@@ -23,7 +23,7 @@ using Autodesk.Forge.Core;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 
-namespace sdk.manager
+namespace Autodesk.Sdk.Manager
 {
     public class ApsClient : IApsClient
     {
