@@ -21,7 +21,7 @@
  */
 using Microsoft.Extensions.Logging;
 
-namespace Autodesk.Sdk.Manager
+namespace Autodesk.SDKManager
 {
     public class SdkManagerBuilder : IBuilder
     {

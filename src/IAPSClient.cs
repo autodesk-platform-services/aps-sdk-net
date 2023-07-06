@@ -21,7 +21,7 @@
  */
 using Autodesk.Forge.Core;
 
-namespace Autodesk.Sdk.Manager
+namespace Autodesk.SDKManager
 {
     public interface IApsClient
     {

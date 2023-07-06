@@ -21,7 +21,7 @@
  */
 using System;
 
-namespace Autodesk.Sdk.Manager
+namespace Autodesk.SDKManager
 {
     public class AuthClient : IAuthClient
     {

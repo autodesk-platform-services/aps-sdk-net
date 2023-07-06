@@ -22,7 +22,7 @@
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 
-namespace Autodesk.Sdk.Manager
+namespace Autodesk.SDKManager
 {
     public class SDKManager : ISDKManager
     {
