@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors></Authors>
+    <Company>Autodesk</Company>
+    <Product>Autodesk SDK</Product>
+    <Description>Client sdk for Webhooks API</Description>
+    <Copyright>Autodesk Inc.</Copyright>
+    <PackageId>Autodesk.Webhooks</PackageId>
+    <Version>1.0.0-beta3</Version>
+    <Authors>Autodesk</Authors>
+    <owners>Autodesk</owners>
+    <Company>Autodesk</Company>
+  </PropertyGroup>
+    <ItemGroup>
+      <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+      <PackageReference Include="Autodesk.Forge.Core.NetStandard" Version="2.0.0" />
+      <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.0" />
+      <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
+      <PackageReference Include="Microsoft.Extensions.Options" Version="6.0.0" />
+      <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+      <PackageReference Include="Autodesk.SDKManager" Version="1.0.0-beta1" />
+    </ItemGroup>
+
+</Project>

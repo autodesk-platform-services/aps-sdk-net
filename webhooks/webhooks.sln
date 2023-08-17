@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autodesk.WebhooksApi", "source\Autodesk.WebhooksApi.csproj", "{E898A6D2-071E-4D01-B212-A14EFD209A6D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autodesk.WebhooksApi.Test", "test\Autodesk.WebhooksApi.Test.csproj", "{16D9EE9B-2621-4DEC-A7BC-64986C5FC329}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E898A6D2-071E-4D01-B212-A14EFD209A6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E898A6D2-071E-4D01-B212-A14EFD209A6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E898A6D2-071E-4D01-B212-A14EFD209A6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E898A6D2-071E-4D01-B212-A14EFD209A6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16D9EE9B-2621-4DEC-A7BC-64986C5FC329}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16D9EE9B-2621-4DEC-A7BC-64986C5FC329}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16D9EE9B-2621-4DEC-A7BC-64986C5FC329}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16D9EE9B-2621-4DEC-A7BC-64986C5FC329}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
