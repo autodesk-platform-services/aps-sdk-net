@@ -14,4 +14,4 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Run Action 1 (Run .NET Tests)
-        uses: ./webhooks/.github/actions/action1.yml
+        uses: ./webhooks/actions/action1.yml
