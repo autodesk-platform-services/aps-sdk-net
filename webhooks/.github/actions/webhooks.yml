@@ -3,7 +3,7 @@ name: .NET Test and Coverage
 on:
   push:
     branches:
-      - main  # Adjust this branch name if needed
+      - develop/harun  # Adjust this branch name if needed
 
 jobs:
   build:
