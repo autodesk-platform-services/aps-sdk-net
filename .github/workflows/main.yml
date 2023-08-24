@@ -14,5 +14,5 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Run Webhooks Action
-        uses: ./webhooks/.github/actions/webhooks.yml
+        uses: ./webhooks/.github/actions/action.yml
 
