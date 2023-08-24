@@ -1,17 +1,17 @@
 using Autodesk.Forge.Core;
-using Autodesk.DataManagementApi;
-using Autodesk.DataManagementApi.Http;
-using Autodesk.DataManagementApi.Model;
+using Autodesk.DataManagement;
+using Autodesk.DataManagement.Http;
+using Autodesk.DataManagement.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Autodesk.SDKManager;
 
-namespace Autodesk.DataManagementApi.Test;
+namespace Autodesk.DataManagement.Test;
 
 
 [TestClass]
-public class TestDataManagementApi
+public class TestDataManagement
 {
-    private static DataManagementApi _dataManagementApi = null!;
+    private static DataManagementClient _dataManagementApi = null!;
 
     private const string token = "<token>";
 
@@ -24,7 +24,7 @@ public class TestDataManagementApi
                 .Add(ResiliencyConfiguration.CreateDefault())
                 .Build();
 
-        _dataManagementApi = new DataManagementApi(sdkManager);
+        _dataManagementApi = new DataManagementClient(sdkManager);
     }
 
     [TestMethod]
