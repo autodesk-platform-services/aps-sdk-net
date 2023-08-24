@@ -3,7 +3,7 @@ name: Main Workflow
 on:
   push:
     branches:
-      - main
+      - develop/harun
 
 jobs:
   run_actions:

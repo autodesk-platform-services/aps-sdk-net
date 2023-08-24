@@ -3,7 +3,7 @@ name: Run .NET Tests
 on:
   push:
     branches:
-      - main
+      - develop/harun
 
 jobs:
   build:
