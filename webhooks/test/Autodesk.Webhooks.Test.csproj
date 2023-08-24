@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>Autodesk.WebhooksApi.Test</RootNamespace>
+    <RootNamespace>Autodesk.Webhooks.Test</RootNamespace>
     <Nullable>enable</Nullable>
 
     <IsPackable>false</IsPackable>
@@ -16,6 +16,6 @@
     <PackageReference Include="coverlet.collector" Version="3.1.2" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\source\Autodesk.WebhooksApi.csproj"/>
+    <ProjectReference Include="..\source\Autodesk.Webhooks.csproj"/>
   </ItemGroup>
 </Project>

@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autodesk.ModelDerivativeApi
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "webhooks", "webhooks", "{50380220-FCC6-401E-B36A-5BD6CFE0D70E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autodesk.WebhooksApi", "webhooks\source\Autodesk.WebhooksApi.csproj", "{5F54DA01-35E8-460D-9E11-5BD8A595E0AA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autodesk.Webhooks", "webhooks\source\Autodesk.Webhooks.csproj", "{5F54DA01-35E8-460D-9E11-5BD8A595E0AA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "datamanagement", "datamanagement", "{46B7D388-D640-40F4-AB18-5CE712DD5A36}"
 EndProject
