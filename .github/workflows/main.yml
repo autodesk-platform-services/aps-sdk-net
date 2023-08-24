@@ -3,7 +3,7 @@ name: Main Workflow
 on:
   push:
     branches:
-      - develop/harun
+      - main
 
 jobs:
   run_actions:
@@ -13,6 +13,5 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Run Webhooks Action
-        uses: ./webhooks/.github/actions/action.yml
-
+      - name: Run Action 1 (Run .NET Tests)
+        uses: ./webhooks/.github/actions/action1.yml

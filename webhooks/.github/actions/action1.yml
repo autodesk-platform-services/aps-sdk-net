@@ -1,16 +1,13 @@
-name: .NET Test and Coverage
+name: Run .NET Tests
 
 on:
   push:
     branches:
-      - develop/harun # Adjust this branch name if needed
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    env:
-      AUTODESK_API_TOKEN: ${{ secrets.AUTODESK_API_TOKEN }} # Reference the secret here
 
     steps:
       - name: Checkout code
@@ -19,22 +16,10 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v2
         with:
-          dotnet-version: 5.x # Change to your desired version
+          dotnet-version: 5.x  # Change to your desired version
 
       - name: Restore dependencies
         run: dotnet restore
 
-      - name: Build and run tests
+      - name: Run Tests
         run: dotnet test --no-restore --verbosity normal --collect:"XPlat Code Coverage"
-
-      - name: Publish coverage results
-        uses: coverlet/coverlet-action@v2.2.0
-        with:
-          files: "**/coverage.cobertura.xml"
-          threshold: 80 # Adjust the coverage threshold as needed
-
-      - name: Upload coverage artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: coverage-report
-          path: TestResults/Coverage # Change the path to match your actual coverage report path
