@@ -22,14 +22,22 @@ jobs:
         run: dotnet restore
 
       - name: Test DataManagement
-        run: dotnet test ./datamanagement/test --configuration Release --no-restore
-
+        run: |
+          cd datamanagement/test
+          dotnet test --configuration Release
+  
       - name: Test OSS
-        run: dotnet test ./oss/test --configuration Release --no-restore
-
+        run: |
+          cd oss/test
+          dotnet test --configuration Release
+  
       - name: Test Webhooks
-        run: dotnet test ./webhooks/test --configuration Release --no-restore
-
+        run: |
+          cd webhooks/test
+          dotnet test --configuration Release
+  
       - name: Test ModelDerivative
-        run: dotnet test ./modelderivative/test --configuration Release --no-restore
+        run: |
+          cd modelderivative/test
+          dotnet test --configuration Release
 
