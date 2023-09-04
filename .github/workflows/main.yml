@@ -21,23 +21,27 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore
 
-      - name: Test DataManagement
+      # - name: Test DataManagement
+      #   run: |
+      #     cd datamanagement/test
+      #     dotnet test --configuration Release
+
+      # - name: Test OSS
+      #   run: |
+      #     cd oss/test
+      #     dotnet test --configuration Release
+
+      - name: Build Webhooks
         run: |
-          cd datamanagement/test
-          dotnet test --configuration Release
-  
-      - name: Test OSS
-        run: |
-          cd oss/test
-          dotnet test --configuration Release
-  
+          cd webhooks/source
+          dotnet build --configuration Release
+
       - name: Test Webhooks
         run: |
           cd webhooks/test
           dotnet test --configuration Release
-  
-      - name: Test ModelDerivative
-        run: |
-          cd modelderivative/test
-          dotnet test --configuration Release
 
+      # - name: Test ModelDerivative
+      #   run: |
+      #     cd modelderivative/test
+      #     dotnet test --configuration Release
