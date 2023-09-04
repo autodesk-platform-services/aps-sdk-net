@@ -12,7 +12,7 @@
     <Authors>Autodesk</Authors>
     <owners>Autodesk</owners>
     <Company>Autodesk</Company>
-    <RestoreSources>$(RestoreSources);../../samples\packages</RestoreSources>
+    <RestoreSources>$(RestoreSources);https://api.nuget.org/v3/index.json;../../samples\packages</RestoreSources>
   </PropertyGroup>
     <ItemGroup>
       <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
