@@ -18,18 +18,15 @@ jobs:
         with:
           dotnet-version: 6.0.100
 
+      - name: Restore NuGet Packages
+        run: dotnet restore
+
       - name: Cache NuGet packages
         uses: actions/cache@v2
         with:
           path: ~/.nuget/packages
           key: nuget-${{ runner.os }}-${{ hashFiles('**/*.csproj') }}
         if: success()
-
-      - name: Clean
-        run: dotnet clean
-
-      - name: Restore NuGet Packages
-        run: dotnet restore
 
       # - name: Test DataManagement
       #   run: |
