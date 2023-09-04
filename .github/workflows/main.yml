@@ -21,6 +21,9 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore
 
-      - name: Run Tests in Webhooks
-        run: dotnet test --no-restore --verbosity normal --collect:"XPlat Code Coverage"
+      - name: Build
+        run: dotnet build --configuration Release
+
+      - name: Test
+        run: dotnet test --configuration Release --no-restore
 
