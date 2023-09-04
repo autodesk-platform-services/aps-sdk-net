@@ -12,6 +12,7 @@
     <Authors>Autodesk</Authors>
     <owners>Autodesk</owners>
     <Company>Autodesk</Company>
+    <RestoreSources>$(RestoreSources);../../samples\packages</RestoreSources>
   </PropertyGroup>
     <ItemGroup>
       <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
@@ -21,7 +22,10 @@
       <PackageReference Include="Microsoft.Extensions.Options" Version="6.0.0" />
       <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-      <PackageReference Include="Autodesk.SDKManager" Version="1.0.0-beta1" />
+      <PackageReference Include="Autodesk.SDKManager" Version="1.0.0-beta1">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
     </ItemGroup>
 
 </Project>
