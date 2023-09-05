@@ -21,7 +21,7 @@ jobs:
       - name: Build and Test
         run: |
           dotnet restore
-          dotnet test webhooks/test/Autodesk.Webhooks.Test.csproj
+          dotnet test 
         # env:
         #   Client_Id: ${{ secrets.CLIENT_ID }}
         #   Client_Secret: ${{ secrets.CLIENT_SECRET }}
