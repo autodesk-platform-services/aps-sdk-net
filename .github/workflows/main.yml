@@ -20,6 +20,7 @@ jobs:
 
       - name: Build and Test
         run: |
+          dotnet clean
           dotnet restore
           cd webhooks
           dotnet test 
