@@ -21,6 +21,7 @@ jobs:
       - name: Build and Test
         run: |
           dotnet restore
+          cd webhooks
           dotnet test 
         # env:
         #   Client_Id: ${{ secrets.CLIENT_ID }}
