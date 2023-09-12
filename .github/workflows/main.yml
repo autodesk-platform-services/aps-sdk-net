@@ -18,34 +18,36 @@ jobs:
         with:
           dotnet-version: 6.0.100
 
-      - name: Build and Test
+      - name: Build
         run: |
           dotnet clean
           dotnet restore
-          dotnet test 
+          dotnet build
+
+      - name: Test
+        run: |
+          cd webhooks/test
+          dotnet test --configuration Release
         # env:
         #   Client_Id: ${{ secrets.CLIENT_ID }}
         #   Client_Secret: ${{ secrets.CLIENT_SECRET }}
 
-      # - name: Build
-      #   run: dotnet build
+      - name: Test DataManagement
+        run: |
+          cd datamanagement/test
+          dotnet test --configuration Release
 
-      # - name: Test DataManagement
-      #   run: |
-      #     cd datamanagement/test
-      #     dotnet test --configuration Release
+      - name: Test OSS
+        run: |
+          cd oss/test
+          dotnet test --configuration Release
 
-      # - name: Test OSS
-      #   run: |
-      #     cd oss/test
-      #     dotnet test --configuration Release
+      - name: Test Webhooks
+        run: |
+          cd webhooks/test
+          dotnet test --configuration Release
 
-      # - name: Test Webhooks
-      #   run: |
-      #     cd webhooks/test
-      #     dotnet test --configuration Release
-
-      # - name: Test ModelDerivative
-      #   run: |
-      #     cd modelderivative/test
-      #     dotnet test --configuration Release
+      - name: Test ModelDerivative
+        run: |
+          cd modelderivative/test
+          dotnet test --configuration Release
