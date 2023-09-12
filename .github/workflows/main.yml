@@ -24,6 +24,13 @@ jobs:
           dotnet restore
           dotnet build
 
+      - name: Set environment variables
+        env:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          CALLBACK_URL: ${{ secrets.CALLBACK_URL }}
+          WORKFLOW_ID: ${{ secrets.WORKFLOW_ID }}
+        run: echo "The secret key is $ACCESS_TOKEN"
+
       - name: Test Webhooks
         run: |
           cd webhooks/test
