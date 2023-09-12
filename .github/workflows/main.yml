@@ -22,7 +22,6 @@ jobs:
         run: |
           dotnet clean
           dotnet restore
-          cd webhooks
           dotnet test 
         # env:
         #   Client_Id: ${{ secrets.CLIENT_ID }}
