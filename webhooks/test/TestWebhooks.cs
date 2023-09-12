@@ -13,9 +13,9 @@ public class TestWebhooks
 {
     private static WebhooksClient _webhooksApi = null!;
 
-    private const string token = Environment.GetEnvironmentVariable("ACCESS_TOKEN") ?? "Access token not found";
-    private const string callbackUrl = Environment.GetEnvironmentVariable("CALLBACK_URL") ?? "Callback Url not found";
-    private const string workFlowId = Environment.GetEnvironmentVariable("WORKFLOW_ID") ?? "Workflow id not found";
+    string token = Environment.GetEnvironmentVariable("ACCESS_TOKEN") ?? "Access token not found";
+    string callbackUrl = Environment.GetEnvironmentVariable("CALLBACK_URL") ?? "Callback Url not found";
+    string workFlowId = Environment.GetEnvironmentVariable("WORKFLOW_ID") ?? "Workflow id not found";
 
     [ClassInitialize]
     public static void ClassInitialize(TestContext testContext)
