@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autodesk.ModelDerivativeApi.Test", "test\Autodesk.ModelDerivativeApi.Test.csproj", "{C70523C4-851D-4467-BF06-3C59DE0046CA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autodesk.ModelDerivative.Test", "test\Autodesk.ModelDerivative.Test.csproj", "{C70523C4-851D-4467-BF06-3C59DE0046CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autodesk.ModelDerivativeApi", "source\Autodesk.ModelDerivativeApi.csproj", "{0321639F-AC52-4EEF-BFC5-4FC308D9F348}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autodesk.ModelDerivative", "source\Autodesk.ModelDerivative.csproj", "{0321639F-AC52-4EEF-BFC5-4FC308D9F348}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

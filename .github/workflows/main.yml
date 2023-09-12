@@ -24,13 +24,10 @@ jobs:
           dotnet restore
           dotnet build
 
-      - name: Test
+      - name: Test Webhooks
         run: |
           cd webhooks/test
           dotnet test --configuration Release
-        # env:
-        #   Client_Id: ${{ secrets.CLIENT_ID }}
-        #   Client_Secret: ${{ secrets.CLIENT_SECRET }}
 
       - name: Test DataManagement
         run: |
