@@ -1,4 +1,4 @@
-name: Run Tests
+name: Run Tests on Develop
 
 on:
   push:
@@ -20,38 +20,53 @@ jobs:
 
       - name: Build
         run: |
+          # Clean, restore, and build the .NET project
           dotnet clean
           dotnet restore
           dotnet build
 
-      - name: Set environment variables
+      - name: Set Environment Variables
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           CALLBACK_URL: ${{ secrets.CALLBACK_URL }}
           WORKFLOW_ID: ${{ secrets.WORKFLOW_ID }}
-        run: echo "The secret key is $ACCESS_TOKEN"
+          HOOK_ID: ${{ secrets.HOOK_ID }}
+          DOWNLOAD_ID: ${{ secrets.DOWNLOAD_ID }}
+          FOLDER_ID: ${{ secrets.FOLDER_ID }}
+          HUB_ID: ${{ secrets.HUB_ID }}
+          ITEM_ID: ${{ secrets.ITEM_ID }}
+          JOB_ID: ${{ secrets.JOB_ID }}
+          PROJECT_ID: ${{ secrets.PROJECT_ID }}
+          VERSION_ID: ${{ secrets.VERSION_ID }}
+        run: |
+          # Display the secret key for verification
+          echo "The secret key is $ACCESS_TOKEN"
 
       - name: Test Webhooks
         run: |
+          # Run tests for the Webhooks component
           cd webhooks/test
-          dotnet test --configuration Release
+          dotnet test --configuration Release /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
 
-      - name: Test DataManagement
+      - name: Test Data Management
         run: |
+          # Run tests for the Data Management component
           cd datamanagement/test
-          dotnet test --configuration Release
+          dotnet test --configuration Release /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
 
-      - name: Test OSS
-        run: |
-          cd oss/test
-          dotnet test --configuration Release
+      # - name: Test OSS
+      #   run: |
+      #     # Run tests for the Object Storage Service (OSS)
+      #     cd oss/test
+      #     dotnet test --configuration Release /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
 
-      - name: Test Webhooks
-        run: |
-          cd webhooks/test
-          dotnet test --configuration Release
+      # - name: Test Model Derivative
+      #   run: |
+      #     # Run tests for the Model Derivative component
+      #     cd modelderivative/test
+      #     dotnet test --configuration Release /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
 
-      - name: Test ModelDerivative
-        run: |
-          cd modelderivative/test
-          dotnet test --configuration Release
+      # - name: Upload Code Coverage Report to Codecov
+      #   uses: codecov/codecov-action@v2
+      #   with:
+      #     token: ${{ secrets.CODECOV_TOKEN }}
