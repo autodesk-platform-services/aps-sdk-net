@@ -3,9 +3,10 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors></Authors>
     <Company>Autodesk</Company>
-    <Product>Autodesk Platform Services SDK</Product>
-    <Description>Client SDK for Data Management API</Description>
+    <Product>Autodesk SDK</Product>
+    <Description>Client sdk for DataManagement API</Description>
     <Copyright>Autodesk Inc.</Copyright>
     <PackageId>Autodesk.DataManagement</PackageId>
     <Version>1.0.0-beta3</Version>

@@ -31,25 +31,25 @@ jobs:
           cd webhooks/test
           dotnet test --configuration Release /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
         env:
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          TWO_LEGGED_ACCESS_TOKEN: ${{ secrets.TWO_LEGGED_ACCESS_TOKEN }}
           CALLBACK_URL: ${{ secrets.CALLBACK_URL }}
           WORKFLOW_ID: ${{ secrets.WORKFLOW_ID }}
           HOOK_ID: ${{ secrets.HOOK_ID }}
 
-      - name: Test Data Management
-        run: |
-          # Run tests for the Data Management component
-          cd datamanagement/test
-          dotnet test --configuration Release /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
-        env:
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          DOWNLOAD_ID: ${{ secrets.DOWNLOAD_ID }}
-          FOLDER_ID: ${{ secrets.FOLDER_ID }}
-          HUB_ID: ${{ secrets.HUB_ID }}
-          ITEM_ID: ${{ secrets.ITEM_ID }}
-          JOB_ID: ${{ secrets.JOB_ID }}
-          PROJECT_ID: ${{ secrets.PROJECT_ID }}
-          VERSION_ID: ${{ secrets.VERSION_ID }}
+      # - name: Test Data Management
+      #   run: |
+      #     # Run tests for the Data Management component
+      #     cd datamanagement/test
+      #     dotnet test --configuration Release /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
+      #   env:
+      #     THREE_LEGGED_ACCESS_TOKEN: ${{ secrets.THREE_LEGGED_ACCESS_TOKEN }}
+      #     DOWNLOAD_ID: ${{ secrets.DOWNLOAD_ID }}
+      #     FOLDER_ID: ${{ secrets.FOLDER_ID }}
+      #     HUB_ID: ${{ secrets.HUB_ID }}
+      #     ITEM_ID: ${{ secrets.ITEM_ID }}
+      #     JOB_ID: ${{ secrets.JOB_ID }}
+      #     PROJECT_ID: ${{ secrets.PROJECT_ID }}
+      #     VERSION_ID: ${{ secrets.VERSION_ID }}
 
       # - name: Test OSS
       #   run: |

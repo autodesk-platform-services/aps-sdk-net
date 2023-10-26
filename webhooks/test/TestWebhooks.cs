@@ -13,7 +13,7 @@ public class TestWebhooks
 {
     private static WebhooksClient _webhooksApi = null!;
 
-    string token = Environment.GetEnvironmentVariable("ACCESS_TOKEN");
+    string token = Environment.GetEnvironmentVariable("TWO_LEGGED_ACCESS_TOKEN");
     string callbackUrl = Environment.GetEnvironmentVariable("CALLBACK_URL");
     string workFlowId = Environment.GetEnvironmentVariable("WORKFLOW_ID");
     string hookId = Environment.GetEnvironmentVariable("HOOK_ID");
@@ -34,7 +34,7 @@ public class TestWebhooks
     [TestMethod]
     public async Task TestGetHookDetailsAsync()
     {
-        HookDetailsResult getSystemEventHook = await _webhooksApi.GetHookDetailsAsync(system: Systems.Data, _event: Events.DmVersionAdded, hookId: hookId, accessToken: token);
+        HookDetails getSystemEventHook = await _webhooksApi.GetHookDetailsAsync(system: Systems.Data, _event: Events.DmVersionAdded, hookId: hookId, accessToken: token);
 
         var HookId = getSystemEventHook.HookId;
         Assert.IsTrue(HookId == hookId);
@@ -44,7 +44,7 @@ public class TestWebhooks
     [TestMethod]
     public async Task TestGetSystemEventHooksAsync()
     {
-        HooksResult getSystemEventHooks = await _webhooksApi.GetSystemEventHooksAsync(system: Systems.Data, _event: Events.DmVersionAdded, accessToken: token);
+        Hooks getSystemEventHooks = await _webhooksApi.GetSystemEventHooksAsync(system: Systems.Derivative, _event: Events.ExtractionUpdated, accessToken: token);
         Assert.IsTrue(getSystemEventHooks.Data.Count > 0);
     }
 
@@ -52,7 +52,7 @@ public class TestWebhooks
     [TestMethod]
     public async Task TestGetSystemHooksAsync()
     {
-        HooksResult getSystemHooks = await _webhooksApi.GetSystemHooksAsync(system: Systems.Data, accessToken: token);
+        Hooks getSystemHooks = await _webhooksApi.GetSystemHooksAsync(system: Systems.Derivative, accessToken: token);
         Assert.IsTrue(getSystemHooks.Data.Count > 0);
     }
 
@@ -60,7 +60,7 @@ public class TestWebhooks
     [TestMethod]
     public async Task TestGetHooksAsync()
     {
-        HooksResult getHooks = await _webhooksApi.GetHooksAsync(accessToken: token);
+        Hooks getHooks = await _webhooksApi.GetHooksAsync(accessToken: token);
         Assert.IsTrue(getHooks.Data.Count > 0);
     }
 
@@ -68,7 +68,7 @@ public class TestWebhooks
     [TestMethod]
     public async Task TestGetAppHooksAsync()
     {
-        HooksResult getAppHooks = await _webhooksApi.GetAppHooksAsync(accessToken: token);
+        Hooks getAppHooks = await _webhooksApi.GetAppHooksAsync(accessToken: token);
         Assert.IsTrue(getAppHooks.Data.Count > 0);
     }
 
@@ -94,7 +94,7 @@ public class TestWebhooks
         createSystemHook.CallbackUrl = callbackUrl;
         createSystemHook.Scope = createSystemHook.Scope.SetScope(Scopes.Workflow, workFlowId);
 
-        HookCreationResult createSystemHookResponse = await _webhooksApi.CreateSystemHookAsync(system: Systems.Derivative, hookPayload: createSystemHook, accessToken: token);
+        Hook createSystemHookResponse = await _webhooksApi.CreateSystemHookAsync(system: Systems.Derivative, hookPayload: createSystemHook, accessToken: token);
         Assert.IsTrue(createSystemHookResponse.Hooks.Count > 0);
     }
 
@@ -132,7 +132,7 @@ public class TestWebhooks
         createToken.Token = "awffbvdb3trf4fvdfbUyt39suHnbe5Mnrks8";
 
         // Add a new Webhook secret token
-        TokenCreationResult createTokenResponse = await _webhooksApi.CreateTokenAsync(tokenPayload: createToken, accessToken: token);
+        Token createTokenResponse = await _webhooksApi.CreateTokenAsync(tokenPayload: createToken, accessToken: token);
         Assert.IsTrue(createTokenResponse.Status == 200);
     }
 

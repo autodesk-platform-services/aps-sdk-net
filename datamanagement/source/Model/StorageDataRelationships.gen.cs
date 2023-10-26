@@ -49,7 +49,7 @@ namespace Autodesk.DataManagement.Model
         /// Gets or Sets Target
         /// </summary>
         [DataMember(Name="target", EmitDefaultValue=false)]
-        public TopFoldersDataRelationshipsParent Target { get; set; }
+        public StorageDataRelationshipsTarget Target { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

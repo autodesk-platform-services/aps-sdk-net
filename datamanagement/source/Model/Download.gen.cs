@@ -61,7 +61,7 @@ namespace Autodesk.DataManagement.Model
         /// Gets or Sets Data
         /// </summary>
         [DataMember(Name="data", EmitDefaultValue=false)]
-        public CreatedDownloadData Data { get; set; }
+        public DownloadData Data { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

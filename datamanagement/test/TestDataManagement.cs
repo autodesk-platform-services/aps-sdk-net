@@ -5,6 +5,8 @@ using Autodesk.DataManagement.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Autodesk.SDKManager;
 using Type = Autodesk.DataManagement.Model.Type;
+using System.Reflection.Metadata.Ecma335;
+using System.Data.Common;
 
 namespace Autodesk.DataManagement.Test;
 
@@ -14,7 +16,7 @@ public class TestDataManagement
 {
     private static DataManagementClient _dataManagementApi = null!;
 
-    string token = Environment.GetEnvironmentVariable("ACCESS_TOKEN");
+    string token = Environment.GetEnvironmentVariable("THREE_LEGGED_ACCESS_TOKEN");
     string hubId = Environment.GetEnvironmentVariable("HUB_ID");
     string projectId = Environment.GetEnvironmentVariable("PROJECT_ID");
     string downloadId = Environment.GetEnvironmentVariable("DOWNLOAD_ID");
@@ -22,6 +24,7 @@ public class TestDataManagement
     string folderId = Environment.GetEnvironmentVariable("FOLDER_ID");
     string itemId = Environment.GetEnvironmentVariable("ITEM_ID");
     string versionId = Environment.GetEnvironmentVariable("VERSION_ID");
+
 
     [ClassInitialize]
     public static void ClassInitialize(TestContext testContext)
@@ -83,66 +86,91 @@ public class TestDataManagement
     [TestMethod]
     public async Task TestGetDownloadAsync()
     {
-        Download download = await _dataManagementApi.GetDownloadAsync(projectId: projectId, downloadId: downloadId, accessToken: token);
-        CreatedDownloadData downloadData = download.Data;
-        Assert.IsTrue(downloadId == downloadData.Id);
+        DownloadDetails downloadDetails = await _dataManagementApi.GetDownloadAsync(projectId: projectId, downloadId: downloadId, accessToken: token);
+        DownloadData downloadDetailsData = downloadDetails.Data;
+        Assert.IsTrue(downloadId == downloadDetailsData.Id);
     }
 
     [TestMethod]
     public async Task TestGetDownloadJobAsync()
     {
         Job job = await _dataManagementApi.GetDownloadJobAsync(projectId: projectId, jobId: jobId, accessToken: token);
-        CreatedDownloadData jobData = job.Data;
+        DownloadData jobData = job.Data;
         Assert.IsTrue(jobId == jobData.Id);
     }
 
     [TestMethod]
     public async Task TestCreateDownloadAsync()
     {
-        CreateDownload createDownload = new CreateDownload();
+        DownloadPayload downloadPayload = new DownloadPayload()
+        {
+            Jsonapi = new ModifyFolderPayloadJsonapi()
+            {
+                _Version = VersionNumber._10
+            },
+            Data = new DownloadPayloadData()
+            {
+                Type = Type.Downloads,
+                Attributes = new DownloadPayloadDataAttributes()
+                {
+                    Format = new DownloadPayloadDataAttributesFormat()
+                    {
+                        FileType = ""
+                    }
+                },
+                Relationships = new DownloadPayloadDataRelationships()
+                {
+                    Source = new FolderPayloadDataRelationshipsParent()
+                    {
+                        Data = new FolderPayloadDataRelationshipsParentData()
+                        {
+                            Type = Type.Versions,
+                            Id = versionId
+                        }
+                    }
+                }
+            }
+        };
 
-        createDownload.Jsonapi._Version = VersionNumber._10;
-
-        CreateDownloadData createDownloadData = createDownload.Data;
-        createDownloadData.Type = Type.Downloads;
-
-        CreateDownloadDataAttributes attributes = createDownloadData.Attributes;
-        CreateDownloadDataAttributesFormat Format = attributes.Format;
-
-        CreateDownloadDataRelationships relationships = createDownloadData.Relationships;
-        StorageRequestDataRelationshipsTarget source = relationships.Source;
-        StorageRequestDataRelationshipsTargetData storageData = source.Data;
-        storageData.Type = Type.Versions;
-        storageData.Id = versionId;
-
-        CreatedDownload createdDownload = await _dataManagementApi.CreateDownloadAsync(projectId: projectId, createDownload: createDownload, accessToken: token);
-        CreatedDownloadData createdDownloadData = createdDownload.Data;
-        Assert.IsTrue(createdDownloadData.Type == "jobs");
+        Download download = await _dataManagementApi.CreateDownloadAsync(projectId: projectId, downloadPayload: downloadPayload, accessToken: token);
+        DownloadData downloadData = download.Data;
+        Assert.IsTrue(downloadData.Type == "jobs");
 
     }
 
     [TestMethod]
     public async Task TestCreateStorageAsync()
     {
-        StorageRequest storageRequest = new StorageRequest();
+        StoragePayload storagePayload = new StoragePayload()
+        {
+            Jsonapi = new ModifyFolderPayloadJsonapi()
+            {
+                _Version = VersionNumber._10
+            },
+            Data = new StoragePayloadData()
+            {
+                Type = Type.Objects,
+                Attributes = new StoragePayloadDataAttributes()
+                {
+                    Name = "drawing.dwg"
+                },
+                Relationships = new StoragePayloadDataRelationships()
+                {
+                    Target = new ModifyFolderPayloadDataRelationshipsParent()
+                    {
+                        Data = new ModifyFolderPayloadDataRelationshipsParentData()
+                        {
+                            Type = Type.Folders,
+                            Id = "urn:adsk.wipprod:fs.folder:co.mgS-lb-BThaTdHnhiN_mbA"
+                        }
+                    }
+                }
+            }
+        };
 
-        storageRequest.Jsonapi._Version = VersionNumber._10;
-
-        StorageRequestData storageData = storageRequest.Data;
-        storageData.Type = Type.Objects;
-
-        StorageRequestDataAttributes attributes = storageData.Attributes;
-        attributes.Name = "drawing.dwg";
-
-        StorageRequestDataRelationships relationships = storageData.Relationships;
-        StorageRequestDataRelationshipsTarget target = relationships.Target;
-        StorageRequestDataRelationshipsTargetData targetData = target.Data;
-        targetData.Type = Type.Folders;
-        targetData.Id = "urn:adsk.wipprod:fs.folder:co.mgS-lb-BThaTdHnhiN_mbA";
-
-        Storage createdStorage = await _dataManagementApi.CreateStorageAsync(projectId: projectId, storageRequest: storageRequest, accessToken: token);
-        StorageData createdStorageData = createdStorage.Data;
-        Assert.IsTrue(createdStorageData.Type == "objects");
+        Storage storage = await _dataManagementApi.CreateStorageAsync(projectId: projectId, storagePayload: storagePayload, accessToken: token);
+        StorageData storageData = storage.Data;
+        Assert.IsTrue(storageData.Type == Type.Objects);
     }
 
     [TestMethod]
@@ -199,48 +227,68 @@ public class TestDataManagement
     [TestMethod]
     public async Task TestCreateFolderAsync()
     {
-        CreateFolder createFolder = new CreateFolder();
+        FolderPayload folderPayload = new FolderPayload()
+        {
+            Jsonapi = new ModifyFolderPayloadJsonapi()
+            {
+                _Version = VersionNumber._10
+            },
+            Data = new FolderPayloadData()
+            {
+                Type = Type.Folders,
+                Attributes = new FolderPayloadDataAttributes()
+                {
+                    Name = "folder",
+                    Extension = new RelationshipRefsPayloadDataMetaExtension()
+                    {
+                        Type = Type.FoldersautodeskCoreFolder,
+                        _Version = VersionNumber._10
+                    }
+                },
+                Relationships = new FolderPayloadDataRelationships()
+                {
+                    Parent = new FolderPayloadDataRelationshipsParent()
+                    {
+                        Data = new FolderPayloadDataRelationshipsParentData()
+                        {
+                            Type = Type.Folders,
+                            Id = folderId
+                        }
+                    }
+                }
+            },
+        };
 
-        createFolder.Jsonapi._Version = VersionNumber._10;
-
-        CreateFolderData folderData = createFolder.Data;
-        folderData.Type = Type.Folders;
-
-        CreateFolderDataAttributes attributes = folderData.Attributes;
-        attributes.Name = "folder";
-
-        CreateFolderDataAttributesExtension attributesExtension = attributes.Extension;
-        attributesExtension.Type = Type.FoldersautodeskCoreFolder;
-        attributesExtension._Version = VersionNumber._10;
-
-        CreateFolderDataRelationships relationship = folderData.Relationships;
-        StorageRequestDataRelationshipsTarget target = relationship.Parent;
-        StorageRequestDataRelationshipsTargetData targetData = target.Data;
-        targetData.Type = Type.Folders;
-        targetData.Id = folderId;
-
-        Folder folder = await _dataManagementApi.CreateFolderAsync(projectId: projectId, createFolder: createFolder, accessToken: token);
-        FolderData createdFolderData = folder.Data;
-        Assert.IsTrue(createdFolderData.Type == "folders");
+        Folder folder = await _dataManagementApi.CreateFolderAsync(projectId: projectId, folderPayload: folderPayload, accessToken: token);
+        FolderData folderData = folder.Data;
+        Assert.IsTrue(folderData.Type == "folders");
     }
 
     [TestMethod]
     public async Task TestCreateFolderRelationshipsRefAsync()
     {
-        RelationshipRefsRequest relationshipRefsRequest = new RelationshipRefsRequest();
+        RelationshipRefsPayload relationshipRefsPayload = new RelationshipRefsPayload()
+        {
+            Jsonapi = new ModifyFolderPayloadJsonapi()
+            {
+                _Version = VersionNumber._10
+            },
+            Data = new RelationshipRefsPayloadData()
+            {
+                Type = Type.Versions,
+                Id = versionId,
+                Meta = new RelationshipRefsPayloadDataMeta()
+                {
+                    Extension = new RelationshipRefsPayloadDataMetaExtension()
+                    {
+                        Type = Type.AuxiliaryautodeskCoreAttachment,
+                        _Version = VersionNumber._10
+                    }
+                }
+            }
+        };
 
-        relationshipRefsRequest.Jsonapi._Version = VersionNumber._10;
-
-        RelationshipRefsRequestData relData = relationshipRefsRequest.Data;
-        relData.Type = Type.Versions;
-        relData.Id = versionId;
-
-        RelationshipRefsRequestDataMeta relDataMeta = relData.Meta;
-        RelationshipRefsRequestDataMetaExtension relDataExtension = relDataMeta.Extension;
-        relDataExtension.Type = "auxiliary:autodesk.core:Attachment";
-        relDataExtension._Version = VersionNumber._10;
-
-        HttpResponseMessage relationship = await _dataManagementApi.CreateFolderRelationshipsRefAsync(folderId: folderId, projectId: projectId, relationshipRefsRequest: relationshipRefsRequest, accessToken: token);
+        HttpResponseMessage relationship = await _dataManagementApi.CreateFolderRelationshipsRefAsync(folderId: folderId, projectId: projectId, relationshipRefsPayload: relationshipRefsPayload, accessToken: token);
         var statusCode = relationship.StatusCode;
         string statusCodeString = statusCode.ToString();
         Assert.IsTrue(statusCodeString == "NoContent");
@@ -249,18 +297,24 @@ public class TestDataManagement
     [TestMethod]
     public async Task TestPatchFolderAsync()
     {
-        ModifyFolder modifyFolder = new ModifyFolder();
+        ModifyFolderPayload modifyFolderPayload = new ModifyFolderPayload()
+        {
+            Jsonapi = new ModifyFolderPayloadJsonapi()
+            {
+                _Version = VersionNumber._10
+            },
+            Data = new ModifyFolderPayloadData()
+            {
+                Type = Type.Folders,
+                Id = folderId,
+                Attributes = new ModifyFolderPayloadDataAttributes()
+                {
+                    Name = "Drawings"
+                }
+            }
+        };
 
-        modifyFolder.Jsonapi._Version = VersionNumber._10;
-
-        ModifyFolderData modifyFolderData = modifyFolder.Data;
-        modifyFolderData.Type = Type.Folders;
-        modifyFolderData.Id = folderId;
-
-        ModifyFolderDataAttributes attributes = modifyFolderData.Attributes;
-        attributes.Name = "Drawings";
-
-        Folder folder = await _dataManagementApi.PatchFolderAsync(projectId: projectId, folderId: folderId, modifyFolder: modifyFolder, accessToken: token);
+        Folder folder = await _dataManagementApi.PatchFolderAsync(projectId: projectId, folderId: folderId, modifyFolderPayload: modifyFolderPayload, accessToken: token);
         FolderData folderData = folder.Data;
         Assert.IsTrue(folderId == folderData.Id);
     }
@@ -310,57 +364,76 @@ public class TestDataManagement
         Assert.IsTrue(itemTipData.Type == "versions");
     }
 
-    // [TestMethod]
-    // public async Task TestGetItemVersionsAsync()
-    // {
-    //     Versions versions = await _dataManagementApi.GetItemVersionsAsync(projectId: projectId, itemId: itemId, accessToken: token);
-    //     Assert.IsInstanceOfType(versions.Data, typeof(List<VersionsData>));
-    // }
+    [TestMethod]
+    public async Task TestGetItemVersionsAsync()
+    {
+        Versions versions = await _dataManagementApi.GetItemVersionsAsync(projectId: projectId, itemId: itemId, accessToken: token);
+        Assert.IsInstanceOfType(versions.Data, typeof(List<VersionsData>));
+    }
 
     [TestMethod]
     public async Task TestCreateItemAsync()
     {
-        CreateItem createItem = new CreateItem();
 
-        createItem.Jsonapi._Version = VersionNumber._10;
-
-        CreateItemData createItemData = createItem.Data;
-        createItemData.Type = Type.Items;
-
-        CreateItemDataAttributes attributes = createItemData.Attributes;
-        attributes.DisplayName = "drawing.dwg";
-
-        CreateItemDataAttributesExtension extension = attributes.Extension;
-        extension.Type = Type.ItemsautodeskCoreFile;
-        extension._Version = VersionNumber._10;
-
-        CreateItemDataRelationships relationships = createItemData.Relationships;
-        StorageRequestDataRelationshipsTarget tip = relationships.Tip;
-        StorageRequestDataRelationshipsTargetData tipData = tip.Data;
-        tipData.Type = Type.Versions;
-        tipData.Id = "1";
-
-        StorageRequestDataRelationshipsTarget parent = relationships.Parent;
-        StorageRequestDataRelationshipsTargetData parentData = parent.Data;
-        parentData.Type = Type.Versions;
-        parentData.Id = "1";
-
-        List<CreateItemIncluded> included = createItem.Included;
-
-        foreach (var includedData in included)
+        ItemPayload itemPayload = new ItemPayload()
         {
-            includedData.Type = Type.Versions;
-            includedData.Id = "1";
+            Jsonapi = new ModifyFolderPayloadJsonapi()
+            {
+                _Version = VersionNumber._10
+            },
+            Data = new ItemPayloadData()
+            {
+                Type = Type.Items,
+                Attributes = new ItemPayloadDataAttributes()
+                {
+                    DisplayName = "drawing.dwg",
+                    Extension = new ItemPayloadDataAttributesExtension()
+                    {
+                        Type = Type.ItemsautodeskCoreFile,
+                        _Version = VersionNumber._10
+                    }
+                },
+                Relationships = new ItemPayloadDataRelationships()
+                {
+                    Tip = new FolderPayloadDataRelationshipsParent()
+                    {
+                        Data = new FolderPayloadDataRelationshipsParentData()
+                        {
+                            Type = Type.Versions,
+                            Id = "1"
+                        }
+                    },
+                    Parent = new FolderPayloadDataRelationshipsParent()
+                    {
+                        Data = new FolderPayloadDataRelationshipsParentData()
+                        {
+                            Type = Type.Versions,
+                            Id = "1"
+                        }
+                    }
+                }
+            },
+            Included = new List<ItemPayloadIncluded>()
+            {
+                new ItemPayloadIncluded()
+                {
+                    Type = Type.Versions,
+                    Id = "1",
+                    Attributes = new ItemPayloadIncludedAttributes()
+                    {
+                        Name = "drawing.dwg",
+                        Extension = new ItemPayloadDataAttributesExtension()
+                        {
+                            Type = Type.VersionsautodeskCoreFile,
+                            _Version = VersionNumber._10
+                        }
+                    }
+                }
+            }
+        };
 
-            CreateItemIncludedAttributes includedAttributes = includedData.Attributes;
-            includedAttributes.Name = "drawing.dwg";
 
-            CreateItemDataAttributesExtension includedExtension = includedAttributes.Extension;
-            includedExtension.Type = Type.VersionsautodeskCoreFile;
-            includedExtension._Version = VersionNumber._10;
-        }
-
-        Item item = await _dataManagementApi.CreateItemAsync(projectId: projectId, createItem: createItem, accessToken: token);
+        Item item = await _dataManagementApi.CreateItemAsync(projectId: projectId, itemPayload: itemPayload, accessToken: token);
         ItemData itemData = item.Data;
         Assert.IsTrue(itemData.Type == "items");
     }
@@ -368,20 +441,28 @@ public class TestDataManagement
     [TestMethod]
     public async Task TestCreateItemRelationshipsRefAsync()
     {
-        RelationshipRefsRequest relationshipRefsRequest = new RelationshipRefsRequest();
+        RelationshipRefsPayload relationshipRefsPayload = new RelationshipRefsPayload()
+        {
+            Jsonapi = new ModifyFolderPayloadJsonapi()
+            {
+                _Version = VersionNumber._10
+            },
+            Data = new RelationshipRefsPayloadData()
+            {
+                Type = Type.Versions,
+                Id = "urn:adsk.wipprod:fs.file:vf.ooWjwAQJR0uEoPRyfEnvew?version=1",
+                Meta = new RelationshipRefsPayloadDataMeta()
+                {
+                    Extension = new RelationshipRefsPayloadDataMetaExtension()
+                    {
+                        Type = Type.AuxiliaryautodeskCoreAttachment,
+                        _Version = VersionNumber._10
+                    }
+                }
+            }
+        };
 
-        relationshipRefsRequest.Jsonapi._Version = VersionNumber._10;
-
-        RelationshipRefsRequestData relationshipRefsRequestData = relationshipRefsRequest.Data;
-        relationshipRefsRequestData.Type = Type.Versions;
-        relationshipRefsRequestData.Id = "urn:adsk.wipprod:fs.file:vf.ooWjwAQJR0uEoPRyfEnvew?version=1";
-
-        RelationshipRefsRequestDataMeta meta = relationshipRefsRequestData.Meta;
-        RelationshipRefsRequestDataMetaExtension extension = meta.Extension;
-        extension.Type = "auxiliary:autodesk.core:Attachment";
-        extension._Version = VersionNumber._10;
-
-        HttpResponseMessage responseMessage = await _dataManagementApi.CreateItemRelationshipsRefAsync(projectId: projectId, itemId: itemId, relationshipRefsRequest: relationshipRefsRequest, accessToken: token);
+        HttpResponseMessage responseMessage = await _dataManagementApi.CreateItemRelationshipsRefAsync(projectId: projectId, itemId: itemId, relationshipRefsPayload: relationshipRefsPayload, accessToken: token);
         var statusCode = responseMessage.StatusCode;
         string statusCodeString = statusCode.ToString();
         Assert.IsTrue(statusCodeString == "NoContent");
@@ -390,18 +471,24 @@ public class TestDataManagement
     [TestMethod]
     public async Task TestPatchItemAsync()
     {
-        ItemRequest itemRequest = new ItemRequest();
+        ModifyItemPayload modifyItemPayload = new ModifyItemPayload()
+        {
+            Jsonapi = new ModifyFolderPayloadJsonapi()
+            {
+                _Version = VersionNumber._10
+            },
+            Data = new ModifyItemPayloadData()
+            {
+                Type = Type.Items,
+                Id = "urn:adsk.wipprod:dm.lineage:AeYgDtcTSuqYoyMweWFhhQ",
+                Attributes = new ModifyItemPayloadDataAttributes()
+                {
+                    DisplayName = "drawing.dwg"
+                }
+            }
+        };
 
-        itemRequest.Jsonapi._Version = VersionNumber._10;
-
-        ItemRequestData itemRequestData = itemRequest.Data;
-        itemRequestData.Type = Type.Items;
-        itemRequestData.Id = "urn:adsk.wipprod:dm.lineage:AeYgDtcTSuqYoyMweWFhhQ";
-
-        ItemRequestDataAttributes attributes = itemRequestData.Attributes;
-        attributes.DisplayName = "drawing.dwg";
-
-        Item item = await _dataManagementApi.PatchItemAsync(projectId: projectId, itemId: itemId, itemRequest: itemRequest, accessToken: token);
+        Item item = await _dataManagementApi.PatchItemAsync(projectId: projectId, itemId: itemId, modifyItemPayload: modifyItemPayload, accessToken: token);
         ItemData itemData = item.Data;
         Assert.IsTrue(itemData.Type == "items");
     }
@@ -409,9 +496,9 @@ public class TestDataManagement
     [TestMethod]
     public async Task TestGetVersionAsync()
     {
-        ModelVersion modelVersion = await _dataManagementApi.GetVersionAsync(projectId: projectId, versionId: versionId, accessToken: token);
-        ItemTipData modelVersionData = modelVersion.Data;
-        Assert.IsTrue(modelVersionData.Type == "versions");
+        VersionDetails versionDetails = await _dataManagementApi.GetVersionAsync(projectId: projectId, versionId: versionId, accessToken: token);
+        VersionDetailsData versionDetailsData = versionDetails.Data;
+        Assert.IsTrue(versionDetailsData.Type == "versions");
     }
 
     [TestMethod]
@@ -461,53 +548,76 @@ public class TestDataManagement
     [TestMethod]
     public async Task TestCreateVersionAsync()
     {
-        CreateVersion createVersion = new CreateVersion();
+        VersionPayload versionPayload = new VersionPayload()
+        {
+            Jsonapi = new ModifyFolderPayloadJsonapi()
+            {
+                _Version = VersionNumber._10
+            },
+            Data = new VersionPayloadData()
+            {
+                Type = Type.Items,
+                Attributes = new VersionPayloadDataAttributes()
+                {
+                    Name = "drawing.dwg",
+                    Extension = new RelationshipRefsPayloadDataMetaExtension()
+                    {
+                        Type = Type.VersionsautodeskCoreFile,
+                        _Version = VersionNumber._10
+                    }
+                },
+                Relationships = new VersionPayloadDataRelationships()
+                {
+                    Item = new FolderPayloadDataRelationshipsParent()
+                    {
+                        Data = new FolderPayloadDataRelationshipsParentData()
+                        {
+                            Type = Type.Items,
+                            Id = "urn:adsk.wipprod:dm.lineage:AeYgDtcTSuqYoyMweWFhhQ"
+                        }
+                    },
+                    Storage = new FolderPayloadDataRelationshipsParent()
+                    {
+                        Data = new FolderPayloadDataRelationshipsParentData()
+                        {
+                            Type = Type.Objects,
+                            Id = "urn:adsk.objects:os.object:wip.dm.prod/980cff2c-f0f8-43d9-a151-4a2d916b91a2.dwg"
+                        }
+                    }
+                }
+            }
+        };
 
-        createVersion.Jsonapi._Version = VersionNumber._10;
-
-        CreateVersionData createVersionData = createVersion.Data;
-        createVersionData.Type = Type.Items;
-
-        CreateVersionDataAttributes attributes = createVersionData.Attributes;
-        attributes.Name = "drawing.dwg";
-
-        CreateVersionDataAttributesExtension extension = attributes.Extension;
-        extension.Type = "versions:autodesk.core:File";
-        extension._Version = "1.0";
-
-        CreateVersionDataRelationships relationships = createVersionData.Relationships;
-        StorageRequestDataRelationshipsTarget item = relationships.Item;
-        StorageRequestDataRelationshipsTargetData itemData = item.Data;
-        itemData.Type = Type.Items;
-        itemData.Id = "urn:adsk.wipprod:dm.lineage:AeYgDtcTSuqYoyMweWFhhQ";
-
-        StorageRequestDataRelationshipsTarget storage = relationships.Storage;
-        StorageRequestDataRelationshipsTargetData storageData = storage.Data;
-        storageData.Type = Type.Objects;
-        storageData.Id = "urn:adsk.objects:os.object:wip.dm.prod/980cff2c-f0f8-43d9-a151-4a2d916b91a2.dwg";
-
-        CreatedVersion createdVersion = await _dataManagementApi.CreateVersionAsync(projectId: projectId, createVersion: createVersion, accessToken: token);
-        CreatedVersionData createdVersionData = createdVersion.Data;
-        Assert.IsTrue(createdVersionData.Type == "versions");
+        ModelVersion modelVersion = await _dataManagementApi.CreateVersionAsync(projectId: projectId, versionPayload: versionPayload, accessToken: token);
+        VersionData modelVersionData = modelVersion.Data;
+        Assert.IsTrue(modelVersionData.Type == "versions");
     }
 
     [TestMethod]
     public async Task TestCreateVersionRelationshipsRefAsync()
     {
-        RelationshipRefsRequest relationshipRefsRequest = new RelationshipRefsRequest();
+        RelationshipRefsPayload relationshipRefsPayload = new RelationshipRefsPayload()
+        {
+            Jsonapi = new ModifyFolderPayloadJsonapi()
+            {
+                _Version = VersionNumber._10
+            },
+            Data = new RelationshipRefsPayloadData()
+            {
+                Type = Type.Versions,
+                Id = "urn:adsk.wipprod:fs.file:vf.ooWjwAQJR0uEoPRyfEnvew?version=1",
+                Meta = new RelationshipRefsPayloadDataMeta()
+                {
+                    Extension = new RelationshipRefsPayloadDataMetaExtension()
+                    {
+                        Type = Type.AuxiliaryautodeskCoreAttachment,
+                        _Version = VersionNumber._10
+                    }
+                }
+            }
+        };
 
-        relationshipRefsRequest.Jsonapi._Version = VersionNumber._10;
-
-        RelationshipRefsRequestData relationshipRefsRequestData = relationshipRefsRequest.Data;
-        relationshipRefsRequestData.Type = Type.Versions;
-        relationshipRefsRequestData.Id = "urn:adsk.wipprod:fs.file:vf.ooWjwAQJR0uEoPRyfEnvew?version=1";
-
-        RelationshipRefsRequestDataMeta meta = relationshipRefsRequestData.Meta;
-        RelationshipRefsRequestDataMetaExtension extension = meta.Extension;
-        extension.Type = "auxiliary:autodesk.core:Attachment";
-        extension._Version = VersionNumber._10;
-
-        HttpResponseMessage responseMessage = await _dataManagementApi.CreateVersionRelationshipsRefAsync(projectId: projectId, versionId: versionId, relationshipRefsRequest: relationshipRefsRequest, accessToken: token);
+        HttpResponseMessage responseMessage = await _dataManagementApi.CreateVersionRelationshipsRefAsync(projectId: projectId, versionId: versionId, relationshipRefsPayload: relationshipRefsPayload, accessToken: token);
         var statusCode = responseMessage.StatusCode;
         string statusCodeString = statusCode.ToString();
         Assert.IsTrue(statusCodeString == "NoContent");
@@ -516,20 +626,26 @@ public class TestDataManagement
     [TestMethod]
     public async Task TestPatchVersionAsync()
     {
-        VersionRequest versionRequest = new VersionRequest();
+        ModifyVersionPayload modifyVersionPayload = new ModifyVersionPayload()
+        {
+            Jsonapi = new ModifyFolderPayloadJsonapi()
+            {
+                _Version = VersionNumber._10
+            },
+            Data = new ModifyVersionPayloadData()
+            {
+                Type = Type.Items,
+                Id = "urn:adsk.wipprod:fs.file:vf.ooWjwAQJR0uEoPRyfEnvew?version=1",
+                Attributes = new ModifyVersionPayloadDataAttributes()
+                {
+                    Name = "new name for drawing.dwg"
+                }
+            }
+        };
 
-        versionRequest.Jsonapi._Version = VersionNumber._10;
-
-        VersionRequestData versionRequestData = versionRequest.Data;
-        versionRequestData.Type = Type.Items;
-        versionRequestData.Id = "urn:adsk.wipprod:fs.file:vf.ooWjwAQJR0uEoPRyfEnvew?version=1";
-
-        VersionRequestDataAttributes attributes = versionRequestData.Attributes;
-        attributes.Name = "new name for drawing.dwg";
-
-        ModelVersion modelVersion = await _dataManagementApi.PatchVersionAsync(projectId: projectId, versionId: versionId, versionRequest: versionRequest, accessToken: token);
-        ItemTipData modelVersionData = modelVersion.Data;
-        Assert.IsTrue(modelVersionData.Type == "versions");
+        VersionDetails versionDetails = await _dataManagementApi.PatchVersionAsync(projectId: projectId, versionId: versionId, modifyVersionPayload: modifyVersionPayload, accessToken: token);
+        VersionDetailsData versionDetailsData = versionDetails.Data;
+        Assert.IsTrue(versionDetailsData.Type == "versions");
     }
 
 
