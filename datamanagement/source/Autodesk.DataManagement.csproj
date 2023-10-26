@@ -9,7 +9,7 @@
     <Description>Client sdk for DataManagement API</Description>
     <Copyright>Autodesk Inc.</Copyright>
     <PackageId>Autodesk.DataManagement</PackageId>
-    <Version>1.0.0-beta3</Version>
+    <Version>1.0.0-beta4</Version>
     <Authors>Autodesk</Authors>
     <owners>Autodesk</owners>
     <Company>Autodesk</Company>
