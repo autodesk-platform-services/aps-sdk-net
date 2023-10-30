@@ -146,27 +146,43 @@ foreach (var topFolder in topFoldersData)
 }
 
 
-
 // Folders
 
 // Describe the folder to be created
-CreateFolder createFolder = new CreateFolder();
-createFolder.Jsonapi._Version = VersionNumber._10;
-CreateFolderData createFolderData = createFolder.Data;
-createFolderData.Type = Type.Folders;
-CreateFolderDataAttributes createFolderDataAttributes = createFolderData.Attributes;
-createFolderDataAttributes.Name = "Plans";
-CreateFolderDataAttributesExtension createFolderDataAttributesExtension = createFolderDataAttributes.Extension;
-createFolderDataAttributesExtension.Type = Type.FoldersautodeskCoreFolder;
-createFolderDataAttributesExtension._Version = VersionNumber._10;
-CreateFolderDataRelationships createFolderDataRelationships = createFolderData.Relationships;
-StorageRequestDataRelationshipsTarget createFolderDataRelationshipsParent = createFolderDataRelationships.Parent;
-StorageRequestDataRelationshipsTargetData createFolderDataRelationshipsParentData = createFolderDataRelationshipsParent.Data;
-createFolderDataRelationshipsParentData.Type = Type.Folders;
-createFolderDataRelationshipsParentData.Id = "urn:adsk.wipprod:dm.folder:sdfedf8wefl";
+FolderPayload folderPayload = new FolderPayload()
+{
+    Jsonapi = new ModifyFolderPayloadJsonapi()
+    {
+        _Version = VersionNumber._10
+    },
+    Data = new FolderPayloadData()
+    {
+        Type = Type.Folders,
+        Attributes = new FolderPayloadDataAttributes()
+        {
+            Name = "folder",
+            Extension = new RelationshipRefsPayloadDataMetaExtension()
+            {
+                Type = Type.FoldersautodeskCoreFolder,
+                _Version = VersionNumber._10
+            }
+        },
+        Relationships = new FolderPayloadDataRelationships()
+        {
+            Parent = new FolderPayloadDataRelationshipsParent()
+            {
+                Data = new FolderPayloadDataRelationshipsParentData()
+                {
+                    Type = Type.Folders,
+                    Id = folderId
+                }
+            }
+        }
+    },
+};
 
 // Creates a new folder.
-Folder createdFolder = await _dataManagementApi.CreateFolderAsync(projectId: project_id, createFolder: createFolder, accessToken: token);
+Folder folder = await _dataManagementApi.CreateFolderAsync(projectId: projectId, folderPayload: folderPayload, accessToken: token);
 
 FolderData createdFolderData = createdFolder.Data;
 string createdFolderDataType = createdFolderData.Type;
@@ -251,39 +267,67 @@ string parentFolderDataAttributesExtensionType = parentFolder.Data.Attributes.Ex
 string parentFolderDataAttributesExtensionVersion = parentFolder.Data.Attributes.Extension._Version;
 
 
-// Items
-ItemsApi _itemsApi = new ItemsApi(sdkManager);
-
 
 // Describe item to be created
-CreateItem createItem = new CreateItem();
-
-createItem.Jsonapi._Version = VersionNumber._10;
-
-createItem.Data.Type = Type.Items;
-createItem.Data.Attributes.DisplayName = "drawing.dwg";
-createItem.Data.Attributes.Extension.Type = Type.ItemsautodeskCoreFile;
-createItem.Data.Attributes.Extension._Version = VersionNumber._10;
-createItem.Data.Relationships.Tip.Data.Type = Type.Versions;
-createItem.Data.Relationships.Tip.Data.Id = "1";
-createItem.Data.Relationships.Parent.Data.Type = Type.Folders;
-createItem.Data.Relationships.Parent.Data.Id = "urn:adsk.wipprod:fs.folder:co.mgS-lb-BThaTdHnhiN_mbA";
-
-List<CreateItemIncluded> Included = createItem.Included;
-foreach (var included in Included)
+ItemPayload itemPayload = new ItemPayload()
 {
-    included.Type = Type.Versions;
-    included.Id = "1";
-    included.Attributes.Name = "drawing.dwg";
-    included.Attributes.Extension.Type = Type.VersionsautodeskCoreFile;
-    included.Attributes.Extension._Version = VersionNumber._10;
+    Jsonapi = new ModifyFolderPayloadJsonapi()
+    {
+        _Version = VersionNumber._10
+    },
+    Data = new ItemPayloadData()
+    {
+        Type = Type.Items,
+        Attributes = new ItemPayloadDataAttributes()
+        {
+            DisplayName = "drawing.dwg",
+            Extension = new ItemPayloadDataAttributesExtension()
+            {
+                Type = Type.ItemsautodeskCoreFile,
+                _Version = VersionNumber._10
+            }
+        },
+        Relationships = new ItemPayloadDataRelationships()
+        {
+            Tip = new FolderPayloadDataRelationshipsParent()
+            {
+                Data = new FolderPayloadDataRelationshipsParentData()
+                {
+                    Type = Type.Versions,
+                    Id = "1"
+                }
+            },
+            Parent = new FolderPayloadDataRelationshipsParent()
+            {
+                Data = new FolderPayloadDataRelationshipsParentData()
+                {
+                    Type = Type.Versions,
+                    Id = "1"
+                }
+            }
+        }
+    },
+    Included = new List<ItemPayloadIncluded>()
+            {
+                new ItemPayloadIncluded()
+                {
+                    Type = Type.Versions,
+                    Id = "1",
+                    Attributes = new ItemPayloadIncludedAttributes()
+                    {
+                        Name = "drawing.dwg",
+                        Extension = new ItemPayloadDataAttributesExtension()
+                        {
+                            Type = Type.VersionsautodeskCoreFile,
+                            _Version = VersionNumber._10
+                        }
+                    }
+                }
+            }
+};
 
-    included.Relationships.Storage.Data.Type = Type.Objects;
-    included.Relationships.Storage.Data.Id = "urn:adsk.objects:os.object:wip.dm.prod/2a6d61f2-49df-4d7b-9aed-439586d61df7.dwg";
-}
 
-// Creates the first version of a file (item)
-Item createdItem = await _dataManagementApi.CreateItemAsync(projectId: project_id, createItem: createItem, accessToken: token);
+Item createdItem = await _dataManagementApi.CreateItemAsync(projectId: projectId, itemPayload: itemPayload, accessToken: token);
 
 string createdItemJsonapiVersion = createdItem.Jsonapi._Version;
 
@@ -305,26 +349,48 @@ string createdItemDataAttributesExtensionType = createdItem.Data.Attributes.Exte
 string createdItemDataAttributesExtensionVersion = createdItem.Data.Attributes.Extension._Version;
 
 
-// Versions
-VersionsApi _versionsApi = new VersionsApi(sdkManager);
-
 // Describe the version to be created.
-CreateVersion createVersion = new CreateVersion();
+VersionPayload versionPayload = new VersionPayload()
+{
+    Jsonapi = new ModifyFolderPayloadJsonapi()
+    {
+        _Version = VersionNumber._10
+    },
+    Data = new VersionPayloadData()
+    {
+        Type = Type.Items,
+        Attributes = new VersionPayloadDataAttributes()
+        {
+            Name = "drawing.dwg",
+            Extension = new RelationshipRefsPayloadDataMetaExtension()
+            {
+                Type = Type.VersionsautodeskCoreFile,
+                _Version = VersionNumber._10
+            }
+        },
+        Relationships = new VersionPayloadDataRelationships()
+        {
+            Item = new FolderPayloadDataRelationshipsParent()
+            {
+                Data = new FolderPayloadDataRelationshipsParentData()
+                {
+                    Type = Type.Items,
+                    Id = "urn:adsk.wipprod:dm.lineage:AeYgDtcTSuqYoyMweWFhhQ"
+                }
+            },
+            Storage = new FolderPayloadDataRelationshipsParent()
+            {
+                Data = new FolderPayloadDataRelationshipsParentData()
+                {
+                    Type = Type.Objects,
+                    Id = "urn:adsk.objects:os.object:wip.dm.prod/980cff2c-f0f8-43d9-a151-4a2d916b91a2.dwg"
+                }
+            }
+        }
+    }
+};
 
-createVersion.Jsonapi._Version = VersionNumber._10;
-createVersion.Data.Type = Type.Versions;
-createVersion.Data.Attributes.Name = "drawing.dwg";
-createVersion.Data.Attributes.Extension.Type = "versions:autodesk.core:File";
-createVersion.Data.Attributes.Extension._Version = "1.0";
-
-createVersion.Data.Relationships.Item.Data.Type = Type.Items;
-createVersion.Data.Relationships.Item.Data.Id = "urn:adsk.wipprod:dm.lineage:AeYgDtcTSuqYoyMweWFhhQ";
-
-createVersion.Data.Relationships.Storage.Data.Type = Type.Objects;
-createVersion.Data.Relationships.Storage.Data.Id = "urn:adsk.objects:os.object:wip.dm.prod/980cff2c-f0f8-43d9-a151-4a2d916b91a2.dwg";
-
-// Creates new versions of a file (item), except for the first version of the item
-CreatedVersion createdVersion = await _dataManagementApi.CreateVersionAsync(projectId: project_id, createVersion: createVersion, accessToken: token);
+ModelVersion createdVersion = await _dataManagementApi.CreateVersionAsync(projectId: projectId, versionPayload: versionPayload, accessToken: token);
 
 string createdVersionJsonapiVersion = createdVersion.Jsonapi._Version;
 
