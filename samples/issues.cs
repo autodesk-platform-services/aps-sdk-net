@@ -8,10 +8,7 @@ string projectid ="c2522227-fd2e-4944-913b-3709e2d9f96a";
 
 SDKManager sdkManager = SdkManagerBuilder
                 .Create() // Creates SDK Manager Builder itself.
-                .Add(new ApsConfiguration()
-                {
-                }
-                )
+                .Add(new ApsConfiguration())
                 .Add(ResiliencyConfiguration.CreateDefault())
                 .Build();
 IssuesClient issuesClient = new IssuesClient(sdkManager);
@@ -39,8 +36,8 @@ newIssue.AssignedTo="J2Q2EL4FKPKRHTKF";
 newIssue.AssignedToType=AssignedToType.User;
 newIssue.IssueSubtypeId="9f39edab-8773-440d-848b-99d098e86ce3";
 newIssue.DueDate="2023-10-10";
-var Createissue =await issuesClient.CreateIssueAsync(projectid,xAdsRegion:XAdsRegion.US,newIssue,accessToken:token);
-Console.WriteLine(Createissue);
+Issue createissue =await issuesClient.CreateIssueAsync(projectid,xAdsRegion:XAdsRegion.US,newIssue,accessToken:token);
+Console.WriteLine(createissue);
 
 
 // Create Comment
