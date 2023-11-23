@@ -48,7 +48,7 @@ namespace Autodesk.ModelDerivative.Model
         /// <summary>
         /// Gets or Sets ApplicationProtocol
         /// </summary>
-        [DataMember(Name="applicationProtocol", EmitDefaultValue=false)]
+        [DataMember(Name="applicationProtocol", EmitDefaultValue=true)]
         public ApplicationProtocol ApplicationProtocol { get; set; }
 
         /// <summary>

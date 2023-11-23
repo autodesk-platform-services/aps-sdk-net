@@ -36,7 +36,7 @@ namespace Autodesk.ModelDerivative.Model
     /// JobSvf2OutputFormat
     /// </summary>
     [DataContract]
-    public partial class JobSvf2OutputFormat : JobPayloadFormat
+    public partial class JobSvf2OutputFormat: JobPayloadFormat
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="JobSvf2OutputFormat" /> class.
@@ -44,7 +44,30 @@ namespace Autodesk.ModelDerivative.Model
         public JobSvf2OutputFormat()
         {
         }
+
+             /// <summary>
+        /// Gets or Sets Views
+        /// </summary>
+        [DataMember(Name="views", EmitDefaultValue=false)]
+        public List<View> Views { get; set; }
+ 
+         /// <summary>
+        /// Gets or Sets Type. Default set to Svf2.
+        /// </summary>
+        [DataMember(Name="type", EmitDefaultValue=false)]
+        private Type Type { get; set; } = Type.Svf2;
         
+        /// <summary>
+        /// Gets or Sets Advanced
+        /// </summary>
+        [DataMember(Name="advanced", EmitDefaultValue=false)]
+        public JobSvf2OutputFormatAdvanced Advanced { get; set; }
+        
+
+
+
+        // SVF2 is now inherited from SVF. Below duplicate code is commented.
+        /*
         /// <summary>
         /// Gets or Sets Views
         /// </summary>
@@ -62,7 +85,7 @@ namespace Autodesk.ModelDerivative.Model
         /// </summary>
         [DataMember(Name="advanced", EmitDefaultValue=false)]
         public JobSvfOutputFormatAdvanced Advanced { get; set; }
-
+*/
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

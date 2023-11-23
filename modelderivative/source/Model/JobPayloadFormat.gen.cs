@@ -38,13 +38,7 @@ namespace Autodesk.ModelDerivative.Model
     [DataContract]
     public partial class JobPayloadFormat 
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="JobPayloadFormat" /> class.
-        /// </summary>
-        public JobPayloadFormat()
-        {
-        }
-               
+                     
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

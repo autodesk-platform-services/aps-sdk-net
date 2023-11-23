@@ -29,51 +29,17 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using System.ComponentModel;
 
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// SpecificPropertiesPayload
+    /// JobSvfOutputFormatAdvanced
     /// </summary>
-    [DataContract]
-    public partial class SpecificPropertiesPayload 
+   [DataContract]
+   [EditorBrowsable(EditorBrowsableState.Never)]
+    public partial class JobSvfOutputFormatAdvanced 
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SpecificPropertiesPayload" /> class.
-        /// </summary>
-        public SpecificPropertiesPayload()
-        {
-        }
-        
-        /// <summary>
-        /// Gets or Sets Pagination
-        /// </summary>
-        [DataMember(Name="pagination", EmitDefaultValue=false)]
-        public SpecificPropertiesPayloadPagination Pagination { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Query. This is internal and not exposed.
-        /// </summary>
-        [DataMember(Name = "query", EmitDefaultValue = false)]
-        internal Dictionary<object, object> Filter { get { return Query.FilterQuery; } }
-
-
-        /// <summary>
-        /// Class to help set up Query Filters
-        /// </summary>
-        public SpecificPropertiesPayloadQuery Query { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Fields
-        /// </summary>
-        [DataMember(Name="fields", EmitDefaultValue=false)]
-        public Object Fields { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Payload
-        /// </summary>
-        [DataMember(Name="payload", EmitDefaultValue=true)]
-        public Payload Payload { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

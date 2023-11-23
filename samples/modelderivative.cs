@@ -4,8 +4,8 @@ using Autodesk.ModelDerivative.Model;
 using Autodesk.SDKManager;
 using Newtonsoft.Json.Linq;
 
-string token = "<token>";
-string urn = "<urn>";
+string token = "eyJhbGciOiJSUzI1NiIsImtpZCI6IjY0RE9XMnJoOE9tbjNpdk1NU0xlNGQ2VHEwUSIsInBpLmF0bSI6ImFzc2MifQ.eyJzY29wZSI6WyJkYXRhOnJlYWQiLCJkYXRhOndyaXRlIiwiZGF0YTpjcmVhdGUiLCJidWNrZXQ6cmVhZCIsImJ1Y2tldDp1cGRhdGUiLCJidWNrZXQ6ZGVsZXRlIiwiYnVja2V0OmNyZWF0ZSIsInZpZXdhYmxlczpyZWFkIiwiY29kZTphbGwiXSwiY2xpZW50X2lkIjoiQnZ5TVFwZ3UyNjFVUnd5dm9GOTVwU0Z6QmUyOUt2U1IiLCJpc3MiOiJodHRwczovL2RldmVsb3Blci5hcGkuYXV0b2Rlc2suY29tIiwiYXVkIjoiaHR0cHM6Ly9hdXRvZGVzay5jb20iLCJqdGkiOiJPM013YzY5NzZndlNUWnphY1ZQQnJYNTJLTTE5b3B1eHdtV2xRdjBsdVlGQ25ha3ZjcHZ4TFNGa0VBRWYxTXhDIiwiZXhwIjoxNzAwNzQxOTIxfQ.iUhETlp3ebApo8fEH8CWbqp1kpLR5lPAIrUrifO9fegpEFaqROQZwzSvP3IKhYdqFLUwX3qwanHVWR198O3RHUSj0nGDYlXrFX0DJP5JOjRTTgM34kaFBu9kRASo8D8eLg2BExeeGUlpVv7jDdy583QkBWuPVrJpFeACBD5vPvYJU96-Szk__FhPYXzACLabjAVHV7_nPOYz1yUHswtMIS6QfT5ntwSrY0anUlUxYpaTm_JxlI7HLZg84ZAnZUCn_T3Ei9Yw0fQge4auVwic90Mnb-gpYmhZzydI9qQ3K8Ziw1t0ZcNxbjbCPk0nqbG5tXdLQyBYGkwQqeSgbvkOfA";
+string urn = "dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6dHN0YnVja2V0MTIzL09mZmljZS5ydnQ";
 
 
 // Instantiate SDK manager as below.   
@@ -23,15 +23,15 @@ ModelDerivativeClient modelDerivativeClient = new ModelDerivativeClient(sdkManag
 List<JobPayloadFormat> outputFormats = new List<JobPayloadFormat>()
 {
       // initialising an Svf2 output class will automatically set the type to Svf2.
-      new JobSvf2OutputFormat()
+      new JobSvfOutputFormat()
       {
 
-         Views =  new List<View>()
-                {
-                View._2d,
-                View._3d
-                },
-
+      Views = new List<View>(){
+         View._2d,
+          View._3d
+           }  // mandatory params? 
+                
+        
       },
 
       // initialising a Thumbnail output class will automatically set the type to Thumbnail.
@@ -40,8 +40,8 @@ List<JobPayloadFormat> outputFormats = new List<JobPayloadFormat>()
       {
             Advanced = new JobThumbnailOutputFormatAdvanced(){
 
-                  Width = Width.NUMBER_100,
-                  Height = Height.NUMBER_100
+                  Width = Width._100, // enum channge to only 100
+                  Height = Height._100
             }
 
 
@@ -63,7 +63,7 @@ JobPayload Job = new JobPayload()
     Output = new JobPayloadOutput()
     {
         Formats = outputFormats,
-        Destination = Region.US // This will call the respective endpoint - Either US or EMEA. Defaults to US.
+        Destination = new JobPayloadOutputDestination(){ Region = Region.US} // This will call the respective endpoint - Either US or EMEA. Defaults to US.
     },
 };
 

@@ -33,45 +33,26 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// An array of flat JSON objects representing metadata.
+    /// JobSvfOutputFormatAdvanced
     /// </summary>
     [DataContract]
-    public partial class ModelViewsDataMetadata 
+    public partial class JobSvfOutputFormatAdvancedDGN : JobSvfOutputFormatAdvanced
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ModelViewsDataMetadata" /> class.
+        /// Initializes a new instance of the <see cref="JobSvfOutputFormatAdvancedDGN" /> class.
         /// </summary>
-        public ModelViewsDataMetadata()
+        public JobSvfOutputFormatAdvancedDGN()
         {
         }
         
         /// <summary>
-        /// Name of the model view
+        /// An array containing user data linkage IDs of the linkage data to be extracted from the DGN file. Linkage data is not extracted if you do not specify this attribute.
         /// </summary>
-        /// <value>Name of the model view</value>
-        [DataMember(Name="name", EmitDefaultValue=false)]
-        public string Name { get; set; }
+        /// <value>An array containing user data linkage IDs of the linkage data to be extracted from the DGN file. Linkage data is not extracted if you do not specify this attribute.</value>
+        [DataMember(Name="requestedLinkageIDs", EmitDefaultValue=false)]
+        public List<int?> RequestedLinkageIDs { get; set; }
 
-        /// <summary>
-        /// Unique identifier for the model view
-        /// </summary>
-        /// <value>Unique identifier for the model view</value>
-        [DataMember(Name="guid", EmitDefaultValue=false)]
-        public string Guid { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Role
-        /// </summary>
-        [DataMember(Name="role", EmitDefaultValue=true)]
-        public Role Role { get; set; }
-
-        /// <summary>
-        /// Indicates whether the model view is a Master View. This attribute is present only if the model view is a Master View. Possible values: true: Model View is a Master View derived from a Revit file.
-        /// </summary>
-        /// <value>Indicates whether the model view is a Master View. This attribute is present only if the model view is a Master View. Possible values: true: Model View is a Master View derived from a Revit file.</value>
-        [DataMember(Name="isMasterView", EmitDefaultValue=false)]
-        public bool? IsMasterView { get; set; }
-
+        
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>

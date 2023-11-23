@@ -55,7 +55,7 @@ namespace Autodesk.ModelDerivative.Model
         /// <summary>
         /// Gets or Sets Region
         /// </summary>
-        [DataMember(Name="region", EmitDefaultValue=false)]
+        [DataMember(Name="region", EmitDefaultValue=true)]
         public Region Region { get; set; }
 
         /// <summary>

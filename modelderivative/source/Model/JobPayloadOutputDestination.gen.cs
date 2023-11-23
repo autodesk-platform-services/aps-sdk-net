@@ -29,6 +29,7 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using System.ComponentModel;
 
 namespace Autodesk.ModelDerivative.Model
 {
@@ -36,7 +37,7 @@ namespace Autodesk.ModelDerivative.Model
     /// JobPayloadOutputDestination
     /// </summary>
     [DataContract]
-    public partial class JobPayloadOutputDestination 
+    public partial class JobPayloadOutputDestination
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="JobPayloadOutputDestination" /> class.
@@ -44,12 +45,13 @@ namespace Autodesk.ModelDerivative.Model
         public JobPayloadOutputDestination()
         {
         }
-        
+
         /// <summary>
         /// Gets or Sets Region
         /// </summary>
-        [DataMember(Name="region", EmitDefaultValue=false)]
+        [DataMember(Name = "region", EmitDefaultValue = true)]
         public Region Region { get; set; }
+
 
         /// <summary>
         /// Returns the string presentation of the object

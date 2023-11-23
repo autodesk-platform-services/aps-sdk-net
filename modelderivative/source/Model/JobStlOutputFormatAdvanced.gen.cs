@@ -48,7 +48,7 @@ namespace Autodesk.ModelDerivative.Model
         /// <summary>
         /// Gets or Sets Format
         /// </summary>
-        [DataMember(Name="format", EmitDefaultValue=false)]
+        [DataMember(Name="format", EmitDefaultValue=true)]
         public Format Format { get; set; }
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace Autodesk.ModelDerivative.Model
         /// <summary>
         /// Gets or Sets ExportFileStructure
         /// </summary>
-        [DataMember(Name="exportFileStructure", EmitDefaultValue=false)]
+        [DataMember(Name="exportFileStructure", EmitDefaultValue=true)]
         public ExportFileStructure ExportFileStructure { get; set; }
 
         /// <summary>
