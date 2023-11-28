@@ -23,15 +23,15 @@ ModelDerivativeClient modelDerivativeClient = new ModelDerivativeClient(sdkManag
 List<JobPayloadFormat> outputFormats = new List<JobPayloadFormat>()
 {
       // initialising an Svf2 output class will automatically set the type to Svf2.
-      new JobSvf2OutputFormat()
+      new JobSvfOutputFormat()
       {
 
-         Views =  new List<View>()
-                {
-                View._2d,
-                View._3d
-                },
-
+      Views = new List<View>(){
+         View._2d,
+          View._3d
+           }  // mandatory params? 
+                
+        
       },
 
       // initialising a Thumbnail output class will automatically set the type to Thumbnail.
@@ -40,8 +40,8 @@ List<JobPayloadFormat> outputFormats = new List<JobPayloadFormat>()
       {
             Advanced = new JobThumbnailOutputFormatAdvanced(){
 
-                  Width = Width.NUMBER_100,
-                  Height = Height.NUMBER_100
+                  Width = Width._100, // enum channge to only 100
+                  Height = Height._100
             }
 
 
@@ -63,7 +63,7 @@ JobPayload Job = new JobPayload()
     Output = new JobPayloadOutput()
     {
         Formats = outputFormats,
-        Destination = Region.US // This will call the respective endpoint - Either US or EMEA. Defaults to US.
+        Destination = new JobPayloadOutputDestination(){ Region = Region.US} // This will call the respective endpoint - Either US or EMEA. Defaults to US.
     },
 };
 

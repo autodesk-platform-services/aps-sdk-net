@@ -85,7 +85,7 @@ namespace Autodesk.ModelDerivative
         #endregion Derivatives
 
         #region Thumbnail
-        public async System.Threading.Tasks.Task<System.IO.Stream> GetThumbnailAsync(string urn, Width width = Width.NUMBER_200, Height height = Height.NUMBER_200, Region region = default, string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<System.IO.Stream> GetThumbnailAsync(string urn, Width width = Width._200, Height height = Height._200, Region region = default, string accessToken = null, bool throwOnError = true)
         {
             var response = await this.ThumbnailsApi.GetThumbnailAsync(urn, width, height, region, accessToken, throwOnError);
             return response.Content;

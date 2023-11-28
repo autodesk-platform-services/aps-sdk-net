@@ -48,13 +48,13 @@ namespace Autodesk.ModelDerivative.Model
         /// <summary>
         /// Gets or Sets ExportFileStructure
         /// </summary>
-        [DataMember(Name="exportFileStructure", EmitDefaultValue=false)]
+        [DataMember(Name="exportFileStructure", EmitDefaultValue=true)]
         public ExportFileStructure ExportFileStructure { get; set; }
 
         /// <summary>
         /// Gets or Sets Unit
         /// </summary>
-        [DataMember(Name="unit", EmitDefaultValue=false)]
+        [DataMember(Name="unit", EmitDefaultValue=true)]
         public Unit Unit { get; set; }
 
         /// <summary>

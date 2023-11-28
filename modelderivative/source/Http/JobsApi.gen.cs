@@ -154,7 +154,7 @@ namespace Autodesk.ModelDerivative.Http
         public async System.Threading.Tasks.Task<ApiResponse<Job>> StartJobAsync (bool? xAdsForce= default(bool?),XAdsDerivativeFormat? xAdsDerivativeFormat= default,JobPayload jobPayload= default(JobPayload), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into StartJobAsync ");
-            string regionPath = Utils.GetPathfromRegion(jobPayload.Output.Destination);
+            string regionPath = Utils.GetPathfromRegion(jobPayload.Output.Destination.Region);
             using (var request = new HttpRequestMessage())
             {
                 var queryParam = new Dictionary<string, object>();

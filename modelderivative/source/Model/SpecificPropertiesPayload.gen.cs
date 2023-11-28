@@ -72,7 +72,7 @@ namespace Autodesk.ModelDerivative.Model
         /// <summary>
         /// Gets or Sets Payload
         /// </summary>
-        [DataMember(Name="payload", EmitDefaultValue=false)]
+        [DataMember(Name="payload", EmitDefaultValue=true)]
         public Payload Payload { get; set; }
 
         /// <summary>

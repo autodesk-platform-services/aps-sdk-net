@@ -54,7 +54,7 @@ namespace Autodesk.ModelDerivative.Model
         /// <summary>
         /// Gets or Sets Type. Default set to Svf.
         /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [DataMember(Name="type", EmitDefaultValue=true)]
         private Type Type { get; set; } = Type.Svf;
 
         /// <summary>

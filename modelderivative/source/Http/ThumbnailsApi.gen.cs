@@ -140,7 +140,7 @@ namespace Autodesk.ModelDerivative.Http
         /// <param name="urn">The Base64 (URL Safe) encoded design URN</param>/// <param name="width">Width of thumbnail  Possible values: 100, 200, 400  If width is omitted, but height is specified, the implicit value for width will match height.  If both width and height are omitted, the server will return a thumbnail closest to a width of 200, if available. (optional)</param>/// <param name="height">Height of thumbnail  Possible values: 100, 200, 400  If height is omitted, but width is specified, the implicit value for height will match width.  If both width and height are omitted, the server will return a thumbnail closest to a width of 200, if available. (optional)</param>
         /// <returns>Task of ApiResponse<System.IO.Stream></returns>
         
-        public async System.Threading.Tasks.Task<ApiResponse<System.IO.Stream>> GetThumbnailAsync (string urn,Width width = Width.NUMBER_200 ,Height height = Height.NUMBER_200, Region region = default,string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ApiResponse<System.IO.Stream>> GetThumbnailAsync (string urn,Width width = Width._200 ,Height height = Height._200, Region region = default,string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into GetThumbnailAsync ");
                 string regionPath = Utils.GetPathfromRegion(region);

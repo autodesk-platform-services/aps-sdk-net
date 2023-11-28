@@ -41,22 +41,22 @@ namespace Autodesk.ModelDerivative.Model
     {
         
         /// <summary>
-        /// Enum NUMBER_100 for value: 100
+        /// Enum _100 for value: 100
         /// </summary>
         
-        NUMBER_100 = 100,
+        _100 = 100,
         
         /// <summary>
-        /// Enum NUMBER_200 for value: 200
+        /// Enum _200 for value: 200
         /// </summary>
         
-        NUMBER_200 = 200,
+        _200 = 200,
         
         /// <summary>
-        /// Enum NUMBER_400 for value: 400
+        /// Enum _400 for value: 400
         /// </summary>
         
-        NUMBER_400 = 400
+        _400 = 400
     }
 
 }

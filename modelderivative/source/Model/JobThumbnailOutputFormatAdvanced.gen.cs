@@ -48,13 +48,13 @@ namespace Autodesk.ModelDerivative.Model
         /// <summary>
         /// Gets or Sets Width
         /// </summary>
-        [DataMember(Name="width", EmitDefaultValue=false)]
+        [DataMember(Name="width", EmitDefaultValue=true)]
         public Width Width { get; set; }
 
         /// <summary>
         /// Gets or Sets Height
         /// </summary>
-        [DataMember(Name="height", EmitDefaultValue=false)]
+        [DataMember(Name="height", EmitDefaultValue=true)]
         public Height Height { get; set; }
 
         /// <summary>

@@ -62,7 +62,7 @@ namespace Autodesk.ModelDerivative.Model
         /// <summary>
         /// Gets or Sets Role
         /// </summary>
-        [DataMember(Name="role", EmitDefaultValue=false)]
+        [DataMember(Name="role", EmitDefaultValue=true)]
         public Role Role { get; set; }
 
         /// <summary>
