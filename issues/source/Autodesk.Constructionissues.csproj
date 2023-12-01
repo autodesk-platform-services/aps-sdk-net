@@ -9,7 +9,7 @@
     <Description>Client sdk for Constructionissues API</Description>
     <Copyright>Autodesk Inc.</Copyright>
     <PackageId>Autodesk.Constructionissues</PackageId>
-    <Version>0.0.1</Version>
+    <Version>1.0.0-beta1</Version>
     <Authors>Autodesk SDK team</Authors>
     <owners>Autodesk SDK team</owners>
     <Company>Autodesk</Company>

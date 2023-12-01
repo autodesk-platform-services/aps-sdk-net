@@ -36,12 +36,12 @@ namespace Autodesk.Constructionissues.Model
     /// Issues
     /// </summary>
     [DataContract]
-    public partial class Issues 
+    public partial class IssuesPage
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Issues" /> class.
         /// </summary>
-        public Issues()
+        public IssuesPage()
         {
         }
         
