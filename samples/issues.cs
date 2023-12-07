@@ -85,7 +85,7 @@ namespace Samples
             Console.WriteLine(attrDefinition);
         }
 
-        public async Task MainAsync()
+        public async void Main()
         {
             // Initialise SDKManager & Issueslient
             Initialise();
