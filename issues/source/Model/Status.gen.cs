@@ -30,7 +30,7 @@ using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace Autodesk.Constructionissues.Model
+namespace Autodesk.Construction.Issues.Model
 {
     /// <summary>
     /// The current status of the issue. To check the available statuses for the project, call GET users/me and check the permitted statuses list (issue.new.permittedStatuses). For more information about statuses, see the Help documentation.

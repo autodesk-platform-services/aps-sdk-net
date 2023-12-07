@@ -22,7 +22,7 @@
 using System;
 using System.Net.Http;
 
-namespace Autodesk.Constructionissues
+namespace Autodesk.Construction.Issues
 {
   public abstract class ServiceApiException : HttpRequestException
   {

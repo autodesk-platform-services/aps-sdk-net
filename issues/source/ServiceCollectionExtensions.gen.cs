@@ -22,9 +22,9 @@
 using Autodesk.Forge.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Autodesk.Constructionissues.Http;
+using Autodesk.Construction.Issues.Http;
 
-namespace Autodesk.Constructionissues
+namespace Autodesk.Construction.Issues
 {
     public static class ServiceCollectionExtensions
     {

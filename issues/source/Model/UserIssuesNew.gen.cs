@@ -30,7 +30,7 @@ using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace Autodesk.Constructionissues.Model
+namespace Autodesk.Construction.Issues.Model
 {
     /// <summary>
     /// If this object appears in the response, it indicates that the user can create and modify issues.
