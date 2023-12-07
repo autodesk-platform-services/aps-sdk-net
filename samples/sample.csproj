@@ -12,6 +12,7 @@
     <PackageReference Include="Autodesk.DataManagement" Version="1.0.0-beta3"/>
     <PackageReference Include="Autodesk.Oss" Version="1.0.0-beta3"/>   
     <PackageReference Include="Autodesk.Authentication" Version="1.0.0-beta1"/>   
+     <PackageReference Include="Autodesk.Construction.Issues" Version="1.0.0-beta1"/>   
     <PackageReference Include="Autodesk.SdkManager" Version="1.0.0-beta1" />
   </ItemGroup>
 </Project>

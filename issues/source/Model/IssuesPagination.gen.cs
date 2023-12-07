@@ -30,7 +30,7 @@ using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace Autodesk.Constructionissues.Model
+namespace Autodesk.Construction.Issues.Model
 {
     /// <summary>
     /// The pagination object defining the limit, offset, total number of issues, next and previous URL

@@ -23,7 +23,7 @@ using System;
 using Newtonsoft.Json;
 using System.Net.Http;
 using System.Threading.Tasks;
-namespace Autodesk.Constructionissues.Client
+namespace Autodesk.Construction.Issues.Client
 {
     /// <summary>
     /// Helpers for marshalling parameters

@@ -1,8 +1,8 @@
-namespace Autodesk.IssuesApi.Test;
+namespace Autodesk.Construction.Issues.Test;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Autodesk.Constructionissues;
-using Autodesk.Constructionissues.Model;
+using Autodesk.Construction.Issues;
+using Autodesk.Construction.Issues.Model;
 using Autodesk.SDKManager;
 
 
