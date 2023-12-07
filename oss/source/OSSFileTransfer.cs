@@ -67,10 +67,11 @@ namespace Autodesk.Oss
             AdskEnvironment adskEnvironment = AdskEnvironment.Prd,
             ILogger logger = null)
         {
-            if (authentication == null)
-            {
-                throw new ArgumentNullException("IAuthentication");
-            }
+        //Commented out since Authentication is not implemented
+            // if (authentication == null)
+            // {
+            //     throw new ArgumentNullException("IAuthentication");
+            // }
             _forgeService = ForgeService.CreateDefault();
             _configuration = configuration;
             _logger = logger ?? NullLogger.Instance;
@@ -80,7 +81,7 @@ namespace Autodesk.Oss
                 .Add(new ApsConfiguration(adskEnvironment))
                 .Add(ResiliencyConfiguration.CreateDefault())
                 .Add(_logger)
-                .Add(authentication)
+                // .Add(authentication)
                 .Build();
             _ossApi = new OSSApi(sdkManager);
 

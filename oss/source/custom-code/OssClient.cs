@@ -18,6 +18,8 @@ namespace Autodesk.Oss
         public OssClient(SDKManager.SDKManager sdkManager)
         {
             this.OSSApi = new OSSApi(sdkManager);
+            this.oSSFileTransfer = new OSSFileTransfer(new FileTransferConfigurations(3) ,null);
+
         }
 
 
