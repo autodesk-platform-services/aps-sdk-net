@@ -30,28 +30,29 @@ using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
+
+
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
     /// Region in which to store references. Possible values: US, EMEA. By default, it is set to US. 
     /// </summary>
     /// <value>Region in which to store references. Possible values: US, EMEA. By default, it is set to US. </value>
-    
-    [JsonConverter(typeof(StringEnumConverter))]
-    
+   
+    [JsonConverter(typeof(StringEnumConverter))]   
     public enum Region
     {
         
         /// <summary>
         /// Enum US for value: US
         /// </summary>
-        [EnumMember(Value = "US")]
+        [EnumMember(Value = "us")]
         US,
         
         /// <summary>
         /// Enum EMEA for value: EMEA
         /// </summary>
-        [EnumMember(Value = "EMEA")]
+        [EnumMember(Value = "emea")]
         EMEA
     }
 

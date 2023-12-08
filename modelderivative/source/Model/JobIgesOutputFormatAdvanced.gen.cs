@@ -55,19 +55,19 @@ namespace Autodesk.ModelDerivative.Model
         /// <summary>
         /// Gets or Sets SurfaceType
         /// </summary>
-        [DataMember(Name="surfaceType", EmitDefaultValue=false)]
+        [DataMember(Name="surfaceType", EmitDefaultValue=true)]
         public SurfaceType SurfaceType { get; set; }
 
         /// <summary>
         /// Gets or Sets SheetType
         /// </summary>
-        [DataMember(Name="sheetType", EmitDefaultValue=false)]
+        [DataMember(Name="sheetType", EmitDefaultValue=true)]
         public SheetType SheetType { get; set; }
 
         /// <summary>
         /// Gets or Sets SolidType
         /// </summary>
-        [DataMember(Name="solidType", EmitDefaultValue=false)]
+        [DataMember(Name="solidType", EmitDefaultValue=true)]
         public SolidType SolidType { get; set; }
 
         /// <summary>

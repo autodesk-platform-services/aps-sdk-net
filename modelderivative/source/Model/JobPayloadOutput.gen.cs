@@ -36,7 +36,7 @@ namespace Autodesk.ModelDerivative.Model
     /// Group of outputs
     /// </summary>
     [DataContract]
-    public partial class JobPayloadOutput 
+    public partial class JobPayloadOutput
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="JobPayloadOutput" /> class.
@@ -44,18 +44,18 @@ namespace Autodesk.ModelDerivative.Model
         public JobPayloadOutput()
         {
         }
-        
+
         /// <summary>
         /// Gets or Sets Destination
         /// </summary>
-        [DataMember(Name="destination", EmitDefaultValue=false)]
-        public Region Destination { get; set; }
+        [DataMember(Name = "destination", EmitDefaultValue = false)]
+        public JobPayloadOutputDestination Destination{get;set;}
 
         /// <summary>
         /// Group of requested formats/types. User can request multiple formats.
         /// </summary>
         /// <value>Group of requested formats/types. User can request multiple formats.</value>
-        [DataMember(Name="formats", EmitDefaultValue=false)]
+        [DataMember(Name = "formats", EmitDefaultValue = false)]
         public List<JobPayloadFormat> Formats { get; set; }
 
         /// <summary>
@@ -66,6 +66,7 @@ namespace Autodesk.ModelDerivative.Model
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
+      
     }
 
 }
