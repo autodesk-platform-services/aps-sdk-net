@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autodesk.DataManagementApi", "source\Autodesk.DataManagementApi.csproj", "{4E496045-3AB8-4048-9885-9D02A9DB9FA2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autodesk.DataManagement", "source\Autodesk.DataManagement.csproj", "{4E496045-3AB8-4048-9885-9D02A9DB9FA2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autodesk.DataManagementApi.Test", "test\Autodesk.DataManagementApi.Test.csproj", "{DED1DC8F-3E99-4236-AC2C-E2E5A252A503}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autodesk.DataManagement.Test", "test\Autodesk.DataManagement.Test.csproj", "{DED1DC8F-3E99-4236-AC2C-E2E5A252A503}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

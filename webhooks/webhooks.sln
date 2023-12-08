@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autodesk.WebhooksApi", "source\Autodesk.WebhooksApi.csproj", "{E898A6D2-071E-4D01-B212-A14EFD209A6D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autodesk.Webhooks", "source\Autodesk.Webhooks.csproj", "{E898A6D2-071E-4D01-B212-A14EFD209A6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autodesk.WebhooksApi.Test", "test\Autodesk.WebhooksApi.Test.csproj", "{16D9EE9B-2621-4DEC-A7BC-64986C5FC329}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autodesk.Webhooks.Test", "test\Autodesk.Webhooks.Test.csproj", "{16D9EE9B-2621-4DEC-A7BC-64986C5FC329}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

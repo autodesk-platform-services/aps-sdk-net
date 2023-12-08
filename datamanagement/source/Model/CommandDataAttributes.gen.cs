@@ -55,7 +55,7 @@ namespace Autodesk.DataManagement.Model
         /// Gets or Sets Extension
         /// </summary>
         [DataMember(Name="extension", EmitDefaultValue=false)]
-        public CreatedVersionIncludedAttributesExtension Extension { get; set; }
+        public VersionIncludedAttributesExtension Extension { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
