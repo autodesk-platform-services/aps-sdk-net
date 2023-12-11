@@ -3,16 +3,15 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Company>Autodesk</Company>
-    <Product>Autodesk Platform Services SDK</Product>
-    <Description>Client SDK for Data Management OSS API</Description>
+    <Authors>Autodesk Platform Services SDK Team</Authors>
+    <PackageDescription>Client SDK for Data Management OSS API</PackageDescription>
     <Copyright>Autodesk Inc.</Copyright>
     <PackageId>Autodesk.Oss</PackageId>
-    <Version>1.0.0-beta3</Version>
-    <Authors>Autodesk</Authors>
-    <owners>Autodesk</owners>
-    <Company>Autodesk</Company>
-  </PropertyGroup>
+    <PackageVersion>1.0.0</PackageVersion>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/autodesk-platform-services/aps-sdk-net.git</RepositoryUrl> 
+    </PropertyGroup>
     <ItemGroup>
       <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
       <PackageReference Include="Autodesk.Forge.Core.NetStandard" Version="2.0.0" />
@@ -21,7 +20,9 @@
       <PackageReference Include="Microsoft.Extensions.Options" Version="6.0.0" />
       <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-      <PackageReference Include="Autodesk.SDKManager" Version="1.0.0-beta1" />
+      <PackageReference Include="Autodesk.SDKManager" Version="1.0.0" />
+      <None Include="../../LICENSE.txt" Pack="true" PackagePath=""/>
+      <None Include="../../README.md" Pack="true" PackagePath=""/>
     </ItemGroup>
 
 </Project>
