@@ -30,7 +30,7 @@ using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace Autodesk.Constructionissues.Model
+namespace Autodesk.Construction.Issues.Model
 {
     /// <summary>
     /// The individual viewable associated with the issue (pushpin). This is relevant for both individual 2D sheets and views within a 3D model, and individual PDF sheets within a multi-sheet PDF file. It is only relevant if the issue is associated with a file.

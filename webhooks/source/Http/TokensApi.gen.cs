@@ -47,9 +47,9 @@ namespace Autodesk.Webhooks.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="xAdsRegion">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;. (optional)</param>/// <param name="region">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;.  The &#x60;&#x60;x-ads-region&#x60;&#x60; header also specifies the region. If you specify both, &#x60;&#x60;x-ads-region&#x60;&#x60; has precedence.  (optional)</param>/// <param name="tokenPayload">A secret token that is used to generate a hash signature, which is passed along with notification requests to the callback URL (optional)</param>
-        /// <returns>Task of ApiResponse<TokenCreationResult></returns>
+        /// <returns>Task of ApiResponse<Token></returns>
         
-        System.Threading.Tasks.Task<ApiResponse<TokenCreationResult>> CreateTokenAsync (string xAdsRegion= default(string), string region= default(string), TokenPayload tokenPayload= default(TokenPayload),  string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<ApiResponse<Token>> CreateTokenAsync (string xAdsRegion= default(string), string region= default(string), TokenPayload tokenPayload= default(TokenPayload),  string accessToken = null, bool throwOnError = true);
         /// <summary>
         /// Delete a Webhook secret token
         /// </summary>
@@ -160,9 +160,9 @@ namespace Autodesk.Webhooks.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="xAdsRegion">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;. (optional)</param>/// <param name="region">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;.  The &#x60;&#x60;x-ads-region&#x60;&#x60; header also specifies the region. If you specify both, &#x60;&#x60;x-ads-region&#x60;&#x60; has precedence.  (optional)</param>/// <param name="tokenPayload">A secret token that is used to generate a hash signature, which is passed along with notification requests to the callback URL (optional)</param>
-        /// <returns>Task of ApiResponse<TokenCreationResult></returns>
+        /// <returns>Task of ApiResponse<Token></returns>
         
-        public async System.Threading.Tasks.Task<ApiResponse<TokenCreationResult>> CreateTokenAsync (string xAdsRegion= default(string),string region= default(string),TokenPayload tokenPayload= default(TokenPayload), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ApiResponse<Token>> CreateTokenAsync (string xAdsRegion= default(string),string region= default(string),TokenPayload tokenPayload= default(TokenPayload), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into CreateTokenAsync ");
             using (var request = new HttpRequestMessage())
@@ -216,10 +216,10 @@ namespace Autodesk.Webhooks.Http
                 else if (!response.IsSuccessStatusCode)
                 {
                     logger.LogError($"response unsuccess with status code: {response.StatusCode}");
-                    return new ApiResponse<TokenCreationResult>(response, default(TokenCreationResult));
+                    return new ApiResponse<Token>(response, default(Token));
                 }
                 logger.LogInformation($"Exited from CreateTokenAsync with response statusCode: {response.StatusCode}");
-                return new ApiResponse<TokenCreationResult>(response, await LocalMarshalling.DeserializeAsync<TokenCreationResult>(response.Content));
+                return new ApiResponse<Token>(response, await LocalMarshalling.DeserializeAsync<Token>(response.Content));
 
             } // using
         }

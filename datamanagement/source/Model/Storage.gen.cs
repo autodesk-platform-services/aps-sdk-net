@@ -49,13 +49,13 @@ namespace Autodesk.DataManagement.Model
         /// Gets or Sets Jsonapi
         /// </summary>
         [DataMember(Name="jsonapi", EmitDefaultValue=false)]
-        public HubsJsonapi Jsonapi { get; set; }
+        public StorageJsonapi Jsonapi { get; set; }
 
         /// <summary>
         /// Gets or Sets Links
         /// </summary>
         [DataMember(Name="links", EmitDefaultValue=false)]
-        public HubsLinks Links { get; set; }
+        public StorageLinks Links { get; set; }
 
         /// <summary>
         /// Gets or Sets Data

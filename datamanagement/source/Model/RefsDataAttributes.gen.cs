@@ -109,7 +109,7 @@ namespace Autodesk.DataManagement.Model
         /// Gets or Sets Extension
         /// </summary>
         [DataMember(Name="extension", EmitDefaultValue=false)]
-        public FolderContentsIncludedAttributesExtension Extension { get; set; }
+        public RefsDataAttributesExtension Extension { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

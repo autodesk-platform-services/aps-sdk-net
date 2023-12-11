@@ -70,6 +70,18 @@ namespace Autodesk.DataManagement.Model
         public string ConformingStatus { get; set; }
 
         /// <summary>
+        /// Gets or Sets ModelGuid
+        /// </summary>
+        [DataMember(Name="modelGuid", EmitDefaultValue=false)]
+        public string ModelGuid { get; set; }
+
+        /// <summary>
+        /// Gets or Sets ProjectGuid
+        /// </summary>
+        [DataMember(Name="projectGuid", EmitDefaultValue=false)]
+        public string ProjectGuid { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>

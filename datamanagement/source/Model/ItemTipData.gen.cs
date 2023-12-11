@@ -61,7 +61,7 @@ namespace Autodesk.DataManagement.Model
         /// Gets or Sets Attributes
         /// </summary>
         [DataMember(Name="attributes", EmitDefaultValue=false)]
-        public RefsDataAttributes Attributes { get; set; }
+        public ItemTipDataAttributes Attributes { get; set; }
 
         /// <summary>
         /// Gets or Sets Links

@@ -26,13 +26,13 @@ using System;
 using System.Linq;
 using System.Net.Http;
 using System.Runtime.Serialization;
-using Autodesk.Constructionissues.Model;
-using Autodesk.Constructionissues.Client;
+using Autodesk.Construction.Issues.Model;
+using Autodesk.Construction.Issues.Client;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Autodesk.SDKManager;
 
-namespace Autodesk.Constructionissues.Http
+namespace Autodesk.Construction.Issues.Http
 {
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints

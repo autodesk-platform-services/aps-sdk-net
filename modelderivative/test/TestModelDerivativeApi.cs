@@ -14,7 +14,7 @@ public class TestModelDerivativeAPi
     private static ModelDerivativeClient _mdClient = null!;
 
     private const string token = "<token>";
-    private const string urn = "<urn>>";
+    private const string urn = "<urn>";
 
     [ClassInitialize]
     public static void ClassInitialize(TestContext testContext)

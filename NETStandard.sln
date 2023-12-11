@@ -5,15 +5,15 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "modelderivative", "modelderivative", "{3E6CDD5D-9AEA-4A9C-9085-00D791DD34E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autodesk.ModelDerivativeApi", "modelderivative\source\Autodesk.ModelDerivativeApi.csproj", "{ED05FF2A-8775-4552-B0FF-C9BCD6CB66D4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autodesk.ModelDerivative", "modelderivative\source\Autodesk.ModelDerivative.csproj", "{ED05FF2A-8775-4552-B0FF-C9BCD6CB66D4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "webhooks", "webhooks", "{50380220-FCC6-401E-B36A-5BD6CFE0D70E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autodesk.WebhooksApi", "webhooks\source\Autodesk.WebhooksApi.csproj", "{5F54DA01-35E8-460D-9E11-5BD8A595E0AA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autodesk.Webhooks", "webhooks\source\Autodesk.Webhooks.csproj", "{5F54DA01-35E8-460D-9E11-5BD8A595E0AA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "datamanagement", "datamanagement", "{46B7D388-D640-40F4-AB18-5CE712DD5A36}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autodesk.DataManagementApi", "datamanagement\source\Autodesk.DataManagementApi.csproj", "{EDD91D74-7221-4859-8EFD-2DC2E3549B55}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autodesk.DataManagement", "datamanagement\source\Autodesk.DataManagement.csproj", "{EDD91D74-7221-4859-8EFD-2DC2E3549B55}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "oss", "oss", "{1ADC317D-E69E-48A8-999D-CB00EB1EBD88}"
 EndProject

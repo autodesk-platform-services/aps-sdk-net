@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// Successful retrieval of a specific version.
+    /// Successful creation of a version.
     /// </summary>
     [DataContract]
     public partial class ModelVersion 
@@ -61,7 +61,19 @@ namespace Autodesk.DataManagement.Model
         /// Gets or Sets Data
         /// </summary>
         [DataMember(Name="data", EmitDefaultValue=false)]
-        public ItemTipData Data { get; set; }
+        public VersionData Data { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Included
+        /// </summary>
+        [DataMember(Name="included", EmitDefaultValue=false)]
+        public List<VersionIncluded> Included { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Meta
+        /// </summary>
+        [DataMember(Name="meta", EmitDefaultValue=false)]
+        public VersionMeta Meta { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
