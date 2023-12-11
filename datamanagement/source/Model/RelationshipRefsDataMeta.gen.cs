@@ -85,7 +85,7 @@ namespace Autodesk.DataManagement.Model
         /// Gets or Sets Extension
         /// </summary>
         [DataMember(Name="extension", EmitDefaultValue=false)]
-        public HubsDataAttributesExtension Extension { get; set; }
+        public RelationshipRefsDataMetaExtension Extension { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
