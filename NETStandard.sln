@@ -23,6 +23,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "authentication", "authentic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autodesk.Authentication", "authentication\source\Autodesk.Authentication.csproj", "{6FD0F8C7-0547-4ED7-93A2-525B4A3411A9}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "issues", "issues", "{0CDF551D-4B04-4860-BB8F-F3A77BC899ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autodesk.Construction.Issues", "issues\source\Autodesk.Construction.Issues.csproj", "{8C6376C9-61E6-4836-831E-8B3E8FDAE65F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,6 +56,10 @@ Global
 		{6FD0F8C7-0547-4ED7-93A2-525B4A3411A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6FD0F8C7-0547-4ED7-93A2-525B4A3411A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6FD0F8C7-0547-4ED7-93A2-525B4A3411A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C6376C9-61E6-4836-831E-8B3E8FDAE65F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C6376C9-61E6-4836-831E-8B3E8FDAE65F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C6376C9-61E6-4836-831E-8B3E8FDAE65F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C6376C9-61E6-4836-831E-8B3E8FDAE65F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{ED05FF2A-8775-4552-B0FF-C9BCD6CB66D4} = {3E6CDD5D-9AEA-4A9C-9085-00D791DD34E4}
@@ -59,5 +67,6 @@ Global
 		{EDD91D74-7221-4859-8EFD-2DC2E3549B55} = {46B7D388-D640-40F4-AB18-5CE712DD5A36}
 		{007F105D-E656-4744-82A3-9080099B10DC} = {1ADC317D-E69E-48A8-999D-CB00EB1EBD88}
 		{6FD0F8C7-0547-4ED7-93A2-525B4A3411A9} = {F4C92067-B21E-4309-A426-C7CEC0BD6213}
+		{8C6376C9-61E6-4836-831E-8B3E8FDAE65F} = {0CDF551D-4B04-4860-BB8F-F3A77BC899ED}
 	EndGlobalSection
 EndGlobal
