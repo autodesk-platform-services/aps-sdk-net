@@ -47,7 +47,7 @@ namespace Autodesk.DataManagement.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="projectId">The unique identifier of a project. For BIM 360 Docs, the project ID in the Data Management API corresponds to the project ID in the BIM 360 API. To convert a project ID in the BIM 360 API into a project ID in the Data Management API you need to add a “b.\&quot; prefix. For example, a project ID of c8b0c73d-3ae9 translates to a project ID of b.c8b0c73d-3ae9.</param>/// <param name="xUserId">In a two-legged authentication context, the app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act on behalf of only the user specified. (optional)</param>/// <param name="commandPayload">The POST body is a JSON object with the following attributes. (optional)</param>
-        /// <returns>Task of ApiResponse<Command></returns>
+        /// <returns>Task of ApiResponse&#60;Command&#62;</returns>
         
         System.Threading.Tasks.Task<ApiResponse<Command>> PostCommandAsync (string projectId, string xUserId= default(string), CommandPayload commandPayload= default(CommandPayload),  string accessToken = null, bool throwOnError = true);
     }
@@ -138,7 +138,7 @@ namespace Autodesk.DataManagement.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="projectId">The unique identifier of a project. For BIM 360 Docs, the project ID in the Data Management API corresponds to the project ID in the BIM 360 API. To convert a project ID in the BIM 360 API into a project ID in the Data Management API you need to add a “b.\&quot; prefix. For example, a project ID of c8b0c73d-3ae9 translates to a project ID of b.c8b0c73d-3ae9.</param>/// <param name="xUserId">In a two-legged authentication context, the app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act on behalf of only the user specified. (optional)</param>/// <param name="commandPayload">The POST body is a JSON object with the following attributes. (optional)</param>
-        /// <returns>Task of ApiResponse<Command></returns>
+        /// <returns>Task of ApiResponse&#60;Command&#62;</returns>
         
         public async System.Threading.Tasks.Task<ApiResponse<Command>> PostCommandAsync (string projectId,string xUserId= default(string),CommandPayload commandPayload= default(CommandPayload), string accessToken = null, bool throwOnError = true)
         {

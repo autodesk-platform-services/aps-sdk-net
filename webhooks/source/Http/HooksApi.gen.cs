@@ -58,7 +58,7 @@ namespace Autodesk.Webhooks.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="system">string A system for example data for Data Management</param>/// <param name="xAdsRegion">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;. (optional)</param>/// <param name="region">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;.  The &#x60;&#x60;x-ads-region&#x60;&#x60; header also specifies the region. If you specify both, &#x60;&#x60;x-ads-region&#x60;&#x60; has precedence.  (optional)</param>/// <param name="hookPayload"> (optional)</param>
-        /// <returns>Task of ApiResponse<Hook></returns>
+        /// <returns>Task of ApiResponse&#60;Hook&#62;</returns>
         
         System.Threading.Tasks.Task<ApiResponse<Hook>> CreateSystemHookAsync (Systems system, string xAdsRegion= default(string), string region= default(string), HookPayload hookPayload= default(HookPayload),  string accessToken = null, bool throwOnError = true);
         /// <summary>
@@ -80,7 +80,7 @@ namespace Autodesk.Webhooks.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="xAdsRegion">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;. (optional)</param>/// <param name="pageState">Base64 encoded string used to return the next page of the list of webhooks. This can be obtained from the &#x60;&#x60;next&#x60;&#x60; field of the previous page. PagingState instances are not portable and implementation is subject to change across versions. Default page size is 200. (optional)</param>/// <param name="status">Status of the hooks. Options: &#x60;&#x60;active&#x60;&#x60;, &#x60;&#x60;inactive&#x60;&#x60; (optional)</param>/// <param name="sort">Sort order of the hooks based on last updated time. Options: ‘asc’, ‘desc’. Default is ‘desc’. (optional)</param>/// <param name="region">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;.  The &#x60;&#x60;x-ads-region&#x60;&#x60; header also specifies the region. If you specify both, &#x60;&#x60;x-ads-region&#x60;&#x60; has precedence.  (optional)</param>
-        /// <returns>Task of ApiResponse<Hooks></returns>
+        /// <returns>Task of ApiResponse&#60;Hooks&#62;</returns>
         
         System.Threading.Tasks.Task<ApiResponse<Hooks>> GetAppHooksAsync (string xAdsRegion= default(string), string pageState= default(string), string status= default(string), string sort= default(string), string region= default(string),  string accessToken = null, bool throwOnError = true);
         /// <summary>
@@ -91,7 +91,7 @@ namespace Autodesk.Webhooks.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="system">string A system for example data for Data Management</param>/// <param name="_event">string A system for example data for Data Management</param>/// <param name="hookId">Id of the webhook to retrieve</param>/// <param name="xAdsRegion">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;. (optional)</param>/// <param name="region">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;.  The &#x60;&#x60;x-ads-region&#x60;&#x60; header also specifies the region. If you specify both, &#x60;&#x60;x-ads-region&#x60;&#x60; has precedence.  (optional)</param>
-        /// <returns>Task of ApiResponse<HookDetails></returns>
+        /// <returns>Task of ApiResponse&#60;HookDetails&#62;</returns>
         
         System.Threading.Tasks.Task<ApiResponse<HookDetails>> GetHookDetailsAsync (Systems system, Events _event, string hookId, string xAdsRegion= default(string), string region= default(string),  string accessToken = null, bool throwOnError = true);
         /// <summary>
@@ -102,7 +102,7 @@ namespace Autodesk.Webhooks.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="pageState">Base64 encoded string used to return the next page of the list of webhooks. This can be obtained from the next field of the previous page. PagingState instances are not portable and implementation is subject to change across versions. Default page size is 200. (optional)</param>/// <param name="status">Status of the hooks. Options: ‘active’, ‘inactive’ (optional)</param>/// <param name="region">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;.  The &#x60;&#x60;x-ads-region&#x60;&#x60; header also specifies the region. If you specify both, &#x60;&#x60;x-ads-region&#x60;&#x60; has precedence.  (optional)</param>/// <param name="xAdsRegion">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: EMEA, US. Default is US. (optional)</param>
-        /// <returns>Task of ApiResponse<Hooks></returns>
+        /// <returns>Task of ApiResponse&#60;Hooks&#62;</returns>
         
         System.Threading.Tasks.Task<ApiResponse<Hooks>> GetHooksAsync (string pageState= default(string), string status= default(string), string region= default(string), string xAdsRegion= default(string),  string accessToken = null, bool throwOnError = true);
         /// <summary>
@@ -113,7 +113,7 @@ namespace Autodesk.Webhooks.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="system">string A system for example data for Data Management</param>/// <param name="_event">string A system for example data for Data Management</param>/// <param name="xAdsRegion">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;. (optional)</param>/// <param name="region">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;.  The &#x60;&#x60;x-ads-region&#x60;&#x60; header also specifies the region. If you specify both, &#x60;&#x60;x-ads-region&#x60;&#x60; has precedence.  (optional)</param>/// <param name="scopeName">Scope name used to create hook. For example : folder (optional)</param>/// <param name="pageState">Base64 encoded string used to return the next page of the list of webhooks. This can be obtained from the &#x60;&#x60;next&#x60;&#x60; field of the previous page. PagingState instances are not portable and implementation is subject to change across versions. Default page size is 200. (optional)</param>/// <param name="status">Status of the hooks. Options: &#x60;&#x60;active&#x60;&#x60;, &#x60;&#x60;inactive&#x60;&#x60; (optional)</param>
-        /// <returns>Task of ApiResponse<Hooks></returns>
+        /// <returns>Task of ApiResponse&#60;Hooks&#62;</returns>
         
         System.Threading.Tasks.Task<ApiResponse<Hooks>> GetSystemEventHooksAsync (Systems system, Events _event, string xAdsRegion= default(string), string region= default(string), string scopeName= default(string), string pageState= default(string), string status= default(string),  string accessToken = null, bool throwOnError = true);
         /// <summary>
@@ -124,7 +124,7 @@ namespace Autodesk.Webhooks.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="system">string A system for example data for Data Management</param>/// <param name="xAdsRegion">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;. (optional)</param>/// <param name="status">Status of the hooks. Options: &#x60;&#x60;active&#x60;&#x60;, &#x60;&#x60;inactive&#x60;&#x60; (optional)</param>/// <param name="pageState">Base64 encoded string used to return the next page of the list of webhooks. This can be obtained from the &#x60;&#x60;next&#x60;&#x60; field of the previous page. PagingState instances are not portable and implementation is subject to change across versions. Default page size is 200. (optional)</param>/// <param name="region">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;.  The &#x60;&#x60;x-ads-region&#x60;&#x60; header also specifies the region. If you specify both, &#x60;&#x60;x-ads-region&#x60;&#x60; has precedence.  (optional)</param>
-        /// <returns>Task of ApiResponse<Hooks></returns>
+        /// <returns>Task of ApiResponse&#60;Hooks&#62;</returns>
         
         System.Threading.Tasks.Task<ApiResponse<Hooks>> GetSystemHooksAsync (Systems system, string xAdsRegion= default(string), string status= default(string), string pageState= default(string), string region= default(string),  string accessToken = null, bool throwOnError = true);
         /// <summary>
@@ -301,7 +301,7 @@ namespace Autodesk.Webhooks.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="system">string A system for example data for Data Management</param>/// <param name="xAdsRegion">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;. (optional)</param>/// <param name="region">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;.  The &#x60;&#x60;x-ads-region&#x60;&#x60; header also specifies the region. If you specify both, &#x60;&#x60;x-ads-region&#x60;&#x60; has precedence.  (optional)</param>/// <param name="hookPayload"> (optional)</param>
-        /// <returns>Task of ApiResponse<Hook></returns>
+        /// <returns>Task of ApiResponse&#60;Hook&#62;</returns>
         
         public async System.Threading.Tasks.Task<ApiResponse<Hook>> CreateSystemHookAsync (Systems system,string xAdsRegion= default(string),string region= default(string),HookPayload hookPayload= default(HookPayload), string accessToken = null, bool throwOnError = true)
         {
@@ -449,7 +449,7 @@ namespace Autodesk.Webhooks.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="xAdsRegion">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;. (optional)</param>/// <param name="pageState">Base64 encoded string used to return the next page of the list of webhooks. This can be obtained from the &#x60;&#x60;next&#x60;&#x60; field of the previous page. PagingState instances are not portable and implementation is subject to change across versions. Default page size is 200. (optional)</param>/// <param name="status">Status of the hooks. Options: &#x60;&#x60;active&#x60;&#x60;, &#x60;&#x60;inactive&#x60;&#x60; (optional)</param>/// <param name="sort">Sort order of the hooks based on last updated time. Options: ‘asc’, ‘desc’. Default is ‘desc’. (optional)</param>/// <param name="region">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;.  The &#x60;&#x60;x-ads-region&#x60;&#x60; header also specifies the region. If you specify both, &#x60;&#x60;x-ads-region&#x60;&#x60; has precedence.  (optional)</param>
-        /// <returns>Task of ApiResponse<Hooks></returns>
+        /// <returns>Task of ApiResponse&#60;Hooks&#62;</returns>
         
         public async System.Threading.Tasks.Task<ApiResponse<Hooks>> GetAppHooksAsync (string xAdsRegion= default(string),string pageState= default(string),string status= default(string),string sort= default(string),string region= default(string), string accessToken = null, bool throwOnError = true)
         {
@@ -522,7 +522,7 @@ namespace Autodesk.Webhooks.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="system">string A system for example data for Data Management</param>/// <param name="_event">string A system for example data for Data Management</param>/// <param name="hookId">Id of the webhook to retrieve</param>/// <param name="xAdsRegion">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;. (optional)</param>/// <param name="region">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;.  The &#x60;&#x60;x-ads-region&#x60;&#x60; header also specifies the region. If you specify both, &#x60;&#x60;x-ads-region&#x60;&#x60; has precedence.  (optional)</param>
-        /// <returns>Task of ApiResponse<HookDetails></returns>
+        /// <returns>Task of ApiResponse&#60;HookDetails&#62;</returns>
         
         public async System.Threading.Tasks.Task<ApiResponse<HookDetails>> GetHookDetailsAsync (Systems system,Events _event,string hookId,string xAdsRegion= default(string),string region= default(string), string accessToken = null, bool throwOnError = true)
         {
@@ -597,7 +597,7 @@ namespace Autodesk.Webhooks.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="pageState">Base64 encoded string used to return the next page of the list of webhooks. This can be obtained from the next field of the previous page. PagingState instances are not portable and implementation is subject to change across versions. Default page size is 200. (optional)</param>/// <param name="status">Status of the hooks. Options: ‘active’, ‘inactive’ (optional)</param>/// <param name="region">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;.  The &#x60;&#x60;x-ads-region&#x60;&#x60; header also specifies the region. If you specify both, &#x60;&#x60;x-ads-region&#x60;&#x60; has precedence.  (optional)</param>/// <param name="xAdsRegion">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: EMEA, US. Default is US. (optional)</param>
-        /// <returns>Task of ApiResponse<Hooks></returns>
+        /// <returns>Task of ApiResponse&#60;Hooks&#62;</returns>
         
         public async System.Threading.Tasks.Task<ApiResponse<Hooks>> GetHooksAsync (string pageState= default(string),string status= default(string),string region= default(string),string xAdsRegion= default(string), string accessToken = null, bool throwOnError = true)
         {
@@ -669,7 +669,7 @@ namespace Autodesk.Webhooks.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="system">string A system for example data for Data Management</param>/// <param name="_event">string A system for example data for Data Management</param>/// <param name="xAdsRegion">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;. (optional)</param>/// <param name="region">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;.  The &#x60;&#x60;x-ads-region&#x60;&#x60; header also specifies the region. If you specify both, &#x60;&#x60;x-ads-region&#x60;&#x60; has precedence.  (optional)</param>/// <param name="scopeName">Scope name used to create hook. For example : folder (optional)</param>/// <param name="pageState">Base64 encoded string used to return the next page of the list of webhooks. This can be obtained from the &#x60;&#x60;next&#x60;&#x60; field of the previous page. PagingState instances are not portable and implementation is subject to change across versions. Default page size is 200. (optional)</param>/// <param name="status">Status of the hooks. Options: &#x60;&#x60;active&#x60;&#x60;, &#x60;&#x60;inactive&#x60;&#x60; (optional)</param>
-        /// <returns>Task of ApiResponse<Hooks></returns>
+        /// <returns>Task of ApiResponse&#60;Hooks&#62;</returns>
         
         public async System.Threading.Tasks.Task<ApiResponse<Hooks>> GetSystemEventHooksAsync (Systems system,Events _event,string xAdsRegion= default(string),string region= default(string),string scopeName= default(string),string pageState= default(string),string status= default(string), string accessToken = null, bool throwOnError = true)
         {
@@ -746,7 +746,7 @@ namespace Autodesk.Webhooks.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="system">string A system for example data for Data Management</param>/// <param name="xAdsRegion">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;. (optional)</param>/// <param name="status">Status of the hooks. Options: &#x60;&#x60;active&#x60;&#x60;, &#x60;&#x60;inactive&#x60;&#x60; (optional)</param>/// <param name="pageState">Base64 encoded string used to return the next page of the list of webhooks. This can be obtained from the &#x60;&#x60;next&#x60;&#x60; field of the previous page. PagingState instances are not portable and implementation is subject to change across versions. Default page size is 200. (optional)</param>/// <param name="region">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;.  The &#x60;&#x60;x-ads-region&#x60;&#x60; header also specifies the region. If you specify both, &#x60;&#x60;x-ads-region&#x60;&#x60; has precedence.  (optional)</param>
-        /// <returns>Task of ApiResponse<Hooks></returns>
+        /// <returns>Task of ApiResponse&#60;Hooks&#62;</returns>
         
         public async System.Threading.Tasks.Task<ApiResponse<Hooks>> GetSystemHooksAsync (Systems system,string xAdsRegion= default(string),string status= default(string),string pageState= default(string),string region= default(string), string accessToken = null, bool throwOnError = true)
         {

@@ -69,7 +69,7 @@ namespace Autodesk.Authentication.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
 
-        /// <returns>Task of ApiResponse<Jwks></returns>
+        /// <returns>Task of ApiResponse&#60;Jwks&#62;</returns>
 
         System.Threading.Tasks.Task<ApiResponse<Jwks>> GetKeysAsync(/*string accessToken = null*/ bool throwOnError = true);
         /// <summary>
@@ -80,7 +80,7 @@ namespace Autodesk.Authentication.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
 
-        /// <returns>Task of ApiResponse<OidcSpec></returns>
+        /// <returns>Task of ApiResponse&#60;OidcSpec&#62;</returns>
 
         System.Threading.Tasks.Task<ApiResponse<OidcSpec>> GetOidcSpecAsync(/*string accessToken = null,*/ bool throwOnError = true);
         /// <summary>
@@ -91,7 +91,7 @@ namespace Autodesk.Authentication.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="authorization">Must be in the form Basic ${Base64(&lt;client_id&gt;:&lt;client_secret&gt;)} (optional)</param>/// <param name="token"> (optional)</param>/// <param name="clientId"> (optional)</param>
-        /// <returns>Task of ApiResponse<Introspecttoken></returns>
+        /// <returns>Task of ApiResponse&#60;Introspecttoken&#62;</returns>
 
         System.Threading.Tasks.Task<ApiResponse<IntrospectToken>> IntrospectTokenAsync(string token, string authorization = default(string), string clientId = default(string), bool throwOnError = true);
         /// <summary>
@@ -101,7 +101,7 @@ namespace Autodesk.Authentication.Http
         /// This API endpoint logs a user out by removing their user browser session and redirects the user to the Autodesk login page.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="postLogoutRedirectUri">Location to redirect once the logout is performed. Note that the provided domain host should be in the allowed list. Contact #oxygen slack channel for more details. (optional)</param>
+        /// <param name="postLogoutRedirectUri">Location to redirect once the logout is performed. Note that the provided domain host should be in the allowed list. (optional)</param>
 
         /// <returns>Task of HttpResponseMessage</returns>
         string Logout(string postLogoutRedirectUri = default(string));
@@ -325,7 +325,7 @@ namespace Autodesk.Authentication.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
 
-        /// <returns>Task of ApiResponse<Jwks></returns>
+        /// <returns>Task of ApiResponse&#60;Jwks&#62;</returns>
 
         public async System.Threading.Tasks.Task<ApiResponse<Jwks>> GetKeysAsync(/*string accessToken = null,*/ bool throwOnError = true)
         {
@@ -384,7 +384,7 @@ namespace Autodesk.Authentication.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
 
-        /// <returns>Task of ApiResponse<OidcSpec></returns>
+        /// <returns>Task of ApiResponse&#60;OidcSpec&#62;</returns>
 
         public async System.Threading.Tasks.Task<ApiResponse<OidcSpec>> GetOidcSpecAsync(/*string accessToken = null,*/ bool throwOnError = true)
         {
@@ -446,7 +446,7 @@ namespace Autodesk.Authentication.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="authorization">Must be in the form Basic ${Base64(&lt;client_id&gt;:&lt;client_secret&gt;)} (optional)</param>/// <param name="token"> (optional)</param>/// <param name="clientId"> (optional)</param>
-        /// <returns>Task of ApiResponse<Introspecttoken></returns>
+        /// <returns>Task of ApiResponse&#60;Introspecttoken&#62;</returns>
 
         public async System.Threading.Tasks.Task<ApiResponse<IntrospectToken>> IntrospectTokenAsync(string token,string authorization = default(string),  string clientId = default(string), /*string accessToken = null,*/ bool throwOnError = true)
         {
@@ -528,8 +528,8 @@ namespace Autodesk.Authentication.Http
         /// This API endpoint logs a user out by removing their user browser session and redirects the user to the Autodesk login page.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="postLogoutRedirectUri">Location to redirect once the logout is performed. Note that the provided domain host should be in the allowed list. Contact #oxygen slack channel for more details. (optional)</param>
-        /// <returns>Redirect uri/returns>
+        /// <param name="postLogoutRedirectUri">Location to redirect once the logout is performed. Note that the provided domain host should be in the allowed list. (optional)</param>
+        /// <returns>Redirect uri</returns>
         public string Logout(string postLogoutRedirectUri = default(string))
         {
             logger.LogInformation("Entered into LogoutAsync ");

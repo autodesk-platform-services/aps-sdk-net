@@ -47,7 +47,7 @@ namespace Autodesk.Construction.Issues.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="projectId"></param>/// <param name="xAdsRegion">The region where the bucket residesAcceptable values: &#x60;US&#x60;, &#x60;EMEA&#x60;</param>
-        /// <returns>Task of ApiResponse<User></returns>
+        /// <returns>Task of ApiResponse&#60;User&#62;</returns>
         
         System.Threading.Tasks.Task<ApiResponse<User>> GetUserProfileAsync (string projectId, XAdsRegion xAdsRegion,  string accessToken = null, bool throwOnError = true);
     }
@@ -138,7 +138,7 @@ namespace Autodesk.Construction.Issues.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="projectId"></param>/// <param name="xAdsRegion">The region where the bucket residesAcceptable values: &#x60;US&#x60;, &#x60;EMEA&#x60;</param>
-        /// <returns>Task of ApiResponse<User></returns>
+        /// <returns>Task of ApiResponse&#60;User&#62;</returns>
         
         public async System.Threading.Tasks.Task<ApiResponse<User>> GetUserProfileAsync (string projectId,XAdsRegion xAdsRegion, string accessToken = null, bool throwOnError = true)
         {

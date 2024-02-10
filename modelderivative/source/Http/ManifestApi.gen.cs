@@ -47,7 +47,7 @@ namespace Autodesk.ModelDerivative.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="urn">The Base64 (URL Safe) encoded design URN</param>
-        /// <returns>Task of ApiResponse<DeleteManifest></returns>
+        /// <returns>Task of ApiResponse&#60;DeleteManifest&#62;</returns>
         
         System.Threading.Tasks.Task<ApiResponse<DeleteManifest>> DeleteManifestAsync (string urn,  Region region = default,string accessToken = null, bool throwOnError = true);
         /// <summary>
@@ -58,7 +58,7 @@ namespace Autodesk.ModelDerivative.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="urn">The Base64 (URL Safe) encoded design URN</param>/// <param name="acceptEncoding">A comma separated list of the algorthms you want the response to be encoded in, specified in the order of preference.    If you specify &#x60;&#x60;gzip&#x60;&#x60; or &#x60;&#x60;*&#x60;&#x60;, the service uses the GZIP algorithm to encode the response.  (optional)</param>
-        /// <returns>Task of ApiResponse<Manifest></returns>
+        /// <returns>Task of ApiResponse&#60;Manifest&#62;</returns>
         
         System.Threading.Tasks.Task<ApiResponse<Manifest>> GetManifestAsync (string urn, Region region = default,string acceptEncoding= default(string),  string accessToken = null, bool throwOnError = true);
     }
@@ -149,7 +149,7 @@ namespace Autodesk.ModelDerivative.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="urn">The Base64 (URL Safe) encoded design URN</param>
-        /// <returns>Task of ApiResponse<DeleteManifest></returns>
+        /// <returns>Task of ApiResponse&#60;DeleteManifest&#62;</returns>
         
         public async System.Threading.Tasks.Task<ApiResponse<DeleteManifest>> DeleteManifestAsync (string urn,Region region = default, string accessToken = null, bool throwOnError = true)
         {
@@ -237,7 +237,7 @@ namespace Autodesk.ModelDerivative.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="urn">The Base64 (URL Safe) encoded design URN</param>/// <param name="acceptEncoding">A comma separated list of the algorthms you want the response to be encoded in, specified in the order of preference.    If you specify &#x60;&#x60;gzip&#x60;&#x60; or &#x60;&#x60;*&#x60;&#x60;, the service uses the GZIP algorithm to encode the response.  (optional)</param>
-        /// <returns>Task of ApiResponse<Manifest></returns>
+        /// <returns>Task of ApiResponse&#60;Manifest&#62;</returns>
         
         public async System.Threading.Tasks.Task<ApiResponse<Manifest>> GetManifestAsync (string urn, Region region = default,string acceptEncoding= default(string), string accessToken = null, bool throwOnError = true)
         {

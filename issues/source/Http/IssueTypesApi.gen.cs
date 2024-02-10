@@ -47,7 +47,7 @@ namespace Autodesk.Construction.Issues.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="projectId"></param>/// <param name="xAdsRegion">The region where the bucket residesAcceptable values: &#x60;US&#x60;, &#x60;EMEA&#x60;</param>/// <param name="include">Use include&#x3D;subtypes to include the types (subtypes) for each category (type). (optional)</param>/// <param name="limit">Add limit&#x3D;20 to limit the results count (together with the offset to support pagination). (optional)</param>/// <param name="offset">Add offset&#x3D;20 to get partial results (together with the limit to support pagination). (optional)</param>/// <param name="filterUpdatedAt">Retrieves types that were last updated at the specified date and time, in in one of the following URL-encoded formats: YYYY-MM-DDThh:mm:ss.sz or YYYY-MM-DD. Separate multiple values with commas. (optional)</param>/// <param name="filterIsActive">Filter types by status e.g. filter[isActive]&#x3D;true will only return active types. Default value: undefined (meaning both active &amp; inactive issue type categories will return). (optional)</param>
-        /// <returns>Task of ApiResponse<IssueType></returns>
+        /// <returns>Task of ApiResponse&#60;IssueType&#62;</returns>
         
         System.Threading.Tasks.Task<ApiResponse<IssueType>> GetIssuesTypesAsync (string projectId, XAdsRegion xAdsRegion, string include= default(string), int? limit= default(int?), int? offset= default(int?), string filterUpdatedAt= default(string), bool? filterIsActive= default(bool?),  string accessToken = null, bool throwOnError = true);
     }
@@ -138,7 +138,7 @@ namespace Autodesk.Construction.Issues.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="projectId"></param>/// <param name="xAdsRegion">The region where the bucket residesAcceptable values: &#x60;US&#x60;, &#x60;EMEA&#x60;</param>/// <param name="include">Use include&#x3D;subtypes to include the types (subtypes) for each category (type). (optional)</param>/// <param name="limit">Add limit&#x3D;20 to limit the results count (together with the offset to support pagination). (optional)</param>/// <param name="offset">Add offset&#x3D;20 to get partial results (together with the limit to support pagination). (optional)</param>/// <param name="filterUpdatedAt">Retrieves types that were last updated at the specified date and time, in in one of the following URL-encoded formats: YYYY-MM-DDThh:mm:ss.sz or YYYY-MM-DD. Separate multiple values with commas. (optional)</param>/// <param name="filterIsActive">Filter types by status e.g. filter[isActive]&#x3D;true will only return active types. Default value: undefined (meaning both active &amp; inactive issue type categories will return). (optional)</param>
-        /// <returns>Task of ApiResponse<IssueType></returns>
+        /// <returns>Task of ApiResponse&#60;IssueType&#62;</returns>
         
         public async System.Threading.Tasks.Task<ApiResponse<IssueType>> GetIssuesTypesAsync (string projectId,XAdsRegion xAdsRegion,string include= default(string),int? limit= default(int?),int? offset= default(int?),string filterUpdatedAt= default(string),bool? filterIsActive= default(bool?), string accessToken = null, bool throwOnError = true)
         {

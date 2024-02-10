@@ -23,6 +23,7 @@ using System;
 
 namespace Autodesk.Oss
 {
+  /// <exclude/>
   public class S3ServiceApiException : ServiceApiException
   {
     public int ErrorCode {get; set;}

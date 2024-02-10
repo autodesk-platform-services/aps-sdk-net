@@ -47,7 +47,7 @@ namespace Autodesk.Construction.Issues.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="projectId">The ID of the project.</param>/// <param name="issueId">The unique identifier of the issue.</param>/// <param name="xAdsRegion">The region where the bucket residesAcceptable values: &#x60;US&#x60;, &#x60;EMEA&#x60;</param>/// <param name="commentsPayload"> (optional)</param>
-        /// <returns>Task of ApiResponse<CreatedComment></returns>
+        /// <returns>Task of ApiResponse&#60;CreatedComment&#62;</returns>
         
         System.Threading.Tasks.Task<ApiResponse<CreatedComment>> CreateCommentsAsync (string projectId, string issueId, XAdsRegion xAdsRegion, CommentsPayload commentsPayload= default(CommentsPayload),  string accessToken = null, bool throwOnError = true);
         /// <summary>
@@ -58,7 +58,7 @@ namespace Autodesk.Construction.Issues.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="projectId">The ID of the project.</param>/// <param name="issueId">The unique identifier of the issue.</param>/// <param name="xAdsRegion">The region where the bucket residesAcceptable values: &#x60;US&#x60;, &#x60;EMEA&#x60;</param>/// <param name="limit">Add limit&#x3D;20 to limit the results count (together with the offset to support pagination). (optional)</param>/// <param name="offset">Add offset&#x3D;20 to get partial results (together with the limit to support pagination). (optional)</param>/// <param name="sortBy">Sort issue comments by specified fields. Separate multiple values with commas. To sort in descending order add a - (minus sign) before the sort criteria (optional)</param>
-        /// <returns>Task of ApiResponse<Comments></returns>
+        /// <returns>Task of ApiResponse&#60;Comments&#62;</returns>
         
         System.Threading.Tasks.Task<ApiResponse<Comments>> GetCommentsAsync (string projectId, string issueId, XAdsRegion xAdsRegion, string limit= default(string), string offset= default(string), List<SortBy> sortBy= default(List<SortBy>),  string accessToken = null, bool throwOnError = true);
     }
@@ -149,7 +149,7 @@ namespace Autodesk.Construction.Issues.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="projectId">The ID of the project.</param>/// <param name="issueId">The unique identifier of the issue.</param>/// <param name="xAdsRegion">The region where the bucket residesAcceptable values: &#x60;US&#x60;, &#x60;EMEA&#x60;</param>/// <param name="commentsPayload"> (optional)</param>
-        /// <returns>Task of ApiResponse<CreatedComment></returns>
+        /// <returns>Task of ApiResponse&#60;CreatedComment&#62;</returns>
         
         public async System.Threading.Tasks.Task<ApiResponse<CreatedComment>> CreateCommentsAsync (string projectId,string issueId,XAdsRegion xAdsRegion,CommentsPayload commentsPayload= default(CommentsPayload), string accessToken = null, bool throwOnError = true)
         {
@@ -239,7 +239,7 @@ namespace Autodesk.Construction.Issues.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="projectId">The ID of the project.</param>/// <param name="issueId">The unique identifier of the issue.</param>/// <param name="xAdsRegion">The region where the bucket residesAcceptable values: &#x60;US&#x60;, &#x60;EMEA&#x60;</param>/// <param name="limit">Add limit&#x3D;20 to limit the results count (together with the offset to support pagination). (optional)</param>/// <param name="offset">Add offset&#x3D;20 to get partial results (together with the limit to support pagination). (optional)</param>/// <param name="sortBy">Sort issue comments by specified fields. Separate multiple values with commas. To sort in descending order add a - (minus sign) before the sort criteria (optional)</param>
-        /// <returns>Task of ApiResponse<Comments></returns>
+        /// <returns>Task of ApiResponse&#60;Comments&#62;</returns>
         
         public async System.Threading.Tasks.Task<ApiResponse<Comments>> GetCommentsAsync (string projectId,string issueId,XAdsRegion xAdsRegion,string limit= default(string),string offset= default(string),List<SortBy> sortBy= default(List<SortBy>), string accessToken = null, bool throwOnError = true)
         {

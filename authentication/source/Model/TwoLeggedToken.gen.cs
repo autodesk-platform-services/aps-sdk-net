@@ -39,7 +39,7 @@ namespace Autodesk.Authentication.Model
     public partial class TwoLeggedToken 
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Model2leggedtoken" /> class.
+        /// Initializes a new instance of the <see cref="TwoLeggedToken" /> class.
         /// </summary>
         public TwoLeggedToken()
         {

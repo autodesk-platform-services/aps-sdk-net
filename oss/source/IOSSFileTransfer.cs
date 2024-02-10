@@ -25,6 +25,7 @@ using System.Threading.Tasks;
 using System.Threading;
 namespace Autodesk.Oss
 {
+    /// <exclude/>
     public interface IOSSFileTransfer
     {
         Task<bool> IsFileSizeAllowed(string filePath);

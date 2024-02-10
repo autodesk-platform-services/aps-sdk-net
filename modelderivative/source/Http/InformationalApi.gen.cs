@@ -47,7 +47,7 @@ namespace Autodesk.ModelDerivative.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="ifModifiedSince">Specifies a date in the &#x60;&#x60;Day of the week, DD Month YYYY HH:MM:SS GMT&#x60;&#x60; format. The response will contain only the formats modified since the specified date and time. If you specify an invalid date, the response will contain all supported formats. If no changes have been made after the specified date, the service returns HTTP status &#x60;&#x60;304&#x60;&#x60;, NOT MODIFIED. (optional)</param>/// <param name="acceptEncoding">A comma separated list of the algorthms you want the response to be encoded in, specified in the order of preference.    If you specify &#x60;&#x60;gzip&#x60;&#x60; or &#x60;&#x60;*&#x60;&#x60;, the service uses the GZIP algorithm to encode the response.  (optional)</param>
-        /// <returns>Task of ApiResponse<Formats></returns>
+        /// <returns>Task of ApiResponse&#60;Formats&#62;</returns>
         
         System.Threading.Tasks.Task<ApiResponse<Formats>> GetFormatsAsync (string ifModifiedSince= default(string), string acceptEncoding= default(string),  string accessToken = null, bool throwOnError = true);
     }
@@ -138,7 +138,7 @@ namespace Autodesk.ModelDerivative.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="ifModifiedSince">Specifies a date in the &#x60;&#x60;Day of the week, DD Month YYYY HH:MM:SS GMT&#x60;&#x60; format. The response will contain only the formats modified since the specified date and time. If you specify an invalid date, the response will contain all supported formats. If no changes have been made after the specified date, the service returns HTTP status &#x60;&#x60;304&#x60;&#x60;, NOT MODIFIED. (optional)</param>/// <param name="acceptEncoding">A comma separated list of the algorthms you want the response to be encoded in, specified in the order of preference.    If you specify &#x60;&#x60;gzip&#x60;&#x60; or &#x60;&#x60;*&#x60;&#x60;, the service uses the GZIP algorithm to encode the response.  (optional)</param>
-        /// <returns>Task of ApiResponse<Formats></returns>
+        /// <returns>Task of ApiResponse&#60;Formats&#62;</returns>
         
         public async System.Threading.Tasks.Task<ApiResponse<Formats>> GetFormatsAsync (string ifModifiedSince= default(string),string acceptEncoding= default(string), string accessToken = null, bool throwOnError = true)
         {

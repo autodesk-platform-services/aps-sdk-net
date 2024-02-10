@@ -47,7 +47,7 @@ namespace Autodesk.DataManagement.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="hubId">The unique identifier of a hub.</param>/// <param name="xUserId">In a two-legged authentication context, the app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act on behalf of only the user specified. (optional)</param>
-        /// <returns>Task of ApiResponse<Hub></returns>
+        /// <returns>Task of ApiResponse&#60;Hub&#62;</returns>
         
         System.Threading.Tasks.Task<ApiResponse<Hub>> GetHubAsync (string hubId, string xUserId= default(string),  string accessToken = null, bool throwOnError = true);
         /// <summary>
@@ -58,7 +58,7 @@ namespace Autodesk.DataManagement.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="xUserId">In a two-legged authentication context, the app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act on behalf of only the user specified. (optional)</param>/// <param name="filterId">Filter by the id of the ref target. (optional)</param>/// <param name="filterName">Filter by the name of the ref target. (optional)</param>/// <param name="filterExtensionType">Filter by the extension type. (optional)</param>
-        /// <returns>Task of ApiResponse<Hubs></returns>
+        /// <returns>Task of ApiResponse&#60;Hubs&#62;</returns>
         
         System.Threading.Tasks.Task<ApiResponse<Hubs>> GetHubsAsync (string xUserId= default(string), List<string> filterId= default(List<string>), string filterName= default(string), List<string> filterExtensionType= default(List<string>),  string accessToken = null, bool throwOnError = true);
     }
@@ -149,7 +149,7 @@ namespace Autodesk.DataManagement.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="hubId">The unique identifier of a hub.</param>/// <param name="xUserId">In a two-legged authentication context, the app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act on behalf of only the user specified. (optional)</param>
-        /// <returns>Task of ApiResponse<Hub></returns>
+        /// <returns>Task of ApiResponse&#60;Hub&#62;</returns>
         
         public async System.Threading.Tasks.Task<ApiResponse<Hub>> GetHubAsync (string hubId,string xUserId= default(string), string accessToken = null, bool throwOnError = true)
         {
@@ -228,7 +228,7 @@ namespace Autodesk.DataManagement.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="xUserId">In a two-legged authentication context, the app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act on behalf of only the user specified. (optional)</param>/// <param name="filterId">Filter by the id of the ref target. (optional)</param>/// <param name="filterName">Filter by the name of the ref target. (optional)</param>/// <param name="filterExtensionType">Filter by the extension type. (optional)</param>
-        /// <returns>Task of ApiResponse<Hubs></returns>
+        /// <returns>Task of ApiResponse&#60;Hubs&#62;</returns>
         
         public async System.Threading.Tasks.Task<ApiResponse<Hubs>> GetHubsAsync (string xUserId= default(string),List<string> filterId= default(List<string>),string filterName= default(string),List<string> filterExtensionType= default(List<string>), string accessToken = null, bool throwOnError = true)
         {

@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 
 namespace Autodesk.Authentication
 {
+    /// <exclude/>
     public static class Utils
     {
 

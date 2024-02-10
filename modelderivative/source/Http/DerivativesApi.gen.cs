@@ -47,7 +47,7 @@ namespace Autodesk.ModelDerivative.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="derivativeUrn">The URL-encoded URN of the derivatives. The URN is retrieved from the GET {urn}/manifest endpoint.</param>/// <param name="urn">The Base64 (URL Safe) encoded design URN</param>/// <param name="minutesExpiration">Specifies how many minutes the signed cookies should remain valid. Default value is 360 minutes. The value you specify must be lower than the default value for this parameter. If you specify a value greater than the default value, the Model Derivative service will return an error with an HTTP status code of 400. (optional)</param>/// <param name="responseContentDisposition">The value that must be returned with the download URL as the response-content-disposition query string parameter. Must begin with attachment. This value defaults to the default value corresponding to the derivative/file. (optional)</param>
-        /// <returns>Task of ApiResponse<DerivativeDownload></returns>
+        /// <returns>Task of ApiResponse&#60;DerivativeDownload&#62;</returns>
 
         System.Threading.Tasks.Task<ApiResponse<DerivativeDownload>> GetDerivativeUrlAsync(string derivativeUrn, string urn, Region region = default, int? minutesExpiration = default(int?), string responseContentDisposition = default(string), string accessToken = null, bool throwOnError = true);
         /// <summary>
@@ -149,7 +149,7 @@ namespace Autodesk.ModelDerivative.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="derivativeUrn">The URL-encoded URN of the derivatives. The URN is retrieved from the GET {urn}/manifest endpoint.</param>/// <param name="urn">The Base64 (URL Safe) encoded design URN</param>/// <param name="minutesExpiration">Specifies how many minutes the signed cookies should remain valid. Default value is 360 minutes. The value you specify must be lower than the default value for this parameter. If you specify a value greater than the default value, the Model Derivative service will return an error with an HTTP status code of 400. (optional)</param>/// <param name="responseContentDisposition">The value that must be returned with the download URL as the response-content-disposition query string parameter. Must begin with attachment. This value defaults to the default value corresponding to the derivative/file. (optional)</param>
-        /// <returns>Task of ApiResponse<DerivativeDownload></returns>
+        /// <returns>Task of ApiResponse&#60;DerivativeDownload&#62;</returns>
 
         public async System.Threading.Tasks.Task<ApiResponse<DerivativeDownload>> GetDerivativeUrlAsync(string derivativeUrn, string urn, Region region = default, int? minutesExpiration = default(int?), string responseContentDisposition = default(string), string accessToken = null, bool throwOnError = true)
         {

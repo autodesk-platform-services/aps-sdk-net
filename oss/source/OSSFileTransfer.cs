@@ -36,6 +36,7 @@ using Autodesk.SDKManager;
 
 namespace Autodesk.Oss
 {
+    /// <exclude/>
     static class Constants
     {
         public const int MaxRetry = 5;
@@ -46,6 +47,7 @@ namespace Autodesk.Oss
     /// <summary>
     /// Custom code for upload/download
     /// </summary>
+    /// <exclude/>
     public class OSSFileTransfer : IOSSFileTransfer
     {
         private ILogger _logger;

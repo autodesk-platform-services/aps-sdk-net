@@ -47,7 +47,7 @@ namespace Autodesk.Authentication.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="authorization">YOUR_3_LEGGED_ACCESS_TOKEN (optional)</param>
-        /// <returns>Task of ApiResponse<UserInfo></returns>
+        /// <returns>Task of ApiResponse&#60;UserInfo&#62;</returns>
         
         System.Threading.Tasks.Task<ApiResponse<UserInfo>> GetUserinfoAsync (string authorization, bool throwOnError = true);
     }
@@ -138,7 +138,7 @@ namespace Autodesk.Authentication.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="authorization">YOUR_3_LEGGED_ACCESS_TOKEN (optional)</param>
-        /// <returns>Task of ApiResponse<UserInfo></returns>
+        /// <returns>Task of ApiResponse&#60;UserInfo&#62;</returns>
         
         public async System.Threading.Tasks.Task<ApiResponse<UserInfo>> GetUserinfoAsync (string authorization, bool throwOnError = true)
         {

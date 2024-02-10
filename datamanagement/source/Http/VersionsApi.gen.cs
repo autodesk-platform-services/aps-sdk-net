@@ -47,7 +47,7 @@ namespace Autodesk.DataManagement.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="projectId">The unique identifier of a project. For BIM 360 Docs, the project ID in the Data Management API corresponds to the project ID in the BIM 360 API. To convert a project ID in the BIM 360 API into a project ID in the Data Management API you need to add a “b.\&quot; prefix. For example, a project ID of c8b0c73d-3ae9 translates to a project ID of b.c8b0c73d-3ae9.</param>/// <param name="xUserId">In a two-legged authentication context, the app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act on behalf of only the user specified. (optional)</param>/// <param name="copyFrom">Only relevant for copying files to BIM 360 Docs - the version ID (URN) of the file to copy. For details about finding the URN, follow the initial steps in the Download a File tutorial.  You can only copy files to the Plans folder or to subfolders of the Plans folder with an item:autodesk.bim360:Document item extension type, and you can only copy files to the Project Files folder or to subfolders of the Project Files folder with an item:autodesk.bim360:File item extension type.  To verify an item’s extension type, use GET item, and check the attributes.extension.type attribute.  Note that if you copy a file to the Plans folder or to a subfolder of the Plans folder, the copied file inherits the permissions of the source file. For example, if the end user did not have permission to download files in the source folder, but does have permission to download files in the target folder, he/she will not be able to download the copied file.  Note that you cannot copy a file if it is in the middle of being uploaded, updated, or copied. To verify the current process state of a file, call GET item, and check the attributes.extension.data.processState attribute. (optional)</param>/// <param name="versionPayload">Describe the version to be created. (optional)</param>
-        /// <returns>Task of ApiResponse<ModelVersion></returns>
+        /// <returns>Task of ApiResponse&#60;ModelVersion&#62;</returns>
         
         System.Threading.Tasks.Task<ApiResponse<ModelVersion>> CreateVersionAsync (string projectId, string xUserId= default(string), string copyFrom= default(string), VersionPayload versionPayload= default(VersionPayload),  string accessToken = null, bool throwOnError = true);
         /// <summary>
@@ -69,7 +69,7 @@ namespace Autodesk.DataManagement.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="projectId">The unique identifier of a project. For BIM 360 Docs, the project ID in the Data Management API corresponds to the project ID in the BIM 360 API. To convert a project ID in the BIM 360 API into a project ID in the Data Management API you need to add a “b.\&quot; prefix. For example, a project ID of c8b0c73d-3ae9 translates to a project ID of b.c8b0c73d-3ae9.</param>/// <param name="versionId">The unique identifier of a version.</param>/// <param name="xUserId">In a two-legged authentication context, the app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act on behalf of only the user specified. (optional)</param>
-        /// <returns>Task of ApiResponse<VersionDetails></returns>
+        /// <returns>Task of ApiResponse&#60;VersionDetails&#62;</returns>
         
         System.Threading.Tasks.Task<ApiResponse<VersionDetails>> GetVersionAsync (string projectId, string versionId, string xUserId= default(string),  string accessToken = null, bool throwOnError = true);
         /// <summary>
@@ -80,7 +80,7 @@ namespace Autodesk.DataManagement.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="projectId">The unique identifier of a project. For BIM 360 Docs, the project ID in the Data Management API corresponds to the project ID in the BIM 360 API. To convert a project ID in the BIM 360 API into a project ID in the Data Management API you need to add a “b.\&quot; prefix. For example, a project ID of c8b0c73d-3ae9 translates to a project ID of b.c8b0c73d-3ae9.</param>/// <param name="versionId">The unique identifier of a version.</param>/// <param name="xUserId">In a two-legged authentication context, the app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act on behalf of only the user specified. (optional)</param>
-        /// <returns>Task of ApiResponse<DownloadFormats></returns>
+        /// <returns>Task of ApiResponse&#60;DownloadFormats&#62;</returns>
         
         System.Threading.Tasks.Task<ApiResponse<DownloadFormats>> GetVersionDownloadFormatsAsync (string projectId, string versionId, string xUserId= default(string),  string accessToken = null, bool throwOnError = true);
         /// <summary>
@@ -91,7 +91,7 @@ namespace Autodesk.DataManagement.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="projectId">The unique identifier of a project. For BIM 360 Docs, the project ID in the Data Management API corresponds to the project ID in the BIM 360 API. To convert a project ID in the BIM 360 API into a project ID in the Data Management API you need to add a “b.\&quot; prefix. For example, a project ID of c8b0c73d-3ae9 translates to a project ID of b.c8b0c73d-3ae9.</param>/// <param name="versionId">The unique identifier of a version.</param>/// <param name="xUserId">In a two-legged authentication context, the app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act on behalf of only the user specified. (optional)</param>/// <param name="filterFormatFileType">Filter by the file type of the download object. (optional)</param>
-        /// <returns>Task of ApiResponse<Downloads></returns>
+        /// <returns>Task of ApiResponse&#60;Downloads&#62;</returns>
         
         System.Threading.Tasks.Task<ApiResponse<Downloads>> GetVersionDownloadsAsync (string projectId, string versionId, string xUserId= default(string), List<string> filterFormatFileType= default(List<string>),  string accessToken = null, bool throwOnError = true);
         /// <summary>
@@ -102,7 +102,7 @@ namespace Autodesk.DataManagement.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="projectId">The unique identifier of a project. For BIM 360 Docs, the project ID in the Data Management API corresponds to the project ID in the BIM 360 API. To convert a project ID in the BIM 360 API into a project ID in the Data Management API you need to add a “b.\&quot; prefix. For example, a project ID of c8b0c73d-3ae9 translates to a project ID of b.c8b0c73d-3ae9.</param>/// <param name="versionId">The unique identifier of a version.</param>/// <param name="xUserId">In a two-legged authentication context, the app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act on behalf of only the user specified. (optional)</param>
-        /// <returns>Task of ApiResponse<Item></returns>
+        /// <returns>Task of ApiResponse&#60;Item&#62;</returns>
         
         System.Threading.Tasks.Task<ApiResponse<Item>> GetVersionItemAsync (string projectId, string versionId, string xUserId= default(string),  string accessToken = null, bool throwOnError = true);
         /// <summary>
@@ -113,7 +113,7 @@ namespace Autodesk.DataManagement.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="projectId">The unique identifier of a project. For BIM 360 Docs, the project ID in the Data Management API corresponds to the project ID in the BIM 360 API. To convert a project ID in the BIM 360 API into a project ID in the Data Management API you need to add a “b.\&quot; prefix. For example, a project ID of c8b0c73d-3ae9 translates to a project ID of b.c8b0c73d-3ae9.</param>/// <param name="versionId">The unique identifier of a version.</param>/// <param name="xUserId">In a two-legged authentication context, the app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act on behalf of only the user specified. (optional)</param>/// <param name="filterType">Filter by the type of the objects in the folder. Supported values include folders and items. (optional)</param>/// <param name="filterId">Filter by the id of the ref target. (optional)</param>/// <param name="filterExtensionType">Filter by the extension type. (optional)</param>
-        /// <returns>Task of ApiResponse<Refs></returns>
+        /// <returns>Task of ApiResponse&#60;Refs&#62;</returns>
         
         System.Threading.Tasks.Task<ApiResponse<Refs>> GetVersionRefsAsync (string projectId, string versionId, string xUserId= default(string), List<string> filterType= default(List<string>), List<string> filterId= default(List<string>), List<string> filterExtensionType= default(List<string>),  string accessToken = null, bool throwOnError = true);
         /// <summary>
@@ -124,7 +124,7 @@ namespace Autodesk.DataManagement.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="projectId">The unique identifier of a project. For BIM 360 Docs, the project ID in the Data Management API corresponds to the project ID in the BIM 360 API. To convert a project ID in the BIM 360 API into a project ID in the Data Management API you need to add a “b.\&quot; prefix. For example, a project ID of c8b0c73d-3ae9 translates to a project ID of b.c8b0c73d-3ae9.</param>/// <param name="versionId">The unique identifier of a version.</param>/// <param name="xUserId">In a two-legged authentication context, the app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act on behalf of only the user specified. (optional)</param>
-        /// <returns>Task of ApiResponse<RelationshipLinks></returns>
+        /// <returns>Task of ApiResponse&#60;RelationshipLinks&#62;</returns>
         
         System.Threading.Tasks.Task<ApiResponse<RelationshipLinks>> GetVersionRelationshipsLinksAsync (string projectId, string versionId, string xUserId= default(string),  string accessToken = null, bool throwOnError = true);
         /// <summary>
@@ -135,7 +135,7 @@ namespace Autodesk.DataManagement.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="projectId">The unique identifier of a project. For BIM 360 Docs, the project ID in the Data Management API corresponds to the project ID in the BIM 360 API. To convert a project ID in the BIM 360 API into a project ID in the Data Management API you need to add a “b.\&quot; prefix. For example, a project ID of c8b0c73d-3ae9 translates to a project ID of b.c8b0c73d-3ae9.</param>/// <param name="versionId">The unique identifier of a version.</param>/// <param name="xUserId">In a two-legged authentication context, the app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act on behalf of only the user specified. (optional)</param>/// <param name="filterType">Filter by the type of the objects in the folder. Supported values include folders and items. (optional)</param>/// <param name="filterId">Filter by the id of the ref target. (optional)</param>/// <param name="filterRefType">Filter by refType. Possible values: derived, dependencies, auxiliary, xrefs, includes (optional)</param>/// <param name="filterDirection">Filter by the direction of the reference. Possible values: from, to (optional)</param>/// <param name="filterExtensionType">Filter by the extension type. (optional)</param>
-        /// <returns>Task of ApiResponse<RelationshipRefs></returns>
+        /// <returns>Task of ApiResponse&#60;RelationshipRefs&#62;</returns>
         
         System.Threading.Tasks.Task<ApiResponse<RelationshipRefs>> GetVersionRelationshipsRefsAsync (string projectId, string versionId, string xUserId= default(string), List<string> filterType= default(List<string>), List<string> filterId= default(List<string>), string filterRefType= null, string filterDirection= null, List<string> filterExtensionType= default(List<string>),  string accessToken = null, bool throwOnError = true);
         /// <summary>
@@ -146,7 +146,7 @@ namespace Autodesk.DataManagement.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="projectId">The unique identifier of a project. For BIM 360 Docs, the project ID in the Data Management API corresponds to the project ID in the BIM 360 API. To convert a project ID in the BIM 360 API into a project ID in the Data Management API you need to add a “b.\&quot; prefix. For example, a project ID of c8b0c73d-3ae9 translates to a project ID of b.c8b0c73d-3ae9.</param>/// <param name="versionId">The unique identifier of a version.</param>/// <param name="modifyVersionPayload">Describe the version to be patched. (optional)</param>
-        /// <returns>Task of ApiResponse<VersionDetails></returns>
+        /// <returns>Task of ApiResponse&#60;VersionDetails&#62;</returns>
         
         System.Threading.Tasks.Task<ApiResponse<VersionDetails>> PatchVersionAsync (string projectId, string versionId, ModifyVersionPayload modifyVersionPayload= default(ModifyVersionPayload),  string accessToken = null, bool throwOnError = true);
     }
@@ -237,7 +237,7 @@ namespace Autodesk.DataManagement.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="projectId">The unique identifier of a project. For BIM 360 Docs, the project ID in the Data Management API corresponds to the project ID in the BIM 360 API. To convert a project ID in the BIM 360 API into a project ID in the Data Management API you need to add a “b.\&quot; prefix. For example, a project ID of c8b0c73d-3ae9 translates to a project ID of b.c8b0c73d-3ae9.</param>/// <param name="xUserId">In a two-legged authentication context, the app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act on behalf of only the user specified. (optional)</param>/// <param name="copyFrom">Only relevant for copying files to BIM 360 Docs - the version ID (URN) of the file to copy. For details about finding the URN, follow the initial steps in the Download a File tutorial.  You can only copy files to the Plans folder or to subfolders of the Plans folder with an item:autodesk.bim360:Document item extension type, and you can only copy files to the Project Files folder or to subfolders of the Project Files folder with an item:autodesk.bim360:File item extension type.  To verify an item’s extension type, use GET item, and check the attributes.extension.type attribute.  Note that if you copy a file to the Plans folder or to a subfolder of the Plans folder, the copied file inherits the permissions of the source file. For example, if the end user did not have permission to download files in the source folder, but does have permission to download files in the target folder, he/she will not be able to download the copied file.  Note that you cannot copy a file if it is in the middle of being uploaded, updated, or copied. To verify the current process state of a file, call GET item, and check the attributes.extension.data.processState attribute. (optional)</param>/// <param name="versionPayload">Describe the version to be created. (optional)</param>
-        /// <returns>Task of ApiResponse<ModelVersion></returns>
+        /// <returns>Task of ApiResponse&#60;ModelVersion&#62;</returns>
         
         public async System.Threading.Tasks.Task<ApiResponse<ModelVersion>> CreateVersionAsync (string projectId,string xUserId= default(string),string copyFrom= default(string),VersionPayload versionPayload= default(VersionPayload), string accessToken = null, bool throwOnError = true)
         {
@@ -399,7 +399,7 @@ namespace Autodesk.DataManagement.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="projectId">The unique identifier of a project. For BIM 360 Docs, the project ID in the Data Management API corresponds to the project ID in the BIM 360 API. To convert a project ID in the BIM 360 API into a project ID in the Data Management API you need to add a “b.\&quot; prefix. For example, a project ID of c8b0c73d-3ae9 translates to a project ID of b.c8b0c73d-3ae9.</param>/// <param name="versionId">The unique identifier of a version.</param>/// <param name="xUserId">In a two-legged authentication context, the app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act on behalf of only the user specified. (optional)</param>
-        /// <returns>Task of ApiResponse<VersionDetails></returns>
+        /// <returns>Task of ApiResponse&#60;VersionDetails&#62;</returns>
         
         public async System.Threading.Tasks.Task<ApiResponse<VersionDetails>> GetVersionAsync (string projectId,string versionId,string xUserId= default(string), string accessToken = null, bool throwOnError = true)
         {
@@ -479,7 +479,7 @@ namespace Autodesk.DataManagement.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="projectId">The unique identifier of a project. For BIM 360 Docs, the project ID in the Data Management API corresponds to the project ID in the BIM 360 API. To convert a project ID in the BIM 360 API into a project ID in the Data Management API you need to add a “b.\&quot; prefix. For example, a project ID of c8b0c73d-3ae9 translates to a project ID of b.c8b0c73d-3ae9.</param>/// <param name="versionId">The unique identifier of a version.</param>/// <param name="xUserId">In a two-legged authentication context, the app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act on behalf of only the user specified. (optional)</param>
-        /// <returns>Task of ApiResponse<DownloadFormats></returns>
+        /// <returns>Task of ApiResponse&#60;DownloadFormats&#62;</returns>
         
         public async System.Threading.Tasks.Task<ApiResponse<DownloadFormats>> GetVersionDownloadFormatsAsync (string projectId,string versionId,string xUserId= default(string), string accessToken = null, bool throwOnError = true)
         {
@@ -559,7 +559,7 @@ namespace Autodesk.DataManagement.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="projectId">The unique identifier of a project. For BIM 360 Docs, the project ID in the Data Management API corresponds to the project ID in the BIM 360 API. To convert a project ID in the BIM 360 API into a project ID in the Data Management API you need to add a “b.\&quot; prefix. For example, a project ID of c8b0c73d-3ae9 translates to a project ID of b.c8b0c73d-3ae9.</param>/// <param name="versionId">The unique identifier of a version.</param>/// <param name="xUserId">In a two-legged authentication context, the app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act on behalf of only the user specified. (optional)</param>/// <param name="filterFormatFileType">Filter by the file type of the download object. (optional)</param>
-        /// <returns>Task of ApiResponse<Downloads></returns>
+        /// <returns>Task of ApiResponse&#60;Downloads&#62;</returns>
         
         public async System.Threading.Tasks.Task<ApiResponse<Downloads>> GetVersionDownloadsAsync (string projectId,string versionId,string xUserId= default(string),List<string> filterFormatFileType= default(List<string>), string accessToken = null, bool throwOnError = true)
         {
@@ -640,7 +640,7 @@ namespace Autodesk.DataManagement.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="projectId">The unique identifier of a project. For BIM 360 Docs, the project ID in the Data Management API corresponds to the project ID in the BIM 360 API. To convert a project ID in the BIM 360 API into a project ID in the Data Management API you need to add a “b.\&quot; prefix. For example, a project ID of c8b0c73d-3ae9 translates to a project ID of b.c8b0c73d-3ae9.</param>/// <param name="versionId">The unique identifier of a version.</param>/// <param name="xUserId">In a two-legged authentication context, the app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act on behalf of only the user specified. (optional)</param>
-        /// <returns>Task of ApiResponse<Item></returns>
+        /// <returns>Task of ApiResponse&#60;Item&#62;</returns>
         
         public async System.Threading.Tasks.Task<ApiResponse<Item>> GetVersionItemAsync (string projectId,string versionId,string xUserId= default(string), string accessToken = null, bool throwOnError = true)
         {
@@ -720,7 +720,7 @@ namespace Autodesk.DataManagement.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="projectId">The unique identifier of a project. For BIM 360 Docs, the project ID in the Data Management API corresponds to the project ID in the BIM 360 API. To convert a project ID in the BIM 360 API into a project ID in the Data Management API you need to add a “b.\&quot; prefix. For example, a project ID of c8b0c73d-3ae9 translates to a project ID of b.c8b0c73d-3ae9.</param>/// <param name="versionId">The unique identifier of a version.</param>/// <param name="xUserId">In a two-legged authentication context, the app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act on behalf of only the user specified. (optional)</param>/// <param name="filterType">Filter by the type of the objects in the folder. Supported values include folders and items. (optional)</param>/// <param name="filterId">Filter by the id of the ref target. (optional)</param>/// <param name="filterExtensionType">Filter by the extension type. (optional)</param>
-        /// <returns>Task of ApiResponse<Refs></returns>
+        /// <returns>Task of ApiResponse&#60;Refs&#62;</returns>
         
         public async System.Threading.Tasks.Task<ApiResponse<Refs>> GetVersionRefsAsync (string projectId,string versionId,string xUserId= default(string),List<string> filterType= default(List<string>),List<string> filterId= default(List<string>),List<string> filterExtensionType= default(List<string>), string accessToken = null, bool throwOnError = true)
         {
@@ -803,7 +803,7 @@ namespace Autodesk.DataManagement.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="projectId">The unique identifier of a project. For BIM 360 Docs, the project ID in the Data Management API corresponds to the project ID in the BIM 360 API. To convert a project ID in the BIM 360 API into a project ID in the Data Management API you need to add a “b.\&quot; prefix. For example, a project ID of c8b0c73d-3ae9 translates to a project ID of b.c8b0c73d-3ae9.</param>/// <param name="versionId">The unique identifier of a version.</param>/// <param name="xUserId">In a two-legged authentication context, the app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act on behalf of only the user specified. (optional)</param>
-        /// <returns>Task of ApiResponse<RelationshipLinks></returns>
+        /// <returns>Task of ApiResponse&#60;RelationshipLinks&#62;</returns>
         
         public async System.Threading.Tasks.Task<ApiResponse<RelationshipLinks>> GetVersionRelationshipsLinksAsync (string projectId,string versionId,string xUserId= default(string), string accessToken = null, bool throwOnError = true)
         {
@@ -883,7 +883,7 @@ namespace Autodesk.DataManagement.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="projectId">The unique identifier of a project. For BIM 360 Docs, the project ID in the Data Management API corresponds to the project ID in the BIM 360 API. To convert a project ID in the BIM 360 API into a project ID in the Data Management API you need to add a “b.\&quot; prefix. For example, a project ID of c8b0c73d-3ae9 translates to a project ID of b.c8b0c73d-3ae9.</param>/// <param name="versionId">The unique identifier of a version.</param>/// <param name="xUserId">In a two-legged authentication context, the app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act on behalf of only the user specified. (optional)</param>/// <param name="filterType">Filter by the type of the objects in the folder. Supported values include folders and items. (optional)</param>/// <param name="filterId">Filter by the id of the ref target. (optional)</param>/// <param name="filterRefType">Filter by refType. Possible values: derived, dependencies, auxiliary, xrefs, includes (optional)</param>/// <param name="filterDirection">Filter by the direction of the reference. Possible values: from, to (optional)</param>/// <param name="filterExtensionType">Filter by the extension type. (optional)</param>
-        /// <returns>Task of ApiResponse<RelationshipRefs></returns>
+        /// <returns>Task of ApiResponse&#60;RelationshipRefs&#62;</returns>
         
         public async System.Threading.Tasks.Task<ApiResponse<RelationshipRefs>> GetVersionRelationshipsRefsAsync (string projectId,string versionId,string xUserId= default(string),List<string> filterType= default(List<string>),List<string> filterId= default(List<string>),string filterRefType= null,string filterDirection= null,List<string> filterExtensionType= default(List<string>), string accessToken = null, bool throwOnError = true)
         {
@@ -968,7 +968,7 @@ namespace Autodesk.DataManagement.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="projectId">The unique identifier of a project. For BIM 360 Docs, the project ID in the Data Management API corresponds to the project ID in the BIM 360 API. To convert a project ID in the BIM 360 API into a project ID in the Data Management API you need to add a “b.\&quot; prefix. For example, a project ID of c8b0c73d-3ae9 translates to a project ID of b.c8b0c73d-3ae9.</param>/// <param name="versionId">The unique identifier of a version.</param>/// <param name="modifyVersionPayload">Describe the version to be patched. (optional)</param>
-        /// <returns>Task of ApiResponse<VersionDetails></returns>
+        /// <returns>Task of ApiResponse&#60;VersionDetails&#62;</returns>
         
         public async System.Threading.Tasks.Task<ApiResponse<VersionDetails>> PatchVersionAsync (string projectId,string versionId,ModifyVersionPayload modifyVersionPayload= default(ModifyVersionPayload), string accessToken = null, bool throwOnError = true)
         {

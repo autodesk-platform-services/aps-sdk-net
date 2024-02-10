@@ -36,7 +36,7 @@ namespace Autodesk.Authentication
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="authorization">YOUR_3_LEGGED_ACCESS_TOKEN </param>
-        /// <returns>Task of ApiResponse<UserInfo></returns>
+        /// <returns>Task of ApiResponse&#60;UserInfo&#62;</returns>
 
         public async System.Threading.Tasks.Task<UserInfo> GetUserInfoAsync(string authorization)
         {
@@ -157,8 +157,8 @@ namespace Autodesk.Authentication
         /// This API endpoint logs a user out by removing their user browser session and redirects the user to the Autodesk login page.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="postLogoutRedirectUri">Location to redirect once the logout is performed. Note that the provided domain host should be in the allowed list. Contact #oxygen slack channel for more details. (optional)</param>
-        /// <returns>Redirect uri/returns>
+        /// <param name="postLogoutRedirectUri">Location to redirect once the logout is performed. Note that the provided domain host should be in the allowed list. (optional)</param>
+        /// <returns>Redirect uri</returns>
         public string Logout(string postLogoutRedirectUri = default(string))
         {
             return this.tokenApi.Logout(postLogoutRedirectUri);
@@ -173,7 +173,7 @@ namespace Autodesk.Authentication
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="token">The token to be revoked. (optional)</param>/// <param name="tokenTypeHint">Should be either &#39;access_token&#39;, &#39;refresh_token&#39; or &#39;device_secret&#39;. (optional)</param>/// <param name="clientId">This field is required for public client. (optional)</param>
-        /// <returns>Task of ApiResponse<Object></returns>
+        /// <returns>Task of ApiResponse&#60;Object&#62;</returns>
 
         public async System.Threading.Tasks.Task<HttpResponseMessage> RevokeAsync(string token, string clientId, string clientSecret = default(string), TokenTypeHint tokenTypeHint = default(TokenTypeHint))
         {

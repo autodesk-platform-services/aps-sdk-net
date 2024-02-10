@@ -24,6 +24,7 @@ using System.Net.Http;
 
 namespace Autodesk.Oss
 {
+  /// <exclude/>
   public class FileTransferException : ServiceApiException
   {
     public FileTransferException(string message) : base(message) {}

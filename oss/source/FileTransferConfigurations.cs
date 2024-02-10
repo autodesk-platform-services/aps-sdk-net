@@ -21,6 +21,7 @@
  */
 namespace Autodesk.Oss
 {
+    /// <exclude/>
     public class FileTransferConfigurations : IFileTransferConfigurations
     {
         int _retryCount;
