@@ -1,0 +1,14 @@
+### YamlMime:ManagedReference
+apiRules:
+    - exclude:
+          uidRegex: .*\.Http
+          type: Type
+    - exclude:
+          uidRegex: .*\.LocalMarshalling
+          type: Class
+    - exclude:
+          uidRegex: .*\.*ApiException
+          type: Class
+    - exclude:
+          uidRegex: .*\.ServiceCollectionExtensions
+          type: Class

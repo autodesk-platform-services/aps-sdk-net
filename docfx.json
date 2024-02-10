@@ -1,0 +1,51 @@
+{
+  "metadata": [
+    {
+      "src": [
+        {
+          "src": "",
+          "files": [
+            "authentication/source/Autodesk.Authentication.csproj",
+            "modelderivative/source/Autodesk.ModelDerivative.csproj",
+            "datamanagement/source/Autodesk.DataManagement.csproj",
+            "oss/source/Autodesk.OSS.csproj",
+            "webhooks/source/Autodesk.WebHooks.csproj",
+            "issues/source/Autodesk.Construction.Issues.csproj"
+          ]
+        }
+      ],
+      "dest": "api",
+      "filter": "docfx_exclude.yml"
+    }
+  ],
+  "build": {
+    "content": [
+      {
+        "files": [
+          "**/*.{md,yml}"
+        ],
+        "exclude": [
+          "_site/**"
+        ]
+      }
+    ],
+    "resource": [
+      {
+        "files": [
+          "images/**"
+        ]
+      }
+    ],
+    "output": "_site",
+    "template": [
+      "default",
+      "modern"
+    ],
+    "globalMetadata": {
+      "_appName": "mysite",
+      "_appTitle": "mysite",
+      "_enableSearch": false,
+      "pdf": false
+    }
+  }
+}
