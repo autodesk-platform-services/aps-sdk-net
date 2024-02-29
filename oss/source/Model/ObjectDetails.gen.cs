@@ -78,7 +78,7 @@ namespace Autodesk.Oss.Model
         /// </summary>
         /// <value>Object size</value>
         [DataMember(Name="size", EmitDefaultValue=false)]
-        public int? Size { get; set; }
+        public long? Size { get; set; }
 
         /// <summary>
         /// Object content-type
