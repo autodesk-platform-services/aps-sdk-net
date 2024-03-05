@@ -33,35 +33,23 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Webhooks.Model
 {
     /// <summary>
-    /// ModifyHookPayloadHookAttribute
+    /// GetHookDetails400Response
     /// </summary>
     [DataContract]
-    public partial class ModifyHookPayloadHookAttribute 
+    public partial class GetHookDetails400Response 
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ModifyHookPayloadHookAttribute" /> class.
+        /// Initializes a new instance of the <see cref="GetHookDetails400Response" /> class.
         /// </summary>
-        public ModifyHookPayloadHookAttribute()
+        public GetHookDetails400Response()
         {
         }
         
         /// <summary>
-        /// Gets or Sets Myfoo
+        /// Gets or Sets Id
         /// </summary>
-        [DataMember(Name="myfoo", EmitDefaultValue=false)]
-        public decimal? Myfoo { get; set; }
-
-        /// <summary>
-        /// Gets or Sets ProjectId
-        /// </summary>
-        [DataMember(Name="projectId", EmitDefaultValue=false)]
-        public string ProjectId { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Myobject
-        /// </summary>
-        [DataMember(Name="myobject", EmitDefaultValue=false)]
-        public ModifyHookPayloadHookAttributeMyobject Myobject { get; set; }
+        [DataMember(Name="id", EmitDefaultValue=false)]
+        public string Id { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
