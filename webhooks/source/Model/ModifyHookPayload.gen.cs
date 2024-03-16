@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Webhooks.Model
 {
     /// <summary>
-    /// ModifyHookPayload
+    /// Modify Hook Payload
     /// </summary>
     [DataContract]
     public partial class ModifyHookPayload 
@@ -67,7 +67,19 @@ namespace Autodesk.Webhooks.Model
         /// Gets or Sets HookAttribute
         /// </summary>
         [DataMember(Name="hookAttribute", EmitDefaultValue=false)]
-        public ModifyHookPayloadHookAttribute HookAttribute { get; set; }
+        public Object HookAttribute { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Token
+        /// </summary>
+        [DataMember(Name="token", EmitDefaultValue=false)]
+        public string Token { get; set; }
+
+        /// <summary>
+        /// Gets or Sets HookExpiry
+        /// </summary>
+        [DataMember(Name="hookExpiry", EmitDefaultValue=false)]
+        public string HookExpiry { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
