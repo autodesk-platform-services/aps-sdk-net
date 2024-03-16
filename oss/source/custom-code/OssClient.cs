@@ -5,6 +5,7 @@ using Autodesk.Oss.Http;
 using Autodesk.Oss.Model;
 using Autodesk.Oss.Client;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace Autodesk.Oss
 {
@@ -28,6 +29,10 @@ namespace Autodesk.Oss
         var response = await this.oSSFileTransfer.Upload( bucketKey,  objectKey, sourceToUpload,  accessToken,  cancellationToken,  projectScope , requestIdPrefix ,  progress );
         var apiResponse = new ApiResponse<ObjectDetails>(response, await LocalMarshalling.DeserializeAsync<ObjectDetails>(response.Content));
         return apiResponse.Content;
+        }
+        public async Task Download(string bucketKey, string objectKey,string filePath,string accessToken,CancellationToken cancellationToken,string projectScope = "",string requestIdPrefix = "",IProgress<int> progress = null)
+        {
+            await this.oSSFileTransfer.Download(bucketKey,objectKey,filePath,accessToken,cancellationToken,projectScope,requestIdPrefix,progress);
         }
         /// <summary>
         /// 
@@ -247,7 +252,6 @@ namespace Autodesk.Oss
 
         public async System.Threading.Tasks.Task<BucketObjects> GetObjectsAsync(string bucketKey, int? limit = default(int?), string beginsWith = default(string), string startAt = default(string), string accessToken = null, bool throwOnError = true)
         {
-
             var response = await this.OSSApi.GetObjectsAsync(bucketKey, limit, beginsWith, startAt, accessToken, throwOnError);
             return response.Content;
         } /// <summary>
