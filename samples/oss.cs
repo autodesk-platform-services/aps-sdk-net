@@ -10,6 +10,7 @@ namespace Samples
             string bucketKey = "<bucket key>";
             string objectName = "<object name>";
             string sourceToUpload = "<path to source file>";
+            string filePath ="<path to source file>";
             OssClient ossClient = null!;
 
 
@@ -44,6 +45,11 @@ namespace Samples
                   string objectKey = objectDetails.ObjectKey;
 
             }
+            public async Task Download()
+            {
+                  //The below helper method takes care of the complete Download process, i.e.
+                  await ossClient.Download(bucketKey, objectName, filePath, accessToken: token, CancellationToken.None);
+            }
 
             public async void Main()
             {
@@ -53,6 +59,7 @@ namespace Samples
                   // Call respective methods
                   await GetBucketDetailsAsync();
                   await Upload();
+                  await Download();
             }
       }
 }
