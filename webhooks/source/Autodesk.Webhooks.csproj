@@ -3,17 +3,13 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Authors></Authors>
-    <Company>Autodesk</Company>
-    <Product>Autodesk SDK</Product>
-    <Description>Client sdk for Webhooks API</Description>
+    <Authors>Autodesk Platform Services SDK Team</Authors>
+    <PackageDescription>Client SDK for WebHooks API</PackageDescription>
     <Copyright>Autodesk Inc.</Copyright>
     <PackageId>Autodesk.Webhooks</PackageId>
-    <Version>1.0.0</Version>
-    <Authors>Autodesk SDK team</Authors>
-    <owners>Autodesk SDK team</owners>
-    <Company>Autodesk</Company>
+    <PackageVersion>1.0.0</PackageVersion>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/autodesk-platform-services/aps-sdk-net.git</RepositoryUrl>
   </PropertyGroup>
     <ItemGroup>
@@ -24,7 +20,7 @@
       <PackageReference Include="Microsoft.Extensions.Options" Version="6.0.0" />
       <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-      <PackageReference Include="Autodesk.SDKManager" Version="1.0.1" />
+      <PackageReference Include="Autodesk.SDKManager" Version="1.0.0" />
       <None Include="../../LICENSE.txt" Pack="true" PackagePath=""/>
       <None Include="../../README.md" Pack="true" PackagePath=""/>
     </ItemGroup>

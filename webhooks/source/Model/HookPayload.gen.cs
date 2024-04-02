@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Webhooks.Model
 {
     /// <summary>
-    /// Hook Payload
+    /// HookPayload
     /// </summary>
     [DataContract]
     public partial class HookPayload 
