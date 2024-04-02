@@ -76,6 +76,36 @@ namespace Autodesk.Webhooks.Model
         public string HookExpiry { get; set; }
 
         /// <summary>
+        /// Gets or Sets Filter
+        /// </summary>
+        [DataMember(Name="filter", EmitDefaultValue=false)]
+        public string Filter { get; set; }
+
+        /// <summary>
+        /// Gets or Sets HubId
+        /// </summary>
+        [DataMember(Name="hubId", EmitDefaultValue=false)]
+        public string HubId { get; set; }
+
+        /// <summary>
+        /// Gets or Sets ProjectId
+        /// </summary>
+        [DataMember(Name="projectId", EmitDefaultValue=false)]
+        public string ProjectId { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Tenant
+        /// </summary>
+        [DataMember(Name="tenant", EmitDefaultValue=false)]
+        public string Tenant { get; set; }
+
+        /// <summary>
+        /// Gets or Sets CallbackWithEventPayloadOnly
+        /// </summary>
+        [DataMember(Name="callbackWithEventPayloadOnly", EmitDefaultValue=false)]
+        public bool? CallbackWithEventPayloadOnly { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
