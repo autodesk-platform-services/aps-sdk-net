@@ -33,33 +33,40 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Authentication.Model
 {
     /// <summary>
-    /// Enum for Grant types    
+    /// Specifies the grant type you are requesting the code for. Possible values are: 
+    ///
+    ///- `client_credentials` -  For a 2-legged access token.
+    ///- `authorization_code` - For a 3-legged access token.
+    ///- `refresh_token` - For a refresh token.
     /// </summary>
-    /// <value>Enum for Grant types</value>
-    
+    ///<value>Specifies the grant type you are requesting the code for. Possible values are: 
+    ///
+    ///- `client_credentials` -  For a 2-legged access token.
+    ///- `authorization_code` - For a 3-legged access token.
+    ///- `refresh_token` - For a refresh token.</value>
+
     [JsonConverter(typeof(StringEnumConverter))]
-    
+
     public enum GrantType
     {
-        
+
         /// <summary>
-        /// Enum Client_credentials for value: Client_credentials
+        /// Enum Clientcredentials for value: client_credentials
         /// </summary>
         [EnumMember(Value = "client_credentials")]
-        Client_credentials,
-        
+        ClientCredentials,
+
         /// <summary>
-        /// Enum Authorization_code for value: authorization_code
+        /// Enum Authorizationcode for value: authorization_code
         /// </summary>
         [EnumMember(Value = "authorization_code")]
-        Authorization_code,
-        
+        AuthorizationCode,
+
         /// <summary>
-        /// Enum Refresh_token for Refresh_token
+        /// Enum Refreshtoken for value: refresh_token
         /// </summary>
         [EnumMember(Value = "refresh_token")]
-        Refresh_token,
-        
+        RefreshToken
     }
 
 }

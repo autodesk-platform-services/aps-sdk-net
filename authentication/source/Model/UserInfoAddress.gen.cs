@@ -33,66 +33,62 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Authentication.Model
 {
     /// <summary>
-    /// JwksKey
+    /// A JSON object containing information of the postal address of the user.
     /// </summary>
     [DataContract]
-    public partial class JwksKey 
+    public partial class UserInfoAddress 
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="JwksKey" /> class.
+        /// Initializes a new instance of the <see cref="UserInfoAddress" /> class.
         /// </summary>
-        public JwksKey()
+        public UserInfoAddress()
         {
         }
         
         /// <summary>
-        ///The ID of the key. Acts as a unique identifier for a specific key within the JWKS.
+        ///The street address part of the address. Can contain the house number, street name, postal code, and so on.  New lines are represented as `\n`.
         /// </summary>
         /// <value>
-        ///The ID of the key. Acts as a unique identifier for a specific key within the JWKS.
+        ///The street address part of the address. Can contain the house number, street name, postal code, and so on.  New lines are represented as `\n`.
         /// </value>
-        [DataMember(Name="kid", EmitDefaultValue=false)]
-        public string Kid { get; set; }
+        [DataMember(Name="street_address", EmitDefaultValue=false)]
+        public string StreetAddress { get; set; }
 
         /// <summary>
-        ///The cryptographic algorithm family used with the key. Currently, always `RSA`.
+        ///The city or locality part of the address.
         /// </summary>
         /// <value>
-        ///The cryptographic algorithm family used with the key. Currently, always `RSA`.
+        ///The city or locality part of the address.
         /// </value>
-        [DataMember(Name="kty", EmitDefaultValue=false)]
-        public string Kty { get; set; }
+        [DataMember(Name="locality", EmitDefaultValue=false)]
+        public string Locality { get; set; }
 
         /// <summary>
-        ///The intended use of the public key. Possible values:
-///
-///- `sig` - Verify the signature on data.
+        ///The state, province, prefecture, or region part of the address.
         /// </summary>
         /// <value>
-        ///The intended use of the public key. Possible values:
-///
-///- `sig` - Verify the signature on data.
+        ///The state, province, prefecture, or region part of the address.
         /// </value>
-        [DataMember(Name="use", EmitDefaultValue=false)]
-        public string Use { get; set; }
+        [DataMember(Name="region", EmitDefaultValue=false)]
+        public string Region { get; set; }
 
         /// <summary>
-        ///The RSA modulus value.
+        ///The zip code or postal code part of the address.
         /// </summary>
         /// <value>
-        ///The RSA modulus value.
+        ///The zip code or postal code part of the address.
         /// </value>
-        [DataMember(Name="n", EmitDefaultValue=false)]
-        public string N { get; set; }
+        [DataMember(Name="postal_code", EmitDefaultValue=false)]
+        public string PostalCode { get; set; }
 
         /// <summary>
-        ///The RSA exponent value.
+        ///The country name part of the address.
         /// </summary>
         /// <value>
-        ///The RSA exponent value.
+        ///The country name part of the address.
         /// </value>
-        [DataMember(Name="e", EmitDefaultValue=false)]
-        public string E { get; set; }
+        [DataMember(Name="country", EmitDefaultValue=false)]
+        public string Country { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

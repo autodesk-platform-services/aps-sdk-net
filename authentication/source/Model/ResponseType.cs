@@ -33,9 +33,9 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Authentication.Model
 {
     /// <summary>
-    /// Enum for Grant types    
+    /// Defines responseType
     /// </summary>
-    /// <value>Enum for Grant types</value>
+    ///<value></value>
     
     [JsonConverter(typeof(StringEnumConverter))]
     
@@ -43,17 +43,16 @@ namespace Autodesk.Authentication.Model
     {
         
         /// <summary>
-        /// Enum code for value: code
+        /// Enum Code for value: code
         /// </summary>
         [EnumMember(Value = "code")]
         Code,
         
         /// <summary>
-        /// Enum id_token for value: id_token
+        /// Enum Idtoken for value: id_token
         /// </summary>
         [EnumMember(Value = "id_token")]
-        Id_token,
-                     
+        Idtoken
     }
 
 }

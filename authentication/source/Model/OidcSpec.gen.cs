@@ -46,80 +46,119 @@ namespace Autodesk.Authentication.Model
         }
         
         /// <summary>
-        /// Gets or Sets Issuer
+        ///The base URL of the openID Provider. Always `https://developer.api.autodesk.com` for APS.
         /// </summary>
+        /// <value>
+        ///The base URL of the openID Provider. Always `https://developer.api.autodesk.com` for APS.
+        /// </value>
         [DataMember(Name="issuer", EmitDefaultValue=false)]
         public string Issuer { get; set; }
 
         /// <summary>
-        /// Gets or Sets AuthorizationEndpoint
+        ///The endpoint for authorizing users. It initiates the user authentication process in obtaining an authorization code grant.
         /// </summary>
+        /// <value>
+        ///The endpoint for authorizing users. It initiates the user authentication process in obtaining an authorization code grant.
+        /// </value>
         [DataMember(Name="authorization_endpoint", EmitDefaultValue=false)]
         public string AuthorizationEndpoint { get; set; }
 
         /// <summary>
-        /// Gets or Sets TokenEndpoint
+        ///The endpoint for acquiring access tokens and refresh tokens.
         /// </summary>
+        /// <value>
+        ///The endpoint for acquiring access tokens and refresh tokens.
+        /// </value>
         [DataMember(Name="token_endpoint", EmitDefaultValue=false)]
         public string TokenEndpoint { get; set; }
 
         /// <summary>
-        /// Gets or Sets UserinfoEndpoint
+        ///The endpoint for querying information about the authenticated user.
         /// </summary>
+        /// <value>
+        ///The endpoint for querying information about the authenticated user.
+        /// </value>
         [DataMember(Name="userinfo_endpoint", EmitDefaultValue=false)]
         public string UserinfoEndpoint { get; set; }
 
         /// <summary>
-        /// Gets or Sets JwksUri
+        ///The endpoint for retrieving public keys used by APS, in the JWKS format.
         /// </summary>
+        /// <value>
+        ///The endpoint for retrieving public keys used by APS, in the JWKS format.
+        /// </value>
         [DataMember(Name="jwks_uri", EmitDefaultValue=false)]
         public string JwksUri { get; set; }
 
         /// <summary>
-        /// Gets or Sets RevocationEndpoint
+        ///The endpoint for revoking an access token or refresh token.
         /// </summary>
-        [DataMember(Name="revocation_endpoint", EmitDefaultValue=false)]
-        public string RevocationEndpoint { get; set; }
+        /// <value>
+        ///The endpoint for revoking an access token or refresh token.
+        /// </value>
+        [DataMember(Name="revoke_endpoint", EmitDefaultValue=false)]
+        public string RevokeEndpoint { get; set; }
 
         /// <summary>
-        /// Gets or Sets IntrospectionEndpoint
+        ///The endpoint for obtaining metadata about an access token or refresh token.
         /// </summary>
+        /// <value>
+        ///The endpoint for obtaining metadata about an access token or refresh token.
+        /// </value>
         [DataMember(Name="introspection_endpoint", EmitDefaultValue=false)]
         public string IntrospectionEndpoint { get; set; }
 
         /// <summary>
-        /// Gets or Sets ScopesSupported
+        ///A list of supported scopes.
         /// </summary>
+        /// <value>
+        ///A list of supported scopes.
+        /// </value>
         [DataMember(Name="scopes_supported", EmitDefaultValue=false)]
         public List<string> ScopesSupported { get; set; }
 
         /// <summary>
-        /// Gets or Sets ResponseTypesSupported
+        ///A list of the response types supported by APS. Each response type represent a different flow.
         /// </summary>
+        /// <value>
+        ///A list of the response types supported by APS. Each response type represent a different flow.
+        /// </value>
         [DataMember(Name="response_types_supported", EmitDefaultValue=false)]
         public List<string> ResponseTypesSupported { get; set; }
 
         /// <summary>
-        /// Gets or Sets ResponseModesSupported
+        ///A list of response modes supported by APS. Each response mode defines a different way of delivering an authorization response.
         /// </summary>
+        /// <value>
+        ///A list of response modes supported by APS. Each response mode defines a different way of delivering an authorization response.
+        /// </value>
         [DataMember(Name="response_modes_supported", EmitDefaultValue=false)]
         public List<string> ResponseModesSupported { get; set; }
 
         /// <summary>
-        /// Gets or Sets GrantTypesSupported
+        ///A list of grant types supported by APS. Each grant type represents a different way an application can obtain an access token.
         /// </summary>
+        /// <value>
+        ///A list of grant types supported by APS. Each grant type represents a different way an application can obtain an access token.
+        /// </value>
         [DataMember(Name="grant_types_supported", EmitDefaultValue=false)]
         public List<string> GrantTypesSupported { get; set; }
 
         /// <summary>
-        /// Gets or Sets SubjectTypesSupported
+        ///A list of subject identifier types supported by APS.
         /// </summary>
+        /// <value>
+        ///A list of subject identifier types supported by APS.
+        /// </value>
         [DataMember(Name="subject_types_supported", EmitDefaultValue=false)]
         public List<string> SubjectTypesSupported { get; set; }
 
         /// <summary>
-        /// Gets or Sets IdTokenSigningAlgValuesSupported
+        ///A list of all the token signing algorithms supported by APS.
         /// </summary>
+        /// <value>
+        ///A list of all the token signing algorithms supported by APS.
+        /// </value>
         [DataMember(Name="id_token_signing_alg_values_supported", EmitDefaultValue=false)]
         public List<string> IdTokenSigningAlgValuesSupported { get; set; }
 

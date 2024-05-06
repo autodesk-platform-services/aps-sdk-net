@@ -33,29 +33,44 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Authentication.Model
 {
     /// <summary>
-    /// Error response body
+    /// UserInfoSocialUserinfoList
     /// </summary>
     [DataContract]
-    public partial class Error 
+    public partial class UserInfoSocialUserinfoList 
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Error" /> class.
+        /// Initializes a new instance of the <see cref="UserInfoSocialUserinfoList" /> class.
         /// </summary>
-        public Error()
+        public UserInfoSocialUserinfoList()
         {
         }
         
         /// <summary>
-        /// Gets or Sets _Error
+        ///The ID of the user within the social media platform.
         /// </summary>
-        [DataMember(Name="error", EmitDefaultValue=false)]
-        public string _Error { get; set; }
+        /// <value>
+        ///The ID of the user within the social media platform.
+        /// </value>
+        [DataMember(Name="socialUserId", EmitDefaultValue=false)]
+        public string SocialUserId { get; set; }
 
         /// <summary>
-        /// Gets or Sets ErrorDescription
+        ///The ID of the social media platform.
         /// </summary>
-        [DataMember(Name="error_description", EmitDefaultValue=false)]
-        public string ErrorDescription { get; set; }
+        /// <value>
+        ///The ID of the social media platform.
+        /// </value>
+        [DataMember(Name="providerId", EmitDefaultValue=false)]
+        public string ProviderId { get; set; }
+
+        /// <summary>
+        ///The name of teh social media platform.
+        /// </summary>
+        /// <value>
+        ///The name of teh social media platform.
+        /// </value>
+        [DataMember(Name="providerName", EmitDefaultValue=false)]
+        public string ProviderName { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

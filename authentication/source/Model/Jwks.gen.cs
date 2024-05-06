@@ -45,9 +45,16 @@ namespace Autodesk.Authentication.Model
         {
         }
         
+        /// <summary>
+        ///Gets or Sets Keys
+        /// </summary>
         [DataMember(Name="keys", EmitDefaultValue=false)]
         public List<JwksKey> Keys { get; set; }
-        
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
+        /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);

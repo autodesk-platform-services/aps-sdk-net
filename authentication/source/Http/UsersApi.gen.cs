@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Authentication
  *
@@ -40,14 +40,14 @@ namespace Autodesk.Authentication.Http
     public interface IUsersApi
     {
         /// <summary>
-        /// GET User Info
+        /// Get User Info
         /// </summary>
         /// <remarks>
-        /// Retrieves basic information for the given authenticated user. Only supports 3-legged access tokens.
+        ///Retrieves information about the authenticated user.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="authorization">YOUR_3_LEGGED_ACCESS_TOKEN (optional)</param>
-        /// <returns>Task of ApiResponse<UserInfo></returns>
+        /// <returns>Task of ApiResponse&lt;UserInfo&gt;</returns>
         
         System.Threading.Tasks.Task<ApiResponse<UserInfo>> GetUserinfoAsync (string authorization, bool throwOnError = true);
     }
@@ -131,14 +131,14 @@ namespace Autodesk.Authentication.Http
         public ForgeService Service {get; set;}
 
         /// <summary>
-        /// GET User Info
+        /// Get User Info
         /// </summary>
         /// <remarks>
-        /// Retrieves basic information for the given authenticated user. Only supports 3-legged access tokens.
+        ///Retrieves information about the authenticated user.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="authorization">YOUR_3_LEGGED_ACCESS_TOKEN (optional)</param>
-        /// <returns>Task of ApiResponse<UserInfo></returns>
+        /// <returns>Task of ApiResponse&lt;UserInfo&gt;</returns>
         
         public async System.Threading.Tasks.Task<ApiResponse<UserInfo>> GetUserinfoAsync (string authorization, bool throwOnError = true)
         {
