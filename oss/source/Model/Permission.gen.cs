@@ -46,18 +46,19 @@ namespace Autodesk.Oss.Model
         }
         
         /// <summary>
-        /// The authentication ID
+        ///The Client ID of the application.
         /// </summary>
-        /// <value>The authentication ID</value>
+        /// <value>
+        ///The Client ID of the application.
+        /// </value>
         [DataMember(Name="authId", EmitDefaultValue=false)]
         public string AuthId { get; set; }
 
         /// <summary>
-        /// The authentication access type
+        ///Gets or Sets Access
         /// </summary>
-        /// <value>The authentication access type</value>
-        [DataMember(Name="access", EmitDefaultValue=false)]
-        public string Access { get; set; }
+        [DataMember(Name="access", EmitDefaultValue=true)]
+        public PermissionAccess Access { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

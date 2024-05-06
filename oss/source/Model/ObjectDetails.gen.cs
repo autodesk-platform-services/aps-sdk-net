@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Oss.Model
 {
     /// <summary>
-    /// Object json response
+    /// Represents an object within a bucket.
     /// </summary>
     [DataContract]
     public partial class ObjectDetails 
@@ -46,51 +46,65 @@ namespace Autodesk.Oss.Model
         }
         
         /// <summary>
-        /// Bucket key
+        ///The bucket key of the bucket that contains the object.
         /// </summary>
-        /// <value>Bucket key</value>
+        /// <value>
+        ///The bucket key of the bucket that contains the object.
+        /// </value>
         [DataMember(Name="bucketKey", EmitDefaultValue=false)]
         public string BucketKey { get; set; }
 
         /// <summary>
-        /// Object URN
+        ///An identifier (URN) that uniquely and persistently identifies the object.
         /// </summary>
-        /// <value>Object URN</value>
+        /// <value>
+        ///An identifier (URN) that uniquely and persistently identifies the object.
+        /// </value>
         [DataMember(Name="objectId", EmitDefaultValue=false)]
         public string ObjectId { get; set; }
 
         /// <summary>
-        /// Object name
+        ///A URL-encoded human friendly name to identify the object.
         /// </summary>
-        /// <value>Object name</value>
+        /// <value>
+        ///A URL-encoded human friendly name to identify the object.
+        /// </value>
         [DataMember(Name="objectKey", EmitDefaultValue=false)]
         public string ObjectKey { get; set; }
 
         /// <summary>
-        /// Object SHA1
+        ///A hash value computed from the data of the object.
         /// </summary>
-        /// <value>Object SHA1</value>
+        /// <value>
+        ///A hash value computed from the data of the object.
+        /// </value>
         [DataMember(Name="sha1", EmitDefaultValue=false)]
         public byte[] Sha1 { get; set; }
 
         /// <summary>
-        /// Object size
+        ///The total amount of storage space occupied by the object, in bytes.
         /// </summary>
-        /// <value>Object size</value>
+        /// <value>
+        ///The total amount of storage space occupied by the object, in bytes.
+        /// </value>
         [DataMember(Name="size", EmitDefaultValue=false)]
-        public long? Size { get; set; }
+        public int? Size { get; set; }
 
         /// <summary>
-        /// Object content-type
+        ///The format of the data stored within the object, expressed as a MIME type.
         /// </summary>
-        /// <value>Object content-type</value>
+        /// <value>
+        ///The format of the data stored within the object, expressed as a MIME type.
+        /// </value>
         [DataMember(Name="contentType", EmitDefaultValue=false)]
         public string ContentType { get; set; }
 
         /// <summary>
-        /// URL to download the object
+        ///A URL that points to the actual location of the object.
         /// </summary>
-        /// <value>URL to download the object</value>
+        /// <value>
+        ///A URL that points to the actual location of the object.
+        /// </value>
         [DataMember(Name="location", EmitDefaultValue=false)]
         public string Location { get; set; }
 

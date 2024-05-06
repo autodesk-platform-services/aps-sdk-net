@@ -46,44 +46,56 @@ namespace Autodesk.Oss.Model
         }
         
         /// <summary>
-        /// The key of the object for which to create a download signed URL.
+        ///The URL-encoded human friendly name of the object to download.
         /// </summary>
-        /// <value>The key of the object for which to create a download signed URL.</value>
+        /// <value>
+        ///The URL-encoded human friendly name of the object to download.
+        /// </value>
         [DataMember(Name="objectKey", EmitDefaultValue=false)]
         public string ObjectKey { get; set; }
 
         /// <summary>
-        /// The value of the Content-Type header the client expects to receive from S3. If this attribute is not provided, it defaults to the value stored for the object itself.
+        ///The value of the Content-Type header you want to receive when you download the object using the signed URL. If you do not specify a value, the Content-Type header defaults to the value stored with OSS.
         /// </summary>
-        /// <value>The value of the Content-Type header the client expects to receive from S3. If this attribute is not provided, it defaults to the value stored for the object itself.</value>
+        /// <value>
+        ///The value of the Content-Type header you want to receive when you download the object using the signed URL. If you do not specify a value, the Content-Type header defaults to the value stored with OSS.
+        /// </value>
         [DataMember(Name="response-content-type", EmitDefaultValue=false)]
         public string ResponseContentType { get; set; }
 
         /// <summary>
-        /// The value of the Content-Disposition header the client expects to receive from S3. If this attribute is not provided, it defaults to the value stored for the object itself.
+        ///The value of the Content-Disposition header you want to receive when you download the object using the signed URL. If you do not specify a value, the Content-Disposition header defaults to the value stored with OSS.
         /// </summary>
-        /// <value>The value of the Content-Disposition header the client expects to receive from S3. If this attribute is not provided, it defaults to the value stored for the object itself.</value>
+        /// <value>
+        ///The value of the Content-Disposition header you want to receive when you download the object using the signed URL. If you do not specify a value, the Content-Disposition header defaults to the value stored with OSS.
+        /// </value>
         [DataMember(Name="response-content-disposition", EmitDefaultValue=false)]
         public string ResponseContentDisposition { get; set; }
 
         /// <summary>
-        /// The value of the Cache-Control header that the client expects to receive from S3. If this attribute is not provided, it defaults to the value stored for the object itself.
+        ///The value of the Cache-Control header you want to receive when you download the object using the signed URL. If you do not specify a value, the Cache-Control header defaults to the value stored with OSS.
         /// </summary>
-        /// <value>The value of the Cache-Control header that the client expects to receive from S3. If this attribute is not provided, it defaults to the value stored for the object itself.</value>
+        /// <value>
+        ///The value of the Cache-Control header you want to receive when you download the object using the signed URL. If you do not specify a value, the Cache-Control header defaults to the value stored with OSS.
+        /// </value>
         [DataMember(Name="response-cache-control", EmitDefaultValue=false)]
         public string ResponseCacheControl { get; set; }
 
         /// <summary>
-        /// The value of the ETag of the object. If they match, the response body will show the status of this item as &#x60;skipped&#x60; with the reason &#x60;Not Modified&#x60;, as the client already has the data.
+        ///The last known ETag value of the object. OSS returns the signed URL only if the `If-None-Match` header differs from the ETag value of the object on S3. If not, it returns a 304 "Not Modified" HTTP status.
         /// </summary>
-        /// <value>The value of the ETag of the object. If they match, the response body will show the status of this item as &#x60;skipped&#x60; with the reason &#x60;Not Modified&#x60;, as the client already has the data.</value>
+        /// <value>
+        ///The last known ETag value of the object. OSS returns the signed URL only if the `If-None-Match` header differs from the ETag value of the object on S3. If not, it returns a 304 "Not Modified" HTTP status.
+        /// </value>
         [DataMember(Name="If-None-Match", EmitDefaultValue=false)]
         public string IfNoneMatch { get; set; }
 
         /// <summary>
-        /// If the requested object has not been modified since the time specified in this attribute, the response body will show the status of this item as &#x60;skipped&#x60; with the reason &#x60;Not Modified&#x60;, as the client still has the latest version of the data.
+        ///A timestamp in the HTTP date format (Mon, DD Month YYYY HH:MM:SS GMT). A signed URL is returned only if the object has been modified since the specified timestamp. If not, a 304 (Not Modified) HTTP status is returned.
         /// </summary>
-        /// <value>If the requested object has not been modified since the time specified in this attribute, the response body will show the status of this item as &#x60;skipped&#x60; with the reason &#x60;Not Modified&#x60;, as the client still has the latest version of the data.</value>
+        /// <value>
+        ///A timestamp in the HTTP date format (Mon, DD Month YYYY HH:MM:SS GMT). A signed URL is returned only if the object has been modified since the specified timestamp. If not, a 304 (Not Modified) HTTP status is returned.
+        /// </value>
         [DataMember(Name="If-Modified-Since", EmitDefaultValue=false)]
         public string IfModifiedSince { get; set; }
 

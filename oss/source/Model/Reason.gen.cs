@@ -46,9 +46,11 @@ namespace Autodesk.Oss.Model
         }
         
         /// <summary>
-        /// reason for failure
+        ///reason for failure
         /// </summary>
-        /// <value>reason for failure</value>
+        /// <value>
+        ///reason for failure
+        /// </value>
         [DataMember(Name="reason", EmitDefaultValue=false)]
         public string _Reason { get; set; }
 

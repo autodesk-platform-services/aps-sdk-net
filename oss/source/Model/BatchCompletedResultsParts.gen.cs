@@ -33,43 +33,48 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Oss.Model
 {
     /// <summary>
-    /// Completes3uploadResponse400Parts
+    /// BatchCompletedResultsParts
     /// </summary>
     [DataContract]
-    public partial class Completes3uploadResponse400Parts 
+    public partial class BatchCompletedResultsParts 
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Completes3uploadResponse400Parts" /> class.
+        /// Initializes a new instance of the <see cref="BatchCompletedResultsParts" /> class.
         /// </summary>
-        public Completes3uploadResponse400Parts()
+        public BatchCompletedResultsParts()
         {
         }
         
         /// <summary>
-        /// The index of the part in the multipart upload.
+        ///The index of the first part in the multipart upload.
         /// </summary>
-        /// <value>The index of the part in the multipart upload.</value>
-        [DataMember(Name="part", EmitDefaultValue=false)]
-        public int? Part { get; set; }
+        /// <value>
+        ///The index of the first part in the multipart upload.
+        /// </value>
+        [DataMember(Name="firstPart", EmitDefaultValue=false)]
+        public int? FirstPart { get; set; }
 
         /// <summary>
-        /// Indicates whether this particular part uploaded to S3 is valid. If no part has been uploaded to S3 for a particular index, the status will be &#39;Pending&#39;. If the eTag of the part in S3 does not match the one provided in the request, the status will be &#39;Unexpected&#39;. If the blob uploaded to S3 is smaller than the minimum chunk size (5MB for all parts except the final one), the status will be &#39;TooSmall&#39;. If both of the latter conditions are true, the status will be &#39;Unexpected+TooSmall&#39;. If none of these issues exist, the status will be &#39;Ok&#39;.
+        ///Gets or Sets Status
         /// </summary>
-        /// <value>Indicates whether this particular part uploaded to S3 is valid. If no part has been uploaded to S3 for a particular index, the status will be &#39;Pending&#39;. If the eTag of the part in S3 does not match the one provided in the request, the status will be &#39;Unexpected&#39;. If the blob uploaded to S3 is smaller than the minimum chunk size (5MB for all parts except the final one), the status will be &#39;TooSmall&#39;. If both of the latter conditions are true, the status will be &#39;Unexpected+TooSmall&#39;. If none of these issues exist, the status will be &#39;Ok&#39;.</value>
         [DataMember(Name="status", EmitDefaultValue=true)]
-        public string Status { get; set; }
+        public Status Status { get; set; }
 
         /// <summary>
-        /// The size of the corresponding part detected in S3.
+        ///The size of the corresponding part detected in S3.
         /// </summary>
-        /// <value>The size of the corresponding part detected in S3.</value>
+        /// <value>
+        ///The size of the corresponding part detected in S3.
+        /// </value>
         [DataMember(Name="size", EmitDefaultValue=false)]
         public int? Size { get; set; }
 
         /// <summary>
-        /// The eTag of the detected part in S3.
+        ///The eTag of the detected part in S3.
         /// </summary>
-        /// <value>The eTag of the detected part in S3.</value>
+        /// <value>
+        ///The eTag of the detected part in S3.
+        /// </value>
         [DataMember(Name="eTag", EmitDefaultValue=false)]
         public string ETag { get; set; }
 

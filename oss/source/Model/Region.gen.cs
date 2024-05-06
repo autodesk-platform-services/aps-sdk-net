@@ -33,40 +33,44 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Oss.Model
 {
     /// <summary>
-    /// BatchCopyObjects
+    /// Specifies where the bucket containing the object stored. Possible values are:
+///
+///        - `US` - (Default) Data center for the US region.
+///        - `EMEA` - Data center for the European Union, Middle East, and Africa.
+///        - `APAC` -  (Beta) Data center for Australia.
+///
+///        **Note:** Beta features are subject to change. Please do not use in production environments.
     /// </summary>
-    [DataContract]
-    public partial class BatchCopyObjects 
+    ///<value>Specifies where the bucket containing the object stored. Possible values are:
+///
+///        - `US` - (Default) Data center for the US region.
+///        - `EMEA` - Data center for the European Union, Middle East, and Africa.
+///        - `APAC` -  (Beta) Data center for Australia.
+///
+///        **Note:** Beta features are subject to change. Please do not use in production environments.</value>
+    
+    [JsonConverter(typeof(StringEnumConverter))]
+    
+    public enum Region
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BatchCopyObjects" /> class.
-        /// </summary>
-        public BatchCopyObjects()
-        {
-        }
         
         /// <summary>
-        /// The key to be given to the copied object.
+        /// Enum US for value: US
         /// </summary>
-        /// <value>The key to be given to the copied object.</value>
-        [DataMember(Name="objectKey", EmitDefaultValue=false)]
-        public string ObjectKey { get; set; }
-
+        [EnumMember(Value = "US")]
+        US,
+        
         /// <summary>
-        /// The SHA-1 hash of the object to be copied.
+        /// Enum EMEA for value: EMEA
         /// </summary>
-        /// <value>The SHA-1 hash of the object to be copied.</value>
-        [DataMember(Name="sha1", EmitDefaultValue=false)]
-        public string Sha1 { get; set; }
-
+        [EnumMember(Value = "EMEA")]
+        EMEA,
+        
         /// <summary>
-        /// Returns the string presentation of the object
+        /// Enum APAC for value: APAC
         /// </summary>
-        /// <returns>String presentation of the object</returns>
-        public override string ToString()
-        {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
-        }
+        [EnumMember(Value = "APAC")]
+        APAC
     }
 
 }

@@ -33,33 +33,40 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Oss.Model
 {
     /// <summary>
-    /// BatchCopy
+    /// Specifies the retention policy for the objects stored in the bucket. Possible values are: 
+///            
+///- `transient` - Objects are retained for 24 hours.
+///- `temporary` - Objects are retained for 30 days.
+///- `persistent` - Objects are retained until they are deleted.
     /// </summary>
-    [DataContract]
-    public partial class BatchCopy 
+    ///<value>Specifies the retention policy for the objects stored in the bucket. Possible values are: 
+///            
+///- `transient` - Objects are retained for 24 hours.
+///- `temporary` - Objects are retained for 30 days.
+///- `persistent` - Objects are retained until they are deleted.</value>
+    
+    [JsonConverter(typeof(StringEnumConverter))]
+    
+    public enum PolicyKey
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BatchCopy" /> class.
-        /// </summary>
-        public BatchCopy()
-        {
-        }
         
         /// <summary>
-        /// An array of objects indicating the objects to copy and the keys to assign to the copies.
+        /// Enum Transient for value: transient
         /// </summary>
-        /// <value>An array of objects indicating the objects to copy and the keys to assign to the copies.</value>
-        [DataMember(Name="objects", EmitDefaultValue=false)]
-        public List<BatchCopyObjects> Objects { get; set; }
-
+        [EnumMember(Value = "transient")]
+        Transient,
+        
         /// <summary>
-        /// Returns the string presentation of the object
+        /// Enum Temporary for value: temporary
         /// </summary>
-        /// <returns>String presentation of the object</returns>
-        public override string ToString()
-        {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
-        }
+        [EnumMember(Value = "temporary")]
+        Temporary,
+        
+        /// <summary>
+        /// Enum Persistent for value: persistent
+        /// </summary>
+        [EnumMember(Value = "persistent")]
+        Persistent
     }
 
 }

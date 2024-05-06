@@ -46,25 +46,28 @@ namespace Autodesk.Oss.Model
         }
         
         /// <summary>
-        /// Bucket key
+        ///Bucket key: An ID that uniquely identifies the bucket.
         /// </summary>
-        /// <value>Bucket key</value>
+        /// <value>
+        ///Bucket key: An ID that uniquely identifies the bucket.
+        /// </value>
         [DataMember(Name="bucketKey", EmitDefaultValue=false)]
         public string BucketKey { get; set; }
 
         /// <summary>
-        /// Timestamp in epoch time
+        ///The time the bucket was created, represented as a Unix timestamp.
         /// </summary>
-        /// <value>Timestamp in epoch time</value>
+        /// <value>
+        ///The time the bucket was created, represented as a Unix timestamp.
+        /// </value>
         [DataMember(Name="createdDate", EmitDefaultValue=false)]
         public long? CreatedDate { get; set; }
 
         /// <summary>
-        /// Policy values: &#x60;transient&#x60;, &#x60;temporary&#x60; or &#x60;persistent&#x60; 
+        ///Gets or Sets PolicyKey
         /// </summary>
-        /// <value>Policy values: &#x60;transient&#x60;, &#x60;temporary&#x60; or &#x60;persistent&#x60; </value>
         [DataMember(Name="policyKey", EmitDefaultValue=true)]
-        public string PolicyKey { get; set; }
+        public PolicyKey PolicyKey { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

@@ -46,7 +46,7 @@ namespace Autodesk.Oss.Model
         }
         
         /// <summary>
-        /// Gets or Sets _Result
+        ///Gets or Sets _Result
         /// </summary>
         [DataMember(Name="result", EmitDefaultValue=false)]
         public string _Result { get; set; }

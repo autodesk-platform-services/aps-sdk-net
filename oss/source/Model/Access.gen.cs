@@ -33,32 +33,32 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Oss.Model
 {
     /// <summary>
-    /// BucketsNamespaces
+    /// Access for signed resource Acceptable values: read, write, readwrite Default value: read
     /// </summary>
-    [DataContract]
-    public partial class BucketsNamespaces 
+    ///<value>Access for signed resource Acceptable values: read, write, readwrite Default value: read</value>
+    
+    [JsonConverter(typeof(StringEnumConverter))]
+    
+    public enum Access
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BucketsNamespaces" /> class.
-        /// </summary>
-        public BucketsNamespaces()
-        {
-        }
         
         /// <summary>
-        /// Gets or Sets Namespaces
+        /// Enum Read for value: Read
         /// </summary>
-        [DataMember(Name="namespaces", EmitDefaultValue=false)]
-        public List<string> Namespaces { get; set; }
-
+        [EnumMember(Value = "Read")]
+        Read,
+        
         /// <summary>
-        /// Returns the string presentation of the object
+        /// Enum Write for value: Write
         /// </summary>
-        /// <returns>String presentation of the object</returns>
-        public override string ToString()
-        {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
-        }
+        [EnumMember(Value = "Write")]
+        Write,
+        
+        /// <summary>
+        /// Enum ReadWrite for value: ReadWrite
+        /// </summary>
+        [EnumMember(Value = "ReadWrite")]
+        ReadWrite
     }
 
 }

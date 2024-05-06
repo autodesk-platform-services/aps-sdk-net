@@ -33,32 +33,32 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Oss.Model
 {
     /// <summary>
-    /// BatchdeleteRequest
+    /// Specifies the level of permission the application has. Possible values are:
+///
+///- `full` - Unrestricted access to objects within the bucket.
+///- `read_only` - Read only access to the objects within the bucket. Modification and deletion of objects is not allowed.
     /// </summary>
-    [DataContract]
-    public partial class BatchdeleteRequest 
+    ///<value>Specifies the level of permission the application has. Possible values are:
+///
+///- `full` - Unrestricted access to objects within the bucket.
+///- `read_only` - Read only access to the objects within the bucket. Modification and deletion of objects is not allowed.</value>
+    
+    [JsonConverter(typeof(StringEnumConverter))]
+    
+    public enum PermissionAccess
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BatchdeleteRequest" /> class.
-        /// </summary>
-        public BatchdeleteRequest()
-        {
-        }
         
         /// <summary>
-        /// Gets or Sets ObjectKeys
+        /// Enum Full for value: full
         /// </summary>
-        [DataMember(Name="objectKeys", EmitDefaultValue=false)]
-        public List<string> ObjectKeys { get; set; }
-
+        [EnumMember(Value = "full")]
+        Full,
+        
         /// <summary>
-        /// Returns the string presentation of the object
+        /// Enum Read for value: read
         /// </summary>
-        /// <returns>String presentation of the object</returns>
-        public override string ToString()
-        {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
-        }
+        [EnumMember(Value = "read")]
+        Read
     }
 
 }

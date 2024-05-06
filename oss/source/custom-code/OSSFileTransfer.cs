@@ -50,7 +50,7 @@ namespace Autodesk.Oss
     {
         private ILogger _logger;
         private IFileTransferConfigurations _configuration;
-        private IOSSApi _ossApi;
+        private ObjectsApi objectsApi;
         private IAuthClient _authentication;
 
         private int _maxRetryOnTokenExpiry;
@@ -83,7 +83,7 @@ namespace Autodesk.Oss
                 .Add(_logger)
                 // .Add(authentication)
                 .Build();
-            _ossApi = new OSSApi(sdkManager);
+            objectsApi = new ObjectsApi(sdkManager);
 
             _maxChunkCountAllowed = _configuration.GetMaxChunkCountAllowed();
             _maxRetryOnUrlExpiry = _configuration.GetMaxRetryOnUrlExpiry();
@@ -225,7 +225,7 @@ namespace Autodesk.Oss
                     }
                 }
 
-                var completeResponse = await _ossApi.CompleteSignedS3UploadAsync(
+                var completeResponse = await objectsApi.CompleteSignedS3UploadAsync(
                     bucketKey: bucketKey,
                     objectKey: objectKey,
                     contentType: "application/json",
@@ -263,7 +263,7 @@ namespace Autodesk.Oss
 
                 try
                 {
-                    var response = await _ossApi.SignedS3UploadAsync(
+                    var response = await objectsApi.SignedS3UploadAsync(
                           bucketKey: bucketKey,
                           objectKey: objectKey,
                           parts: parts,
@@ -427,14 +427,13 @@ namespace Autodesk.Oss
 
                 try
                 {
-                    var objectStatusEnumString = Utils.GetObjectStatusEnumString(ObjectStatus.Complete);
-                    var response = await _ossApi.SignedS3DownloadAsync(
+                    var response = await objectsApi.SignedS3DownloadAsync(
                     bucketKey: bucketKey,
                     objectKey: objectKey,
                     accessToken: accessToken,
                     xAdsAcmScopes: projectScope);
 
-                    if (response.Content.Status != objectStatusEnumString)
+                    if (response.Content.Status != DownloadStatus.Complete)
                     {
                         _logger.LogError("{requestId} File not available for download yet.", requestId);
                         throw new OssApiException($"{requestId} File not available for download yet.");

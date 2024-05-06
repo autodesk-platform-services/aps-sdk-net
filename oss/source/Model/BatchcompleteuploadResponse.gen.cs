@@ -46,11 +46,13 @@ namespace Autodesk.Oss.Model
         }
         
         /// <summary>
-        /// A map of the returned results; each key in the map corresponds to an object key in the batch, and the value includes the results for that object.
+        ///A map of the returned results; each key in the map corresponds to an object key in the batch, and the value includes the results for that object.
         /// </summary>
-        /// <value>A map of the returned results; each key in the map corresponds to an object key in the batch, and the value includes the results for that object.</value>
+        /// <value>
+        ///A map of the returned results; each key in the map corresponds to an object key in the batch, and the value includes the results for that object.
+        /// </value>
         [DataMember(Name="results", EmitDefaultValue=false)]
-        public Dictionary<string, BatchcompleteuploadResponseResultsValue> Results { get; set; }
+        public Dictionary<string, BatchCompletedResults> Results { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

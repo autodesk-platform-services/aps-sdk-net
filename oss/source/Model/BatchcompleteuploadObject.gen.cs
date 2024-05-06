@@ -46,9 +46,11 @@ namespace Autodesk.Oss.Model
         }
         
         /// <summary>
-        /// An array of objects, each of which represents an upload to complete.
+        ///An array of objects, each of which represents an upload to complete.
         /// </summary>
-        /// <value>An array of objects, each of which represents an upload to complete.</value>
+        /// <value>
+        ///An array of objects, each of which represents an upload to complete.
+        /// </value>
         [DataMember(Name="requests", EmitDefaultValue=false)]
         public List<BatchcompleteuploadObjectRequests> Requests { get; set; }
 

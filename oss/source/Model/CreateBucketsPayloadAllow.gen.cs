@@ -46,16 +46,26 @@ namespace Autodesk.Oss.Model
         }
         
         /// <summary>
-        /// The application key to grant access to
+        ///The Client ID of the application.
         /// </summary>
-        /// <value>The application key to grant access to</value>
+        /// <value>
+        ///The Client ID of the application.
+        /// </value>
         [DataMember(Name="authId", EmitDefaultValue=false)]
         public string AuthId { get; set; }
 
         /// <summary>
-        /// Acceptable values: &#x60;full&#x60; or &#x60;read&#x60; 
+        ///Specifies the level of permission the application has. Required when `allow` is specified. Possible values are:
+///
+/// - `full` - Unrestricted access to objects within the bucket.
+///- `read_only` - Read only access to the objects within the bucket. Modification or deletion of objects is not allowed.
         /// </summary>
-        /// <value>Acceptable values: &#x60;full&#x60; or &#x60;read&#x60; </value>
+        /// <value>
+        ///Specifies the level of permission the application has. Required when `allow` is specified. Possible values are:
+///
+/// - `full` - Unrestricted access to objects within the bucket.
+///- `read_only` - Read only access to the objects within the bucket. Modification or deletion of objects is not allowed.
+        /// </value>
         [DataMember(Name="access", EmitDefaultValue=true)]
         public string Access { get; set; }
 

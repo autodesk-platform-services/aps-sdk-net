@@ -46,7 +46,7 @@ namespace Autodesk.Oss.Model
         }
         
         /// <summary>
-        /// Gets or Sets Results
+        ///Gets or Sets Results
         /// </summary>
         [DataMember(Name="results", EmitDefaultValue=false)]
         public Dictionary<string, Batchsigneds3uploadResponseResultsValue> Results { get; set; }
