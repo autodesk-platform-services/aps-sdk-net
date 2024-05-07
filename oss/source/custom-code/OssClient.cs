@@ -24,6 +24,36 @@ namespace Autodesk.Oss
 
         }
 
+        /// <summary>
+        /// Upload a File
+        /// </summary>
+        /// <remarks>
+        ///This method consolidates the multiple steps in the [Upload](en/docs/data/v2/tutorials/upload-file/) process, into a single method.
+        /// </remarks>
+        /// <exception cref="OssApiException">Thrown when fails to make API call</exception>
+        /// <param name="bucketKey">
+        ///The bucket key of the bucket that contains the objects you are operating on.
+        /// </param>
+        /// <param name="objectKey">
+        ///The URL-encoded human friendly name of the object.
+        /// </param>
+        /// <param name="sourceToUpload">
+        ///The Path of the file to be uploaded  
+        ///
+        /// </param>
+        /// <param name="cancellationToken">
+        /// (optional)
+        /// </param>
+        /// <param name="projectScope">
+        /// (optional)
+        /// </param>
+        /// <param name="requestIdPrefix">
+        /// (optional)
+        /// </param>
+        /// <param name="progress">
+        /// (optional)
+        /// </param>
+        /// <returns>Task of &lt;Upload&gt;</returns>
 
         public async System.Threading.Tasks.Task<ObjectDetails> Upload(string bucketKey, string objectKey, string sourceToUpload, string accessToken, CancellationToken cancellationToken, string projectScope = "", string requestIdPrefix = "", IProgress<int> progress = null)
         {
@@ -31,6 +61,37 @@ namespace Autodesk.Oss
             var apiResponse = new ApiResponse<ObjectDetails>(response, await LocalMarshalling.DeserializeAsync<ObjectDetails>(response.Content));
             return apiResponse.Content;
         }
+        
+        /// <summary>
+        /// Dwonload a File
+        /// </summary>
+        /// <remarks>
+        ///This method consolidates the multiple steps in the [Download](en/docs/data/v2/tutorials/download-file/) process, into a single method.
+        /// </remarks>
+        /// <exception cref="OssApiException">Thrown when fails to make API call</exception>
+        /// <param name="bucketKey">
+        ///The bucket key of the bucket that contains the objects you are operating on.
+        /// </param>
+        /// <param name="objectKey">
+        ///The URL-encoded human friendly name of the object.
+        /// </param>
+        /// <param name="filePath">
+        ///The Path of the file to be downloaded  
+        ///
+        /// </param>
+        /// <param name="cancellationToken">
+        /// (optional)
+        /// </param>
+        /// <param name="projectScope">
+        /// (optional)
+        /// </param>
+        /// <param name="requestIdPrefix">
+        /// (optional)
+        /// </param>
+        /// <param name="progress">
+        /// (optional)
+        /// </param>
+        /// <returns>Task of &lt;Downlaod&gt;</returns>
         public async System.Threading.Tasks.Task Download(string bucketKey, string objectKey, string filePath, string accessToken, CancellationToken cancellationToken, string projectScope = "", string requestIdPrefix = "", IProgress<int> progress = null)
         {
             await this.oSSFileTransfer.Download(bucketKey, objectKey, filePath, accessToken, cancellationToken, projectScope, requestIdPrefix, progress);
@@ -43,14 +104,14 @@ namespace Autodesk.Oss
         ///
         ///You can specify up to 25 objects in this operation. 
         /// </remarks>
-        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+        /// <exception cref="OssApiException">Thrown when fails to make API call</exception>
         /// <param name="bucketKey">
         ///The bucket key of the bucket that contains the objects you are operating on.
         /// </param>
         /// <param name="requests">
         /// (optional)
         /// </param>
-        /// <returns>Task of ApiResponse&lt;BatchcompleteuploadResponse&gt;</returns>
+        /// <returns>Task of &lt;BatchcompleteuploadResponse&gt;</returns>
 
         public async System.Threading.Tasks.Task<BatchcompleteuploadResponse> BatchCompleteUploadAsync(string bucketKey, BatchcompleteuploadObject requests = default(BatchcompleteuploadObject), string accessToken = null, bool throwOnError = true)
         {
@@ -66,7 +127,7 @@ namespace Autodesk.Oss
         ///
         ///Only the application that owns the bucket can call this operation. All other applications that call this operation will receive a "403 Forbidden" error.
         /// </remarks>
-        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+        /// <exception cref="OssApiException">Thrown when fails to make API call</exception>
         /// <param name="bucketKey">
         ///The bucket key of the bucket that contains the objects you are operating on.
         /// </param>
@@ -84,7 +145,7 @@ namespace Autodesk.Oss
         ///
         ///**Tip:** Use the smallest possible time window to minimize exposure of the signed URL. (optional)
         /// </param>
-        /// <returns>Task of ApiResponse&lt;Batchsigneds3downloadResponse&gt;</returns>
+        /// <returns>Task of &lt;Batchsigneds3downloadResponse&gt;</returns>
 
         public async System.Threading.Tasks.Task<Batchsigneds3downloadResponse> BatchSignedS3DownloadAsync(string bucketKey, Batchsigneds3downloadObject requests, bool? publicResourceFallback = default(bool?), int? minutesExpiration = default(int?), string accessToken = null, bool throwOnError = true)
         {
@@ -103,7 +164,7 @@ namespace Autodesk.Oss
         ///
         ///If an upload fails after the validity period of a signed URL has elapsed, you can call this operation again to obtain fresh signed URLs. However, you must use the same `uploadKey` that was returned when you originally called this operation. 
         /// </remarks>
-        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+        /// <exception cref="OssApiException">Thrown when fails to make API call</exception>
         /// <param name="bucketKey">
         ///The bucket key of the bucket that contains the objects you are operating on.
         /// </param>
@@ -120,7 +181,7 @@ namespace Autodesk.Oss
         /// <param name="requests">
         /// (optional)
         /// </param>
-        /// <returns>Task of ApiResponse&lt;Batchsigneds3uploadResponse&gt;</returns>
+        /// <returns>Task of &lt;Batchsigneds3uploadResponse&gt;</returns>
 
         public async System.Threading.Tasks.Task<Batchsigneds3uploadResponse> BatchSignedS3UploadAsync(string bucketKey, bool? useAcceleration = default(bool?), int? minutesExpiration = default(int?), Batchsigneds3uploadObject requests = default(Batchsigneds3uploadObject), string accessToken = null, bool throwOnError = true)
         {
@@ -133,7 +194,7 @@ namespace Autodesk.Oss
         /// <remarks>
         ///Requests OSS to assemble and reconstitute the object that was uploaded using signed S3 upload URL. You must call this operation only after all parts/chunks of the object has been uploaded.
         /// </remarks>
-        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+        /// <exception cref="OssApiException">Thrown when fails to make API call</exception>
         /// <param name="bucketKey">
         ///The bucket key of the bucket that contains the objects you are operating on.
         /// </param>
@@ -175,7 +236,7 @@ namespace Autodesk.Oss
         /// <remarks>
         ///Creates a copy of an object within the bucket.
         /// </remarks>
-        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+        /// <exception cref="OssApiException">Thrown when fails to make API call</exception>
         /// <param name="bucketKey">
         ///The bucket key of the bucket that contains the objects you are operating on.
         /// </param>
@@ -194,7 +255,7 @@ namespace Autodesk.Oss
         /// <param name="xAdsAcmGroups">
         ///Use this header to pass the Oxygen groups you want the OSS Api Proxy to use for group validation for the given user in the OAuth2 token. (optional)
         /// </param>
-        /// <returns>Task of ApiResponse&lt;ObjectDetails&gt;</returns>
+        /// <returns>Task of &lt;ObjectDetails&gt;</returns>
 
         public async System.Threading.Tasks.Task<ObjectDetails> CopyToAsync(string bucketKey, string objectKey, string newObjName, string xAdsAcmNamespace = default(string), string xAdsAcmCheckGroups = default(string), string xAdsAcmGroups = default(string), string accessToken = null, bool throwOnError = true)
         {
@@ -211,7 +272,7 @@ namespace Autodesk.Oss
         ///
         ///**Note:** Do not use this operation to create buckets for BIM360 Document Management. Use [POST projects/{project_id}/storage](/en/docs/data/v2/reference/http/projects-project_id-storage-POST>_ instead. For details, see `Upload Files to BIM 360 Document Management </en/docs/bim360/v1/tutorials/document-management/upload-document).
         /// </remarks>
-        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+        /// <exception cref="OssApiException">Thrown when fails to make API call</exception>
         /// <param name="policyKey">
         ///
         /// </param>
@@ -222,7 +283,7 @@ namespace Autodesk.Oss
         ///- `APAC` -  (Beta) Data center for Australia.
         ///**Note:** Beta features are subject to change. Please do not use in production environments. (optional)
         /// </param>
-        /// <returns>Task of ApiResponse&lt;Bucket&gt;</returns>
+        /// <returns>Task of &lt;Bucket&gt;</returns>
 
         public async System.Threading.Tasks.Task<Bucket> CreateBucketAsync(Region xAdsRegion, CreateBucketsPayload policyKey, string accessToken = null, bool throwOnError = true)
         {
@@ -239,7 +300,7 @@ namespace Autodesk.Oss
         ///
         ///Only the application that owns the bucket containing the object can call this operation.
         /// </remarks>
-        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+        /// <exception cref="OssApiException">Thrown when fails to make API call</exception>
         /// <param name="bucketKey">
         ///The bucket key of the bucket that contains the objects you are operating on.
         /// </param>
@@ -257,7 +318,7 @@ namespace Autodesk.Oss
         /// <param name="createSignedResource">
         /// (optional)
         /// </param>
-        /// <returns>Task of ApiResponse&lt;CreateObjectSigned&gt;</returns>
+        /// <returns>Task of &lt;CreateObjectSigned&gt;</returns>
 
         public async System.Threading.Tasks.Task<CreateObjectSigned> CreateSignedResourceAsync(string bucketKey, string objectKey, Access? access = null, bool? useCdn = default(bool?), CreateSignedResource createSignedResource = default(CreateSignedResource), string accessToken = null, bool throwOnError = true)
         {
@@ -274,7 +335,7 @@ namespace Autodesk.Oss
         ///
         ///**Note:** Bucket keys will not be immediately available for reuse. 
         /// </remarks>
-        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+        /// <exception cref="OssApiException">Thrown when fails to make API call</exception>
         /// <param name="bucketKey">
         ///The bucket key of the bucket to delete.
         /// </param>
@@ -291,7 +352,7 @@ namespace Autodesk.Oss
         /// <remarks>
         ///Deletes an object from the bucket.
         /// </remarks>
-        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+        /// <exception cref="OssApiException">Thrown when fails to make API call</exception>
         /// <param name="bucketKey">
         ///The bucket key of the bucket that contains the objects you are operating on.
         /// </param>
@@ -323,7 +384,7 @@ namespace Autodesk.Oss
         ///
         ///Only applications that own the bucket containing the object can call this operation. 
         /// </remarks>
-        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+        /// <exception cref="OssApiException">Thrown when fails to make API call</exception>
         /// <param name="hash">
         ///The ID component of the signed URL.
         ///
@@ -353,11 +414,11 @@ namespace Autodesk.Oss
         ///
         ///**Note:** Only the application that owns the bucket can call this operation. All other applications that call this operation will receive a "403 Forbidden" error. 
         /// </remarks>
-        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+        /// <exception cref="OssApiException">Thrown when fails to make API call</exception>
         /// <param name="bucketKey">
         ///The bucket key of the bucket to query.
         /// </param>
-        /// <returns>Task of ApiResponse&lt;Bucket&gt;</returns>
+        /// <returns>Task of &lt;Bucket&gt;</returns>
 
         public async System.Threading.Tasks.Task<Bucket> GetBucketDetailsAsync(string bucketKey, string accessToken = null, bool throwOnError = true)
         {
@@ -370,7 +431,7 @@ namespace Autodesk.Oss
         /// <remarks>
         ///Returns a list of buckets owned by the application. 
         /// </remarks>
-        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+        /// <exception cref="OssApiException">Thrown when fails to make API call</exception>
         /// <param name="region">
         ///Specifies where the bucket containing the object stored. Possible values are:
         ///
@@ -387,7 +448,7 @@ namespace Autodesk.Oss
         /// <param name="startAt">
         ///The ID of the last item that was returned in the previous result set.  It enables the system to return subsequent items starting from the next one after the specified ID. (optional)
         /// </param>
-        /// <returns>Task of ApiResponse&lt;Buckets&gt;</returns>
+        /// <returns>Task of &lt;Buckets&gt;</returns>
         public async System.Threading.Tasks.Task<Buckets> GetBucketsAsync(Region? region = null, int? limit = default(int?), string startAt = default(string), string accessToken = null, bool throwOnError = true)
         {
             var response = await this.bucketsApi.GetBucketsAsync(region, limit, startAt, accessToken, throwOnError);
@@ -399,7 +460,7 @@ namespace Autodesk.Oss
         /// <remarks>
         ///Returns detailed information about the specified object.
         /// </remarks>
-        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+        /// <exception cref="OssApiException">Thrown when fails to make API call</exception>
         /// <param name="bucketKey">
         ///The bucket key of the bucket that contains the objects you are operating on.
         /// </param>
@@ -421,7 +482,7 @@ namespace Autodesk.Oss
         /// <param name="with">
         /// (optional)
         /// </param>
-        /// <returns>Task of ApiResponse&lt;ObjectFullDetails&gt;</returns>
+        /// <returns>Task of &lt;ObjectFullDetails&gt;</returns>
         public async System.Threading.Tasks.Task<ObjectFullDetails> GetObjectDetailsAsync(string bucketKey, string objectKey, DateTime? ifModifiedSince = default(DateTime?), string xAdsAcmNamespace = default(string), string xAdsAcmCheckGroups = default(string), string xAdsAcmGroups = default(string), With? with = null, string accessToken = null, bool throwOnError = true)
         {
             var response = await this.objectsApi.GetObjectDetailsAsync(bucketKey, objectKey, ifModifiedSince, xAdsAcmNamespace, xAdsAcmCheckGroups, xAdsAcmGroups, with, accessToken, throwOnError);
@@ -435,7 +496,7 @@ namespace Autodesk.Oss
         ///
         ///Only the application that owns the bucket can call this operation. All other applications that call this operation will receive a "403 Forbidden" error.
         /// </remarks>
-        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+        /// <exception cref="OssApiException">Thrown when fails to make API call</exception>
         /// <param name="bucketKey">
         ///The bucket key of the bucket that contains the objects you are operating on.
         /// </param>
@@ -449,7 +510,7 @@ namespace Autodesk.Oss
         /// <param name="startAt">
         ///The ID of the last item that was returned in the previous result set.  It enables the system to return subsequent items starting from the next one after the specified ID. (optional)
         /// </param>
-        /// <returns>Task of ApiResponse&lt;BucketObjects&gt;</returns>
+        /// <returns>Task of &lt;BucketObjects&gt;</returns>
         public async System.Threading.Tasks.Task<BucketObjects> GetObjectsAsync(string bucketKey, int? limit = default(int?), string beginsWith = default(string), string startAt = default(string), string accessToken = null, bool throwOnError = true)
         {
             var response = await this.objectsApi.GetObjectsAsync(bucketKey, limit, beginsWith, startAt, accessToken, throwOnError);
@@ -463,7 +524,7 @@ namespace Autodesk.Oss
         ///
         ///**Note:** The signed URL returned by [Generate OSS Signed URL](/en/docs/data/v2/reference/http/signedresources-:id-GET/)  contains the `hash` URI parameter as well. 
         /// </remarks>
-        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+        /// <exception cref="OssApiException">Thrown when fails to make API call</exception>
         /// <param name="hash">
         ///The ID component of the signed URL.
         ///
@@ -500,7 +561,7 @@ namespace Autodesk.Oss
         /// <param name="responseContentType">
         ///The value of the Content-Type header you want to receive when you download the object using the signed URL. If you do not specify a value, the Content-Type header defaults to the value stored with OSS. (optional)
         /// </param>
-        /// <returns>Task of ApiResponse&lt;System.IO.Stream&gt;</returns>
+        /// <returns>Task of &lt;System.IO.Stream&gt;</returns>
         public async System.Threading.Tasks.Task<System.IO.Stream> GetSignedResourceAsync(string hash, string range = default(string), string ifNoneMatch = default(string), DateTime? ifModifiedSince = default(DateTime?), string acceptEncoding = default(string), Region? region = null, string responseContentDisposition = default(string), string responseContentType = default(string), string accessToken = null, bool throwOnError = true)
         {
             var response = await this.objectsApi.GetSignedResourceAsync(hash, range, ifNoneMatch, ifModifiedSince, acceptEncoding, region, responseContentDisposition, responseContentType, accessToken, throwOnError);
@@ -512,7 +573,7 @@ namespace Autodesk.Oss
         /// <remarks>
         ///Returns an empty response body and a 200 response code if the object exists.
         /// </remarks>
-        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+        /// <exception cref="OssApiException">Thrown when fails to make API call</exception>
         /// <param name="bucketKey">
         ///The bucket key of the bucket that contains the objects you are operating on.
         /// </param>
@@ -562,7 +623,7 @@ namespace Autodesk.Oss
         ///
         ///In addition to this operation that generates S3 signed URLs, OSS provides an operation to generate OSS signed URLs. S3 signed URLs allow direct upload/download from S3 but are restricted to bucket owners. OSS signed URLs also allow upload/download and can be configured for access by other applications, making them suitable for sharing objects across applications.
         /// </remarks>
-        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+        /// <exception cref="OssApiException">Thrown when fails to make API call</exception>
         /// <param name="bucketKey">
         ///The bucket key of the bucket that contains the objects you are operating on.
         /// </param>
@@ -606,7 +667,7 @@ namespace Autodesk.Oss
         /// <param name="redirect">
         ///Generates a HTTP redirection response (Temporary Redirect 307​) using the generated URL. (optional)
         /// </param>
-        /// <returns>Task of ApiResponse&lt;Signeds3downloadResponse&gt;</returns>
+        /// <returns>Task of &lt;Signeds3downloadResponse&gt;</returns>
 
         public async System.Threading.Tasks.Task<Signeds3downloadResponse> SignedS3DownloadAsync(string bucketKey, string objectKey, string ifNoneMatch = default(string), DateTime? ifModifiedSince = default(DateTime?), string xAdsAcmScopes = default(string), string responseContentType = default(string), string responseContentDisposition = default(string), string responseCacheControl = default(string), bool? publicResourceFallback = default(bool?), int? minutesExpiration = default(int?), bool? useCdn = default(bool?), bool? redirect = default(bool?), string accessToken = null, bool throwOnError = true)
         {
@@ -627,7 +688,7 @@ namespace Autodesk.Oss
         ///
         ///In addition to this operation that generates S3 signed URLs, OSS provides an operation to generate OSS signed URLs. S3 signed URLs allow direct upload/download from S3 but are restricted to bucket owners. OSS signed URLs also allow upload/download and can be configured for access by other applications, making them suitable for sharing objects across applications.    
         /// </remarks>
-        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+        /// <exception cref="OssApiException">Thrown when fails to make API call</exception>
         /// <param name="bucketKey">
         ///The bucket key of the bucket that contains the objects you are operating on.
         /// </param>
@@ -656,7 +717,7 @@ namespace Autodesk.Oss
         ///
         ///`false`: Generates a standard S3 signed URL. (optional)
         /// </param>
-        /// <returns>Task of ApiResponse&lt;Signeds3uploadResponse&gt;</returns>
+        /// <returns>Task of &lt;Signeds3uploadResponse&gt;</returns>
 
         public async System.Threading.Tasks.Task<Signeds3uploadResponse> SignedS3UploadAsync(string bucketKey, string objectKey, string xAdsAcmScopes = default(string), int? parts = default(int?), int? firstPart = default(int?), string uploadKey = default(string), int? minutesExpiration = default(int?), bool? useAcceleration = default(bool?), string accessToken = null, bool throwOnError = true)
         {
@@ -674,7 +735,7 @@ namespace Autodesk.Oss
         ///- The signed URL is valid (it has not expired as yet).
         ///- It was generated with `write` or `readwrite` for the `access` parameter.
         /// </remarks>
-        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+        /// <exception cref="OssApiException">Thrown when fails to make API call</exception>
         /// <param name="hash">
         ///The ID component of the signed URL.
         ///
@@ -704,7 +765,7 @@ namespace Autodesk.Oss
         /// <param name="ifMatch">
         ///The current value of the `sha1` attribute of the object you want to replace. OSS checks the `If-Match` header against the `sha1` attribute of the object in OSS. If they match, OSS allows the object to be overwritten. Otherwise, it means that the object on OSS has been modified since you retrieved the `sha1` and the request fails. (optional)
         /// </param>
-        /// <returns>Task of ApiResponse&lt;ObjectDetails&gt;</returns>
+        /// <returns>Task of &lt;ObjectDetails&gt;</returns>
 
         public async System.Threading.Tasks.Task<ObjectDetails> UploadSignedResourceAsync(string hash, int? contentLength, System.IO.Stream body, string contentType = default(string), string contentDisposition = default(string), Region? xAdsRegion = null, string ifMatch = default(string), string accessToken = null, bool throwOnError = true)
         {
@@ -719,7 +780,7 @@ namespace Autodesk.Oss
         ///
         ///**Note:** The signed URL returned by [Generate OSS Signed URL](/en/docs/data/v2/reference/http/signedresources-:id-GET/)  contains the `hash` URI parameter as well. 
         /// </remarks>
-        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+        /// <exception cref="OssApiException">Thrown when fails to make API call</exception>
         /// <param name="hash">
         ///The ID component of the signed URL.
         ///
@@ -749,7 +810,7 @@ namespace Autodesk.Oss
         ///
         ///**Note:** Beta features are subject to change. Please do not use in production environments. (optional)
         /// </param>
-        /// <returns>Task of ApiResponse&lt;ObjectDetails&gt;</returns>
+        /// <returns>Task of &lt;ObjectDetails&gt;</returns>
 
        public  async System.Threading.Tasks.Task<ObjectDetails> UploadSignedResourcesChunkAsync(string hash, string contentRange, string sessionId, System.IO.Stream body, string contentType = default(string), string contentDisposition = default(string), Region? xAdsRegion = null, string accessToken = null, bool throwOnError = true)
         {
