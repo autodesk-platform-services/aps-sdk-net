@@ -64,10 +64,10 @@ namespace Autodesk.Authentication.Model
         public string ProviderId { get; set; }
 
         /// <summary>
-        ///The name of teh social media platform.
+        ///The name of the social media platform.
         /// </summary>
         /// <value>
-        ///The name of teh social media platform.
+        ///The name of the social media platform.
         /// </value>
         [DataMember(Name="providerName", EmitDefaultValue=false)]
         public string ProviderName { get; set; }

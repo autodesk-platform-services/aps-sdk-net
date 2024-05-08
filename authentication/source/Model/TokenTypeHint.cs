@@ -33,9 +33,9 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Authentication.Model
 {
     /// <summary>
-    /// Defines tokenTypeHint
+    /// The type of token to revoke. Possible values are: `access_token` and `refresh_token`.
     /// </summary>
-    ///<value></value>
+    ///<value>The type of token to revoke. Possible values are: `access_token` and `refresh_token`.</value>
     
     [JsonConverter(typeof(StringEnumConverter))]
     
