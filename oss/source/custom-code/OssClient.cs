@@ -270,7 +270,7 @@ namespace Autodesk.Oss
         ///
         ///Buckets are virtual container within the Object Storage Service (OSS), which you can use to store and manage objects (files) in the cloud. The application creating the bucket is the owner of the bucket.
         ///
-        ///**Note:** Do not use this operation to create buckets for BIM360 Document Management. Use [POST projects/{project_id}/storage](/en/docs/data/v2/reference/http/projects-project_id-storage-POST>_ instead. For details, see `Upload Files to BIM 360 Document Management </en/docs/bim360/v1/tutorials/document-management/upload-document).
+        ///**Note:** Do not use this operation to create buckets for BIM360 Document Management. Use [POST projects/{project_id}/storage](/en/docs/data/v2/reference/http/projects-project_id-storage-POST) instead. For details, see `Upload Files to BIM 360 Document Management (/en/docs/bim360/v1/tutorials/document-management/upload-document).
         /// </remarks>
         /// <exception cref="OssApiException">Thrown when fails to make API call</exception>
         /// <param name="policyKey">
@@ -388,9 +388,9 @@ namespace Autodesk.Oss
         /// <param name="hash">
         ///The ID component of the signed URL.
         ///
-        ///**Note:** The signed URL returned by Generate OSS Signed URL </en/docs/data/v2/reference/http/signedresources-:id-GET/>_ contains `hash` as a URI parameter.
+        ///**Note:** The signed URL returned by Generate OSS Signed URL (/en/docs/data/v2/reference/http/signedresources-:id-GET/) contains `hash` as a URI parameter.
         /// </param>
-        /// <param name="xAdsRegion">
+        /// <param name="region">
         ///Specifies where the bucket containing the object stored. Possible values are:
         ///
         ///- `US` - (Default) Data center for the US region.
@@ -528,10 +528,10 @@ namespace Autodesk.Oss
         /// <param name="hash">
         ///The ID component of the signed URL.
         ///
-        ///**Note:** The signed URL returned by Generate OSS Signed URL </en/docs/data/v2/reference/http/signedresources-:id-GET/>_ contains `hash` as a URI parameter.
+        ///**Note:** The signed URL returned by Generate OSS Signed URL (/en/docs/data/v2/reference/http/signedresources-:id-GET/) contains `hash` as a URI parameter.
         /// </param>
         /// <param name="range">
-        ///The byte range to download, specified in the form `bytes=<START_BYTE>-<END_BYTE>`. (optional)
+        ///The byte range to download, specified in the form `bytes=&lt;START_BYTE&gt;-&lt;END_BYTE&gt;`. (optional)
         /// </param>
         /// <param name="ifNoneMatch">
         ///The last known ETag value of the object. OSS returns the requested data  only if the `If-None-Match` header differs from the ETag value of the object on OSS, which indicates that the object on OSS is newer. If not, it returns a 304 "Not Modified" HTTP status. (optional)
@@ -739,7 +739,7 @@ namespace Autodesk.Oss
         /// <param name="hash">
         ///The ID component of the signed URL.
         ///
-        ///**Note:** The signed URL returned by Generate OSS Signed URL </en/docs/data/v2/reference/http/signedresources-:id-GET/>_ contains `hash` as a URI parameter.
+        ///**Note:** The signed URL returned by Generate OSS Signed URL (/en/docs/data/v2/reference/http/signedresources-:id-GET/) contains `hash` as a URI parameter.
         /// </param>
         /// <param name="contentLength">
         ///The size of the data contained in the request body, in bytes.
@@ -784,10 +784,10 @@ namespace Autodesk.Oss
         /// <param name="hash">
         ///The ID component of the signed URL.
         ///
-        ///**Note:** The signed URL returned by Generate OSS Signed URL </en/docs/data/v2/reference/http/signedresources-:id-GET/>_ contains `hash` as a URI parameter.
+        ///**Note:** The signed URL returned by Generate OSS Signed URL (/en/docs/data/v2/reference/http/signedresources-:id-GET/) contains `hash` as a URI parameter.
         /// </param>
         /// <param name="contentRange">
-        ///The byte range to upload, specified in the form `bytes=<START_BYTE>-<END_BYTE>`.
+        ///The byte range to upload, specified in the form `bytes=&lt;START_BYTE&gt;-&lt;END_BYTE&gt;`.
         /// </param>
         /// <param name="sessionId">
         ///An ID to uniquely identify the file upload session.
