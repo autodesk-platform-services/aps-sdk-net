@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Webhooks.Model
 {
     /// <summary>
-    /// ModifyHookPayload
+    /// Modify Hook Payload
     /// </summary>
     [DataContract]
     public partial class ModifyHookPayload 
@@ -46,37 +46,37 @@ namespace Autodesk.Webhooks.Model
         }
         
         /// <summary>
-        /// Gets or Sets Status
+        ///Gets or Sets Status
         /// </summary>
         [DataMember(Name="status", EmitDefaultValue=false)]
         public string Status { get; set; }
 
         /// <summary>
-        /// Gets or Sets AutoReactivateHook
+        ///Gets or Sets AutoReactivateHook
         /// </summary>
         [DataMember(Name="autoReactivateHook", EmitDefaultValue=false)]
         public bool? AutoReactivateHook { get; set; }
 
         /// <summary>
-        /// Gets or Sets Filter
+        ///Gets or Sets Filter
         /// </summary>
         [DataMember(Name="filter", EmitDefaultValue=false)]
         public string Filter { get; set; }
 
         /// <summary>
-        /// Gets or Sets HookAttribute
+        ///Gets or Sets HookAttribute
         /// </summary>
         [DataMember(Name="hookAttribute", EmitDefaultValue=false)]
         public Object HookAttribute { get; set; }
 
         /// <summary>
-        /// Gets or Sets Token
+        ///Gets or Sets Token
         /// </summary>
         [DataMember(Name="token", EmitDefaultValue=false)]
         public string Token { get; set; }
 
         /// <summary>
-        /// Gets or Sets HookExpiry
+        ///Gets or Sets HookExpiry
         /// </summary>
         [DataMember(Name="hookExpiry", EmitDefaultValue=false)]
         public string HookExpiry { get; set; }

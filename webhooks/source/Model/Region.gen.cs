@@ -33,44 +33,36 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Webhooks.Model
 {
     /// <summary>
-    /// Defines Systems
+    /// Specifies the geographical location (region) of the server that the request is executed on. Supported values are: `EMEA`, `US`. Default is `US`.
+///
+///The `x-ads-region` header also specifies the region. If you specify both, `x-ads-region` has precedence.
     /// </summary>
-    ///<value></value>
+    ///<value>Specifies the geographical location (region) of the server that the request is executed on. Supported values are: `EMEA`, `US`. Default is `US`.
+///
+///The `x-ads-region` header also specifies the region. If you specify both, `x-ads-region` has precedence.</value>
     
     [JsonConverter(typeof(StringEnumConverter))]
     
-    public enum Systems
+    public enum Region
     {
         
         /// <summary>
-        /// Enum Data for value: data
+        /// Enum US for value: US
         /// </summary>
-        [EnumMember(Value = "data")]
-        Data,
+        [EnumMember(Value = "US")]
+        US,
         
         /// <summary>
-        /// Enum Derivative for value: derivative
+        /// Enum EMEA for value: EMEA
         /// </summary>
-        [EnumMember(Value = "derivative")]
-        Derivative,
+        [EnumMember(Value = "EMEA")]
+        EMEA,
         
         /// <summary>
-        /// Enum AdskC4r for value: adsk.c4r
+        /// Enum APAC for value: APAC
         /// </summary>
-        [EnumMember(Value = "adsk.c4r")]
-        AdskC4r,
-        
-        /// <summary>
-        /// Enum AdskFlcProduction for value: adsk.flc.production
-        /// </summary>
-        [EnumMember(Value = "adsk.flc.production")]
-        AdskFlcProduction,
-        
-        /// <summary>
-        /// Enum AutodeskConstructionCost for value: autodesk.construction.cost
-        /// </summary>
-        [EnumMember(Value = "autodesk.construction.cost")]
-        AutodeskConstructionCost
+        [EnumMember(Value = "APAC")]
+        APAC
     }
 
 }

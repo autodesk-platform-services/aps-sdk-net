@@ -46,85 +46,85 @@ namespace Autodesk.Webhooks.Model
         }
         
         /// <summary>
-        /// Gets or Sets HookId
+        ///Gets or Sets HookId
         /// </summary>
         [DataMember(Name="hookId", EmitDefaultValue=false)]
         public string HookId { get; set; }
 
         /// <summary>
-        /// Gets or Sets Tenant
+        ///Gets or Sets Tenant
         /// </summary>
         [DataMember(Name="tenant", EmitDefaultValue=false)]
         public string Tenant { get; set; }
 
         /// <summary>
-        /// Gets or Sets CallbackUrl
+        ///Gets or Sets CallbackUrl
         /// </summary>
         [DataMember(Name="callbackUrl", EmitDefaultValue=false)]
         public string CallbackUrl { get; set; }
 
         /// <summary>
-        /// Gets or Sets CreatedBy
+        ///Gets or Sets CreatedBy
         /// </summary>
         [DataMember(Name="createdBy", EmitDefaultValue=false)]
         public string CreatedBy { get; set; }
 
         /// <summary>
-        /// Gets or Sets Event
+        ///Gets or Sets Event
         /// </summary>
         [DataMember(Name="event", EmitDefaultValue=false)]
         public string Event { get; set; }
 
         /// <summary>
-        /// Gets or Sets CreatedDate
+        ///Gets or Sets CreatedDate
         /// </summary>
         [DataMember(Name="createdDate", EmitDefaultValue=false)]
         public string CreatedDate { get; set; }
 
         /// <summary>
-        /// Gets or Sets LastUpdatedDate
+        ///Gets or Sets LastUpdatedDate
         /// </summary>
         [DataMember(Name="lastUpdatedDate", EmitDefaultValue=false)]
         public string LastUpdatedDate { get; set; }
 
         /// <summary>
-        /// Gets or Sets System
+        ///Gets or Sets System
         /// </summary>
         [DataMember(Name="system", EmitDefaultValue=false)]
         public string System { get; set; }
 
         /// <summary>
-        /// Gets or Sets CreatorType
+        ///Gets or Sets CreatorType
         /// </summary>
         [DataMember(Name="creatorType", EmitDefaultValue=false)]
         public string CreatorType { get; set; }
 
         /// <summary>
-        /// Gets or Sets Scope
+        ///Gets or Sets Scope
         /// </summary>
         [DataMember(Name="scope", EmitDefaultValue=false)]
         public HookDetailsScope Scope { get; set; }
 
         /// <summary>
-        /// Gets or Sets Status
+        ///Gets or Sets Status
         /// </summary>
         [DataMember(Name="status", EmitDefaultValue=false)]
         public string Status { get; set; }
 
         /// <summary>
-        /// Gets or Sets AutoReactivateHook
+        ///Gets or Sets AutoReactivateHook
         /// </summary>
         [DataMember(Name="autoReactivateHook", EmitDefaultValue=false)]
         public bool? AutoReactivateHook { get; set; }
 
         /// <summary>
-        /// Gets or Sets Urn
+        ///Gets or Sets Urn
         /// </summary>
         [DataMember(Name="urn", EmitDefaultValue=false)]
         public string Urn { get; set; }
 
         /// <summary>
-        /// Gets or Sets Self
+        ///Gets or Sets Self
         /// </summary>
         [DataMember(Name="__self__", EmitDefaultValue=false)]
         public string Self { get; set; }
