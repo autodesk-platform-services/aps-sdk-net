@@ -92,7 +92,7 @@ namespace Autodesk.Oss
             _authentication = authentication;
         }
 
-        public async Task<bool> IsFileSizeAllowed(string filePath)
+        private async Task<bool> IsFileSizeAllowed(string filePath)
         {
             return await Task.Run(() =>
             {
@@ -310,7 +310,7 @@ namespace Autodesk.Oss
             return numberOfChunks;
         }
 
-        protected virtual async Task<dynamic> UploadToURL(string url, byte[] buffer)
+        private async Task<dynamic> UploadToURL(string url, byte[] buffer)
         {
             var client = new HttpClient();
             var httpContent = new ByteArrayContent(buffer);
@@ -392,7 +392,7 @@ namespace Autodesk.Oss
             }
         }
 
-        protected virtual async Task WriteToFileStreamFromUrl(FileStream fileStream, string contentUrl, double start, double end,
+        private async Task WriteToFileStreamFromUrl(FileStream fileStream, string contentUrl, double start, double end,
             string requestId)
         {
             _forgeService.Client.DefaultRequestHeaders.Add("Range", "bytes=" + start + "-" + end);

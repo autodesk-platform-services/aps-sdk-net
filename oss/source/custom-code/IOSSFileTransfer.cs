@@ -27,7 +27,6 @@ namespace Autodesk.Oss
 {
     public interface IOSSFileTransfer
     {
-        Task<bool> IsFileSizeAllowed(string filePath);
  
         Task<HttpResponseMessage> Upload(
             string bucketKey,

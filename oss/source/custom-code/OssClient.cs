@@ -28,7 +28,7 @@ namespace Autodesk.Oss
         /// Upload a File
         /// </summary>
         /// <remarks>
-        ///This method consolidates the multiple steps in the [Upload](en/docs/data/v2/tutorials/upload-file/) process, into a single method.
+        /// Uploads a file by transparently handling operations like obtaining signed upload URLs, chunking large files for optimal transfer, and notifying OSS to assemble the uploaded parts.
         /// </remarks>
         /// <exception cref="OssApiException">Thrown when fails to make API call</exception>
         /// <param name="bucketKey">
@@ -66,7 +66,7 @@ namespace Autodesk.Oss
         /// Dwonload a File
         /// </summary>
         /// <remarks>
-        ///This method consolidates the multiple steps in the [Download](en/docs/data/v2/tutorials/download-file/) process, into a single method.
+        ///Downloads a file by transparently handling operations like obtaining signed download URLs and chunking large files for optimal transfer.
         /// </remarks>
         /// <exception cref="OssApiException">Thrown when fails to make API call</exception>
         /// <param name="bucketKey">
@@ -270,7 +270,7 @@ namespace Autodesk.Oss
         ///
         ///Buckets are virtual container within the Object Storage Service (OSS), which you can use to store and manage objects (files) in the cloud. The application creating the bucket is the owner of the bucket.
         ///
-        ///**Note:** Do not use this operation to create buckets for BIM360 Document Management. Use [POST projects/{project_id}/storage](/en/docs/data/v2/reference/http/projects-project_id-storage-POST) instead. For details, see `Upload Files to BIM 360 Document Management (/en/docs/bim360/v1/tutorials/document-management/upload-document).
+        ///**Note:** Do not use this operation to create buckets for BIM360 Document Management. Use [POST projects/{project_id}/storage](/en/docs/data/v2/reference/http/projects-project_id-storage-POST>) instead. For details, see [Upload Files to BIM 360 Document Management](/en/docs/bim360/v1/tutorials/document-management/upload-document).
         /// </remarks>
         /// <exception cref="OssApiException">Thrown when fails to make API call</exception>
         /// <param name="policyKey">
@@ -388,7 +388,7 @@ namespace Autodesk.Oss
         /// <param name="hash">
         ///The ID component of the signed URL.
         ///
-        ///**Note:** The signed URL returned by Generate OSS Signed URL (/en/docs/data/v2/reference/http/signedresources-:id-GET/) contains `hash` as a URI parameter.
+        ///**Note:** The signed URL returned by [Generate OSS Signed URL](/en/docs/data/v2/reference/http/signedresources-:id-GET/) contains `hash` as a URI parameter.
         /// </param>
         /// <param name="region">
         ///Specifies where the bucket containing the object stored. Possible values are:
@@ -528,7 +528,7 @@ namespace Autodesk.Oss
         /// <param name="hash">
         ///The ID component of the signed URL.
         ///
-        ///**Note:** The signed URL returned by Generate OSS Signed URL (/en/docs/data/v2/reference/http/signedresources-:id-GET/) contains `hash` as a URI parameter.
+        ///**Note:** The signed URL returned by [Generate OSS Signed URL](/en/docs/data/v2/reference/http/signedresources-:id-GET/) contains `hash` as a URI parameter.
         /// </param>
         /// <param name="range">
         ///The byte range to download, specified in the form `bytes=&lt;START_BYTE&gt;-&lt;END_BYTE&gt;`. (optional)
@@ -567,48 +567,7 @@ namespace Autodesk.Oss
             var response = await this.objectsApi.GetSignedResourceAsync(hash, range, ifNoneMatch, ifModifiedSince, acceptEncoding, region, responseContentDisposition, responseContentType, accessToken, throwOnError);
             return response.Content;
         }
-        /// <summary>
-        /// Check Object Existence
-        /// </summary>
-        /// <remarks>
-        ///Returns an empty response body and a 200 response code if the object exists.
-        /// </remarks>
-        /// <exception cref="OssApiException">Thrown when fails to make API call</exception>
-        /// <param name="bucketKey">
-        ///The bucket key of the bucket that contains the objects you are operating on.
-        /// </param>
-        /// <param name="objectKey">
-        ///The URL-encoded human friendly name of the object.
-        /// </param>
-        /// <param name="ifModifiedSince">
-        ///A timestamp in the HTTP date format (Mon, DD Month YYYY HH:MM:SS GMT). The requested data is returned only if the object has been modified since the specified timestamp. If not, a 304 (Not Modified) HTTP status is returned. (optional)
-        /// </param>
-        /// <param name="xAdsAcmNamespace">
-        ///This header is used to let the OSS Api Proxy know if ACM is used to authorize access to the given object. If this authorization is used by your service, then you must provide the name of the namespace you want to validate access control policies against. (optional)
-        /// </param>
-        /// <param name="xAdsAcmCheckGroups">
-        ///Informs the OSS Api Proxy know if your service requires ACM authorization to also validate against Oxygen groups. If so, you must pass this header with a value of `true`. Otherwise, the assumption is that checking authorization against Oxygen groups is not required. (optional)
-        /// </param>
-        /// <param name="xAdsAcmGroups">
-        ///Use this header to pass the Oxygen groups you want the OSS Api Proxy to use for group validation for the given user in the OAuth2 token. (optional)
-        /// </param>
-        /// <param name="with">
-        ///**Not applicable to this operation**
-        ///
-        ///The optional information you can request for. To request more than one of the following, specify this parameter multiple times in the request.  Possible values: 
-        ///
-        ///- `createdDate` 
-        ///- `lastAccessedDate` 
-        ///- `lastModifiedDate` 
-        ///- `userDefinedMetadata` (optional)
-        /// </param>
 
-        /// <returns>Task of HttpResponseMessage</returns>
-        public async System.Threading.Tasks.Task<HttpResponseMessage> HeadObjectDetailsAsync(string bucketKey, string objectKey, DateTime? ifModifiedSince = default(DateTime?), string xAdsAcmNamespace = default(string), string xAdsAcmCheckGroups = default(string), string xAdsAcmGroups = default(string), string with = null, string accessToken = null, bool throwOnError = true)
-        {
-            var response = await this.objectsApi.HeadObjectDetailsAsync(bucketKey, objectKey, ifModifiedSince, xAdsAcmNamespace, xAdsAcmCheckGroups, xAdsAcmGroups, with, accessToken, throwOnError);
-            return response;
-        }
         /// <summary>
         /// Generate Signed S3 Download URL
         /// </summary>
@@ -739,7 +698,7 @@ namespace Autodesk.Oss
         /// <param name="hash">
         ///The ID component of the signed URL.
         ///
-        ///**Note:** The signed URL returned by Generate OSS Signed URL (/en/docs/data/v2/reference/http/signedresources-:id-GET/) contains `hash` as a URI parameter.
+        ///**Note:** The signed URL returned by [Generate OSS Signed URL](/en/docs/data/v2/reference/http/signedresources-:id-GET/) contains `hash` as a URI parameter.
         /// </param>
         /// <param name="contentLength">
         ///The size of the data contained in the request body, in bytes.
@@ -778,13 +737,13 @@ namespace Autodesk.Oss
         /// <remarks>
         ///Performs a resumable upload using an OSS signed URL. Use this operation to upload an object in chunks.
         ///
-        ///**Note:** The signed URL returned by [Generate OSS Signed URL](/en/docs/data/v2/reference/http/signedresources-:id-GET/)  contains the `hash` URI parameter as well. 
+        ///**Note:** The signed URL returned by [Generate OSS Signed URL](/en/docs/data/v2/reference/http/signedresources-:id-GET/) contains the `hash` as a URI parameter. 
         /// </remarks>
         /// <exception cref="OssApiException">Thrown when fails to make API call</exception>
         /// <param name="hash">
         ///The ID component of the signed URL.
         ///
-        ///**Note:** The signed URL returned by Generate OSS Signed URL (/en/docs/data/v2/reference/http/signedresources-:id-GET/) contains `hash` as a URI parameter.
+        ///**Note:** The signed URL returned by [Generate OSS Signed URL](/en/docs/data/v2/reference/http/signedresources-:id-GET/) contains `hash` as a URI parameter.
         /// </param>
         /// <param name="contentRange">
         ///The byte range to upload, specified in the form `bytes=&lt;START_BYTE&gt;-&lt;END_BYTE&gt;`.
@@ -812,10 +771,10 @@ namespace Autodesk.Oss
         /// </param>
         /// <returns>Task of &lt;ObjectDetails&gt;</returns>
 
-       public  async System.Threading.Tasks.Task<ObjectDetails> UploadSignedResourcesChunkAsync(string hash, string contentRange, string sessionId, System.IO.Stream body, string contentType = default(string), string contentDisposition = default(string), Region? xAdsRegion = null, string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ObjectDetails> UploadSignedResourcesChunkAsync(string hash, string contentRange, string sessionId, System.IO.Stream body, string contentType = default(string), string contentDisposition = default(string), Region? xAdsRegion = null, string accessToken = null, bool throwOnError = true)
         {
-            var response = await this.objectsApi.UploadSignedResourcesChunkAsync(hash, contentRange,sessionId, body, contentType , contentDisposition , xAdsRegion , accessToken , throwOnError);
-            return response.Content;            
+            var response = await this.objectsApi.UploadSignedResourcesChunkAsync(hash, contentRange, sessionId, body, contentType, contentDisposition, xAdsRegion, accessToken, throwOnError);
+            return response.Content;
         }
     }
 

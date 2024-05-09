@@ -251,7 +251,7 @@ namespace Autodesk.Oss.Http
         /// <param name="hash">
         ///The ID component of the signed URL.
         ///
-        ///**Note:** The signed URL returned by Generate OSS Signed URL </en/docs/data/v2/reference/http/signedresources-:id-GET/>_ contains `hash` as a URI parameter.
+        ///**Note:** The signed URL returned by [Generate OSS Signed URL](/en/docs/data/v2/reference/http/signedresources-:id-GET/) contains `hash` as a URI parameter.
         /// </param>
         /// <param name="xAdsRegion">
         ///Specifies where the bucket containing the object stored. Possible values are:
@@ -333,7 +333,7 @@ namespace Autodesk.Oss.Http
         /// <param name="hash">
         ///The ID component of the signed URL.
         ///
-        ///**Note:** The signed URL returned by Generate OSS Signed URL </en/docs/data/v2/reference/http/signedresources-:id-GET/>_ contains `hash` as a URI parameter.
+        ///**Note:** The signed URL returned by [Generate OSS Signed URL](/en/docs/data/v2/reference/http/signedresources-:id-GET/) contains `hash` as a URI parameter.
         /// </param>
         /// <param name="range">
         ///The byte range to download, specified in the form `bytes=<START_BYTE>-<END_BYTE>`. (optional)
@@ -369,44 +369,6 @@ namespace Autodesk.Oss.Http
         /// <returns>Task of ApiResponse&lt;System.IO.Stream&gt;</returns>
 
         System.Threading.Tasks.Task<ApiResponse<System.IO.Stream>> GetSignedResourceAsync(string hash, string range = default(string), string ifNoneMatch = default(string), DateTime? ifModifiedSince = default(DateTime?), string acceptEncoding = default(string), Region? region = null, string responseContentDisposition = default(string), string responseContentType = default(string), string accessToken = null, bool throwOnError = true);
-        /// <summary>
-        /// Check Object Existence
-        /// </summary>
-        /// <remarks>
-        ///Returns an empty response body and a 200 response code if the object exists.
-        /// </remarks>
-        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="bucketKey">
-        ///The bucket key of the bucket that contains the objects you are operating on.
-        /// </param>
-        /// <param name="objectKey">
-        ///The URL-encoded human friendly name of the object.
-        /// </param>
-        /// <param name="ifModifiedSince">
-        ///A timestamp in the HTTP date format (Mon, DD Month YYYY HH:MM:SS GMT). The requested data is returned only if the object has been modified since the specified timestamp. If not, a 304 (Not Modified) HTTP status is returned. (optional)
-        /// </param>
-        /// <param name="xAdsAcmNamespace">
-        ///This header is used to let the OSS Api Proxy know if ACM is used to authorize access to the given object. If this authorization is used by your service, then you must provide the name of the namespace you want to validate access control policies against. (optional)
-        /// </param>
-        /// <param name="xAdsAcmCheckGroups">
-        ///Informs the OSS Api Proxy know if your service requires ACM authorization to also validate against Oxygen groups. If so, you must pass this header with a value of `true`. Otherwise, the assumption is that checking authorization against Oxygen groups is not required. (optional)
-        /// </param>
-        /// <param name="xAdsAcmGroups">
-        ///Use this header to pass the Oxygen groups you want the OSS Api Proxy to use for group validation for the given user in the OAuth2 token. (optional)
-        /// </param>
-        /// <param name="with">
-        ///**Not applicable to this operation**
-        ///
-        ///The optional information you can request for. To request more than one of the following, specify this parameter multiple times in the request.  Possible values: 
-        ///
-        ///- `createdDate` 
-        ///- `lastAccessedDate` 
-        ///- `lastModifiedDate` 
-        ///- `userDefinedMetadata` (optional)
-        /// </param>
-
-        /// <returns>Task of HttpResponseMessage</returns>
-        System.Threading.Tasks.Task<HttpResponseMessage> HeadObjectDetailsAsync(string bucketKey, string objectKey, DateTime? ifModifiedSince = default(DateTime?), string xAdsAcmNamespace = default(string), string xAdsAcmCheckGroups = default(string), string xAdsAcmGroups = default(string), string with = null, string accessToken = null, bool throwOnError = true);
         /// <summary>
         /// Generate Signed S3 Download URL
         /// </summary>
@@ -529,7 +491,7 @@ namespace Autodesk.Oss.Http
         /// <param name="hash">
         ///The ID component of the signed URL.
         ///
-        ///**Note:** The signed URL returned by Generate OSS Signed URL </en/docs/data/v2/reference/http/signedresources-:id-GET/>_ contains `hash` as a URI parameter.
+        ///**Note:** The signed URL returned by [Generate OSS Signed URL](/en/docs/data/v2/reference/http/signedresources-:id-GET/) contains `hash` as a URI parameter.
         /// </param>
         /// <param name="contentLength">
         ///The size of the data contained in the request body, in bytes.
@@ -564,13 +526,13 @@ namespace Autodesk.Oss.Http
         /// <remarks>
         ///Performs a resumable upload using an OSS signed URL. Use this operation to upload an object in chunks.
         ///
-        ///**Note:** The signed URL returned by [Generate OSS Signed URL](/en/docs/data/v2/reference/http/signedresources-:id-GET/)  contains the `hash` URI parameter as well. 
+        ///**Note:** The signed URL returned by [Generate OSS Signed URL](/en/docs/data/v2/reference/http/signedresources-:id-GET/) contains the `hash` as a URI parameter. 
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="hash">
         ///The ID component of the signed URL.
         ///
-        ///**Note:** The signed URL returned by Generate OSS Signed URL </en/docs/data/v2/reference/http/signedresources-:id-GET/>_ contains `hash` as a URI parameter.
+        ///**Note:** The signed URL returned by [Generate OSS Signed URL](/en/docs/data/v2/reference/http/signedresources-:id-GET/) contains `hash` as a URI parameter.
         /// </param>
         /// <param name="contentRange">
         ///The byte range to upload, specified in the form `bytes=<START_BYTE>-<END_BYTE>`.
@@ -1339,7 +1301,7 @@ namespace Autodesk.Oss.Http
         /// <param name="hash">
         ///The ID component of the signed URL.
         ///
-        ///**Note:** The signed URL returned by Generate OSS Signed URL </en/docs/data/v2/reference/http/signedresources-:id-GET/>_ contains `hash` as a URI parameter.
+        ///**Note:** The signed URL returned by [Generate OSS Signed URL](/en/docs/data/v2/reference/http/signedresources-:id-GET/) contains `hash` as a URI parameter.
         /// </param>
         /// <param name="xAdsRegion">
         ///Specifies where the bucket containing the object stored. Possible values are:
@@ -1611,7 +1573,7 @@ namespace Autodesk.Oss.Http
         /// <param name="hash">
         ///The ID component of the signed URL.
         ///
-        ///**Note:** The signed URL returned by Generate OSS Signed URL </en/docs/data/v2/reference/http/signedresources-:id-GET/>_ contains `hash` as a URI parameter.
+        ///**Note:** The signed URL returned by [Generate OSS Signed URL](/en/docs/data/v2/reference/http/signedresources-:id-GET/) contains `hash` as a URI parameter.
         /// </param>
         /// <param name="range">
         ///The byte range to download, specified in the form `bytes=<START_BYTE>-<END_BYTE>`. (optional)
@@ -1711,110 +1673,6 @@ namespace Autodesk.Oss.Http
                 }
                 logger.LogInformation($"Exited from GetSignedResourceAsync with response statusCode: {response.StatusCode}");
                 return new ApiResponse<System.IO.Stream>(response, await LocalMarshalling.DeserializeAsync<System.IO.Stream>(response.Content));
-
-            } // using
-        }
-        /// <summary>
-        /// Check Object Existence
-        /// </summary>
-        /// <remarks>
-        ///Returns an empty response body and a 200 response code if the object exists.
-        /// </remarks>
-        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="bucketKey">
-        ///The bucket key of the bucket that contains the objects you are operating on.
-        /// </param>
-        /// <param name="objectKey">
-        ///The URL-encoded human friendly name of the object.
-        /// </param>
-        /// <param name="ifModifiedSince">
-        ///A timestamp in the HTTP date format (Mon, DD Month YYYY HH:MM:SS GMT). The requested data is returned only if the object has been modified since the specified timestamp. If not, a 304 (Not Modified) HTTP status is returned. (optional)
-        /// </param>
-        /// <param name="xAdsAcmNamespace">
-        ///This header is used to let the OSS Api Proxy know if ACM is used to authorize access to the given object. If this authorization is used by your service, then you must provide the name of the namespace you want to validate access control policies against. (optional)
-        /// </param>
-        /// <param name="xAdsAcmCheckGroups">
-        ///Informs the OSS Api Proxy know if your service requires ACM authorization to also validate against Oxygen groups. If so, you must pass this header with a value of `true`. Otherwise, the assumption is that checking authorization against Oxygen groups is not required. (optional)
-        /// </param>
-        /// <param name="xAdsAcmGroups">
-        ///Use this header to pass the Oxygen groups you want the OSS Api Proxy to use for group validation for the given user in the OAuth2 token. (optional)
-        /// </param>
-        /// <param name="with">
-        ///**Not applicable to this operation**
-        ///
-        ///The optional information you can request for. To request more than one of the following, specify this parameter multiple times in the request.  Possible values: 
-        ///
-        ///- `createdDate` 
-        ///- `lastAccessedDate` 
-        ///- `lastModifiedDate` 
-        ///- `userDefinedMetadata` (optional)
-        /// </param>
-
-        /// <returns>Task of HttpResponseMessage</returns>
-        public async System.Threading.Tasks.Task<HttpResponseMessage> HeadObjectDetailsAsync(string bucketKey, string objectKey, DateTime? ifModifiedSince = default(DateTime?), string xAdsAcmNamespace = default(string), string xAdsAcmCheckGroups = default(string), string xAdsAcmGroups = default(string), string with = null, string accessToken = null, bool throwOnError = true)
-        {
-            logger.LogInformation("Entered into HeadObjectDetailsAsync ");
-            using (var request = new HttpRequestMessage())
-            {
-                var queryParam = new Dictionary<string, object>();
-                SetQueryParameter("with", with, queryParam);
-                request.RequestUri =
-                    Marshalling.BuildRequestUri("/oss/v2/buckets/{bucketKey}/objects/{objectKey}/details",
-                        routeParameters: new Dictionary<string, object> {
-                            { "bucketKey", bucketKey},
-                            { "objectKey", objectKey},
-                        },
-                        queryParameters: queryParam
-                    );
-
-                request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/OSS/C#/1.0.0-beta1");
-                if (!string.IsNullOrEmpty(accessToken))
-                {
-                    request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
-                }
-
-
-
-                SetHeader("If-Modified-Since", ifModifiedSince, request);
-                SetHeader("x-ads-acm-namespace", xAdsAcmNamespace, request);
-                SetHeader("x-ads-acm-check-groups", xAdsAcmCheckGroups, request);
-                SetHeader("x-ads-acm-groups", xAdsAcmGroups, request);
-
-                // tell the underlying pipeline what scope we'd like to use
-                // if (scopes == null)
-                // {
-                // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read ");
-                // }
-                // else
-                // {
-                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
-                // }
-
-                request.Method = new HttpMethod("HEAD");
-
-                // make the HTTP request
-                var response = await this.Service.Client.SendAsync(request);
-
-                if (throwOnError)
-                {
-                    try
-                    {
-                        await response.EnsureSuccessStatusCodeAsync();
-                    }
-                    catch (HttpRequestException ex)
-                    {
-                        throw new OssApiException(ex.Message, response, ex);
-                    }
-                }
-                else if (!response.IsSuccessStatusCode)
-                {
-                    logger.LogError($"response unsuccess with status code: {response.StatusCode}");
-                    return response;
-                }
-                logger.LogInformation($"Exited from HeadObjectDetailsAsync with response statusCode: {response.StatusCode}");
-                return response;
 
             } // using
         }
@@ -2078,7 +1936,7 @@ namespace Autodesk.Oss.Http
         /// <param name="hash">
         ///The ID component of the signed URL.
         ///
-        ///**Note:** The signed URL returned by Generate OSS Signed URL </en/docs/data/v2/reference/http/signedresources-:id-GET/>_ contains `hash` as a URI parameter.
+        ///**Note:** The signed URL returned by [Generate OSS Signed URL](/en/docs/data/v2/reference/http/signedresources-:id-GET/) contains `hash` as a URI parameter.
         /// </param>
         /// <param name="contentLength">
         ///The size of the data contained in the request body, in bytes.
@@ -2179,13 +2037,13 @@ namespace Autodesk.Oss.Http
         /// <remarks>
         ///Performs a resumable upload using an OSS signed URL. Use this operation to upload an object in chunks.
         ///
-        ///**Note:** The signed URL returned by [Generate OSS Signed URL](/en/docs/data/v2/reference/http/signedresources-:id-GET/)  contains the `hash` URI parameter as well. 
+        ///**Note:** The signed URL returned by [Generate OSS Signed URL](/en/docs/data/v2/reference/http/signedresources-:id-GET/) contains the `hash` as a URI parameter. 
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="hash">
         ///The ID component of the signed URL.
         ///
-        ///**Note:** The signed URL returned by Generate OSS Signed URL </en/docs/data/v2/reference/http/signedresources-:id-GET/>_ contains `hash` as a URI parameter.
+        ///**Note:** The signed URL returned by [Generate OSS Signed URL](/en/docs/data/v2/reference/http/signedresources-:id-GET/) contains `hash` as a URI parameter.
         /// </param>
         /// <param name="contentRange">
         ///The byte range to upload, specified in the form `bytes=<START_BYTE>-<END_BYTE>`.
