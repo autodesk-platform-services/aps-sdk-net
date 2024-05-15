@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Oss.Model
 {
     /// <summary>
-    /// Buckets
+    /// An object that represents a collection of buckets.
     /// </summary>
     [DataContract]
     public partial class Buckets 

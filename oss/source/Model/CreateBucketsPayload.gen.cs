@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Oss.Model
 {
     /// <summary>
-    /// Request body structure for Create Bucket operation.
+    /// The request payload for the Create Bucket operation.
     /// </summary>
     [DataContract]
     public partial class CreateBucketsPayload 

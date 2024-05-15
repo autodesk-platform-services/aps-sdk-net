@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Oss.Model
 {
     /// <summary>
-    /// Signeds3downloadResponse
+    /// An object representing the response payload on successful execution of a Generate Signed S3 Download URL operation.
     /// </summary>
     [DataContract]
     public partial class Signeds3downloadResponse 

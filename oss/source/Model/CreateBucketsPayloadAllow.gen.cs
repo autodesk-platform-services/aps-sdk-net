@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Oss.Model
 {
     /// <summary>
-    /// CreateBucketsPayloadAllow
+    /// An object that represents the permissions allowed for a bucket.
     /// </summary>
     [DataContract]
     public partial class CreateBucketsPayloadAllow 

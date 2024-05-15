@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Oss.Model
 {
     /// <summary>
-    /// Object Signed Object json response
+    /// The request payload for a Generate OSS Signed URL operation.
     /// </summary>
     [DataContract]
     public partial class CreateObjectSigned 

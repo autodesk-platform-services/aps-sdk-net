@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Oss.Model
 {
     /// <summary>
-    /// Represents detailed information about an object.
+    /// Represents detailed information about an object within a bucket.
     /// </summary>
     [DataContract]
     public partial class ObjectFullDetails 

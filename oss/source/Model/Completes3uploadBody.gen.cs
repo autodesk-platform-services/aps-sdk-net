@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Oss.Model
 {
     /// <summary>
-    /// Completes3uploadBody
+    /// The request payload for a Complete Upload to S3 Signed URL operation.
     /// </summary>
     [DataContract]
     public partial class Completes3uploadBody 

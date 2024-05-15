@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Oss.Model
 {
     /// <summary>
-    /// BatchcompleteuploadResponse
+    /// The response to a Complete Batch Upload to S3 Signed URLs operation.
     /// </summary>
     [DataContract]
     public partial class BatchcompleteuploadResponse 
