@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Oss.Model
 {
     /// <summary>
-    /// Bucket Payload Body Structure
+    /// The request payload for the Create Bucket operation.
     /// </summary>
     [DataContract]
     public partial class CreateBucketsPayload 
@@ -46,24 +46,32 @@ namespace Autodesk.Oss.Model
         }
         
         /// <summary>
-        /// Bucket key
+        ///Bucket key: A unique name you assign to a bucket. Bucket keys must be globally unique across all applications and regions. They must consist of only lower case characters, numbers 0-9, and underscores (_).
+///
+///**Note:** You cannot change a bucket key once the bucket is created.
         /// </summary>
-        /// <value>Bucket key</value>
+        /// <value>
+        ///Bucket key: A unique name you assign to a bucket. Bucket keys must be globally unique across all applications and regions. They must consist of only lower case characters, numbers 0-9, and underscores (_).
+///
+///**Note:** You cannot change a bucket key once the bucket is created.
+        /// </value>
         [DataMember(Name="bucketKey", EmitDefaultValue=false)]
         public string BucketKey { get; set; }
 
         /// <summary>
-        /// Gets or Sets Allow
+        ///An array of objects, where each object represents an application that can access the bucket.
         /// </summary>
+        /// <value>
+        ///An array of objects, where each object represents an application that can access the bucket.
+        /// </value>
         [DataMember(Name="allow", EmitDefaultValue=false)]
         public List<CreateBucketsPayloadAllow> Allow { get; set; }
 
         /// <summary>
-        /// [Data retention policy](https://developer.autodesk.com/en/docs/data/v2/overview/retention-policy/)  Acceptable values: &#x60;transient&#x60;, &#x60;temporary&#x60; or &#x60;persistent&#x60; 
+        ///Gets or Sets PolicyKey
         /// </summary>
-        /// <value>[Data retention policy](https://developer.autodesk.com/en/docs/data/v2/overview/retention-policy/)  Acceptable values: &#x60;transient&#x60;, &#x60;temporary&#x60; or &#x60;persistent&#x60; </value>
         [DataMember(Name="policyKey", EmitDefaultValue=true)]
-        public string PolicyKey { get; set; }
+        public PolicyKey PolicyKey { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

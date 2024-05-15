@@ -37,8 +37,8 @@ namespace Autodesk.Oss
         public static IHttpClientBuilder AddOss(this IServiceCollection services, IConfiguration configuration)
         {
             // services.Configure<Configuration>(configuration.GetSection("Forge").GetSection("Oss"));
-            services.AddTransient<IOSSApi,OSSApi>();
-
+            services.AddTransient<IBucketsApi,BucketsApi>();
+            services.AddTransient<IObjectsApi,ObjectsApi>();
             // services.AddTransient<OssClient>();
             return services.AddForgeService(configuration);
         }

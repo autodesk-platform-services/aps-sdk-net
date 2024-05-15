@@ -33,12 +33,21 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Oss.Model
 {
     /// <summary>
-    /// Defines ObjectStatusEnum
+    /// Indicates the upload status of the requested object. Possible values are:
+///
+///- `complete` - The upload process is finished. If the object was uploaded in chunks, assembly of chunks into the final object is also complete.
+///- `chunked` - The object was uploaded in chunks, but assembly of chunks into the final object is still pending. `public-resource-fallback` = `false`
+///- `fallback`` - The object was uploaded in chunks, but assembly of chunks into the final object is still pending. `public-resource-fallback` = `true`` 
     /// </summary>
+    ///<value>Indicates the upload status of the requested object. Possible values are:
+///
+///- `complete` - The upload process is finished. If the object was uploaded in chunks, assembly of chunks into the final object is also complete.
+///- `chunked` - The object was uploaded in chunks, but assembly of chunks into the final object is still pending. `public-resource-fallback` = `false`
+///- `fallback`` - The object was uploaded in chunks, but assembly of chunks into the final object is still pending. `public-resource-fallback` = `true`` </value>
     
     [JsonConverter(typeof(StringEnumConverter))]
     
-    public enum ObjectStatus
+    public enum DownloadStatus
     {
         
         /// <summary>

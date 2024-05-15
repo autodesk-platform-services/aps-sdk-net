@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Oss.Model
 {
     /// <summary>
-    /// BucketObjects
+    /// An array where each element represents an object in the bucket.
     /// </summary>
     [DataContract]
     public partial class BucketObjects 
@@ -46,15 +46,17 @@ namespace Autodesk.Oss.Model
         }
         
         /// <summary>
-        /// Gets or Sets Items
+        ///Gets or Sets Items
         /// </summary>
         [DataMember(Name="items", EmitDefaultValue=false)]
         public List<ObjectDetails> Items { get; set; }
 
         /// <summary>
-        /// Next possible request
+        ///The URL to be used to retrieve the next page of results, if available. It will be present only when there are more items to be retrieved after the current set.
         /// </summary>
-        /// <value>Next possible request</value>
+        /// <value>
+        ///The URL to be used to retrieve the next page of results, if available. It will be present only when there are more items to be retrieved after the current set.
+        /// </value>
         [DataMember(Name="next", EmitDefaultValue=false)]
         public string Next { get; set; }
 

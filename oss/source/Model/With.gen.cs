@@ -33,33 +33,50 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Oss.Model
 {
     /// <summary>
-    /// revoke definition
+    /// **Not applicable for Head operation**
+///The optional information you can request for. To request more than one of the following, specify this parameter multiple times in the request.  Possible values: 
+///
+///- `createdDate` 
+///- `lastAccessedDate` 
+///- `lastModifiedDate` 
+///- `userDefinedMetadata`
     /// </summary>
-    [DataContract]
-    public partial class Revoke 
+    ///<value>**Not applicable for Head operation**
+///The optional information you can request for. To request more than one of the following, specify this parameter multiple times in the request.  Possible values: 
+///
+///- `createdDate` 
+///- `lastAccessedDate` 
+///- `lastModifiedDate` 
+///- `userDefinedMetadata`</value>
+    
+    [JsonConverter(typeof(StringEnumConverter))]
+    
+    public enum With
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Revoke" /> class.
-        /// </summary>
-        public Revoke()
-        {
-        }
         
         /// <summary>
-        /// Objects representing applications to which the owner wants to grant access at bucket creation time
+        /// Enum CreatedDate for value: createdDate
         /// </summary>
-        /// <value>Objects representing applications to which the owner wants to grant access at bucket creation time</value>
-        [DataMember(Name="revoke", EmitDefaultValue=false)]
-        public List<RevokeRevoke> _Revoke { get; set; }
-
+        [EnumMember(Value = "createdDate")]
+        CreatedDate,
+        
         /// <summary>
-        /// Returns the string presentation of the object
+        /// Enum LastAccessedDate for value: lastAccessedDate
         /// </summary>
-        /// <returns>String presentation of the object</returns>
-        public override string ToString()
-        {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
-        }
+        [EnumMember(Value = "lastAccessedDate")]
+        LastAccessedDate,
+        
+        /// <summary>
+        /// Enum LastModifiedDate for value: lastModifiedDate
+        /// </summary>
+        [EnumMember(Value = "lastModifiedDate")]
+        LastModifiedDate,
+        
+        /// <summary>
+        /// Enum UserDefinedMetadata for value: userDefinedMetadata
+        /// </summary>
+        [EnumMember(Value = "userDefinedMetadata")]
+        UserDefinedMetadata
     }
 
 }

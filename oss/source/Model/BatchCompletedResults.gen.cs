@@ -33,92 +33,114 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Oss.Model
 {
     /// <summary>
-    /// BatchcompleteuploadResponseResultsValue
+    /// The results returned by the Complete Batch Upload to S3 Signed URLs operation.
     /// </summary>
     [DataContract]
-    public partial class BatchcompleteuploadResponseResultsValue 
+    public partial class BatchCompletedResults 
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="BatchcompleteuploadResponseResultsValue" /> class.
+        /// Initializes a new instance of the <see cref="BatchCompletedResults" /> class.
         /// </summary>
-        public BatchcompleteuploadResponseResultsValue()
+        public BatchCompletedResults()
         {
         }
         
         /// <summary>
-        /// A string indicating whether the object completion failed. If this is not present, assume the completion succeeded. If this is \&quot;error\&quot;, then the object completion failed.
+        ///If this attribute is not returned, completion has succeeded. If the value of this attribute is "error", completion failed.'
         /// </summary>
-        /// <value>A string indicating whether the object completion failed. If this is not present, assume the completion succeeded. If this is \&quot;error\&quot;, then the object completion failed.</value>
+        /// <value>
+        ///If this attribute is not returned, completion has succeeded. If the value of this attribute is "error", completion failed.'
+        /// </value>
         [DataMember(Name="status", EmitDefaultValue=false)]
         public string Status { get; set; }
 
         /// <summary>
-        /// The key of the bucket into which the object was uploaded.
+        ///The bucket key of the bucket the object was uploaded to.
         /// </summary>
-        /// <value>The key of the bucket into which the object was uploaded.</value>
+        /// <value>
+        ///The bucket key of the bucket the object was uploaded to.
+        /// </value>
         [DataMember(Name="bucketKey", EmitDefaultValue=false)]
         public string BucketKey { get; set; }
 
         /// <summary>
-        /// The key of the object.
+        ///The URL-encoded human friendly name of the object.
         /// </summary>
-        /// <value>The key of the object.</value>
+        /// <value>
+        ///The URL-encoded human friendly name of the object.
+        /// </value>
         [DataMember(Name="objectKey", EmitDefaultValue=false)]
         public string ObjectKey { get; set; }
 
         /// <summary>
-        /// The URN of the object.
+        ///An identifier (URN) that uniquely and persistently identifies the object.
         /// </summary>
-        /// <value>The URN of the object.</value>
+        /// <value>
+        ///An identifier (URN) that uniquely and persistently identifies the object.
+        /// </value>
         [DataMember(Name="objectId", EmitDefaultValue=false)]
         public string ObjectId { get; set; }
 
         /// <summary>
-        /// The size of the object in bytes, if successful. If unsuccessful due to a size mismatch, this is an object with information about the mismatch.
+        ///The total amount of storage space occupied by the object, in bytes.
         /// </summary>
-        /// <value>The size of the object in bytes, if successful. If unsuccessful due to a size mismatch, this is an object with information about the mismatch.</value>
+        /// <value>
+        ///The total amount of storage space occupied by the object, in bytes.
+        /// </value>
         [DataMember(Name="size", EmitDefaultValue=false)]
         public int? Size { get; set; }
 
         /// <summary>
-        /// The Content-Type stored for the object, if provided.
+        ///The format of the data stored within the object, expressed as a MIME type. This attribute is returned only if it was specified when the object was uploaded.
         /// </summary>
-        /// <value>The Content-Type stored for the object, if provided.</value>
+        /// <value>
+        ///The format of the data stored within the object, expressed as a MIME type. This attribute is returned only if it was specified when the object was uploaded.
+        /// </value>
         [DataMember(Name="contentType", EmitDefaultValue=false)]
         public string ContentType { get; set; }
 
         /// <summary>
-        /// The Content-Disposition stored for the object, if provided.
+        ///The Content-Disposition value for the uploaded object as recorded within OSS. This attribute is returned only if it was specified when the object was uploaded.
         /// </summary>
-        /// <value>The Content-Disposition stored for the object, if provided.</value>
+        /// <value>
+        ///The Content-Disposition value for the uploaded object as recorded within OSS. This attribute is returned only if it was specified when the object was uploaded.
+        /// </value>
         [DataMember(Name="contentDisposition", EmitDefaultValue=false)]
         public string ContentDisposition { get; set; }
 
         /// <summary>
-        /// The Content-Encoding stored for the object, if provided.
+        ///The Content-Encoding value for the uploaded object as recorded within OSS. This attribute is returned only if it was specified when the object was uploaded.
         /// </summary>
-        /// <value>The Content-Encoding stored for the object, if provided.</value>
+        /// <value>
+        ///The Content-Encoding value for the uploaded object as recorded within OSS. This attribute is returned only if it was specified when the object was uploaded.
+        /// </value>
         [DataMember(Name="contentEncoding", EmitDefaultValue=false)]
         public string ContentEncoding { get; set; }
 
         /// <summary>
-        /// The Cache-Control stored for the object, if provided.
+        ///The Cache-Control value for the uploaded object as recorded within OSS. This attribute is returned only if it was specified when the object was uploaded.
         /// </summary>
-        /// <value>The Cache-Control stored for the object, if provided.</value>
+        /// <value>
+        ///The Cache-Control value for the uploaded object as recorded within OSS. This attribute is returned only if it was specified when the object was uploaded.
+        /// </value>
         [DataMember(Name="cacheControl", EmitDefaultValue=false)]
         public string CacheControl { get; set; }
 
         /// <summary>
-        /// An array containing the status of each part, indicating any issues in eTag mismatch or size issues.
+        ///An array containing the status of each part, indicating any issues with eTag or size mismatch issues.
         /// </summary>
-        /// <value>An array containing the status of each part, indicating any issues in eTag mismatch or size issues.</value>
+        /// <value>
+        ///An array containing the status of each part, indicating any issues with eTag or size mismatch issues.
+        /// </value>
         [DataMember(Name="parts", EmitDefaultValue=false)]
-        public List<BatchcompleteuploadResponseResultsValueParts> Parts { get; set; }
+        public List<BatchCompletedResultsParts> Parts { get; set; }
 
         /// <summary>
-        /// The reason for the failure, if the status is \&quot;error\&quot;.
+        ///The reason for the failure, if the status is `error`.
         /// </summary>
-        /// <value>The reason for the failure, if the status is \&quot;error\&quot;.</value>
+        /// <value>
+        ///The reason for the failure, if the status is `error`.
+        /// </value>
         [DataMember(Name="reason", EmitDefaultValue=false)]
         public string Reason { get; set; }
 
