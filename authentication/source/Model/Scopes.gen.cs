@@ -33,9 +33,9 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Authentication.Model
 {
     /// <summary>
-    /// Enum for scopes
+    /// Specifies the scope for the token you are requesting. See the [Developer's Guide documentation on scopes](/en/docs/oauth/v2/developers_guide/scopes/) for a complete list of possible values.
     /// </summary>
-    /// <value>Enum for scopes</value>
+    ///<value>Specifies the scope for the token you are requesting. See the [Developer's Guide documentation on scopes](/en/docs/oauth/v2/developers_guide/scopes/) for a complete list of possible values.</value>
     
     [JsonConverter(typeof(StringEnumConverter))]
     
@@ -71,6 +71,12 @@ namespace Autodesk.Authentication.Model
         /// </summary>
         [EnumMember(Value = "data:read")]
         DataRead,
+        
+        /// <summary>
+        /// Enum DatareadURNOFRESOURCE for value: data:read:&lt;URN_OF_RESOURCE&gt;
+        /// </summary>
+        [EnumMember(Value = "data:read:<URN_OF_RESOURCE>")]
+        DatareadURNOFRESOURCE,
         
         /// <summary>
         /// Enum Datawrite for value: data:write

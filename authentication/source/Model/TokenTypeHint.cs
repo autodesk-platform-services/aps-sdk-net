@@ -33,9 +33,9 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Authentication.Model
 {
     /// <summary>
-    /// Enum for scopes
+    /// The type of token to revoke. Possible values are: `access_token` and `refresh_token`.
     /// </summary>
-    /// <value>Enum for scopes</value>
+    ///<value>The type of token to revoke. Possible values are: `access_token` and `refresh_token`.</value>
     
     [JsonConverter(typeof(StringEnumConverter))]
     
@@ -43,18 +43,16 @@ namespace Autodesk.Authentication.Model
     {
         
         /// <summary>
-        /// Enum UserProfileread for value: user-profile:read
+        /// Enum Accesstoken for value: access_token
         /// </summary>
         [EnumMember(Value = "access_token")]
-        Access_token,
+        Accesstoken,
         
         /// <summary>
-        /// Enum Userread for value: user:read
+        /// Enum Refreshtoken for value: refresh_token
         /// </summary>
         [EnumMember(Value = "refresh_token")]
-        Refresh_token,
-       
-       
+        Refreshtoken
     }
 
 }

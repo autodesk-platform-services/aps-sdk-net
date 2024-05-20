@@ -39,26 +39,26 @@ namespace Autodesk.Authentication.Model
     public partial class TwoLeggedToken 
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Model2leggedtoken" /> class.
+        /// Initializes a new instance of the <see cref="TwoLeggedToken" /> class.
         /// </summary>
         public TwoLeggedToken()
         {
         }
         
         /// <summary>
-        /// Gets or Sets AccessToken
+        ///Gets or Sets AccessToken
         /// </summary>
         [DataMember(Name="access_token", EmitDefaultValue=false)]
         public string AccessToken { get; set; }
 
         /// <summary>
-        /// Gets or Sets TokenType
+        ///Gets or Sets TokenType
         /// </summary>
         [DataMember(Name="token_type", EmitDefaultValue=false)]
         public string TokenType { get; set; }
 
         /// <summary>
-        /// Gets or Sets ExpiresIn
+        ///Gets or Sets ExpiresIn
         /// </summary>
         [DataMember(Name="expires_in", EmitDefaultValue=false)]
         public int? ExpiresIn { get; set; }
