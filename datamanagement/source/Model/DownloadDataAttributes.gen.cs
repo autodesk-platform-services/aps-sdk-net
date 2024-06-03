@@ -48,8 +48,8 @@ namespace Autodesk.DataManagement.Model
         /// <summary>
         /// Gets or Sets Status
         /// </summary>
-        [DataMember(Name="status", EmitDefaultValue=false)]
-        public string Status { get; set; }
+        [DataMember(Name="status", EmitDefaultValue=true)]
+        public Status Status { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

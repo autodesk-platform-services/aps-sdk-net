@@ -66,8 +66,8 @@ namespace Autodesk.DataManagement.Model
         /// <summary>
         /// Gets or Sets ConformingStatus
         /// </summary>
-        [DataMember(Name="conformingStatus", EmitDefaultValue=false)]
-        public string ConformingStatus { get; set; }
+        [DataMember(Name="conformingStatus", EmitDefaultValue=true)]
+        public ConformingStatus ConformingStatus { get; set; }
 
         /// <summary>
         /// Gets or Sets ModelGuid

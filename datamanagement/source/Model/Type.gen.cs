@@ -73,6 +73,30 @@ namespace Autodesk.DataManagement.Model
         Items,
         
         /// <summary>
+        /// Enum Hubs for value: hubs
+        /// </summary>
+        [EnumMember(Value = "hubs")]
+        Hubs,
+        
+        /// <summary>
+        /// Enum Projects for value: projects
+        /// </summary>
+        [EnumMember(Value = "projects")]
+        Projects,
+        
+        /// <summary>
+        /// Enum DownloadFormats for value: downloadFormats
+        /// </summary>
+        [EnumMember(Value = "downloadFormats")]
+        DownloadFormats,
+        
+        /// <summary>
+        /// Enum Jobs for value: jobs
+        /// </summary>
+        [EnumMember(Value = "jobs")]
+        Jobs,
+        
+        /// <summary>
         /// Enum ItemsautodeskBim360File for value: items:autodesk.bim360:File
         /// </summary>
         [EnumMember(Value = "items:autodesk.bim360:File")]

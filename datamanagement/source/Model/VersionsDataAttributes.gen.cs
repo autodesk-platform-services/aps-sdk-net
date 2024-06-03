@@ -112,6 +112,18 @@ namespace Autodesk.DataManagement.Model
         public VersionsDataAttributesExtension Extension { get; set; }
 
         /// <summary>
+        ///Gets or Sets FileType
+        /// </summary>
+        [DataMember(Name="fileType", EmitDefaultValue=false)]
+        public string FileType { get; set; }
+
+        /// <summary>
+        ///Gets or Sets StorageSize
+        /// </summary>
+        [DataMember(Name="storageSize", EmitDefaultValue=false)]
+        public decimal? StorageSize { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>

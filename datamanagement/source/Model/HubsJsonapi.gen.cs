@@ -48,8 +48,8 @@ namespace Autodesk.DataManagement.Model
         /// <summary>
         /// Gets or Sets _Version
         /// </summary>
-        [DataMember(Name="version", EmitDefaultValue=false)]
-        public string _Version { get; set; }
+        [DataMember(Name="version", EmitDefaultValue=true)]
+        public VersionNumber _Version { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

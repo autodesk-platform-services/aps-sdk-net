@@ -32,13 +32,13 @@ class DataManagement
         List<HubsData> getHubsData = getHubs.Data;
         foreach (var currentHub in getHubsData)
         {
-            string hubsType = currentHub.Type;
+            Type hubsType = currentHub.Type;
             string HubsId = currentHub.Id;
 
             // Atrributes
             HubsDataAttributes hubsAttributes = currentHub.Attributes;
             string hubsAttributeName = hubsAttributes.Name;
-            string hubsAttributesRegion = hubsAttributes.Region;
+            Region hubsAttributesRegion = hubsAttributes.Region;
 
             HubsDataAttributesExtension hubsDataAttributesExtension = hubsAttributes.Extension;
             string hubsDataAttributesExtensionType = hubsDataAttributesExtension.Type;
@@ -58,13 +58,13 @@ class DataManagement
         Hub getHub = await dataManagementClient.GetHubAsync(hubId: hub_id, accessToken: token);
 
         HubData getHubData = getHub.Data;
-        string hubType = getHubData.Type;
+        Type hubType = getHubData.Type;
         string hubId = getHubData.Id;
 
         // Atrributes
         HubDataAttributes hubAttributes = getHubData.Attributes;
         string hubAttributeName = hubAttributes.Name;
-        string hubAttributesRegion = hubAttributes.Region;
+        Region hubAttributesRegion = hubAttributes.Region;
 
         HubDataAttributesExtension hubAttributesExtension = hubAttributes.Extension;
         string hubAttributesExtensionType = hubAttributesExtension.Type;
@@ -86,7 +86,7 @@ class DataManagement
         List<ProjectsData> getHubProjectsData = getHubProjects.Data;
         foreach (var currentProject in getHubProjectsData)
         {
-            string hubProjectsType = currentProject.Type;
+            Type hubProjectsType = currentProject.Type;
             string hubProjectsId = currentProject.Id;
 
             // Attributes
@@ -117,7 +117,7 @@ class DataManagement
 
         ProjectsData getHubProjectData = getHubProject.Data;
 
-        string getHubProjectDataType = getHubProjectData.Type;
+        Type getHubProjectDataType = getHubProjectData.Type;
         string getHubProjectDataId = getHubProjectData.Id;
 
         // Attributes
@@ -148,7 +148,7 @@ class DataManagement
     {
         TopFolders projectTopFolders = await dataManagementClient.GetProjectTopFoldersAsync(hubId: hub_id, projectId: project_id, accessToken: token);
 
-        string projectTopFoldersJsonapiVersion = projectTopFolders.Jsonapi._Version;
+        VersionNumber projectTopFoldersJsonapiVersion = projectTopFolders.Jsonapi._Version;
         string projectTopFoldersLinksSelfHref = projectTopFolders.Links.Self.Href;
 
         List<TopFoldersData> topFoldersData = projectTopFolders.Data;
@@ -191,7 +191,7 @@ class DataManagement
                 {
                     Parent = new FolderPayloadDataRelationshipsParent()
                     {
-                        Data = new FolderPayloadDataRelationshipsParentData()
+                        Data = new ModifyVersionPayloadData()
                         {
                             Type = Type.Folders,
                             Id = folder_id
@@ -205,7 +205,7 @@ class DataManagement
         Folder createdFolder = await dataManagementClient.CreateFolderAsync(projectId: project_id, folderPayload: folderPayload, accessToken: token);
 
         FolderData createdFolderData = createdFolder.Data;
-        string createdFolderDataType = createdFolderData.Type;
+        Type createdFolderDataType = createdFolderData.Type;
         string createdFolderDataId = createdFolderData.Id;
         FolderDataAttributes createdFolderDataAttributes = createdFolderData.Attributes;
         string createdFolderDataAttributesName = createdFolderDataAttributes.Name;
@@ -252,7 +252,7 @@ class DataManagement
     {
         FolderContents folderContents = await dataManagementClient.GetFolderContentsAsync(projectId: project_id, folderId: folder_id, accessToken: token);
 
-        string folderContentsJsonapiVersion = folderContents.Jsonapi._Version;
+        VersionNumber folderContentsJsonapiVersion = folderContents.Jsonapi._Version;
 
         string folderContentsLinksSelfHref = folderContents.Links.Self.Href;
         string folderContentsLinksFirstHref = folderContents.Links.First.Href;
@@ -262,7 +262,7 @@ class DataManagement
         List<FolderContentsData> folderContentsData = folderContents.Data;
         foreach (var contentData in folderContentsData)
         {
-            string contentDataType = contentData.Type;
+            Type contentDataType = contentData.Type;
             string contentDataId = contentData.Id;
 
             string contentDataAttributesName = contentData.Attributes.Name;
@@ -279,11 +279,11 @@ class DataManagement
 
         Folder parentFolder = await dataManagementClient.GetFolderParentAsync(projectId: project_id, folderId: folder_id, accessToken: token);
 
-        string parentFolderJsonapiVersion = parentFolder.Jsonapi._Version;
+        VersionNumber parentFolderJsonapiVersion = parentFolder.Jsonapi._Version;
 
         string parentFolderLinksSelfHref = parentFolder.Links.Self.Href;
 
-        string parentFolderDataType = parentFolder.Data.Type;
+        Type parentFolderDataType = parentFolder.Data.Type;
         string parentFolderDataId = parentFolder.Data.Id;
 
         string parentFolderDataAttributesName = parentFolder.Data.Attributes.Name;
@@ -316,20 +316,20 @@ class DataManagement
                 },
                 Relationships = new ItemPayloadDataRelationships()
                 {
-                    Tip = new FolderPayloadDataRelationshipsParent()
+                    Tip = new ItemPayloadDataRelationshipsTip()
                     {
-                        Data = new FolderPayloadDataRelationshipsParentData()
+                        Data = new ItemPayloadDataRelationshipsTipData()
                         {
                             Type = Type.Versions,
-                            Id = "1"
+                            Id = ResourceId._1
                         }
                     },
-                    Parent = new FolderPayloadDataRelationshipsParent()
+                    Parent = new ItemPayloadDataRelationshipsTip()
                     {
-                        Data = new FolderPayloadDataRelationshipsParentData()
+                        Data = new ItemPayloadDataRelationshipsTipData()
                         {
                             Type = Type.Versions,
-                            Id = "1"
+                            Id = ResourceId._1
                         }
                     }
                 }
@@ -356,11 +356,11 @@ class DataManagement
 
         Item createdItem = await dataManagementClient.CreateItemAsync(projectId: project_id, itemPayload: itemPayload, accessToken: token);
 
-        string createdItemJsonapiVersion = createdItem.Jsonapi._Version;
+        VersionNumber createdItemJsonapiVersion = createdItem.Jsonapi._Version;
 
         string createdItemLinks = createdItem.Links.Self.Href;
 
-        string createdItemDataType = createdItem.Data.Type;
+        Type createdItemDataType = createdItem.Data.Type;
         string createdItemDataId = createdItem.Data.Id;
 
         string createdItemDataAttributesDisplayName = createdItem.Data.Attributes.DisplayName;
@@ -401,7 +401,7 @@ class DataManagement
                 {
                     Item = new FolderPayloadDataRelationshipsParent()
                     {
-                        Data = new FolderPayloadDataRelationshipsParentData()
+                        Data = new ModifyVersionPayloadData()
                         {
                             Type = Type.Items,
                             Id = "urn:adsk.wipprod:dm.lineage:AeYgDtcTSuqYoyMweWFhhQ"
@@ -409,7 +409,7 @@ class DataManagement
                     },
                     Storage = new FolderPayloadDataRelationshipsParent()
                     {
-                        Data = new FolderPayloadDataRelationshipsParentData()
+                        Data = new ModifyVersionPayloadData()
                         {
                             Type = Type.Objects,
                             Id = "urn:adsk.objects:os.object:wip.dm.prod/980cff2c-f0f8-43d9-a151-4a2d916b91a2.dwg"
@@ -421,11 +421,11 @@ class DataManagement
 
         ModelVersion createdVersion = await dataManagementClient.CreateVersionAsync(projectId: project_id, versionPayload: versionPayload, accessToken: token);
 
-        string createdVersionJsonapiVersion = createdVersion.Jsonapi._Version;
+        VersionNumber createdVersionJsonapiVersion = createdVersion.Jsonapi._Version;
 
         string createdVersionLinks = createdVersion.Links.Self.Href;
 
-        string createdVersionDataType = createdVersion.Data.Type;
+        Type createdVersionDataType = createdVersion.Data.Type;
         string createdVersionDataId = createdVersion.Data.Id;
         string createdVersionDataLinksSelf = createdVersion.Data.Links.Self.Href;
         string createdVersionDataLinksWebView = createdVersion.Data.Links.WebView.Href;

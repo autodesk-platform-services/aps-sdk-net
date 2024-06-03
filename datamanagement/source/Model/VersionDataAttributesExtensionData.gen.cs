@@ -48,8 +48,8 @@ namespace Autodesk.DataManagement.Model
         /// <summary>
         /// Gets or Sets ProcessState
         /// </summary>
-        [DataMember(Name="processState", EmitDefaultValue=false)]
-        public string ProcessState { get; set; }
+        [DataMember(Name="conformingStatus", EmitDefaultValue=true)]
+        public ConformingStatus ConformingStatus { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

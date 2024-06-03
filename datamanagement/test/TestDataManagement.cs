@@ -16,6 +16,7 @@ public class TestDataManagement
 {
     private static DataManagementClient _dataManagementApi = null!;
 
+
     string token = Environment.GetEnvironmentVariable("THREE_LEGGED_ACCESS_TOKEN");
     string hubId = Environment.GetEnvironmentVariable("HUB_ID");
     string projectId = Environment.GetEnvironmentVariable("PROJECT_ID");
@@ -24,6 +25,7 @@ public class TestDataManagement
     string folderId = Environment.GetEnvironmentVariable("FOLDER_ID");
     string itemId = Environment.GetEnvironmentVariable("ITEM_ID");
     string versionId = Environment.GetEnvironmentVariable("VERSION_ID");
+    string storageUrn = Environment.GetEnvironmentVariable("STORAGE_URN");
 
 
     [ClassInitialize]
@@ -87,7 +89,7 @@ public class TestDataManagement
     public async Task TestGetDownloadAsync()
     {
         DownloadDetails downloadDetails = await _dataManagementApi.GetDownloadAsync(projectId: projectId, downloadId: downloadId, accessToken: token);
-        DownloadData downloadDetailsData = downloadDetails.Data;
+        DownloadDetailsData downloadDetailsData = downloadDetails.Data;
         Assert.IsTrue(downloadId == downloadDetailsData.Id);
     }
 
@@ -122,7 +124,7 @@ public class TestDataManagement
                 {
                     Source = new FolderPayloadDataRelationshipsParent()
                     {
-                        Data = new FolderPayloadDataRelationshipsParentData()
+                        Data = new ModifyVersionPayloadData()
                         {
                             Type = Type.Versions,
                             Id = versionId
@@ -134,7 +136,7 @@ public class TestDataManagement
 
         Download download = await _dataManagementApi.CreateDownloadAsync(projectId: projectId, downloadPayload: downloadPayload, accessToken: token);
         DownloadData downloadData = download.Data;
-        Assert.IsTrue(downloadData.Type == "jobs");
+        Assert.IsTrue(downloadData.Type == Type.Jobs);
 
     }
 
@@ -184,7 +186,7 @@ public class TestDataManagement
     [TestMethod]
     public async Task TestGetFolderContentsAsync()
     {
-        FolderContents folderContents = await _dataManagementApi.GetFolderContentsAsync(projectId: projectId, folderId: folderId, accessToken: token);
+        FolderContents folderContents = await _dataManagementApi.GetFolderContentsAsync(projectId: projectId, folderId: folderId, pageLimit: 1, accessToken: token);
         Assert.IsTrue(folderContents.Data.Count > 0);
     }
 
@@ -193,7 +195,7 @@ public class TestDataManagement
     {
         Folder folder = await _dataManagementApi.GetFolderParentAsync(projectId: projectId, folderId: folderId, accessToken: token);
         FolderData folderData = folder.Data;
-        Assert.IsTrue(folderData.Type == "folders");
+        Assert.IsTrue(folderData.Type == Type.Folders);
     }
 
     [TestMethod]
@@ -238,10 +240,10 @@ public class TestDataManagement
                 Type = Type.Folders,
                 Attributes = new FolderPayloadDataAttributes()
                 {
-                    Name = "folder",
+                    Name = "New Folder",
                     Extension = new RelationshipRefsPayloadDataMetaExtension()
                     {
-                        Type = Type.FoldersautodeskCoreFolder,
+                        Type = Type.FoldersautodeskBim360Folder,
                         _Version = VersionNumber._10
                     }
                 },
@@ -249,7 +251,7 @@ public class TestDataManagement
                 {
                     Parent = new FolderPayloadDataRelationshipsParent()
                     {
-                        Data = new FolderPayloadDataRelationshipsParentData()
+                        Data = new ModifyVersionPayloadData()
                         {
                             Type = Type.Folders,
                             Id = folderId
@@ -261,7 +263,7 @@ public class TestDataManagement
 
         Folder folder = await _dataManagementApi.CreateFolderAsync(projectId: projectId, folderPayload: folderPayload, accessToken: token);
         FolderData folderData = folder.Data;
-        Assert.IsTrue(folderData.Type == "folders");
+        Assert.IsTrue(folderData.Type == Type.Folders);
     }
 
     [TestMethod]
@@ -324,7 +326,7 @@ public class TestDataManagement
     {
         Item item = await _dataManagementApi.GetItemAsync(projectId: projectId, itemId: itemId, accessToken: token);
         ItemData itemData = item.Data;
-        Assert.IsTrue(itemData.Type == "items");
+        Assert.IsTrue(itemData.Type == Type.Items);
     }
 
     [TestMethod]
@@ -332,7 +334,7 @@ public class TestDataManagement
     {
         Folder folder = await _dataManagementApi.GetItemParentFolderAsync(projectId: projectId, itemId: itemId, accessToken: token);
         FolderData folderData = folder.Data;
-        Assert.IsTrue(folderData.Type == "folders");
+        Assert.IsTrue(folderData.Type == Type.Folders);
     }
 
     [TestMethod]
@@ -361,7 +363,7 @@ public class TestDataManagement
     {
         ItemTip itemTip = await _dataManagementApi.GetItemTipAsync(projectId: projectId, itemId: itemId, accessToken: token);
         ItemTipData itemTipData = itemTip.Data;
-        Assert.IsTrue(itemTipData.Type == "versions");
+        Assert.IsTrue(itemTipData.Type == Type.Versions);
     }
 
     [TestMethod]
@@ -389,7 +391,7 @@ public class TestDataManagement
                     DisplayName = "drawing.dwg",
                     Extension = new ItemPayloadDataAttributesExtension()
                     {
-                        Type = Type.ItemsautodeskCoreFile,
+                        Type = Type.ItemsautodeskBim360File,
                         _Version = VersionNumber._10
                     }
                 },
@@ -397,7 +399,7 @@ public class TestDataManagement
                 {
                     Tip = new FolderPayloadDataRelationshipsParent()
                     {
-                        Data = new FolderPayloadDataRelationshipsParentData()
+                        Data = new ModifyVersionPayloadData()
                         {
                             Type = Type.Versions,
                             Id = "1"
@@ -405,10 +407,10 @@ public class TestDataManagement
                     },
                     Parent = new FolderPayloadDataRelationshipsParent()
                     {
-                        Data = new FolderPayloadDataRelationshipsParentData()
+                        Data = new ModifyVersionPayloadData()
                         {
-                            Type = Type.Versions,
-                            Id = "1"
+                            Type = Type.Folders,
+                            Id = folderId
                         }
                     }
                 }
@@ -424,7 +426,7 @@ public class TestDataManagement
                         Name = "drawing.dwg",
                         Extension = new ItemPayloadDataAttributesExtension()
                         {
-                            Type = Type.VersionsautodeskCoreFile,
+                            Type = Type.VersionsautodeskBim360File,
                             _Version = VersionNumber._10
                         }
                     }
@@ -435,7 +437,7 @@ public class TestDataManagement
 
         Item item = await _dataManagementApi.CreateItemAsync(projectId: projectId, itemPayload: itemPayload, accessToken: token);
         ItemData itemData = item.Data;
-        Assert.IsTrue(itemData.Type == "items");
+        Assert.IsTrue(itemData.Type == Type.Items);
     }
 
     [TestMethod]
@@ -450,7 +452,7 @@ public class TestDataManagement
             Data = new RelationshipRefsPayloadData()
             {
                 Type = Type.Versions,
-                Id = "urn:adsk.wipprod:fs.file:vf.ooWjwAQJR0uEoPRyfEnvew?version=1",
+                Id = versionId,
                 Meta = new RelationshipRefsPayloadDataMeta()
                 {
                     Extension = new RelationshipRefsPayloadDataMetaExtension()
@@ -480,17 +482,17 @@ public class TestDataManagement
             Data = new ModifyItemPayloadData()
             {
                 Type = Type.Items,
-                Id = "urn:adsk.wipprod:dm.lineage:AeYgDtcTSuqYoyMweWFhhQ",
-                Attributes = new ModifyItemPayloadDataAttributes()
+                Id = itemId,
+                Attributes = new
                 {
-                    DisplayName = "drawing.dwg"
+                    DisplayName = "drawing.rvt"
                 }
             }
         };
 
         Item item = await _dataManagementApi.PatchItemAsync(projectId: projectId, itemId: itemId, modifyItemPayload: modifyItemPayload, accessToken: token);
         ItemData itemData = item.Data;
-        Assert.IsTrue(itemData.Type == "items");
+        Assert.IsTrue(itemData.Type == Type.Items);
     }
 
     [TestMethod]
@@ -498,7 +500,7 @@ public class TestDataManagement
     {
         VersionDetails versionDetails = await _dataManagementApi.GetVersionAsync(projectId: projectId, versionId: versionId, accessToken: token);
         VersionDetailsData versionDetailsData = versionDetails.Data;
-        Assert.IsTrue(versionDetailsData.Type == "versions");
+        Assert.IsTrue(versionDetailsData.Type == Type.Versions);
     }
 
     [TestMethod]
@@ -506,7 +508,7 @@ public class TestDataManagement
     {
         DownloadFormats downloadFormats = await _dataManagementApi.GetVersionDownloadFormatsAsync(projectId: projectId, versionId: versionId, accessToken: token);
         DownloadFormatsData downloadFormatsData = downloadFormats.Data;
-        Assert.IsTrue(downloadFormatsData.Type == "downloadFormats");
+        Assert.IsTrue(downloadFormatsData.Type == Type.DownloadFormats);
     }
 
     [TestMethod]
@@ -521,7 +523,7 @@ public class TestDataManagement
     {
         Item item = await _dataManagementApi.GetVersionItemAsync(projectId: projectId, versionId: versionId, accessToken: token);
         ItemData itemData = item.Data;
-        Assert.IsTrue(itemData.Type == "items");
+        Assert.IsTrue(itemData.Type == Type.Items);
     }
 
     [TestMethod]
@@ -556,13 +558,13 @@ public class TestDataManagement
             },
             Data = new VersionPayloadData()
             {
-                Type = Type.Items,
+                Type = Type.Versions,
                 Attributes = new VersionPayloadDataAttributes()
                 {
-                    Name = "drawing.dwg",
+                    Name = "drawing.rvt",
                     Extension = new RelationshipRefsPayloadDataMetaExtension()
                     {
-                        Type = Type.VersionsautodeskCoreFile,
+                        Type = Type.VersionsautodeskBim360File,
                         _Version = VersionNumber._10
                     }
                 },
@@ -570,18 +572,18 @@ public class TestDataManagement
                 {
                     Item = new FolderPayloadDataRelationshipsParent()
                     {
-                        Data = new FolderPayloadDataRelationshipsParentData()
+                        Data = new ModifyVersionPayloadData()
                         {
                             Type = Type.Items,
-                            Id = "urn:adsk.wipprod:dm.lineage:AeYgDtcTSuqYoyMweWFhhQ"
+                            Id = itemId
                         }
                     },
                     Storage = new FolderPayloadDataRelationshipsParent()
                     {
-                        Data = new FolderPayloadDataRelationshipsParentData()
+                        Data = new ModifyVersionPayloadData()
                         {
                             Type = Type.Objects,
-                            Id = "urn:adsk.objects:os.object:wip.dm.prod/980cff2c-f0f8-43d9-a151-4a2d916b91a2.dwg"
+                            Id = storageUrn
                         }
                     }
                 }
@@ -590,7 +592,7 @@ public class TestDataManagement
 
         ModelVersion modelVersion = await _dataManagementApi.CreateVersionAsync(projectId: projectId, versionPayload: versionPayload, accessToken: token);
         VersionData modelVersionData = modelVersion.Data;
-        Assert.IsTrue(modelVersionData.Type == "versions");
+        Assert.IsTrue(modelVersionData.Type == Type.Versions);
     }
 
     [TestMethod]
@@ -632,22 +634,20 @@ public class TestDataManagement
             {
                 _Version = VersionNumber._10
             },
-            Data = new ModifyVersionPayloadData()
+            Data = new ModifyItemPayloadData()
             {
-                Type = Type.Items,
-                Id = "urn:adsk.wipprod:fs.file:vf.ooWjwAQJR0uEoPRyfEnvew?version=1",
-                Attributes = new ModifyVersionPayloadDataAttributes()
+                Type = Type.Versions,
+                Id = versionId,
+                Attributes = new
                 {
-                    Name = "new name for drawing.dwg"
+                    Name = "New name for Drawing.rvt"
                 }
             }
         };
 
         VersionDetails versionDetails = await _dataManagementApi.PatchVersionAsync(projectId: projectId, versionId: versionId, modifyVersionPayload: modifyVersionPayload, accessToken: token);
         VersionDetailsData versionDetailsData = versionDetails.Data;
-        Assert.IsTrue(versionDetailsData.Type == "versions");
+        Assert.IsTrue(versionDetailsData.Type == Type.Versions);
     }
-
-
 
 }

@@ -64,6 +64,12 @@ namespace Autodesk.DataManagement.Model
         public VersionDataAttributesExtensionData Data { get; set; }
 
         /// <summary>
+        ///Gets or Sets Schema
+        /// </summary>
+        [DataMember(Name="schema", EmitDefaultValue=false)]
+        public VersionDataAttributesExtensionSchema Schema { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>

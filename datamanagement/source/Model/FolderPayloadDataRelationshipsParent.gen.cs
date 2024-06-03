@@ -49,7 +49,7 @@ namespace Autodesk.DataManagement.Model
         /// Gets or Sets Data
         /// </summary>
         [DataMember(Name="data", EmitDefaultValue=false)]
-        public FolderPayloadDataRelationshipsParentData Data { get; set; }
+        public ModifyVersionPayloadData Data { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

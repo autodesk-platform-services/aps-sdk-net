@@ -97,13 +97,31 @@ namespace Autodesk.DataManagement.Model
         /// Gets or Sets VersionNumber
         /// </summary>
         [DataMember(Name="versionNumber", EmitDefaultValue=false)]
-        public decimal? VersionNumber { get; set; }
+        public int? VersionNumber { get; set; }
 
         /// <summary>
         /// Gets or Sets Extension
         /// </summary>
         [DataMember(Name="extension", EmitDefaultValue=false)]
         public VersionDataAttributesExtension Extension { get; set; }
+
+        /// <summary>
+        ///Gets or Sets MimeType
+        /// </summary>
+        [DataMember(Name="mimeType", EmitDefaultValue=false)]
+        public string MimeType { get; set; }
+
+        /// <summary>
+        ///Gets or Sets FileType
+        /// </summary>
+        [DataMember(Name="fileType", EmitDefaultValue=false)]
+        public string FileType { get; set; }
+
+        /// <summary>
+        ///Gets or Sets StorageSize
+        /// </summary>
+        [DataMember(Name="storageSize", EmitDefaultValue=false)]
+        public int? StorageSize { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

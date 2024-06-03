@@ -100,7 +100,25 @@ namespace Autodesk.DataManagement.Model
         public bool? Reserved { get; set; }
 
         /// <summary>
-        /// Gets or Sets Extension
+        /// Gets or Sets ReservedTime
+        /// </summary>
+        [DataMember(Name="reservedTime", EmitDefaultValue=false)]
+        public string ReservedTime { get; set; }
+
+        /// <summary>
+        ///Gets or Sets ReservedUserId
+        /// </summary>
+        [DataMember(Name="reservedUserId", EmitDefaultValue=false)]
+        public string ReservedUserId { get; set; }
+
+        /// <summary>
+        ///Gets or Sets ReservedUserName
+        /// </summary>
+        [DataMember(Name="reservedUserName", EmitDefaultValue=false)]
+        public string ReservedUserName { get; set; }
+
+        /// <summary>
+        ///Gets or Sets Extension
         /// </summary>
         [DataMember(Name="extension", EmitDefaultValue=false)]
         public VersionIncludedAttributesExtension Extension { get; set; }

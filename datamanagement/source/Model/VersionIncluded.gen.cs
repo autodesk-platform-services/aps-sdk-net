@@ -48,8 +48,8 @@ namespace Autodesk.DataManagement.Model
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; set; }
+        [DataMember(Name="type", EmitDefaultValue=true)]
+        public Type Type { get; set; }
 
         /// <summary>
         /// Gets or Sets Id
@@ -68,6 +68,12 @@ namespace Autodesk.DataManagement.Model
         /// </summary>
         [DataMember(Name="links", EmitDefaultValue=false)]
         public ProjectsDataLinks Links { get; set; }
+
+        /// <summary>
+        ///Gets or Sets Relationships
+        /// </summary>
+        [DataMember(Name="relationships", EmitDefaultValue=false)]
+        public VersionIncludedRelationships Relationships { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
