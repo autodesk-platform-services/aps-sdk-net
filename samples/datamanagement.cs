@@ -28,7 +28,7 @@ class DataManagement
     {
         //Returns a collection of accessible hubs for this member.
         Hubs getHubs = await dataManagementClient.GetHubsAsync(accessToken: token);
-        // Get list of hubs data
+
         List<HubsData> getHubsData = getHubs.Data;
         foreach (var currentHub in getHubsData)
         {
