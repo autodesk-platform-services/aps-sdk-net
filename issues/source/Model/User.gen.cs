@@ -36,7 +36,7 @@ namespace Autodesk.Construction.Issues.Model
     /// User
     /// </summary>
     [DataContract]
-    public partial class User 
+    public partial class User
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="User" /> class.
@@ -44,40 +44,48 @@ namespace Autodesk.Construction.Issues.Model
         public User()
         {
         }
-        
+
         /// <summary>
-        /// Unique identifier for the given user.
+        ///Unique identifier for the given user.
         /// </summary>
-        /// <value>Unique identifier for the given user.</value>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        /// <value>
+        ///Unique identifier for the given user.
+        /// </value>
+        [DataMember(Name = "id", EmitDefaultValue = false)]
         public string Id { get; set; }
 
         /// <summary>
-        /// States whether the current logged in user is a system admin.
+        ///States whether the current logged in user is a system admin.
         /// </summary>
-        /// <value>States whether the current logged in user is a system admin.</value>
-        [DataMember(Name="isProjectAdmin", EmitDefaultValue=false)]
+        /// <value>
+        ///States whether the current logged in user is a system admin.
+        /// </value>
+        [DataMember(Name = "isProjectAdmin", EmitDefaultValue = false)]
         public bool? IsProjectAdmin { get; set; }
 
         /// <summary>
-        /// Not relevant
+        ///Not relevant
         /// </summary>
-        /// <value>Not relevant</value>
-        [DataMember(Name="canManageTemplates", EmitDefaultValue=false)]
+        /// <value>
+        ///Not relevant
+        /// </value>
+        [DataMember(Name = "canManageTemplates", EmitDefaultValue = false)]
         public bool? CanManageTemplates { get; set; }
 
         /// <summary>
-        /// Gets or Sets Issues
+        ///Gets or Sets Issues
         /// </summary>
-        [DataMember(Name="issues", EmitDefaultValue=false)]
+        [DataMember(Name = "issues", EmitDefaultValue = false)]
         public UserIssues Issues { get; set; }
 
         /// <summary>
-        /// The permission level of the user. Each permission level corresponds to a combination of values in the response. For example, a combination of read and create in the response, corresponds to a Create for other companies permission level.
+        ///The permission level of the user. Each permission level corresponds to a combination of values in the response. For example, a combination of read and create in the response, corresponds to a Create for other companies permission level.
         /// </summary>
-        /// <value>The permission level of the user. Each permission level corresponds to a combination of values in the response. For example, a combination of read and create in the response, corresponds to a Create for other companies permission level.</value>
-        [DataMember(Name="permissionLevels", EmitDefaultValue=false)]
-        public List<string> PermissionLevels { get; set; }
+        /// <value>
+        ///The permission level of the user. Each permission level corresponds to a combination of values in the response. For example, a combination of read and create in the response, corresponds to a Create for other companies permission level.
+        /// </value>
+        [DataMember(Name = "permissionLevels", EmitDefaultValue = false)]
+        public List<PermissionLevel> PermissionLevels { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

@@ -31,6 +31,7 @@ using Autodesk.Construction.Issues.Client;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Autodesk.SDKManager;
+using System.Collections;
 
 namespace Autodesk.Construction.Issues.Http
 {
@@ -43,13 +44,36 @@ namespace Autodesk.Construction.Issues.Http
         /// Your GET endpoint
         /// </summary>
         /// <remarks>
-        /// Retrieves information about issue custom attributes (custom fields) for a project, including the custom attribute title, description and type.
+        ///Retrieves information about issue custom attributes (custom fields) for a project, including the custom attribute title, description and type.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="projectId"></param>/// <param name="xAdsRegion">The region where the bucket residesAcceptable values: &#x60;US&#x60;, &#x60;EMEA&#x60;</param>/// <param name="limit">The number of custom attribute definitions to return in the response payload. For example, limit&#x3D;2. Acceptable values: 1-200. Default value: 200. (optional)</param>/// <param name="offset">The number of custom attribute definitions you want to begin retrieving results from. (optional)</param>/// <param name="filterCreatedAt">Retrieves items that were created at the specified date and time, in one of the following URL-encoded formats: YYYY-MM-DDThh:mm:ss.sz or YYYY-MM-DD. Separate multiple values with commas. (optional)</param>/// <param name="filterUpdatedAt">Retrieves items that were last updated at the specified date and time, in one of the following URL-encoded formats: YYYY-MM-DDThh:mm:ss.sz or YYYY-MM-DD. Separate multiple values with commas. (optional)</param>/// <param name="filterDeletedAt">Retrieves types that were deleted at the specified date and time, in one of the following URL-encoded formats: YYYY-MM-DDThh:mm:ss.sz or YYYY-MM-DD. Separate multiple values with commas.  (optional)</param>/// <param name="filterDataType">Retrieves issue custom attribute definitions with the specified data type. Possible values: list (this corresponds to dropdown in the UI), text, paragraph, numeric. For example, filter[dataType]&#x3D;text,numeric. (optional)</param>
-        /// <returns>Task of ApiResponse<AttrDefinition></returns>
-        
-        System.Threading.Tasks.Task<ApiResponse<AttrDefinition>> GetAttributeDefinitionsAsync (string projectId, XAdsRegion xAdsRegion, int? limit= default(int?), int? offset= default(int?), string filterCreatedAt= default(string), string filterUpdatedAt= default(string), string filterDeletedAt= default(string), List<FilterdataType> filterDataType= default(List<FilterdataType>),  string accessToken = null, bool throwOnError = true);
+        /// <param name="projectId">
+        ///
+        /// </param>
+        /// <param name="xAdsRegion">
+        /// (optional)
+        /// </param>
+        /// <param name="limit">
+        ///The number of custom attribute definitions to return in the response payload. For example, limit=2. Acceptable values: 1-200. Default value: 200. (optional)
+        /// </param>
+        /// <param name="offset">
+        ///The number of custom attribute definitions you want to begin retrieving results from. (optional)
+        /// </param>
+        /// <param name="filterCreatedAt">
+        ///Retrieves items that were created at the specified date and time, in one of the following URL-encoded formats: YYYY-MM-DDThh:mm:ss.sz or YYYY-MM-DD. Separate multiple values with commas. (optional)
+        /// </param>
+        /// <param name="filterUpdatedAt">
+        ///Retrieves items that were last updated at the specified date and time, in one of the following URL-encoded formats: YYYY-MM-DDThh:mm:ss.sz or YYYY-MM-DD. Separate multiple values with commas. (optional)
+        /// </param>
+        /// <param name="filterDeletedAt">
+        ///Retrieves types that were deleted at the specified date and time, in one of the following URL-encoded formats: YYYY-MM-DDThh:mm:ss.sz or YYYY-MM-DD. Separate multiple values with commas.  (optional)
+        /// </param>
+        /// <param name="filterDataType">
+        ///Retrieves issue custom attribute definitions with the specified data type. Possible values: list (this corresponds to dropdown in the UI), text, paragraph, numeric. For example, filter[dataType]=text,numeric. (optional)
+        /// </param>
+        /// <returns>Task of ApiResponse&lt;AttrDefinition&gt;</returns>
+
+        System.Threading.Tasks.Task<ApiResponse<AttrDefinition>> GetAttributeDefinitionsAsync(string projectId, Region? xAdsRegion = null, int? limit = default(int?), int? offset = default(int?), string filterCreatedAt = default(string), string filterUpdatedAt = default(string), string filterDeletedAt = default(string), List<DataType> filterDataType = default(List<DataType>), string accessToken = null, bool throwOnError = true);
     }
 
     /// <summary>
@@ -72,27 +96,49 @@ namespace Autodesk.Construction.Issues.Http
         }
         private void SetQueryParameter(string name, object value, Dictionary<string, object> dictionary)
         {
-            if(value is Enum)
+            if (value is Enum)
             {
                 var type = value.GetType();
                 var memberInfos = type.GetMember(value.ToString());
                 var enumValueMemberInfo = memberInfos.FirstOrDefault(m => m.DeclaringType == type);
                 var valueAttributes = enumValueMemberInfo.GetCustomAttributes(typeof(EnumMemberAttribute), false);
-                if(valueAttributes.Length > 0)
+                if (valueAttributes.Length > 0)
                 {
                     dictionary.Add(name, ((EnumMemberAttribute)valueAttributes[0]).Value);
                 }
             }
-            else if(value is int)
+            else if (value is int)
             {
-                if((int)value > 0)
+                if ((int)value > 0)
                 {
                     dictionary.Add(name, value);
                 }
             }
+            else if (value is IList)
+            {
+                if (value is List<string>)
+                {
+                    value = String.Join(",",(List<string>)value);
+                     dictionary.Add(name, value);
+                }
+                else 
+                {
+                    List<string>newlist = new List<string>();
+                    foreach ( var x in (IList)value)
+                    {
+                            var type = x.GetType();
+                            var memberInfos = type.GetMember(x.ToString());
+                            var enumValueMemberInfo = memberInfos.FirstOrDefault(m => m.DeclaringType == type);
+                            var valueAttributes = enumValueMemberInfo.GetCustomAttributes(typeof(EnumMemberAttribute), false);
+                            newlist.Add(((EnumMemberAttribute)valueAttributes[0]).Value);                            
+                    }
+                    string joinedString = String.Join(",", newlist);
+                    dictionary.Add(name, joinedString);
+                }
+            }
             else
             {
-                if(value != null)
+                if (value != null)
                 {
                     dictionary.Add(name, value);
                 }
@@ -100,27 +146,27 @@ namespace Autodesk.Construction.Issues.Http
         }
         private void SetHeader(string baseName, object value, HttpRequestMessage req)
         {
-                if(value is DateTime)
+            if (value is DateTime)
+            {
+                if ((DateTime)value != DateTime.MinValue)
                 {
-                    if((DateTime)value != DateTime.MinValue)
+                    req.Headers.TryAddWithoutValidation(baseName, LocalMarshalling.ParameterToString(value)); // header parameter
+                }
+            }
+            else
+            {
+                if (value != null)
+                {
+                    if (!string.Equals(baseName, "Content-Range"))
                     {
                         req.Headers.TryAddWithoutValidation(baseName, LocalMarshalling.ParameterToString(value)); // header parameter
                     }
-                }
-                else
-                {
-                    if (value != null)
+                    else
                     {
-                        if(!string.Equals(baseName, "Content-Range"))
-                        {
-                            req.Headers.TryAddWithoutValidation(baseName, LocalMarshalling.ParameterToString(value)); // header parameter
-                        }
-                        else
-                        {
-                            req.Content.Headers.Add(baseName, LocalMarshalling.ParameterToString(value));
-                        }
+                        req.Content.Headers.Add(baseName, LocalMarshalling.ParameterToString(value));
                     }
                 }
+            }
 
         }
 
@@ -128,19 +174,42 @@ namespace Autodesk.Construction.Issues.Http
         /// Gets or sets the ApsConfiguration object
         /// </summary>
         /// <value>An instance of the ForgeService</value>
-        public ForgeService Service {get; set;}
+        public ForgeService Service { get; set; }
 
         /// <summary>
         /// Your GET endpoint
         /// </summary>
         /// <remarks>
-        /// Retrieves information about issue custom attributes (custom fields) for a project, including the custom attribute title, description and type.
+        ///Retrieves information about issue custom attributes (custom fields) for a project, including the custom attribute title, description and type.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="projectId"></param>/// <param name="xAdsRegion">The region where the bucket residesAcceptable values: &#x60;US&#x60;, &#x60;EMEA&#x60;</param>/// <param name="limit">The number of custom attribute definitions to return in the response payload. For example, limit&#x3D;2. Acceptable values: 1-200. Default value: 200. (optional)</param>/// <param name="offset">The number of custom attribute definitions you want to begin retrieving results from. (optional)</param>/// <param name="filterCreatedAt">Retrieves items that were created at the specified date and time, in one of the following URL-encoded formats: YYYY-MM-DDThh:mm:ss.sz or YYYY-MM-DD. Separate multiple values with commas. (optional)</param>/// <param name="filterUpdatedAt">Retrieves items that were last updated at the specified date and time, in one of the following URL-encoded formats: YYYY-MM-DDThh:mm:ss.sz or YYYY-MM-DD. Separate multiple values with commas. (optional)</param>/// <param name="filterDeletedAt">Retrieves types that were deleted at the specified date and time, in one of the following URL-encoded formats: YYYY-MM-DDThh:mm:ss.sz or YYYY-MM-DD. Separate multiple values with commas.  (optional)</param>/// <param name="filterDataType">Retrieves issue custom attribute definitions with the specified data type. Possible values: list (this corresponds to dropdown in the UI), text, paragraph, numeric. For example, filter[dataType]&#x3D;text,numeric. (optional)</param>
-        /// <returns>Task of ApiResponse<AttrDefinition></returns>
-        
-        public async System.Threading.Tasks.Task<ApiResponse<AttrDefinition>> GetAttributeDefinitionsAsync (string projectId,XAdsRegion xAdsRegion,int? limit= default(int?),int? offset= default(int?),string filterCreatedAt= default(string),string filterUpdatedAt= default(string),string filterDeletedAt= default(string),List<FilterdataType> filterDataType= default(List<FilterdataType>), string accessToken = null, bool throwOnError = true)
+        /// <param name="projectId">
+        ///
+        /// </param>
+        /// <param name="xAdsRegion">
+        /// (optional)
+        /// </param>
+        /// <param name="limit">
+        ///The number of custom attribute definitions to return in the response payload. For example, limit=2. Acceptable values: 1-200. Default value: 200. (optional)
+        /// </param>
+        /// <param name="offset">
+        ///The number of custom attribute definitions you want to begin retrieving results from. (optional)
+        /// </param>
+        /// <param name="filterCreatedAt">
+        ///Retrieves items that were created at the specified date and time, in one of the following URL-encoded formats: YYYY-MM-DDThh:mm:ss.sz or YYYY-MM-DD. Separate multiple values with commas. (optional)
+        /// </param>
+        /// <param name="filterUpdatedAt">
+        ///Retrieves items that were last updated at the specified date and time, in one of the following URL-encoded formats: YYYY-MM-DDThh:mm:ss.sz or YYYY-MM-DD. Separate multiple values with commas. (optional)
+        /// </param>
+        /// <param name="filterDeletedAt">
+        ///Retrieves types that were deleted at the specified date and time, in one of the following URL-encoded formats: YYYY-MM-DDThh:mm:ss.sz or YYYY-MM-DD. Separate multiple values with commas.  (optional)
+        /// </param>
+        /// <param name="filterDataType">
+        ///Retrieves issue custom attribute definitions with the specified data type. Possible values: list (this corresponds to dropdown in the UI), text, paragraph, numeric. For example, filter[dataType]=text,numeric. (optional)
+        /// </param>
+        /// <returns>Task of ApiResponse&lt;AttrDefinition&gt;></returns>
+
+        public async System.Threading.Tasks.Task<ApiResponse<AttrDefinition>> GetAttributeDefinitionsAsync(string projectId, Region? xAdsRegion = null, int? limit = default(int?), int? offset = default(int?), string filterCreatedAt = default(string), string filterUpdatedAt = default(string), string filterDeletedAt = default(string), List<DataType> filterDataType = default(List<DataType>), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into GetAttributeDefinitionsAsync ");
             using (var request = new HttpRequestMessage())
@@ -161,43 +230,43 @@ namespace Autodesk.Construction.Issues.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/CONSTRUCTION.ISSUES/C#/0.0.1");
-                if(!string.IsNullOrEmpty(accessToken))
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/CONSTRUCTION.ISSUES/C#/1.0.0-beta1");
+                if (!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
                 }
 
 
 
-                SetHeader("x-ads-region", (xAdsRegion.ToString().ToLowerInvariant()), request);
+                SetHeader("x-ads-region", xAdsRegion, request);
 
                 // tell the underlying pipeline what scope we'd like to use
                 // if (scopes == null)
                 // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
+                // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
                 // }
                 // else
                 // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
                 // if (scopes == null)
                 // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
+                // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
                 // }
                 // else
                 // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
                 // if (scopes == null)
                 // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
+                // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
                 // }
                 // else
                 // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
 
                 request.Method = new HttpMethod("GET");
@@ -209,9 +278,11 @@ namespace Autodesk.Construction.Issues.Http
                 {
                     try
                     {
-                      await response.EnsureSuccessStatusCodeAsync();
-                    } catch (HttpRequestException ex) {
-                      throw new ConstructionissuesApiException(ex.Message, response, ex);
+                        await response.EnsureSuccessStatusCodeAsync();
+                    }
+                    catch (HttpRequestException ex)
+                    {
+                        throw new ConstructionissuesApiException(ex.Message, response, ex);
                     }
                 }
                 else if (!response.IsSuccessStatusCode)

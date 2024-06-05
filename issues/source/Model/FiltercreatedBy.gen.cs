@@ -36,7 +36,7 @@ namespace Autodesk.Construction.Issues.Model
     /// FiltercreatedBy
     /// </summary>
     [DataContract]
-    public partial class FiltercreatedBy 
+    public partial class FiltercreatedBy
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="FiltercreatedBy" /> class.
@@ -44,11 +44,11 @@ namespace Autodesk.Construction.Issues.Model
         public FiltercreatedBy()
         {
         }
-        
+
         /// <summary>
         /// Gets or Sets Id
         /// </summary>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        [DataMember(Name = "id", EmitDefaultValue = false)]
         public string Id { get; set; }
 
         /// <summary>

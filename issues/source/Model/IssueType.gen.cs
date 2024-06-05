@@ -36,7 +36,7 @@ namespace Autodesk.Construction.Issues.Model
     /// IssueType
     /// </summary>
     [DataContract]
-    public partial class IssueType 
+    public partial class IssueType
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="IssueType" /> class.
@@ -44,18 +44,20 @@ namespace Autodesk.Construction.Issues.Model
         public IssueType()
         {
         }
-        
+
         /// <summary>
-        /// Gets or Sets Pagination
+        ///Gets or Sets Pagination
         /// </summary>
-        [DataMember(Name="pagination", EmitDefaultValue=false)]
+        [DataMember(Name = "pagination", EmitDefaultValue = false)]
         public IssueTypePagination Pagination { get; set; }
 
         /// <summary>
-        /// A list of issue type categories.
+        ///A list of issue type categories.
         /// </summary>
-        /// <value>A list of issue type categories.</value>
-        [DataMember(Name="results", EmitDefaultValue=false)]
+        /// <value>
+        ///A list of issue type categories.
+        /// </value>
+        [DataMember(Name = "results", EmitDefaultValue = false)]
         public List<IssueTypeResults> Results { get; set; }
 
         /// <summary>

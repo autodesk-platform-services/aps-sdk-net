@@ -36,7 +36,7 @@ namespace Autodesk.Construction.Issues.Model
     /// The position of the pushpin in the viewable.
     /// </summary>
     [DataContract]
-    public partial class IssueLinkedDocumentsDetailsPosition 
+    public partial class IssueLinkedDocumentsDetailsPosition
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="IssueLinkedDocumentsDetailsPosition" /> class.
@@ -44,26 +44,32 @@ namespace Autodesk.Construction.Issues.Model
         public IssueLinkedDocumentsDetailsPosition()
         {
         }
-        
+
         /// <summary>
-        /// The x-value of the position in the viewable.
+        ///The x-value of the position in the viewable.
         /// </summary>
-        /// <value>The x-value of the position in the viewable.</value>
-        [DataMember(Name="x", EmitDefaultValue=false)]
+        /// <value>
+        ///The x-value of the position in the viewable.
+        /// </value>
+        [DataMember(Name = "x", EmitDefaultValue = false)]
         public int? X { get; set; }
 
         /// <summary>
-        /// The y-value of the position in the viewable.
+        ///The y-value of the position in the viewable.
         /// </summary>
-        /// <value>The y-value of the position in the viewable.</value>
-        [DataMember(Name="y", EmitDefaultValue=false)]
+        /// <value>
+        ///The y-value of the position in the viewable.
+        /// </value>
+        [DataMember(Name = "y", EmitDefaultValue = false)]
         public int? Y { get; set; }
 
         /// <summary>
-        /// The z-value of the position in the viewable.
+        ///The z-value of the position in the viewable.
         /// </summary>
-        /// <value>The z-value of the position in the viewable.</value>
-        [DataMember(Name="z", EmitDefaultValue=false)]
+        /// <value>
+        ///The z-value of the position in the viewable.
+        /// </value>
+        [DataMember(Name = "z", EmitDefaultValue = false)]
         public int? Z { get; set; }
 
         /// <summary>

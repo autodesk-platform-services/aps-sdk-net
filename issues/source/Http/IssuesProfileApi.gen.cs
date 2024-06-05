@@ -31,6 +31,7 @@ using Autodesk.Construction.Issues.Client;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Autodesk.SDKManager;
+using System.Collections;
 
 namespace Autodesk.Construction.Issues.Http
 {
@@ -43,13 +44,18 @@ namespace Autodesk.Construction.Issues.Http
         /// Your GET endpoint
         /// </summary>
         /// <remarks>
-        /// Returns the current user permissions.
+        ///Returns the current user permissions.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="projectId"></param>/// <param name="xAdsRegion">The region where the bucket residesAcceptable values: &#x60;US&#x60;, &#x60;EMEA&#x60;</param>
-        /// <returns>Task of ApiResponse<User></returns>
-        
-        System.Threading.Tasks.Task<ApiResponse<User>> GetUserProfileAsync (string projectId, XAdsRegion xAdsRegion,  string accessToken = null, bool throwOnError = true);
+        /// <param name="projectId">
+        ///
+        /// </param>
+        /// <param name="xAdsRegion">
+        /// (optional)
+        /// </param>
+        /// <returns>Task of ApiResponse&lt;User&gt;</returns>
+
+        System.Threading.Tasks.Task<ApiResponse<User>> GetUserProfileAsync(string projectId, Region? xAdsRegion = null, string accessToken = null, bool throwOnError = true);
     }
 
     /// <summary>
@@ -72,27 +78,49 @@ namespace Autodesk.Construction.Issues.Http
         }
         private void SetQueryParameter(string name, object value, Dictionary<string, object> dictionary)
         {
-            if(value is Enum)
+            if (value is Enum)
             {
                 var type = value.GetType();
                 var memberInfos = type.GetMember(value.ToString());
                 var enumValueMemberInfo = memberInfos.FirstOrDefault(m => m.DeclaringType == type);
                 var valueAttributes = enumValueMemberInfo.GetCustomAttributes(typeof(EnumMemberAttribute), false);
-                if(valueAttributes.Length > 0)
+                if (valueAttributes.Length > 0)
                 {
                     dictionary.Add(name, ((EnumMemberAttribute)valueAttributes[0]).Value);
                 }
             }
-            else if(value is int)
+            else if (value is int)
             {
-                if((int)value > 0)
+                if ((int)value > 0)
                 {
                     dictionary.Add(name, value);
                 }
             }
+            else if (value is IList)
+            {
+                if (value is List<string>)
+                {
+                    value = String.Join(",",(List<string>)value);
+                     dictionary.Add(name, value);
+                }
+                else 
+                {
+                    List<string>newlist = new List<string>();
+                    foreach ( var x in (IList)value)
+                    {
+                            var type = x.GetType();
+                            var memberInfos = type.GetMember(x.ToString());
+                            var enumValueMemberInfo = memberInfos.FirstOrDefault(m => m.DeclaringType == type);
+                            var valueAttributes = enumValueMemberInfo.GetCustomAttributes(typeof(EnumMemberAttribute), false);
+                            newlist.Add(((EnumMemberAttribute)valueAttributes[0]).Value);                            
+                    }
+                    string joinedString = String.Join(",", newlist);
+                    dictionary.Add(name, joinedString);
+                }
+            }
             else
             {
-                if(value != null)
+                if (value != null)
                 {
                     dictionary.Add(name, value);
                 }
@@ -100,27 +128,27 @@ namespace Autodesk.Construction.Issues.Http
         }
         private void SetHeader(string baseName, object value, HttpRequestMessage req)
         {
-                if(value is DateTime)
+            if (value is DateTime)
+            {
+                if ((DateTime)value != DateTime.MinValue)
                 {
-                    if((DateTime)value != DateTime.MinValue)
+                    req.Headers.TryAddWithoutValidation(baseName, LocalMarshalling.ParameterToString(value)); // header parameter
+                }
+            }
+            else
+            {
+                if (value != null)
+                {
+                    if (!string.Equals(baseName, "Content-Range"))
                     {
                         req.Headers.TryAddWithoutValidation(baseName, LocalMarshalling.ParameterToString(value)); // header parameter
                     }
-                }
-                else
-                {
-                    if (value != null)
+                    else
                     {
-                        if(!string.Equals(baseName, "Content-Range"))
-                        {
-                            req.Headers.TryAddWithoutValidation(baseName, LocalMarshalling.ParameterToString(value)); // header parameter
-                        }
-                        else
-                        {
-                            req.Content.Headers.Add(baseName, LocalMarshalling.ParameterToString(value));
-                        }
+                        req.Content.Headers.Add(baseName, LocalMarshalling.ParameterToString(value));
                     }
                 }
+            }
 
         }
 
@@ -128,19 +156,24 @@ namespace Autodesk.Construction.Issues.Http
         /// Gets or sets the ApsConfiguration object
         /// </summary>
         /// <value>An instance of the ForgeService</value>
-        public ForgeService Service {get; set;}
+        public ForgeService Service { get; set; }
 
         /// <summary>
         /// Your GET endpoint
         /// </summary>
         /// <remarks>
-        /// Returns the current user permissions.
+        ///Returns the current user permissions.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="projectId"></param>/// <param name="xAdsRegion">The region where the bucket residesAcceptable values: &#x60;US&#x60;, &#x60;EMEA&#x60;</param>
-        /// <returns>Task of ApiResponse<User></returns>
-        
-        public async System.Threading.Tasks.Task<ApiResponse<User>> GetUserProfileAsync (string projectId,XAdsRegion xAdsRegion, string accessToken = null, bool throwOnError = true)
+        /// <param name="projectId">
+        ///
+        /// </param>
+        /// <param name="xAdsRegion">
+        /// (optional)
+        /// </param>
+        /// <returns>Task of ApiResponse&lt;User&gt;></returns>
+
+        public async System.Threading.Tasks.Task<ApiResponse<User>> GetUserProfileAsync(string projectId, Region? xAdsRegion = null, string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into GetUserProfileAsync ");
             using (var request = new HttpRequestMessage())
@@ -155,43 +188,43 @@ namespace Autodesk.Construction.Issues.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/CONSTRUCTION.ISSUES/C#/0.0.1");
-                if(!string.IsNullOrEmpty(accessToken))
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/CONSTRUCTION.ISSUES/C#/1.0.0-beta1");
+                if (!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
                 }
 
 
 
-                SetHeader("x-ads-region", (xAdsRegion.ToString().ToLowerInvariant()), request);
+                SetHeader("x-ads-region", xAdsRegion, request);
 
                 // tell the underlying pipeline what scope we'd like to use
                 // if (scopes == null)
                 // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
+                // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
                 // }
                 // else
                 // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
                 // if (scopes == null)
                 // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
+                // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
                 // }
                 // else
                 // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
                 // if (scopes == null)
                 // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
+                // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
                 // }
                 // else
                 // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
 
                 request.Method = new HttpMethod("GET");
@@ -203,9 +236,11 @@ namespace Autodesk.Construction.Issues.Http
                 {
                     try
                     {
-                      await response.EnsureSuccessStatusCodeAsync();
-                    } catch (HttpRequestException ex) {
-                      throw new ConstructionissuesApiException(ex.Message, response, ex);
+                        await response.EnsureSuccessStatusCodeAsync();
+                    }
+                    catch (HttpRequestException ex)
+                    {
+                        throw new ConstructionissuesApiException(ex.Message, response, ex);
                     }
                 }
                 else if (!response.IsSuccessStatusCode)

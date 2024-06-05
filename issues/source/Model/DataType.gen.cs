@@ -33,36 +33,37 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Construction.Issues.Model
 {
     /// <summary>
-    /// Defines dataType
+    /// Retrieves issue custom attribute definitions with the specified data type
     /// </summary>
-    
+    ///<value>Retrieves issue custom attribute definitions with the specified data type</value>
+
     [JsonConverter(typeof(StringEnumConverter))]
-    
+
     public enum DataType
     {
-        
+
         /// <summary>
         /// Enum List for value: list
         /// </summary>
         [EnumMember(Value = "list")]
         List,
-        
+
         /// <summary>
         /// Enum Text for value:  text
         /// </summary>
-        [EnumMember(Value = " text")]
+        [EnumMember(Value = "text")]
         Text,
-        
+
         /// <summary>
         /// Enum Paragraph for value:  paragraph
         /// </summary>
-        [EnumMember(Value = " paragraph")]
+        [EnumMember(Value = "paragraph")]
         Paragraph,
-        
+
         /// <summary>
         /// Enum Numeric for value:  numeric
         /// </summary>
-        [EnumMember(Value = " numeric")]
+        [EnumMember(Value = "numeric")]
         Numeric
     }
 

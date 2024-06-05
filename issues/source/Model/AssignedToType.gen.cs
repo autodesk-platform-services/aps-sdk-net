@@ -35,30 +35,31 @@ namespace Autodesk.Construction.Issues.Model
     /// <summary>
     /// Defines assignedToType
     /// </summary>
-    
+    ///<value></value>
+
     [JsonConverter(typeof(StringEnumConverter))]
-    
+
     public enum AssignedToType
     {
-        
+
         /// <summary>
         /// Enum User for value: user
         /// </summary>
         [EnumMember(Value = "user")]
         User,
-        
+
         /// <summary>
         /// Enum Company for value:  company
         /// </summary>
         [EnumMember(Value = " company")]
         Company,
-        
+
         /// <summary>
         /// Enum Role for value:  role
         /// </summary>
         [EnumMember(Value = " role")]
         Role,
-        
+
         /// <summary>
         /// Enum Null for value: null
         /// </summary>

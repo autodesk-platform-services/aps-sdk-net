@@ -36,34 +36,40 @@ namespace Autodesk.Construction.Issues.Model
     /// The pagination object defining the limit, offset, total number of issues, next and previous URL
     /// </summary>
     [DataContract]
-    public partial class IssuesPagination 
+    public partial class IssuesPagePagination
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="IssuesPagination" /> class.
+        /// Initializes a new instance of the <see cref="IssuesPagePagination" /> class.
         /// </summary>
-        public IssuesPagination()
+        public IssuesPagePagination()
         {
         }
-        
+
         /// <summary>
-        /// The maximum number of issues to be returned in each page.
+        ///The maximum number of issues to be returned in each page.
         /// </summary>
-        /// <value>The maximum number of issues to be returned in each page.</value>
-        [DataMember(Name="limit", EmitDefaultValue=false)]
+        /// <value>
+        ///The maximum number of issues to be returned in each page.
+        /// </value>
+        [DataMember(Name = "limit", EmitDefaultValue = false)]
         public int? Limit { get; set; }
 
         /// <summary>
-        /// The offset defining the start position from where the issues are returned
+        ///The offset defining the start position from where the issues are returned
         /// </summary>
-        /// <value>The offset defining the start position from where the issues are returned</value>
-        [DataMember(Name="offset", EmitDefaultValue=false)]
+        /// <value>
+        ///The offset defining the start position from where the issues are returned
+        /// </value>
+        [DataMember(Name = "offset", EmitDefaultValue = false)]
         public int? Offset { get; set; }
 
         /// <summary>
-        /// The total number of issues including the ones of the current page
+        ///The total number of issues including the ones of the current page
         /// </summary>
-        /// <value>The total number of issues including the ones of the current page</value>
-        [DataMember(Name="totalResults", EmitDefaultValue=false)]
+        /// <value>
+        ///The total number of issues including the ones of the current page
+        /// </value>
+        [DataMember(Name = "totalResults", EmitDefaultValue = false)]
         public int? TotalResults { get; set; }
 
         /// <summary>

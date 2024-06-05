@@ -33,109 +33,97 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Construction.Issues.Model
 {
     /// <summary>
-    /// CommentsResults
+    /// ResultsLinkedDocuments
     /// </summary>
     [DataContract]
-    public partial class CommentsResults
+    public partial class ResultsLinkedDocuments
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="CommentsResults" /> class.
+        /// Initializes a new instance of the <see cref="ResultsLinkedDocuments" /> class.
         /// </summary>
-        public CommentsResults()
+        public ResultsLinkedDocuments()
         {
         }
 
         /// <summary>
-        /// The comment ID.
+        ///The type of file. Possible values:
+        ///TwoDVectorPushpin (3D models) TwoDRasterPushpin (2D sheets and views)
         /// </summary>
         /// <value>
-        ///The comment ID.
+        ///The type of file. Possible values:
+        ///TwoDVectorPushpin (3D models) TwoDRasterPushpin (2D sheets and views)
         /// </value>
-        [DataMember(Name = "id", EmitDefaultValue = false)]
-        public string Id { get; set; }
+        [DataMember(Name = "type", EmitDefaultValue = false)]
+        public string Type { get; set; }
 
         /// <summary>
-        ///The comment content. A \n indicates a new line, e.g.: Hey\nAharon will be a 2 lines comment.
-        ///Max length: 10000
+        ///The ID of the file associated with the issue (pushpin). Note the we do not currently support data associated with the ACC Build Sheet tool.
         /// </summary>
         /// <value>
-        ///The comment content. A \n indicates a new line, e.g.: Hey\nAharon will be a 2 lines comment.
-        ///Max length: 10000
+        ///The ID of the file associated with the issue (pushpin). Note the we do not currently support data associated with the ACC Build Sheet tool.
         /// </value>
-        [DataMember(Name = "body", EmitDefaultValue = false)]
-        public string Body { get; set; }
+        [DataMember(Name = "urn", EmitDefaultValue = false)]
+        public string Urn { get; set; }
 
         /// <summary>
-        ///The date and time the custom attribute was created, in the following format: YYYY-MM-DDThh:mm:ss.sz.
+        ///The Autodesk ID of the user who created the pushpin issue.
         /// </summary>
         /// <value>
-        ///The date and time the custom attribute was created, in the following format: YYYY-MM-DDThh:mm:ss.sz.
-        /// </value>
-        [DataMember(Name = "createdAt", EmitDefaultValue = false)]
-        public string CreatedAt { get; set; }
-
-        /// <summary>
-        ///The Autodesk ID of the user who created the comment.
-        /// </summary>
-        /// <value>
-        ///The Autodesk ID of the user who created the comment.
+        ///The Autodesk ID of the user who created the pushpin issue.
         /// </value>
         [DataMember(Name = "createdBy", EmitDefaultValue = false)]
         public string CreatedBy { get; set; }
 
         /// <summary>
-        ///Not relevant
+        ///The date and time the pushpin was created, in ISO8601 format.
         /// </summary>
         /// <value>
-        ///Not relevant
+        ///The date and time the pushpin was created, in ISO8601 format.
         /// </value>
-        [DataMember(Name = "updatedAt", EmitDefaultValue = false)]
-        public string UpdatedAt { get; set; }
+        [DataMember(Name = "createdAt", EmitDefaultValue = false)]
+        public string CreatedAt { get; set; }
 
         /// <summary>
-        ///Not relevant
+        ///The version of the file the pushin issue was added to. For information about file versions, see the Data Management API.
         /// </summary>
         /// <value>
-        ///Not relevant
+        ///The version of the file the pushin issue was added to. For information about file versions, see the Data Management API.
         /// </value>
-        [DataMember(Name = "deletedAt", EmitDefaultValue = false)]
-        public string DeletedAt { get; set; }
+        [DataMember(Name = "createdAtVersion", EmitDefaultValue = false)]
+        public int? CreatedAtVersion { get; set; }
 
         /// <summary>
-        ///Not relevant
+        ///The Autodesk ID of the user who closed the pushpin issue.
         /// </summary>
         /// <value>
-        ///Not relevant
+        ///The Autodesk ID of the user who closed the pushpin issue.
         /// </value>
-        [DataMember(Name = "clientCreatedAt", EmitDefaultValue = false)]
-        public string ClientCreatedAt { get; set; }
+        [DataMember(Name = "closedBy", EmitDefaultValue = false)]
+        public string ClosedBy { get; set; }
 
         /// <summary>
-        ///Not relevant
+        ///The date and time the pushpin issue was closed, in ISO8601 format.
         /// </summary>
         /// <value>
-        ///Not relevant
+        ///The date and time the pushpin issue was closed, in ISO8601 format.
         /// </value>
-        [DataMember(Name = "clientUpdatedAt", EmitDefaultValue = false)]
-        public string ClientUpdatedAt { get; set; }
+        [DataMember(Name = "closedAt", EmitDefaultValue = false)]
+        public string ClosedAt { get; set; }
 
         /// <summary>
-        ///Not relevant
+        ///The version of the file when the pushpin issue was closed.
         /// </summary>
         /// <value>
-        ///Not relevant
+        ///The version of the file when the pushpin issue was closed.
         /// </value>
-        [DataMember(Name = "permittedActions", EmitDefaultValue = false)]
-        public List<string> PermittedActions { get; set; }
+        [DataMember(Name = "closedAtVersion", EmitDefaultValue = false)]
+        public int? ClosedAtVersion { get; set; }
 
         /// <summary>
-        ///Not relevant
+        ///Gets or Sets Details
         /// </summary>
-        /// <value>
-        ///Not relevant
-        /// </value>
-        [DataMember(Name = "permittedAttributes", EmitDefaultValue = false)]
-        public List<string> PermittedAttributes { get; set; }
+        [DataMember(Name = "details", EmitDefaultValue = false)]
+        public ResultsLinkedDocumentsDetails Details { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

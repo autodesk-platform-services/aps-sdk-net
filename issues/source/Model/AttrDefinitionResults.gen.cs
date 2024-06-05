@@ -36,7 +36,7 @@ namespace Autodesk.Construction.Issues.Model
     /// AttrDefinitionResults
     /// </summary>
     [DataContract]
-    public partial class AttrDefinitionResults 
+    public partial class AttrDefinitionResults
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AttrDefinitionResults" /> class.
@@ -44,128 +44,149 @@ namespace Autodesk.Construction.Issues.Model
         public AttrDefinitionResults()
         {
         }
-        
+
         /// <summary>
-        /// The ID of the custom attribute.
+        ///The ID of the custom attribute.
         /// </summary>
-        /// <value>The ID of the custom attribute.</value>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        /// <value>
+        ///The ID of the custom attribute.
+        /// </value>
+        [DataMember(Name = "id", EmitDefaultValue = false)]
         public string Id { get; set; }
 
         /// <summary>
-        /// The ID of the custom attribute definition.
+        ///Not relevant
         /// </summary>
-        /// <value>The ID of the custom attribute definition.</value>
-        [DataMember(Name="attributeDefinitionId", EmitDefaultValue=false)]
-        public string AttributeDefinitionId { get; set; }
-
-        /// <summary>
-        /// Not relevant
-        /// </summary>
-        /// <value>Not relevant</value>
-        [DataMember(Name="containerId", EmitDefaultValue=false)]
+        /// <value>
+        ///Not relevant
+        /// </value>
+        [DataMember(Name = "containerId", EmitDefaultValue = false)]
         public string ContainerId { get; set; }
 
         /// <summary>
-        /// Gets or Sets MappedItemType
+        ///Gets or Sets MappedItemType
         /// </summary>
-        [DataMember(Name="mappedItemType", EmitDefaultValue=false)]
+        [DataMember(Name = "mappedItemType", EmitDefaultValue = false)]
         public string MappedItemType { get; set; }
 
         /// <summary>
-        /// The ID of the item (type, or subtype) the custom attribute is mapped to.
+        ///The ID of the item (type, or subtype) the custom attribute is mapped to.
         /// </summary>
-        /// <value>The ID of the item (type, or subtype) the custom attribute is mapped to.</value>
-        [DataMember(Name="mappedItemId", EmitDefaultValue=false)]
+        /// <value>
+        ///The ID of the item (type, or subtype) the custom attribute is mapped to.
+        /// </value>
+        [DataMember(Name = "mappedItemId", EmitDefaultValue = false)]
         public string MappedItemId { get; set; }
 
         /// <summary>
-        /// The order that the custom attributes were mapped to the item (type, subtype). This is only relevant to non-inherited mappings.
+        ///The order that the custom attributes were mapped to the item (type, subtype). This is only relevant to non-inherited mappings.
         /// </summary>
-        /// <value>The order that the custom attributes were mapped to the item (type, subtype). This is only relevant to non-inherited mappings.</value>
-        [DataMember(Name="order", EmitDefaultValue=false)]
+        /// <value>
+        ///The order that the custom attributes were mapped to the item (type, subtype). This is only relevant to non-inherited mappings.
+        /// </value>
+        [DataMember(Name = "order", EmitDefaultValue = false)]
         public int? Order { get; set; }
 
         /// <summary>
-        /// Gets or Sets DataType
+        ///Gets or Sets DataType
         /// </summary>
-        [DataMember(Name="dataType", EmitDefaultValue=false)]
-        public string DataType { get; set; }
+        [DataMember(Name = "dataType", EmitDefaultValue = true)]
+        public DataType DataType { get; set; }
 
         /// <summary>
-        /// Gets or Sets Metadata
+        ///Gets or Sets Metadata
         /// </summary>
-        [DataMember(Name="metadata", EmitDefaultValue=false)]
+        [DataMember(Name = "metadata", EmitDefaultValue = false)]
         public AttrDefinitionResultsMetadata Metadata { get; set; }
 
         /// <summary>
-        /// Not relevant
+        ///Not relevant
         /// </summary>
-        /// <value>Not relevant</value>
-        [DataMember(Name="permittedActions", EmitDefaultValue=false)]
+        /// <value>
+        ///Not relevant
+        /// </value>
+        [DataMember(Name = "permittedActions", EmitDefaultValue = false)]
         public List<string> PermittedActions { get; set; }
 
         /// <summary>
-        /// Not relevant
+        ///Not relevant
         /// </summary>
-        /// <value>Not relevant</value>
-        [DataMember(Name="permittedAttributes", EmitDefaultValue=false)]
+        /// <value>
+        ///Not relevant
+        /// </value>
+        [DataMember(Name = "permittedAttributes", EmitDefaultValue = false)]
         public List<string> PermittedAttributes { get; set; }
 
         /// <summary>
-        /// The date and time the custom attribute was created, in the following format: YYYY-MM-DDThh:mm:ss.sz.
+        ///The date and time the custom attribute was created, in the following format: YYYY-MM-DDThh:mm:ss.sz.
         /// </summary>
-        /// <value>The date and time the custom attribute was created, in the following format: YYYY-MM-DDThh:mm:ss.sz.</value>
-        [DataMember(Name="createdAt", EmitDefaultValue=false)]
+        /// <value>
+        ///The date and time the custom attribute was created, in the following format: YYYY-MM-DDThh:mm:ss.sz.
+        /// </value>
+        [DataMember(Name = "createdAt", EmitDefaultValue = false)]
         public string CreatedAt { get; set; }
 
         /// <summary>
-        /// The Autodesk ID of the user who created the custom attribute.
+        ///The Autodesk ID of the user who created the custom attribute.
         /// </summary>
-        /// <value>The Autodesk ID of the user who created the custom attribute.</value>
-        [DataMember(Name="createdBy", EmitDefaultValue=false)]
+        /// <value>
+        ///The Autodesk ID of the user who created the custom attribute.
+        /// </value>
+        [DataMember(Name = "createdBy", EmitDefaultValue = false)]
         public string CreatedBy { get; set; }
 
         /// <summary>
-        /// The last date and time the custom attribute was updated, in the following format: YYYY-MM-DDThh:mm:ss.sz.
+        ///The last date and time the custom attribute was updated, in the following format: YYYY-MM-DDThh:mm:ss.sz.
         /// </summary>
-        /// <value>The last date and time the custom attribute was updated, in the following format: YYYY-MM-DDThh:mm:ss.sz.</value>
-        [DataMember(Name="updatedAt", EmitDefaultValue=false)]
+        /// <value>
+        ///The last date and time the custom attribute was updated, in the following format: YYYY-MM-DDThh:mm:ss.sz.
+        /// </value>
+        [DataMember(Name = "updatedAt", EmitDefaultValue = false)]
         public string UpdatedAt { get; set; }
 
         /// <summary>
-        /// The Autodesk ID of the user who last updated the custom attribute.
+        ///The Autodesk ID of the user who last updated the custom attribute.
         /// </summary>
-        /// <value>The Autodesk ID of the user who last updated the custom attribute.</value>
-        [DataMember(Name="updatedBy", EmitDefaultValue=false)]
+        /// <value>
+        ///The Autodesk ID of the user who last updated the custom attribute.
+        /// </value>
+        [DataMember(Name = "updatedBy", EmitDefaultValue = false)]
         public string UpdatedBy { get; set; }
 
         /// <summary>
-        /// The date and time the custom attribute was deleted, in the following format: YYYY-MM-DDThh:mm:ss.sz.
+        ///The date and time the custom attribute was deleted, in the following format: YYYY-MM-DDThh:mm:ss.sz.
         /// </summary>
-        /// <value>The date and time the custom attribute was deleted, in the following format: YYYY-MM-DDThh:mm:ss.sz.</value>
-        [DataMember(Name="deletedAt", EmitDefaultValue=false)]
+        /// <value>
+        ///The date and time the custom attribute was deleted, in the following format: YYYY-MM-DDThh:mm:ss.sz.
+        /// </value>
+        [DataMember(Name = "deletedAt", EmitDefaultValue = false)]
         public string DeletedAt { get; set; }
 
         /// <summary>
-        /// The Autodesk ID of the user who deleted the custom attribute.
+        ///The Autodesk ID of the user who deleted the custom attribute.
         /// </summary>
-        /// <value>The Autodesk ID of the user who deleted the custom attribute.</value>
-        [DataMember(Name="deletedBy", EmitDefaultValue=false)]
+        /// <value>
+        ///The Autodesk ID of the user who deleted the custom attribute.
+        /// </value>
+        [DataMember(Name = "deletedBy", EmitDefaultValue = false)]
         public string DeletedBy { get; set; }
 
         /// <summary>
-        /// The title of the custom attribute. 
+        ///The title of the custom attribute.
         /// </summary>
-        /// <value>The title of the custom attribute. </value>
-        [DataMember(Name="title", EmitDefaultValue=false)]
+        /// <value>
+        ///The title of the custom attribute.
+        /// </value>
+        [DataMember(Name = "title", EmitDefaultValue = false)]
         public string Title { get; set; }
 
         /// <summary>
-        /// The description of the custom attribute.
+        ///The description of the custom attribute.
         /// </summary>
-        /// <value>The description of the custom attribute.</value>
-        [DataMember(Name="description", EmitDefaultValue=false)]
+        /// <value>
+        ///The description of the custom attribute.
+        /// </value>
+        [DataMember(Name = "description", EmitDefaultValue = false)]
         public string Description { get; set; }
 
         /// <summary>

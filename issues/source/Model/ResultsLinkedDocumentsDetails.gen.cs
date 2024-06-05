@@ -36,20 +36,23 @@ namespace Autodesk.Construction.Issues.Model
     /// Information about the individual viewable.
     /// </summary>
     [DataContract]
-    public partial class IssueLinkedDocumentsDetails
+    public partial class ResultsLinkedDocumentsDetails
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="IssueLinkedDocumentsDetails" /> class.
+        /// Initializes a new instance of the <see cref="ResultsLinkedDocumentsDetails" /> class.
         /// </summary>
-        public IssueLinkedDocumentsDetails()
+        public ResultsLinkedDocumentsDetails()
         {
         }
 
         /// <summary>
-        ///Gets or Sets Viewable
+        ///The individual viewable associated with the issue (pushpin). This is relevant for both individual 2D sheets and views within a 3D model, and individual PDF sheets within a multi-sheet PDF file. It is only relevant if the issue is associated with a file.
         /// </summary>
+        /// <value>
+        ///The individual viewable associated with the issue (pushpin). This is relevant for both individual 2D sheets and views within a 3D model, and individual PDF sheets within a multi-sheet PDF file. It is only relevant if the issue is associated with a file.
+        /// </value>
         [DataMember(Name = "viewable", EmitDefaultValue = false)]
-        public IssueLinkedDocumentsDetailsViewable Viewable { get; set; }
+        public Object Viewable { get; set; }
 
         /// <summary>
         ///Gets or Sets Position

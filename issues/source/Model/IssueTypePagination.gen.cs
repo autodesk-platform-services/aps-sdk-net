@@ -36,7 +36,7 @@ namespace Autodesk.Construction.Issues.Model
     /// The pagination object.
     /// </summary>
     [DataContract]
-    public partial class IssueTypePagination 
+    public partial class IssueTypePagination
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="IssueTypePagination" /> class.
@@ -44,26 +44,32 @@ namespace Autodesk.Construction.Issues.Model
         public IssueTypePagination()
         {
         }
-        
+
         /// <summary>
-        /// The number of items per page.
+        ///The number of items per page.
         /// </summary>
-        /// <value>The number of items per page.</value>
-        [DataMember(Name="limit", EmitDefaultValue=false)]
+        /// <value>
+        ///The number of items per page.
+        /// </value>
+        [DataMember(Name = "limit", EmitDefaultValue = false)]
         public int? Limit { get; set; }
 
         /// <summary>
-        /// The page number that the results begin from.
+        ///The page number that the results begin from.
         /// </summary>
-        /// <value>The page number that the results begin from.</value>
-        [DataMember(Name="offset", EmitDefaultValue=false)]
+        /// <value>
+        ///The page number that the results begin from.
+        /// </value>
+        [DataMember(Name = "offset", EmitDefaultValue = false)]
         public int? Offset { get; set; }
 
         /// <summary>
-        /// The number of items in the response.
+        ///The number of items in the response.
         /// </summary>
-        /// <value>The number of items in the response.</value>
-        [DataMember(Name="totalResults", EmitDefaultValue=false)]
+        /// <value>
+        ///The number of items in the response.
+        /// </value>
+        [DataMember(Name = "totalResults", EmitDefaultValue = false)]
         public int? TotalResults { get; set; }
 
         /// <summary>

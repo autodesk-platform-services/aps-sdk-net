@@ -36,7 +36,7 @@ namespace Autodesk.Construction.Issues.Model
     /// The pagination object.
     /// </summary>
     [DataContract]
-    public partial class AttrMapping 
+    public partial class AttrMapping
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AttrMapping" /> class.
@@ -44,18 +44,20 @@ namespace Autodesk.Construction.Issues.Model
         public AttrMapping()
         {
         }
-        
+
         /// <summary>
-        /// Gets or Sets Pagination
+        ///Gets or Sets Pagination
         /// </summary>
-        [DataMember(Name="pagination", EmitDefaultValue=false)]
+        [DataMember(Name = "pagination", EmitDefaultValue = false)]
         public IssueTypePagination Pagination { get; set; }
 
         /// <summary>
-        /// A list of issue attribute mappings.
+        ///A list of issue attribute mappings.
         /// </summary>
-        /// <value>A list of issue attribute mappings.</value>
-        [DataMember(Name="results", EmitDefaultValue=false)]
+        /// <value>
+        ///A list of issue attribute mappings.
+        /// </value>
+        [DataMember(Name = "results", EmitDefaultValue = false)]
         public List<AttrMappingResults> Results { get; set; }
 
         /// <summary>

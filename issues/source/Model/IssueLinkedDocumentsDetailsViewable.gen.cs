@@ -36,7 +36,7 @@ namespace Autodesk.Construction.Issues.Model
     /// The individual viewable associated with the issue (pushpin). This is relevant for both individual 2D sheets and views within a 3D model, and individual PDF sheets within a multi-sheet PDF file. It is only relevant if the issue is associated with a file.
     /// </summary>
     [DataContract]
-    public partial class IssueLinkedDocumentsDetailsViewable 
+    public partial class IssueLinkedDocumentsDetailsViewable
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="IssueLinkedDocumentsDetailsViewable" /> class.
@@ -44,40 +44,52 @@ namespace Autodesk.Construction.Issues.Model
         public IssueLinkedDocumentsDetailsViewable()
         {
         }
-        
+
         /// <summary>
-        /// Not relevant
+        ///Not relevant
         /// </summary>
-        /// <value>Not relevant</value>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        /// <value>
+        ///Not relevant
+        /// </value>
+        [DataMember(Name = "id", EmitDefaultValue = false)]
         public string Id { get; set; }
 
         /// <summary>
-        /// The ID of the viewable (guid).
+        ///The ID of the viewable (guid).
         /// </summary>
-        /// <value>The ID of the viewable (guid).</value>
-        [DataMember(Name="guid", EmitDefaultValue=false)]
+        /// <value>
+        ///The ID of the viewable (guid).
+        /// </value>
+        [DataMember(Name = "guid", EmitDefaultValue = false)]
         public string Guid { get; set; }
 
         /// <summary>
-        /// Not relevant
+        ///Not relevant
         /// </summary>
-        /// <value>Not relevant</value>
-        [DataMember(Name="viewableId", EmitDefaultValue=false)]
+        /// <value>
+        ///Not relevant
+        /// </value>
+        [DataMember(Name = "viewableId", EmitDefaultValue = false)]
         public string ViewableId { get; set; }
 
         /// <summary>
-        /// The name of the viewable. Max length: 1000
+        ///The name of the viewable.
+        ///Max length: 1000
         /// </summary>
-        /// <value>The name of the viewable. Max length: 1000</value>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        /// <value>
+        ///The name of the viewable.
+        ///Max length: 1000
+        /// </value>
+        [DataMember(Name = "name", EmitDefaultValue = false)]
         public string Name { get; set; }
 
         /// <summary>
-        /// True if it is a 3D viewable false if it is a 2D viewable
+        ///True if it is a 3D viewable false if it is a 2D viewable
         /// </summary>
-        /// <value>True if it is a 3D viewable false if it is a 2D viewable</value>
-        [DataMember(Name="is3D", EmitDefaultValue=false)]
+        /// <value>
+        ///True if it is a 3D viewable false if it is a 2D viewable
+        /// </value>
+        [DataMember(Name = "is3D", EmitDefaultValue = false)]
         public bool? Is3D { get; set; }
 
         /// <summary>

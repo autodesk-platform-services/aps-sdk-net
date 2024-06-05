@@ -36,7 +36,7 @@ namespace Autodesk.Construction.Issues.Model
     /// IssueTypeResultsSubtypes
     /// </summary>
     [DataContract]
-    public partial class IssueTypeResultsSubtypes 
+    public partial class IssueTypeResultsSubtypes
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="IssueTypeResultsSubtypes" /> class.
@@ -44,110 +44,140 @@ namespace Autodesk.Construction.Issues.Model
         public IssueTypeResultsSubtypes()
         {
         }
-        
+
         /// <summary>
-        /// The ID of the issue subtype.
+        ///The ID of the issue subtype.
         /// </summary>
-        /// <value>The ID of the issue subtype.</value>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        /// <value>
+        ///The ID of the issue subtype.
+        /// </value>
+        [DataMember(Name = "id", EmitDefaultValue = false)]
         public string Id { get; set; }
 
         /// <summary>
-        /// The ID of the parent issue type.
+        ///The ID of the parent issue type.
         /// </summary>
-        /// <value>The ID of the parent issue type.</value>
-        [DataMember(Name="issueTypeId", EmitDefaultValue=false)]
+        /// <value>
+        ///The ID of the parent issue type.
+        /// </value>
+        [DataMember(Name = "issueTypeId", EmitDefaultValue = false)]
         public string IssueTypeId { get; set; }
 
         /// <summary>
-        /// Max length: 250
+        ///Max length: 250
         /// </summary>
-        /// <value>Max length: 250</value>
-        [DataMember(Name="title", EmitDefaultValue=false)]
+        /// <value>
+        ///Max length: 250
+        /// </value>
+        [DataMember(Name = "title", EmitDefaultValue = false)]
         public string Title { get; set; }
 
         /// <summary>
-        /// 3 chars pin label.
+        ///3 chars pin label.
         /// </summary>
-        /// <value>3 chars pin label.</value>
-        [DataMember(Name="code", EmitDefaultValue=false)]
+        /// <value>
+        ///3 chars pin label.
+        /// </value>
+        [DataMember(Name = "code", EmitDefaultValue = false)]
         public string Code { get; set; }
 
         /// <summary>
-        /// States whether the issue type is active.
+        ///States whether the issue type is active.
         /// </summary>
-        /// <value>States whether the issue type is active.</value>
-        [DataMember(Name="isActive", EmitDefaultValue=false)]
+        /// <value>
+        ///States whether the issue type is active.
+        /// </value>
+        [DataMember(Name = "isActive", EmitDefaultValue = false)]
         public bool? IsActive { get; set; }
 
         /// <summary>
-        /// Not relevant
+        ///Not relevant
         /// </summary>
-        /// <value>Not relevant</value>
-        [DataMember(Name="orderIndex", EmitDefaultValue=false)]
+        /// <value>
+        ///Not relevant
+        /// </value>
+        [DataMember(Name = "orderIndex", EmitDefaultValue = false)]
         public int? OrderIndex { get; set; }
 
         /// <summary>
-        /// Not relevant
+        ///Not relevant
         /// </summary>
-        /// <value>Not relevant</value>
-        [DataMember(Name="isReadOnly", EmitDefaultValue=false)]
+        /// <value>
+        ///Not relevant
+        /// </value>
+        [DataMember(Name = "isReadOnly", EmitDefaultValue = false)]
         public bool? IsReadOnly { get; set; }
 
         /// <summary>
-        /// Not relevant
+        ///Not relevant
         /// </summary>
-        /// <value>Not relevant</value>
-        [DataMember(Name="permittedActions", EmitDefaultValue=false)]
+        /// <value>
+        ///Not relevant
+        /// </value>
+        [DataMember(Name = "permittedActions", EmitDefaultValue = false)]
         public List<string> PermittedActions { get; set; }
 
         /// <summary>
-        /// Not relevant
+        ///Not relevant
         /// </summary>
-        /// <value>Not relevant</value>
-        [DataMember(Name="permittedAttributes", EmitDefaultValue=false)]
+        /// <value>
+        ///Not relevant
+        /// </value>
+        [DataMember(Name = "permittedAttributes", EmitDefaultValue = false)]
         public List<string> PermittedAttributes { get; set; }
 
         /// <summary>
-        /// The unique identifier of the user who created the issue type.
+        ///The unique identifier of the user who created the issue type.
         /// </summary>
-        /// <value>The unique identifier of the user who created the issue type.</value>
-        [DataMember(Name="createdBy", EmitDefaultValue=false)]
+        /// <value>
+        ///The unique identifier of the user who created the issue type.
+        /// </value>
+        [DataMember(Name = "createdBy", EmitDefaultValue = false)]
         public string CreatedBy { get; set; }
 
         /// <summary>
-        /// The date and time the issue was created, in ISO8601 format.
+        ///The date and time the issue was created, in ISO8601 format.
         /// </summary>
-        /// <value>The date and time the issue was created, in ISO8601 format.</value>
-        [DataMember(Name="createdAt", EmitDefaultValue=false)]
+        /// <value>
+        ///The date and time the issue was created, in ISO8601 format.
+        /// </value>
+        [DataMember(Name = "createdAt", EmitDefaultValue = false)]
         public string CreatedAt { get; set; }
 
         /// <summary>
-        /// The unique identifier of the user who updated the issue type.
+        ///The unique identifier of the user who updated the issue type.
         /// </summary>
-        /// <value>The unique identifier of the user who updated the issue type.</value>
-        [DataMember(Name="updatedBy", EmitDefaultValue=false)]
+        /// <value>
+        ///The unique identifier of the user who updated the issue type.
+        /// </value>
+        [DataMember(Name = "updatedBy", EmitDefaultValue = false)]
         public string UpdatedBy { get; set; }
 
         /// <summary>
-        /// The date and time the issue type was updated, in ISO8601 format.
+        ///The date and time the issue type was updated, in ISO8601 format.
         /// </summary>
-        /// <value>The date and time the issue type was updated, in ISO8601 format.</value>
-        [DataMember(Name="updatedAt", EmitDefaultValue=false)]
+        /// <value>
+        ///The date and time the issue type was updated, in ISO8601 format.
+        /// </value>
+        [DataMember(Name = "updatedAt", EmitDefaultValue = false)]
         public string UpdatedAt { get; set; }
 
         /// <summary>
-        /// The unique identifier of the user who deleted the issue type.
+        ///The unique identifier of the user who deleted the issue type.
         /// </summary>
-        /// <value>The unique identifier of the user who deleted the issue type.</value>
-        [DataMember(Name="deletedBy", EmitDefaultValue=false)]
+        /// <value>
+        ///The unique identifier of the user who deleted the issue type.
+        /// </value>
+        [DataMember(Name = "deletedBy", EmitDefaultValue = false)]
         public string DeletedBy { get; set; }
 
         /// <summary>
-        /// The date and time the issue type was deleted, in ISO8601 format.
+        ///The date and time the issue type was deleted, in ISO8601 format.
         /// </summary>
-        /// <value>The date and time the issue type was deleted, in ISO8601 format.</value>
-        [DataMember(Name="deletedAt", EmitDefaultValue=false)]
+        /// <value>
+        ///The date and time the issue type was deleted, in ISO8601 format.
+        /// </value>
+        [DataMember(Name = "deletedAt", EmitDefaultValue = false)]
         public string DeletedAt { get; set; }
 
         /// <summary>

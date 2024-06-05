@@ -36,7 +36,7 @@ namespace Autodesk.Construction.Issues.Model
     /// IssueLinkedDocuments
     /// </summary>
     [DataContract]
-    public partial class IssueLinkedDocuments 
+    public partial class IssueLinkedDocuments
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="IssueLinkedDocuments" /> class.
@@ -44,67 +44,85 @@ namespace Autodesk.Construction.Issues.Model
         public IssueLinkedDocuments()
         {
         }
-        
+
         /// <summary>
-        /// The type of file. Possible values: TwoDVectorPushpin (3D models) TwoDRasterPushpin (2D sheets and views)
+        ///The type of file. Possible values:
+        ///TwoDVectorPushpin (3D models) TwoDRasterPushpin (2D sheets and views)
         /// </summary>
-        /// <value>The type of file. Possible values: TwoDVectorPushpin (3D models) TwoDRasterPushpin (2D sheets and views)</value>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        /// <value>
+        ///The type of file. Possible values:
+        ///TwoDVectorPushpin (3D models) TwoDRasterPushpin (2D sheets and views)
+        /// </value>
+        [DataMember(Name = "type", EmitDefaultValue = false)]
         public string Type { get; set; }
 
         /// <summary>
-        /// The ID of the file associated with the issue (pushpin). Note the we do not currently support data associated with the ACC Build Sheet tool.
+        ///The ID of the file associated with the issue (pushpin). Note the we do not currently support data associated with the ACC Build Sheet tool.
         /// </summary>
-        /// <value>The ID of the file associated with the issue (pushpin). Note the we do not currently support data associated with the ACC Build Sheet tool.</value>
-        [DataMember(Name="urn", EmitDefaultValue=false)]
+        /// <value>
+        ///The ID of the file associated with the issue (pushpin). Note the we do not currently support data associated with the ACC Build Sheet tool.
+        /// </value>
+        [DataMember(Name = "urn", EmitDefaultValue = false)]
         public string Urn { get; set; }
 
         /// <summary>
-        /// The Autodesk ID of the user who created the pushpin issue.
+        ///The Autodesk ID of the user who created the pushpin issue.
         /// </summary>
-        /// <value>The Autodesk ID of the user who created the pushpin issue.</value>
-        [DataMember(Name="createdBy", EmitDefaultValue=false)]
+        /// <value>
+        ///The Autodesk ID of the user who created the pushpin issue.
+        /// </value>
+        [DataMember(Name = "createdBy", EmitDefaultValue = false)]
         public string CreatedBy { get; set; }
 
         /// <summary>
-        /// The date and time the pushpin was created, in ISO8601 format.
+        ///The date and time the pushpin was created, in ISO8601 format.
         /// </summary>
-        /// <value>The date and time the pushpin was created, in ISO8601 format.</value>
-        [DataMember(Name="createdAt", EmitDefaultValue=false)]
+        /// <value>
+        ///The date and time the pushpin was created, in ISO8601 format.
+        /// </value>
+        [DataMember(Name = "createdAt", EmitDefaultValue = false)]
         public string CreatedAt { get; set; }
 
         /// <summary>
-        /// The version of the file the pushin issue was added to. For information about file versions, see the Data Management API.
+        ///The version of the file the pushin issue was added to. For information about file versions, see the Data Management API.
         /// </summary>
-        /// <value>The version of the file the pushin issue was added to. For information about file versions, see the Data Management API.</value>
-        [DataMember(Name="createdAtVersion", EmitDefaultValue=false)]
+        /// <value>
+        ///The version of the file the pushin issue was added to. For information about file versions, see the Data Management API.
+        /// </value>
+        [DataMember(Name = "createdAtVersion", EmitDefaultValue = false)]
         public int? CreatedAtVersion { get; set; }
 
         /// <summary>
-        /// The Autodesk ID of the user who closed the pushpin issue.
+        ///The Autodesk ID of the user who closed the pushpin issue.
         /// </summary>
-        /// <value>The Autodesk ID of the user who closed the pushpin issue.</value>
-        [DataMember(Name="closedBy", EmitDefaultValue=false)]
+        /// <value>
+        ///The Autodesk ID of the user who closed the pushpin issue.
+        /// </value>
+        [DataMember(Name = "closedBy", EmitDefaultValue = false)]
         public string ClosedBy { get; set; }
 
         /// <summary>
-        /// The date and time the pushpin issue was closed, in ISO8601 format.
+        ///The date and time the pushpin issue was closed, in ISO8601 format.
         /// </summary>
-        /// <value>The date and time the pushpin issue was closed, in ISO8601 format.</value>
-        [DataMember(Name="closedAt", EmitDefaultValue=false)]
+        /// <value>
+        ///The date and time the pushpin issue was closed, in ISO8601 format.
+        /// </value>
+        [DataMember(Name = "closedAt", EmitDefaultValue = false)]
         public string ClosedAt { get; set; }
 
         /// <summary>
-        /// The version of the file when the pushpin issue was closed.
+        ///The version of the file when the pushpin issue was closed.
         /// </summary>
-        /// <value>The version of the file when the pushpin issue was closed.</value>
-        [DataMember(Name="closedAtVersion", EmitDefaultValue=false)]
+        /// <value>
+        ///The version of the file when the pushpin issue was closed.
+        /// </value>
+        [DataMember(Name = "closedAtVersion", EmitDefaultValue = false)]
         public int? ClosedAtVersion { get; set; }
 
         /// <summary>
-        /// Gets or Sets Details
+        ///Gets or Sets Details
         /// </summary>
-        [DataMember(Name="details", EmitDefaultValue=false)]
+        [DataMember(Name = "details", EmitDefaultValue = false)]
         public IssueLinkedDocumentsDetails Details { get; set; }
 
         /// <summary>

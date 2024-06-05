@@ -36,7 +36,7 @@ namespace Autodesk.Construction.Issues.Model
     /// The list object.
     /// </summary>
     [DataContract]
-    public partial class AttrDefinitionResultsMetadataList 
+    public partial class AttrDefinitionResultsMetadataList
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AttrDefinitionResultsMetadataList" /> class.
@@ -44,12 +44,14 @@ namespace Autodesk.Construction.Issues.Model
         public AttrDefinitionResultsMetadataList()
         {
         }
-        
+
         /// <summary>
-        /// The options object.
+        ///The options object.
         /// </summary>
-        /// <value>The options object.</value>
-        [DataMember(Name="options", EmitDefaultValue=false)]
+        /// <value>
+        ///The options object.
+        /// </value>
+        [DataMember(Name = "options", EmitDefaultValue = false)]
         public List<AttrDefinitionResultsMetadataListOptions> Options { get; set; }
 
         /// <summary>

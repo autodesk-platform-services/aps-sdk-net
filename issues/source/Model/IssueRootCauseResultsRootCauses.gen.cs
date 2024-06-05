@@ -32,83 +32,103 @@ using Newtonsoft.Json.Converters;
 
 namespace Autodesk.Construction.Issues.Model
 {
-    /// <summary>
-    /// IssueRootCauseResultsRootCauses
-    /// </summary>
-    [DataContract]
-    public partial class IssueRootCauseResultsRootCauses 
-    {
         /// <summary>
-        /// Initializes a new instance of the <see cref="IssueRootCauseResultsRootCauses" /> class.
+        /// IssueRootCauseResultsRootCauses
         /// </summary>
-        public IssueRootCauseResultsRootCauses()
+        [DataContract]
+        public partial class IssueRootCauseResultsRootCauses
         {
+                /// <summary>
+                /// Initializes a new instance of the <see cref="IssueRootCauseResultsRootCauses" /> class.
+                /// </summary>
+                public IssueRootCauseResultsRootCauses()
+                {
+                }
+
+                /// <summary>
+                ///The ID of the issue root cause.
+                /// </summary>
+                /// <value>
+                ///The ID of the issue root cause.
+                /// </value>
+                [DataMember(Name = "id", EmitDefaultValue = false)]
+                public string Id { get; set; }
+
+                /// <summary>
+                ///The ID of the parent issue root cause category.
+                /// </summary>
+                /// <value>
+                ///The ID of the parent issue root cause category.
+                /// </value>
+                [DataMember(Name = "rootCauseCategoryId", EmitDefaultValue = false)]
+                public string RootCauseCategoryId { get; set; }
+
+                /// <summary>
+                ///The title of the issue root cause.
+                ///Max length: 100
+                /// </summary>
+                /// <value>
+                ///The title of the issue root cause.
+                ///Max length: 100
+                /// </value>
+                [DataMember(Name = "title", EmitDefaultValue = false)]
+                public string Title { get; set; }
+
+                /// <summary>
+                ///The description of the custom attribute.
+                ///Max length: 500
+                /// </summary>
+                /// <value>
+                ///The description of the custom attribute.
+                ///Max length: 500
+                /// </value>
+                [DataMember(Name = "isActive", EmitDefaultValue = false)]
+                public bool? IsActive { get; set; }
+
+                /// <summary>
+                ///Not relevant
+                /// </summary>
+                /// <value>
+                ///Not relevant
+                /// </value>
+                [DataMember(Name = "permittedActions", EmitDefaultValue = false)]
+                public List<string> PermittedActions { get; set; }
+
+                /// <summary>
+                ///Not relevant
+                /// </summary>
+                /// <value>
+                ///Not relevant
+                /// </value>
+                [DataMember(Name = "permittedAttributes", EmitDefaultValue = false)]
+                public List<string> PermittedAttributes { get; set; }
+
+                /// <summary>
+                ///The date and time the custom attribute was deleted, in the following format: YYYY-MM-DDThh:mm:ss.sz.
+                /// </summary>
+                /// <value>
+                ///The date and time the custom attribute was deleted, in the following format: YYYY-MM-DDThh:mm:ss.sz.
+                /// </value>
+                [DataMember(Name = "deletedAt", EmitDefaultValue = false)]
+                public string DeletedAt { get; set; }
+
+                /// <summary>
+                ///The Autodesk ID of the user who deleted the custom attribute.
+                /// </summary>
+                /// <value>
+                ///The Autodesk ID of the user who deleted the custom attribute.
+                /// </value>
+                [DataMember(Name = "deletedBy", EmitDefaultValue = false)]
+                public string DeletedBy { get; set; }
+
+                /// <summary>
+                /// Returns the string presentation of the object
+                /// </summary>
+                /// <returns>String presentation of the object</returns>
+                public override string ToString()
+                {
+                        return JsonConvert.SerializeObject(this, Formatting.Indented);
+                }
         }
-        
-        /// <summary>
-        /// The ID of the issue root cause.
-        /// </summary>
-        /// <value>The ID of the issue root cause.</value>
-        [DataMember(Name="id", EmitDefaultValue=false)]
-        public string Id { get; set; }
-
-        /// <summary>
-        /// The ID of the parent issue root cause category.
-        /// </summary>
-        /// <value>The ID of the parent issue root cause category.</value>
-        [DataMember(Name="rootCauseCategoryId", EmitDefaultValue=false)]
-        public string RootCauseCategoryId { get; set; }
-
-        /// <summary>
-        /// The title of the issue root cause. Max length: 100
-        /// </summary>
-        /// <value>The title of the issue root cause. Max length: 100</value>
-        [DataMember(Name="title", EmitDefaultValue=false)]
-        public string Title { get; set; }
-
-        /// <summary>
-        /// The description of the custom attribute. Max length: 500
-        /// </summary>
-        /// <value>The description of the custom attribute. Max length: 500</value>
-        [DataMember(Name="isActive", EmitDefaultValue=false)]
-        public bool? IsActive { get; set; }
-
-        /// <summary>
-        /// Not relevant
-        /// </summary>
-        /// <value>Not relevant</value>
-        [DataMember(Name="permittedActions", EmitDefaultValue=false)]
-        public List<string> PermittedActions { get; set; }
-
-        /// <summary>
-        /// Not relevant
-        /// </summary>
-        /// <value>Not relevant</value>
-        [DataMember(Name="permittedAttributes", EmitDefaultValue=false)]
-        public List<string> PermittedAttributes { get; set; }
-
-        /// <summary>
-        /// The date and time the custom attribute was deleted, in the following format: YYYY-MM-DDThh:mm:ss.sz.
-        /// </summary>
-        /// <value>The date and time the custom attribute was deleted, in the following format: YYYY-MM-DDThh:mm:ss.sz.</value>
-        [DataMember(Name="deletedAt", EmitDefaultValue=false)]
-        public string DeletedAt { get; set; }
-
-        /// <summary>
-        /// The Autodesk ID of the user who deleted the custom attribute.
-        /// </summary>
-        /// <value>The Autodesk ID of the user who deleted the custom attribute.</value>
-        [DataMember(Name="deletedBy", EmitDefaultValue=false)]
-        public string DeletedBy { get; set; }
-
-        /// <summary>
-        /// Returns the string presentation of the object
-        /// </summary>
-        /// <returns>String presentation of the object</returns>
-        public override string ToString()
-        {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
-        }
-    }
 
 }

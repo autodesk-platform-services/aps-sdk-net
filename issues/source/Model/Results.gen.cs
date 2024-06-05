@@ -33,15 +33,15 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Construction.Issues.Model
 {
         /// <summary>
-        /// Issue
+        /// Results
         /// </summary>
         [DataContract]
-        public partial class Issue
+        public partial class Results
         {
                 /// <summary>
-                /// Initializes a new instance of the <see cref="Issue" /> class.
+                /// Initializes a new instance of the <see cref="Results" /> class.
                 /// </summary>
-                public Issue()
+                public Results()
                 {
                 }
 
@@ -131,8 +131,11 @@ namespace Autodesk.Construction.Issues.Model
                 public string IssueSubtypeId { get; set; }
 
                 /// <summary>
-                ///Gets or Sets Status
+                ///The current status of the issue. To check the available statuses for the project, call GET users/me and check the permitted statuses list (issue.new.permittedStatuses). For more information about statuses, see the Help documentation.
                 /// </summary>
+                /// <value>
+                ///The current status of the issue. To check the available statuses for the project, call GET users/me and check the permitted statuses list (issue.new.permittedStatuses). For more information about statuses, see the Help documentation.
+                /// </value>
                 [DataMember(Name = "status", EmitDefaultValue = false)]
                 public string Status { get; set; }
 
@@ -146,13 +149,10 @@ namespace Autodesk.Construction.Issues.Model
                 public string AssignedTo { get; set; }
 
                 /// <summary>
-                ///The type of the current assignee of this issue. Possible values: user, company, role, null. Note that if you select a type, you also need to select the assignee ID (assignedTo).
+                ///Gets or Sets AssignedToType
                 /// </summary>
-                /// <value>
-                ///The type of the current assignee of this issue. Possible values: user, company, role, null. Note that if you select a type, you also need to select the assignee ID (assignedTo).
-                /// </value>
-                [DataMember(Name = "assignedToType", EmitDefaultValue = false)]
-                public string AssignedToType { get; set; }
+                [DataMember(Name = "assignedToType", EmitDefaultValue = true)]
+                public AssignedToType AssignedToType { get; set; }
 
                 /// <summary>
                 ///The due date of the issue, in ISO8601 format.
@@ -199,7 +199,7 @@ namespace Autodesk.Construction.Issues.Model
                 ///Information about the files associated with issues (pushpins).
                 /// </value>
                 [DataMember(Name = "linkedDocuments", EmitDefaultValue = false)]
-                public List<IssueLinkedDocuments> LinkedDocuments { get; set; }
+                public List<ResultsLinkedDocuments> LinkedDocuments { get; set; }
 
                 /// <summary>
                 ///Not relevant

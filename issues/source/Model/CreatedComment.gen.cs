@@ -36,7 +36,7 @@ namespace Autodesk.Construction.Issues.Model
     /// CreatedComment
     /// </summary>
     [DataContract]
-    public partial class CreatedComment 
+    public partial class CreatedComment
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="CreatedComment" /> class.
@@ -44,75 +44,97 @@ namespace Autodesk.Construction.Issues.Model
         public CreatedComment()
         {
         }
-        
+
         /// <summary>
-        /// The comment ID.
+        ///The comment ID.
         /// </summary>
-        /// <value>The comment ID.</value>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        /// <value>
+        ///The comment ID.
+        /// </value>
+        [DataMember(Name = "id", EmitDefaultValue = false)]
         public string Id { get; set; }
 
         /// <summary>
-        /// The comment content. A \\n indicates a new line, e.g.: Hey\\nAharon will be a 2 lines comment. Max length: 10000
+        ///The comment content. A \n indicates a new line, e.g.: Hey\nAharon will be a 2 lines comment.
+        ///Max length: 10000
         /// </summary>
-        /// <value>The comment content. A \\n indicates a new line, e.g.: Hey\\nAharon will be a 2 lines comment. Max length: 10000</value>
-        [DataMember(Name="body", EmitDefaultValue=false)]
+        /// <value>
+        ///The comment content. A \n indicates a new line, e.g.: Hey\nAharon will be a 2 lines comment.
+        ///Max length: 10000
+        /// </value>
+        [DataMember(Name = "body", EmitDefaultValue = false)]
         public string Body { get; set; }
 
         /// <summary>
-        /// The date and time the custom attribute was created, in the following format: YYYY-MM-DDThh:mm:ss.sz.
+        ///The date and time the custom attribute was created, in the following format: YYYY-MM-DDThh:mm:ss.sz.
         /// </summary>
-        /// <value>The date and time the custom attribute was created, in the following format: YYYY-MM-DDThh:mm:ss.sz.</value>
-        [DataMember(Name="createdAt", EmitDefaultValue=false)]
+        /// <value>
+        ///The date and time the custom attribute was created, in the following format: YYYY-MM-DDThh:mm:ss.sz.
+        /// </value>
+        [DataMember(Name = "createdAt", EmitDefaultValue = false)]
         public string CreatedAt { get; set; }
 
         /// <summary>
-        /// The Autodesk ID of the user who created the comment.
+        ///The Autodesk ID of the user who created the comment.
         /// </summary>
-        /// <value>The Autodesk ID of the user who created the comment.</value>
-        [DataMember(Name="createdBy", EmitDefaultValue=false)]
+        /// <value>
+        ///The Autodesk ID of the user who created the comment.
+        /// </value>
+        [DataMember(Name = "createdBy", EmitDefaultValue = false)]
         public string CreatedBy { get; set; }
 
         /// <summary>
-        /// Not relevant
+        ///Not relevant
         /// </summary>
-        /// <value>Not relevant</value>
-        [DataMember(Name="updatedAt", EmitDefaultValue=false)]
+        /// <value>
+        ///Not relevant
+        /// </value>
+        [DataMember(Name = "updatedAt", EmitDefaultValue = false)]
         public string UpdatedAt { get; set; }
 
         /// <summary>
-        /// Not relevant
+        ///Not relevant
         /// </summary>
-        /// <value>Not relevant</value>
-        [DataMember(Name="deletedAt", EmitDefaultValue=false)]
+        /// <value>
+        ///Not relevant
+        /// </value>
+        [DataMember(Name = "deletedAt", EmitDefaultValue = false)]
         public string DeletedAt { get; set; }
 
         /// <summary>
-        /// Not relevant
+        ///Not relevant
         /// </summary>
-        /// <value>Not relevant</value>
-        [DataMember(Name="clientCreatedAt", EmitDefaultValue=false)]
+        /// <value>
+        ///Not relevant
+        /// </value>
+        [DataMember(Name = "clientCreatedAt", EmitDefaultValue = false)]
         public string ClientCreatedAt { get; set; }
 
         /// <summary>
-        /// Not relevant
+        ///Not relevant
         /// </summary>
-        /// <value>Not relevant</value>
-        [DataMember(Name="clientUpdatedAt", EmitDefaultValue=false)]
+        /// <value>
+        ///Not relevant
+        /// </value>
+        [DataMember(Name = "clientUpdatedAt", EmitDefaultValue = false)]
         public string ClientUpdatedAt { get; set; }
 
         /// <summary>
-        /// Not relevant
+        ///Not relevant
         /// </summary>
-        /// <value>Not relevant</value>
-        [DataMember(Name="permittedActions", EmitDefaultValue=false)]
+        /// <value>
+        ///Not relevant
+        /// </value>
+        [DataMember(Name = "permittedActions", EmitDefaultValue = false)]
         public List<string> PermittedActions { get; set; }
 
         /// <summary>
-        /// Not relevant
+        ///Not relevant
         /// </summary>
-        /// <value>Not relevant</value>
-        [DataMember(Name="permittedAttributes", EmitDefaultValue=false)]
+        /// <value>
+        ///Not relevant
+        /// </value>
+        [DataMember(Name = "permittedAttributes", EmitDefaultValue = false)]
         public List<string> PermittedAttributes { get; set; }
 
         /// <summary>

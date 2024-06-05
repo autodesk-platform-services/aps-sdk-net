@@ -36,7 +36,7 @@ namespace Autodesk.Construction.Issues.Model
     /// UserIssues
     /// </summary>
     [DataContract]
-    public partial class UserIssues 
+    public partial class UserIssues
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="UserIssues" /> class.
@@ -44,17 +44,17 @@ namespace Autodesk.Construction.Issues.Model
         public UserIssues()
         {
         }
-        
+
         /// <summary>
-        /// Gets or Sets New
+        ///Gets or Sets New
         /// </summary>
-        [DataMember(Name="new", EmitDefaultValue=false)]
+        [DataMember(Name = "new", EmitDefaultValue = false)]
         public UserIssuesNew New { get; set; }
 
         /// <summary>
-        /// Gets or Sets Filter
+        ///Gets or Sets Filter
         /// </summary>
-        [DataMember(Name="filter", EmitDefaultValue=false)]
+        [DataMember(Name = "filter", EmitDefaultValue = false)]
         public UserIssuesFilter Filter { get; set; }
 
         /// <summary>

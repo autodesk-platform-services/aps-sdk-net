@@ -33,25 +33,40 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Construction.Issues.Model
 {
     /// <summary>
-    /// Defines x-ads-region
+    /// Specifies where the bucket containing the object is stored. Possible values are:
+    ///            - `US` - (Default) Data center for the US region.
+    ///            - `EMEA` - Data center for the European Union, Middle East, and Africa.
+    ///            - `APAC` -  (Beta) Data center for Australia.
+    ///**Note:** Beta features are subject to change. Please do not use in production environments.
     /// </summary>
-    
+    ///<value>Specifies where the bucket containing the object is stored. Possible values are:
+    ///            - `US` - (Default) Data center for the US region.
+    ///            - `EMEA` - Data center for the European Union, Middle East, and Africa.
+    ///            - `APAC` -  (Beta) Data center for Australia.
+    ///**Note:** Beta features are subject to change. Please do not use in production environments.</value>
+
     [JsonConverter(typeof(StringEnumConverter))]
-    
-    public enum XAdsRegion
+
+    public enum Region
     {
-        
+
         /// <summary>
         /// Enum US for value: US
         /// </summary>
         [EnumMember(Value = "US")]
         US,
-        
+
         /// <summary>
         /// Enum EMEA for value: EMEA
         /// </summary>
         [EnumMember(Value = "EMEA")]
-        EMEA
+        EMEA,
+
+        /// <summary>
+        /// Enum APAC for value: APAC
+        /// </summary>
+        [EnumMember(Value = "APAC")]
+        APAC
     }
 
 }
