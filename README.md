@@ -22,7 +22,7 @@ The Developer Portal has everything APS:
 ## Nuget Packages
 
 - [Authentication](https://www.nuget.org/packages/Autodesk.Authentication)
-- [Construction Issues](https://www.nuget.org/packages/Autodesk.Construction.Issues/1.0.0-beta1)
+- [Construction Issues](https://www.nuget.org/packages/Autodesk.Construction.Issues)
 - [Data Management](https://www.nuget.org/packages/Autodesk.DataManagement)
 - [Model Derivative](https://www.nuget.org/packages/Autodesk.ModelDerivative)
 - [OSS](https://www.nuget.org/packages/Autodesk.Oss)
