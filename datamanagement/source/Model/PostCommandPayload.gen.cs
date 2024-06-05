@@ -1,4 +1,4 @@
-/* 
+/*
  * APS SDK
  *
  * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
@@ -19,58 +19,58 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
-using System.Linq;
-using System.IO;
-using System.Text;
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// Post command payload oneof
+    /// Base class for all command types
     /// </summary>
     [DataContract]
-    public partial class PostCommandPayload 
+    [KnownType(typeof(CheckPermissionPayload))]
+    [KnownType(typeof(GetPublishModelJobPayload))]
+    [KnownType(typeof(ListItemsPayload))]
+    [KnownType(typeof(ListRefsPayload))]
+    [KnownType(typeof(PublishModelPayload))]
+    [KnownType(typeof(PublishWithoutLinksPayload))]
+    public partial class PostCommandPayload
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PostCommandPayload" /> class.
-        /// </summary>
-        public PostCommandPayload()
-        {
-        }
-        
-        /// <summary>
-        ///Gets or Sets Jsonapi
-        /// </summary>
-        [DataMember(Name="jsonapi", EmitDefaultValue=false)]
-        public ModifyFolderPayloadJsonapi Jsonapi { get; set; }
-
-        /// <summary>
-        ///Gets or Sets Data
-        /// </summary>
-        [DataMember(Name="data", EmitDefaultValue=false)]
-        public PublishModelPayloadData Data { get; set; }
-
-        /// <summary>
-        ///Gets or Sets Id
-        /// </summary>
-        [DataMember(Name="id", EmitDefaultValue=false)]
-        public string Id { get; set; }
-
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
-        public override string ToString()
-        {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
-        }
     }
 
+    public partial class CheckPermissionPayload : PostCommandPayload
+    {
+        // Properties specific to CheckPermission
+    }
+
+    public partial class GetPublishModelJobPayload : PostCommandPayload
+    {
+        // Properties specific to GetPublishModelJob
+    }
+    public partial class ListItemsPayload : PostCommandPayload
+    {
+        // Properties specific to ListItemsPayload
+    }
+
+    public partial class ListRefsPayload : PostCommandPayload
+    {
+        // Properties specific to ListRefsPayload
+    }
+
+    public partial class PublishModelPayload : PostCommandPayload
+    {
+        // Properties specific to PublishModelPayload
+    }
+
+    public partial class PublishWithoutLinksPayload : PostCommandPayload
+    {
+        // Properties specific to PublishWithoutLinksPayload
+    }
 }

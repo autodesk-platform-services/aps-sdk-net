@@ -154,7 +154,7 @@ public class TestDataManagement
                 Type = Type.Objects,
                 Attributes = new StoragePayloadDataAttributes()
                 {
-                    Name = "drawing.dwg"
+                    Name = ""
                 },
                 Relationships = new StoragePayloadDataRelationships()
                 {
@@ -163,7 +163,7 @@ public class TestDataManagement
                         Data = new ModifyFolderPayloadDataRelationshipsParentData()
                         {
                             Type = Type.Folders,
-                            Id = "urn:adsk.wipprod:fs.folder:co.mgS-lb-BThaTdHnhiN_mbA"
+                            Id = ""
                         }
                     }
                 }
@@ -240,7 +240,7 @@ public class TestDataManagement
                 Type = Type.Folders,
                 Attributes = new FolderPayloadDataAttributes()
                 {
-                    Name = "New Folder",
+                    Name = "",
                     Extension = new RelationshipRefsPayloadDataMetaExtension()
                     {
                         Type = Type.FoldersautodeskBim360Folder,
@@ -311,7 +311,7 @@ public class TestDataManagement
                 Id = folderId,
                 Attributes = new ModifyFolderPayloadDataAttributes()
                 {
-                    Name = "Drawings"
+                    Name = ""
                 }
             }
         };
@@ -388,7 +388,7 @@ public class TestDataManagement
                 Type = Type.Items,
                 Attributes = new ItemPayloadDataAttributes()
                 {
-                    DisplayName = "drawing.dwg",
+                    DisplayName = "",
                     Extension = new ItemPayloadDataAttributesExtension()
                     {
                         Type = Type.ItemsautodeskBim360File,
@@ -402,7 +402,7 @@ public class TestDataManagement
                         Data = new ModifyVersionPayloadData()
                         {
                             Type = Type.Versions,
-                            Id = "1"
+                            Id = ""
                         }
                     },
                     Parent = new FolderPayloadDataRelationshipsParent()
@@ -420,10 +420,10 @@ public class TestDataManagement
                 new ItemPayloadIncluded()
                 {
                     Type = Type.Versions,
-                    Id = "1",
+                    Id = "",
                     Attributes = new ItemPayloadIncludedAttributes()
                     {
-                        Name = "drawing.dwg",
+                        Name = "",
                         Extension = new ItemPayloadDataAttributesExtension()
                         {
                             Type = Type.VersionsautodeskBim360File,
@@ -485,7 +485,7 @@ public class TestDataManagement
                 Id = itemId,
                 Attributes = new
                 {
-                    DisplayName = "drawing.rvt"
+                    DisplayName = ""
                 }
             }
         };
@@ -561,7 +561,7 @@ public class TestDataManagement
                 Type = Type.Versions,
                 Attributes = new VersionPayloadDataAttributes()
                 {
-                    Name = "drawing.rvt",
+                    Name = "",
                     Extension = new RelationshipRefsPayloadDataMetaExtension()
                     {
                         Type = Type.VersionsautodeskBim360File,
@@ -607,7 +607,7 @@ public class TestDataManagement
             Data = new RelationshipRefsPayloadData()
             {
                 Type = Type.Versions,
-                Id = "urn:adsk.wipprod:fs.file:vf.ooWjwAQJR0uEoPRyfEnvew?version=1",
+                Id = "",
                 Meta = new RelationshipRefsPayloadDataMeta()
                 {
                     Extension = new RelationshipRefsPayloadDataMetaExtension()
@@ -640,7 +640,7 @@ public class TestDataManagement
                 Id = versionId,
                 Attributes = new
                 {
-                    Name = "New name for Drawing.rvt"
+                    Name = ""
                 }
             }
         };
@@ -648,6 +648,57 @@ public class TestDataManagement
         VersionDetails versionDetails = await _dataManagementApi.PatchVersionAsync(projectId: projectId, versionId: versionId, modifyVersionPayload: modifyVersionPayload, accessToken: token);
         VersionDetailsData versionDetailsData = versionDetails.Data;
         Assert.IsTrue(versionDetailsData.Type == Type.Versions);
+    }
+
+    [TestMethod]
+    public async Task TestPostCommandAsync()
+    {
+        CheckPermissionPayload checkPermissionPayload = new CheckPermissionPayload()
+        {
+            Jsonapi = new ModifyFolderPayloadJsonapi()
+            {
+                _Version = VersionNumber._10
+            },
+            Data = new CheckPermissionPayloadData()
+            {
+                Type = Type.Commands,
+                Attributes = new CheckPermissionPayloadDataAttributes()
+                {
+                    Extension = new CheckPermissionPayloadDataAttributesExtension()
+                    {
+                        Type = Type.CommandsautodeskCoreCheckPermission,
+                        _Version = "",
+                        Data = new CheckPermissionPayloadDataAttributesExtensionData()
+                        {
+                            RequiredActions = new List<Action> 
+                            {
+                                Action.Download,
+                                Action.View,
+                            }
+                        }
+                    }
+                },
+                Relationships = new CheckPermissionPayloadDataRelationships()
+                {
+                    Resources = new CheckPermissionPayloadDataRelationshipsResources()
+                    {
+                        Data = new List<CheckPermissionPayloadDataRelationshipsResourcesData>
+                        {
+                            new CheckPermissionPayloadDataRelationshipsResourcesData()
+                            {
+                                Type = Type.Folders, 
+                                Id = folderId
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        PostCommand response = await _dataManagementApi.PostCommandAsync(projectId: projectId, postCommandPayload: checkPermissionPayload, accessToken: token);
+
+        Assert.IsInstanceOfType(response, typeof(PostCommand), "Response should be of type CheckPermission");
+    
     }
 
 }
