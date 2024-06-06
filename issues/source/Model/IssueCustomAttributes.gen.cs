@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Construction.Issues
  *
@@ -36,7 +36,7 @@ namespace Autodesk.Construction.Issues.Model
     /// IssueCustomAttributes
     /// </summary>
     [DataContract]
-    public partial class IssueCustomAttributes 
+    public partial class IssueCustomAttributes
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="IssueCustomAttributes" /> class.
@@ -44,33 +44,41 @@ namespace Autodesk.Construction.Issues.Model
         public IssueCustomAttributes()
         {
         }
-        
+
         /// <summary>
-        /// The unique identifier of the custom attribute.
+        ///The unique identifier of the custom attribute.
         /// </summary>
-        /// <value>The unique identifier of the custom attribute.</value>
-        [DataMember(Name="attributeDefinitionId", EmitDefaultValue=false)]
+        /// <value>
+        ///The unique identifier of the custom attribute.
+        /// </value>
+        [DataMember(Name = "attributeDefinitionId", EmitDefaultValue = false)]
         public string AttributeDefinitionId { get; set; }
 
         /// <summary>
-        /// Custom attribute value. Possible value types: string, number, null.
+        ///Custom attribute value. Possible value types: string, number, null.
         /// </summary>
-        /// <value>Custom attribute value. Possible value types: string, number, null.</value>
-        [DataMember(Name="value", EmitDefaultValue=false)]
+        /// <value>
+        ///Custom attribute value. Possible value types: string, number, null.
+        /// </value>
+        [DataMember(Name = "value", EmitDefaultValue = false)]
         public Object Value { get; set; }
 
         /// <summary>
-        /// The type of attribute. Possible values: numeric, paragraph, list (this corresponds to dropdown in the UI), text.
+        ///The type of attribute. Possible values: numeric, paragraph, list (this corresponds to dropdown in the UI), text.
         /// </summary>
-        /// <value>The type of attribute. Possible values: numeric, paragraph, list (this corresponds to dropdown in the UI), text.</value>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        /// <value>
+        ///The type of attribute. Possible values: numeric, paragraph, list (this corresponds to dropdown in the UI), text.
+        /// </value>
+        [DataMember(Name = "type", EmitDefaultValue = false)]
         public string Type { get; set; }
 
         /// <summary>
-        /// Free text description of the attribute.
+        ///Free text description of the attribute.
         /// </summary>
-        /// <value>Free text description of the attribute.</value>
-        [DataMember(Name="title", EmitDefaultValue=false)]
+        /// <value>
+        ///Free text description of the attribute.
+        /// </value>
+        [DataMember(Name = "title", EmitDefaultValue = false)]
         public string Title { get; set; }
 
         /// <summary>

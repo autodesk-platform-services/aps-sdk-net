@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Construction.Issues
  *
@@ -36,7 +36,7 @@ namespace Autodesk.Construction.Issues.Model
     /// A GPS Coordinate which represents the geo location of the issue.
     /// </summary>
     [DataContract]
-    public partial class IssueGpsCoordinates 
+    public partial class IssueGpsCoordinates
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="IssueGpsCoordinates" /> class.
@@ -44,17 +44,17 @@ namespace Autodesk.Construction.Issues.Model
         public IssueGpsCoordinates()
         {
         }
-        
+
         /// <summary>
-        /// Gets or Sets Latitude
+        ///Gets or Sets Latitude
         /// </summary>
-        [DataMember(Name="latitude", EmitDefaultValue=false)]
+        [DataMember(Name = "latitude", EmitDefaultValue = false)]
         public decimal? Latitude { get; set; }
 
         /// <summary>
-        /// Gets or Sets Longitude
+        ///Gets or Sets Longitude
         /// </summary>
-        [DataMember(Name="longitude", EmitDefaultValue=false)]
+        [DataMember(Name = "longitude", EmitDefaultValue = false)]
         public decimal? Longitude { get; set; }
 
         /// <summary>

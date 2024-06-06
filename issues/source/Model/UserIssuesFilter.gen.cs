@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Construction.Issues
  *
@@ -36,7 +36,7 @@ namespace Autodesk.Construction.Issues.Model
     /// Not relevant
     /// </summary>
     [DataContract]
-    public partial class UserIssuesFilter 
+    public partial class UserIssuesFilter
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="UserIssuesFilter" /> class.
@@ -44,12 +44,14 @@ namespace Autodesk.Construction.Issues.Model
         public UserIssuesFilter()
         {
         }
-        
+
         /// <summary>
-        /// Not relevant
+        ///Not relevant
         /// </summary>
-        /// <value>Not relevant</value>
-        [DataMember(Name="permittedStatuses", EmitDefaultValue=false)]
+        /// <value>
+        ///Not relevant
+        /// </value>
+        [DataMember(Name = "permittedStatuses", EmitDefaultValue = false)]
         public List<string> PermittedStatuses { get; set; }
 
         /// <summary>

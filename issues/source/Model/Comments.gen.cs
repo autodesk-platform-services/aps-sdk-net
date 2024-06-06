@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Construction.Issues
  *
@@ -36,7 +36,7 @@ namespace Autodesk.Construction.Issues.Model
     /// The pagination object.
     /// </summary>
     [DataContract]
-    public partial class Comments 
+    public partial class Comments
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Comments" /> class.
@@ -44,18 +44,20 @@ namespace Autodesk.Construction.Issues.Model
         public Comments()
         {
         }
-        
+
         /// <summary>
-        /// Gets or Sets Pagination
+        ///Gets or Sets Pagination
         /// </summary>
-        [DataMember(Name="pagination", EmitDefaultValue=false)]
+        [DataMember(Name = "pagination", EmitDefaultValue = false)]
         public IssueTypePagination Pagination { get; set; }
 
         /// <summary>
-        /// The ID of the custom attribute.
+        ///The ID of the custom attribute.
         /// </summary>
-        /// <value>The ID of the custom attribute.</value>
-        [DataMember(Name="results", EmitDefaultValue=false)]
+        /// <value>
+        ///The ID of the custom attribute.
+        /// </value>
+        [DataMember(Name = "results", EmitDefaultValue = false)]
         public List<CommentsResults> Results { get; set; }
 
         /// <summary>

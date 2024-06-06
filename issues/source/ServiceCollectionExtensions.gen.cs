@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Construction.Issues
  *
@@ -37,13 +37,13 @@ namespace Autodesk.Construction.Issues
         public static IHttpClientBuilder AddConstructionissues(this IServiceCollection services, IConfiguration configuration)
         {
             // services.Configure<Configuration>(configuration.GetSection("Forge").GetSection("Constructionissues"));
-            services.AddTransient<IIssueAttributeDefinitionsApi,IssueAttributeDefinitionsApi>();
-            services.AddTransient<IIssueAttributeMappingsApi,IssueAttributeMappingsApi>();
-            services.AddTransient<IIssueCommentsApi,IssueCommentsApi>();
-            services.AddTransient<IIssueRootCauseCategoriesApi,IssueRootCauseCategoriesApi>();
-            services.AddTransient<IIssueTypesApi,IssueTypesApi>();
-            services.AddTransient<IIssuesApi,IssuesApi>();
-            services.AddTransient<IIssuesProfileApi,IssuesProfileApi>();
+            services.AddTransient<IIssueAttributeDefinitionsApi, IssueAttributeDefinitionsApi>();
+            services.AddTransient<IIssueAttributeMappingsApi, IssueAttributeMappingsApi>();
+            services.AddTransient<IIssueCommentsApi, IssueCommentsApi>();
+            services.AddTransient<IIssueRootCauseCategoriesApi, IssueRootCauseCategoriesApi>();
+            services.AddTransient<IIssueTypesApi, IssueTypesApi>();
+            services.AddTransient<IIssuesApi, IssuesApi>();
+            services.AddTransient<IIssuesProfileApi, IssuesProfileApi>();
             // services.AddTransient<ConstructionissuesClient>();
             return services.AddForgeService(configuration);
         }

@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Construction.Issues
  *
@@ -33,30 +33,32 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Construction.Issues.Model
 {
     /// <summary>
-    /// Issues
+    /// IssuesPage
     /// </summary>
     [DataContract]
     public partial class IssuesPage
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Issues" /> class.
+        /// Initializes a new instance of the <see cref="IssuesPage" /> class.
         /// </summary>
         public IssuesPage()
         {
         }
-        
-        /// <summary>
-        /// Gets or Sets Pagination
-        /// </summary>
-        [DataMember(Name="pagination", EmitDefaultValue=false)]
-        public IssuesPagination Pagination { get; set; }
 
         /// <summary>
-        /// The list of issues in the current page
+        ///Gets or Sets Pagination
         /// </summary>
-        /// <value>The list of issues in the current page</value>
-        [DataMember(Name="results", EmitDefaultValue=false)]
-        public List<Issue> Results { get; set; }
+        [DataMember(Name = "pagination", EmitDefaultValue = false)]
+        public IssuesPagePagination Pagination { get; set; }
+
+        /// <summary>
+        ///The list of issues in the current page
+        /// </summary>
+        /// <value>
+        ///The list of issues in the current page
+        /// </value>
+        [DataMember(Name = "results", EmitDefaultValue = false)]
+        public List<Results> Results { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

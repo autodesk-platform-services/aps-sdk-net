@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Construction.Issues
  *
@@ -33,32 +33,32 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Construction.Issues.Model
 {
     /// <summary>
-    /// Retrieves issue custom attribute definitions with the specified data type
+    /// Defines permission_level
     /// </summary>
-    /// <value>Retrieves issue custom attribute definitions with the specified data type</value>
-    
+    ///<value></value>
+
     [JsonConverter(typeof(StringEnumConverter))]
-    
-    public enum FilterdataType
+
+    public enum PermissionLevel
     {
-        
+
         /// <summary>
-        /// Enum Text for value: text
+        /// Enum Create for value: create
         /// </summary>
-        [EnumMember(Value = "text")]
-        Text,
-        
+        [EnumMember(Value = "create")]
+        Create,
+
         /// <summary>
-        /// Enum Paragraph for value: paragraph
+        /// Enum Read for value: read
         /// </summary>
-        [EnumMember(Value = "paragraph")]
-        Paragraph,
-        
+        [EnumMember(Value = "read")]
+        Read,
+
         /// <summary>
-        /// Enum Numeric for value: numeric
+        /// Enum Write for value: write
         /// </summary>
-        [EnumMember(Value = "numeric")]
-        Numeric
+        [EnumMember(Value = "write")]
+        Write
     }
 
 }

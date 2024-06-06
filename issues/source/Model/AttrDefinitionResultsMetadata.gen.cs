@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Construction.Issues
  *
@@ -36,7 +36,7 @@ namespace Autodesk.Construction.Issues.Model
     /// The metadata object; only relevant for list custom attributes.
     /// </summary>
     [DataContract]
-    public partial class AttrDefinitionResultsMetadata 
+    public partial class AttrDefinitionResultsMetadata
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AttrDefinitionResultsMetadata" /> class.
@@ -44,11 +44,11 @@ namespace Autodesk.Construction.Issues.Model
         public AttrDefinitionResultsMetadata()
         {
         }
-        
+
         /// <summary>
-        /// Gets or Sets List
+        ///Gets or Sets List
         /// </summary>
-        [DataMember(Name="list", EmitDefaultValue=false)]
+        [DataMember(Name = "list", EmitDefaultValue = false)]
         public AttrDefinitionResultsMetadataList List { get; set; }
 
         /// <summary>

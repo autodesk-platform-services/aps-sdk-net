@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Construction.Issues
  *
@@ -36,7 +36,7 @@ namespace Autodesk.Construction.Issues.Model
     /// If this object appears in the response, it indicates that the user can create and modify issues.
     /// </summary>
     [DataContract]
-    public partial class UserIssuesNew 
+    public partial class UserIssuesNew
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="UserIssuesNew" /> class.
@@ -44,47 +44,61 @@ namespace Autodesk.Construction.Issues.Model
         public UserIssuesNew()
         {
         }
-        
+
         /// <summary>
-        /// The list of actions permitted for the user for this issue in its current state.
+        ///The list of actions permitted for the user for this issue in its current state.
         /// </summary>
-        /// <value>The list of actions permitted for the user for this issue in its current state.</value>
-        [DataMember(Name="permittedActions", EmitDefaultValue=false)]
+        /// <value>
+        ///The list of actions permitted for the user for this issue in its current state.
+        /// </value>
+        [DataMember(Name = "permittedActions", EmitDefaultValue = false)]
         public List<string> PermittedActions { get; set; }
 
         /// <summary>
-        /// A list of attributes you are allowed to open a new issue. issueTypeId, linkedDocument, links, ownerId, officialResponse, rootCauseId, snapshotUrn are not applicable.
+        ///A list of attributes you are allowed to open a new issue. issueTypeId, linkedDocument, links, ownerId, officialResponse, rootCauseId, snapshotUrn are not applicable.
         /// </summary>
-        /// <value>A list of attributes you are allowed to open a new issue. issueTypeId, linkedDocument, links, ownerId, officialResponse, rootCauseId, snapshotUrn are not applicable.</value>
-        [DataMember(Name="permittedAttributes", EmitDefaultValue=false)]
+        /// <value>
+        ///A list of attributes you are allowed to open a new issue. issueTypeId, linkedDocument, links, ownerId, officialResponse, rootCauseId, snapshotUrn are not applicable.
+        /// </value>
+        [DataMember(Name = "permittedAttributes", EmitDefaultValue = false)]
         public List<string> PermittedAttributes { get; set; }
 
         /// <summary>
-        /// A list of available statuses for the project. Possible values: draft, open, pending, in_progress, completed, in_review, not_approved, in_dispute, closed.
+        ///A list of available statuses for the project.
+        ///Possible values: draft, open, pending, in_progress, completed, in_review, not_approved, in_dispute, closed.
         /// </summary>
-        /// <value>A list of available statuses for the project. Possible values: draft, open, pending, in_progress, completed, in_review, not_approved, in_dispute, closed.</value>
-        [DataMember(Name="permittedStatuses", EmitDefaultValue=false)]
+        /// <value>
+        ///A list of available statuses for the project.
+        ///Possible values: draft, open, pending, in_progress, completed, in_review, not_approved, in_dispute, closed.
+        /// </value>
+        [DataMember(Name = "permittedStatuses", EmitDefaultValue = false)]
         public List<string> PermittedStatuses { get; set; }
 
         /// <summary>
-        /// Not relevant
+        ///Not relevant
         /// </summary>
-        /// <value>Not relevant</value>
-        [DataMember(Name="permitted_actions", EmitDefaultValue=false)]
+        /// <value>
+        ///Not relevant
+        /// </value>
+        [DataMember(Name = "permitted_actions", EmitDefaultValue = false)]
         public List<string> _PermittedActions { get; set; }
 
         /// <summary>
-        /// Not relevant
+        ///Not relevant
         /// </summary>
-        /// <value>Not relevant</value>
-        [DataMember(Name="permitted_attributes", EmitDefaultValue=false)]
+        /// <value>
+        ///Not relevant
+        /// </value>
+        [DataMember(Name = "permitted_attributes", EmitDefaultValue = false)]
         public List<string> _PermittedAttributes { get; set; }
 
         /// <summary>
-        /// Not relevant
+        ///Not relevant
         /// </summary>
-        /// <value>Not relevant</value>
-        [DataMember(Name="permitted_statuses", EmitDefaultValue=false)]
+        /// <value>
+        ///Not relevant
+        /// </value>
+        [DataMember(Name = "permitted_statuses", EmitDefaultValue = false)]
         public List<string> _PermittedStatuses { get; set; }
 
         /// <summary>

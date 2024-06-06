@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Construction.Issues
  *
@@ -35,30 +35,31 @@ namespace Autodesk.Construction.Issues.Model
     /// <summary>
     /// Defines assignedToType
     /// </summary>
-    
+    ///<value></value>
+
     [JsonConverter(typeof(StringEnumConverter))]
-    
+
     public enum AssignedToType
     {
-        
+
         /// <summary>
         /// Enum User for value: user
         /// </summary>
         [EnumMember(Value = "user")]
         User,
-        
+
         /// <summary>
         /// Enum Company for value:  company
         /// </summary>
         [EnumMember(Value = " company")]
         Company,
-        
+
         /// <summary>
         /// Enum Role for value:  role
         /// </summary>
         [EnumMember(Value = " role")]
         Role,
-        
+
         /// <summary>
         /// Enum Null for value: null
         /// </summary>

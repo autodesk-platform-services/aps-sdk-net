@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Construction.Issues
  *
@@ -36,7 +36,7 @@ namespace Autodesk.Construction.Issues.Model
     /// CommentsPayload
     /// </summary>
     [DataContract]
-    public partial class CommentsPayload 
+    public partial class CommentsPayload
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="CommentsPayload" /> class.
@@ -44,11 +44,11 @@ namespace Autodesk.Construction.Issues.Model
         public CommentsPayload()
         {
         }
-        
+
         /// <summary>
         /// Gets or Sets Body
         /// </summary>
-        [DataMember(Name="body", EmitDefaultValue=false)]
+        [DataMember(Name = "body", EmitDefaultValue = false)]
         public string Body { get; set; }
 
         /// <summary>

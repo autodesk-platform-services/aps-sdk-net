@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Construction.Issues
  *
@@ -35,114 +35,115 @@ namespace Autodesk.Construction.Issues.Model
     /// <summary>
     /// Defines sortBy
     /// </summary>
-    
+    ///<value></value>
+
     [JsonConverter(typeof(StringEnumConverter))]
-    
+
     public enum SortBy
     {
-        
+
         /// <summary>
         /// Enum CreatedAt for value: createdAt
         /// </summary>
         [EnumMember(Value = "createdAt")]
         CreatedAt,
-        
+
         /// <summary>
         /// Enum UpdatedAt for value: updatedAt
         /// </summary>
         [EnumMember(Value = "updatedAt")]
         UpdatedAt,
-        
+
         /// <summary>
         /// Enum CreatedBy for value: createdBy
         /// </summary>
         [EnumMember(Value = "createdBy")]
         CreatedBy,
-        
+
         /// <summary>
         /// Enum DisplayId for value: displayId
         /// </summary>
         [EnumMember(Value = "displayId")]
         DisplayId,
-        
+
         /// <summary>
         /// Enum Title for value: title
         /// </summary>
         [EnumMember(Value = "title")]
         Title,
-        
+
         /// <summary>
         /// Enum Description for value: description
         /// </summary>
         [EnumMember(Value = "description")]
         Description,
-        
+
         /// <summary>
         /// Enum Status for value: status
         /// </summary>
         [EnumMember(Value = "status")]
         Status,
-        
+
         /// <summary>
         /// Enum AssignedTo for value: assignedTo
         /// </summary>
         [EnumMember(Value = "assignedTo")]
         AssignedTo,
-        
+
         /// <summary>
         /// Enum AssignedToType for value: assignedToType
         /// </summary>
         [EnumMember(Value = "assignedToType")]
         AssignedToType,
-        
+
         /// <summary>
         /// Enum DueDate for value: dueDate
         /// </summary>
         [EnumMember(Value = "dueDate")]
         DueDate,
-        
+
         /// <summary>
         /// Enum LocationDetails for value: locationDetails
         /// </summary>
         [EnumMember(Value = "locationDetails")]
         LocationDetails,
-        
+
         /// <summary>
         /// Enum Published for value: published
         /// </summary>
         [EnumMember(Value = "published")]
         Published,
-        
+
         /// <summary>
         /// Enum ClosedBy for value: closedBy
         /// </summary>
         [EnumMember(Value = "closedBy")]
         ClosedBy,
-        
+
         /// <summary>
         /// Enum ClosedAt for value: closedAt
         /// </summary>
         [EnumMember(Value = "closedAt")]
         ClosedAt,
-        
+
         /// <summary>
         /// Enum IssueSubType for value: issueSubType
         /// </summary>
         [EnumMember(Value = "issueSubType")]
         IssueSubType,
-        
+
         /// <summary>
         /// Enum IssueType for value: issueType
         /// </summary>
         [EnumMember(Value = "issueType")]
         IssueType,
-        
+
         /// <summary>
         /// Enum CustomAttributes for value: customAttributes
         /// </summary>
         [EnumMember(Value = "customAttributes")]
         CustomAttributes,
-        
+
         /// <summary>
         /// Enum StartDate for value: startDate
         /// </summary>

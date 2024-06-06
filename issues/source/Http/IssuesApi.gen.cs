@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Construction.Issues
  *
@@ -31,6 +31,7 @@ using Autodesk.Construction.Issues.Client;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Autodesk.SDKManager;
+using System.Collections;
 
 namespace Autodesk.Construction.Issues.Http
 {
@@ -43,46 +44,160 @@ namespace Autodesk.Construction.Issues.Http
         /// 
         /// </summary>
         /// <remarks>
-        /// Adds an issue to a project.
+        ///Adds an issue to a project.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="projectId">The ID of the project.</param>/// <param name="xAdsRegion">The region where the bucket residesAcceptable values: &#x60;US&#x60;, &#x60;EMEA&#x60;</param>/// <param name="issuePayload"> (optional)</param>
-        /// <returns>Task of ApiResponse<Issue></returns>
-        
-        System.Threading.Tasks.Task<ApiResponse<Issue>> CreateIssueAsync (string projectId, XAdsRegion xAdsRegion, IssuePayload issuePayload= default(IssuePayload),  string accessToken = null, bool throwOnError = true);
+        /// <param name="projectId">
+        ///The ID of the project.
+        /// </param>
+        /// <param name="xAdsRegion">
+        /// (optional)
+        /// </param>
+        /// <param name="issuePayload">
+        /// (optional)
+        /// </param>
+        /// <returns>Task of ApiResponse&lt;Issue&gt;</returns>
+
+        System.Threading.Tasks.Task<ApiResponse<Issue>> CreateIssueAsync(string projectId, Region? xAdsRegion = null, IssuePayload issuePayload = default(IssuePayload), string accessToken = null, bool throwOnError = true);
         /// <summary>
         /// Your GET endpoint
         /// </summary>
         /// <remarks>
-        /// Retrieves detailed information about a single issue. For general information about all the issues in a project.
+        ///Retrieves detailed information about a single issue. For general information about all the issues in a project.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="projectId">The ID of the project.</param>/// <param name="issueId">The unique identifier of the issue.</param>/// <param name="xAdsRegion">The region where the bucket residesAcceptable values: &#x60;US&#x60;, &#x60;EMEA&#x60;</param>
-        /// <returns>Task of ApiResponse<Issue></returns>
-        
-        System.Threading.Tasks.Task<ApiResponse<Issue>> GetIssueDetailsAsync (string projectId, string issueId, XAdsRegion xAdsRegion,  string accessToken = null, bool throwOnError = true);
+        /// <param name="projectId">
+        ///The ID of the project.
+        /// </param>
+        /// <param name="issueId">
+        ///The unique identifier of the issue.
+        /// </param>
+        /// <param name="xAdsRegion">
+        /// (optional)
+        /// </param>
+        /// <returns>Task of ApiResponse&lt;Issue&gt;</returns>
+
+        System.Threading.Tasks.Task<ApiResponse<Issue>> GetIssueDetailsAsync(string projectId, string issueId, Region? xAdsRegion = null, string accessToken = null, bool throwOnError = true);
         /// <summary>
         /// Your GET endpoint
         /// </summary>
         /// <remarks>
-        /// Retrieves information about all the issues in a project, including details about their associated comments and attachments.
+        ///Retrieves information about all the issues in a project, including details about their associated comments and attachments.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="projectId">The ID of the project.</param>/// <param name="xAdsRegion">The region where the bucket residesAcceptable values: &#x60;US&#x60;, &#x60;EMEA&#x60;</param>/// <param name="filterId">Filter issues by the unique issue ID. Separate multiple values with commas. (optional)</param>/// <param name="filterIssueTypeId">Filter issues by the unique identifier of the category of the issue. Note that the API name for category is type. Separate multiple values with commas. (optional)</param>/// <param name="filterIssueSubtypeId">Filter issues by the unique identifier of the type of the issue. Note that the API name for type is subtype. Separate multiple values with commas. (optional)</param>/// <param name="filterStatus">Filter issues by their status. Separate multiple values with commas. (optional)</param>/// <param name="filterLinkedDocumentUrn">Retrieves pushpin issues associated with the specified files. We support all file types that are compatible with the Files tool. You need to specify the URL-encoded file item IDs. (optional)</param>/// <param name="filterDueDate">Filter issues by due date, in one of the following URL-encoded format: YYYY-MM-DD. Separate multiple values with commas. (optional)</param>/// <param name="filterStartDate">Filter issues by start date, in one of the following URL-encoded format: YYYY-MM-DD. Separate multiple values with commas. (optional)</param>/// <param name="filterCreatedAt">Filter issues created at the specified date and time, in one of the following URL-encoded formats: YYYY-MM-DDThh:mm:ss.sz or YYYY-MM-DD. Separate multiple values with commas (optional)</param>/// <param name="filterCreatedBy">Filter issues by the unique identifier of the user who created the issue. Separate multiple values with commas. (optional)</param>/// <param name="filterUpdatedAt">Filter issues updated at the specified date and time, in one of the following URL-encoded formats: YYYY-MM-DDThh:mm:ss.sz or YYYY-MM-DD. Separate multiple values with commas.  (optional)</param>/// <param name="filterUpdatedBy">Filter issues by the unique identifier of the user who updated the issue. Separate multiple values with commas. (optional)</param>/// <param name="filterAssignedTo">Filter issues by the unique Autodesk ID of the User/Company/Role identifier of the current assignee of this issue. Separate multiple values with commas. (optional)</param>/// <param name="filterRootCauseId">Filter issues by the unique identifier of the type of root cause for the issue. Separate multiple values with commas. (optional)</param>/// <param name="filterLocationId">Retrieves issues associated with the specified location but not the location’s sublocations. To also retrieve issues that relate to the locations’s sublocations use the sublocationId filter. Separate multiple values with commas. (optional)</param>/// <param name="filterSubLocationId">Retrieves issues associated with the specified unique LBS (Location Breakdown Structure) identifier, as well as issues associated with the sub locations of the LBS identifier. Separate multiple values with commas. (optional)</param>/// <param name="filterClosedBy">Filter issues by the unique identifier of the user who closed the issue. Separate multiple values with commas. For Example: A3RGM375QTZ7. (optional)</param>/// <param name="filterClosedAt">Filter issues closed at the specified date and time, in one of the following URL-encoded formats: YYYY-MM-DDThh:mm:ss.sz or YYYY-MM-DD. Separate multiple values with commas. (optional)</param>/// <param name="filterSearch">Filter issues using ‘search’ criteria. this will filter both title and issues display ID. For example, use filter[search]&#x3D;300 (optional)</param>/// <param name="filterDisplayId">Filter issues by the chronological user-friendly identifier. Separate multiple values with commas. (optional)</param>/// <param name="filterAssignedToType">Filter issues by the type of the current assignee of this issue. Separate multiple values with commas. Possible values: Possible values: user, company, role, null. For Example: user. (optional)</param>/// <param name="filterCustomAttributes">Filter issues by the custom attributes. Each custom attribute filter should be defined by it’s uuid. For example: filter[customAttributes][f227d940-ae9b-4722-9297-389f4411f010]&#x3D;1,2,3. Separate multiple values with commas. (optional)</param>/// <param name="filterValid">Only return valid issues (&#x3D;no empty type/subtype). Default value: undefined (meaning will return both valid &amp; invalid issues). (optional)</param>/// <param name="limit">Return specified number of issues. Acceptable values are 1-100. Default value: 100. (optional)</param>/// <param name="offset">Return issues starting from the specified offset number. Default value: 0. (optional)</param>/// <param name="sortBy">Sort issue comments by specified fields. Separate multiple values with commas. To sort in descending order add a - (minus sign) before the sort criteria (optional)</param>/// <param name="fields">Return only specific fields in issue object. Separate multiple values with commas. (optional)</param>
-        /// <returns>Task of ApiResponse<Issues></returns>
-        
-        System.Threading.Tasks.Task<ApiResponse<IssuesPage>> GetIssuesAsync (string projectId, XAdsRegion xAdsRegion, List<string> filterId= default(List<string>), List<string> filterIssueTypeId= default(List<string>), List<string> filterIssueSubtypeId= default(List<string>), string filterStatus= default(string), List<string> filterLinkedDocumentUrn= default(List<string>), string filterDueDate= default(string), string filterStartDate= default(string), string filterCreatedAt= default(string), FiltercreatedBy filterCreatedBy= default(FiltercreatedBy), string filterUpdatedAt= default(string), List<string> filterUpdatedBy= default(List<string>), List<string> filterAssignedTo= default(List<string>), List<string> filterRootCauseId= default(List<string>), List<string> filterLocationId= default(List<string>), List<string> filterSubLocationId= default(List<string>), List<string> filterClosedBy= default(List<string>), string filterClosedAt= default(string), string filterSearch= default(string), int? filterDisplayId= default(int?), string filterAssignedToType= default(string), List<string> filterCustomAttributes= default(List<string>), bool? filterValid= default(bool?), int? limit= default(int?), int? offset= default(int?), List<SortBy> sortBy= default(List<SortBy>), List<Fields> fields= default(List<Fields>),  string accessToken = null, bool throwOnError = true);
+        /// <param name="projectId">
+        ///The ID of the project.
+        /// </param>
+        /// <param name="filterId">
+        ///Filter issues by the unique issue ID. Separate multiple values with commas. (optional)
+        /// </param>
+        /// <param name="filterIssueTypeId">
+        ///Filter issues by the unique identifier of the category of the issue. Note that the API name for category is type. Separate multiple values with commas. (optional)
+        /// </param>
+        /// <param name="filterIssueSubtypeId">
+        ///Filter issues by the unique identifier of the type of the issue. Note that the API name for type is subtype. Separate multiple values with commas. (optional)
+        /// </param>
+        /// <param name="filterStatus">
+        ///Filter issues by their status. Separate multiple values with commas. (optional)
+        /// </param>
+        /// <param name="filterLinkedDocumentUrn">
+        ///Retrieves pushpin issues associated with the specified files. We support all file types that are compatible with the Files tool. You need to specify the URL-encoded file item IDs. (optional)
+        /// </param>
+        /// <param name="xAdsRegion">
+        /// (optional)
+        /// </param>
+        /// <param name="filterDueDate">
+        ///Filter issues by due date, in one of the following URL-encoded format: YYYY-MM-DD. Separate multiple values with commas. (optional)
+        /// </param>
+        /// <param name="filterStartDate">
+        ///Filter issues by start date, in one of the following URL-encoded format: YYYY-MM-DD. Separate multiple values with commas. (optional)
+        /// </param>
+        /// <param name="filterCreatedAt">
+        ///Filter issues created at the specified date and time, in one of the following URL-encoded formats: YYYY-MM-DDThh:mm:ss.sz or YYYY-MM-DD. Separate multiple values with commas (optional)
+        /// </param>
+        /// <param name="filterCreatedBy">
+        ///Filter issues by the unique identifier of the user who created the issue. Separate multiple values with commas. (optional)
+        /// </param>
+        /// <param name="filterUpdatedAt">
+        ///Filter issues updated at the specified date and time, in one of the following URL-encoded formats: YYYY-MM-DDThh:mm:ss.sz or YYYY-MM-DD. Separate multiple values with commas.  (optional)
+        /// </param>
+        /// <param name="filterUpdatedBy">
+        ///Filter issues by the unique identifier of the user who updated the issue. Separate multiple values with commas. (optional)
+        /// </param>
+        /// <param name="filterAssignedTo">
+        ///Filter issues by the unique Autodesk ID of the User/Company/Role identifier of the current assignee of this issue. Separate multiple values with commas. (optional)
+        /// </param>
+        /// <param name="filterRootCauseId">
+        ///Filter issues by the unique identifier of the type of root cause for the issue. Separate multiple values with commas. (optional)
+        /// </param>
+        /// <param name="filterLocationId">
+        ///Retrieves issues associated with the specified location but not the location’s sublocations. To also retrieve issues that relate to the locations’s sublocations use the sublocationId filter. Separate multiple values with commas. (optional)
+        /// </param>
+        /// <param name="filterSubLocationId">
+        ///Retrieves issues associated with the specified unique LBS (Location Breakdown Structure) identifier, as well as issues associated with the sub locations of the LBS identifier. Separate multiple values with commas. (optional)
+        /// </param>
+        /// <param name="filterClosedBy">
+        ///Filter issues by the unique identifier of the user who closed the issue. Separate multiple values with commas. For Example: A3RGM375QTZ7. (optional)
+        /// </param>
+        /// <param name="filterClosedAt">
+        ///Filter issues closed at the specified date and time, in one of the following URL-encoded formats: YYYY-MM-DDThh:mm:ss.sz or YYYY-MM-DD. Separate multiple values with commas. (optional)
+        /// </param>
+        /// <param name="filterSearch">
+        ///Filter issues using ‘search’ criteria. this will filter both title and issues display ID. For example, use filter[search]=300 (optional)
+        /// </param>
+        /// <param name="filterDisplayId">
+        ///Filter issues by the chronological user-friendly identifier. Separate multiple values with commas. (optional)
+        /// </param>
+        /// <param name="filterAssignedToType">
+        ///Filter issues by the type of the current assignee of this issue. Separate multiple values with commas. Possible values: Possible values: user, company, role, null. For Example: user. (optional)
+        /// </param>
+        /// <param name="filterCustomAttributes">
+        ///Filter issues by the custom attributes. Each custom attribute filter should be defined by it’s uuid. For example: filter[customAttributes][f227d940-ae9b-4722-9297-389f4411f010]=1,2,3. Separate multiple values with commas. (optional)
+        /// </param>
+        /// <param name="filterValid">
+        ///Only return valid issues (=no empty type/subtype). Default value: undefined (meaning will return both valid & invalid issues). (optional)
+        /// </param>
+        /// <param name="limit">
+        ///Return specified number of issues. Acceptable values are 1-100. Default value: 100. (optional)
+        /// </param>
+        /// <param name="offset">
+        ///Return issues starting from the specified offset number. Default value: 0. (optional)
+        /// </param>
+        /// <param name="sortBy">
+        ///Sort issue comments by specified fields. Separate multiple values with commas. To sort in descending order add a - (minus sign) before the sort criteria (optional)
+        /// </param>
+        /// <param name="fields">
+        ///Return only specific fields in issue object. Separate multiple values with commas. (optional)
+        /// </param>
+        /// <returns>Task of ApiResponse&lt;IssuesPage&gt;</returns>
+
+        System.Threading.Tasks.Task<ApiResponse<IssuesPage>> GetIssuesAsync(string projectId, List<string> filterId = default(List<string>), List<string> filterIssueTypeId = default(List<string>), List<string> filterIssueSubtypeId = default(List<string>), string filterStatus = default(string), List<string> filterLinkedDocumentUrn = default(List<string>), Region? xAdsRegion = null, string filterDueDate = default(string), string filterStartDate = default(string), string filterCreatedAt = default(string), FiltercreatedBy filterCreatedBy = default(FiltercreatedBy), string filterUpdatedAt = default(string), List<string> filterUpdatedBy = default(List<string>), List<string> filterAssignedTo = default(List<string>), List<string> filterRootCauseId = default(List<string>), List<string> filterLocationId = default(List<string>), List<string> filterSubLocationId = default(List<string>), List<string> filterClosedBy = default(List<string>), string filterClosedAt = default(string), string filterSearch = default(string), int? filterDisplayId = default(int?), string filterAssignedToType = default(string), List<string> filterCustomAttributes = default(List<string>), bool? filterValid = default(bool?), int? limit = default(int?), int? offset = default(int?), List<SortBy> sortBy = default(List<SortBy>), List<Fields> fields = default(List<Fields>), string accessToken = null, bool throwOnError = true);
         /// <summary>
         /// 
         /// </summary>
         /// <remarks>
-        /// Updates an issue.  To verify whether a user can update issues for a specific project, call GET users/me.  To verify which attributes the user can update, call GET issues/:id and check the permittedAttributes and permittedStatuses lists.
+        ///Updates an issue.
+        ///
+        ///To verify whether a user can update issues for a specific project, call GET users/me.
+        ///
+        ///To verify which attributes the user can update, call GET issues/:id and check the permittedAttributes and permittedStatuses lists.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="projectId">The ID of the project.</param>/// <param name="issueId">The unique identifier of the issue.</param>/// <param name="xAdsRegion">The region where the bucket residesAcceptable values: &#x60;US&#x60;, &#x60;EMEA&#x60;</param>/// <param name="issuePayload"> (optional)</param>
-        /// <returns>Task of ApiResponse<Issue></returns>
-        
-        System.Threading.Tasks.Task<ApiResponse<Issue>> PatchIssueDetailsAsync (string projectId, string issueId, XAdsRegion xAdsRegion, IssuePayload issuePayload= default(IssuePayload),  string accessToken = null, bool throwOnError = true);
+        /// <param name="projectId">
+        ///The ID of the project.
+        /// </param>
+        /// <param name="issueId">
+        ///The unique identifier of the issue.
+        /// </param>
+        /// <param name="xAdsRegion">
+        /// (optional)
+        /// </param>
+        /// <param name="issuePayload">
+        /// (optional)
+        /// </param>
+        /// <returns>Task of ApiResponse&lt;Issue&gt;</returns>
+
+        System.Threading.Tasks.Task<ApiResponse<Issue>> PatchIssueDetailsAsync(string projectId, string issueId, Region? xAdsRegion = null, IssuePayload issuePayload = default(IssuePayload), string accessToken = null, bool throwOnError = true);
     }
 
     /// <summary>
@@ -105,55 +220,78 @@ namespace Autodesk.Construction.Issues.Http
         }
         private void SetQueryParameter(string name, object value, Dictionary<string, object> dictionary)
         {
-            if(value is Enum)
+            if (value is Enum)
             {
                 var type = value.GetType();
                 var memberInfos = type.GetMember(value.ToString());
                 var enumValueMemberInfo = memberInfos.FirstOrDefault(m => m.DeclaringType == type);
                 var valueAttributes = enumValueMemberInfo.GetCustomAttributes(typeof(EnumMemberAttribute), false);
-                if(valueAttributes.Length > 0)
+                if (valueAttributes.Length > 0)
                 {
                     dictionary.Add(name, ((EnumMemberAttribute)valueAttributes[0]).Value);
                 }
             }
-            else if(value is int)
+            else if (value is int)
             {
-                if((int)value > 0)
+                if ((int)value > 0)
                 {
                     dictionary.Add(name, value);
                 }
             }
+           else if (value is IList)
+            {
+                if (value is List<string>)
+                {
+                    value = String.Join(",",(List<string>)value);
+                     dictionary.Add(name, value);
+                }
+                else 
+                {
+                    List<string>newlist = new List<string>();
+                    foreach ( var x in (IList)value)
+                    {
+                            var type = x.GetType();
+                            var memberInfos = type.GetMember(x.ToString());
+                            var enumValueMemberInfo = memberInfos.FirstOrDefault(m => m.DeclaringType == type);
+                            var valueAttributes = enumValueMemberInfo.GetCustomAttributes(typeof(EnumMemberAttribute), false);
+                            newlist.Add(((EnumMemberAttribute)valueAttributes[0]).Value);                            
+                    }
+                    string joinedString = String.Join(",", newlist);
+                    dictionary.Add(name, joinedString);
+                }
+            }
             else
             {
-                if(value != null)
+                if (value != null)
                 {
+                    
                     dictionary.Add(name, value);
                 }
             }
         }
         private void SetHeader(string baseName, object value, HttpRequestMessage req)
         {
-                if(value is DateTime)
+            if (value is DateTime)
+            {
+                if ((DateTime)value != DateTime.MinValue)
                 {
-                    if((DateTime)value != DateTime.MinValue)
+                    req.Headers.TryAddWithoutValidation(baseName, LocalMarshalling.ParameterToString(value)); // header parameter
+                }
+            }
+            else
+            {
+                if (value != null)
+                {
+                    if (!string.Equals(baseName, "Content-Range"))
                     {
                         req.Headers.TryAddWithoutValidation(baseName, LocalMarshalling.ParameterToString(value)); // header parameter
                     }
-                }
-                else
-                {
-                    if (value != null)
+                    else
                     {
-                        if(!string.Equals(baseName, "Content-Range"))
-                        {
-                            req.Headers.TryAddWithoutValidation(baseName, LocalMarshalling.ParameterToString(value)); // header parameter
-                        }
-                        else
-                        {
-                            req.Content.Headers.Add(baseName, LocalMarshalling.ParameterToString(value));
-                        }
+                        req.Content.Headers.Add(baseName, LocalMarshalling.ParameterToString(value));
                     }
                 }
+            }
 
         }
 
@@ -161,19 +299,27 @@ namespace Autodesk.Construction.Issues.Http
         /// Gets or sets the ApsConfiguration object
         /// </summary>
         /// <value>An instance of the ForgeService</value>
-        public ForgeService Service {get; set;}
+        public ForgeService Service { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         /// <remarks>
-        /// Adds an issue to a project.
+        ///Adds an issue to a project.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="projectId">The ID of the project.</param>/// <param name="xAdsRegion">The region where the bucket residesAcceptable values: &#x60;US&#x60;, &#x60;EMEA&#x60;</param>/// <param name="issuePayload"> (optional)</param>
-        /// <returns>Task of ApiResponse<Issue></returns>
-        
-        public async System.Threading.Tasks.Task<ApiResponse<Issue>> CreateIssueAsync (string projectId,XAdsRegion xAdsRegion,IssuePayload issuePayload= default(IssuePayload), string accessToken = null, bool throwOnError = true)
+        /// <param name="projectId">
+        ///The ID of the project.
+        /// </param>
+        /// <param name="xAdsRegion">
+        /// (optional)
+        /// </param>
+        /// <param name="issuePayload">
+        /// (optional)
+        /// </param>
+        /// <returns>Task of ApiResponse&lt;Issue&gt;></returns>
+
+        public async System.Threading.Tasks.Task<ApiResponse<Issue>> CreateIssueAsync(string projectId, Region? xAdsRegion = null, IssuePayload issuePayload = default(IssuePayload), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into CreateIssueAsync ");
             using (var request = new HttpRequestMessage())
@@ -188,8 +334,8 @@ namespace Autodesk.Construction.Issues.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/CONSTRUCTION.ISSUES/C#/0.0.1");
-                if(!string.IsNullOrEmpty(accessToken))
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/CONSTRUCTION.ISSUES/C#/1.0.0-beta1");
+                if (!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
                 }
@@ -197,35 +343,35 @@ namespace Autodesk.Construction.Issues.Http
                 request.Content = Marshalling.Serialize(issuePayload); // http body (model) parameter
 
 
-                SetHeader("x-ads-region", (xAdsRegion.ToString().ToLowerInvariant()), request);
+                SetHeader("x-ads-region", xAdsRegion, request);
 
                 // tell the underlying pipeline what scope we'd like to use
                 // if (scopes == null)
                 // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
+                // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
                 // }
                 // else
                 // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
                 // if (scopes == null)
                 // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
+                // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
                 // }
                 // else
                 // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
                 // if (scopes == null)
                 // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
+                // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
                 // }
                 // else
                 // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
 
                 request.Method = new HttpMethod("POST");
@@ -237,9 +383,11 @@ namespace Autodesk.Construction.Issues.Http
                 {
                     try
                     {
-                      await response.EnsureSuccessStatusCodeAsync();
-                    } catch (HttpRequestException ex) {
-                      throw new ConstructionissuesApiException(ex.Message, response, ex);
+                        await response.EnsureSuccessStatusCodeAsync();
+                    }
+                    catch (HttpRequestException ex)
+                    {
+                        throw new ConstructionissuesApiException(ex.Message, response, ex);
                     }
                 }
                 else if (!response.IsSuccessStatusCode)
@@ -256,13 +404,21 @@ namespace Autodesk.Construction.Issues.Http
         /// Your GET endpoint
         /// </summary>
         /// <remarks>
-        /// Retrieves detailed information about a single issue. For general information about all the issues in a project.
+        ///Retrieves detailed information about a single issue. For general information about all the issues in a project.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="projectId">The ID of the project.</param>/// <param name="issueId">The unique identifier of the issue.</param>/// <param name="xAdsRegion">The region where the bucket residesAcceptable values: &#x60;US&#x60;, &#x60;EMEA&#x60;</param>
-        /// <returns>Task of ApiResponse<Issue></returns>
-        
-        public async System.Threading.Tasks.Task<ApiResponse<Issue>> GetIssueDetailsAsync (string projectId,string issueId,XAdsRegion xAdsRegion, string accessToken = null, bool throwOnError = true)
+        /// <param name="projectId">
+        ///The ID of the project.
+        /// </param>
+        /// <param name="issueId">
+        ///The unique identifier of the issue.
+        /// </param>
+        /// <param name="xAdsRegion">
+        /// (optional)
+        /// </param>
+        /// <returns>Task of ApiResponse&lt;Issue&gt;></returns>
+
+        public async System.Threading.Tasks.Task<ApiResponse<Issue>> GetIssueDetailsAsync(string projectId, string issueId, Region? xAdsRegion = null, string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into GetIssueDetailsAsync ");
             using (var request = new HttpRequestMessage())
@@ -278,43 +434,43 @@ namespace Autodesk.Construction.Issues.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/CONSTRUCTION.ISSUES/C#/0.0.1");
-                if(!string.IsNullOrEmpty(accessToken))
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/CONSTRUCTION.ISSUES/C#/1.0.0-beta1");
+                if (!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
                 }
 
 
 
-                SetHeader("x-ads-region", (xAdsRegion.ToString().ToLowerInvariant()), request);
+                SetHeader("x-ads-region", xAdsRegion, request);
 
                 // tell the underlying pipeline what scope we'd like to use
                 // if (scopes == null)
                 // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
+                // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
                 // }
                 // else
                 // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
                 // if (scopes == null)
                 // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
+                // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
                 // }
                 // else
                 // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
                 // if (scopes == null)
                 // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
+                // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
                 // }
                 // else
                 // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
 
                 request.Method = new HttpMethod("GET");
@@ -326,9 +482,11 @@ namespace Autodesk.Construction.Issues.Http
                 {
                     try
                     {
-                      await response.EnsureSuccessStatusCodeAsync();
-                    } catch (HttpRequestException ex) {
-                      throw new ConstructionissuesApiException(ex.Message, response, ex);
+                        await response.EnsureSuccessStatusCodeAsync();
+                    }
+                    catch (HttpRequestException ex)
+                    {
+                        throw new ConstructionissuesApiException(ex.Message, response, ex);
                     }
                 }
                 else if (!response.IsSuccessStatusCode)
@@ -345,13 +503,96 @@ namespace Autodesk.Construction.Issues.Http
         /// Your GET endpoint
         /// </summary>
         /// <remarks>
-        /// Retrieves information about all the issues in a project, including details about their associated comments and attachments.
+        ///Retrieves information about all the issues in a project, including details about their associated comments and attachments.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="projectId">The ID of the project.</param>/// <param name="xAdsRegion">The region where the bucket residesAcceptable values: &#x60;US&#x60;, &#x60;EMEA&#x60;</param>/// <param name="filterId">Filter issues by the unique issue ID. Separate multiple values with commas. (optional)</param>/// <param name="filterIssueTypeId">Filter issues by the unique identifier of the category of the issue. Note that the API name for category is type. Separate multiple values with commas. (optional)</param>/// <param name="filterIssueSubtypeId">Filter issues by the unique identifier of the type of the issue. Note that the API name for type is subtype. Separate multiple values with commas. (optional)</param>/// <param name="filterStatus">Filter issues by their status. Separate multiple values with commas. (optional)</param>/// <param name="filterLinkedDocumentUrn">Retrieves pushpin issues associated with the specified files. We support all file types that are compatible with the Files tool. You need to specify the URL-encoded file item IDs. (optional)</param>/// <param name="filterDueDate">Filter issues by due date, in one of the following URL-encoded format: YYYY-MM-DD. Separate multiple values with commas. (optional)</param>/// <param name="filterStartDate">Filter issues by start date, in one of the following URL-encoded format: YYYY-MM-DD. Separate multiple values with commas. (optional)</param>/// <param name="filterCreatedAt">Filter issues created at the specified date and time, in one of the following URL-encoded formats: YYYY-MM-DDThh:mm:ss.sz or YYYY-MM-DD. Separate multiple values with commas (optional)</param>/// <param name="filterCreatedBy">Filter issues by the unique identifier of the user who created the issue. Separate multiple values with commas. (optional)</param>/// <param name="filterUpdatedAt">Filter issues updated at the specified date and time, in one of the following URL-encoded formats: YYYY-MM-DDThh:mm:ss.sz or YYYY-MM-DD. Separate multiple values with commas.  (optional)</param>/// <param name="filterUpdatedBy">Filter issues by the unique identifier of the user who updated the issue. Separate multiple values with commas. (optional)</param>/// <param name="filterAssignedTo">Filter issues by the unique Autodesk ID of the User/Company/Role identifier of the current assignee of this issue. Separate multiple values with commas. (optional)</param>/// <param name="filterRootCauseId">Filter issues by the unique identifier of the type of root cause for the issue. Separate multiple values with commas. (optional)</param>/// <param name="filterLocationId">Retrieves issues associated with the specified location but not the location’s sublocations. To also retrieve issues that relate to the locations’s sublocations use the sublocationId filter. Separate multiple values with commas. (optional)</param>/// <param name="filterSubLocationId">Retrieves issues associated with the specified unique LBS (Location Breakdown Structure) identifier, as well as issues associated with the sub locations of the LBS identifier. Separate multiple values with commas. (optional)</param>/// <param name="filterClosedBy">Filter issues by the unique identifier of the user who closed the issue. Separate multiple values with commas. For Example: A3RGM375QTZ7. (optional)</param>/// <param name="filterClosedAt">Filter issues closed at the specified date and time, in one of the following URL-encoded formats: YYYY-MM-DDThh:mm:ss.sz or YYYY-MM-DD. Separate multiple values with commas. (optional)</param>/// <param name="filterSearch">Filter issues using ‘search’ criteria. this will filter both title and issues display ID. For example, use filter[search]&#x3D;300 (optional)</param>/// <param name="filterDisplayId">Filter issues by the chronological user-friendly identifier. Separate multiple values with commas. (optional)</param>/// <param name="filterAssignedToType">Filter issues by the type of the current assignee of this issue. Separate multiple values with commas. Possible values: Possible values: user, company, role, null. For Example: user. (optional)</param>/// <param name="filterCustomAttributes">Filter issues by the custom attributes. Each custom attribute filter should be defined by it’s uuid. For example: filter[customAttributes][f227d940-ae9b-4722-9297-389f4411f010]&#x3D;1,2,3. Separate multiple values with commas. (optional)</param>/// <param name="filterValid">Only return valid issues (&#x3D;no empty type/subtype). Default value: undefined (meaning will return both valid &amp; invalid issues). (optional)</param>/// <param name="limit">Return specified number of issues. Acceptable values are 1-100. Default value: 100. (optional)</param>/// <param name="offset">Return issues starting from the specified offset number. Default value: 0. (optional)</param>/// <param name="sortBy">Sort issue comments by specified fields. Separate multiple values with commas. To sort in descending order add a - (minus sign) before the sort criteria (optional)</param>/// <param name="fields">Return only specific fields in issue object. Separate multiple values with commas. (optional)</param>
-        /// <returns>Task of ApiResponse<Issues></returns>
-        
-        public async System.Threading.Tasks.Task<ApiResponse<IssuesPage>> GetIssuesAsync (string projectId,XAdsRegion xAdsRegion,List<string> filterId= default(List<string>),List<string> filterIssueTypeId= default(List<string>),List<string> filterIssueSubtypeId= default(List<string>),string filterStatus= default(string),List<string> filterLinkedDocumentUrn= default(List<string>),string filterDueDate= default(string),string filterStartDate= default(string),string filterCreatedAt= default(string),FiltercreatedBy filterCreatedBy= default(FiltercreatedBy),string filterUpdatedAt= default(string),List<string> filterUpdatedBy= default(List<string>),List<string> filterAssignedTo= default(List<string>),List<string> filterRootCauseId= default(List<string>),List<string> filterLocationId= default(List<string>),List<string> filterSubLocationId= default(List<string>),List<string> filterClosedBy= default(List<string>),string filterClosedAt= default(string),string filterSearch= default(string),int? filterDisplayId= default(int?),string filterAssignedToType= default(string),List<string> filterCustomAttributes= default(List<string>),bool? filterValid= default(bool?),int? limit= default(int?),int? offset= default(int?),List<SortBy> sortBy= default(List<SortBy>),List<Fields> fields= default(List<Fields>), string accessToken = null, bool throwOnError = true)
+        /// <param name="projectId">
+        ///The ID of the project.
+        /// </param>
+        /// <param name="filterId">
+        ///Filter issues by the unique issue ID. Separate multiple values with commas. (optional)
+        /// </param>
+        /// <param name="filterIssueTypeId">
+        ///Filter issues by the unique identifier of the category of the issue. Note that the API name for category is type. Separate multiple values with commas. (optional)
+        /// </param>
+        /// <param name="filterIssueSubtypeId">
+        ///Filter issues by the unique identifier of the type of the issue. Note that the API name for type is subtype. Separate multiple values with commas. (optional)
+        /// </param>
+        /// <param name="filterStatus">
+        ///Filter issues by their status. Separate multiple values with commas. (optional)
+        /// </param>
+        /// <param name="filterLinkedDocumentUrn">
+        ///Retrieves pushpin issues associated with the specified files. We support all file types that are compatible with the Files tool. You need to specify the URL-encoded file item IDs. (optional)
+        /// </param>
+        /// <param name="xAdsRegion">
+        /// (optional)
+        /// </param>
+        /// <param name="filterDueDate">
+        ///Filter issues by due date, in one of the following URL-encoded format: YYYY-MM-DD. Separate multiple values with commas. (optional)
+        /// </param>
+        /// <param name="filterStartDate">
+        ///Filter issues by start date, in one of the following URL-encoded format: YYYY-MM-DD. Separate multiple values with commas. (optional)
+        /// </param>
+        /// <param name="filterCreatedAt">
+        ///Filter issues created at the specified date and time, in one of the following URL-encoded formats: YYYY-MM-DDThh:mm:ss.sz or YYYY-MM-DD. Separate multiple values with commas (optional)
+        /// </param>
+        /// <param name="filterCreatedBy">
+        ///Filter issues by the unique identifier of the user who created the issue. Separate multiple values with commas. (optional)
+        /// </param>
+        /// <param name="filterUpdatedAt">
+        ///Filter issues updated at the specified date and time, in one of the following URL-encoded formats: YYYY-MM-DDThh:mm:ss.sz or YYYY-MM-DD. Separate multiple values with commas.  (optional)
+        /// </param>
+        /// <param name="filterUpdatedBy">
+        ///Filter issues by the unique identifier of the user who updated the issue. Separate multiple values with commas. (optional)
+        /// </param>
+        /// <param name="filterAssignedTo">
+        ///Filter issues by the unique Autodesk ID of the User/Company/Role identifier of the current assignee of this issue. Separate multiple values with commas. (optional)
+        /// </param>
+        /// <param name="filterRootCauseId">
+        ///Filter issues by the unique identifier of the type of root cause for the issue. Separate multiple values with commas. (optional)
+        /// </param>
+        /// <param name="filterLocationId">
+        ///Retrieves issues associated with the specified location but not the location’s sublocations. To also retrieve issues that relate to the locations’s sublocations use the sublocationId filter. Separate multiple values with commas. (optional)
+        /// </param>
+        /// <param name="filterSubLocationId">
+        ///Retrieves issues associated with the specified unique LBS (Location Breakdown Structure) identifier, as well as issues associated with the sub locations of the LBS identifier. Separate multiple values with commas. (optional)
+        /// </param>
+        /// <param name="filterClosedBy">
+        ///Filter issues by the unique identifier of the user who closed the issue. Separate multiple values with commas. For Example: A3RGM375QTZ7. (optional)
+        /// </param>
+        /// <param name="filterClosedAt">
+        ///Filter issues closed at the specified date and time, in one of the following URL-encoded formats: YYYY-MM-DDThh:mm:ss.sz or YYYY-MM-DD. Separate multiple values with commas. (optional)
+        /// </param>
+        /// <param name="filterSearch">
+        ///Filter issues using ‘search’ criteria. this will filter both title and issues display ID. For example, use filter[search]=300 (optional)
+        /// </param>
+        /// <param name="filterDisplayId">
+        ///Filter issues by the chronological user-friendly identifier. Separate multiple values with commas. (optional)
+        /// </param>
+        /// <param name="filterAssignedToType">
+        ///Filter issues by the type of the current assignee of this issue. Separate multiple values with commas. Possible values: Possible values: user, company, role, null. For Example: user. (optional)
+        /// </param>
+        /// <param name="filterCustomAttributes">
+        ///Filter issues by the custom attributes. Each custom attribute filter should be defined by it’s uuid. For example: filter[customAttributes][f227d940-ae9b-4722-9297-389f4411f010]=1,2,3. Separate multiple values with commas. (optional)
+        /// </param>
+        /// <param name="filterValid">
+        ///Only return valid issues (=no empty type/subtype). Default value: undefined (meaning will return both valid & invalid issues). (optional)
+        /// </param>
+        /// <param name="limit">
+        ///Return specified number of issues. Acceptable values are 1-100. Default value: 100. (optional)
+        /// </param>
+        /// <param name="offset">
+        ///Return issues starting from the specified offset number. Default value: 0. (optional)
+        /// </param>
+        /// <param name="sortBy">
+        ///Sort issue comments by specified fields. Separate multiple values with commas. To sort in descending order add a - (minus sign) before the sort criteria (optional)
+        /// </param>
+        /// <param name="fields">
+        ///Return only specific fields in issue object. Separate multiple values with commas. (optional)
+        /// </param>
+        /// <returns>Task of ApiResponse&lt;IssuesPage&gt;></returns>
+
+        public async System.Threading.Tasks.Task<ApiResponse<IssuesPage>> GetIssuesAsync(string projectId, List<string> filterId = default(List<string>), List<string> filterIssueTypeId = default(List<string>), List<string> filterIssueSubtypeId = default(List<string>), string filterStatus = default(string), List<string> filterLinkedDocumentUrn = default(List<string>), Region? xAdsRegion = null, string filterDueDate = default(string), string filterStartDate = default(string), string filterCreatedAt = default(string), FiltercreatedBy filterCreatedBy = default(FiltercreatedBy), string filterUpdatedAt = default(string), List<string> filterUpdatedBy = default(List<string>), List<string> filterAssignedTo = default(List<string>), List<string> filterRootCauseId = default(List<string>), List<string> filterLocationId = default(List<string>), List<string> filterSubLocationId = default(List<string>), List<string> filterClosedBy = default(List<string>), string filterClosedAt = default(string), string filterSearch = default(string), int? filterDisplayId = default(int?), string filterAssignedToType = default(string), List<string> filterCustomAttributes = default(List<string>), bool? filterValid = default(bool?), int? limit = default(int?), int? offset = default(int?), List<SortBy> sortBy = default(List<SortBy>), List<Fields> fields = default(List<Fields>), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into GetIssuesAsync ");
             using (var request = new HttpRequestMessage())
@@ -392,43 +633,43 @@ namespace Autodesk.Construction.Issues.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/CONSTRUCTION.ISSUES/C#/0.0.1");
-                if(!string.IsNullOrEmpty(accessToken))
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/CONSTRUCTION.ISSUES/C#/1.0.0-beta1");
+                if (!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
                 }
 
 
 
-                SetHeader("x-ads-region", (xAdsRegion.ToString().ToLowerInvariant()), request);
+                SetHeader("x-ads-region", xAdsRegion, request);
 
                 // tell the underlying pipeline what scope we'd like to use
                 // if (scopes == null)
                 // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
+                // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
                 // }
                 // else
                 // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
                 // if (scopes == null)
                 // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
+                // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
                 // }
                 // else
                 // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
                 // if (scopes == null)
                 // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
+                // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
                 // }
                 // else
                 // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
 
                 request.Method = new HttpMethod("GET");
@@ -440,9 +681,11 @@ namespace Autodesk.Construction.Issues.Http
                 {
                     try
                     {
-                      await response.EnsureSuccessStatusCodeAsync();
-                    } catch (HttpRequestException ex) {
-                      throw new ConstructionissuesApiException(ex.Message, response, ex);
+                        await response.EnsureSuccessStatusCodeAsync();
+                    }
+                    catch (HttpRequestException ex)
+                    {
+                        throw new ConstructionissuesApiException(ex.Message, response, ex);
                     }
                 }
                 else if (!response.IsSuccessStatusCode)
@@ -459,13 +702,28 @@ namespace Autodesk.Construction.Issues.Http
         /// 
         /// </summary>
         /// <remarks>
-        /// Updates an issue.  To verify whether a user can update issues for a specific project, call GET users/me.  To verify which attributes the user can update, call GET issues/:id and check the permittedAttributes and permittedStatuses lists.
+        ///Updates an issue.
+        ///
+        ///To verify whether a user can update issues for a specific project, call GET users/me.
+        ///
+        ///To verify which attributes the user can update, call GET issues/:id and check the permittedAttributes and permittedStatuses lists.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="projectId">The ID of the project.</param>/// <param name="issueId">The unique identifier of the issue.</param>/// <param name="xAdsRegion">The region where the bucket residesAcceptable values: &#x60;US&#x60;, &#x60;EMEA&#x60;</param>/// <param name="issuePayload"> (optional)</param>
-        /// <returns>Task of ApiResponse<Issue></returns>
-        
-        public async System.Threading.Tasks.Task<ApiResponse<Issue>> PatchIssueDetailsAsync (string projectId,string issueId,XAdsRegion xAdsRegion,IssuePayload issuePayload= default(IssuePayload), string accessToken = null, bool throwOnError = true)
+        /// <param name="projectId">
+        ///The ID of the project.
+        /// </param>
+        /// <param name="issueId">
+        ///The unique identifier of the issue.
+        /// </param>
+        /// <param name="xAdsRegion">
+        /// (optional)
+        /// </param>
+        /// <param name="issuePayload">
+        /// (optional)
+        /// </param>
+        /// <returns>Task of ApiResponse&lt;Issue&gt;></returns>
+
+        public async System.Threading.Tasks.Task<ApiResponse<Issue>> PatchIssueDetailsAsync(string projectId, string issueId, Region? xAdsRegion = null, IssuePayload issuePayload = default(IssuePayload), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into PatchIssueDetailsAsync ");
             using (var request = new HttpRequestMessage())
@@ -481,8 +739,8 @@ namespace Autodesk.Construction.Issues.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/CONSTRUCTION.ISSUES/C#/0.0.1");
-                if(!string.IsNullOrEmpty(accessToken))
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/CONSTRUCTION.ISSUES/C#/1.0.0-beta1");
+                if (!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
                 }
@@ -490,35 +748,35 @@ namespace Autodesk.Construction.Issues.Http
                 request.Content = Marshalling.Serialize(issuePayload); // http body (model) parameter
 
 
-                SetHeader("x-ads-region", (xAdsRegion.ToString().ToLowerInvariant()), request);
+                SetHeader("x-ads-region", xAdsRegion, request);
 
                 // tell the underlying pipeline what scope we'd like to use
                 // if (scopes == null)
                 // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
+                // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
                 // }
                 // else
                 // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
                 // if (scopes == null)
                 // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
+                // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
                 // }
                 // else
                 // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
                 // if (scopes == null)
                 // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
+                // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
                 // }
                 // else
                 // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
 
                 request.Method = new HttpMethod("PATCH");
@@ -530,9 +788,11 @@ namespace Autodesk.Construction.Issues.Http
                 {
                     try
                     {
-                      await response.EnsureSuccessStatusCodeAsync();
-                    } catch (HttpRequestException ex) {
-                      throw new ConstructionissuesApiException(ex.Message, response, ex);
+                        await response.EnsureSuccessStatusCodeAsync();
+                    }
+                    catch (HttpRequestException ex)
+                    {
+                        throw new ConstructionissuesApiException(ex.Message, response, ex);
                     }
                 }
                 else if (!response.IsSuccessStatusCode)

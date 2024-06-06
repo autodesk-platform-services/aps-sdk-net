@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Construction.Issues
  *
@@ -43,24 +43,52 @@ namespace Autodesk.Construction.Issues.Http
         /// 
         /// </summary>
         /// <remarks>
-        /// Creates a new comment under a specific issue.
+        ///Creates a new comment under a specific issue.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="projectId">The ID of the project.</param>/// <param name="issueId">The unique identifier of the issue.</param>/// <param name="xAdsRegion">The region where the bucket residesAcceptable values: &#x60;US&#x60;, &#x60;EMEA&#x60;</param>/// <param name="commentsPayload"> (optional)</param>
-        /// <returns>Task of ApiResponse<CreatedComment></returns>
-        
-        System.Threading.Tasks.Task<ApiResponse<CreatedComment>> CreateCommentsAsync (string projectId, string issueId, XAdsRegion xAdsRegion, CommentsPayload commentsPayload= default(CommentsPayload),  string accessToken = null, bool throwOnError = true);
+        /// <param name="projectId">
+        ///The ID of the project.
+        /// </param>
+        /// <param name="issueId">
+        ///The unique identifier of the issue.
+        /// </param>
+        /// <param name="xAdsRegion">
+        /// (optional)
+        /// </param>
+        /// <param name="commentsPayload">
+        /// (optional)
+        /// </param>
+        /// <returns>Task of ApiResponse&lt;CreatedComment&gt;</returns>
+
+        System.Threading.Tasks.Task<ApiResponse<CreatedComment>> CreateCommentsAsync(string projectId, string issueId, Region? xAdsRegion = null, CommentsPayload commentsPayload = default(CommentsPayload), string accessToken = null, bool throwOnError = true);
         /// <summary>
         /// Your GET endpoint
         /// </summary>
         /// <remarks>
-        /// Get all the comments for a specific issue.
+        ///Get all the comments for a specific issue.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="projectId">The ID of the project.</param>/// <param name="issueId">The unique identifier of the issue.</param>/// <param name="xAdsRegion">The region where the bucket residesAcceptable values: &#x60;US&#x60;, &#x60;EMEA&#x60;</param>/// <param name="limit">Add limit&#x3D;20 to limit the results count (together with the offset to support pagination). (optional)</param>/// <param name="offset">Add offset&#x3D;20 to get partial results (together with the limit to support pagination). (optional)</param>/// <param name="sortBy">Sort issue comments by specified fields. Separate multiple values with commas. To sort in descending order add a - (minus sign) before the sort criteria (optional)</param>
-        /// <returns>Task of ApiResponse<Comments></returns>
-        
-        System.Threading.Tasks.Task<ApiResponse<Comments>> GetCommentsAsync (string projectId, string issueId, XAdsRegion xAdsRegion, string limit= default(string), string offset= default(string), List<SortBy> sortBy= default(List<SortBy>),  string accessToken = null, bool throwOnError = true);
+        /// <param name="projectId">
+        ///The ID of the project.
+        /// </param>
+        /// <param name="issueId">
+        ///The unique identifier of the issue.
+        /// </param>
+        /// <param name="xAdsRegion">
+        /// (optional)
+        /// </param>
+        /// <param name="limit">
+        ///Add limit=20 to limit the results count (together with the offset to support pagination). (optional)
+        /// </param>
+        /// <param name="offset">
+        ///Add offset=20 to get partial results (together with the limit to support pagination). (optional)
+        /// </param>
+        /// <param name="sortBy">
+        ///Sort issue comments by specified fields. Separate multiple values with commas. To sort in descending order add a - (minus sign) before the sort criteria (optional)
+        /// </param>
+        /// <returns>Task of ApiResponse&lt;Comments&gt;</returns>
+
+        System.Threading.Tasks.Task<ApiResponse<Comments>> GetCommentsAsync(string projectId, string issueId, Region? xAdsRegion = null, string limit = default(string), string offset = default(string), List<SortBy> sortBy = default(List<SortBy>), string accessToken = null, bool throwOnError = true);
     }
 
     /// <summary>
@@ -83,27 +111,27 @@ namespace Autodesk.Construction.Issues.Http
         }
         private void SetQueryParameter(string name, object value, Dictionary<string, object> dictionary)
         {
-            if(value is Enum)
+            if (value is Enum)
             {
                 var type = value.GetType();
                 var memberInfos = type.GetMember(value.ToString());
                 var enumValueMemberInfo = memberInfos.FirstOrDefault(m => m.DeclaringType == type);
                 var valueAttributes = enumValueMemberInfo.GetCustomAttributes(typeof(EnumMemberAttribute), false);
-                if(valueAttributes.Length > 0)
+                if (valueAttributes.Length > 0)
                 {
                     dictionary.Add(name, ((EnumMemberAttribute)valueAttributes[0]).Value);
                 }
             }
-            else if(value is int)
+            else if (value is int)
             {
-                if((int)value > 0)
+                if ((int)value > 0)
                 {
                     dictionary.Add(name, value);
                 }
             }
             else
             {
-                if(value != null)
+                if (value != null)
                 {
                     dictionary.Add(name, value);
                 }
@@ -111,27 +139,27 @@ namespace Autodesk.Construction.Issues.Http
         }
         private void SetHeader(string baseName, object value, HttpRequestMessage req)
         {
-                if(value is DateTime)
+            if (value is DateTime)
+            {
+                if ((DateTime)value != DateTime.MinValue)
                 {
-                    if((DateTime)value != DateTime.MinValue)
+                    req.Headers.TryAddWithoutValidation(baseName, LocalMarshalling.ParameterToString(value)); // header parameter
+                }
+            }
+            else
+            {
+                if (value != null)
+                {
+                    if (!string.Equals(baseName, "Content-Range"))
                     {
                         req.Headers.TryAddWithoutValidation(baseName, LocalMarshalling.ParameterToString(value)); // header parameter
                     }
-                }
-                else
-                {
-                    if (value != null)
+                    else
                     {
-                        if(!string.Equals(baseName, "Content-Range"))
-                        {
-                            req.Headers.TryAddWithoutValidation(baseName, LocalMarshalling.ParameterToString(value)); // header parameter
-                        }
-                        else
-                        {
-                            req.Content.Headers.Add(baseName, LocalMarshalling.ParameterToString(value));
-                        }
+                        req.Content.Headers.Add(baseName, LocalMarshalling.ParameterToString(value));
                     }
                 }
+            }
 
         }
 
@@ -139,19 +167,30 @@ namespace Autodesk.Construction.Issues.Http
         /// Gets or sets the ApsConfiguration object
         /// </summary>
         /// <value>An instance of the ForgeService</value>
-        public ForgeService Service {get; set;}
+        public ForgeService Service { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         /// <remarks>
-        /// Creates a new comment under a specific issue.
+        ///Creates a new comment under a specific issue.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="projectId">The ID of the project.</param>/// <param name="issueId">The unique identifier of the issue.</param>/// <param name="xAdsRegion">The region where the bucket residesAcceptable values: &#x60;US&#x60;, &#x60;EMEA&#x60;</param>/// <param name="commentsPayload"> (optional)</param>
-        /// <returns>Task of ApiResponse<CreatedComment></returns>
-        
-        public async System.Threading.Tasks.Task<ApiResponse<CreatedComment>> CreateCommentsAsync (string projectId,string issueId,XAdsRegion xAdsRegion,CommentsPayload commentsPayload= default(CommentsPayload), string accessToken = null, bool throwOnError = true)
+        /// <param name="projectId">
+        ///The ID of the project.
+        /// </param>
+        /// <param name="issueId">
+        ///The unique identifier of the issue.
+        /// </param>
+        /// <param name="xAdsRegion">
+        /// (optional)
+        /// </param>
+        /// <param name="commentsPayload">
+        /// (optional)
+        /// </param>
+        /// <returns>Task of ApiResponse&lt;CreatedComment&gt;></returns>
+
+        public async System.Threading.Tasks.Task<ApiResponse<CreatedComment>> CreateCommentsAsync(string projectId, string issueId, Region? xAdsRegion = null, CommentsPayload commentsPayload = default(CommentsPayload), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into CreateCommentsAsync ");
             using (var request = new HttpRequestMessage())
@@ -167,8 +206,8 @@ namespace Autodesk.Construction.Issues.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/CONSTRUCTION.ISSUES/C#/0.0.1");
-                if(!string.IsNullOrEmpty(accessToken))
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/CONSTRUCTION.ISSUES/C#/1.0.0-beta1");
+                if (!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
                 }
@@ -176,35 +215,35 @@ namespace Autodesk.Construction.Issues.Http
                 request.Content = Marshalling.Serialize(commentsPayload); // http body (model) parameter
 
 
-                SetHeader("x-ads-region", (xAdsRegion.ToString().ToLowerInvariant()), request);
+                SetHeader("x-ads-region", xAdsRegion, request);
 
                 // tell the underlying pipeline what scope we'd like to use
                 // if (scopes == null)
                 // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
+                // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
                 // }
                 // else
                 // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
                 // if (scopes == null)
                 // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
+                // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
                 // }
                 // else
                 // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
                 // if (scopes == null)
                 // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
+                // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
                 // }
                 // else
                 // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
 
                 request.Method = new HttpMethod("POST");
@@ -216,9 +255,11 @@ namespace Autodesk.Construction.Issues.Http
                 {
                     try
                     {
-                      await response.EnsureSuccessStatusCodeAsync();
-                    } catch (HttpRequestException ex) {
-                      throw new ConstructionissuesApiException(ex.Message, response, ex);
+                        await response.EnsureSuccessStatusCodeAsync();
+                    }
+                    catch (HttpRequestException ex)
+                    {
+                        throw new ConstructionissuesApiException(ex.Message, response, ex);
                     }
                 }
                 else if (!response.IsSuccessStatusCode)
@@ -235,13 +276,30 @@ namespace Autodesk.Construction.Issues.Http
         /// Your GET endpoint
         /// </summary>
         /// <remarks>
-        /// Get all the comments for a specific issue.
+        ///Get all the comments for a specific issue.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="projectId">The ID of the project.</param>/// <param name="issueId">The unique identifier of the issue.</param>/// <param name="xAdsRegion">The region where the bucket residesAcceptable values: &#x60;US&#x60;, &#x60;EMEA&#x60;</param>/// <param name="limit">Add limit&#x3D;20 to limit the results count (together with the offset to support pagination). (optional)</param>/// <param name="offset">Add offset&#x3D;20 to get partial results (together with the limit to support pagination). (optional)</param>/// <param name="sortBy">Sort issue comments by specified fields. Separate multiple values with commas. To sort in descending order add a - (minus sign) before the sort criteria (optional)</param>
-        /// <returns>Task of ApiResponse<Comments></returns>
-        
-        public async System.Threading.Tasks.Task<ApiResponse<Comments>> GetCommentsAsync (string projectId,string issueId,XAdsRegion xAdsRegion,string limit= default(string),string offset= default(string),List<SortBy> sortBy= default(List<SortBy>), string accessToken = null, bool throwOnError = true)
+        /// <param name="projectId">
+        ///The ID of the project.
+        /// </param>
+        /// <param name="issueId">
+        ///The unique identifier of the issue.
+        /// </param>
+        /// <param name="xAdsRegion">
+        /// (optional)
+        /// </param>
+        /// <param name="limit">
+        ///Add limit=20 to limit the results count (together with the offset to support pagination). (optional)
+        /// </param>
+        /// <param name="offset">
+        ///Add offset=20 to get partial results (together with the limit to support pagination). (optional)
+        /// </param>
+        /// <param name="sortBy">
+        ///Sort issue comments by specified fields. Separate multiple values with commas. To sort in descending order add a - (minus sign) before the sort criteria (optional)
+        /// </param>
+        /// <returns>Task of ApiResponse&lt;Comments&gt;></returns>
+
+        public async System.Threading.Tasks.Task<ApiResponse<Comments>> GetCommentsAsync(string projectId, string issueId, Region? xAdsRegion = null, string limit = default(string), string offset = default(string), List<SortBy> sortBy = default(List<SortBy>), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into GetCommentsAsync ");
             using (var request = new HttpRequestMessage())
@@ -260,43 +318,43 @@ namespace Autodesk.Construction.Issues.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/CONSTRUCTION.ISSUES/C#/0.0.1");
-                if(!string.IsNullOrEmpty(accessToken))
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/CONSTRUCTION.ISSUES/C#/1.0.0-beta1");
+                if (!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
                 }
 
 
 
-                SetHeader("x-ads-region", (xAdsRegion.ToString().ToLowerInvariant()), request);
+                SetHeader("x-ads-region", xAdsRegion, request);
 
                 // tell the underlying pipeline what scope we'd like to use
                 // if (scopes == null)
                 // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
+                // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
                 // }
                 // else
                 // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
                 // if (scopes == null)
                 // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
+                // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
                 // }
                 // else
                 // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
                 // if (scopes == null)
                 // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
+                // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
                 // }
                 // else
                 // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
 
                 request.Method = new HttpMethod("GET");
@@ -308,9 +366,11 @@ namespace Autodesk.Construction.Issues.Http
                 {
                     try
                     {
-                      await response.EnsureSuccessStatusCodeAsync();
-                    } catch (HttpRequestException ex) {
-                      throw new ConstructionissuesApiException(ex.Message, response, ex);
+                        await response.EnsureSuccessStatusCodeAsync();
+                    }
+                    catch (HttpRequestException ex)
+                    {
+                        throw new ConstructionissuesApiException(ex.Message, response, ex);
                     }
                 }
                 else if (!response.IsSuccessStatusCode)

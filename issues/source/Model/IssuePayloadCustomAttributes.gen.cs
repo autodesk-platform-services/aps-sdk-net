@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Construction.Issues
  *
@@ -36,7 +36,7 @@ namespace Autodesk.Construction.Issues.Model
     /// IssuePayloadCustomAttributes
     /// </summary>
     [DataContract]
-    public partial class IssuePayloadCustomAttributes 
+    public partial class IssuePayloadCustomAttributes
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="IssuePayloadCustomAttributes" /> class.
@@ -44,19 +44,23 @@ namespace Autodesk.Construction.Issues.Model
         public IssuePayloadCustomAttributes()
         {
         }
-        
+
         /// <summary>
-        /// The unique identifier of the custom attribute.
+        ///The unique identifier of the custom attribute.
         /// </summary>
-        /// <value>The unique identifier of the custom attribute.</value>
-        [DataMember(Name="attributeDefinitionId", EmitDefaultValue=false)]
+        /// <value>
+        ///The unique identifier of the custom attribute.
+        /// </value>
+        [DataMember(Name = "attributeDefinitionId", EmitDefaultValue = false)]
         public string AttributeDefinitionId { get; set; }
 
         /// <summary>
-        /// Custom attribute value. Possible value types: string, number, null.
+        ///Custom attribute value. Possible value types: string, number, null.
         /// </summary>
-        /// <value>Custom attribute value. Possible value types: string, number, null.</value>
-        [DataMember(Name="value", EmitDefaultValue=false)]
+        /// <value>
+        ///Custom attribute value. Possible value types: string, number, null.
+        /// </value>
+        [DataMember(Name = "value", EmitDefaultValue = false)]
         public Object Value { get; set; }
 
         /// <summary>

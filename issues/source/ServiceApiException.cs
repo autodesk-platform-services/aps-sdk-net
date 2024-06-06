@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Construction.Issues
  *
@@ -26,9 +26,9 @@ namespace Autodesk.Construction.Issues
 {
   public abstract class ServiceApiException : HttpRequestException
   {
-    public HttpResponseMessage HttpResponseMessage {get; set;}
+    public HttpResponseMessage HttpResponseMessage { get; set; }
 
-    public ServiceApiException(string message) : base(message) {}
+    public ServiceApiException(string message) : base(message) { }
     public ServiceApiException(string message, HttpResponseMessage httpResponseMessage, Exception exception) : base(message, exception)
     {
       this.HttpResponseMessage = httpResponseMessage;
@@ -37,7 +37,7 @@ namespace Autodesk.Construction.Issues
 
   public class ConstructionissuesApiException : ServiceApiException
   {
-    public ConstructionissuesApiException(string message) : base(message) {}
-    public ConstructionissuesApiException(string message, HttpResponseMessage httpResponseMessage, Exception exception) : base(message, httpResponseMessage, exception) {}
+    public ConstructionissuesApiException(string message) : base(message) { }
+    public ConstructionissuesApiException(string message, HttpResponseMessage httpResponseMessage, Exception exception) : base(message, httpResponseMessage, exception) { }
   }
 }
