@@ -58,6 +58,18 @@ namespace Autodesk.DataManagement.Model
         public string _Version { get; set; }
 
         /// <summary>
+        ///Gets or Sets Schema
+        /// </summary>
+        [DataMember(Name="schema", EmitDefaultValue=false)]
+        public VersionIncludedAttributesExtensionSchema Schema { get; set; }
+
+        /// <summary>
+        ///Gets or Sets Data
+        /// </summary>
+        [DataMember(Name="data", EmitDefaultValue=false)]
+        public Object Data { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>

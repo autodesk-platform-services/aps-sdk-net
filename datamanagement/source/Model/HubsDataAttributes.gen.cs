@@ -60,8 +60,8 @@ namespace Autodesk.DataManagement.Model
         /// <summary>
         /// Gets or Sets Region
         /// </summary>
-        [DataMember(Name="region", EmitDefaultValue=false)]
-        public string Region { get; set; }
+        [DataMember(Name="region", EmitDefaultValue=true)]
+        public Region Region { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

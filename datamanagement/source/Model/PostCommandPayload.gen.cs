@@ -1,0 +1,76 @@
+/*
+ * APS SDK
+ *
+ * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ *
+ * Data Management
+ *
+ * The Data Management API provides a unified and consistent way to access data across BIM 360 Team, Fusion Team (formerly known as A360 Team), BIM 360 Docs, A360 Personal, and the Object Storage Service. With this API, you can accomplish a number of workflows, including accessing a Fusion model in Fusion Team and getting an ordered structure of items, IDs, and properties for generating a bill of materials in a 3rd-party process. Or, you might want to superimpose a Fusion model and a building model to use in the Viewer.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+using Newtonsoft.Json;
+
+namespace Autodesk.DataManagement.Model
+{
+    /// <summary>
+    /// Base class for all command types
+    /// </summary>
+    [DataContract]
+    [KnownType(typeof(CheckPermissionPayload))]
+    [KnownType(typeof(GetPublishModelJobPayload))]
+    [KnownType(typeof(ListItemsPayload))]
+    [KnownType(typeof(ListRefsPayload))]
+    [KnownType(typeof(PublishModelPayload))]
+    [KnownType(typeof(PublishWithoutLinksPayload))]
+    public partial class PostCommandPayload
+    {
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
+        /// <returns>String presentation of the object</returns>
+    }
+
+    public partial class CheckPermissionPayload : PostCommandPayload
+    {
+        // Properties specific to CheckPermission
+    }
+
+    public partial class GetPublishModelJobPayload : PostCommandPayload
+    {
+        // Properties specific to GetPublishModelJob
+    }
+    public partial class ListItemsPayload : PostCommandPayload
+    {
+        // Properties specific to ListItemsPayload
+    }
+
+    public partial class ListRefsPayload : PostCommandPayload
+    {
+        // Properties specific to ListRefsPayload
+    }
+
+    public partial class PublishModelPayload : PostCommandPayload
+    {
+        // Properties specific to PublishModelPayload
+    }
+
+    public partial class PublishWithoutLinksPayload : PostCommandPayload
+    {
+        // Properties specific to PublishWithoutLinksPayload
+    }
+}
