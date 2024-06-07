@@ -1,11 +1,11 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Model Derivative
  *
- * Model Derivative Service Documentation
+ * Use the Model Derivative API to translate designs from one CAD format to another. You can also use this API to extract metadata from a model.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,9 +33,21 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// Specifies how storeys are translated. Available options are: - hide - (default) storeys are extracted but not visible by default. - show - storeys are extracted and are visible by default. - skip - storeys are not translated. Note These options are applicable only when conversionMethod is set to modern or v3.
+    /// Specifies how storeys are translated. Applicable only when the source design is of type IFC. Possible values are:
+///
+///- `hide` - (Default) Storeys are translated but not visible by default.
+///- `show` - Storeys are translated and are visible by default.
+///- `skip` - Storeys are not translated.
+///
+///**Note:** These options are applicable only when `conversionMethod` is set to `modern` or `v3`.
     /// </summary>
-    /// <value>Specifies how storeys are translated. Available options are: - hide - (default) storeys are extracted but not visible by default. - show - storeys are extracted and are visible by default. - skip - storeys are not translated. Note These options are applicable only when conversionMethod is set to modern or v3.</value>
+    ///<value>Specifies how storeys are translated. Applicable only when the source design is of type IFC. Possible values are:
+///
+///- `hide` - (Default) Storeys are translated but not visible by default.
+///- `show` - Storeys are translated and are visible by default.
+///- `skip` - Storeys are not translated.
+///
+///**Note:** These options are applicable only when `conversionMethod` is set to `modern` or `v3`.</value>
     
     [JsonConverter(typeof(StringEnumConverter))]
     

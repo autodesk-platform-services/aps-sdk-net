@@ -1,11 +1,11 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Model Derivative
  *
- * Model Derivative Service Documentation
+ * Use the Model Derivative API to translate designs from one CAD format to another. You can also use this API to extract metadata from a model.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,30 +33,30 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// Set the width. Possible values are &#x60;100&#x60;, &#x60;200&#x60; and &#x60;400&#x60;.
+    /// Sets the width of a thumbnail output in pixels. Possible values are `100`, `200` and `400`.
     /// </summary>
-    /// <value>Set the width. Possible values are &#x60;100&#x60;, &#x60;200&#x60; and &#x60;400&#x60;.</value>
+    ///<value>Sets the width of a thumbnail output in pixels. Possible values are `100`, `200` and `400`.</value>
     
     public enum Width
     {
         
         /// <summary>
-        /// Enum _100 for value: 100
+        /// Enum NUMBER_100 for value: 100
         /// </summary>
         
-        _100 = 100,
+        NUMBER_100 = 100,
         
         /// <summary>
-        /// Enum _200 for value: 200
+        /// Enum NUMBER_200 for value: 200
         /// </summary>
         
-        _200 = 200,
+        NUMBER_200 = 200,
         
         /// <summary>
-        /// Enum _400 for value: 400
+        /// Enum NUMBER_400 for value: 400
         /// </summary>
         
-        _400 = 400
+        NUMBER_400 = 400
     }
 
 }

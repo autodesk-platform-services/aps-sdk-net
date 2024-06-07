@@ -5,7 +5,7 @@
  *
  * Model Derivative
  *
- * Model Derivative Service Documentation
+ * Use the Model Derivative API to translate designs from one CAD format to another. You can also use this API to extract metadata from a model.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,13 +43,24 @@ namespace Autodesk.ModelDerivative.Http
         /// List Supported Formats
         /// </summary>
         /// <remarks>
-        /// Returns an up-to-date list of supported translations. You can use to this list to find out what derivatives are supported by each source file type. You can set options to return the list of supported translations only if they have been updated since a specified date.  See the &#x60;Supported Translation Formats table &lt;/en/docs/model-derivative/v2/overview/supported-translations&gt;&#x60;_ for more details about supported translations.  **Note:** We keep adding new file formats to our supported translations list, constantly.
+        ///Returns an up-to-date list of supported translations. This operation also provides information on the types of derivatives that can be generated for each source design file type. Furthermore, it allows you to obtain a list of translations that have changed since a specified date.
+///
+///See the [Supported Translation Formats table](/en/docs/model-derivative/v2/overview/supported-translations) for more details.
+///
+///**Note:** We keep adding new file formats to our supported translations list, constantly.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="ifModifiedSince">Specifies a date in the &#x60;&#x60;Day of the week, DD Month YYYY HH:MM:SS GMT&#x60;&#x60; format. The response will contain only the formats modified since the specified date and time. If you specify an invalid date, the response will contain all supported formats. If no changes have been made after the specified date, the service returns HTTP status &#x60;&#x60;304&#x60;&#x60;, NOT MODIFIED. (optional)</param>/// <param name="acceptEncoding">A comma separated list of the algorthms you want the response to be encoded in, specified in the order of preference.    If you specify &#x60;&#x60;gzip&#x60;&#x60; or &#x60;&#x60;*&#x60;&#x60;, the service uses the GZIP algorithm to encode the response.  (optional)</param>
-        /// <returns>Task of ApiResponse<Formats></returns>
+         /// <param name="ifModifiedSince">
+         ///Specifies a date in the `Day of the week, DD Month YYYY HH:MM:SS GMT` format. The response will contain only the formats modified since the specified date and time. If you specify an invalid date, the response will contain all supported formats. If no changes have been made after the specified date, the service returns HTTP status `304`, NOT MODIFIED. (optional)
+         /// </param>
+         /// <param name="acceptEncoding">
+         ///A comma separated list of the algorithms you want the response to be encoded in, specified in the order of preference.  
+///
+///If you specify `gzip` or `*`, content is compressed and returned in gzip format. (optional)
+         /// </param>
+        /// <returns>Task of ApiResponse&lt;SupportedFormats&gt;</returns>
         
-        System.Threading.Tasks.Task<ApiResponse<Formats>> GetFormatsAsync (string ifModifiedSince= default(string), string acceptEncoding= default(string),  string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<ApiResponse<SupportedFormats>> GetFormatsAsync (string ifModifiedSince= default(string), string acceptEncoding= default(string),  string accessToken = null, bool throwOnError = true);
     }
 
     /// <summary>
@@ -134,13 +145,24 @@ namespace Autodesk.ModelDerivative.Http
         /// List Supported Formats
         /// </summary>
         /// <remarks>
-        /// Returns an up-to-date list of supported translations. You can use to this list to find out what derivatives are supported by each source file type. You can set options to return the list of supported translations only if they have been updated since a specified date.  See the &#x60;Supported Translation Formats table &lt;/en/docs/model-derivative/v2/overview/supported-translations&gt;&#x60;_ for more details about supported translations.  **Note:** We keep adding new file formats to our supported translations list, constantly.
+        ///Returns an up-to-date list of supported translations. This operation also provides information on the types of derivatives that can be generated for each source design file type. Furthermore, it allows you to obtain a list of translations that have changed since a specified date.
+///
+///See the [Supported Translation Formats table](/en/docs/model-derivative/v2/overview/supported-translations) for more details.
+///
+///**Note:** We keep adding new file formats to our supported translations list, constantly.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="ifModifiedSince">Specifies a date in the &#x60;&#x60;Day of the week, DD Month YYYY HH:MM:SS GMT&#x60;&#x60; format. The response will contain only the formats modified since the specified date and time. If you specify an invalid date, the response will contain all supported formats. If no changes have been made after the specified date, the service returns HTTP status &#x60;&#x60;304&#x60;&#x60;, NOT MODIFIED. (optional)</param>/// <param name="acceptEncoding">A comma separated list of the algorthms you want the response to be encoded in, specified in the order of preference.    If you specify &#x60;&#x60;gzip&#x60;&#x60; or &#x60;&#x60;*&#x60;&#x60;, the service uses the GZIP algorithm to encode the response.  (optional)</param>
-        /// <returns>Task of ApiResponse<Formats></returns>
+         /// <param name="ifModifiedSince">
+         ///Specifies a date in the `Day of the week, DD Month YYYY HH:MM:SS GMT` format. The response will contain only the formats modified since the specified date and time. If you specify an invalid date, the response will contain all supported formats. If no changes have been made after the specified date, the service returns HTTP status `304`, NOT MODIFIED. (optional)
+         /// </param>
+         /// <param name="acceptEncoding">
+         ///A comma separated list of the algorithms you want the response to be encoded in, specified in the order of preference.  
+///
+///If you specify `gzip` or `*`, content is compressed and returned in gzip format. (optional)
+         /// </param>
+        /// <returns>Task of ApiResponse&lt;SupportedFormats&gt;></returns>
         
-        public async System.Threading.Tasks.Task<ApiResponse<Formats>> GetFormatsAsync (string ifModifiedSince= default(string),string acceptEncoding= default(string), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ApiResponse<SupportedFormats>> GetFormatsAsync (string ifModifiedSince= default(string),string acceptEncoding= default(string), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into GetFormatsAsync ");
             using (var request = new HttpRequestMessage())
@@ -184,15 +206,6 @@ namespace Autodesk.ModelDerivative.Http
                 // {
                     // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
-                // if (scopes == null)
-                // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
-                // }
-                // else
-                // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
-                // }
 
                 request.Method = new HttpMethod("GET");
 
@@ -211,10 +224,10 @@ namespace Autodesk.ModelDerivative.Http
                 else if (!response.IsSuccessStatusCode)
                 {
                     logger.LogError($"response unsuccess with status code: {response.StatusCode}");
-                    return new ApiResponse<Formats>(response, default(Formats));
+                    return new ApiResponse<SupportedFormats>(response, default(SupportedFormats));
                 }
                 logger.LogInformation($"Exited from GetFormatsAsync with response statusCode: {response.StatusCode}");
-                return new ApiResponse<Formats>(response, await LocalMarshalling.DeserializeAsync<Formats>(response.Content));
+                return new ApiResponse<SupportedFormats>(response, await LocalMarshalling.DeserializeAsync<SupportedFormats>(response.Content));
 
             } // using
         }

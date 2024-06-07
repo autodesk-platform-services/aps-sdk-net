@@ -5,7 +5,7 @@
  *
  * Model Derivative
  *
- * Model Derivative Service Documentation
+ * Use the Model Derivative API to translate designs from one CAD format to another. You can also use this API to extract metadata from a model.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,7 +36,7 @@ namespace Autodesk.ModelDerivative.Model
     /// Job
     /// </summary>
     [DataContract]
-    public partial class Job 
+    public partial class Job
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Job" /> class.
@@ -44,25 +44,29 @@ namespace Autodesk.ModelDerivative.Model
         public Job()
         {
         }
-        
+
         /// <summary>
-        /// reporting success status
+        ///reporting success status
         /// </summary>
-        /// <value>reporting success status</value>
-        [DataMember(Name="result", EmitDefaultValue=false)]
+        /// <value>
+        ///reporting success status
+        /// </value>
+        [DataMember(Name = "result", EmitDefaultValue = false)]
         public string Result { get; set; }
 
         /// <summary>
-        /// the urn identifier of the source file
+        ///the urn identifier of the source file
         /// </summary>
-        /// <value>the urn identifier of the source file</value>
-        [DataMember(Name="urn", EmitDefaultValue=false)]
+        /// <value>
+        ///the urn identifier of the source file
+        /// </value>
+        [DataMember(Name = "urn", EmitDefaultValue = false)]
         public string Urn { get; set; }
 
         /// <summary>
-        /// Gets or Sets AcceptedJobs
+        ///Gets or Sets AcceptedJobs
         /// </summary>
-        [DataMember(Name="acceptedJobs", EmitDefaultValue=false)]
+        [DataMember(Name = "acceptedJobs", EmitDefaultValue = false)]
         public JobAcceptedJobs AcceptedJobs { get; set; }
 
         /// <summary>

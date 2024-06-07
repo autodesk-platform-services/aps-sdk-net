@@ -3,9 +3,9 @@
  *
  * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
- * Model Derivative API
+ * Model Derivative
  *
- * Model Derivative Service Documentation
+ * Use the Model Derivative API to translate designs from one CAD format to another. You can also use this API to extract metadata from a model.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,7 +36,7 @@ namespace Autodesk.ModelDerivative.Model
     /// An array of flat JSON objects representing metadata.
     /// </summary>
     [DataContract]
-    public partial class ModelViewsDataMetadata 
+    public partial class ModelViewsDataMetadata
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ModelViewsDataMetadata" /> class.
@@ -44,32 +44,42 @@ namespace Autodesk.ModelDerivative.Model
         public ModelViewsDataMetadata()
         {
         }
-        
+
         /// <summary>
-        /// Name of the model view
+        ///Name of the Model View.
         /// </summary>
-        /// <value>Name of the model view</value>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        /// <value>
+        ///Name of the Model View.
+        /// </value>
+        [DataMember(Name = "name", EmitDefaultValue = false)]
         public string Name { get; set; }
 
         /// <summary>
-        /// Unique identifier for the model view
+        ///Unique ID of the Model View.
         /// </summary>
-        /// <value>Unique identifier for the model view</value>
-        [DataMember(Name="guid", EmitDefaultValue=false)]
+        /// <value>
+        ///Unique ID of the Model View.
+        /// </value>
+        [DataMember(Name = "guid", EmitDefaultValue = false)]
         public string Guid { get; set; }
 
         /// <summary>
-        /// Gets or Sets Role
+        ///Gets or Sets Role
         /// </summary>
-        [DataMember(Name="role", EmitDefaultValue=true)]
+        [DataMember(Name = "role", EmitDefaultValue = true)]
         public Role Role { get; set; }
 
         /// <summary>
-        /// Indicates whether the model view is a Master View. This attribute is present only if the model view is a Master View. Possible values: true: Model View is a Master View derived from a Revit file.
+        ///`true`: Model View is a Master View derived from a Revit source design.
+        ///
+        ///`false`: Model View is not a Master View.
         /// </summary>
-        /// <value>Indicates whether the model view is a Master View. This attribute is present only if the model view is a Master View. Possible values: true: Model View is a Master View derived from a Revit file.</value>
-        [DataMember(Name="isMasterView", EmitDefaultValue=false)]
+        /// <value>
+        ///`true`: Model View is a Master View derived from a Revit source design.
+        ///
+        ///`false`: Model View is not a Master View.
+        /// </value>
+        [DataMember(Name = "isMasterView", EmitDefaultValue = false)]
         public bool? IsMasterView { get; set; }
 
         /// <summary>

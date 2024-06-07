@@ -3,9 +3,9 @@
  *
  * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
- * Model Derivative API
+ * Model Derivative
  *
- * Model Derivative Service Documentation
+ * Use the Model Derivative API to translate designs from one CAD format to another. You can also use this API to extract metadata from a model.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,75 +32,109 @@ using Newtonsoft.Json.Converters;
 
 namespace Autodesk.ModelDerivative.Model
 {
-    /// <summary>
-    /// Manifest
-    /// </summary>
-    [DataContract]
-    public partial class Manifest 
-    {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Manifest" /> class.
+        /// Manifest
         /// </summary>
-        public Manifest()
+        [DataContract]
+        public partial class Manifest
         {
+                /// <summary>
+                /// Initializes a new instance of the <see cref="Manifest" /> class.
+                /// </summary>
+                public Manifest()
+                {
+                }
+
+                /// <summary>
+                ///The URL-safe Base64 encoded URN of the source design.
+                /// </summary>
+                /// <value>
+                ///The URL-safe Base64 encoded URN of the source design.
+                /// </value>
+                [DataMember(Name = "urn", EmitDefaultValue = false)]
+                public string Urn { get; set; }
+
+                /// <summary>
+                ///An array of objects, where each object represents a derivative of the source design.
+                /// </summary>
+                /// <value>
+                ///An array of objects, where each object represents a derivative of the source design.
+                /// </value>
+                [DataMember(Name = "derivatives", EmitDefaultValue = false)]
+                public List<ManifestDerivative> Derivatives { get; set; }
+
+                /// <summary>
+                ///- `true`: There is a thumbnail for the source design.
+                ///- `false`: There is no thumbnail for the source design.
+                /// </summary>
+                /// <value>
+                ///- `true`: There is a thumbnail for the source design.
+                ///- `false`: There is no thumbnail for the source design.
+                /// </value>
+                [DataMember(Name = "hasThumbnail", EmitDefaultValue = false)]
+                public string HasThumbnail { get; set; }
+
+                /// <summary>
+                ///Indicates the overall progress of all translation jobs, as a percentage. Once all requested derivatives are generated, the value changes to `complete`.
+                /// </summary>
+                /// <value>
+                ///Indicates the overall progress of all translation jobs, as a percentage. Once all requested derivatives are generated, the value changes to `complete`.
+                /// </value>
+                [DataMember(Name = "progress", EmitDefaultValue = false)]
+                public string Progress { get; set; }
+
+                /// <summary>
+                ///The type of data that is returned. Always `manifest`.
+                /// </summary>
+                /// <value>
+                ///The type of data that is returned. Always `manifest`.
+                /// </value>
+                [DataMember(Name = "type", EmitDefaultValue = false)]
+                public string Type { get; set; }
+
+                /// <summary>
+                ///Specifies the data center where the manifest, derivatives, and references are stored. Possible values are: 
+                ///
+                ///- `US` - Data center for the US region.
+                ///- `EMEA` - Data center for European Union, Middle East, and Africa. 
+                ///- `APAC` - Data centre for the Australia region.
+                /// </summary>
+                /// <value>
+                ///Specifies the data center where the manifest, derivatives, and references are stored. Possible values are: 
+                ///
+                ///- `US` - Data center for the US region.
+                ///- `EMEA` - Data center for European Union, Middle East, and Africa. 
+                ///- `APAC` - Data centre for the Australia region.
+                /// </value>
+                [DataMember(Name = "region", EmitDefaultValue = false)]
+                public string Region { get; set; }
+
+                /// <summary>
+                ///Indicates the version of the schema that the manifest is based on.
+                /// </summary>
+                /// <value>
+                ///Indicates the version of the schema that the manifest is based on.
+                /// </value>
+                [DataMember(Name = "version", EmitDefaultValue = false)]
+                public string _Version { get; set; }
+
+                /// <summary>
+                ///Overall status of all translation jobs for the source design. Possible values are: `pending`, `success`, `inprogress`, `failed`, `timeout`.
+                /// </summary>
+                /// <value>
+                ///Overall status of all translation jobs for the source design. Possible values are: `pending`, `success`, `inprogress`, `failed`, `timeout`.
+                /// </value>
+                [DataMember(Name = "status", EmitDefaultValue = false)]
+                public string Status { get; set; }
+
+                /// <summary>
+                /// Returns the string presentation of the object
+                /// </summary>
+                /// <returns>String presentation of the object</returns>
+                public override string ToString()
+                {
+                        return JsonConvert.SerializeObject(this, Formatting.Indented);
+                }
         }
-        
-        /// <summary>
-        /// Gets or Sets Urn
-        /// </summary>
-        [DataMember(Name="urn", EmitDefaultValue=false)]
-        public string Urn { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Derivatives
-        /// </summary>
-        [DataMember(Name="derivatives", EmitDefaultValue=false)]
-        public List<ManifestDerivatives> Derivatives { get; set; }
-
-        /// <summary>
-        /// Gets or Sets HasThumbnail
-        /// </summary>
-        [DataMember(Name="hasThumbnail", EmitDefaultValue=false)]
-        public string HasThumbnail { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Progress
-        /// </summary>
-        [DataMember(Name="progress", EmitDefaultValue=false)]
-        public string Progress { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Region
-        /// </summary>
-        [DataMember(Name="region", EmitDefaultValue=false)]
-        public string Region { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Version
-        /// </summary>
-        [DataMember(Name="version", EmitDefaultValue=false)]
-        public string Version { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Status
-        /// </summary>
-        [DataMember(Name="status", EmitDefaultValue=false)]
-        public string Status { get; set; }
-
-        /// <summary>
-        /// Returns the string presentation of the object
-        /// </summary>
-        /// <returns>String presentation of the object</returns>
-        public override string ToString()
-        {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
-        }
-    }
 
 }

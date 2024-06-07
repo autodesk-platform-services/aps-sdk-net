@@ -3,9 +3,9 @@
  *
  * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
- * Model Derivative API
+ * Model Derivative
  *
- * Model Derivative Service Documentation
+ * Use the Model Derivative API to translate designs from one CAD format to another. You can also use this API to extract metadata from a model.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,85 +32,12 @@ using Newtonsoft.Json.Converters;
 
 namespace Autodesk.ModelDerivative.Model
 {
-    /// <summary>
-    /// SpecificPropertiesPayloadQuery
-    /// </summary>
-    public partial class SpecificPropertiesPayloadQuery 
-    {
         /// <summary>
-        /// Initializes a new instance of the <see cref="SpecificPropertiesPayloadQuery" /> class.
+        /// Specifies what objects to query. Contains the parameters to pass to the search service. You can use one of the following forms: 
         /// </summary>
-        public SpecificPropertiesPayloadQuery()
+
+        public interface ISpecificPropertiesPayloadQuery
         {
         }
-        
-
-        private Dictionary<object, object> filterQuery;
-
-        internal Dictionary<object, object> FilterQuery { get { return filterQuery ?? buildFilterQuery(); } }
-
-        public Filter FilterType { get; set; }
-
-        public List<object> Values { get; set; }
-
-
-        private Dictionary<object, object> buildFilterQuery()
-        {
-            string filterParam = string.Empty;
-            string valueParam = string.Empty;
-            switch (FilterType)
-            {
-                case Filter.ObjectID:
-                    filterParam = "$in";
-                    valueParam = "objectid";
-                    break;
-
-                case Filter.ExternalID:
-                    filterParam = "$in";
-                    valueParam = "externalId";
-                    break;
-
-                case Filter.Prefix:
-                    filterParam = " $prefix";
-                    valueParam = "name";
-                    break;
-
-                case Filter.Equals:
-                    filterParam = "$eq";
-                    break;
-
-                case Filter.Between:
-                    filterParam = "$between";
-                    break;
-
-                case Filter.LessorEqual:
-                    filterParam = "$le";
-                    break;
-
-                case Filter.GreaterorEqual:
-                    filterParam = "$ge";
-                    break;
-
-                case Filter.Contains:
-                    filterParam = "$contains";
-                    break;
-            }
-            if (valueParam != string.Empty)
-                Values.Insert(0, valueParam);
-            filterQuery = new Dictionary<object, object>{
-               { filterParam,Values}
-             };
-            return filterQuery;
-        }
-
-        /// <summary>
-        /// Returns the string presentation of the object
-        /// </summary>
-        /// <returns>String presentation of the object</returns>
-        public override string ToString()
-        {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
-        }
-    }
 
 }

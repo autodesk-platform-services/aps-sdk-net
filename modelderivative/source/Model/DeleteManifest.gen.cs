@@ -3,9 +3,9 @@
  *
  * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
- * Model Derivative API
+ * Model Derivative
  *
- * Model Derivative Service Documentation
+ * Use the Model Derivative API to translate designs from one CAD format to another. You can also use this API to extract metadata from a model.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// DeleteUrnManifest200Response
+    /// DeleteManifest
     /// </summary>
     [DataContract]
     public partial class DeleteManifest 
@@ -46,8 +46,11 @@ namespace Autodesk.ModelDerivative.Model
         }
         
         /// <summary>
-        /// Gets or Sets Result
+        ///A message describing outcome of the operation. Always `success` for status `200`.
         /// </summary>
+        /// <value>
+        ///A message describing outcome of the operation. Always `success` for status `200`.
+        /// </value>
         [DataMember(Name="result", EmitDefaultValue=false)]
         public string Result { get; set; }
 

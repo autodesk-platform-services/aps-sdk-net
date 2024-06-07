@@ -3,9 +3,9 @@
  *
  * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
- * Model Derivative API
+ * Model Derivative
  *
- * Model Derivative Service Documentation
+ * Use the Model Derivative API to translate designs from one CAD format to another. You can also use this API to extract metadata from a model.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,7 +36,7 @@ namespace Autodesk.ModelDerivative.Model
     /// ModelViews
     /// </summary>
     [DataContract]
-    public partial class ModelViews 
+    public partial class ModelViews
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ModelViews" /> class.
@@ -44,11 +44,11 @@ namespace Autodesk.ModelDerivative.Model
         public ModelViews()
         {
         }
-        
+
         /// <summary>
-        /// Gets or Sets Data
+        ///Gets or Sets Data
         /// </summary>
-        [DataMember(Name="data", EmitDefaultValue=false)]
+        [DataMember(Name = "data", EmitDefaultValue = false)]
         public ModelViewsData Data { get; set; }
 
         /// <summary>

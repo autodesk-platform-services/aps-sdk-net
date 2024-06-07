@@ -3,9 +3,9 @@
  *
  * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
- * Model Derivative API
+ * Model Derivative
  *
- * Model Derivative Service Documentation
+ * Use the Model Derivative API to translate designs from one CAD format to another. You can also use this API to extract metadata from a model.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,7 +36,7 @@ namespace Autodesk.ModelDerivative.Model
     /// JobPayload
     /// </summary>
     [DataContract]
-    public partial class JobPayload 
+    public partial class JobPayload
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="JobPayload" /> class.
@@ -44,23 +44,23 @@ namespace Autodesk.ModelDerivative.Model
         public JobPayload()
         {
         }
-        
+
         /// <summary>
-        /// Gets or Sets Input
+        ///Gets or Sets Input
         /// </summary>
-        [DataMember(Name="input", EmitDefaultValue=false)]
+        [DataMember(Name = "input", EmitDefaultValue = false)]
         public JobPayloadInput Input { get; set; }
 
         /// <summary>
-        /// Gets or Sets Output
+        ///Gets or Sets Output
         /// </summary>
-        [DataMember(Name="output", EmitDefaultValue=false)]
+        [DataMember(Name = "output", EmitDefaultValue = false)]
         public JobPayloadOutput Output { get; set; }
 
         /// <summary>
-        /// Gets or Sets Misc
+        ///Gets or Sets Misc
         /// </summary>
-        [DataMember(Name="misc", EmitDefaultValue=false)]
+        [DataMember(Name = "misc", EmitDefaultValue = false)]
         public JobPayloadMisc Misc { get; set; }
 
         /// <summary>
