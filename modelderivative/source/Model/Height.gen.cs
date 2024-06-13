@@ -33,29 +33,29 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// Sets the height of a thumbnail output in pixels. Possible values are `100`, `200` and `400`.
+    /// Height of thumbnails. Possible values are: `100`, `200`, `400`.If `height` is omitted, but `width` is specified, `height` defaults to `width`.  If both `width` and `height` are omitted, the server will return a thumbnail closest to `200`, if such a thumbnail is available
     /// </summary>
-    ///<value>Sets the height of a thumbnail output in pixels. Possible values are `100`, `200` and `400`.</value>
-
+    ///<value>Height of thumbnails. Possible values are: `100`, `200`, `400`.If `height` is omitted, but `width` is specified, `height` defaults to `width`.  If both `width` and `height` are omitted, the server will return a thumbnail closest to `200`, if such a thumbnail is available</value>
+    
     public enum Height
     {
-
+        
         /// <summary>
         /// Enum NUMBER_100 for value: 100
         /// </summary>
-
+        
         NUMBER_100 = 100,
-
+        
         /// <summary>
         /// Enum NUMBER_200 for value: 200
         /// </summary>
-
+        
         NUMBER_200 = 200,
-
+        
         /// <summary>
         /// Enum NUMBER_400 for value: 400
         /// </summary>
-
+        
         NUMBER_400 = 400
     }
 

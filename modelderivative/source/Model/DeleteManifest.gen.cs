@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// DeleteManifest
+    /// An object that represents the successful response of a Delete Manifest operation. 
     /// </summary>
     [DataContract]
     public partial class DeleteManifest 

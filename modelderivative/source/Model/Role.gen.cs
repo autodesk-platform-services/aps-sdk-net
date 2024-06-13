@@ -33,23 +33,23 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// Type of Model View.
-    ///Possible values are: `2d`, `3d`.
+    /// Specifies the type of a Model View.
+///Possible values are: `2d`, `3d`.
     /// </summary>
-    ///<value>Type of Model View.
-    ///Possible values are: `2d`, `3d`.</value>
-
+    ///<value>Specifies the type of a Model View.
+///Possible values are: `2d`, `3d`.</value>
+    
     [JsonConverter(typeof(StringEnumConverter))]
-
+    
     public enum Role
     {
-
+        
         /// <summary>
         /// Enum _2d for value: 2d
         /// </summary>
         [EnumMember(Value = "2d")]
         _2d,
-
+        
         /// <summary>
         /// Enum _3d for value: 3d
         /// </summary>

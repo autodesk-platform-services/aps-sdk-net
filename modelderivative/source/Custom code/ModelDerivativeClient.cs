@@ -32,6 +32,30 @@ namespace Autodesk.ModelDerivative
         }
 
         #region Informational
+
+        /// <summary>
+        /// List Supported Formats
+        /// </summary>
+        /// <remarks>
+        ///Returns an up-to-date list of supported translations. This operation also provides information on the types of derivatives that can be generated for each source design file type. Furthermore, it allows you to obtain a list of translations that have changed since a specified date.
+        ///
+        ///See the [Supported Translation Formats table](/en/docs/model-derivative/v2/overview/supported-translations) for more details.
+        ///
+        ///**Note:** We keep adding new file formats to our supported translations list, constantly.
+        /// </remarks>
+        /// <exception cref="ModelDerivativeApiException">Thrown when fails to make API call</exception>
+        /// <param name="accessToken">
+        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().
+        /// </param>
+        /// <param name="ifModifiedSince">
+        ///Specifies a date in the `Day of the week, DD Month YYYY HH:MM:SS GMT` format. The response will contain only the formats modified since the specified date and time. If you specify an invalid date, the response will contain all supported formats. If no changes have been made after the specified date, the service returns HTTP status `304`, NOT MODIFIED. (optional)
+        /// </param>
+        /// <param name="acceptEncoding">
+        ///A comma separated list of the algorithms you want the response to be encoded in, specified in the order of preference.  
+        ///
+        ///If you specify `gzip` or `*`, content is compressed and returned in gzip format. (optional)
+        /// </param>
+        /// <returns>Task of SupportedFormats</returns>
         public async System.Threading.Tasks.Task<SupportedFormats> GetFormatsAsync(string accessToken, string ifModifiedSince = default, string acceptEncoding = default, bool throwOnError = true)
         {
 
@@ -54,7 +78,10 @@ namespace Autodesk.ModelDerivative
         ///
         ///If necessary, you can set the `x-ads-force` parameter to `true`. Then, the system will delete the existing manifest and create a new one. However, be aware that doing so will also delete all previously generated derivatives.
         /// </remarks>
-        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+        /// <exception cref="ModelDerivativeApiException">Thrown when fails to make API call</exception>
+        /// <param name="accessToken">
+        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().
+        /// </param>
         /// <param name="xAdsForce">
         ///`true`: Forces the system to parse property data all over again. Use this option to retrieve an object tree when previous attempts have failed.
         ///
@@ -90,7 +117,7 @@ namespace Autodesk.ModelDerivative
         /// </param>
         /// <param name="jobPayload">
         /// </param>
-        /// <returns>Task of Job></returns>
+        /// <returns>Task of Job</returns>
         #region Jobs
         public async System.Threading.Tasks.Task<Job> StartJobAsync(string accessToken, JobPayload jobPayload, Region region = default, bool xAdsForce = default, XAdsDerivativeFormat xAdsDerivativeFormat = default, bool throwOnError = true)
         {
@@ -107,7 +134,10 @@ namespace Autodesk.ModelDerivative
         ///
         ///When you call [Create Translation Job](/en/docs/model-derivative/v2/reference/http/job-POST), set  `checkReferences` to `true`.   The Model Derivative service will then use the details you specify in this operation to locate and download the referenced files.
         /// </remarks>
-        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+        /// <exception cref="ModelDerivativeApiException">Thrown when fails to make API call</exception>
+        /// <param name="accessToken">
+        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().
+        /// </param>
         /// <param name="urn">
         ///The Base64 (URL Safe) encoded design URN.
         /// </param>
@@ -123,7 +153,7 @@ namespace Autodesk.ModelDerivative
         /// <param name="specifyReferencesPayload">
         /// (optional)
         /// </param>
-        /// <returns>Task of SpecifyReferences></returns>
+        /// <returns>Task of SpecifyReferences</returns>
         public async System.Threading.Tasks.Task<SpecifyReferences> SpecifyReferencesAsync(string accessToken, string urn, SpecifyReferencesPayload referencesPayload, Region region = default, bool throwOnError = true)
         {
             var response = await this.JobsApi.SpecifyReferencesAsync(urn, region, referencesPayload, accessToken, throwOnError);
@@ -149,7 +179,10 @@ namespace Autodesk.ModelDerivative
         ///
         ///**Note:** You cannot download 3D SVF2 derivatives.
         /// </remarks>
-        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+        /// <exception cref="ModelDerivativeApiException">Thrown when fails to make API call</exception>
+        /// <param name="accessToken">
+        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().
+        /// </param>
         /// <param name="urn">
         ///The URL-safe Base64 encoded URN of the source design.
         /// </param>
@@ -167,7 +200,7 @@ namespace Autodesk.ModelDerivative
         ///
         ///**Note**: Beta features are subject to change. Please avoid using them in production environments. (optional)
         /// </param>
-        /// <returns>Task of Manifest></returns>
+        /// <returns>Task of Manifest</returns>
         public async System.Threading.Tasks.Task<Manifest> GetManifestAsync(string accessToken, string urn, Region region = default, string acceptEncoding = default, bool throwOnError = true)
         {
             var response = await this.ManifestApi.GetManifestAsync(urn, acceptEncoding, region, accessToken, throwOnError);
@@ -183,7 +216,10 @@ namespace Autodesk.ModelDerivative
         ///
         ///**Note:** This operation is idempotent. So, if you call it multiple times, even when no manifest exists, will still return a successful response (200).
         /// </remarks>
-        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+        /// <exception cref="ModelDerivativeApiException">Thrown when fails to make API call</exception>
+        /// <param name="accessToken">
+        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().
+        /// </param>
         /// <param name="urn">
         ///The URL-safe Base64 encoded URN of the source design.
         /// </param>
@@ -196,7 +232,7 @@ namespace Autodesk.ModelDerivative
         ///
         ///**Note**: Beta features are subject to change. Please avoid using them in production environments. (optional)
         /// </param>
-        /// <returns>Task of DeleteManifest></returns>
+        /// <returns>Task of DeleteManifest</returns>
         public async System.Threading.Tasks.Task<DeleteManifest> DeleteManifestAsync(string accessToken, string urn, Region region = default, bool throwOnError = true)
         {
             var response = await this.ManifestApi.DeleteManifestAsync(urn, region, accessToken, throwOnError);
@@ -214,7 +250,10 @@ namespace Autodesk.ModelDerivative
         /// <remarks>
         ///Returns a download URL and a set of signed cookies, which lets you securely download the derivative specified by the `derivativeUrn` URI parameter. The signed cookies have a lifetime of 6 hours. You can use range headers with the returned download URL to download the derivative in chunks, in parallel.
         /// </remarks>
-        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+        /// <exception cref="ModelDerivativeApiException">Thrown when fails to make API call</exception>
+        /// <param name="accessToken">
+        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().
+        /// </param>
         /// <param name="derivativeUrn">
         ///The URL-encoded URN of the derivative. Use the [Fetch Manifest operation](/en/docs/model-derivative/v2/reference/http/manifest/urn-manifest-GET/)to obtain the URNs of derivatives for the specified source design.
         /// </param>
@@ -261,7 +300,10 @@ namespace Autodesk.ModelDerivative
         ///
         ///Use this operation to determine the total content length of a derivative before you download it. If the derivative is large, you can choose to download the derivative in chunks, by specifying a chunk size using the `Range` header parameter.
         /// </remarks>
-        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+        /// <exception cref="ModelDerivativeApiException">Thrown when fails to make API call</exception>
+        /// <param name="accessToken">
+        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().
+        /// </param>
         /// <param name="urn">
         ///The URL-safe Base64 encoded URN of the source design.
         /// </param>
@@ -294,7 +336,10 @@ namespace Autodesk.ModelDerivative
         /// <remarks>
         ///Downloads a thumbnail of the specified source design.
         /// </remarks>
-        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+        /// <exception cref="ModelDerivativeApiException">Thrown when fails to make API call</exception>
+        /// <param name="accessToken">
+        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().
+        /// </param>
         /// <param name="urn">
         ///The URL-safe Base64 encoded URN of the source design.
         /// </param>
@@ -342,7 +387,10 @@ namespace Autodesk.ModelDerivative
         ///
         ///**Note:** You can retrieve metadata only from a design that has already been translated to SVF or SVF2.
         /// </remarks>
-        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+        /// <exception cref="ModelDerivativeApiException">Thrown when fails to make API call</exception>
+        /// <param name="accessToken">
+        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().
+        /// </param>
         /// <param name="urn">
         ///The URL-safe Base64 encoded URN of the source design.
         /// </param>
@@ -381,7 +429,10 @@ namespace Autodesk.ModelDerivative
         ///- Use the [List Model Views](/en/docs/model-derivative/v2/reference/http/metadata/urn-metadata-GET/) operation to obtain the list of Model Views in the source design.
         ///- Pick the ID of the Model View you want to query and specify that ID as the value for the `modelGuid`  parameter.
         /// </remarks>
-        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+        /// <exception cref="ModelDerivativeApiException">Thrown when fails to make API call</exception>
+        /// <param name="accessToken">
+        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().
+        /// </param>
         /// <param name="urn">
         ///The URL-safe Base64 encoded URN of the source design.
         /// </param>
@@ -465,7 +516,10 @@ namespace Autodesk.ModelDerivative
         ///
         ///**Tip**: Use [Fetch Specific Properties](/en/docs/model-derivative/v2/reference/http/metadata/urn-metadata-guid-properties-query-POST/) to retrieve only the objects and properties of interest. What’s more, the response is paginated. So, when the number of properties returned is large, responses start arriving more promptly.
         /// </remarks>
-        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+        /// <exception cref="ModelDerivativeApiException">Thrown when fails to make API call</exception>
+        /// <param name="accessToken">
+        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().
+        /// </param>
         /// <param name="urn">
         ///The URL-safe Base64 encoded URN of the source design.
         /// </param>
@@ -538,7 +592,10 @@ namespace Autodesk.ModelDerivative
         ///- Use the [List Model Views](/en/docs/model-derivative/v2/reference/http/metadata/urn-metadata-GET/) operation to obtain the list of Model Views in the source design.
         ///- Pick the ID of the Model View you want to query and specify that ID as the value for the `modelGuid`  parameter.
         /// </remarks>
-        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+        /// <exception cref="ModelDerivativeApiException">Thrown when fails to make API call</exception>
+        /// <param name="accessToken">
+        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().
+        /// </param>
         /// <param name="urn">
         ///The URL-safe Base64 encoded URN of the source design.
         /// </param>

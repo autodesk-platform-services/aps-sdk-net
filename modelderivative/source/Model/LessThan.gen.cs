@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    ///  Specify object by attribute value being less than specified value.
+    /// Use this to retrieve only the properties of objects where a specified property is less than a specified value. 
     /// </summary>
     [DataContract]
     public partial class LessThan : ISpecificPropertiesPayloadQuery

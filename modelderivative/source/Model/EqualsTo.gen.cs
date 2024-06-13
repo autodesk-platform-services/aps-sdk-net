@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// Specify objects by attribute name.
+    /// Use this to retrieve only the properties of objects where a specified property is exactly equal to a specified value.
     /// </summary>
     [DataContract]
     public partial class EqualsTo : ISpecificPropertiesPayloadQuery

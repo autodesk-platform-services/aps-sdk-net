@@ -36,7 +36,7 @@ namespace Autodesk.ModelDerivative.Model
     /// An array of objects where each object represents a message logged to the manifest during translation. For example, error messages and warning messages.
     /// </summary>
     [DataContract]
-    public partial class Messages
+    public partial class Messages 
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Messages" /> class.
@@ -44,14 +44,14 @@ namespace Autodesk.ModelDerivative.Model
         public Messages()
         {
         }
-
+        
         /// <summary>
         ///Indicates the type of the message. For example, warning indicates a warning message and error indicates an error message.
         /// </summary>
         /// <value>
         ///Indicates the type of the message. For example, warning indicates a warning message and error indicates an error message.
         /// </value>
-        [DataMember(Name = "type", EmitDefaultValue = false)]
+        [DataMember(Name="type", EmitDefaultValue=false)]
         public string Type { get; set; }
 
         /// <summary>
@@ -60,17 +60,17 @@ namespace Autodesk.ModelDerivative.Model
         /// <value>
         ///The ID of the message. For example, the error code reported by an error message.
         /// </value>
-        [DataMember(Name = "code", EmitDefaultValue = false)]
+        [DataMember(Name="code", EmitDefaultValue=false)]
         public string Code { get; set; }
 
         /// <summary>
-        ///A human-readable explanation of the event being reported.
+        ///A human-readable explanation of the event being reported. Can be a string or an array of string.
         /// </summary>
         /// <value>
-        ///A human-readable explanation of the event being reported.
+        ///A human-readable explanation of the event being reported. Can be a string or an array of string.
         /// </value>
-        [DataMember(Name = "message", EmitDefaultValue = false)]
-        public object Message { get; set; }
+        [DataMember(Name="message", EmitDefaultValue=false)]
+        public Object Message { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

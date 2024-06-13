@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// AllPropertiesDataCollection
+    ///A non-hierarchical list of objects contained in the specified Model View. Each object has a `properties` attribute, which contains the properties of that object.
     /// </summary>
     [DataContract]
     public partial class AllPropertiesDataCollection

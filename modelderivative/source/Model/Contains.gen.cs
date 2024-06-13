@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// Specify object by attribute value containing specified string.
+    /// Use this to retrieve only the properties of objects where a specified property contains a specified value. 
     /// </summary>
     [DataContract]
     public partial class Contains : ISpecificPropertiesPayloadQuery

@@ -33,10 +33,10 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// JobPayload
+    /// An object that represents the request body of a Create Translation Job operation.
     /// </summary>
     [DataContract]
-    public partial class JobPayload
+    public partial class JobPayload 
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="JobPayload" /> class.
@@ -44,23 +44,23 @@ namespace Autodesk.ModelDerivative.Model
         public JobPayload()
         {
         }
-
+        
         /// <summary>
         ///Gets or Sets Input
         /// </summary>
-        [DataMember(Name = "input", EmitDefaultValue = false)]
+        [DataMember(Name="input", EmitDefaultValue=false)]
         public JobPayloadInput Input { get; set; }
 
         /// <summary>
         ///Gets or Sets Output
         /// </summary>
-        [DataMember(Name = "output", EmitDefaultValue = false)]
+        [DataMember(Name="output", EmitDefaultValue=false)]
         public JobPayloadOutput Output { get; set; }
 
         /// <summary>
         ///Gets or Sets Misc
         /// </summary>
-        [DataMember(Name = "misc", EmitDefaultValue = false)]
+        [DataMember(Name="misc", EmitDefaultValue=false)]
         public JobPayloadMisc Misc { get; set; }
 
         /// <summary>

@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// ObjectTree
+    /// An object that represents the successful response of a Fetch Object Tree operation.
     /// </summary>
     [DataContract]
     public partial class ObjectTree 

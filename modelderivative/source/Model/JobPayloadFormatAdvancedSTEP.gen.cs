@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// JobPayloadFormatAdvancedSTEP
+    /// An object that contains advanced options for a STEP output.
     /// </summary>
     [DataContract]
     public partial class JobPayloadFormatAdvancedSTEP 

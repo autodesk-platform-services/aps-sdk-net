@@ -33,10 +33,10 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// Job
+    /// An object that represents the successful response of a Create Translation Job operation.
     /// </summary>
     [DataContract]
-    public partial class Job
+    public partial class Job 
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Job" /> class.
@@ -44,14 +44,14 @@ namespace Autodesk.ModelDerivative.Model
         public Job()
         {
         }
-
+        
         /// <summary>
         ///reporting success status
         /// </summary>
         /// <value>
         ///reporting success status
         /// </value>
-        [DataMember(Name = "result", EmitDefaultValue = false)]
+        [DataMember(Name="result", EmitDefaultValue=false)]
         public string Result { get; set; }
 
         /// <summary>
@@ -60,13 +60,13 @@ namespace Autodesk.ModelDerivative.Model
         /// <value>
         ///the urn identifier of the source file
         /// </value>
-        [DataMember(Name = "urn", EmitDefaultValue = false)]
+        [DataMember(Name="urn", EmitDefaultValue=false)]
         public string Urn { get; set; }
 
         /// <summary>
         ///Gets or Sets AcceptedJobs
         /// </summary>
-        [DataMember(Name = "acceptedJobs", EmitDefaultValue = false)]
+        [DataMember(Name="acceptedJobs", EmitDefaultValue=false)]
         public JobAcceptedJobs AcceptedJobs { get; set; }
 
         /// <summary>

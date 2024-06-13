@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// SpecifyReferencesPayload
+    /// An object that represents the successful response of a Specify References operation.
     /// </summary>
     [DataContract]
     public partial class SpecifyReferencesPayload 

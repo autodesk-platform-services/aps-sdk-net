@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// JobPayloadFormatAdvancedIFC
+    /// An object that contains advanced options for an IFC output.
     /// </summary>
     [DataContract]
     public partial class JobPayloadFormatAdvancedIFC 

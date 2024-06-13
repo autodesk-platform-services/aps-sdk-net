@@ -24,20 +24,26 @@ using System.Net.Http;
 
 namespace Autodesk.ModelDerivative
 {
+  /// <summary>
+  /// An object that is returned when an API call fails.
+  /// </summary>
   public abstract class ServiceApiException : HttpRequestException
   {
-    public HttpResponseMessage HttpResponseMessage {get; set;}
+    public HttpResponseMessage HttpResponseMessage { get; set; }
 
-    public ServiceApiException(string message) : base(message) {}
+    public ServiceApiException(string message) : base(message) { }
     public ServiceApiException(string message, HttpResponseMessage httpResponseMessage, Exception exception) : base(message, exception)
     {
       this.HttpResponseMessage = httpResponseMessage;
     }
   }
 
+  /// <summary>
+  /// An object that is returned when an API call to the Model Derivative service fails.
+  /// </summary>
   public class ModelDerivativeApiException : ServiceApiException
   {
-    public ModelDerivativeApiException(string message) : base(message) {}
-    public ModelDerivativeApiException(string message, HttpResponseMessage httpResponseMessage, Exception exception) : base(message, httpResponseMessage, exception) {}
+    public ModelDerivativeApiException(string message) : base(message) { }
+    public ModelDerivativeApiException(string message, HttpResponseMessage httpResponseMessage, Exception exception) : base(message, httpResponseMessage, exception) { }
   }
 }

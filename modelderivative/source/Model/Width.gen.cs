@@ -33,9 +33,9 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// Sets the width of a thumbnail output in pixels. Possible values are `100`, `200` and `400`.
+    /// Width of thumbnail in pixels.  Possible values are: `100`, `200`, `400`  If `width` is omitted, but `height` is specified, `width` defaults to `height`. If both `width` and `height` are omitted, the server will return a thumbnail closest to `200`, if such a thumbnail is available.
     /// </summary>
-    ///<value>Sets the width of a thumbnail output in pixels. Possible values are `100`, `200` and `400`.</value>
+    ///<value>Width of thumbnail in pixels.  Possible values are: `100`, `200`, `400`  If `width` is omitted, but `height` is specified, `width` defaults to `height`. If both `width` and `height` are omitted, the server will return a thumbnail closest to `200`, if such a thumbnail is available.</value>
     
     public enum Width
     {

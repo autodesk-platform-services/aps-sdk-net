@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// JobPayloadFormatAdvancedIGES
+    /// An object that contains advanced options for an IGES output.
     /// </summary>
     [DataContract]
     public partial class JobPayloadFormatAdvancedIGES 

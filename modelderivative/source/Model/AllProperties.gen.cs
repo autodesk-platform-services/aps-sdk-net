@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// AllProperties
+    /// An object that represents a successful response to a Fetch All Properties operation.
     /// </summary>
     [DataContract]
     public partial class AllProperties 

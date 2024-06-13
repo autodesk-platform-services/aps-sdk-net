@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// Specify objects by their &#x60;&#x60;objectid&#x60;&#x60; or &#x60;&#x60;externalId&#x60;&#x60;.
+    /// Use this to retrieve only the properties of objects with Object IDs or External IDs matching the specified values.   Use the &#x60;&#x60;MatchIdType&#x60;&#x60; Enum to pick between Object IDs and External IDs. 
     /// </summary>
     [DataContract]
     public partial class MatchId : ISpecificPropertiesPayloadQuery

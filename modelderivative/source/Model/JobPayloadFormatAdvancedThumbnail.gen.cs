@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// JobPayloadFormatAdvancedThumbnail
+    /// An object that contains advanced options for a thumbnail output.
     /// </summary>
     [DataContract]
     public partial class JobPayloadFormatAdvancedThumbnail 

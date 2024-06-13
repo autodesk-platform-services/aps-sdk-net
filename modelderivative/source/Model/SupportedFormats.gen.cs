@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// Returns an up-to-date list of supported translations, which you can use to identify which types of derivatives are supported for each source file type
+    /// An object that represents the successful response of a List Supported Formats operation.
     /// </summary>
     [DataContract]
     public partial class SupportedFormats 

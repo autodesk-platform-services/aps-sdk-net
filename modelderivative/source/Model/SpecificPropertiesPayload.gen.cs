@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// SpecificPropertiesPayload
+    /// An object that represents the request body of a Fetch Specific Properties operation.
     /// </summary>
     [DataContract]
     public partial class SpecificPropertiesPayload

@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// DerivativeDownload
+    /// An object that represents the successful response of a Fetch Derivative Download operation.
     /// </summary>
     [DataContract]
     public partial class DerivativeDownload 
@@ -46,32 +46,47 @@ namespace Autodesk.ModelDerivative.Model
         }
         
         /// <summary>
-        ///Gets or Sets Etag
+        ///The calculated ETag hash of the derivative/file, if available.
         /// </summary>
+        /// <value>
+        ///The calculated ETag hash of the derivative/file, if available.
+        /// </value>
         [DataMember(Name="etag", EmitDefaultValue=false)]
         public string Etag { get; set; }
 
         /// <summary>
-        ///Gets or Sets Size
+        ///The size of the derivative/file, in bytes.
         /// </summary>
+        /// <value>
+        ///The size of the derivative/file, in bytes.
+        /// </value>
         [DataMember(Name="size", EmitDefaultValue=false)]
         public decimal? Size { get; set; }
 
         /// <summary>
-        ///Gets or Sets Url
+        ///The download URL.
         /// </summary>
+        /// <value>
+        ///The download URL.
+        /// </value>
         [DataMember(Name="url", EmitDefaultValue=false)]
         public string Url { get; set; }
 
         /// <summary>
-        ///Gets or Sets ContentType
+        ///The content type of the derivative/file.
         /// </summary>
+        /// <value>
+        ///The content type of the derivative/file.
+        /// </value>
         [DataMember(Name="content-type", EmitDefaultValue=false)]
         public string ContentType { get; set; }
 
         /// <summary>
-        ///Gets or Sets Expiration
+        ///The 13-digit epoch time stamp indicating the time the signed cookies expire.
         /// </summary>
+        /// <value>
+        ///The 13-digit epoch time stamp indicating the time the signed cookies expire.
+        /// </value>
         [DataMember(Name="expiration", EmitDefaultValue=false)]
         public decimal? Expiration { get; set; }
 

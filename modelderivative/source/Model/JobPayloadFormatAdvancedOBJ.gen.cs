@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// JobPayloadFormatAdvancedOBJ
+    /// An object that contains advanced options for an OBJ output.
     /// </summary>
     [DataContract]
     public partial class JobPayloadFormatAdvancedOBJ 

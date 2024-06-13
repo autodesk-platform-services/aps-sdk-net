@@ -33,10 +33,10 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// JobPayloadFormatAdvancedDWG
+    /// An object that contains advanced options for an DWG output.
     /// </summary>
     [DataContract]
-    public partial class JobPayloadFormatAdvancedDWG
+    public partial class JobPayloadFormatAdvancedDWG 
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="JobPayloadFormatAdvancedDWG" /> class.
@@ -44,14 +44,14 @@ namespace Autodesk.ModelDerivative.Model
         public JobPayloadFormatAdvancedDWG()
         {
         }
-
+        
         /// <summary>
         ///The export settings should be one of the DWG Export settings pre-saved in the source design.
         /// </summary>
         /// <value>
         ///The export settings should be one of the DWG Export settings pre-saved in the source design.
         /// </value>
-        [DataMember(Name = "exportSettingName", EmitDefaultValue = false)]
+        [DataMember(Name="exportSettingName", EmitDefaultValue=false)]
         public string ExportSettingName { get; set; }
 
         /// <summary>

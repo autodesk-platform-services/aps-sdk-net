@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// Specify objects by attribute value range.
+    /// Use this to retrieve only the properties of objects where a specified attribute is between two specified values. 
     /// </summary>
     [DataContract]
     public partial class Between : ISpecificPropertiesPayloadQuery

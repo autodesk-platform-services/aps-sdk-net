@@ -33,10 +33,10 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// ModelViews
+    /// An object that represents the successful response of a List Model Views operation.
     /// </summary>
     [DataContract]
-    public partial class ModelViews
+    public partial class ModelViews 
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ModelViews" /> class.
@@ -44,11 +44,11 @@ namespace Autodesk.ModelDerivative.Model
         public ModelViews()
         {
         }
-
+        
         /// <summary>
         ///Gets or Sets Data
         /// </summary>
-        [DataMember(Name = "data", EmitDefaultValue = false)]
+        [DataMember(Name="data", EmitDefaultValue=false)]
         public ModelViewsData Data { get; set; }
 
         /// <summary>

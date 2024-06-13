@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// Specify objects by name starting with a specified string.
+    /// Use this to retrieve only the properties of objects with names begining with a specified string. 
     /// </summary>
     [DataContract]
     public partial class BeginsWith : ISpecificPropertiesPayloadQuery

@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// JobPayloadFormatAdvancedSTL
+    /// An object that contains advanced options for a STL output.
     /// </summary>
     [DataContract]
     public partial class JobPayloadFormatAdvancedSTL 
