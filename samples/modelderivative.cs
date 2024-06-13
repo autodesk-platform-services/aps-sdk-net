@@ -86,7 +86,7 @@ namespace Samples
                 string jobResult = jobResponse.Result;
             }
             catch
-            (Exception ex)
+            (ModelDerivativeApiException ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -109,7 +109,7 @@ namespace Samples
                 // get list of derivatives. Query further to get children etc.
                 List<ManifestDerivative> derivatives = manifestResponse.Derivatives;
             }
-            catch (Exception ex)
+            catch (ModelDerivativeApiException ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -118,8 +118,15 @@ namespace Samples
         // Delete Manifest.
         public async Task DeleteManifestAsync()
         {
-            DeleteManifest deleteManifest = await modelDerivativeClient.DeleteManifestAsync(accessToken: token, urn, Region.US);
-            var result = deleteManifest.Result;
+            try
+            {
+                DeleteManifest deleteManifest = await modelDerivativeClient.DeleteManifestAsync(accessToken: token, urn, Region.US);
+                var result = deleteManifest.Result;
+            }
+            catch (ModelDerivativeApiException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
         #endregion
 
@@ -133,8 +140,7 @@ namespace Samples
                 SupportedFormats formatsResponse = await modelDerivativeClient.GetFormatsAsync(accessToken: token);
                 Dictionary<string, List<string>> supportedformats = formatsResponse.Formats;
             }
-            catch
-            (Exception ex)
+            catch (ModelDerivativeApiException ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -154,8 +160,7 @@ namespace Samples
                 // get guid from response
                 modelGuid = modelViewsResponse.Data.Metadata.First().Guid;
             }
-            catch
-            (Exception ex)
+            catch (ModelDerivativeApiException ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -175,8 +180,7 @@ namespace Samples
                 }
                 List<ObjectTreeDataObjects> treeObjects = objectTree.Data.Objects;
             }
-            catch
-            (Exception ex)
+            catch (ModelDerivativeApiException ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -208,8 +212,7 @@ namespace Samples
                 }
                 List<AllPropertiesDataCollection> propertiesDataCollections = specificProperties.Data.Collection;
             }
-            catch
-            (Exception ex)
+            catch (ModelDerivativeApiException ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -229,7 +232,7 @@ namespace Samples
                 }
                 List<AllPropertiesDataCollection> propertiesDataCollections = allProperties.Data.Collection;
             }
-            catch (Exception ex)
+            catch (ModelDerivativeApiException ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -250,7 +253,7 @@ namespace Samples
                     thumbnail.CopyTo(fileStream);
                 }
             }
-            catch (Exception ex)
+            catch (ModelDerivativeApiException ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -259,7 +262,7 @@ namespace Samples
         #endregion
 
         #region Derivatives
-        // Download derivative url
+        // Returns a downloadable url including the coookies
         public async Task DownloadDerivativeURLAsync()
         {
             try
@@ -269,7 +272,7 @@ namespace Samples
                 // the below returns a downloadable url including the coookies
                 var url = derivativeDownload.Url;
             }
-            catch (Exception ex)
+            catch (ModelDerivativeApiException ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -288,7 +291,7 @@ namespace Samples
                 }
                 var ContentLength = derivativeHeaders.Content.Headers.ContentLength;
             }
-            catch (Exception ex)
+            catch (ModelDerivativeApiException ex)
             {
                 Console.WriteLine(ex.Message);
             }
