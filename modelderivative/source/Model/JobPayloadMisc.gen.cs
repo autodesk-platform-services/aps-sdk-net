@@ -3,9 +3,9 @@
  *
  * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
- * Model Derivative API
+ * Model Derivative
  *
- * Model Derivative Service Documentation
+ * Use the Model Derivative API to translate designs from one CAD format to another. You can also use this API to extract metadata from a model.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// JobPayloadMisc
+    /// A collection of miscellaneous parameters.
     /// </summary>
     [DataContract]
     public partial class JobPayloadMisc 
@@ -46,16 +46,20 @@ namespace Autodesk.ModelDerivative.Model
         }
         
         /// <summary>
-        /// The workflow id created for a webhook, used to listen to Model Derivative events. It needs to be no more than 36 chars, and only ASCII, decimal and hyphen are accepted.
+        ///The workflow ID of the webhook that listens to Model Derivative events. It must be 36 characters or less and can only contain alphanumeric characters (A-Z, 0-9) and hyphens (-).
         /// </summary>
-        /// <value>The workflow id created for a webhook, used to listen to Model Derivative events. It needs to be no more than 36 chars, and only ASCII, decimal and hyphen are accepted.</value>
+        /// <value>
+        ///The workflow ID of the webhook that listens to Model Derivative events. It must be 36 characters or less and can only contain alphanumeric characters (A-Z, 0-9) and hyphens (-).
+        /// </value>
         [DataMember(Name="workflow", EmitDefaultValue=false)]
         public string Workflow { get; set; }
 
         /// <summary>
-        /// A user-defined JSON object, which you can use to set some custom workflow information. It needs to be less than 1KB and will be ignored if misc.workflow parameter is not set.
+        ///A user-defined JSON object, which you can use to set some custom workflow information. It must be less than 1KB and is ignored if `misc.workflow` is not specified.
         /// </summary>
-        /// <value>A user-defined JSON object, which you can use to set some custom workflow information. It needs to be less than 1KB and will be ignored if misc.workflow parameter is not set.</value>
+        /// <value>
+        ///A user-defined JSON object, which you can use to set some custom workflow information. It must be less than 1KB and is ignored if `misc.workflow` is not specified.
+        /// </value>
         [DataMember(Name="workflowAttribute", EmitDefaultValue=false)]
         public Object WorkflowAttribute { get; set; }
 

@@ -5,7 +5,7 @@
  *
  * Model Derivative
  *
- * Model Derivative Service Documentation
+ * Use the Model Derivative API to translate designs from one CAD format to another. You can also use this API to extract metadata from a model.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,10 +33,10 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// AllPropertiesDataCollection
+    ///A non-hierarchical list of objects contained in the specified Model View. Each object has a `properties` attribute, which contains the properties of that object.
     /// </summary>
     [DataContract]
-    public partial class AllPropertiesDataCollection 
+    public partial class AllPropertiesDataCollection
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AllPropertiesDataCollection" /> class.
@@ -44,29 +44,51 @@ namespace Autodesk.ModelDerivative.Model
         public AllPropertiesDataCollection()
         {
         }
-        
+
         /// <summary>
-        /// Gets or Sets Objectid
+        ///Unique identifier of the object.
+        ///
+        ///**Note:** The `objectid` is a non-persistent ID assigned to an object when a design file is translated to SVF or SVF2. So:
+        ///
+        ///- The `objectid` of an object can change if the design is translated to SVF or SVF2 again.
+        ///- If you require a persistent ID to reference an object, use `externalId`.
         /// </summary>
-        [DataMember(Name="objectid", EmitDefaultValue=false)]
+        /// <value>
+        ///Unique identifier of the object.
+        ///
+        ///**Note:** The `objectid` is a non-persistent ID assigned to an object when a design file is translated to SVF or SVF2. So:
+        ///
+        ///- The `objectid` of an object can change if the design is translated to SVF or SVF2 again.
+        ///- If you require a persistent ID to reference an object, use `externalId`.
+        /// </value>
+        [DataMember(Name = "objectid", EmitDefaultValue = false)]
         public decimal? Objectid { get; set; }
 
         /// <summary>
-        /// Gets or Sets Name
+        ///Name of the object.
         /// </summary>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        /// <value>
+        ///Name of the object.
+        /// </value>
+        [DataMember(Name = "name", EmitDefaultValue = false)]
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or Sets ExternalId
+        ///A unique identifier of the object as defined in the source design. For example, `UniqueID` in Revit files.
         /// </summary>
-        [DataMember(Name="externalId", EmitDefaultValue=false)]
+        /// <value>
+        ///A unique identifier of the object as defined in the source design. For example, `UniqueID` in Revit files.
+        /// </value>
+        [DataMember(Name = "externalId", EmitDefaultValue = false)]
         public string ExternalId { get; set; }
 
         /// <summary>
-        /// Gets or Sets Properties
+        ///A JSON object containing dictionary objects (key value pairs), where the key is the property name and the value is the value of the property.
         /// </summary>
-        [DataMember(Name="properties", EmitDefaultValue=false)]
+        /// <value>
+        ///A JSON object containing dictionary objects (key value pairs), where the key is the property name and the value is the value of the property.
+        /// </value>
+        [DataMember(Name = "properties", EmitDefaultValue = false)]
         public Object Properties { get; set; }
 
         /// <summary>

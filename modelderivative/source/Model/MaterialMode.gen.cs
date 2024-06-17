@@ -1,11 +1,11 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Model Derivative
  *
- * Model Derivative Service Documentation
+ * Use the Model Derivative API to translate designs from one CAD format to another. You can also use this API to extract metadata from a model.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,27 +33,35 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// Specifies the materials to apply to the generated SVF derivatives. Available options are: - auto - (Default) Use the current setting of the default view of the input file. - basic - Use basic materials. - autodesk - Use Autodesk materials.
+    /// Specifies the materials to apply to the generated SVF derivatives. Applicable only when the source design is of type RVT. Possible values are:
+    ///
+    ///- `auto` - (Default) Use the current setting of the default view of the input file.
+    ///- `basic` - Use basic materials.
+    ///- `autodesk` - Use Autodesk materials.
     /// </summary>
-    /// <value>Specifies the materials to apply to the generated SVF derivatives. Available options are: - auto - (Default) Use the current setting of the default view of the input file. - basic - Use basic materials. - autodesk - Use Autodesk materials.</value>
-    
+    ///<value>Specifies the materials to apply to the generated SVF derivatives. Applicable only when the source design is of type RVT. Possible values are:
+    ///
+    ///- `auto` - (Default) Use the current setting of the default view of the input file.
+    ///- `basic` - Use basic materials.
+    ///- `autodesk` - Use Autodesk materials.</value>
+
     [JsonConverter(typeof(StringEnumConverter))]
-    
+
     public enum MaterialMode
     {
-        
+
         /// <summary>
         /// Enum Auto for value: auto
         /// </summary>
         [EnumMember(Value = "auto")]
         Auto,
-        
+
         /// <summary>
         /// Enum Basic for value: basic
         /// </summary>
         [EnumMember(Value = "basic")]
         Basic,
-        
+
         /// <summary>
         /// Enum Autodesk for value: autodesk
         /// </summary>

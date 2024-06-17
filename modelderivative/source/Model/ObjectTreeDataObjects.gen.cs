@@ -3,9 +3,9 @@
  *
  * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
- * Model Derivative API
+ * Model Derivative
  *
- * Model Derivative Service Documentation
+ * Use the Model Derivative API to translate designs from one CAD format to another. You can also use this API to extract metadata from a model.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,22 +46,31 @@ namespace Autodesk.ModelDerivative.Model
         }
         
         /// <summary>
-        /// Gets or Sets Objectid
+        ///A non-persistent ID that is assigned to an object at translation time.
         /// </summary>
+        /// <value>
+        ///A non-persistent ID that is assigned to an object at translation time.
+        /// </value>
         [DataMember(Name="objectid", EmitDefaultValue=false)]
         public decimal? Objectid { get; set; }
 
         /// <summary>
-        /// Gets or Sets Name
+        ///Name of the object.
         /// </summary>
+        /// <value>
+        ///Name of the object.
+        /// </value>
         [DataMember(Name="name", EmitDefaultValue=false)]
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or Sets Objects
+        ///An optional array of objects of type `object` where each object represents a child of the current node on the object tree.
         /// </summary>
+        /// <value>
+        ///An optional array of objects of type `object` where each object represents a child of the current node on the object tree.
+        /// </value>
         [DataMember(Name="objects", EmitDefaultValue=false)]
-        public List<ObjectTreeDataObjects> Objects { get; set; }
+        public List<Object> Objects { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

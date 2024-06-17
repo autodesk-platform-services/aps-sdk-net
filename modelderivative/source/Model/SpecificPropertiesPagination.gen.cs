@@ -3,9 +3,9 @@
  *
  * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
- * Model Derivative API
+ * Model Derivative
  *
- * Model Derivative Service Documentation
+ * Use the Model Derivative API to translate designs from one CAD format to another. You can also use this API to extract metadata from a model.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// SpecificPropertiesPagination
+    /// Envelope that contains pagination information.
     /// </summary>
     [DataContract]
     public partial class SpecificPropertiesPagination 
@@ -46,20 +46,29 @@ namespace Autodesk.ModelDerivative.Model
         }
         
         /// <summary>
-        /// Gets or Sets Limit
+        ///The maximum number of properties you requested for this page.
         /// </summary>
+        /// <value>
+        ///The maximum number of properties you requested for this page.
+        /// </value>
         [DataMember(Name="limit", EmitDefaultValue=false)]
         public decimal? Limit { get; set; }
 
         /// <summary>
-        /// Gets or Sets Offset
+        ///The number of items skipped (because they were returned in previous pages) when returning this page.
         /// </summary>
+        /// <value>
+        ///The number of items skipped (because they were returned in previous pages) when returning this page.
+        /// </value>
         [DataMember(Name="offset", EmitDefaultValue=false)]
         public decimal? Offset { get; set; }
 
         /// <summary>
-        /// Gets or Sets TotalResults
+        ///The total number of properties to be returned.
         /// </summary>
+        /// <value>
+        ///The total number of properties to be returned.
+        /// </value>
         [DataMember(Name="totalResults", EmitDefaultValue=false)]
         public decimal? TotalResults { get; set; }
 

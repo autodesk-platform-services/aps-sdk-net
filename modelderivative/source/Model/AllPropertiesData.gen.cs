@@ -5,7 +5,7 @@
  *
  * Model Derivative
  *
- * Model Derivative Service Documentation
+ * Use the Model Derivative API to translate designs from one CAD format to another. You can also use this API to extract metadata from a model.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// AllPropertiesData
+    /// An envelope that encapsulates the return data.
     /// </summary>
     [DataContract]
     public partial class AllPropertiesData 
@@ -46,14 +46,20 @@ namespace Autodesk.ModelDerivative.Model
         }
         
         /// <summary>
-        /// Gets or Sets Type
+        ///The type of data that is returned. Always `properties`.
         /// </summary>
+        /// <value>
+        ///The type of data that is returned. Always `properties`.
+        /// </value>
         [DataMember(Name="type", EmitDefaultValue=false)]
         public string Type { get; set; }
 
         /// <summary>
-        /// Gets or Sets Collection
+        ///A non-hierarchical list of objects contained in the specified Model View. Each object has a `properties` attribute, which contains the properties of that object.
         /// </summary>
+        /// <value>
+        ///A non-hierarchical list of objects contained in the specified Model View. Each object has a `properties` attribute, which contains the properties of that object.
+        /// </value>
         [DataMember(Name="collection", EmitDefaultValue=false)]
         public List<AllPropertiesDataCollection> Collection { get; set; }
 
