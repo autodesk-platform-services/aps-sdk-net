@@ -33,32 +33,26 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Authentication.Model
 {
     /// <summary>
-    /// The type of response you want to receive. Possible values are: 
-    ///
-    /// -  `code` - Authorization code grant.
-    /// -  `id_token` - OpenID Connect ID token.
+    /// The type of token to revoke. Possible values are: `access_token` and `refresh_token`.
     /// </summary>
-    ///<value>The type of response you want to receive. Possible values are: 
-    ///
-    /// -  `code` - Authorization code grant.
-    /// -  `id_token` - OpenID Connect ID token.</value>
-
+    ///<value>The type of token to revoke. Possible values are: `access_token` and `refresh_token`.</value>
+    
     [JsonConverter(typeof(StringEnumConverter))]
-
-    public enum ResponseType
+    
+    public enum TokenTypeHint
     {
-
+        
         /// <summary>
-        /// Enum Code for value: code
+        /// Enum Accesstoken for value: access_token
         /// </summary>
-        [EnumMember(Value = "code")]
-        Code,
-
+        [EnumMember(Value = "access_token")]
+        AccessToken,
+        
         /// <summary>
-        /// Enum Idtoken for value: id_token
+        /// Enum Refreshtoken for value: refresh_token
         /// </summary>
-        [EnumMember(Value = "id_token")]
-        Idtoken
+        [EnumMember(Value = "refresh_token")]
+        RefreshToken
     }
 
 }

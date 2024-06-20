@@ -24,20 +24,27 @@ using System.Net.Http;
 
 namespace Autodesk.Authentication
 {
+
+  /// <summary>
+  /// An object that is returned when an API call fails.
+  /// </summary>
   public abstract class ServiceApiException : HttpRequestException
   {
-    public HttpResponseMessage HttpResponseMessage {get; set;}
+    public HttpResponseMessage HttpResponseMessage { get; set; }
 
-    public ServiceApiException(string message) : base(message) {}
+    public ServiceApiException(string message) : base(message) { }
     public ServiceApiException(string message, HttpResponseMessage httpResponseMessage, Exception exception) : base(message, exception)
     {
       this.HttpResponseMessage = httpResponseMessage;
     }
   }
 
+  /// <summary>
+  /// An object that is returned when an API call to the Authentication service fails.
+  /// </summary>
   public class AuthenticationApiException : ServiceApiException
   {
-    public AuthenticationApiException(string message) : base(message) {}
-    public AuthenticationApiException(string message, HttpResponseMessage httpResponseMessage, Exception exception) : base(message, httpResponseMessage, exception) {}
+    public AuthenticationApiException(string message) : base(message) { }
+    public AuthenticationApiException(string message, HttpResponseMessage httpResponseMessage, Exception exception) : base(message, httpResponseMessage, exception) { }
   }
 }

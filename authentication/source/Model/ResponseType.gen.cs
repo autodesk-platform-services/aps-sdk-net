@@ -33,50 +33,32 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Authentication.Model
 {
     /// <summary>
-    /// Refresh token response body.
+    /// The type of response you want to receive. Possible values are: 
+    ///
+    /// -  `code` - Authorization code grant.
+    /// -  `id_token` - OpenID Connect ID token.
     /// </summary>
-    [DataContract]
-    public partial class RefreshToken 
+    ///<value>The type of response you want to receive. Possible values are: 
+    ///
+    /// -  `code` - Authorization code grant.
+    /// -  `id_token` - OpenID Connect ID token.</value>
+
+    [JsonConverter(typeof(StringEnumConverter))]
+
+    public enum ResponseType
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="RefreshToken" /> class.
-        /// </summary>
-        public RefreshToken()
-        {
-        }
-        
-        /// <summary>
-        ///Gets or Sets AccessToken
-        /// </summary>
-        [DataMember(Name="access_token", EmitDefaultValue=false)]
-        public string AccessToken { get; set; }
 
         /// <summary>
-        ///Gets or Sets TokenType
+        /// Enum Code for value: code
         /// </summary>
-        [DataMember(Name="token_type", EmitDefaultValue=false)]
-        public string TokenType { get; set; }
+        [EnumMember(Value = "code")]
+        Code,
 
         /// <summary>
-        ///Gets or Sets ExpiresIn
+        /// Enum Idtoken for value: id_token
         /// </summary>
-        [DataMember(Name="expires_in", EmitDefaultValue=false)]
-        public int? ExpiresIn { get; set; }
-
-        /// <summary>
-        ///Gets or Sets _RefreshToken
-        /// </summary>
-        [DataMember(Name="refresh_token", EmitDefaultValue=false)]
-        public string _RefreshToken { get; set; }
-
-        /// <summary>
-        /// Returns the string presentation of the object
-        /// </summary>
-        /// <returns>String presentation of the object</returns>
-        public override string ToString()
-        {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
-        }
+        [EnumMember(Value = "id_token")]
+        IdToken
     }
 
 }

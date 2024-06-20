@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Authentication.Model
 {
     /// <summary>
-    /// OIDC Specification
+    /// Represents a successful response to a Get OIDC Specification operation.
     /// </summary>
     [DataContract]
     public partial class OidcSpec 
@@ -79,7 +79,7 @@ namespace Autodesk.Authentication.Model
         ///The endpoint for querying information about the authenticated user.
         /// </value>
         [DataMember(Name="userinfo_endpoint", EmitDefaultValue=false)]
-        public string UserinfoEndpoint { get; set; }
+        public string UserInfoEndpoint { get; set; }
 
         /// <summary>
         ///The endpoint for retrieving public keys used by APS, in the JWKS format.

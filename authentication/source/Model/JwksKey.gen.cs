@@ -33,10 +33,10 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Authentication.Model
 {
     /// <summary>
-    /// JwksKey
+    /// Represents a JSON Web Key Set (JWKS).
     /// </summary>
     [DataContract]
-    public partial class JwksKey 
+    public partial class JwksKey
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="JwksKey" /> class.
@@ -44,14 +44,14 @@ namespace Autodesk.Authentication.Model
         public JwksKey()
         {
         }
-        
+
         /// <summary>
         ///The ID of the key. Acts as a unique identifier for a specific key within the JWKS.
         /// </summary>
         /// <value>
         ///The ID of the key. Acts as a unique identifier for a specific key within the JWKS.
         /// </value>
-        [DataMember(Name="kid", EmitDefaultValue=false)]
+        [DataMember(Name = "kid", EmitDefaultValue = false)]
         public string Kid { get; set; }
 
         /// <summary>
@@ -60,20 +60,20 @@ namespace Autodesk.Authentication.Model
         /// <value>
         ///The cryptographic algorithm family used with the key. Currently, always `RSA`.
         /// </value>
-        [DataMember(Name="kty", EmitDefaultValue=false)]
+        [DataMember(Name = "kty", EmitDefaultValue = false)]
         public string Kty { get; set; }
 
         /// <summary>
         ///The intended use of the public key. Possible values:
-///
-///- `sig` - Verify the signature on data.
+        ///
+        ///- `sig` - Verify the signature on data.
         /// </summary>
         /// <value>
         ///The intended use of the public key. Possible values:
-///
-///- `sig` - Verify the signature on data.
+        ///
+        ///- `sig` - Verify the signature on data.
         /// </value>
-        [DataMember(Name="use", EmitDefaultValue=false)]
+        [DataMember(Name = "use", EmitDefaultValue = false)]
         public string Use { get; set; }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace Autodesk.Authentication.Model
         /// <value>
         ///The RSA modulus value.
         /// </value>
-        [DataMember(Name="n", EmitDefaultValue=false)]
+        [DataMember(Name = "n", EmitDefaultValue = false)]
         public string N { get; set; }
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace Autodesk.Authentication.Model
         /// <value>
         ///The RSA exponent value.
         /// </value>
-        [DataMember(Name="e", EmitDefaultValue=false)]
+        [DataMember(Name = "e", EmitDefaultValue = false)]
         public string E { get; set; }
 
         /// <summary>

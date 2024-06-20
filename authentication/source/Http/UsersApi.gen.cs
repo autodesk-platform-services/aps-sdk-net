@@ -48,8 +48,8 @@ namespace Autodesk.Authentication.Http
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="authorization">YOUR_3_LEGGED_ACCESS_TOKEN (optional)</param>
         /// <returns>Task of ApiResponse&lt;UserInfo&gt;</returns>
-        
-        System.Threading.Tasks.Task<ApiResponse<UserInfo>> GetUserinfoAsync (string authorization, bool throwOnError = true);
+
+        System.Threading.Tasks.Task<ApiResponse<UserInfo>> GetUserInfoAsync(string authorization, bool throwOnError = true);
     }
 
     /// <summary>
@@ -58,6 +58,9 @@ namespace Autodesk.Authentication.Http
     public partial class UsersApi : IUsersApi
     {
         ILogger logger;
+
+        // Manually added because UsersApi has a different base address.
+        Uri baseAddress { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UsersApi"/> class
@@ -68,31 +71,32 @@ namespace Autodesk.Authentication.Http
         public UsersApi(SDKManager.SDKManager sdkManager)
         {
             this.Service = sdkManager.ApsClient.Service;
+            this.baseAddress = new Uri("https://api.userprofile.autodesk.com/");
             this.logger = sdkManager.Logger;
         }
         private void SetQueryParameter(string name, object value, Dictionary<string, object> dictionary)
         {
-            if(value is Enum)
+            if (value is Enum)
             {
                 var type = value.GetType();
                 var memberInfos = type.GetMember(value.ToString());
                 var enumValueMemberInfo = memberInfos.FirstOrDefault(m => m.DeclaringType == type);
                 var valueAttributes = enumValueMemberInfo.GetCustomAttributes(typeof(EnumMemberAttribute), false);
-                if(valueAttributes.Length > 0)
+                if (valueAttributes.Length > 0)
                 {
                     dictionary.Add(name, ((EnumMemberAttribute)valueAttributes[0]).Value);
                 }
             }
-            else if(value is int)
+            else if (value is int)
             {
-                if((int)value > 0)
+                if ((int)value > 0)
                 {
                     dictionary.Add(name, value);
                 }
             }
             else
             {
-                if(value != null)
+                if (value != null)
                 {
                     dictionary.Add(name, value);
                 }
@@ -100,27 +104,27 @@ namespace Autodesk.Authentication.Http
         }
         private void SetHeader(string baseName, object value, HttpRequestMessage req)
         {
-                if(value is DateTime)
+            if (value is DateTime)
+            {
+                if ((DateTime)value != DateTime.MinValue)
                 {
-                    if((DateTime)value != DateTime.MinValue)
+                    req.Headers.TryAddWithoutValidation(baseName, LocalMarshalling.ParameterToString(value)); // header parameter
+                }
+            }
+            else
+            {
+                if (value != null)
+                {
+                    if (!string.Equals(baseName, "Content-Range"))
                     {
                         req.Headers.TryAddWithoutValidation(baseName, LocalMarshalling.ParameterToString(value)); // header parameter
                     }
-                }
-                else
-                {
-                    if (value != null)
+                    else
                     {
-                        if(!string.Equals(baseName, "Content-Range"))
-                        {
-                            req.Headers.TryAddWithoutValidation(baseName, LocalMarshalling.ParameterToString(value)); // header parameter
-                        }
-                        else
-                        {
-                            req.Content.Headers.Add(baseName, LocalMarshalling.ParameterToString(value));
-                        }
+                        req.Content.Headers.Add(baseName, LocalMarshalling.ParameterToString(value));
                     }
                 }
+            }
 
         }
 
@@ -128,7 +132,7 @@ namespace Autodesk.Authentication.Http
         /// Gets or sets the ApsConfiguration object
         /// </summary>
         /// <value>An instance of the ForgeService</value>
-        public ForgeService Service {get; set;}
+        public ForgeService Service { get; set; }
 
         /// <summary>
         /// Get User Info
@@ -139,35 +143,23 @@ namespace Autodesk.Authentication.Http
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="authorization">YOUR_3_LEGGED_ACCESS_TOKEN (optional)</param>
         /// <returns>Task of ApiResponse&lt;UserInfo&gt;</returns>
-        
-        public async System.Threading.Tasks.Task<ApiResponse<UserInfo>> GetUserinfoAsync (string authorization, bool throwOnError = true)
+
+        public async System.Threading.Tasks.Task<ApiResponse<UserInfo>> GetUserInfoAsync(string authorization, bool throwOnError = true)
         {
-            logger.LogInformation("Entered into GetUserinfoAsync ");
+            logger.LogInformation("Entered into GetUserInfoAsync ");
             using (var request = new HttpRequestMessage())
             {
                 var queryParam = new Dictionary<string, object>();
                 // *** ss added manually
-                request.RequestUri = new Uri("https://api.userprofile.autodesk.com/userinfo");
-                    // Marshalling.BuildRequestUri("/userinfo",
-                    //     routeParameters: new Dictionary<string, object> {
-                    //     },
-                    //     queryParameters: queryParam
-                    // );
+                request.RequestUri = new Uri(baseAddress, "/userinfo");
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/AUTHENTICATION/C#/1.0.0-beta1");
-                if(!string.IsNullOrEmpty(authorization))
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/AUTHENTICATION/C#/1.0.0");
+                if (!string.IsNullOrEmpty(authorization))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {authorization}");
                 }
 
-
-
-               // SetHeader("Authorization", authorization, request);
-
-                // *** ss code end***
-
-                // tell the underlying pipeline what scope we'd like to use
 
                 request.Method = new HttpMethod("GET");
 
@@ -178,9 +170,11 @@ namespace Autodesk.Authentication.Http
                 {
                     try
                     {
-                      await response.EnsureSuccessStatusCodeAsync();
-                    } catch (HttpRequestException ex) {
-                      throw new AuthenticationApiException(ex.Message, response, ex);
+                        await response.EnsureSuccessStatusCodeAsync();
+                    }
+                    catch (HttpRequestException ex)
+                    {
+                        throw new AuthenticationApiException(ex.Message, response, ex);
                     }
                 }
                 else if (!response.IsSuccessStatusCode)
@@ -188,7 +182,7 @@ namespace Autodesk.Authentication.Http
                     logger.LogError($"response unsuccess with status code: {response.StatusCode}");
                     return new ApiResponse<UserInfo>(response, default(UserInfo));
                 }
-                logger.LogInformation($"Exited from GetUserinfoAsync with response statusCode: {response.StatusCode}");
+                logger.LogInformation($"Exited from GetUserInfoAsync with response statusCode: {response.StatusCode}");
                 return new ApiResponse<UserInfo>(response, await LocalMarshalling.DeserializeAsync<UserInfo>(response.Content));
 
             } // using

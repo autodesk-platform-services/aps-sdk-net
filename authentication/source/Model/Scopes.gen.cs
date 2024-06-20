@@ -43,12 +43,6 @@ namespace Autodesk.Authentication.Model
     {
         
         /// <summary>
-        /// Enum UserProfileread for value: user-profile:read
-        /// </summary>
-        [EnumMember(Value = "user-profile:read")]
-        UserProfileRead,
-        
-        /// <summary>
         /// Enum Userread for value: user:read
         /// </summary>
         [EnumMember(Value = "user:read")]
@@ -59,6 +53,12 @@ namespace Autodesk.Authentication.Model
         /// </summary>
         [EnumMember(Value = "user:write")]
         UserWrite,
+        
+        /// <summary>
+        /// Enum UserProfileread for value: user-profile:read
+        /// </summary>
+        [EnumMember(Value = "user-profile:read")]
+        UserProfileRead,
         
         /// <summary>
         /// Enum Viewablesread for value: viewables:read
@@ -76,7 +76,7 @@ namespace Autodesk.Authentication.Model
         /// Enum DatareadURNOFRESOURCE for value: data:read:&lt;URN_OF_RESOURCE&gt;
         /// </summary>
         [EnumMember(Value = "data:read:<URN_OF_RESOURCE>")]
-        DatareadURNOFRESOURCE,
+        DataReadURNOFRESOURCE,
         
         /// <summary>
         /// Enum Datawrite for value: data:write
