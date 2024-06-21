@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Autodesk.Authentication;
 using Autodesk.Authentication.Model;
 using Autodesk.SDKManager;
@@ -8,14 +9,14 @@ namespace Samples
       class Authentication
       {
             AuthenticationClient authenticationClient = null!;
-            string client_id = "<client_id>";
-            string client_secret = "<client_secret>";
+            string client_id = "BvyMQpgu261URwyvoF95pSFzBe29KvSR";
+            string client_secret = "r2GZlqSxgjK3c4Qm";
             string redirect_uri = @"<redirect_uri>";
             string token = "<token>";
             string authorization_code = "code";
 
             public void Initialise()
-            {     
+            {
                   // Instantiate SDK manager as below.  
                   SDKManager sdkManager = SdkManagerBuilder
                         .Create() // Creates SDK Manager Builder itself.
@@ -30,14 +31,23 @@ namespace Samples
                   // Get 2Legged token.
                   // Pass the  client Id and secret as in your app. The method 
                   // will convert it in '${Base64(<client_id>:<client_secret>)}' format
-                  TwoLeggedToken twoLeggedToken = await authenticationClient.GetTwoLeggedTokenAsync(client_id, client_secret, new List<Scopes>() { Scopes.DataRead, Scopes.BucketRead });
+                  try
+                  {
+                        TwoLeggedToken twoLeggedToken = await authenticationClient.GetTwoLeggedTokenAsync(client_id, client_secret, new List<Scopes>() { Scopes.DataRead, Scopes.BucketRead });
+                        string accessToken = twoLeggedToken.AccessToken;
+                  }
+                  catch (AuthenticationApiException ex)
+                  {
+                        Console.Write(ex.Message);
+                  }
             }
 
 
             public void GetAuthorizeURL()
             {
                   // Get Authorize url
-                  string url = authenticationClient.Authorize(client_id, ResponseType.Code, redirectUri: redirect_uri, new List<Scopes>() { Scopes.DataRead, Scopes.BucketRead });
+                  //  List<Scopes
+                  string url = authenticationClient.Authorize(client_id, ResponseType.Code, redirectUri: redirect_uri, scopes: new List<Scopes>() { Scopes.DataRead, Scopes.BucketRead });
             }
 
 
@@ -46,51 +56,91 @@ namespace Samples
                   // Get 3Legged token.
                   // Pass the  client Id and secret as in your app. The method 
                   // will convert it in Basic ${Base64(<client_id>:<client_secret>)} format
-
-                  ThreeLeggedToken threeLeggedToken = await authenticationClient.GetThreeLeggedTokenAsync(client_id, client_secret, authorization_code, redirect_uri);
-                  string threeLeggedToken_accesstoken = threeLeggedToken.AccessToken;
+                  try
+                  {
+                        ThreeLeggedToken threeLeggedToken = await authenticationClient.GetThreeLeggedTokenAsync(client_id, authorization_code,redirect_uri, clientSecret: client_secret);
+                        string accessToken = threeLeggedToken.AccessToken;
+                  }
+                  catch (AuthenticationApiException ex)
+                  {
+                        Console.Write(ex.Message);
+                  }
             }
 
 
 
-            public async Task GetRefreshTokenAsync()
+            public async Task RefreshTokenAsync()
             {
                   // Get Refresh token
-                  RefreshToken newToken = await authenticationClient.GetRefreshTokenAsync(client_id, client_secret, "refreshToken");
-                  string refreshToken = newToken._RefreshToken;
-                  int? expiresIn = newToken.ExpiresIn;
+                  try
+                  {
+                        ThreeLeggedToken newToken = await authenticationClient.RefreshTokenAsync(client_id, client_secret, "refreshToken");
+                        string accessToken = newToken.AccessToken;
+
+                  }
+                  catch (AuthenticationApiException ex)
+                  {
+                        Console.Write(ex.Message);
+                  }
             }
 
 
             public async Task GetKeysAsync()
             {
                   //Retrieves the list of public keys in the JWKS format (JSON Web Key Set)
-                  Jwks jwks = await authenticationClient.GetKeysAsync();
-                  JwksKey jwksKey = jwks.Keys[1];
+                  try
+                  {
+                        Jwks jwks = await authenticationClient.GetKeysAsync();
+                        JwksKey jwksKey = jwks.Keys[1];
+                  }
+                  catch (AuthenticationApiException ex)
+                  {
+                        Console.Write(ex.Message);
+                  }
             }
 
 
             public async Task GetOidcSpecAsync()
             {
                   // Retrieves the metadata as a JSON listing of OpenID/OAuth endpoints
-                  OidcSpec oidcSpec = await authenticationClient.GetOidcSpecAsync();
-                  string issuer = oidcSpec.Issuer;
+                  try
+                  {
+                        OidcSpec oidcSpec = await authenticationClient.GetOidcSpecAsync();
+                        string issuer = oidcSpec.Issuer;
+                  }
+                  catch (AuthenticationApiException ex)
+                  {
+                        Console.Write(ex.Message);
+                  }
             }
 
 
             public async Task GetUserInfoAsync()
             {
-                  // Retrieves basic information for the given authenticated user.
-                  UserInfo userInfo = await authenticationClient.GetUserInfoAsync("threeLeggedToken_accesstoken");
-                  string userEmail = userInfo.Email;
+                  try
+                  {
+                        // Retrieves basic information for the given authenticated user.
+                        UserInfo userInfo = await authenticationClient.GetUserInfoAsync(token);
+                        string userEmail = userInfo.Email;
+                  }
+                  catch (AuthenticationApiException ex)
+                  {
+                        Console.Write(ex.Message);
+                  }
             }
 
 
-            public async Task TestIntrospectTokenAsync()
+            public async Task IntrospectTokenAsync()
             {
                   // Returns the status information of the tokens.
-                  IntrospectToken introspectToken = await authenticationClient.IntrospectTokenAsync(token, client_id, client_secret);
-                  string tokenType = introspectToken.TokenType;
+                  try
+                  {
+                        IntrospectToken introspectToken = await authenticationClient.IntrospectTokenAsync(token, client_id, client_secret);
+                  }
+                  catch (AuthenticationApiException ex)
+                  {
+                        Console.Write(ex.Message);
+                  }
 
             }
 
@@ -98,20 +148,36 @@ namespace Samples
             public async Task RevokeTokenAsync()
             {
                   // This API endpoint takes an access token or refresh token and revokes it.
-                  HttpResponseMessage response = await authenticationClient.RevokeAsync(token, client_id, client_secret);
-
+                  try
+                  {
+                        HttpResponseMessage response = await authenticationClient.RevokeAsync(token, client_id, client_secret);
+                  }
+                  catch (AuthenticationApiException ex)
+                  {
+                        Console.Write(ex.Message);
+                  }
             }
 
 
-            public async void Main()
+            public void GetLogoutUrl()
             {
+                  string logoutUrl = authenticationClient.Logout();
+            }
 
+            public static async void Main()
+            {
+                  Authentication authentication = new Authentication();
                   // Initialise SDKManager & AuthClient
-                  Initialise();
+                  authentication.Initialise();
                   // Call respective methods
-                  await Get2LeggedTokenAsync();
-                  await Get3LeggedTokenAsync();
-                  GetAuthorizeURL();
+                  await authentication.Get2LeggedTokenAsync();
+                  authentication.GetAuthorizeURL();
+                  await authentication.Get3LeggedTokenAsync();
+                  await authentication.RefreshTokenAsync();
+                  await authentication.GetOidcSpecAsync();
+                  await authentication.GetKeysAsync();
+                  authentication.GetLogoutUrl();
+
 
 
             }

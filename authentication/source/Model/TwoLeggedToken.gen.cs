@@ -82,7 +82,7 @@ namespace Autodesk.Authentication.Model
             set
             {
                 _expiresIn = value;
-                _expiresAt = DateTimeOffset.Now.ToUnixTimeSeconds() + ExpiresIn;
+                _expiresAt = DateTimeOffset.Now.ToUnixTimeSeconds() + _expiresIn;
 
             }
         }

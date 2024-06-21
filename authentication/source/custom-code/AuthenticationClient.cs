@@ -72,10 +72,8 @@ namespace Autodesk.Authentication
         public async System.Threading.Tasks.Task<TwoLeggedToken> GetTwoLeggedTokenAsync(string clientId, string clientSecret, List<Scopes> scopes, bool throwOnError = true)
         {
             var clientIdSecret = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes($"{clientId}:{clientSecret}"));
-            //   var strScopes = String.Join(" ", scopes.Select(x => Utils.GetEnumString(x)));
-            //   var grantType = Utils.GetEnumString(GrantType.ClientCredentials);
             var response = await this.tokenApi.FetchTokenAsync(authorization: clientIdSecret, scopes: scopes, grantType: GrantType.ClientCredentials, throwOnError: throwOnError);
-           return await LocalMarshalling.DeserializeAsync<TwoLeggedToken>(response.Content);
+            return await LocalMarshalling.DeserializeAsync<TwoLeggedToken>(response.Content);
         }
 
         /// <summary>
@@ -143,11 +141,9 @@ namespace Autodesk.Authentication
         ///- `S256`- Hashes the code verifier using the SHA-256 algorithm and then applies Base64 URL encoding. (optional)
         /// </param>
         /// <returns>string</returns>
-        public string Authorize(string clientId, ResponseType responseType, string redirectUri, List<Scopes> scopes)
+        public string Authorize(string clientId, ResponseType responseType, string redirectUri, string nonce = default(string), string state = default(string), List<Scopes> scopes = null, string responseMode = default(string), string prompt = default(string), string authoptions = default(string), string codeChallenge = default(string), string codeChallengeMethod = default(string))
         {
-            var strResponseType = Utils.GetEnumString(responseType);
-            // var strScopes = String.Join(" ", scopes.Select(x => Utils.GetEnumString(x)));
-            return this.tokenApi.Authorize(clientId: clientId, redirectUri: redirectUri, responseType: responseType, scopes: scopes);
+            return this.tokenApi.Authorize(clientId, responseType, redirectUri, nonce, state, scopes, responseMode, prompt, authoptions, codeChallenge, codeChallengeMethod);
         }
 
         /// <summary>
@@ -175,20 +171,18 @@ namespace Autodesk.Authentication
         ///A random URL-encoded string between 43 characters and 128 characters. In a PKCE grant flow, the authentication server uses this string to verify the code challenge that was passed when you called [Authorize User](/en/docs/oauth/v2/reference/http/authorize-GET/).    Required if [`code_challenge` was specified when you called [Authorize User](/en/docs/oauth/v2/reference/http/authorize-GET/).  (optional)
         /// </param> 
         /// <returns>Task of &lt;ThreeLeggedToken&gt;</returns>
-        public async System.Threading.Tasks.Task<ThreeLeggedToken> GetThreeLeggedTokenAsync(string clientId, string code, string redirect_uri, string clientSecret = default(string), string code_verifier = default(string), bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ThreeLeggedToken> GetThreeLeggedTokenAsync(string clientId, string code, string redirectUri, string clientSecret = default(string), string codeVerifier = default(string), bool throwOnError = true)
         {
             if (!string.IsNullOrEmpty(clientSecret))
             { // for private clients
                 var clientIdSecret = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes($"{clientId}:{clientSecret}"));
-                //  var grant_type = Utils.GetEnumString(GrantType.AuthorizationCode);
-                var response = await this.tokenApi.FetchTokenAsync(authorization: clientIdSecret, code: code, grantType: GrantType.AuthorizationCode, redirectUri: redirect_uri, throwOnError: throwOnError);
+                var response = await this.tokenApi.FetchTokenAsync(authorization: clientIdSecret, code: code, grantType: GrantType.AuthorizationCode, redirectUri: redirectUri, throwOnError: throwOnError);
                 return await LocalMarshalling.DeserializeAsync<ThreeLeggedToken>(response.Content);
 
             }
             else
             {   // for public clients
-                // var grant_type = Utils.GetEnumString(GrantType.AuthorizationCode);
-                var response = await this.tokenApi.FetchTokenAsync(clientId: clientId, code: code, grantType: GrantType.AuthorizationCode, redirectUri: redirect_uri, codeVerifier: code_verifier, throwOnError: throwOnError);
+                var response = await this.tokenApi.FetchTokenAsync(clientId: clientId, code: code, grantType: GrantType.AuthorizationCode, redirectUri: redirectUri, codeVerifier: codeVerifier, throwOnError: throwOnError);
                 return await LocalMarshalling.DeserializeAsync<ThreeLeggedToken>(response.Content);
 
             }
@@ -217,24 +211,17 @@ namespace Autodesk.Authentication
         ///If specified, scopes have to be primarily same with or a subset of the scopes used to generate the refresh_token.(optional)
         /// </param>   
         /// <returns>Task of  &lt;ThreeLeggedToken&gt;</returns>
-        public async System.Threading.Tasks.Task<ThreeLeggedToken> GetRefreshTokenAsync(string clientId, string clientSecret, string refreshToken, List<Scopes> scopes = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ThreeLeggedToken> RefreshTokenAsync(string clientId, string clientSecret, string refreshToken, List<Scopes> scopes = null, bool throwOnError = true)
         {
-            // string strScopes = null;
-            // if (scopes != null && scopes.Any())
-            // {
-            //     strScopes = String.Join(" ", scopes.Select(x => Utils.GetEnumString(x)));
-            // }
 
             if (!string.IsNullOrEmpty(clientSecret))
             {   // for private clients
                 var clientIdSecret = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes($"{clientId}:{clientSecret}"));
-                //  var grant_type = Utils.GetEnumString(GrantType.RefreshToken);
                 var response = await this.tokenApi.FetchTokenAsync(authorization: clientIdSecret, scopes: scopes, grantType: GrantType.RefreshToken, refreshToken: refreshToken, throwOnError: throwOnError);
                 return await LocalMarshalling.DeserializeAsync<ThreeLeggedToken>(response.Content);
             }
             else
             {   // for public clients
-                //    var grant_type = Utils.GetEnumString(GrantType.RefreshToken);
                 var response = await this.tokenApi.FetchTokenAsync(clientId: clientId, scopes: scopes, grantType: GrantType.RefreshToken, refreshToken: refreshToken, throwOnError: throwOnError);
                 return await LocalMarshalling.DeserializeAsync<ThreeLeggedToken>(response.Content);
 
@@ -366,7 +353,6 @@ namespace Autodesk.Authentication
 
         public async System.Threading.Tasks.Task<HttpResponseMessage> RevokeAsync(string token, string clientId, string clientSecret = default(string), TokenTypeHint tokenTypeHint = default(TokenTypeHint), bool throwOnError = true)
         {
-            // var token_type_hint = Utils.GetEnumString(tokenTypeHint);
             if (!string.IsNullOrEmpty(clientSecret))
             { // for private clients 
                 var clientIdSecret = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes($"{clientId}:{clientSecret}"));
