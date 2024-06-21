@@ -46,13 +46,13 @@ namespace Autodesk.Webhooks.Model
         }
         
         /// <summary>
-        /// Gets or Sets Links
+        ///Gets or Sets Links
         /// </summary>
         [DataMember(Name="links", EmitDefaultValue=false)]
         public HooksLinks Links { get; set; }
 
         /// <summary>
-        /// Gets or Sets Data
+        ///Gets or Sets Data
         /// </summary>
         [DataMember(Name="data", EmitDefaultValue=false)]
         public List<HooksData> Data { get; set; }

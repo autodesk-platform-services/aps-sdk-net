@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Oss.Model
 {
     /// <summary>
-    /// Result
+    /// A response returned by an Upload Object Using Signed URL operation when processing is yet to be completed.
     /// </summary>
     [DataContract]
     public partial class Result 
@@ -46,7 +46,7 @@ namespace Autodesk.Oss.Model
         }
         
         /// <summary>
-        /// Gets or Sets _Result
+        ///Gets or Sets _Result
         /// </summary>
         [DataMember(Name="result", EmitDefaultValue=false)]
         public string _Result { get; set; }

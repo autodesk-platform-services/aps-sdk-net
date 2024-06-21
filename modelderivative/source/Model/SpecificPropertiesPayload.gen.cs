@@ -3,9 +3,9 @@
  *
  * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
- * Model Derivative API
+ * Model Derivative
  *
- * Model Derivative Service Documentation
+ * Use the Model Derivative API to translate designs from one CAD format to another. You can also use this API to extract metadata from a model.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,10 +33,10 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// SpecificPropertiesPayload
+    /// An object that represents the request body of a Fetch Specific Properties operation.
     /// </summary>
     [DataContract]
-    public partial class SpecificPropertiesPayload 
+    public partial class SpecificPropertiesPayload
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SpecificPropertiesPayload" /> class.
@@ -44,35 +44,48 @@ namespace Autodesk.ModelDerivative.Model
         public SpecificPropertiesPayload()
         {
         }
-        
+
         /// <summary>
-        /// Gets or Sets Pagination
+        ///Gets or Sets Pagination
         /// </summary>
-        [DataMember(Name="pagination", EmitDefaultValue=false)]
+        [DataMember(Name = "pagination", EmitDefaultValue = false)]
         public SpecificPropertiesPayloadPagination Pagination { get; set; }
 
         /// <summary>
-        /// Gets or Sets Query. This is internal and not exposed.
+        ///Gets or Sets Query
         /// </summary>
         [DataMember(Name = "query", EmitDefaultValue = false)]
-        internal Dictionary<object, object> Filter { get { return Query.FilterQuery; } }
-
-
-        /// <summary>
-        /// Class to help set up Query Filters
-        /// </summary>
-        public SpecificPropertiesPayloadQuery Query { get; set; }
+        public ISpecificPropertiesPayloadQuery Query { get; set; }
 
         /// <summary>
-        /// Gets or Sets Fields
+        ///Specifies what properties of the objects to return. If you do not specify this attribute, the response returns all properties.
+        ///
+        ///Possible values are:
+        ///
+        ///- `properties` - Return all properties.
+        ///- `properties.something`- Return the property named `something` and all its children.
+        ///- `properties.some*` - Return all properties with names that begin with `some` and all their children.
+        ///- `properties.category.*` - Return the property named `category` and all its children.
+        ///- `properties.*.property` - Return any property named `property` regardless of its parent.
         /// </summary>
-        [DataMember(Name="fields", EmitDefaultValue=false)]
+        /// <value>
+        ///Specifies what properties of the objects to return. If you do not specify this attribute, the response returns all properties.
+        ///
+        ///Possible values are:
+        ///
+        ///- `properties` - Return all properties.
+        ///- `properties.something`- Return the property named `something` and all its children.
+        ///- `properties.some*` - Return all properties with names that begin with `some` and all their children.
+        ///- `properties.category.*` - Return the property named `category` and all its children.
+        ///- `properties.*.property` - Return any property named `property` regardless of its parent.
+        /// </value>
+        [DataMember(Name = "fields", EmitDefaultValue = false)]
         public Object Fields { get; set; }
 
         /// <summary>
-        /// Gets or Sets Payload
+        ///Gets or Sets Payload
         /// </summary>
-        [DataMember(Name="payload", EmitDefaultValue=true)]
+        [DataMember(Name = "payload", EmitDefaultValue = true)]
         public Payload Payload { get; set; }
 
         /// <summary>

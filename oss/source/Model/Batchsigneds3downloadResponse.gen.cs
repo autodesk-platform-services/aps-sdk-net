@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Oss.Model
 {
     /// <summary>
-    /// Batchsigneds3downloadResponse
+    /// The response to a Batch Generate Signed S3 Download URLs operation.
     /// </summary>
     [DataContract]
     public partial class Batchsigneds3downloadResponse 
@@ -46,7 +46,7 @@ namespace Autodesk.Oss.Model
         }
         
         /// <summary>
-        /// Gets or Sets Results
+        ///Gets or Sets Results
         /// </summary>
         [DataMember(Name="results", EmitDefaultValue=false)]
         public Dictionary<string, DownloadResults> Results { get; set; }

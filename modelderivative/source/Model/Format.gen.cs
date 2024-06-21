@@ -1,11 +1,11 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Model Derivative
  *
- * Model Derivative Service Documentation
+ * Use the Model Derivative API to translate designs from one CAD format to another. You can also use this API to extract metadata from a model.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,21 +33,27 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// Default format is &#x60;binary&#x60;. Possible values are &#x60;binary&#x60; or &#x60;ascii&#x60;.
+    /// Specifies the format of the file to create, when the specified output is STL.  Possible values are:
+    ///
+    ///- `ascii` - Create derivative as an ASCII STL file.
+    ///- `binary` - (Default) Create derivative as a binary STL file.  
     /// </summary>
-    /// <value>Default format is &#x60;binary&#x60;. Possible values are &#x60;binary&#x60; or &#x60;ascii&#x60;.</value>
-    
+    ///<value>Specifies the format of the file to create, when the specified output is STL.  Possible values are:
+    ///
+    ///- `ascii` - Create derivative as an ASCII STL file.
+    ///- `binary` - (Default) Create derivative as a binary STL file.  </value>
+
     [JsonConverter(typeof(StringEnumConverter))]
-    
+
     public enum Format
     {
-        
+
         /// <summary>
         /// Enum Binary for value: binary
         /// </summary>
         [EnumMember(Value = "binary")]
         Binary,
-        
+
         /// <summary>
         /// Enum Ascii for value: ascii
         /// </summary>
