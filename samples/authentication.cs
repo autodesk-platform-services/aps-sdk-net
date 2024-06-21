@@ -9,8 +9,8 @@ namespace Samples
       class Authentication
       {
             AuthenticationClient authenticationClient = null!;
-            string client_id = "BvyMQpgu261URwyvoF95pSFzBe29KvSR";
-            string client_secret = "r2GZlqSxgjK3c4Qm";
+            string client_id = "<client_id>";
+            string client_secret = "<client_secret>";
             string redirect_uri = @"<redirect_uri>";
             string token = "<token>";
             string authorization_code = "code";
