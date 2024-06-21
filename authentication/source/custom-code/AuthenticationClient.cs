@@ -192,7 +192,7 @@ namespace Autodesk.Authentication
         /// Acquire Refresh Token
         /// </summary>
         /// <remarks>
-        ///Returns new access token using the refresh token provided in the request.
+        ///Returns a new 3-legged access token using the refresh token provided in the request.
         ///This operation has a rate limit of 500 calls per minute.
         /// </remarks>
         /// <exception cref="AuthenticationApiException">Thrown when fails to make API call</exception>       
