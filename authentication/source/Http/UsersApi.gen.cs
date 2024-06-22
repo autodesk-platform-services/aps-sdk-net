@@ -60,7 +60,7 @@ namespace Autodesk.Authentication.Http
         ILogger logger;
 
         // Manually added because UsersApi has a different base address.
-        Uri baseAddress { get; set; }
+        public Uri BaseAddress { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UsersApi"/> class
@@ -71,7 +71,7 @@ namespace Autodesk.Authentication.Http
         public UsersApi(SDKManager.SDKManager sdkManager)
         {
             this.Service = sdkManager.ApsClient.Service;
-            this.baseAddress = new Uri("https://api.userprofile.autodesk.com/");
+            this.BaseAddress = new Uri("https://api.userprofile.autodesk.com/");
             this.logger = sdkManager.Logger;
         }
         private void SetQueryParameter(string name, object value, Dictionary<string, object> dictionary)
@@ -151,7 +151,7 @@ namespace Autodesk.Authentication.Http
             {
                 var queryParam = new Dictionary<string, object>();
                 // *** ss added manually
-                request.RequestUri = new Uri(baseAddress, "/userinfo");
+                request.RequestUri = new Uri(BaseAddress, "/userinfo");
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
                 request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/AUTHENTICATION/C#/1.0.0");
