@@ -49,20 +49,6 @@ namespace Autodesk.ModelDerivative.Http
         /// <param name="urn">
         ///The URL-safe Base64 encoded URN of the source design.
         /// </param>
-        /// <param name="width">
-        ///Width of thumbnail in pixels.  
-        ///
-        ///Possible values are: `100`, `200`, `400`  
-        ///
-        ///If `width` is omitted, but `height` is specified, `width` defaults to `height`. If both `width` and `height` are omitted, the server will return a thumbnail closest to `200`, if such a thumbnail is available. (optional)
-        /// </param>
-        /// <param name="height">
-        ///Height of thumbnails.
-        ///
-        ///Possible values are: `100`, `200`, `400`.
-        ///
-        ///If `height` is omitted, but `width` is specified, `height` defaults to `width`.  If both `width` and `height` are omitted, the server will return a thumbnail closest to `200`, if such a thumbnail is available. (optional)
-        /// </param>
         /// <param name="region">
         ///Specifies the data center where the manifest and derivatives of the specified source design are stored. Possible values are:
         ///
@@ -72,9 +58,15 @@ namespace Autodesk.ModelDerivative.Http
         ///
         ///**Note**: Beta features are subject to change. Please avoid using them in production environments. (optional)
         /// </param>
+        /// <param name="width">
+        ///Width of thumbnail in pixels.  Possible values are: `100`, `200`, `400`  If `width` is omitted, but `height` is specified, `width` defaults to `height`. If both `width` and `height` are omitted, the server will return a thumbnail closest to `200`, if such a thumbnail is available. (optional)
+        /// </param>
+        /// <param name="height">
+        ///Height of thumbnails. Possible values are: `100`, `200`, `400`.If `height` is omitted, but `width` is specified, `height` defaults to `width`.  If both `width` and `height` are omitted, the server will return a thumbnail closest to `200`, if such a thumbnail is available (optional)
+        /// </param>
         /// <returns>Task of ApiResponse&lt;System.IO.Stream&gt;</returns>
 
-        System.Threading.Tasks.Task<ApiResponse<System.IO.Stream>> GetThumbnailAsync(string urn, Width? width = null, Height? height = null, Region? region = null, string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<ApiResponse<System.IO.Stream>> GetThumbnailAsync(string urn, Region? region = null, Width? width = null, Height? height = null, string accessToken = null, bool throwOnError = true);
     }
 
     /// <summary>
@@ -165,20 +157,6 @@ namespace Autodesk.ModelDerivative.Http
         /// <param name="urn">
         ///The URL-safe Base64 encoded URN of the source design.
         /// </param>
-        /// <param name="width">
-        ///Width of thumbnail in pixels.  
-        ///
-        ///Possible values are: `100`, `200`, `400`  
-        ///
-        ///If `width` is omitted, but `height` is specified, `width` defaults to `height`. If both `width` and `height` are omitted, the server will return a thumbnail closest to `200`, if such a thumbnail is available. (optional)
-        /// </param>
-        /// <param name="height">
-        ///Height of thumbnails.
-        ///
-        ///Possible values are: `100`, `200`, `400`.
-        ///
-        ///If `height` is omitted, but `width` is specified, `height` defaults to `width`.  If both `width` and `height` are omitted, the server will return a thumbnail closest to `200`, if such a thumbnail is available. (optional)
-        /// </param>
         /// <param name="region">
         ///Specifies the data center where the manifest and derivatives of the specified source design are stored. Possible values are:
         ///
@@ -188,9 +166,15 @@ namespace Autodesk.ModelDerivative.Http
         ///
         ///**Note**: Beta features are subject to change. Please avoid using them in production environments. (optional)
         /// </param>
+        /// <param name="width">
+        ///Width of thumbnail in pixels.  Possible values are: `100`, `200`, `400`  If `width` is omitted, but `height` is specified, `width` defaults to `height`. If both `width` and `height` are omitted, the server will return a thumbnail closest to `200`, if such a thumbnail is available. (optional)
+        /// </param>
+        /// <param name="height">
+        ///Height of thumbnails. Possible values are: `100`, `200`, `400`.If `height` is omitted, but `width` is specified, `height` defaults to `width`.  If both `width` and `height` are omitted, the server will return a thumbnail closest to `200`, if such a thumbnail is available (optional)
+        /// </param>
         /// <returns>Task of ApiResponse&lt;System.IO.Stream&gt;></returns>
 
-        public async System.Threading.Tasks.Task<ApiResponse<System.IO.Stream>> GetThumbnailAsync(string urn, Width? width = null, Height? height = null, Region? region = null, string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ApiResponse<System.IO.Stream>> GetThumbnailAsync(string urn, Region? region = null, Width? width = null, Height? height = null, string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into GetThumbnailAsync ");
             using (var request = new HttpRequestMessage())

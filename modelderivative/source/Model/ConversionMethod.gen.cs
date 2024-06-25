@@ -35,15 +35,17 @@ namespace Autodesk.ModelDerivative.Model
     /// <summary>
     /// Specifies what IFC loader to use during translation. Applicable only when the source design is of type IFC. Possible values are:
     ///
-    ///- `legacy` - Use the Navisworks IFC loader.
-    ///- `modern` - Use the Revit IFC loader (recommended over the legacy option).
-    ///- `v3` - Use the newer Revit IFC loader (recommended over the modern option).
+    ///- `legacy` - Use IFC loader version 1, which is based on the Navisworks IFC loader. 
+    ///- `modern` - Use IFC loader version 2, which is based on the Revit IFC loader. 
+    ///- `v3` - Use IFC loader version 3, which is based on the Revit IFC loader.
+    ///- `v4` - **(Recommended)** Use IFC loader version 4, which is a native solution specifically designed for Autodesk Platform Services (APS). It does not depend on Navisworks or Revit. 
     /// </summary>
     ///<value>Specifies what IFC loader to use during translation. Applicable only when the source design is of type IFC. Possible values are:
     ///
-    ///- `legacy` - Use the Navisworks IFC loader.
-    ///- `modern` - Use the Revit IFC loader (recommended over the legacy option).
-    ///- `v3` - Use the newer Revit IFC loader (recommended over the modern option).</value>
+    ///- `legacy` - Use IFC loader version 1, which is based on the Navisworks IFC loader. 
+    ///- `modern` - Use IFC loader version 2, which is based on the Revit IFC loader. 
+    ///- `v3` - Use IFC loader version 3, which is based on the Revit IFC loader.
+    ///- `v4` - **(Recommended)** Use IFC loader version 4, which is a native solution specifically designed for Autodesk Platform Services (APS). It does not depend on Navisworks or Revit. </value>
 
     [JsonConverter(typeof(StringEnumConverter))]
 
@@ -66,7 +68,13 @@ namespace Autodesk.ModelDerivative.Model
         /// Enum V3 for value: v3
         /// </summary>
         [EnumMember(Value = "v3")]
-        V3
+        V3,
+
+        /// <summary>
+        /// Enum V4 for value: v4
+        /// </summary>
+        [EnumMember(Value = "v4")]
+        V4
     }
 
 }
