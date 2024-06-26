@@ -5,6 +5,7 @@ using Autodesk.Oss.Http;
 using Autodesk.Oss.Model;
 using Autodesk.Oss.Client;
 using System.Threading;
+using System.IO;
 
 namespace Autodesk.Oss
 {
@@ -38,8 +39,8 @@ namespace Autodesk.Oss
         ///The URL-encoded human friendly name of the object.
         /// </param>
         /// <param name="sourceToUpload">
-        ///The Path of the file to be uploaded  
-        ///
+        ///Stream of the of file to be uploded or 
+        ///Path of the file to be uploaded  
         /// </param>
         /// <param name="cancellationToken">
         /// (optional)
@@ -55,11 +56,23 @@ namespace Autodesk.Oss
         /// </param>
         /// <returns>Task of &lt;Upload&gt;</returns>
 
-        public async System.Threading.Tasks.Task<ObjectDetails> Upload(string bucketKey, string objectKey, string sourceToUpload, string accessToken, CancellationToken cancellationToken, string projectScope = "", string requestIdPrefix = "", IProgress<int> progress = null)
+        public async System.Threading.Tasks.Task<ObjectDetails> Upload(string bucketKey, string objectKey, Stream sourceToUpload, string accessToken, CancellationToken cancellationToken, string projectScope = "", string requestIdPrefix = "", IProgress<int> progress = null)
         {
             var response = await this.oSSFileTransfer.Upload(bucketKey, objectKey, sourceToUpload, accessToken, cancellationToken, projectScope, requestIdPrefix, progress);
             var apiResponse = new ApiResponse<ObjectDetails>(response, await LocalMarshalling.DeserializeAsync<ObjectDetails>(response.Content));
             return apiResponse.Content;
+        }
+        public async System.Threading.Tasks.Task<ObjectDetails> Upload(string bucketKey, string objectKey, string sourceToUpload, string accessToken, CancellationToken cancellationToken, string projectScope = "", string requestIdPrefix = "", IProgress<int> progress = null)
+        {
+
+         using (FileStream SourceStream = File.Open(sourceToUpload, FileMode.Open))
+            {
+                var result = new byte[SourceStream.Length];
+                await SourceStream.ReadAsync(result, 0, (int)SourceStream.Length);
+                var response = await this.oSSFileTransfer.Upload(bucketKey, objectKey, new MemoryStream(result), accessToken, cancellationToken, projectScope, requestIdPrefix, progress);
+                var apiResponse = new ApiResponse<ObjectDetails>(response, await LocalMarshalling.DeserializeAsync<ObjectDetails>(response.Content));
+                return apiResponse.Content;
+            }
         }
         
         /// <summary>

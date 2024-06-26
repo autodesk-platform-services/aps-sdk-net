@@ -92,19 +92,17 @@ namespace Autodesk.Oss
             _authentication = authentication;
         }
 
-        private async Task<bool> IsFileSizeAllowed(string filePath)
+        private async Task<bool> IsFileSizeAllowed(Stream filePath)
         {
             return await Task.Run(() =>
             {
-                using (FileStream fileStream = File.OpenRead(filePath))
-                {
-                    long fileSize = fileStream.Length;
+
+                    long fileSize = filePath.Length;
                     double numberOfChunks = CalculateNumberOfChunks((ulong)fileSize);
                     if (numberOfChunks > this._maxChunkCountAllowed)
                     {
                         return false;
                     }
-                }
                 return true;
             });
         }
@@ -112,7 +110,7 @@ namespace Autodesk.Oss
         public async Task<HttpResponseMessage> Upload(
             string bucketKey,
             string objectKey,
-            string sourceToUpload,
+            Stream sourceToUpload,
             string accessToken,
             CancellationToken cancellationToken,
             string projectScope = "",
@@ -128,10 +126,7 @@ namespace Autodesk.Oss
             ValidateProjectScopeName(requestId, projectScope);
 
             progress?.Report(1);
-
-            using (FileStream fileStream = File.OpenRead(sourceToUpload))
-            {
-                ulong numberOfChunks = (ulong)CalculateNumberOfChunks((ulong)fileStream.Length);
+                ulong numberOfChunks = (ulong)CalculateNumberOfChunks((ulong)sourceToUpload.Length);
                 ulong chunksUploaded = 0;
 
                 long start = 0;
@@ -140,7 +135,7 @@ namespace Autodesk.Oss
 
                 _logger.LogInformation("{requestId} Total chunk to be uploaded: {numberOfChunks}", requestId, numberOfChunks);
 
-                using (BinaryReader reader = new BinaryReader(fileStream))
+                using (BinaryReader reader = new BinaryReader(sourceToUpload))
                 {
                     while (chunksUploaded < numberOfChunks)
                     {
@@ -148,7 +143,7 @@ namespace Autodesk.Oss
 
                         int attempts = 0;
 
-                        long end = Math.Min((long)((chunksUploaded + 1) * Constants.ChunkSize), fileStream.Length);
+                        long end = Math.Min((long)((chunksUploaded + 1) * Constants.ChunkSize), sourceToUpload.Length);
                         byte[] fileBytes = readFileBytes(reader, start, end);
 
                         var retryUrlExpiryCount = 0;
@@ -237,7 +232,6 @@ namespace Autodesk.Oss
 
                 progress?.Report(100);
                 return completeResponse;
-            }
         }
 
         private byte[] readFileBytes(BinaryReader reader, long start, long end)
@@ -460,7 +454,7 @@ namespace Autodesk.Oss
             throw new OssApiException($"{requestId} Failed to get download urls after maximum retry.");
         }
 
-        private async Task ValidateFileSize(string requestId, string sourceToUpload)
+        private async Task ValidateFileSize(string requestId, Stream sourceToUpload)
         {
             var sizeAllowed = await IsFileSizeAllowed(sourceToUpload);
             if (!sizeAllowed)

@@ -46,8 +46,11 @@ namespace Autodesk.Oss.Model
         }
         
         /// <summary>
-        ///Gets or Sets _Result
+        ///A human friendly description of the state of processing.
         /// </summary>
+        /// <value>
+        ///A human friendly description of the state of processing.
+        /// </value>
         [DataMember(Name="result", EmitDefaultValue=false)]
         public string _Result { get; set; }
 

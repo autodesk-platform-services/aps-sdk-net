@@ -33,9 +33,9 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Oss.Model
 {
     /// <summary>
-    /// Access for signed resource Acceptable values: read, write, readwrite Default value: read
+    /// Access for signed resource Possible values: read, write, readwrite Default value: read
     /// </summary>
-    ///<value>Access for signed resource Acceptable values: read, write, readwrite Default value: read</value>
+    ///<value>Access for signed resource Possible values: read, write, readwrite Default value: read</value>
     
     [JsonConverter(typeof(StringEnumConverter))]
     
