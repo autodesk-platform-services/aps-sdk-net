@@ -8,8 +8,8 @@ namespace Samples
 
     class ModelDerivative
     {
-        string token = "<>>";
-        string urn = "<>";
+        string? token = Environment.GetEnvironmentVariable("token");
+        string? urn = Environment.GetEnvironmentVariable("urn");
 
         ModelDerivativeClient modelDerivativeClient = null!;
 
@@ -32,7 +32,7 @@ namespace Samples
         public async Task StartJobAsync()
         {
             // set output formats
-            List<IJobPayloadFormat> outputFormats = new List<IJobPayloadFormat>()
+            List<IJobPayloadFormat> payloadFormats = new List<IJobPayloadFormat>()
             {
             // initialising an Svf2 output class will automatically set the type to Svf2.
                 new JobPayloadFormatSVF2()
@@ -41,7 +41,7 @@ namespace Samples
                     {
                         View._2d,
                         View._3d
-                    },  // mandatory params? ,
+                    },  
                     Advanced = new JobPayloadFormatSVF2AdvancedRVT()
                     {
                         GenerateMasterViews =  true
@@ -71,7 +71,7 @@ namespace Samples
                 },
                 Output = new JobPayloadOutput()
                 {
-                    Formats = outputFormats,
+                    Formats = payloadFormats,
                     // Destination is obsolete. Use the region header instead.
                     // Destination = new JobPayloadOutputDestination() { Region = Region.US } // This will call the respective endpoint - Either US or EMEA. Defaults to US.
                 },
@@ -153,7 +153,7 @@ namespace Samples
         // Get list of model views
         public async Task GetModelViewsAsync()
         {
-            string modelGuid = string.Empty;
+            string modelGuid =  Environment.GetEnvironmentVariable("modelGuid")!;
             try
             {
                 ModelViews modelViewsResponse = await modelDerivativeClient.GetModelViewsAsync(accessToken: token, urn, region: Region.US);
@@ -170,7 +170,7 @@ namespace Samples
         // Fetch Object tree
         public async Task GetObjectTreeAsync()
         {
-            string modelGuid = "<modelGuid>";
+            string modelGuid = Environment.GetEnvironmentVariable("modelGuid")!;
             try
             {
                 ObjectTree objectTree = await modelDerivativeClient.GetObjectTreeAsync(accessToken: token, urn, modelGuid, Region.US);
@@ -191,16 +191,16 @@ namespace Samples
         // Fetch specific properties
         public async Task GetSpecificPropertiesAsync()
         {
-            string modelGuid = "<modelGuid>";
+            string modelGuid = Environment.GetEnvironmentVariable("modelGuid")!;
             // specify the request payload
             SpecificPropertiesPayload payload = new SpecificPropertiesPayload()
             {
 
-                Query = new MatchId()
+                Query = new MatchId() 
                 {
-                    In = new List<object> { MatchIdType.ObjectId, 3935 }
+                    In = new List<object> { MatchIdType.ObjectId, 167 }
                 }
-
+                
             };
 
             try
@@ -210,7 +210,7 @@ namespace Samples
                 {
                     // 202 response. Call the endpoint again or iteratively to get 200 OK.
                 }
-                List<AllPropertiesDataCollection> propertiesDataCollections = specificProperties.Data.Collection;
+                List<PropertiesDataCollection> propertiesDataCollections = specificProperties.Data.Collection;
             }
             catch (ModelDerivativeApiException ex)
             {
@@ -222,15 +222,15 @@ namespace Samples
         // Fetch all properties
         public async Task GetAllPropertiesAsync()
         {
-            string modelGuid = "<modelGuid>";
+            string modelGuid =  Environment.GetEnvironmentVariable("modelGuid")!;
             try
             {
-                AllProperties allProperties = await modelDerivativeClient.GetAllPropertiesAsync(accessToken: token, urn, modelGuid);
+                Properties allProperties = await modelDerivativeClient.GetAllPropertiesAsync(accessToken: token, urn, modelGuid);
                 if (allProperties.IsProcessing)
                 {
                     // 202 response. Call the endpoint again or iteratively to get 200 OK.
                 }
-                List<AllPropertiesDataCollection> propertiesDataCollections = allProperties.Data.Collection;
+                List<PropertiesDataCollection> propertiesDataCollections = allProperties.Data.Collection;
             }
             catch (ModelDerivativeApiException ex)
             {
@@ -267,7 +267,7 @@ namespace Samples
         {
             try
             {
-                string derivativeUrn = string.Empty;
+                string derivativeUrn = Environment.GetEnvironmentVariable("derivativeUrn")!;
                 DerivativeDownload derivativeDownload = await modelDerivativeClient.GetDerivativeUrlAsync(accessToken: token, derivativeUrn, urn, Region.US);
                 // the below returns a downloadable url including the coookies
                 var url = derivativeDownload.Url;
@@ -283,7 +283,7 @@ namespace Samples
         {
             try
             {
-                string derivativeUrn = string.Empty;
+                string derivativeUrn = Environment.GetEnvironmentVariable("derivativeUrn")!;
                 HttpResponseMessage derivativeHeaders = await modelDerivativeClient.HeadCheckDerivativeAsync(accessToken: token, urn, derivativeUrn, Region.US);
                 if (derivativeHeaders.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
@@ -318,6 +318,7 @@ namespace Samples
             await GetObjectTreeAsync();
             await GetAllPropertiesAsync();
             await GetSpecificPropertiesAsync();
+      
         }
 
     }

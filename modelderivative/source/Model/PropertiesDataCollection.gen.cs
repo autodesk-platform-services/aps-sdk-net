@@ -33,15 +33,15 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    ///A non-hierarchical list of objects contained in the specified Model View. Each object has a `properties` attribute, which contains the properties of that object.
+    /// PropertiesDataCollection
     /// </summary>
     [DataContract]
-    public partial class AllPropertiesDataCollection
+    public partial class PropertiesDataCollection
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="AllPropertiesDataCollection" /> class.
+        /// Initializes a new instance of the <see cref="PropertiesDataCollection" /> class.
         /// </summary>
-        public AllPropertiesDataCollection()
+        public PropertiesDataCollection()
         {
         }
 
@@ -62,7 +62,7 @@ namespace Autodesk.ModelDerivative.Model
         ///- If you require a persistent ID to reference an object, use `externalId`.
         /// </value>
         [DataMember(Name = "objectid", EmitDefaultValue = false)]
-        public decimal? Objectid { get; set; }
+        public decimal? ObjectId { get; set; }
 
         /// <summary>
         ///Name of the object.
@@ -89,7 +89,7 @@ namespace Autodesk.ModelDerivative.Model
         ///A JSON object containing dictionary objects (key value pairs), where the key is the property name and the value is the value of the property.
         /// </value>
         [DataMember(Name = "properties", EmitDefaultValue = false)]
-        public Object Properties { get; set; }
+        public Dictionary<string, Object> Properties { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

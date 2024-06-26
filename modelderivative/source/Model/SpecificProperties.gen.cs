@@ -55,7 +55,7 @@ namespace Autodesk.ModelDerivative.Model
         ///Gets or Sets Data
         /// </summary>
         [DataMember(Name="data", EmitDefaultValue=false)]
-        public AllPropertiesData Data { get; set; }
+        public PropertiesData Data { get; set; }
 
 
         /// <summary>

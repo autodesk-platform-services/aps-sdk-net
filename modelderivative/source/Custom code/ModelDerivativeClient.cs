@@ -571,13 +571,13 @@ namespace Autodesk.ModelDerivative
         ///
         ///`false`: (Default) Does not retrieve resources if they are larger than 20 MB. (optional)
         /// </param>
-        /// <returns>Task of AllProperties</returns>
+        /// <returns>Task of Properties</returns>
 
-        public async System.Threading.Tasks.Task<AllProperties> GetAllPropertiesAsync(string accessToken, string urn, string modelGuid, Region region = default, string acceptEncoding = default, bool xAdsForce = default, XAdsDerivativeFormat xAdsDerivativeFormat = default, int objectid = default, string forceget = default, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<Properties> GetAllPropertiesAsync(string accessToken, string urn, string modelGuid, Region region = default, string acceptEncoding = default, bool xAdsForce = default, XAdsDerivativeFormat xAdsDerivativeFormat = default, int objectid = default, string forceget = default, bool throwOnError = true)
         {
             var response = await this.MetadataApi.GetAllPropertiesAsync(urn, modelGuid, acceptEncoding, xAdsForce, xAdsDerivativeFormat, region, objectid, forceget, accessToken, throwOnError);
             if (response.HttpResponse.StatusCode == System.Net.HttpStatusCode.Accepted)
-                return (new AllProperties() { IsProcessing = true });
+                return (new Properties() { IsProcessing = true });
             return response.Content;
         }
 

@@ -167,9 +167,9 @@ namespace Autodesk.ModelDerivative.Http
         ///
         ///`false`: (Default) Does not retrieve resources if they are larger than 20 MB. (optional)
         /// </param>
-        /// <returns>Task of ApiResponse&lt;AllProperties&gt;</returns>
+        /// <returns>Task of ApiResponse&lt;Properties&gt;</returns>
 
-        System.Threading.Tasks.Task<ApiResponse<AllProperties>> GetAllPropertiesAsync(string urn, string modelGuid, string acceptEncoding = default(string), bool? xAdsForce = default(bool?), XAdsDerivativeFormat? xAdsDerivativeFormat = null, Region? region = null, int? objectid = default(int?), string forceget = default(string), string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<ApiResponse<Properties>> GetAllPropertiesAsync(string urn, string modelGuid, string acceptEncoding = default(string), bool? xAdsForce = default(bool?), XAdsDerivativeFormat? xAdsDerivativeFormat = null, Region? region = null, int? objectid = default(int?), string forceget = default(string), string accessToken = null, bool throwOnError = true);
         /// <summary>
         /// List Model Views
         /// </summary>
@@ -423,7 +423,7 @@ namespace Autodesk.ModelDerivative.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/MODEL DERIVATIVE/C#/1.0.0");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/MODEL DERIVATIVE/C#/2.0.0");
                 if (!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
@@ -553,9 +553,9 @@ namespace Autodesk.ModelDerivative.Http
         ///
         ///`false`: (Default) Does not retrieve resources if they are larger than 20 MB. (optional)
         /// </param>
-        /// <returns>Task of ApiResponse&lt;AllProperties&gt;></returns>
+        /// <returns>Task of ApiResponse&lt;Properties&gt;></returns>
 
-        public async System.Threading.Tasks.Task<ApiResponse<AllProperties>> GetAllPropertiesAsync(string urn, string modelGuid, string acceptEncoding = default(string), bool? xAdsForce = default(bool?), XAdsDerivativeFormat? xAdsDerivativeFormat = null, Region? region = null, int? objectid = default(int?), string forceget = default(string), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ApiResponse<Properties>> GetAllPropertiesAsync(string urn, string modelGuid, string acceptEncoding = default(string), bool? xAdsForce = default(bool?), XAdsDerivativeFormat? xAdsDerivativeFormat = null, Region? region = null, int? objectid = default(int?), string forceget = default(string), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into GetAllPropertiesAsync ");
             using (var request = new HttpRequestMessage())
@@ -573,7 +573,7 @@ namespace Autodesk.ModelDerivative.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/MODEL DERIVATIVE/C#/1.0.0");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/MODEL DERIVATIVE/C#/2.0.0");
                 if (!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
@@ -625,10 +625,10 @@ namespace Autodesk.ModelDerivative.Http
                 else if (!response.IsSuccessStatusCode)
                 {
                     logger.LogError($"response unsuccess with status code: {response.StatusCode}");
-                    return new ApiResponse<AllProperties>(response, default(AllProperties));
+                    return new ApiResponse<Properties>(response, default(Properties));
                 }
                 logger.LogInformation($"Exited from GetAllPropertiesAsync with response statusCode: {response.StatusCode}");
-                return new ApiResponse<AllProperties>(response, await LocalMarshalling.DeserializeAsync<AllProperties>(response.Content));
+                return new ApiResponse<Properties>(response, await LocalMarshalling.DeserializeAsync<Properties>(response.Content));
 
             } // using
         }
@@ -677,7 +677,7 @@ namespace Autodesk.ModelDerivative.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/MODEL DERIVATIVE/C#/1.0.0");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/MODEL DERIVATIVE/C#/2.0.0");
                 if (!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
@@ -822,7 +822,7 @@ namespace Autodesk.ModelDerivative.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/MODEL DERIVATIVE/C#/1.0.0");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/MODEL DERIVATIVE/C#/2.0.0");
                 if (!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
