@@ -35,7 +35,15 @@ namespace Autodesk.ModelDerivative.Model
     /// <summary>
     /// Options for the output. The available options depend on the output type. 
     /// </summary>
-
+    /// <seealso cref="JobPayloadFormatDWG"/>
+    /// <seealso cref="JobPayloadFormatIFC"/>
+    /// <seealso cref="JobPayloadFormatIGES"/>
+    /// <seealso cref="JobPayloadFormatOBJ"/>
+    /// <seealso cref="JobPayloadFormatSTEP"/>
+    /// <seealso cref="JobPayloadFormatSTL"/>
+    /// <seealso cref="JobPayloadFormatSVF"/>
+    /// <seealso cref="JobPayloadFormatSVF2"/>
+    /// <seealso cref="JobPayloadFormatThumbnail"/>
     public interface IJobPayloadFormat
     {
     }
