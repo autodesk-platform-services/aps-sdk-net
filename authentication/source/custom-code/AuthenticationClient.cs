@@ -141,7 +141,7 @@ namespace Autodesk.Authentication
         ///- `S256`- Hashes the code verifier using the SHA-256 algorithm and then applies Base64 URL encoding. (optional)
         /// </param>
         /// <returns>string</returns>
-        public string Authorize(string clientId, ResponseType responseType, string redirectUri, string nonce = default(string), string state = default(string), List<Scopes> scopes = null, string responseMode = default(string), string prompt = default(string), string authoptions = default(string), string codeChallenge = default(string), string codeChallengeMethod = default(string))
+        public string Authorize(string clientId, ResponseType responseType, string redirectUri, List<Scopes> scopes, string nonce = default(string), string state = default(string), string responseMode = default(string), string prompt = default(string), string authoptions = default(string), string codeChallenge = default(string), string codeChallengeMethod = default(string))
         {
             return this.tokenApi.Authorize(clientId, responseType, redirectUri, nonce, state, scopes, responseMode, prompt, authoptions, codeChallenge, codeChallengeMethod);
         }
