@@ -1,7 +1,7 @@
 using System.Data;
 using System.Reflection.Metadata.Ecma335;
-using Autodesk.Constructionaccountadmin;
-using Autodesk.Constructionaccountadmin.Model;
+using Autodesk.Construction.AccountAdmin;
+using Autodesk.Construction.AccountAdmin.Model;
 using Autodesk.SDKManager;
 
 namespace Samples
@@ -42,7 +42,7 @@ namespace Samples
         {
             var filePath = "test.png";
             using (FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read)){
-                var resp = await adminClient.CreateProjectImageAsync(projectId, accountId, fileStream, Region.US, token);
+                var resp = await adminClient.CreateProjectImageAsync(token, projectId, accountId, fileStream, Region.US);
                 Console.WriteLine(resp);
             }
         }
@@ -58,7 +58,7 @@ namespace Samples
             projectPayload.Country = "United States";
             projectPayload.Timezone = Timezone.AmericaNewYork;
             projectPayload.Platform = Platform.Acc;
-            Project project = await adminClient.CreateProjectAsync(accountId, projectPayload: projectPayload , accessToken: token);
+            Project project = await adminClient.CreateProjectAsync(token, accountId, projectPayload: projectPayload);
         }
 
 
@@ -98,7 +98,7 @@ namespace Samples
             companyPayload.City = "New York";
             companyPayload.WebsiteUrl = "http://www.autodesk.com";
             companyPayload.Description = "This is a test company";
-            Company company = await adminClient.CreateCompanyAsync(accountId,companyPayload: companyPayload, accessToken: token);
+            Company company = await adminClient.CreateCompanyAsync( token, accountId,companyPayload: companyPayload);
         }
 
         // Import Companies
@@ -113,7 +113,7 @@ namespace Samples
             companyPayload.Description = "This is a test company";
 
             List<CompanyPayload> importCompanyPayload= [companyPayload];
-            CompanyImportResponse response = await adminClient.ImportCompaniesAsync(accountId, accessToken: token, companyPayload: importCompanyPayload);
+            CompanyImportResponse response = await adminClient.ImportCompaniesAsync(token, accountId, companyPayload: importCompanyPayload);
         }
 
         //update company details
@@ -125,7 +125,7 @@ namespace Samples
                 Trade = Trade.Concrete,
                 City = "New Jersy"
             };
-            Company response = await adminClient.PatchCompanyDetailsAsync(companyId, accountId, region: Region.US, accessToken: token, companyPatchPayload:companyPatchPayload);
+            Company response = await adminClient.PatchCompanyDetailsAsync(token, companyId, accountId, region: Region.US, companyPatchPayload:companyPatchPayload);
             Console.WriteLine(response);
         }
 
@@ -135,7 +135,7 @@ namespace Samples
             var companyId = "";
             var filePath = "test.png";
             using (FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read)){
-                var resp = await adminClient.PatchCompanyImageAsync(companyId, accountId, fileStream, Region.US, token);
+                var resp = await adminClient.PatchCompanyImageAsync(token, companyId, accountId, fileStream, Region.US);
                 Console.WriteLine(resp);
             }
         }
@@ -143,14 +143,14 @@ namespace Samples
         //list account users
         public async Task listUsers()
         {
-            await adminClient.GetUsersAsync(accountId, accessToken: token);
+            await adminClient.GetUsersAsync(token, accountId);
         }
 
         //get account user details
         public async Task getUser()
         {
             var userId = "";
-            await adminClient.GetUserAsync(accountId, userId, accessToken: token);
+            await adminClient.GetUserAsync(token, accountId, userId);
         }
 
         // Create new User
@@ -162,7 +162,7 @@ namespace Samples
             userPayload.AddressLine1 = "The Fifth Avenue";
             userPayload.City = "New York";
             userPayload.AboutMe = "This is a test user";
-            User response = await adminClient.CreateUserAsync(accountId, userPayload: userPayload, accessToken: token);
+            User response = await adminClient.CreateUserAsync(token, accountId, userPayload: userPayload);
         }
 
         // Import Users
@@ -176,7 +176,7 @@ namespace Samples
             userPayload.AboutMe = "This is a test user";
 
             List<UserPayload> importUserPayload= [userPayload];
-            UserImportResponse response = await adminClient.ImportUsersAsync(accountId, accessToken: token, userPayload: importUserPayload);
+            UserImportResponse response = await adminClient.ImportUsersAsync(token, accountId, userPayload: importUserPayload);
         }
 
         //update user details
@@ -187,19 +187,19 @@ namespace Samples
             {
                 Status =  UserPatchStatus.Active
             };
-            User response = await adminClient.PatchUserDetailsAsync( accountId, userId, region: Region.US, accessToken: token, userPatchPayload: userPatchPayload);
+            User response = await adminClient.PatchUserDetailsAsync(token, accountId, userId, region: Region.US, userPatchPayload: userPatchPayload);
             Console.WriteLine(response);
         }
 
         // get Project Users
         public async Task getProjectUsers() {
-            ProjectUsers response = await adminClient.GetProjectUsersAsync(projectId, accessToken:token);
+            ProjectUsers response = await adminClient.GetProjectUsersAsync(token, projectId);
         }
 
         // fetch specified user in the project
         public async Task getProjectUser() {
             var userId = "";
-            ProjectUser response = await adminClient.GetProjectUserAsync(projectId, userId: userId, accessToken: token);
+            ProjectUser response = await adminClient.GetProjectUserAsync(token, projectId, userId: userId);
         }
 
         //assign user to project
@@ -214,7 +214,7 @@ namespace Samples
                     }
                 ]
             };
-            var response = await adminClient.AssignProjectUserAsync(projectId, projectUserPayload: projectUserPayload, accessToken: token);
+            var response = await adminClient.AssignProjectUserAsync(token, projectId, projectUserPayload: projectUserPayload);
         }
 
         // import users to the specified project
@@ -232,7 +232,7 @@ namespace Samples
                     }
                 ]
             };
-            ProjectUsersImportResponse response = await adminClient.ImportProjectUsersAsync(projectId, accessToken: token, projectUsersImportPayload: projectUsersImportPayload);
+            ProjectUsersImportResponse response = await adminClient.ImportProjectUsersAsync(token, projectId, projectUsersImportPayload: projectUsersImportPayload);
         }
 
         // Update specified user's details in a project
@@ -244,17 +244,17 @@ namespace Samples
                     "d52d31ee-00f2-43cd-ae11-32aba34490df"
                 ]
             };
-            ProjectUserResponse response = await adminClient.UpdateProjectUserAsync(projectId, "4ca99e9a-cce9-40a1-abb7-d69a1fd79178", accessToken: token, projectUsersUpdatePayload: projectUsersUpdatePayload);
+            ProjectUserResponse response = await adminClient.UpdateProjectUserAsync(token, projectId, "4ca99e9a-cce9-40a1-abb7-d69a1fd79178", projectUsersUpdatePayload: projectUsersUpdatePayload);
         }
 
         // Remove the specified user from a project
         public async Task deleteProjectUser() {
-            var response = await adminClient.RemoveProjectUserAsync(projectId, "4ca99e9a-cce9-40a1-abb7-d69a1fd79178", accessToken: token);
+            var response = await adminClient.RemoveProjectUserAsync(token, projectId, "4ca99e9a-cce9-40a1-abb7-d69a1fd79178");
         }
 
         // fetch all the business units in a specific account
         public async Task getBusinessUnits() {
-            BusinessUnitsResponse response = await adminClient.GetBusinessUnitsAsync(accountId, accessToken: token);
+            BusinessUnitsResponse response = await adminClient.GetBusinessUnitsAsync(token, accountId);
         }
 
         // Create business units of a specific account
@@ -267,7 +267,7 @@ namespace Samples
                     }
                 ]
             };
-            BusinessUnitsResponse response = await adminClient.CreateBusinessUnitsAsync(accountId ,accessToken: token, businessUnitsRequestPyload: businessUnitsRequestPyload);
+            BusinessUnitsResponse response = await adminClient.CreateBusinessUnitsAsync(token, accountId, businessUnitsRequestPyload: businessUnitsRequestPyload);
         }
 
         public async void Main()

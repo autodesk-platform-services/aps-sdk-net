@@ -283,7 +283,7 @@ namespace Autodesk.Construction.AccountAdmin.Model
         ///A list of IDs of the roles that the user belongs to in the project.
         /// </value>
         [DataMember(Name="roleIds", EmitDefaultValue=false)]
-        public string RoleIds { get; set; }
+        public List<string> RoleIds { get; set; }
 
         /// <summary>
         ///A list of the role IDs and names that are associated with the user in the project.

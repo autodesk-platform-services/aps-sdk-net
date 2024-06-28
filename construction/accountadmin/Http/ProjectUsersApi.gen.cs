@@ -31,6 +31,7 @@ using Autodesk.Construction.AccountAdmin.Client;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Autodesk.SDKManager;
+using System.Collections;
 
 namespace Autodesk.Construction.AccountAdmin.Http
 {
@@ -296,6 +297,28 @@ namespace Autodesk.Construction.AccountAdmin.Http
                 if((int)value > 0)
                 {
                     dictionary.Add(name, value);
+                }
+            }
+            else if (value is IList)
+            {
+                if (value is List<string>)
+                {
+                    value = String.Join(",",(List<string>)value);
+                     dictionary.Add(name, value);
+                }
+                else 
+                {
+                    List<string>newlist = new List<string>();
+                    foreach ( var x in (IList)value)
+                    {
+                            var type = x.GetType();
+                            var memberInfos = type.GetMember(x.ToString());
+                            var enumValueMemberInfo = memberInfos.FirstOrDefault(m => m.DeclaringType == type);
+                            var valueAttributes = enumValueMemberInfo.GetCustomAttributes(typeof(EnumMemberAttribute), false);
+                            newlist.Add(((EnumMemberAttribute)valueAttributes[0]).Value);                            
+                    }
+                    string joinedString = String.Join(",", newlist);
+                    dictionary.Add(name, joinedString);
                 }
             }
             else
