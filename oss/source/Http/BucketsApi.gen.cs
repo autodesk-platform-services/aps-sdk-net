@@ -47,7 +47,7 @@ namespace Autodesk.Oss.Http
         ///
         ///Buckets are virtual container within the Object Storage Service (OSS), which you can use to store and manage objects (files) in the cloud. The application creating the bucket is the owner of the bucket.
         ///
-        ///**Note:** Do not use this operation to create buckets for BIM360 Document Management. Use [POST projects/{project_id}/storage](/en/docs/data/v2/reference/http/projects-project_id-storage-POST>_ instead. For details, see `Upload Files to BIM 360 Document Management </en/docs/bim360/v1/tutorials/document-management/upload-document).
+        ///**Note:** Do not use this operation to create buckets for BIM360 Document Management. Use [POST projects/{project_id}/storage](/en/docs/data/v2/reference/http/projects-project_id-storage-POST>) instead. For details, see [Upload Files to BIM 360 Document Management](/en/docs/bim360/v1/tutorials/document-management/upload-document).
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="policyKey">
@@ -62,7 +62,7 @@ namespace Autodesk.Oss.Http
         /// </param>
         /// <returns>Task of ApiResponse&lt;Bucket&gt;</returns>
 
-        System.Threading.Tasks.Task<ApiResponse<Bucket>> CreateBucketAsync(CreateBucketsPayload policyKey, Region xAdsRegion , string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<ApiResponse<Bucket>> CreateBucketAsync(CreateBucketsPayload policyKey, Region xAdsRegion, string accessToken = null, bool throwOnError = true);
         /// <summary>
         /// Delete Bucket
         /// </summary>

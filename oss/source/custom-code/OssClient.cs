@@ -5,6 +5,7 @@ using Autodesk.Oss.Http;
 using Autodesk.Oss.Model;
 using Autodesk.Oss.Client;
 using System.Threading;
+using System.IO;
 
 namespace Autodesk.Oss
 {
@@ -38,8 +39,8 @@ namespace Autodesk.Oss
         ///The URL-encoded human friendly name of the object.
         /// </param>
         /// <param name="sourceToUpload">
-        ///The Path of the file to be uploaded  
-        ///
+        ///Stream of the of file to be uploded or 
+        ///Path of the file to be uploaded  
         /// </param>
         /// <param name="cancellationToken">
         /// (optional)
@@ -55,11 +56,23 @@ namespace Autodesk.Oss
         /// </param>
         /// <returns>Task of &lt;Upload&gt;</returns>
 
-        public async System.Threading.Tasks.Task<ObjectDetails> Upload(string bucketKey, string objectKey, string sourceToUpload, string accessToken, CancellationToken cancellationToken, string projectScope = "", string requestIdPrefix = "", IProgress<int> progress = null)
+        public async System.Threading.Tasks.Task<ObjectDetails> Upload(string bucketKey, string objectKey, Stream sourceToUpload, string accessToken, CancellationToken cancellationToken, string projectScope = "", string requestIdPrefix = "", IProgress<int> progress = null)
         {
             var response = await this.oSSFileTransfer.Upload(bucketKey, objectKey, sourceToUpload, accessToken, cancellationToken, projectScope, requestIdPrefix, progress);
             var apiResponse = new ApiResponse<ObjectDetails>(response, await LocalMarshalling.DeserializeAsync<ObjectDetails>(response.Content));
             return apiResponse.Content;
+        }
+        public async System.Threading.Tasks.Task<ObjectDetails> Upload(string bucketKey, string objectKey, string sourceToUpload, string accessToken, CancellationToken cancellationToken, string projectScope = "", string requestIdPrefix = "", IProgress<int> progress = null)
+        {
+
+         using (FileStream SourceStream = File.Open(sourceToUpload, FileMode.Open))
+            {
+                var result = new byte[SourceStream.Length];
+                await SourceStream.ReadAsync(result, 0, (int)SourceStream.Length);
+                var response = await this.oSSFileTransfer.Upload(bucketKey, objectKey, new MemoryStream(result), accessToken, cancellationToken, projectScope, requestIdPrefix, progress);
+                var apiResponse = new ApiResponse<ObjectDetails>(response, await LocalMarshalling.DeserializeAsync<ObjectDetails>(response.Content));
+                return apiResponse.Content;
+            }
         }
         
         /// <summary>
@@ -113,7 +126,7 @@ namespace Autodesk.Oss
         /// </param>
         /// <returns>Task of &lt;BatchcompleteuploadResponse&gt;</returns>
 
-        public async System.Threading.Tasks.Task<BatchcompleteuploadResponse> BatchCompleteUploadAsync(string bucketKey, BatchcompleteuploadObject requests = default(BatchcompleteuploadObject), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<BatchcompleteuploadResponse> BatchCompleteUploadAsync(string accessToken, string bucketKey, BatchcompleteuploadObject requests = default(BatchcompleteuploadObject), bool throwOnError = true)
         {
             var response = await this.objectsApi.BatchCompleteUploadAsync(bucketKey, requests, accessToken, throwOnError);
             return response.Content;
@@ -147,7 +160,7 @@ namespace Autodesk.Oss
         /// </param>
         /// <returns>Task of &lt;Batchsigneds3downloadResponse&gt;</returns>
 
-        public async System.Threading.Tasks.Task<Batchsigneds3downloadResponse> BatchSignedS3DownloadAsync(string bucketKey, Batchsigneds3downloadObject requests, bool? publicResourceFallback = default(bool?), int? minutesExpiration = default(int?), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<Batchsigneds3downloadResponse> BatchSignedS3DownloadAsync(string accessToken, string bucketKey, Batchsigneds3downloadObject requests, bool? publicResourceFallback = default(bool?), int? minutesExpiration = default(int?), bool throwOnError = true)
         {
             var response = await this.objectsApi.BatchSignedS3DownloadAsync(bucketKey, requests, publicResourceFallback, minutesExpiration, accessToken, throwOnError);
             return response.Content;
@@ -183,7 +196,7 @@ namespace Autodesk.Oss
         /// </param>
         /// <returns>Task of &lt;Batchsigneds3uploadResponse&gt;</returns>
 
-        public async System.Threading.Tasks.Task<Batchsigneds3uploadResponse> BatchSignedS3UploadAsync(string bucketKey, bool? useAcceleration = default(bool?), int? minutesExpiration = default(int?), Batchsigneds3uploadObject requests = default(Batchsigneds3uploadObject), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<Batchsigneds3uploadResponse> BatchSignedS3UploadAsync(string accessToken , string bucketKey, Batchsigneds3uploadObject requests , bool? useAcceleration = default(bool?), int? minutesExpiration = default(int?), bool throwOnError = true)
         {
             var response = await this.objectsApi.BatchSignedS3UploadAsync(bucketKey, useAcceleration, minutesExpiration, requests, accessToken, throwOnError);
             return response.Content;
@@ -224,7 +237,7 @@ namespace Autodesk.Oss
         /// </param>
 
         /// <returns>Task of HttpResponseMessage</returns>
-        public async System.Threading.Tasks.Task<HttpResponseMessage> CompleteSignedS3UploadAsync(string bucketKey, string objectKey, string contentType, Completes3uploadBody body, string xAdsMetaContentType = default(string), string xAdsMetaContentDisposition = default(string), string xAdsMetaContentEncoding = default(string), string xAdsMetaCacheControl = default(string), string xAdsUserDefinedMetadata = default(string), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<HttpResponseMessage> CompleteSignedS3UploadAsync(string accessToken, string bucketKey, string objectKey, string contentType, Completes3uploadBody body, string xAdsMetaContentType = default(string), string xAdsMetaContentDisposition = default(string), string xAdsMetaContentEncoding = default(string), string xAdsMetaCacheControl = default(string), string xAdsUserDefinedMetadata = default(string), bool throwOnError = true)
         {
             var response = await this.objectsApi.CompleteSignedS3UploadAsync(bucketKey, objectKey, contentType, body, xAdsMetaContentType, xAdsMetaContentDisposition, xAdsMetaContentEncoding, xAdsMetaCacheControl, xAdsUserDefinedMetadata, accessToken, throwOnError);
             return response;
@@ -257,7 +270,7 @@ namespace Autodesk.Oss
         /// </param>
         /// <returns>Task of &lt;ObjectDetails&gt;</returns>
 
-        public async System.Threading.Tasks.Task<ObjectDetails> CopyToAsync(string bucketKey, string objectKey, string newObjName, string xAdsAcmNamespace = default(string), string xAdsAcmCheckGroups = default(string), string xAdsAcmGroups = default(string), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ObjectDetails> CopyToAsync(string accessToken, string bucketKey, string objectKey, string newObjName, string xAdsAcmNamespace = default(string), string xAdsAcmCheckGroups = default(string), string xAdsAcmGroups = default(string), bool throwOnError = true)
         {
             var response = await this.objectsApi.CopyToAsync(bucketKey, objectKey, newObjName, xAdsAcmNamespace, xAdsAcmCheckGroups, xAdsAcmGroups, accessToken, throwOnError);
             return response.Content;
@@ -285,7 +298,7 @@ namespace Autodesk.Oss
         /// </param>
         /// <returns>Task of &lt;Bucket&gt;</returns>
 
-        public async System.Threading.Tasks.Task<Bucket> CreateBucketAsync(Region xAdsRegion, CreateBucketsPayload policyKey, string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<Bucket> CreateBucketAsync(string accessToken, Region xAdsRegion, CreateBucketsPayload policyKey, bool throwOnError = true)
         {
             var response = await this.bucketsApi.CreateBucketAsync(policyKey, xAdsRegion, accessToken, throwOnError);
             return response.Content;
@@ -320,7 +333,7 @@ namespace Autodesk.Oss
         /// </param>
         /// <returns>Task of &lt;CreateObjectSigned&gt;</returns>
 
-        public async System.Threading.Tasks.Task<CreateObjectSigned> CreateSignedResourceAsync(string bucketKey, string objectKey, Access? access = null, bool? useCdn = default(bool?), CreateSignedResource createSignedResource = default(CreateSignedResource), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<CreateObjectSigned> CreateSignedResourceAsync(string accessToken, string bucketKey, string objectKey, CreateSignedResource createSignedResource, Access? access = null, bool? useCdn = default(bool?), bool throwOnError = true)
         {
             var response = await this.objectsApi.CreateSignedResourceAsync(bucketKey, objectKey, access, useCdn, createSignedResource, accessToken, throwOnError);
             return response.Content;
@@ -341,7 +354,7 @@ namespace Autodesk.Oss
         /// </param>
 
         /// <returns>Task of HttpResponseMessage</returns>
-        public async System.Threading.Tasks.Task<HttpResponseMessage> DeleteBucketAsync(string bucketKey, string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<HttpResponseMessage> DeleteBucketAsync(string accessToken, string bucketKey, bool throwOnError = true)
         {
             var response = await this.bucketsApi.DeleteBucketAsync(bucketKey, accessToken, throwOnError);
             return response;
@@ -370,7 +383,7 @@ namespace Autodesk.Oss
         /// </param>
 
         /// <returns>Task of HttpResponseMessage</returns>
-        public async System.Threading.Tasks.Task<HttpResponseMessage> DeleteObjectAsync(string bucketKey, string objectKey, string xAdsAcmNamespace = default(string), string xAdsAcmCheckGroups = default(string), string xAdsAcmGroups = default(string), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<HttpResponseMessage> DeleteObjectAsync(string accessToken, string bucketKey, string objectKey, string xAdsAcmNamespace = default(string), string xAdsAcmCheckGroups = default(string), string xAdsAcmGroups = default(string), bool throwOnError = true)
         {
             var response = await this.objectsApi.DeleteObjectAsync(bucketKey, objectKey, xAdsAcmNamespace, xAdsAcmCheckGroups, xAdsAcmGroups, accessToken, throwOnError);
             return response;
@@ -401,7 +414,7 @@ namespace Autodesk.Oss
         /// </param>
 
         /// <returns>Task of HttpResponseMessage</returns>
-        public async System.Threading.Tasks.Task<HttpResponseMessage> DeleteSignedResourceAsync(string hash, Region? region = null, string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<HttpResponseMessage> DeleteSignedResourceAsync(string accessToken, string hash, Region? region = null, bool throwOnError = true)
         {
             var response = await this.objectsApi.DeleteSignedResourceAsync(hash, region, accessToken, throwOnError);
             return response;
@@ -420,7 +433,7 @@ namespace Autodesk.Oss
         /// </param>
         /// <returns>Task of &lt;Bucket&gt;</returns>
 
-        public async System.Threading.Tasks.Task<Bucket> GetBucketDetailsAsync(string bucketKey, string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<Bucket> GetBucketDetailsAsync(string accessToken, string bucketKey, bool throwOnError = true)
         {
             var response = await this.bucketsApi.GetBucketDetailsAsync(bucketKey, accessToken, throwOnError);
             return response.Content;
@@ -449,7 +462,7 @@ namespace Autodesk.Oss
         ///The ID of the last item that was returned in the previous result set.  It enables the system to return subsequent items starting from the next one after the specified ID. (optional)
         /// </param>
         /// <returns>Task of &lt;Buckets&gt;</returns>
-        public async System.Threading.Tasks.Task<Buckets> GetBucketsAsync(Region? region = null, int? limit = default(int?), string startAt = default(string), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<Buckets> GetBucketsAsync(string accessToken, Region? region = null, int? limit = default(int?), string startAt = default(string), bool throwOnError = true)
         {
             var response = await this.bucketsApi.GetBucketsAsync(region, limit, startAt, accessToken, throwOnError);
             return response.Content;
@@ -483,7 +496,7 @@ namespace Autodesk.Oss
         /// (optional)
         /// </param>
         /// <returns>Task of &lt;ObjectFullDetails&gt;</returns>
-        public async System.Threading.Tasks.Task<ObjectFullDetails> GetObjectDetailsAsync(string bucketKey, string objectKey, DateTime? ifModifiedSince = default(DateTime?), string xAdsAcmNamespace = default(string), string xAdsAcmCheckGroups = default(string), string xAdsAcmGroups = default(string), With? with = null, string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ObjectFullDetails> GetObjectDetailsAsync(string accessToken, string bucketKey, string objectKey, DateTime? ifModifiedSince = default(DateTime?), string xAdsAcmNamespace = default(string), string xAdsAcmCheckGroups = default(string), string xAdsAcmGroups = default(string), With? with = null, bool throwOnError = true)
         {
             var response = await this.objectsApi.GetObjectDetailsAsync(bucketKey, objectKey, ifModifiedSince, xAdsAcmNamespace, xAdsAcmCheckGroups, xAdsAcmGroups, with, accessToken, throwOnError);
             return response.Content;
@@ -511,7 +524,7 @@ namespace Autodesk.Oss
         ///The ID of the last item that was returned in the previous result set.  It enables the system to return subsequent items starting from the next one after the specified ID. (optional)
         /// </param>
         /// <returns>Task of &lt;BucketObjects&gt;</returns>
-        public async System.Threading.Tasks.Task<BucketObjects> GetObjectsAsync(string bucketKey, int? limit = default(int?), string beginsWith = default(string), string startAt = default(string), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<BucketObjects> GetObjectsAsync(string accessToken, string bucketKey, int? limit = default(int?), string beginsWith = default(string), string startAt = default(string), bool throwOnError = true)
         {
             var response = await this.objectsApi.GetObjectsAsync(bucketKey, limit, beginsWith, startAt, accessToken, throwOnError);
             return response.Content;
@@ -562,7 +575,7 @@ namespace Autodesk.Oss
         ///The value of the Content-Type header you want to receive when you download the object using the signed URL. If you do not specify a value, the Content-Type header defaults to the value stored with OSS. (optional)
         /// </param>
         /// <returns>Task of &lt;System.IO.Stream&gt;</returns>
-        public async System.Threading.Tasks.Task<System.IO.Stream> GetSignedResourceAsync(string hash, string range = default(string), string ifNoneMatch = default(string), DateTime? ifModifiedSince = default(DateTime?), string acceptEncoding = default(string), Region? region = null, string responseContentDisposition = default(string), string responseContentType = default(string), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<System.IO.Stream> GetSignedResourceAsync(string accessToken, string hash, string range = default(string), string ifNoneMatch = default(string), DateTime? ifModifiedSince = default(DateTime?), string acceptEncoding = default(string), Region? region = null, string responseContentDisposition = default(string), string responseContentType = default(string), bool throwOnError = true)
         {
             var response = await this.objectsApi.GetSignedResourceAsync(hash, range, ifNoneMatch, ifModifiedSince, acceptEncoding, region, responseContentDisposition, responseContentType, accessToken, throwOnError);
             return response.Content;
@@ -628,7 +641,7 @@ namespace Autodesk.Oss
         /// </param>
         /// <returns>Task of &lt;Signeds3downloadResponse&gt;</returns>
 
-        public async System.Threading.Tasks.Task<Signeds3downloadResponse> SignedS3DownloadAsync(string bucketKey, string objectKey, string ifNoneMatch = default(string), DateTime? ifModifiedSince = default(DateTime?), string xAdsAcmScopes = default(string), string responseContentType = default(string), string responseContentDisposition = default(string), string responseCacheControl = default(string), bool? publicResourceFallback = default(bool?), int? minutesExpiration = default(int?), bool? useCdn = default(bool?), bool? redirect = default(bool?), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<Signeds3downloadResponse> SignedS3DownloadAsync(string accessToken, string bucketKey, string objectKey, string ifNoneMatch = default(string), DateTime? ifModifiedSince = default(DateTime?), string xAdsAcmScopes = default(string), string responseContentType = default(string), string responseContentDisposition = default(string), string responseCacheControl = default(string), bool? publicResourceFallback = default(bool?), int? minutesExpiration = default(int?), bool? useCdn = default(bool?), bool? redirect = default(bool?), bool throwOnError = true)
         {
             var response = await this.objectsApi.SignedS3DownloadAsync(bucketKey, objectKey, ifNoneMatch, ifModifiedSince, xAdsAcmScopes, responseContentType, responseContentDisposition, responseCacheControl, publicResourceFallback, minutesExpiration, useCdn, redirect, accessToken, throwOnError);
             return response.Content;
@@ -678,7 +691,7 @@ namespace Autodesk.Oss
         /// </param>
         /// <returns>Task of &lt;Signeds3uploadResponse&gt;</returns>
 
-        public async System.Threading.Tasks.Task<Signeds3uploadResponse> SignedS3UploadAsync(string bucketKey, string objectKey, string xAdsAcmScopes = default(string), int? parts = default(int?), int? firstPart = default(int?), string uploadKey = default(string), int? minutesExpiration = default(int?), bool? useAcceleration = default(bool?), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<Signeds3uploadResponse> SignedS3UploadAsync(string accessToken, string bucketKey, string objectKey, string xAdsAcmScopes = default(string), int? parts = default(int?), int? firstPart = default(int?), string uploadKey = default(string), int? minutesExpiration = default(int?), bool? useAcceleration = default(bool?), bool throwOnError = true)
         {
             var response = await this.objectsApi.SignedS3UploadAsync(bucketKey, objectKey, xAdsAcmScopes, parts, firstPart, uploadKey, minutesExpiration, useAcceleration, accessToken, throwOnError);
             return response.Content;
@@ -726,7 +739,7 @@ namespace Autodesk.Oss
         /// </param>
         /// <returns>Task of &lt;ObjectDetails&gt;</returns>
 
-        public async System.Threading.Tasks.Task<ObjectDetails> UploadSignedResourceAsync(string hash, int? contentLength, System.IO.Stream body, string contentType = default(string), string contentDisposition = default(string), Region? xAdsRegion = null, string ifMatch = default(string), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ObjectDetails> UploadSignedResourceAsync(string accessToken, string hash, int? contentLength, System.IO.Stream body, string contentType = default(string), string contentDisposition = default(string), Region? xAdsRegion = null, string ifMatch = default(string), bool throwOnError = true)
         {
             var response = await this.objectsApi.UploadSignedResourceAsync(hash, contentLength, body, contentType, contentDisposition, xAdsRegion, ifMatch, accessToken, throwOnError);
             return response.Content;
@@ -771,7 +784,7 @@ namespace Autodesk.Oss
         /// </param>
         /// <returns>Task of &lt;ObjectDetails&gt;</returns>
 
-        public async System.Threading.Tasks.Task<ObjectDetails> UploadSignedResourcesChunkAsync(string hash, string contentRange, string sessionId, System.IO.Stream body, string contentType = default(string), string contentDisposition = default(string), Region? xAdsRegion = null, string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ObjectDetails> UploadSignedResourcesChunkAsync(string accessToken, string hash, string contentRange, string sessionId, System.IO.Stream body, string contentType = default(string), string contentDisposition = default(string), Region? xAdsRegion = null, bool throwOnError = true)
         {
             var response = await this.objectsApi.UploadSignedResourcesChunkAsync(hash, contentRange, sessionId, body, contentType, contentDisposition, xAdsRegion, accessToken, throwOnError);
             return response.Content;

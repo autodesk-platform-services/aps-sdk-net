@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Oss.Model
 {
     /// <summary>
-    /// An object that represents the response to a Batch Generate Signed S3 Download URLs operation.   **Note**: objectKeyN is a placeholder for the first object key for which the client requested a download signed URL. The attributes within contain the success data / error information for the request for that object. &#x60;results&#x60; will contain one such attribute for each requested object in the batch. 
+    /// An object that represents the response to a Batch Generate Signed S3 Download URLs operation.   **Note**: &#x60;&#x60;objectKeyN&#x60;&#x60; is a placeholder for the first object key for which the client requested a download signed URL. The attributes within contain the success data / error information for the request for that object. &#x60;results&#x60; will contain one such attribute for each requested object in the batch. 
     /// </summary>
     [DataContract]
     public partial class DownloadResults 

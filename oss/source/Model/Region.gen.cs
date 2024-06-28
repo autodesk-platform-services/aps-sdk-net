@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Oss.Model
 {
     /// <summary>
-    /// Specifies where the bucket containing the object stored. Possible values are:
+    /// Specifies where the bucket containing the object is stored. Possible values are:
 ///
 ///        - `US` - (Default) Data center for the US region.
 ///        - `EMEA` - Data center for the European Union, Middle East, and Africa.
@@ -41,7 +41,7 @@ namespace Autodesk.Oss.Model
 ///
 ///        **Note:** Beta features are subject to change. Please do not use in production environments.
     /// </summary>
-    ///<value>Specifies where the bucket containing the object stored. Possible values are:
+    ///<value>Specifies where the bucket containing the object is stored. Possible values are:
 ///
 ///        - `US` - (Default) Data center for the US region.
 ///        - `EMEA` - Data center for the European Union, Middle East, and Africa.

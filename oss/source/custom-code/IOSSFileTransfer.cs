@@ -23,6 +23,7 @@ using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Threading;
+using System.IO;
 namespace Autodesk.Oss
 {
     public interface IOSSFileTransfer
@@ -31,7 +32,7 @@ namespace Autodesk.Oss
         Task<HttpResponseMessage> Upload(
             string bucketKey,
             string objectKey,
-            string sourceToUpload,
+            Stream sourceToUpload,
             string accessToken,
             CancellationToken cancellationToken,
             string projectScope = "",
