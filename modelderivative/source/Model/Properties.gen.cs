@@ -36,27 +36,26 @@ namespace Autodesk.ModelDerivative.Model
     /// An object that represents a successful response to a Fetch All Properties operation.
     /// </summary>
     [DataContract]
-    public partial class AllProperties 
+    public partial class Properties
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="AllProperties" /> class.
+        /// Initializes a new instance of the <see cref="Properties" /> class.
         /// </summary>
-        public AllProperties()
+        public Properties()
         {
         }
-        
+
         /// <summary>
         ///Gets or Sets Data
         /// </summary>
-        [DataMember(Name="data", EmitDefaultValue=false)]
-        public AllPropertiesData Data { get; set; }
+        [DataMember(Name = "data", EmitDefaultValue = false)]
+        public PropertiesData Data { get; set; }
 
-
-         /// <summary>
+        /// <summary>
         /// Returns true if the response is 202 - Accepted
         /// </summary>
         /// <returns>boolean based on if the response is 202 - Accepted</returns>
-        public bool IsProcessing{get; internal set;} = false;
+        public bool IsProcessing { get; internal set; } = false;
 
         /// <summary>
         /// Returns the string presentation of the object

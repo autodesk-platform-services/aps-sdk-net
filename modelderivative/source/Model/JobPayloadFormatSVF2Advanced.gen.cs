@@ -33,11 +33,17 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// Advanced options for &#x60;&#x60;svf2&#x60;&#x60; output types. The available options depend on the input type. These options are as follows:&#39;
+    /// Advanced options for &#x60;&#x60;svf2&#x60;&#x60; output types. The available options depend on the input type.
     /// </summary>
-    public interface IJobPayloadFormatSVF2Advanced 
+    /// <seealso cref="JobPayloadFormatSVF2AdvancedDGN"/>
+    /// <seealso cref="JobPayloadFormatSVF2AdvancedDWG"/>
+    /// <seealso cref="JobPayloadFormatSVF2AdvancedIFC"/>
+    /// <seealso cref="JobPayloadFormatSVF2AdvancedNWD"/>
+    /// <seealso cref="JobPayloadFormatSVF2AdvancedRVT"/>
+    /// <seealso cref="JobPayloadFormatSVF2AdvancedVUE"/>
+    public interface IJobPayloadFormatSVF2Advanced
     {
-       
+
     }
 
 }

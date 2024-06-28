@@ -33,35 +33,41 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// Envelope that contains the return data.
+    /// An envelope that encapsulates the return data.
     /// </summary>
     [DataContract]
-    public partial class SpecificPropertiesData 
+    public partial class PropertiesData
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="SpecificPropertiesData" /> class.
+        /// Initializes a new instance of the <see cref="PropertiesData" /> class.
         /// </summary>
-        public SpecificPropertiesData()
+        public PropertiesData()
         {
         }
-        
+
         /// <summary>
         ///The type of data that is returned. Always `properties`.
         /// </summary>
         /// <value>
         ///The type of data that is returned. Always `properties`.
         /// </value>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [DataMember(Name = "type", EmitDefaultValue = false)]
         public string Type { get; set; }
 
         /// <summary>
-        ///Array of objects with their "properties" as a non-hierarchical list.
+        ///A non-hierarchical list of objects contained in 
+        ///the specified Model View. Each object has a 
+        ///`properties` attribute, which contains the 
+        ///properties of that object.
         /// </summary>
         /// <value>
-        ///Array of objects with their "properties" as a non-hierarchical list.
+        ///A non-hierarchical list of objects contained in 
+        ///the specified Model View. Each object has a 
+        ///`properties` attribute, which contains the 
+        ///properties of that object.
         /// </value>
-        [DataMember(Name="collection", EmitDefaultValue=false)]
-        public List<SpecificPropertiesDataCollection> Collection { get; set; }
+        [DataMember(Name = "collection", EmitDefaultValue = false)]
+        public List<PropertiesDataCollection> Collection { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

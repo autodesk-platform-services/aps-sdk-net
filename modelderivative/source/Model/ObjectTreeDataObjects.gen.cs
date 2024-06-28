@@ -52,7 +52,7 @@ namespace Autodesk.ModelDerivative.Model
         ///A non-persistent ID that is assigned to an object at translation time.
         /// </value>
         [DataMember(Name="objectid", EmitDefaultValue=false)]
-        public decimal? Objectid { get; set; }
+        public decimal? ObjectId { get; set; }
 
         /// <summary>
         ///Name of the object.
@@ -64,13 +64,13 @@ namespace Autodesk.ModelDerivative.Model
         public string Name { get; set; }
 
         /// <summary>
-        ///An optional array of objects of type `object` where each object represents a child of the current node on the object tree.
+        ///An optional array of objects of type `ObjectTreeDataObjects` where each object represents a child of the current node on the object tree.
         /// </summary>
         /// <value>
-        ///An optional array of objects of type `object` where each object represents a child of the current node on the object tree.
+        ///An optional array of objects of type `ObjectTreeDataObjects` where each object represents a child of the current node on the object tree.
         /// </value>
         [DataMember(Name="objects", EmitDefaultValue=false)]
-        public List<Object> Objects { get; set; }
+        public List<ObjectTreeDataObjects> Objects { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

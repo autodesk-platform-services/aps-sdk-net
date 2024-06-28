@@ -33,9 +33,15 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
         /// <summary>
-        /// Specifies what objects to query. Contains the parameters to pass to the search service. You can use one of the following forms: 
+        /// Specifies what objects to query. Contains the parameters to pass to the search service.
         /// </summary>
-
+        /// <seealso cref="BeginsWith"/>
+        /// <seealso cref="Between"/>
+        /// <seealso cref="Contains"/>
+        /// <seealso cref="EqualsTo"/>
+        /// <seealso cref="GreaterThan"/>
+        /// <seealso cref="LessThan"/>
+        /// <seealso cref="MatchId"/>
         public interface ISpecificPropertiesPayloadQuery
         {
         }
