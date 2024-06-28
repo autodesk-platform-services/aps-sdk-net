@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Authentication.Model
 {
         /// <summary>
-        /// UserInfo
+        /// Represents a successful response to a Get User Info operation.
         /// </summary>
         [DataContract]
         public partial class UserInfo
@@ -330,7 +330,7 @@ namespace Autodesk.Authentication.Model
                 ///An array of key-value pairs containing image URLs for various thumbnail sizes of the user's profile picture. The key is named `sizeX&lt;NUMBER&gt;` where `&lt;NUMBER&gt;` is the width and height of the thumbnail, in pixels. The corresponding value is the URL pointing to the thumbnail. For example, `sizeX200` would contain the URL for the 200x200 pixel thumbnail.
                 /// </value>
                 [DataMember(Name = "thumbnails", EmitDefaultValue = false)]
-                public List<Object> Thumbnails { get; set; }
+                public Dictionary<string, string> Thumbnails { get; set; }
 
                 /// <summary>
                 /// Returns the string presentation of the object

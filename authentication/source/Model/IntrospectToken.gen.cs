@@ -33,10 +33,10 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Authentication.Model
 {
     /// <summary>
-    /// IntrospectToken
+    /// Represents the payload returned for an introspect token request.
     /// </summary>
     [DataContract]
-    public partial class IntrospectToken 
+    public partial class IntrospectToken
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="IntrospectToken" /> class.
@@ -44,18 +44,18 @@ namespace Autodesk.Authentication.Model
         public IntrospectToken()
         {
         }
-        
+
         /// <summary>
         ///`true`: The token is active.
-///
-///`false`: The token is expired, invalid, or revoked.
+        ///
+        ///`false`: The token is expired, invalid, or revoked.
         /// </summary>
         /// <value>
         ///`true`: The token is active.
-///
-///`false`: The token is expired, invalid, or revoked.
+        ///
+        ///`false`: The token is expired, invalid, or revoked.
         /// </value>
-        [DataMember(Name="active", EmitDefaultValue=false)]
+        [DataMember(Name = "active", EmitDefaultValue = false)]
         public bool? Active { get; set; }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace Autodesk.Authentication.Model
         /// <value>
         ///A URL-encoded, space separated list of scopes associated with the token.
         /// </value>
-        [DataMember(Name="scope", EmitDefaultValue=false)]
+        [DataMember(Name = "scope", EmitDefaultValue = false)]
         public string Scope { get; set; }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace Autodesk.Authentication.Model
         /// <value>
         ///The Client ID of the application associated with the token.
         /// </value>
-        [DataMember(Name="client_id", EmitDefaultValue=false)]
+        [DataMember(Name = "client_id", EmitDefaultValue = false)]
         public string ClientId { get; set; }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace Autodesk.Authentication.Model
         /// <value>
         ///The expiration time of the token, represented as a Unix timestamp.
         /// </value>
-        [DataMember(Name="exp", EmitDefaultValue=false)]
+        [DataMember(Name = "exp", EmitDefaultValue = false)]
         public int? Exp { get; set; }
 
         /// <summary>
@@ -91,8 +91,8 @@ namespace Autodesk.Authentication.Model
         /// <value>
         ///The ID of the user who authorized the token.
         /// </value>
-        [DataMember(Name="userid", EmitDefaultValue=false)]
-        public string Userid { get; set; }
+        [DataMember(Name = "userid", EmitDefaultValue = false)]
+        public string UserId { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
