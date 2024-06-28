@@ -214,7 +214,7 @@ namespace Autodesk.Webhooks.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/WEBHOOKS/C#/1.0.0");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/WEBHOOKS/C#/2.0.0");
                 if(!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
@@ -292,7 +292,7 @@ namespace Autodesk.Webhooks.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/WEBHOOKS/C#/1.0.0");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/WEBHOOKS/C#/2.0.0");
                 if(!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
@@ -372,7 +372,7 @@ namespace Autodesk.Webhooks.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/WEBHOOKS/C#/1.0.0");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/WEBHOOKS/C#/2.0.0");
                 if(!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
