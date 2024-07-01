@@ -673,7 +673,7 @@ namespace Autodesk.Oss.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/OSS/C#/1.0.0-beta1");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/OSS/C#/1.0.0");
                 if (!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
@@ -765,7 +765,7 @@ namespace Autodesk.Oss.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/OSS/C#/1.0.0-beta1");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/OSS/C#/1.0.0");
                 if (!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
@@ -860,7 +860,7 @@ namespace Autodesk.Oss.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/OSS/C#/1.0.0-beta1");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/OSS/C#/1.0.0");
                 if (!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
@@ -959,7 +959,7 @@ namespace Autodesk.Oss.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/OSS/C#/1.0.0-beta1");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/OSS/C#/1.0.0");
                 if (!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
@@ -1056,7 +1056,7 @@ namespace Autodesk.Oss.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/OSS/C#/1.0.0-beta1");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/OSS/C#/1.0.0");
                 if (!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
@@ -1153,7 +1153,7 @@ namespace Autodesk.Oss.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/OSS/C#/1.0.0-beta1");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/OSS/C#/1.0.0");
                 if (!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
@@ -1240,7 +1240,7 @@ namespace Autodesk.Oss.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/OSS/C#/1.0.0-beta1");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/OSS/C#/1.0.0");
                 if (!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
@@ -1329,7 +1329,7 @@ namespace Autodesk.Oss.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/OSS/C#/1.0.0-beta1");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/OSS/C#/1.0.0");
                 if (!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
@@ -1423,7 +1423,7 @@ namespace Autodesk.Oss.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/OSS/C#/1.0.0-beta1");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/OSS/C#/1.0.0");
                 if (!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
@@ -1515,7 +1515,7 @@ namespace Autodesk.Oss.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/OSS/C#/1.0.0-beta1");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/OSS/C#/1.0.0");
                 if (!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
@@ -1626,7 +1626,7 @@ namespace Autodesk.Oss.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/OSS/C#/1.0.0-beta1");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/OSS/C#/1.0.0");
                 if (!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
@@ -1759,7 +1759,7 @@ namespace Autodesk.Oss.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/OSS/C#/1.0.0-beta1");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/OSS/C#/1.0.0");
                 if (!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
@@ -1874,7 +1874,7 @@ namespace Autodesk.Oss.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/OSS/C#/1.0.0-beta1");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/OSS/C#/1.0.0");
                 if (!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
@@ -1979,7 +1979,7 @@ namespace Autodesk.Oss.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/OSS/C#/1.0.0-beta1");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/OSS/C#/1.0.0");
                 if (!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
@@ -2086,7 +2086,7 @@ namespace Autodesk.Oss.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/OSS/C#/1.0.0-beta1");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/OSS/C#/1.0.0");
                 if (!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
