@@ -505,7 +505,7 @@ namespace Autodesk.Authentication.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/AUTHENTICATION/C#/1.0.0-beta1");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/AUTHENTICATION/C#/2.0.0");
 
 
                 if (!string.IsNullOrEmpty(authorization))
@@ -580,7 +580,7 @@ namespace Autodesk.Authentication.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/AUTHENTICATION/C#/1.0.0-beta1");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/AUTHENTICATION/C#/2.0.0");
       
                 request.Method = new HttpMethod("GET");
 
@@ -632,7 +632,7 @@ namespace Autodesk.Authentication.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/AUTHENTICATION/C#/1.0.0-beta1");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/AUTHENTICATION/C#/2.0.0");
   
                 // tell the underlying pipeline what scope we'd like to use
 
@@ -701,7 +701,7 @@ namespace Autodesk.Authentication.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/AUTHENTICATION/C#/1.0.0-beta1");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/AUTHENTICATION/C#/2.0.0");
 
                 if (!string.IsNullOrEmpty(authorization))
                 {
@@ -823,7 +823,7 @@ namespace Autodesk.Authentication.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/AUTHENTICATION/C#/1.0.0-beta1");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/AUTHENTICATION/C#/2.0.0");
 
                 if (!string.IsNullOrEmpty(authorization))
                 {
