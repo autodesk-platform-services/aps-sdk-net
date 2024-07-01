@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Oss.Model
 {
     /// <summary>
-    /// Object Signed Object json response
+    /// The request payload for a Generate OSS Signed URL operation.
     /// </summary>
     [DataContract]
     public partial class CreateObjectSigned 
@@ -46,23 +46,29 @@ namespace Autodesk.Oss.Model
         }
         
         /// <summary>
-        /// URL created for downloading the object
+        ///URL created for downloading the object
         /// </summary>
-        /// <value>URL created for downloading the object</value>
+        /// <value>
+        ///URL created for downloading the object
+        /// </value>
         [DataMember(Name="signedUrl", EmitDefaultValue=false)]
         public string SignedUrl { get; set; }
 
         /// <summary>
-        /// Value for expiration in minutes
+        ///Value for expiration in minutes
         /// </summary>
-        /// <value>Value for expiration in minutes</value>
+        /// <value>
+        ///Value for expiration in minutes
+        /// </value>
         [DataMember(Name="expiration", EmitDefaultValue=false)]
         public long? Expiration { get; set; }
 
         /// <summary>
-        /// IP addresses that can make a request to this URL.
+        ///IP addresses that can make a request to this URL.
         /// </summary>
-        /// <value>IP addresses that can make a request to this URL.</value>
+        /// <value>
+        ///IP addresses that can make a request to this URL.
+        /// </value>
         [DataMember(Name="allowedIpAddresses", EmitDefaultValue=false)]
         public List<string> AllowedIpAddresses { get; set; }
 

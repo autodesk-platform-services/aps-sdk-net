@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Oss.Model
 {
     /// <summary>
-    /// Completes3uploadBody
+    /// The request payload for a Complete Upload to S3 Signed URL operation.
     /// </summary>
     [DataContract]
     public partial class Completes3uploadBody 
@@ -46,23 +46,29 @@ namespace Autodesk.Oss.Model
         }
         
         /// <summary>
-        /// The identifier of the upload session, which was provided by OSS in the response to the request for the signed URL/s with which to upload the object.
+        ///The ID uniquely identifying the upload session that was returned when you called [Get S3 Signed Upload URL](/en/docs/data/v2/reference/http/buckets-:bucketKey-objects-:objectKey-signeds3upload-POST/).
         /// </summary>
-        /// <value>The identifier of the upload session, which was provided by OSS in the response to the request for the signed URL/s with which to upload the object.</value>
+        /// <value>
+        ///The ID uniquely identifying the upload session that was returned when you called [Get S3 Signed Upload URL](/en/docs/data/v2/reference/http/buckets-:bucketKey-objects-:objectKey-signeds3upload-POST/).
+        /// </value>
         [DataMember(Name="uploadKey", EmitDefaultValue=false)]
         public string UploadKey { get; set; }
 
         /// <summary>
-        /// The expected size of the uploaded object. If provided, OSS will check this against the blob in S3 and return an error if the size does not match.
+        ///The expected size of the object. If provided, OSS will check this against the object in S3 and return an error if the size does not match.
         /// </summary>
-        /// <value>The expected size of the uploaded object. If provided, OSS will check this against the blob in S3 and return an error if the size does not match.</value>
+        /// <value>
+        ///The expected size of the object. If provided, OSS will check this against the object in S3 and return an error if the size does not match.
+        /// </value>
         [DataMember(Name="size", EmitDefaultValue=false)]
         public int? Size { get; set; }
 
         /// <summary>
-        /// An array of eTags. For a single-part upload, this array contains the expected eTag of the entire object. For a multipart upload, this array contains the expected eTag of each part of the upload; the index of an eTag in the array corresponds to its part number in the upload.
+        ///An array of eTags. S3 returns an eTag to each upload request, be it for a chunk or an entire file. For a single-part upload, this array contains the expected eTag of the entire object. For a multipart upload, this array contains the expected eTag of each part of the upload; the index of an eTag in the array corresponds to its part number in the upload. If provided, OSS will validate these eTags against the content in S3, and return an error if the eTags do not match.
         /// </summary>
-        /// <value>An array of eTags. For a single-part upload, this array contains the expected eTag of the entire object. For a multipart upload, this array contains the expected eTag of each part of the upload; the index of an eTag in the array corresponds to its part number in the upload.</value>
+        /// <value>
+        ///An array of eTags. S3 returns an eTag to each upload request, be it for a chunk or an entire file. For a single-part upload, this array contains the expected eTag of the entire object. For a multipart upload, this array contains the expected eTag of each part of the upload; the index of an eTag in the array corresponds to its part number in the upload. If provided, OSS will validate these eTags against the content in S3, and return an error if the eTags do not match.
+        /// </value>
         [DataMember(Name="eTags", EmitDefaultValue=false)]
         public List<string> ETags { get; set; }
 

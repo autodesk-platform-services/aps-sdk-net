@@ -9,7 +9,8 @@ namespace Samples
             string token = "<token>";
             string bucketKey = "<bucket key>";
             string objectName = "<object name>";
-            string sourceToUpload = "<path to source file>";
+            string sourceToUpload = "<path to source file>";//sourceToUpload can also be a stream object
+            string filePath ="<path to source file>";
             OssClient ossClient = null!;
 
 
@@ -38,11 +39,18 @@ namespace Samples
             {
                   //The below helper method takes care of the complete upload process, i.e. 
                   // the steps 2 to 4 in this link (https://aps.autodesk.com/en/docs/data/v2/tutorials/app-managed-bucket/)
+
+                  //sourceToUpload can be either file path or stream of the object 
                   ObjectDetails objectDetails = await ossClient.Upload(bucketKey, objectName, sourceToUpload, accessToken: token, CancellationToken.None);
                   // query for required properties
                   string objectId = objectDetails.ObjectId;
                   string objectKey = objectDetails.ObjectKey;
 
+            }
+            public async Task Download()
+            {
+                  //The below helper method takes care of the complete Download process, i.e.
+                  await ossClient.Download(bucketKey, objectName, filePath, accessToken: token, CancellationToken.None);
             }
 
             public async void Main()
@@ -53,6 +61,7 @@ namespace Samples
                   // Call respective methods
                   await GetBucketDetailsAsync();
                   await Upload();
+                  await Download();
             }
       }
 }

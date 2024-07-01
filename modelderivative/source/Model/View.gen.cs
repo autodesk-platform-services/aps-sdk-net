@@ -1,11 +1,11 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Model Derivative
  *
- * Model Derivative Service Documentation
+ * Use the Model Derivative API to translate designs from one CAD format to another. You can also use this API to extract metadata from a model.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,9 +33,9 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// Required options for SVF type. Possible values are &#x60;2d&#x60; and &#x60;3d&#x60;.
+    /// Required options for SVF type. Possible values are `2d` and `3d`.
     /// </summary>
-    /// <value>Required options for SVF type. Possible values are &#x60;2d&#x60; and &#x60;3d&#x60;.</value>
+    ///<value>Required options for SVF type. Possible values are `2d` and `3d`.</value>
     
     [JsonConverter(typeof(StringEnumConverter))]
     

@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Oss.Model
 {
     /// <summary>
-    /// Batchsigneds3uploadResponse
+    /// The response to a Batch Generate Signed S3 Upload URLs operation.
     /// </summary>
     [DataContract]
     public partial class Batchsigneds3uploadResponse 
@@ -46,8 +46,11 @@ namespace Autodesk.Oss.Model
         }
         
         /// <summary>
-        /// Gets or Sets Results
+        ///A map of the returned results; each key in the map corresponds to an object key in the batch, and the value includes the results for that object.
         /// </summary>
+        /// <value>
+        ///A map of the returned results; each key in the map corresponds to an object key in the batch, and the value includes the results for that object.
+        /// </value>
         [DataMember(Name="results", EmitDefaultValue=false)]
         public Dictionary<string, Batchsigneds3uploadResponseResultsValue> Results { get; set; }
 

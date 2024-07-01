@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Authentication.Model
 {
     /// <summary>
-    /// Jwks
+    /// Represents a successful response to a Get JWKS operation.
     /// </summary>
     [DataContract]
     public partial class Jwks 
@@ -45,9 +45,19 @@ namespace Autodesk.Authentication.Model
         {
         }
         
+        /// <summary>
+        ///An array of objects where each object represents a JSON Web Key Set (JWKS).
+        /// </summary>
+        /// <value>
+        ///An array of objects where each object represents a JSON Web Key Set (JWKS).
+        /// </value>
         [DataMember(Name="keys", EmitDefaultValue=false)]
         public List<JwksKey> Keys { get; set; }
-        
+
+        /// <summary>
+        /// Returns the string presentation of the object
+        /// </summary>
+        /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);

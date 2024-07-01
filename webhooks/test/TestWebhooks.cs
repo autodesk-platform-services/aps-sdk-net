@@ -68,7 +68,7 @@ public class TestWebhooks
     [TestMethod]
     public async Task TestGetAppHooksAsync()
     {
-        Hooks getAppHooks = await _webhooksApi.GetAppHooksAsync(accessToken: token);
+        Hooks getAppHooks = await _webhooksApi.GetAppHooksAsync(accessToken: token, xAdsRegion: XAdsRegion.APAC);
         Assert.IsTrue(getAppHooks.Data.Count > 0);
     }
 

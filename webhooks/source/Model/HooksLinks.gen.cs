@@ -46,7 +46,7 @@ namespace Autodesk.Webhooks.Model
         }
         
         /// <summary>
-        /// Gets or Sets Next
+        ///Gets or Sets Next
         /// </summary>
         [DataMember(Name="next", EmitDefaultValue=false)]
         public string Next { get; set; }

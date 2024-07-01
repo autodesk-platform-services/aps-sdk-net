@@ -1,11 +1,11 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Model Derivative
  *
- * Model Derivative Service Documentation
+ * Use the Model Derivative API to translate designs from one CAD format to another. You can also use this API to extract metadata from a model.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,21 +33,27 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// The format that 2D views must be rendered to. Available options are:  - legacy - (Default) Render to a model derivative specific file format. - pdf - Render to the PDF file format. This option applies only to Revit 2022 files and newer.
+    /// The format that 2D views must be rendered to. Possible values are:
+    ///
+    ///- `legacy` - (Default) Render to a model derivative specific file format.
+    ///- `pdf` - Render to the PDF file format. When the source design is of type Revit, applies only to Revit 2022 files and newer. If the source design is of type DWG, only properties with semantic values are extracted. 
     /// </summary>
-    /// <value>The format that 2D views must be rendered to. Available options are:  - legacy - (Default) Render to a model derivative specific file format. - pdf - Render to the PDF file format. This option applies only to Revit 2022 files and newer.</value>
-    
+    ///<value>The format that 2D views must be rendered to. Possible values are:
+    ///
+    ///- `legacy` - (Default) Render to a model derivative specific file format.
+    ///- `pdf` - Render to the PDF file format. When the source design is of type Revit, applies only to Revit 2022 files and newer. If the source design is of type DWG, only properties with semantic values are extracted. </value>
+
     [JsonConverter(typeof(StringEnumConverter))]
-    
+
     public enum Model2dView
     {
-        
+
         /// <summary>
         /// Enum Legacy for value: legacy
         /// </summary>
         [EnumMember(Value = "legacy")]
         Legacy,
-        
+
         /// <summary>
         /// Enum Pdf for value: pdf
         /// </summary>

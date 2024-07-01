@@ -3,9 +3,9 @@
  *
  * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
- * Model Derivative API
+ * Model Derivative
  *
- * Model Derivative Service Documentation
+ * Use the Model Derivative API to translate designs from one CAD format to another. You can also use this API to extract metadata from a model.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,55 +32,71 @@ using Newtonsoft.Json.Converters;
 
 namespace Autodesk.ModelDerivative.Model
 {
-    /// <summary>
-    /// Group of inputs
-    /// </summary>
-    [DataContract]
-    public partial class JobPayloadInput 
-    {
         /// <summary>
-        /// Initializes a new instance of the <see cref="JobPayloadInput" /> class.
+        /// An object describing the attributes of the source design.
         /// </summary>
-        public JobPayloadInput()
+        [DataContract]
+        public partial class JobPayloadInput
         {
+                /// <summary>
+                /// Initializes a new instance of the <see cref="JobPayloadInput" /> class.
+                /// </summary>
+                public JobPayloadInput()
+                {
+                }
+
+                /// <summary>
+                ///The URL safe Base64 encoded URN of the source design. 
+                ///
+                ///**Note:** The URN is returned as the [objectID` once you complete uploading the source design to APS. This value must be converted to a `Base64 (URL Safe) encoded](http://www.freeformatter.com/base64-encoder.html) string before you can specify it for this attribute.
+                /// </summary>
+                /// <value>
+                ///The URL safe Base64 encoded URN of the source design. 
+                ///
+                ///**Note:** The URN is returned as the [objectID` once you complete uploading the source design to APS. This value must be converted to a `Base64 (URL Safe) encoded](http://www.freeformatter.com/base64-encoder.html) string before you can specify it for this attribute.
+                /// </value>
+                [DataMember(Name = "urn", EmitDefaultValue = false)]
+                public string Urn { get; set; }
+
+                /// <summary>
+                ///- `true`: The source design is compressed as a zip file. If set to `true`, you need to define the `rootFilename`.'
+                ///- `false`: (Default) The source design is not compressed.
+                /// </summary>
+                /// <value>
+                ///- `true`: The source design is compressed as a zip file. If set to `true`, you need to define the `rootFilename`.'
+                ///- `false`: (Default) The source design is not compressed.
+                /// </value>
+                [DataMember(Name = "compressedUrn", EmitDefaultValue = false)]
+                public bool? CompressedUrn { get; set; }
+
+                /// <summary>
+                ///The file name of the top-level component of the source design.  Mandatory if  `compressedUrn` is set to `true`.
+                /// </summary>
+                /// <value>
+                ///The file name of the top-level component of the source design.  Mandatory if  `compressedUrn` is set to `true`.
+                /// </value>
+                [DataMember(Name = "rootFilename", EmitDefaultValue = false)]
+                public string RootFilename { get; set; }
+
+                /// <summary>
+                ///- `true` - Instructs the system to check for references, and if any exist, download all referenced files. Setting this parameter to `true` is mandatory when translating source designs consisting of multiple files. For example, Autodesk Inventor assemblies.
+                ///- `false` - (Default) Instructs the system not to check for references.
+                /// </summary>
+                /// <value>
+                ///- `true` - Instructs the system to check for references, and if any exist, download all referenced files. Setting this parameter to `true` is mandatory when translating source designs consisting of multiple files. For example, Autodesk Inventor assemblies.
+                ///- `false` - (Default) Instructs the system not to check for references.
+                /// </value>
+                [DataMember(Name = "checkReferences", EmitDefaultValue = false)]
+                public bool? CheckReferences { get; set; }
+
+                /// <summary>
+                /// Returns the string presentation of the object
+                /// </summary>
+                /// <returns>String presentation of the object</returns>
+                public override string ToString()
+                {
+                        return JsonConvert.SerializeObject(this, Formatting.Indented);
+                }
         }
-        
-        /// <summary>
-        /// The design URN; returned when uploading the file to APS The URN needs to be [Base64 (URL Safe) encoded](https://developer.autodesk.com/en/docs/model-derivative/v2/reference/http/job-POST/#id3). 
-        /// </summary>
-        /// <value>The design URN; returned when uploading the file to APS The URN needs to be [Base64 (URL Safe) encoded](https://developer.autodesk.com/en/docs/model-derivative/v2/reference/http/job-POST/#id3). </value>
-        [DataMember(Name="urn", EmitDefaultValue=false)]
-        public string Urn { get; set; }
-
-        /// <summary>
-        /// Set this to &#x60;true&#x60; if the source file is compressed. If set to &#x60;true&#x60;, you need to define the &#x60;rootFilename&#x60;.
-        /// </summary>
-        /// <value>Set this to &#x60;true&#x60; if the source file is compressed. If set to &#x60;true&#x60;, you need to define the &#x60;rootFilename&#x60;.</value>
-        [DataMember(Name="compressedUrn", EmitDefaultValue=false)]
-        public bool? CompressedUrn { get; set; }
-
-        /// <summary>
-        /// The root filename of the compressed file. Mandatory if the &#x60;compressedUrn&#x60; is set to &#x60;true&#x60;.
-        /// </summary>
-        /// <value>The root filename of the compressed file. Mandatory if the &#x60;compressedUrn&#x60; is set to &#x60;true&#x60;.</value>
-        [DataMember(Name="rootFilename", EmitDefaultValue=false)]
-        public string RootFilename { get; set; }
-
-        /// <summary>
-        /// - true - Instructs the server to check for references and download all referenced files. If the design consists of multiple files (as with Autodesk Inventor assemblies) the translation fails if this attribute is not set to true. - false - (Default) Does not check for any references.
-        /// </summary>
-        /// <value>- true - Instructs the server to check for references and download all referenced files. If the design consists of multiple files (as with Autodesk Inventor assemblies) the translation fails if this attribute is not set to true. - false - (Default) Does not check for any references.</value>
-        [DataMember(Name="checkReferences", EmitDefaultValue=false)]
-        public bool? CheckReferences { get; set; }
-
-        /// <summary>
-        /// Returns the string presentation of the object
-        /// </summary>
-        /// <returns>String presentation of the object</returns>
-        public override string ToString()
-        {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
-        }
-    }
 
 }

@@ -46,7 +46,7 @@ namespace Autodesk.Webhooks.Model
         }
         
         /// <summary>
-        /// Gets or Sets Hooks
+        ///Gets or Sets Hooks
         /// </summary>
         [DataMember(Name="hooks", EmitDefaultValue=false)]
         public List<HookHooks> Hooks { get; set; }

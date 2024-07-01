@@ -46,44 +46,62 @@ namespace Autodesk.Oss.Model
         }
         
         /// <summary>
-        /// Accompanies error state for the object and describes the error encountered
+        ///Describes an error that was encountered. Returned only if the signed URL request for that object failed.
         /// </summary>
-        /// <value>Accompanies error state for the object and describes the error encountered</value>
+        /// <value>
+        ///Describes an error that was encountered. Returned only if the signed URL request for that object failed.
+        /// </value>
         [DataMember(Name="reason", EmitDefaultValue=false)]
         public string Reason { get; set; }
 
         /// <summary>
-        /// Appears when object is in error state
+        ///Returned only if the signed URL request for that object failed.
         /// </summary>
-        /// <value>Appears when object is in error state</value>
+        /// <value>
+        ///Returned only if the signed URL request for that object failed.
+        /// </value>
         [DataMember(Name="status", EmitDefaultValue=false)]
         public string Status { get; set; }
 
         /// <summary>
-        /// Time Stamp representing the upload abort date for which all parts must be uploaded for the object and the complete upload endpoint must be called.
+        ///The deadline to call [Complete Batch Upload to S3 Signed URL](/en/docs/data/v2/reference/http/buckets-:bucketKey-objects-:objectKey-signeds3upload-POST/) for the object. If not completed by this time, all uploaded data for this session will be discarded.
         /// </summary>
-        /// <value>Time Stamp representing the upload abort date for which all parts must be uploaded for the object and the complete upload endpoint must be called.</value>
+        /// <value>
+        ///The deadline to call [Complete Batch Upload to S3 Signed URL](/en/docs/data/v2/reference/http/buckets-:bucketKey-objects-:objectKey-signeds3upload-POST/) for the object. If not completed by this time, all uploaded data for this session will be discarded.
+        /// </value>
         [DataMember(Name="uploadExpiration", EmitDefaultValue=false)]
         public string UploadExpiration { get; set; }
 
         /// <summary>
-        /// The identifier of the upload session, to differentiate multiple attempts to upload data for the same object. This must be provided when re-requesting chunk URLs for the same blob if they expire, and when calling the Complete Upload endpoint.
+        ///An ID that uniquely identifies the upload session. It allows OSS to differentiate between fresh upload attempts from attempts to resume uploading data for an active upload session, in case of network interruptions. You must provide this value when:
+///
+///- Re-requesting chunk URLs for an active upload session. 
+///- When calling the [Complete Batch Upload to S3 Signed URL](/en/docs/data/v2/reference/http/buckets-:bucketKey-objects-:objectKey-signeds3upload-POST/) operation to end an active upload session.
         /// </summary>
-        /// <value>The identifier of the upload session, to differentiate multiple attempts to upload data for the same object. This must be provided when re-requesting chunk URLs for the same blob if they expire, and when calling the Complete Upload endpoint.</value>
+        /// <value>
+        ///An ID that uniquely identifies the upload session. It allows OSS to differentiate between fresh upload attempts from attempts to resume uploading data for an active upload session, in case of network interruptions. You must provide this value when:
+///
+///- Re-requesting chunk URLs for an active upload session. 
+///- When calling the [Complete Batch Upload to S3 Signed URL](/en/docs/data/v2/reference/http/buckets-:bucketKey-objects-:objectKey-signeds3upload-POST/) operation to end an active upload session.
+        /// </value>
         [DataMember(Name="uploadKey", EmitDefaultValue=false)]
         public string UploadKey { get; set; }
 
         /// <summary>
-        /// Time Stamp representing the expiration of the generated signed URLs.  Note that when multiple parts/URLs are requested, there is a chance that this time stamp does not represent the expiration of all URLs in the group. Consider this expiration a very close approximation of the expiration of the URLs in the group
+        ///The date and time, in the ISO 8601 format, indicating when the signed URLs will expire.
         /// </summary>
-        /// <value>Time Stamp representing the expiration of the generated signed URLs.  Note that when multiple parts/URLs are requested, there is a chance that this time stamp does not represent the expiration of all URLs in the group. Consider this expiration a very close approximation of the expiration of the URLs in the group</value>
+        /// <value>
+        ///The date and time, in the ISO 8601 format, indicating when the signed URLs will expire.
+        /// </value>
         [DataMember(Name="urlExpiration", EmitDefaultValue=false)]
         public string UrlExpiration { get; set; }
 
         /// <summary>
-        /// An array of signed URLs. For a single-part upload, this will only include a single URL. For a multipart upload, there will be one for each chunk of a multipart upload; the index of the URL in the array corresponds to the part number of the chunk.
+        ///An array of signed URLs. For a single-part upload, this will only include a single URL. For a multipart upload, there will be one for each chunk of a multipart upload; the index of the URL in the array corresponds to the part number of the chunk.
         /// </summary>
-        /// <value>An array of signed URLs. For a single-part upload, this will only include a single URL. For a multipart upload, there will be one for each chunk of a multipart upload; the index of the URL in the array corresponds to the part number of the chunk.</value>
+        /// <value>
+        ///An array of signed URLs. For a single-part upload, this will only include a single URL. For a multipart upload, there will be one for each chunk of a multipart upload; the index of the URL in the array corresponds to the part number of the chunk.
+        /// </value>
         [DataMember(Name="urls", EmitDefaultValue=false)]
         public List<string> Urls { get; set; }
 

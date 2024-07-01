@@ -1,11 +1,11 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Model Derivative
  *
- * Model Derivative Service Documentation
+ * Use the Model Derivative API to translate designs from one CAD format to another. You can also use this API to extract metadata from a model.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,27 +33,35 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// Possible values are &#x60;bounded&#x60;, &#x60;trimmed&#x60; and &#x60;wireframe&#x60;. By default it is set to bounded surface.
+    /// Specifies the surface type to export as, when the output is IGES. Possible values are 
+    ///
+    ///- `bounded` - (Default) Bounded surface
+    ///- `trimmed` - Trimmed surface
+    ///-  `wireframe`. Wireframe  surface.'
     /// </summary>
-    /// <value>Possible values are &#x60;bounded&#x60;, &#x60;trimmed&#x60; and &#x60;wireframe&#x60;. By default it is set to bounded surface.</value>
-    
+    ///<value>Specifies the surface type to export as, when the output is IGES. Possible values are 
+    ///
+    ///- `bounded` - (Default) Bounded surface
+    ///- `trimmed` - Trimmed surface
+    ///-  `wireframe`. Wireframe  surface.'</value>
+
     [JsonConverter(typeof(StringEnumConverter))]
-    
+
     public enum SurfaceType
     {
-        
+
         /// <summary>
         /// Enum Bounded for value: bounded
         /// </summary>
         [EnumMember(Value = "bounded")]
         Bounded,
-        
+
         /// <summary>
         /// Enum Trimmed for value: trimmed
         /// </summary>
         [EnumMember(Value = "trimmed")]
         Trimmed,
-        
+
         /// <summary>
         /// Enum Wireframe for value: wireframe
         /// </summary>

@@ -33,20 +33,14 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Authentication.Model
 {
     /// <summary>
-    /// Enum for scopes
+    /// Specifies the scope for the token you are requesting. See the [Developer's Guide documentation on scopes](/en/docs/oauth/v2/developers_guide/scopes/) for a complete list of possible values.
     /// </summary>
-    /// <value>Enum for scopes</value>
+    ///<value>Specifies the scope for the token you are requesting. See the [Developer's Guide documentation on scopes](/en/docs/oauth/v2/developers_guide/scopes/) for a complete list of possible values.</value>
     
     [JsonConverter(typeof(StringEnumConverter))]
     
     public enum Scopes
     {
-        
-        /// <summary>
-        /// Enum UserProfileread for value: user-profile:read
-        /// </summary>
-        [EnumMember(Value = "user-profile:read")]
-        UserProfileRead,
         
         /// <summary>
         /// Enum Userread for value: user:read
@@ -61,6 +55,12 @@ namespace Autodesk.Authentication.Model
         UserWrite,
         
         /// <summary>
+        /// Enum UserProfileread for value: user-profile:read
+        /// </summary>
+        [EnumMember(Value = "user-profile:read")]
+        UserProfileRead,
+        
+        /// <summary>
         /// Enum Viewablesread for value: viewables:read
         /// </summary>
         [EnumMember(Value = "viewables:read")]
@@ -71,6 +71,12 @@ namespace Autodesk.Authentication.Model
         /// </summary>
         [EnumMember(Value = "data:read")]
         DataRead,
+        
+        /// <summary>
+        /// Enum DatareadURNOFRESOURCE for value: data:read:&lt;URN_OF_RESOURCE&gt;
+        /// </summary>
+        [EnumMember(Value = "data:read:<URN_OF_RESOURCE>")]
+        DataReadURNOFRESOURCE,
         
         /// <summary>
         /// Enum Datawrite for value: data:write

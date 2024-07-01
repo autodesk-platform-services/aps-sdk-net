@@ -5,7 +5,7 @@
  *
  * Model Derivative
  *
- * Model Derivative Service Documentation
+ * Use the Model Derivative API to translate designs from one CAD format to another. You can also use this API to extract metadata from a model.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,10 +33,10 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// list of the requested outputs
+    /// List of the requested outputs.
     /// </summary>
     [DataContract]
-    public partial class JobAcceptedJobs 
+    public partial class JobAcceptedJobs
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="JobAcceptedJobs" /> class.
@@ -44,12 +44,14 @@ namespace Autodesk.ModelDerivative.Model
         public JobAcceptedJobs()
         {
         }
-        
+
         /// <summary>
-        /// identical to the request body. For more information please see the request body structure above.
+        ///Identical to the `output` object of the request body. For information on each attribute, see the request body structure description.
         /// </summary>
-        /// <value>identical to the request body. For more information please see the request body structure above.</value>
-        [DataMember(Name="output", EmitDefaultValue=false)]
+        /// <value>
+        ///Identical to the `output` object of the request body. For information on each attribute, see the request body structure description.
+        /// </value>
+        [DataMember(Name = "output", EmitDefaultValue = false)]
         public Object Output { get; set; }
 
         /// <summary>

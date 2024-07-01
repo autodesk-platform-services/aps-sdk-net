@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Oss.Model
 {
     /// <summary>
-    /// Bucket
+    /// An object representing a bucket.
     /// </summary>
     [DataContract]
     public partial class Bucket 
@@ -46,38 +46,46 @@ namespace Autodesk.Oss.Model
         }
         
         /// <summary>
-        /// The key of the Bucket
+        ///Bucket key: An ID that uniquely identifies the bucket.
         /// </summary>
-        /// <value>The key of the Bucket</value>
+        /// <value>
+        ///Bucket key: An ID that uniquely identifies the bucket.
+        /// </value>
         [DataMember(Name="bucketKey", EmitDefaultValue=false)]
         public string BucketKey { get; set; }
 
         /// <summary>
-        /// The owner of the Bucket
+        ///The Client ID of the application that owns the bucket.
         /// </summary>
-        /// <value>The owner of the Bucket</value>
+        /// <value>
+        ///The Client ID of the application that owns the bucket.
+        /// </value>
         [DataMember(Name="bucketOwner", EmitDefaultValue=false)]
         public string BucketOwner { get; set; }
 
         /// <summary>
-        /// The epoch time at which the bucket was created
+        ///The time the bucket was created, represented as a Unix timestamp.
         /// </summary>
-        /// <value>The epoch time at which the bucket was created</value>
+        /// <value>
+        ///The time the bucket was created, represented as a Unix timestamp.
+        /// </value>
         [DataMember(Name="createdDate", EmitDefaultValue=false)]
         public string CreatedDate { get; set; }
 
         /// <summary>
-        /// Gets or Sets Permissions
+        ///An array of objects, where each object represents an application that can access the bucket.
         /// </summary>
+        /// <value>
+        ///An array of objects, where each object represents an application that can access the bucket.
+        /// </value>
         [DataMember(Name="permissions", EmitDefaultValue=false)]
         public List<Permission> Permissions { get; set; }
 
         /// <summary>
-        /// The policy key
+        ///Gets or Sets PolicyKey
         /// </summary>
-        /// <value>The policy key</value>
-        [DataMember(Name="policyKey", EmitDefaultValue=false)]
-        public string PolicyKey { get; set; }
+        [DataMember(Name="policyKey", EmitDefaultValue=true)]
+        public PolicyKey PolicyKey { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

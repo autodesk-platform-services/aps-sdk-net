@@ -46,13 +46,13 @@ namespace Autodesk.Webhooks.Model
         }
         
         /// <summary>
-        /// Gets or Sets Status
+        ///Gets or Sets Status
         /// </summary>
         [DataMember(Name="status", EmitDefaultValue=false)]
         public decimal? Status { get; set; }
 
         /// <summary>
-        /// Gets or Sets Detail
+        ///Gets or Sets Detail
         /// </summary>
         [DataMember(Name="detail", EmitDefaultValue=false)]
         public List<Object> Detail { get; set; }

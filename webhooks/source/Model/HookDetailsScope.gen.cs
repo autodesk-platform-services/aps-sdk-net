@@ -46,7 +46,7 @@ namespace Autodesk.Webhooks.Model
         }
         
         /// <summary>
-        /// Gets or Sets Folder
+        ///Gets or Sets Folder
         /// </summary>
         [DataMember(Name="folder", EmitDefaultValue=false)]
         public string Folder { get; set; }

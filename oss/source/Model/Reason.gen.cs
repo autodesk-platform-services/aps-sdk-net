@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Oss.Model
 {
     /// <summary>
-    /// reason for failure
+    /// An object returned with an error describing the reason for failure.
     /// </summary>
     [DataContract]
     public partial class Reason 
@@ -46,9 +46,11 @@ namespace Autodesk.Oss.Model
         }
         
         /// <summary>
-        /// reason for failure
+        ///reason for failure
         /// </summary>
-        /// <value>reason for failure</value>
+        /// <value>
+        ///reason for failure
+        /// </value>
         [DataMember(Name="reason", EmitDefaultValue=false)]
         public string _Reason { get; set; }
 

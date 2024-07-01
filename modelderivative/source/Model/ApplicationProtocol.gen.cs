@@ -1,11 +1,11 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Model Derivative
  *
- * Model Derivative Service Documentation
+ * Use the Model Derivative API to translate designs from one CAD format to another. You can also use this API to extract metadata from a model.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,27 +33,35 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// A STEP file can be generated with the following Application Protocols: &#x60;203&#x60; for configuration controlled design, &#x60;214&#x60; for core data for automotive mechanical design processes, &#x60;242&#x60; for managed model based 3D engineering. By default, &#x60;214&#x60; will be exported. 
+    /// Specifies the application protocol to use when the output type is STEP. Possible values are: 
+    ///
+    ///- `203` - Configuration controlled design.
+    ///- `214` - (Default) Core data for automotive mechanical design processes. 
+    ///- `242` - Managed model based 3D engineering. 
     /// </summary>
-    /// <value>A STEP file can be generated with the following Application Protocols: &#x60;203&#x60; for configuration controlled design, &#x60;214&#x60; for core data for automotive mechanical design processes, &#x60;242&#x60; for managed model based 3D engineering. By default, &#x60;214&#x60; will be exported. </value>
-    
+    ///<value>Specifies the application protocol to use when the output type is STEP. Possible values are: 
+    ///
+    ///- `203` - Configuration controlled design.
+    ///- `214` - (Default) Core data for automotive mechanical design processes. 
+    ///- `242` - Managed model based 3D engineering. </value>
+
     [JsonConverter(typeof(StringEnumConverter))]
-    
+
     public enum ApplicationProtocol
     {
-        
+
         /// <summary>
         /// Enum _203 for value: 203
         /// </summary>
         [EnumMember(Value = "203")]
         _203,
-        
+
         /// <summary>
         /// Enum _214 for value: 214
         /// </summary>
         [EnumMember(Value = "214")]
         _214,
-        
+
         /// <summary>
         /// Enum _242 for value: 242
         /// </summary>

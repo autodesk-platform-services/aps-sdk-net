@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autodesk.Construction.Issues", "source\Autodesk.Construction.Issues.csproj", "{A37D607C-446C-4A9F-B240-538FA6C0A62D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autodesk.Construction.Issues.Test", "test\Autodesk.Construction.Issues.Test.csproj", "{1DBB7C89-4C18-4643-9897-8DEBE397A322}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A37D607C-446C-4A9F-B240-538FA6C0A62D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A37D607C-446C-4A9F-B240-538FA6C0A62D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A37D607C-446C-4A9F-B240-538FA6C0A62D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A37D607C-446C-4A9F-B240-538FA6C0A62D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1DBB7C89-4C18-4643-9897-8DEBE397A322}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DBB7C89-4C18-4643-9897-8DEBE397A322}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DBB7C89-4C18-4643-9897-8DEBE397A322}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DBB7C89-4C18-4643-9897-8DEBE397A322}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

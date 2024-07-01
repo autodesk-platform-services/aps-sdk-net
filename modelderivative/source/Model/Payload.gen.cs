@@ -1,11 +1,11 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Model Derivative
  *
- * Model Derivative Service Documentation
+ * Use the Model Derivative API to translate designs from one CAD format to another. You can also use this API to extract metadata from a model.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,20 +33,27 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// Defines Payload
+    /// Specifies the format for numeric values in the response body. Possible values:
+    ///
+    ///- `text` - (Default) Returns all properties requested in `fields` without applying any special formatting.
+    ///- `unit` - Applies a filter and returns only the properties that contain numerical values. Additionally, it formats property values as `##&lt;VALUE_OF_PROPERTY&gt;&lt;UNIT_OF_VALUE&lt;&gt;PRECISION&gt;&lt;SYSTEM_UNIT&gt;`. For example `##94.172{mm}[3]{m}`, where `94.172` is the value of the property, `{mm}` is the unit of the value, `[3]` is the precision, and `{m}` is the metric base unit for the measurement.
     /// </summary>
-    
+    ///<value>Specifies the format for numeric values in the response body. Possible values:
+    ///
+    ///- `text` - (Default) Returns all properties requested in `fields` without applying any special formatting.
+    ///- `unit` - Applies a filter and returns only the properties that contain numerical values. Additionally, it formats property values as `##&lt;VALUE_OF_PROPERTY&gt;&lt;UNIT_OF_VALUE&lt;&gt;PRECISION&lt;&gt;SYSTEM_UNIT&gt;`. For example `##94.172{mm}[3]{m}`, where `94.172` is the value of the property, `{mm}` is the unit of the value, `[3]` is the precision, and `{m}` is the metric base unit for the measurement.</value>
+
     [JsonConverter(typeof(StringEnumConverter))]
-    
+
     public enum Payload
     {
-        
+
         /// <summary>
         /// Enum Text for value: text
         /// </summary>
         [EnumMember(Value = "text")]
         Text,
-        
+
         /// <summary>
         /// Enum Unit for value: unit
         /// </summary>

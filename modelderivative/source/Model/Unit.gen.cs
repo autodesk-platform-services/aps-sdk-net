@@ -1,11 +1,11 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Model Derivative
  *
- * Model Derivative Service Documentation
+ * Use the Model Derivative API to translate designs from one CAD format to another. You can also use this API to extract metadata from a model.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,75 +33,105 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// Translate models into different units; this causes the values to change. For example, from millimeters (10, 123, 31) to centimeters (1.0, 12.3, 3.1). If the source unit or the unit you are translating into is not supported, the values remain unchanged. Possible values: meter, decimeter, centimeter, millimeter, micrometer, nanometer yard, foot, inch, mil, microinch Note that this feature does not support F3D files.
+    /// The units the models must be translated to, when the output type is OBJ. For example, from millimeters (10, 123, 31) to centimeters (1.0, 12.3, 3.1). If the source unit or the unit you are translating to is not supported, the values remain unchanged.
+    ///Possible values are: 
+    ///
+    ///- `meter`
+    ///- `decimeter`
+    ///- `centimeter`
+    ///- `millimeter`
+    ///- `micrometer`
+    ///- `nanometer`
+    ///- `yard`
+    ///- `foot`
+    ///- `inch`
+    ///- `mil`
+    ///- `microinch`
+    ///
+    ///**Note:** Not supported when the source design is F3D.
     /// </summary>
-    /// <value>Translate models into different units; this causes the values to change. For example, from millimeters (10, 123, 31) to centimeters (1.0, 12.3, 3.1). If the source unit or the unit you are translating into is not supported, the values remain unchanged. Possible values: meter, decimeter, centimeter, millimeter, micrometer, nanometer yard, foot, inch, mil, microinch Note that this feature does not support F3D files.</value>
-    
+    ///<value>The units the models must be translated to, when the output type is OBJ. For example, from millimeters (10, 123, 31) to centimeters (1.0, 12.3, 3.1). If the source unit or the unit you are translating to is not supported, the values remain unchanged.
+    ///Possible values are: 
+    ///
+    ///- `meter`
+    ///- `decimeter`
+    ///- `centimeter`
+    ///- `millimeter`
+    ///- `micrometer`
+    ///- `nanometer`
+    ///- `yard`
+    ///- `foot`
+    ///- `inch`
+    ///- `mil`
+    ///- `microinch`
+    ///
+    ///**Note:** Not supported when the source design is F3D.</value>
+
     [JsonConverter(typeof(StringEnumConverter))]
-    
+
     public enum Unit
     {
-        
+
         /// <summary>
         /// Enum Meter for value: meter
         /// </summary>
         [EnumMember(Value = "meter")]
         Meter,
-        
+
         /// <summary>
         /// Enum Decimeter for value: decimeter
         /// </summary>
         [EnumMember(Value = "decimeter")]
         Decimeter,
-        
+
         /// <summary>
         /// Enum Centimeter for value: centimeter
         /// </summary>
         [EnumMember(Value = "centimeter")]
         Centimeter,
-        
+
         /// <summary>
         /// Enum Millimeter for value: millimeter
         /// </summary>
         [EnumMember(Value = "millimeter")]
         Millimeter,
-        
+
         /// <summary>
         /// Enum Micrometer for value: micrometer
         /// </summary>
         [EnumMember(Value = "micrometer")]
         Micrometer,
-        
+
         /// <summary>
         /// Enum Nanometer for value: nanometer
         /// </summary>
         [EnumMember(Value = "nanometer")]
         Nanometer,
-        
+
         /// <summary>
         /// Enum Yard for value: yard
         /// </summary>
         [EnumMember(Value = "yard")]
         Yard,
-        
+
         /// <summary>
         /// Enum Foot for value: foot
         /// </summary>
         [EnumMember(Value = "foot")]
         Foot,
-        
+
         /// <summary>
         /// Enum Inch for value: inch
         /// </summary>
         [EnumMember(Value = "inch")]
         Inch,
-        
+
         /// <summary>
         /// Enum Mil for value: mil
         /// </summary>
         [EnumMember(Value = "mil")]
         Mil,
-        
+
         /// <summary>
         /// Enum Microinch for value: microinch
         /// </summary>

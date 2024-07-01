@@ -5,7 +5,7 @@
  *
  * Model Derivative
  *
- * Model Derivative Service Documentation
+ * Use the Model Derivative API to translate designs from one CAD format to another. You can also use this API to extract metadata from a model.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,16 +40,33 @@ namespace Autodesk.ModelDerivative.Http
     public interface IThumbnailsApi
     {
         /// <summary>
-        /// Downloads the thumbnail for the source file.
+        /// Fetch Thumbnail
         /// </summary>
         /// <remarks>
-        /// Downloads the thumbnail for the source file.
+        ///Downloads a thumbnail of the specified source design.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="urn">The Base64 (URL Safe) encoded design URN</param>/// <param name="width">Width of thumbnail  Possible values: 100, 200, 400  If width is omitted, but height is specified, the implicit value for width will match height.  If both width and height are omitted, the server will return a thumbnail closest to a width of 200, if available. (optional)</param>/// <param name="height">Height of thumbnail  Possible values: 100, 200, 400  If height is omitted, but width is specified, the implicit value for height will match width.  If both width and height are omitted, the server will return a thumbnail closest to a width of 200, if available. (optional)</param>
-        /// <returns>Task of ApiResponse<System.IO.Stream></returns>
-        
-        System.Threading.Tasks.Task<ApiResponse<System.IO.Stream>> GetThumbnailAsync (string urn, Width width,Height height, Region region = default,  string accessToken = null, bool throwOnError = true);
+        /// <param name="urn">
+        ///The URL-safe Base64 encoded URN of the source design.
+        /// </param>
+        /// <param name="region">
+        ///Specifies the data center where the manifest and derivatives of the specified source design are stored. Possible values are:
+        ///
+        ///- `US` - (Default) Data center for the US region.
+        ///- `EMEA` - Data center for the European Union, Middle East, and Africa. 
+        ///- `APAC` - (Beta) Data center for the Australia region.
+        ///
+        ///**Note**: Beta features are subject to change. Please avoid using them in production environments. (optional)
+        /// </param>
+        /// <param name="width">
+        ///Width of thumbnail in pixels.  Possible values are: `100`, `200`, `400`  If `width` is omitted, but `height` is specified, `width` defaults to `height`. If both `width` and `height` are omitted, the server will return a thumbnail closest to `200`, if such a thumbnail is available. (optional)
+        /// </param>
+        /// <param name="height">
+        ///Height of thumbnails. Possible values are: `100`, `200`, `400`.If `height` is omitted, but `width` is specified, `height` defaults to `width`.  If both `width` and `height` are omitted, the server will return a thumbnail closest to `200`, if such a thumbnail is available (optional)
+        /// </param>
+        /// <returns>Task of ApiResponse&lt;System.IO.Stream&gt;</returns>
+
+        System.Threading.Tasks.Task<ApiResponse<System.IO.Stream>> GetThumbnailAsync(string urn, Region? region = null, Width? width = null, Height? height = null, string accessToken = null, bool throwOnError = true);
     }
 
     /// <summary>
@@ -72,27 +89,27 @@ namespace Autodesk.ModelDerivative.Http
         }
         private void SetQueryParameter(string name, object value, Dictionary<string, object> dictionary)
         {
-            if(value is Enum)
+            if (value is Enum)
             {
                 var type = value.GetType();
                 var memberInfos = type.GetMember(value.ToString());
                 var enumValueMemberInfo = memberInfos.FirstOrDefault(m => m.DeclaringType == type);
                 var valueAttributes = enumValueMemberInfo.GetCustomAttributes(typeof(EnumMemberAttribute), false);
-                if(valueAttributes.Length > 0)
+                if (valueAttributes.Length > 0)
                 {
                     dictionary.Add(name, ((EnumMemberAttribute)valueAttributes[0]).Value);
                 }
             }
-            else if(value is int)
+            else if (value is int)
             {
-                if((int)value > 0)
+                if ((int)value > 0)
                 {
                     dictionary.Add(name, value);
                 }
             }
             else
             {
-                if(value != null)
+                if (value != null)
                 {
                     dictionary.Add(name, value);
                 }
@@ -100,27 +117,27 @@ namespace Autodesk.ModelDerivative.Http
         }
         private void SetHeader(string baseName, object value, HttpRequestMessage req)
         {
-                if(value is DateTime)
+            if (value is DateTime)
+            {
+                if ((DateTime)value != DateTime.MinValue)
                 {
-                    if((DateTime)value != DateTime.MinValue)
+                    req.Headers.TryAddWithoutValidation(baseName, LocalMarshalling.ParameterToString(value)); // header parameter
+                }
+            }
+            else
+            {
+                if (value != null)
+                {
+                    if (!string.Equals(baseName, "Content-Range"))
                     {
                         req.Headers.TryAddWithoutValidation(baseName, LocalMarshalling.ParameterToString(value)); // header parameter
                     }
-                }
-                else
-                {
-                    if (value != null)
+                    else
                     {
-                        if(!string.Equals(baseName, "Content-Range"))
-                        {
-                            req.Headers.TryAddWithoutValidation(baseName, LocalMarshalling.ParameterToString(value)); // header parameter
-                        }
-                        else
-                        {
-                            req.Content.Headers.Add(baseName, LocalMarshalling.ParameterToString(value));
-                        }
+                        req.Content.Headers.Add(baseName, LocalMarshalling.ParameterToString(value));
                     }
                 }
+            }
 
         }
 
@@ -128,29 +145,45 @@ namespace Autodesk.ModelDerivative.Http
         /// Gets or sets the ApsConfiguration object
         /// </summary>
         /// <value>An instance of the ForgeService</value>
-        public ForgeService Service {get; set;}
+        public ForgeService Service { get; set; }
 
         /// <summary>
-        /// Downloads the thumbnail for the source file.
+        /// Fetch Thumbnail
         /// </summary>
         /// <remarks>
-        /// Downloads the thumbnail for the source file.
+        ///Downloads a thumbnail of the specified source design.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="urn">The Base64 (URL Safe) encoded design URN</param>/// <param name="width">Width of thumbnail  Possible values: 100, 200, 400  If width is omitted, but height is specified, the implicit value for width will match height.  If both width and height are omitted, the server will return a thumbnail closest to a width of 200, if available. (optional)</param>/// <param name="height">Height of thumbnail  Possible values: 100, 200, 400  If height is omitted, but width is specified, the implicit value for height will match width.  If both width and height are omitted, the server will return a thumbnail closest to a width of 200, if available. (optional)</param>
-        /// <returns>Task of ApiResponse<System.IO.Stream></returns>
-        
-        public async System.Threading.Tasks.Task<ApiResponse<System.IO.Stream>> GetThumbnailAsync (string urn,Width width = Width._200 ,Height height = Height._200, Region region = default,string accessToken = null, bool throwOnError = true)
+        /// <param name="urn">
+        ///The URL-safe Base64 encoded URN of the source design.
+        /// </param>
+        /// <param name="region">
+        ///Specifies the data center where the manifest and derivatives of the specified source design are stored. Possible values are:
+        ///
+        ///- `US` - (Default) Data center for the US region.
+        ///- `EMEA` - Data center for the European Union, Middle East, and Africa. 
+        ///- `APAC` - (Beta) Data center for the Australia region.
+        ///
+        ///**Note**: Beta features are subject to change. Please avoid using them in production environments. (optional)
+        /// </param>
+        /// <param name="width">
+        ///Width of thumbnail in pixels.  Possible values are: `100`, `200`, `400`  If `width` is omitted, but `height` is specified, `width` defaults to `height`. If both `width` and `height` are omitted, the server will return a thumbnail closest to `200`, if such a thumbnail is available. (optional)
+        /// </param>
+        /// <param name="height">
+        ///Height of thumbnails. Possible values are: `100`, `200`, `400`.If `height` is omitted, but `width` is specified, `height` defaults to `width`.  If both `width` and `height` are omitted, the server will return a thumbnail closest to `200`, if such a thumbnail is available (optional)
+        /// </param>
+        /// <returns>Task of ApiResponse&lt;System.IO.Stream&gt;></returns>
+
+        public async System.Threading.Tasks.Task<ApiResponse<System.IO.Stream>> GetThumbnailAsync(string urn, Region? region = null, Width? width = null, Height? height = null, string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into GetThumbnailAsync ");
-                string regionPath = Utils.GetPathfromRegion(region);
             using (var request = new HttpRequestMessage())
             {
                 var queryParam = new Dictionary<string, object>();
                 SetQueryParameter("width", width, queryParam);
                 SetQueryParameter("height", height, queryParam);
                 request.RequestUri =
-                   Marshalling.BuildRequestUri(regionPath + "{urn}/thumbnail",
+                    Marshalling.BuildRequestUri("/modelderivative/v2/designdata/{urn}/thumbnail",
                         routeParameters: new Dictionary<string, object> {
                             { "urn", urn},
                         },
@@ -158,42 +191,34 @@ namespace Autodesk.ModelDerivative.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/MODEL DERIVATIVE/C#/1.0.0");
-                if(!string.IsNullOrEmpty(accessToken))
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/MODEL DERIVATIVE/C#/2.0.0");
+                if (!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
                 }
 
 
 
+                SetHeader("region", region, request);
 
                 // tell the underlying pipeline what scope we'd like to use
                 // if (scopes == null)
                 // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read ");
+                // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read ");
                 // }
                 // else
                 // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
                 // if (scopes == null)
                 // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read ");
+                // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read ");
                 // }
                 // else
                 // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
-                // }
-                // if (scopes == null)
-                // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read ");
-                // }
-                // else
-                // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
 
                 request.Method = new HttpMethod("GET");
@@ -205,9 +230,11 @@ namespace Autodesk.ModelDerivative.Http
                 {
                     try
                     {
-                      await response.EnsureSuccessStatusCodeAsync();
-                    } catch (HttpRequestException ex) {
-                      throw new ModelDerivativeApiException(ex.Message, response, ex);
+                        await response.EnsureSuccessStatusCodeAsync();
+                    }
+                    catch (HttpRequestException ex)
+                    {
+                        throw new ModelDerivativeApiException(ex.Message, response, ex);
                     }
                 }
                 else if (!response.IsSuccessStatusCode)
