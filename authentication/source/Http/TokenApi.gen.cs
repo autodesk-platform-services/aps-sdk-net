@@ -383,7 +383,7 @@ namespace Autodesk.Authentication.Http
         ///
         ///The string can only contain alphanumeric characters, commas, periods, underscores, and hyphens.             (optional)
         /// </param>
-        /// <param name="scope">
+        /// <param name="scopes">
         ///A URL-encoded space-delimited list of requested scopes. See the [Developer's Guide documentation on scopes](/en/docs/oauth/v2/developers_guide/scopes/) for a list of valid values you can provide.
         ///
         ///The string you specify for this parameter must not exceed 2000 characters and it cannot contain more than 50 scopes.   (optional)
