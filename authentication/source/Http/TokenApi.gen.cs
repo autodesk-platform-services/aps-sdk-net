@@ -126,7 +126,7 @@ namespace Autodesk.Authentication.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="authorization">
-        ///Must be `Bearer <BASE64_ENCODED_STRING>` where `<BASE64_ENCODED_STRING>` is the Base64 encoding of the concatenated string `<CLIENT_ID>:<CLIENT_SECRET>`.'
+        ///Must be `Bearer &lt;BASE64_ENCODED_STRING&gt;` where `&lt;BASE64_ENCODED_STRING&gt;` is the Base64 encoding of the concatenated string `&lt;CLIENT_ID&gt;:&lt;CLIENT_SECRET&gt;`.'
         ///
         ///**Note** This header is required only for Traditional Web Apps and Server-to-Server Apps. It is not required for Desktop, Mobile, and Single-Page Apps. (optional)
         /// </param>
@@ -190,7 +190,7 @@ namespace Autodesk.Authentication.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="authorization">
-        ///Must be `Bearer <BASE64_ENCODED_STRING>` where `<BASE64_ENCODED_STRING>` is the Base64 encoding of the concatenated string `<CLIENT_ID>:<CLIENT_SECRET>`.'
+        ///Must be `Bearer &lt;BASE64_ENCODED_STRING&gt;` where `&lt;BASE64_ENCODED_STRING&gt;` is the Base64 encoding of the concatenated string `&lt;CLIENT_ID&gt;:&lt;CLIENT_SECRET&gt;`.'
         ///
         ///**Note** This header is required only for Traditional Web Apps and Server-to-Server Apps. It is not required for Desktop, Mobile, and Single-Page Apps. (optional)
         /// </param>
@@ -238,7 +238,7 @@ namespace Autodesk.Authentication.Http
         ///
         /// </param>
         /// <param name="authorization">
-        ///Must be `Bearer <BASE64_ENCODED_STRING>` where `<BASE64_ENCODED_STRING>` is the Base64 encoding of the concatenated string `<CLIENT_ID>:<CLIENT_SECRET>`.'
+        ///Must be `Bearer &lt;BASE64_ENCODED_STRING&gt;` where `&lt;BASE64_ENCODED_STRING&gt;` is the Base64 encoding of the concatenated string `&lt;CLIENT_ID&gt;:&lt;CLIENT_SECRET&gt;`.'
         ///
         ///**Note** This header is required only for Traditional Web Apps and Server-to-Server Apps. It is not required for Desktop, Mobile, and Single-Page Apps. (optional)
         /// </param>
@@ -463,7 +463,7 @@ namespace Autodesk.Authentication.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="authorization">
-        ///Must be `Bearer <BASE64_ENCODED_STRING>` where `<BASE64_ENCODED_STRING>` is the Base64 encoding of the concatenated string `<CLIENT_ID>:<CLIENT_SECRET>`.'
+        ///Must be `Bearer &lt;BASE64_ENCODED_STRING&gt;` where `&lt;BASE64_ENCODED_STRING&gt;` is the Base64 encoding of the concatenated string `&lt;CLIENT_ID&gt;:&lt;CLIENT_SECRET&gt;`.'
         ///
         ///**Note** This header is required only for Traditional Web Apps and Server-to-Server Apps. It is not required for Desktop, Mobile, and Single-Page Apps. (optional)
         /// </param>
@@ -674,7 +674,7 @@ namespace Autodesk.Authentication.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="authorization">
-        ///Must be `Bearer <BASE64_ENCODED_STRING>` where `<BASE64_ENCODED_STRING>` is the Base64 encoding of the concatenated string `<CLIENT_ID>:<CLIENT_SECRET>`.'
+        ///Must be `Bearer &lt;BASE64_ENCODED_STRING&gt;` where `&lt;BASE64_ENCODED_STRING&gt;` is the Base64 encoding of the concatenated string `&lt;CLIENT_ID&gt;:&lt;CLIENT_SECRET&gt;`.'
         ///
         ///**Note** This header is required only for Traditional Web Apps and Server-to-Server Apps. It is not required for Desktop, Mobile, and Single-Page Apps. (optional)
         /// </param>
@@ -798,7 +798,7 @@ namespace Autodesk.Authentication.Http
         ///
         /// </param>
         /// <param name="authorization">
-        ///Must be `Bearer <BASE64_ENCODED_STRING>` where `<BASE64_ENCODED_STRING>` is the Base64 encoding of the concatenated string `<CLIENT_ID>:<CLIENT_SECRET>`.'
+        ///Must be `Bearer &lt;BASE64_ENCODED_STRING&gt;` where `&lt;BASE64_ENCODED_STRING&gt;` is the Base64 encoding of the concatenated string `&lt;CLIENT_ID&gt;:&lt;CLIENT_SECRET&gt;`.'
         ///
         ///**Note** This header is required only for Traditional Web Apps and Server-to-Server Apps. It is not required for Desktop, Mobile, and Single-Page Apps. (optional)
         /// </param>
