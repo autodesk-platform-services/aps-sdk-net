@@ -115,7 +115,7 @@ namespace Autodesk.DataManagement.Model
         /// Gets or Sets StorageSize
         /// </summary>
         [DataMember(Name="storageSize", EmitDefaultValue=false)]
-        public int? StorageSize { get; set; }
+        public long? StorageSize { get; set; }
 
         /// <summary>
         /// Gets or Sets Extension
