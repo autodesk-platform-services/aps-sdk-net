@@ -53,6 +53,15 @@ public class TestOss
 	}
 
 	[TestMethod]
+	public async Task TestDeleteBucketAsync()
+	{
+		HttpResponseMessage? response = await _ossClient.DeleteBucketAsync(
+			accessToken: token,
+			bucketKey: bucketKey);
+		Assert.IsTrue(response.IsSuccessStatusCode);
+	}
+
+	[TestMethod]
 	public async Task TestUploadObjectAsync()
 	{
 		ObjectDetails objectDetails = await _ossClient.Upload(
