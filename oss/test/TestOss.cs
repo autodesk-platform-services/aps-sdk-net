@@ -1,4 +1,4 @@
-namespace test;
+namespace Autodesk.Oss.Test;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Autodesk.SDKManager;
