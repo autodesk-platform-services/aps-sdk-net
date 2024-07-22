@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Authors>Autodesk Platform Services SDK Team</Authors>
     <PackageDescription>Client SDK for Construction Account Admin API</PackageDescription>
     <Copyright>Autodesk Inc.</Copyright>
