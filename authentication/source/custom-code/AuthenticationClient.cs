@@ -203,7 +203,7 @@ namespace Autodesk.Authentication
         ///The Client secret of the calling application, as registered with APS.
         ///**Note** The clientSecret is required only for Traditional Web Apps and Server-to-Server Apps. It is not required for Desktop, Mobile, and Single-Page Apps. (optional)
         /// </param>             
-        /// <param name="refresh_token">
+        /// <param name="refreshToken">
         ///The refresh token used to acquire a new access token and a refresh token.     
         /// </param> 
         /// <param name="scopes">
