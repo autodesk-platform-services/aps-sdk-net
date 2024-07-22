@@ -21,6 +21,7 @@ namespace Autodesk.Oss
         public OssClient(SDKManager.SDKManager sdkManager)
         {
             this.bucketsApi = new BucketsApi(sdkManager);
+            this.objectsApi = new ObjectsApi(sdkManager);
             this.oSSFileTransfer = new OSSFileTransfer(new FileTransferConfigurations(3), null);
 
         }
@@ -65,14 +66,10 @@ namespace Autodesk.Oss
         public async System.Threading.Tasks.Task<ObjectDetails> Upload(string bucketKey, string objectKey, string sourceToUpload, string accessToken, CancellationToken cancellationToken, string projectScope = "", string requestIdPrefix = "", IProgress<int> progress = null)
         {
 
-         using (FileStream SourceStream = File.Open(sourceToUpload, FileMode.Open))
-            {
-                var result = new byte[SourceStream.Length];
-                await SourceStream.ReadAsync(result, 0, (int)SourceStream.Length);
-                var response = await this.oSSFileTransfer.Upload(bucketKey, objectKey, new MemoryStream(result), accessToken, cancellationToken, projectScope, requestIdPrefix, progress);
+                FileStream fileStream = File.OpenRead(sourceToUpload);
+                var response = await this.oSSFileTransfer.Upload(bucketKey, objectKey, fileStream, accessToken, cancellationToken, projectScope, requestIdPrefix, progress);
                 var apiResponse = new ApiResponse<ObjectDetails>(response, await LocalMarshalling.DeserializeAsync<ObjectDetails>(response.Content));
-                return apiResponse.Content;
-            }
+                return apiResponse.Content;    
         }
         
         /// <summary>
@@ -126,7 +123,7 @@ namespace Autodesk.Oss
         /// </param>
         /// <returns>Task of &lt;BatchcompleteuploadResponse&gt;</returns>
 
-        public async System.Threading.Tasks.Task<BatchcompleteuploadResponse> BatchCompleteUploadAsync(string accessToken, string bucketKey, BatchcompleteuploadObject requests = default(BatchcompleteuploadObject), bool throwOnError = true)
+        public async System.Threading.Tasks.Task<BatchcompleteuploadResponse> BatchCompleteUploadAsync(string accessToken, string bucketKey, BatchcompleteuploadObject requests, bool throwOnError = true)
         {
             var response = await this.objectsApi.BatchCompleteUploadAsync(bucketKey, requests, accessToken, throwOnError);
             return response.Content;
@@ -286,7 +283,7 @@ namespace Autodesk.Oss
         ///**Note:** Do not use this operation to create buckets for BIM360 Document Management. Use [POST projects/{project_id}/storage](/en/docs/data/v2/reference/http/projects-project_id-storage-POST>) instead. For details, see [Upload Files to BIM 360 Document Management](/en/docs/bim360/v1/tutorials/document-management/upload-document).
         /// </remarks>
         /// <exception cref="OssApiException">Thrown when fails to make API call</exception>
-        /// <param name="policyKey">
+        /// <param name="bucketsPayload">
         ///
         /// </param>
         /// <param name="xAdsRegion">
@@ -298,9 +295,9 @@ namespace Autodesk.Oss
         /// </param>
         /// <returns>Task of &lt;Bucket&gt;</returns>
 
-        public async System.Threading.Tasks.Task<Bucket> CreateBucketAsync(string accessToken, Region xAdsRegion, CreateBucketsPayload policyKey, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<Bucket> CreateBucketAsync(string accessToken, Region xAdsRegion, CreateBucketsPayload bucketsPayload, bool throwOnError = true)
         {
-            var response = await this.bucketsApi.CreateBucketAsync(policyKey, xAdsRegion, accessToken, throwOnError);
+            var response = await this.bucketsApi.CreateBucketAsync(bucketsPayload, xAdsRegion, accessToken, throwOnError);
             return response.Content;
         }
         /// <summary>
