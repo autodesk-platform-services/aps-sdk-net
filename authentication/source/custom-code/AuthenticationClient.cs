@@ -211,7 +211,7 @@ namespace Autodesk.Authentication
         ///If specified, scopes have to be primarily same with or a subset of the scopes used to generate the refresh_token.(optional)
         /// </param>   
         /// <returns>Task of  &lt;ThreeLeggedToken&gt;</returns>
-        public async System.Threading.Tasks.Task<ThreeLeggedToken> RefreshTokenAsync(string clientId, string clientSecret, string refreshToken, List<Scopes> scopes = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ThreeLeggedToken> RefreshTokenAsync(string refreshToken, string clientId, string clientSecret = default(string), List<Scopes> scopes = null, bool throwOnError = true)
         {
 
             if (!string.IsNullOrEmpty(clientSecret))
