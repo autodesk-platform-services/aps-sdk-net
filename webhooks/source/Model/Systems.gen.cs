@@ -35,6 +35,7 @@ namespace Autodesk.Webhooks.Model
     /// <summary>
     /// Defines Systems
     /// </summary>
+    ///<value></value>
     
     [JsonConverter(typeof(StringEnumConverter))]
     

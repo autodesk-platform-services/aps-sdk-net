@@ -1,11 +1,11 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Model Derivative
  *
- * Model Derivative Service Documentation
+ * Use the Model Derivative API to translate designs from one CAD format to another. You can also use this API to extract metadata from a model.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,21 +33,27 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// The source of the thumbnail:  rendered: generated pursuant to this API call extracted: obtained from the original design file
+    /// The source of the thumbnail:  Possible values are:
+    ///
+    ///- `rendered` - Generated pursuant to this API call 
+    ///- `extracted` - Obtained from the original design file'
     /// </summary>
-    /// <value>The source of the thumbnail:  rendered: generated pursuant to this API call extracted: obtained from the original design file</value>
-    
+    ///<value>The source of the thumbnail:  Possible values are:
+    ///
+    ///- `rendered` - Generated pursuant to this API call 
+    ///- `extracted` - Obtained from the original design file'</value>
+
     [JsonConverter(typeof(StringEnumConverter))]
-    
+
     public enum XAdsRole
     {
-        
+
         /// <summary>
         /// Enum Rendered for value: rendered
         /// </summary>
         [EnumMember(Value = "rendered")]
         Rendered,
-        
+
         /// <summary>
         /// Enum Extracted for value: extracted
         /// </summary>

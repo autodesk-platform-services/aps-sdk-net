@@ -3,9 +3,9 @@
  *
  * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
- * Model Derivative API
+ * Model Derivative
  *
- * Model Derivative Service Documentation
+ * Use the Model Derivative API to translate designs from one CAD format to another. You can also use this API to extract metadata from a model.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// Group of outputs
+    /// An object describing the attributes of the requested derivatives.
     /// </summary>
     [DataContract]
     public partial class JobPayloadOutput
@@ -46,17 +46,20 @@ namespace Autodesk.ModelDerivative.Model
         }
 
         /// <summary>
-        /// Gets or Sets Destination
+        ///Gets or Sets Destination
         /// </summary>
+        [Obsolete("This attribute is replaced by the region header.")]
         [DataMember(Name = "destination", EmitDefaultValue = false)]
-        public JobPayloadOutputDestination Destination{get;set;}
+        public JobPayloadOutputDestination Destination { get; set; }
 
         /// <summary>
-        /// Group of requested formats/types. User can request multiple formats.
+        ///An array of objects, where each object represents a requested derivative format. You can request multiple derivatives.
         /// </summary>
-        /// <value>Group of requested formats/types. User can request multiple formats.</value>
+        /// <value>
+        ///An array of objects, where each object represents a requested derivative format. You can request multiple derivatives.
+        /// </value>
         [DataMember(Name = "formats", EmitDefaultValue = false)]
-        public List<JobPayloadFormat> Formats { get; set; }
+        public List<IJobPayloadFormat> Formats { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -66,7 +69,6 @@ namespace Autodesk.ModelDerivative.Model
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
-      
     }
 
 }

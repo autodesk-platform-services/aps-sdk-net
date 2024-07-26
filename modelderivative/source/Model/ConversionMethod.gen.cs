@@ -1,11 +1,11 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Model Derivative
  *
- * Model Derivative Service Documentation
+ * Use the Model Derivative API to translate designs from one CAD format to another. You can also use this API to extract metadata from a model.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,32 +33,48 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// Specifies what IFC loader to use during translation. Available options are: - legacy - Use the Navisworks IFC loader. - modern - Use the Revit IFC loader (recommended over the legacy option). - v3 - Use the newer Revit IFC loader (recommended over the older modern option) If both switchLoader and conversionMethod are specified, Model Derivative uses the conversionMethod parameter. If conversionMethod is not specified, Model Derivative uses the switchLoader parameter.
+    /// Specifies what IFC loader to use during translation. Applicable only when the source design is of type IFC. Possible values are:
+    ///
+    ///- `legacy` - Use IFC loader version 1, which is based on the Navisworks IFC loader. 
+    ///- `modern` - Use IFC loader version 2, which is based on the Revit IFC loader. 
+    ///- `v3` - Use IFC loader version 3, which is based on the Revit IFC loader.
+    ///- `v4` - **(Recommended)** Use IFC loader version 4, which is a native solution specifically designed for Autodesk Platform Services (APS). It does not depend on Navisworks or Revit. 
     /// </summary>
-    /// <value>Specifies what IFC loader to use during translation. Available options are: - legacy - Use the Navisworks IFC loader. - modern - Use the Revit IFC loader (recommended over the legacy option). - v3 - Use the newer Revit IFC loader (recommended over the older modern option) If both switchLoader and conversionMethod are specified, Model Derivative uses the conversionMethod parameter. If conversionMethod is not specified, Model Derivative uses the switchLoader parameter.</value>
-    
+    ///<value>Specifies what IFC loader to use during translation. Applicable only when the source design is of type IFC. Possible values are:
+    ///
+    ///- `legacy` - Use IFC loader version 1, which is based on the Navisworks IFC loader. 
+    ///- `modern` - Use IFC loader version 2, which is based on the Revit IFC loader. 
+    ///- `v3` - Use IFC loader version 3, which is based on the Revit IFC loader.
+    ///- `v4` - **(Recommended)** Use IFC loader version 4, which is a native solution specifically designed for Autodesk Platform Services (APS). It does not depend on Navisworks or Revit. </value>
+
     [JsonConverter(typeof(StringEnumConverter))]
-    
+
     public enum ConversionMethod
     {
-        
+
         /// <summary>
         /// Enum Legacy for value: legacy
         /// </summary>
         [EnumMember(Value = "legacy")]
         Legacy,
-        
+
         /// <summary>
         /// Enum Modern for value: modern
         /// </summary>
         [EnumMember(Value = "modern")]
         Modern,
-        
+
         /// <summary>
         /// Enum V3 for value: v3
         /// </summary>
         [EnumMember(Value = "v3")]
-        V3
+        V3,
+
+        /// <summary>
+        /// Enum V4 for value: v4
+        /// </summary>
+        [EnumMember(Value = "v4")]
+        V4
     }
 
 }

@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Oss.Model
 {
     /// <summary>
-    /// objectKeyN is a placeholder for the first object key for which the client requested a download signed URL. The attributes within contain the success data / error info for the request for that object. &#x60;results&#x60; will contain one such attribute for each requested object in the batch.
+    /// An object that represents the response to a Batch Generate Signed S3 Download URLs operation.   **Note**: &#x60;&#x60;objectKeyN&#x60;&#x60; is a placeholder for the first object key for which the client requested a download signed URL. The attributes within contain the success data / error information for the request for that object. &#x60;results&#x60; will contain one such attribute for each requested object in the batch. 
     /// </summary>
     [DataContract]
     public partial class DownloadResults 
@@ -46,43 +46,61 @@ namespace Autodesk.Oss.Model
         }
         
         /// <summary>
-        /// Indicates the status of the object. &#x60;complete&#x60; indicates a raw upload or merged resumable upload; &#x60;chunked&#x60; indicates an unmerged resumable upload where the user  provide &#x60;public-resource-fallback&#x60;&#x3D;&#x60;false&#x60;; &#x60;fallback&#x60; indicates an unmerged resumable  upload where the user provides &#x60;public-resource-fallback&#x60;&#x3D;&#x60;true&#x60;.
+        ///Gets or Sets Status
         /// </summary>
-        /// <value>Indicates the status of the object. &#x60;complete&#x60; indicates a raw upload or merged resumable upload; &#x60;chunked&#x60; indicates an unmerged resumable upload where the user  provide &#x60;public-resource-fallback&#x60;&#x3D;&#x60;false&#x60;; &#x60;fallback&#x60; indicates an unmerged resumable  upload where the user provides &#x60;public-resource-fallback&#x60;&#x3D;&#x60;true&#x60;.</value>
         [DataMember(Name="status", EmitDefaultValue=true)]
-        public string Status { get; set; }
+        public DownloadStatus Status { get; set; }
 
         /// <summary>
-        /// The S3 signed URL with which to download the object. This attribute is returned when &#x60;status&#x60; is &#x60;complete&#x60; or &#x60;fallback&#x60;; in the latter case, this will return an OSS Signed Resource, not an S3 signed URL.
+        ///A S3 signed URL with which to download the object. This attribute is returned when `status` is `complete` or `fallback`; in the latter case, this will return an OSS signed URL, not an S3 signed URL.
         /// </summary>
-        /// <value>The S3 signed URL with which to download the object. This attribute is returned when &#x60;status&#x60; is &#x60;complete&#x60; or &#x60;fallback&#x60;; in the latter case, this will return an OSS Signed Resource, not an S3 signed URL.</value>
+        /// <value>
+        ///A S3 signed URL with which to download the object. This attribute is returned when `status` is `complete` or `fallback`; in the latter case, this will return an OSS signed URL, not an S3 signed URL.
+        /// </value>
         [DataMember(Name="url", EmitDefaultValue=false)]
         public string Url { get; set; }
 
         /// <summary>
-        /// A map of S3 signed URLs, one for each chunk of an unmerged resumable upload. This attribute is returned when &#x60;status&#x60; is &#x60;chunked&#x60;. The key of each entry is the byte range of the total file which the chunk comprises.
+        ///A map of S3 signed URLs, one for each chunk of an unmerged resumable upload. This attribute is returned when `status` is `chunked`. The key of each entry is the byte range of the total file which the chunk comprises.
         /// </summary>
-        /// <value>A map of S3 signed URLs, one for each chunk of an unmerged resumable upload. This attribute is returned when &#x60;status&#x60; is &#x60;chunked&#x60;. The key of each entry is the byte range of the total file which the chunk comprises.</value>
+        /// <value>
+        ///A map of S3 signed URLs, one for each chunk of an unmerged resumable upload. This attribute is returned when `status` is `chunked`. The key of each entry is the byte range of the total file which the chunk comprises.
+        /// </value>
         [DataMember(Name="urls", EmitDefaultValue=false)]
         public Object Urls { get; set; }
 
         /// <summary>
-        /// Gets or Sets Params
+        ///The values that were requested for the following parameters when requesting the S3 signed URL.
+///
+///- `Content-Type`
+///- `Content-Disposition`
+///- `Cache-Control`.
         /// </summary>
+        /// <value>
+        ///The values that were requested for the following parameters when requesting the S3 signed URL.
+///
+///- `Content-Type`
+///- `Content-Disposition`
+///- `Cache-Control`.
+        /// </value>
         [DataMember(Name="params", EmitDefaultValue=false)]
-        public DownloadResultsParams Params { get; set; }
+        public Object Params { get; set; }
 
         /// <summary>
-        /// The object size in bytes.
+        ///The total amount of storage space occupied by the object, in bytes.
         /// </summary>
-        /// <value>The object size in bytes.</value>
+        /// <value>
+        ///The total amount of storage space occupied by the object, in bytes.
+        /// </value>
         [DataMember(Name="size", EmitDefaultValue=false)]
         public long? Size { get; set; }
 
         /// <summary>
-        /// The calculated sha1 of the object, if available.
+        ///A hash value computed from the data of the object, if available.
         /// </summary>
-        /// <value>The calculated sha1 of the object, if available.</value>
+        /// <value>
+        ///A hash value computed from the data of the object, if available.
+        /// </value>
         [DataMember(Name="sha1", EmitDefaultValue=false)]
         public string Sha1 { get; set; }
 

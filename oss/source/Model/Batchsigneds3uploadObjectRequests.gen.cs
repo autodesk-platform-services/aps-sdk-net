@@ -46,30 +46,38 @@ namespace Autodesk.Oss.Model
         }
         
         /// <summary>
-        /// The key/name of the object for which to create an S3 upload URL. If neither the \&quot;part\&quot; nor \&quot;parts\&quot; attribute is provided, OSS will return a single upload URL with which to upload the entire object.
+        ///A URL-encoded human friendly name of the object to upload.
         /// </summary>
-        /// <value>The key/name of the object for which to create an S3 upload URL. If neither the \&quot;part\&quot; nor \&quot;parts\&quot; attribute is provided, OSS will return a single upload URL with which to upload the entire object.</value>
+        /// <value>
+        ///A URL-encoded human friendly name of the object to upload.
+        /// </value>
         [DataMember(Name="objectKey", EmitDefaultValue=false)]
         public string ObjectKey { get; set; }
 
         /// <summary>
-        /// The index of an individual part for which to retrieve a chunk upload URL.
+        ///The index of first chunk to be uploaded.
         /// </summary>
-        /// <value>The index of an individual part for which to retrieve a chunk upload URL.</value>
+        /// <value>
+        ///The index of first chunk to be uploaded.
+        /// </value>
         [DataMember(Name="firstPart", EmitDefaultValue=false)]
         public int? FirstPart { get; set; }
 
         /// <summary>
-        /// For a multipart upload, the number of chunk URLs to return. If X is provided, the response will include chunk URLs from 1 to X. If none provided, the response will include only a single URL with which to upload an entire object.
+        ///The number of parts you intend to chunk the object for uploading. OSS will return that many signed URLs, one URL for each chunk. If you do not specify a value you'll get only one URL to upload the entire object.
         /// </summary>
-        /// <value>For a multipart upload, the number of chunk URLs to return. If X is provided, the response will include chunk URLs from 1 to X. If none provided, the response will include only a single URL with which to upload an entire object.</value>
+        /// <value>
+        ///The number of parts you intend to chunk the object for uploading. OSS will return that many signed URLs, one URL for each chunk. If you do not specify a value you'll get only one URL to upload the entire object.
+        /// </value>
         [DataMember(Name="parts", EmitDefaultValue=false)]
         public int? Parts { get; set; }
 
         /// <summary>
-        /// The identifier of a previously-initiated upload, in order to request more chunk upload URLs for the same upload. This must match the uploadKey returned by a previous call to this endpoint where the client requested more than one part URL.
+        ///The `uploadKey` of a previously-initiated upload, in order to request more chunk upload URLs for the same upload. If you do not specify a value, OSS will initiate a new upload entirely.
         /// </summary>
-        /// <value>The identifier of a previously-initiated upload, in order to request more chunk upload URLs for the same upload. This must match the uploadKey returned by a previous call to this endpoint where the client requested more than one part URL.</value>
+        /// <value>
+        ///The `uploadKey` of a previously-initiated upload, in order to request more chunk upload URLs for the same upload. If you do not specify a value, OSS will initiate a new upload entirely.
+        /// </value>
         [DataMember(Name="uploadKey", EmitDefaultValue=false)]
         public string UploadKey { get; set; }
 

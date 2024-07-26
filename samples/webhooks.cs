@@ -44,7 +44,7 @@ namespace Samples
         // Retrieves a paginated list of all the webhooks. If the pageState query string is not specified, the first page is returned.
         public async Task GetHooksAsync()
         {
-            Hooks getHooks = await webhooksClient.GetHooksAsync(accessToken: token);
+            Hooks getHooks = await webhooksClient.GetHooksAsync(accessToken: token, region: Region.APAC);
             // get hooks next link meant for pagination
             string getHooksLink = getHooks.Links.Next;
             // Get list of hooks data
@@ -210,19 +210,20 @@ namespace Samples
         }
 
 
-        public async void Main()
+         public static async Task Main(string[] args)
         {
+            var webhooks = new Webhooks();
             // Initialise SDKManager & WebhooksClient
-            Initialise();
+            webhooks.Initialise();
             // Call respective methods
-            await CreateSystemEventHookAsync();
-            await GetHooksAsync();
-            await GetAppHooksAsync();
-            await GetSystemHooksAsync();
-            await GetSystemEventHooksAsync();
-            await GetHookDetailsAsync();
-            await PatchSystemEventHookAsync();
-            await CreateSystemHookAsync();
+            await webhooks.CreateSystemEventHookAsync();
+            await webhooks.GetHooksAsync();
+            await webhooks.GetAppHooksAsync();
+            await webhooks.GetSystemHooksAsync();
+            await webhooks.GetSystemEventHooksAsync();
+            await webhooks.GetHookDetailsAsync();
+            await webhooks.PatchSystemEventHookAsync();
+            await webhooks.CreateSystemHookAsync();
         }
     }
 }

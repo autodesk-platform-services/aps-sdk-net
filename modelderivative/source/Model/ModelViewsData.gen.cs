@@ -3,9 +3,9 @@
  *
  * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
- * Model Derivative API
+ * Model Derivative
  *
- * Model Derivative Service Documentation
+ * Use the Model Derivative API to translate designs from one CAD format to another. You can also use this API to extract metadata from a model.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,10 +33,10 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// Envelope that contains the return data.
+    /// An envelope that contains the return data.
     /// </summary>
     [DataContract]
-    public partial class ModelViewsData 
+    public partial class ModelViewsData
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ModelViewsData" /> class.
@@ -44,18 +44,23 @@ namespace Autodesk.ModelDerivative.Model
         public ModelViewsData()
         {
         }
-        
+
         /// <summary>
-        /// The type of data that is returned.
+        ///The type of data that is returned.
         /// </summary>
-        /// <value>The type of data that is returned.</value>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        /// <value>
+        ///The type of data that is returned.
+        /// </value>
+        [DataMember(Name = "type", EmitDefaultValue = false)]
         public string Type { get; set; }
 
         /// <summary>
-        /// Gets or Sets Metadata
+        ///An array of objects, where each object represents a Model View.
         /// </summary>
-        [DataMember(Name="metadata", EmitDefaultValue=false)]
+        /// <value>
+        ///An array of objects, where each object represents a Model View.
+        /// </value>
+        [DataMember(Name = "metadata", EmitDefaultValue = false)]
         public List<ModelViewsDataMetadata> Metadata { get; set; }
 
         /// <summary>
