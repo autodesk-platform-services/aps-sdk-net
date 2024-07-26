@@ -78,7 +78,7 @@ namespace Autodesk.Authentication.Model
 
         /// <summary>
         /// Time the access token will expire at, in Unix seconds.
-        ////// </summary>
+        /// </summary>
         /// <value>
         ///Time the access token will expire at, in Unix seconds.
         /// </value>
