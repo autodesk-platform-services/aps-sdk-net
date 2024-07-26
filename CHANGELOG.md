@@ -2,10 +2,56 @@
 
 ## [Unreleased](https://github.com/autodesk-platform-services/aps-sdk-net/tree/HEAD)
 
-[Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v1...HEAD)
+[Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v2...HEAD)
 
 **Merged pull requests:**
 
+- Update AutoChangeLog.yml [\#68](https://github.com/autodesk-platform-services/aps-sdk-net/pull/68) ([sajith-subramanian](https://github.com/sajith-subramanian))
+- Update AutoChangeLog.yml [\#67](https://github.com/autodesk-platform-services/aps-sdk-net/pull/67) ([sajith-subramanian](https://github.com/sajith-subramanian))
+
+## [v2](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v2) (2024-07-26)
+
+[Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v1...v2)
+
+**Breaking changes:**
+
+- \[Das 198\] - Updated Model Derivative with feedback and changes from Docs team. [\#50](https://github.com/autodesk-platform-services/aps-sdk-net/pull/50) ([sajith-subramanian](https://github.com/sajith-subramanian))
+- \[Das 214\] - Fixes for Authentication SDK  [\#47](https://github.com/autodesk-platform-services/aps-sdk-net/pull/47) ([sajith-subramanian](https://github.com/sajith-subramanian))
+- \[DAS 198\] -  Changes to Model Derivative SDK [\#45](https://github.com/autodesk-platform-services/aps-sdk-net/pull/45) ([sajith-subramanian](https://github.com/sajith-subramanian))
+- Updated region enum in webhook sdk [\#33](https://github.com/autodesk-platform-services/aps-sdk-net/pull/33) ([nishchhaldagar](https://github.com/nishchhaldagar))
+
+**Implemented enhancements:**
+
+- Upload function now accept memory stream and consumed docs team changes [\#48](https://github.com/autodesk-platform-services/aps-sdk-net/pull/48) ([srivastavarahull](https://github.com/srivastavarahull))
+- Added Regions enum support [\#43](https://github.com/autodesk-platform-services/aps-sdk-net/pull/43) ([srivastavarahull](https://github.com/srivastavarahull))
+- Added Regions enum, Removed Inline models and Accumulated Docs team changes [\#34](https://github.com/autodesk-platform-services/aps-sdk-net/pull/34) ([srivastavarahull](https://github.com/srivastavarahull))
+
+**Fixed bugs:**
+
+- Fixed Oss Client [\#64](https://github.com/autodesk-platform-services/aps-sdk-net/pull/64) ([srivastavarahull](https://github.com/srivastavarahull))
+
+**Merged pull requests:**
+
+- Release v2 - `Autodesk.Authentication` documentation. [\#59](https://github.com/autodesk-platform-services/aps-sdk-net/pull/59) ([ricaun](https://github.com/ricaun))
+- Merge Release v2 branch with Main [\#58](https://github.com/autodesk-platform-services/aps-sdk-net/pull/58) ([sajith-subramanian](https://github.com/sajith-subramanian))
+- Update Oss sdk with User Agent Changes [\#57](https://github.com/autodesk-platform-services/aps-sdk-net/pull/57) ([srivastavarahull](https://github.com/srivastavarahull))
+- Update release branch [\#56](https://github.com/autodesk-platform-services/aps-sdk-net/pull/56) ([sajith-subramanian](https://github.com/sajith-subramanian))
+- Updated User Agent [\#55](https://github.com/autodesk-platform-services/aps-sdk-net/pull/55) ([srivastavarahull](https://github.com/srivastavarahull))
+- Updated Used Agent [\#54](https://github.com/autodesk-platform-services/aps-sdk-net/pull/54) ([srivastavarahull](https://github.com/srivastavarahull))
+- \[DAS -214\] - Bump up user agent version [\#53](https://github.com/autodesk-platform-services/aps-sdk-net/pull/53) ([sajith-subramanian](https://github.com/sajith-subramanian))
+- DAS 203 webhooks client fix [\#52](https://github.com/autodesk-platform-services/aps-sdk-net/pull/52) ([nishchhaldagar](https://github.com/nishchhaldagar))
+- Das 219 [\#51](https://github.com/autodesk-platform-services/aps-sdk-net/pull/51) ([srivastavarahull](https://github.com/srivastavarahull))
+- DAS 220 - Added DotNet SDK for ACC Admin [\#49](https://github.com/autodesk-platform-services/aps-sdk-net/pull/49) ([nishchhaldagar](https://github.com/nishchhaldagar))
+- Keep branch updated with Dev [\#46](https://github.com/autodesk-platform-services/aps-sdk-net/pull/46) ([sajith-subramanian](https://github.com/sajith-subramanian))
+- Moved issues under construction [\#44](https://github.com/autodesk-platform-services/aps-sdk-net/pull/44) ([srivastavarahull](https://github.com/srivastavarahull))
+- Updated Nuget Package links in the README. [\#40](https://github.com/autodesk-platform-services/aps-sdk-net/pull/40) ([tylerwarner33](https://github.com/tylerwarner33))
+- \[DAS 214\] - Update Authentication SDK with changes to Documentation.  [\#37](https://github.com/autodesk-platform-services/aps-sdk-net/pull/37) ([sajith-subramanian](https://github.com/sajith-subramanian))
+- Update Changelog yml file in Dev branch [\#36](https://github.com/autodesk-platform-services/aps-sdk-net/pull/36) ([sajith-subramanian](https://github.com/sajith-subramanian))
+- Added Download function in oss sample. [\#26](https://github.com/autodesk-platform-services/aps-sdk-net/pull/26) ([srivastavarahull](https://github.com/srivastavarahull))
+- Bg remove ads server ref [\#22](https://github.com/autodesk-platform-services/aps-sdk-net/pull/22) ([Arrotech](https://github.com/Arrotech))
+- Das 154 [\#21](https://github.com/autodesk-platform-services/aps-sdk-net/pull/21) ([Arrotech](https://github.com/Arrotech))
+- Das 169 [\#20](https://github.com/autodesk-platform-services/aps-sdk-net/pull/20) ([srivastavarahull](https://github.com/srivastavarahull))
+- Das 159 [\#19](https://github.com/autodesk-platform-services/aps-sdk-net/pull/19) ([srivastavarahull](https://github.com/srivastavarahull))
 - Update sln files [\#18](https://github.com/autodesk-platform-services/aps-sdk-net/pull/18) ([sajith-subramanian](https://github.com/sajith-subramanian))
 
 ## [v1](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v1) (2023-12-12)
