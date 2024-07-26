@@ -25,6 +25,7 @@ using System.Collections.Generic;
 using System;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Runtime.Serialization;
 using Autodesk.Construction.AccountAdmin.Model;
 using Autodesk.Construction.AccountAdmin.Client;
@@ -426,14 +427,13 @@ namespace Autodesk.Construction.AccountAdmin.Http
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
                 }
-                // var content = new MultipartFormDataContent();
-                // content.Add(new StreamContent(File.OpenRead(@"C:/Users/n078/OneDrive - Autodesk/Desktop/sdk.png")), "chunk", @"C:/Users/n078/OneDrive - Autodesk/Desktop/sdk.png");
-                // request.Content = content;
 
-                var formdata = new MultipartFormDataContent
-                {
-                    { new StreamContent(body), "chunk", Path.GetFileName((body as FileStream).Name) }
-                };
+                var formdata = new MultipartFormDataContent();
+
+                var fileStreamContent = new StreamContent(body);
+                fileStreamContent.Headers.ContentType = new MediaTypeHeaderValue("image/png");
+                formdata.Add(fileStreamContent, "chunk", Path.GetFileName((body as FileStream).Name));
+
                 request.Content = formdata;
 
                 SetHeader("Region", region, request);

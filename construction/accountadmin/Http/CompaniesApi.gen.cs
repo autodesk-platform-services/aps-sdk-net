@@ -25,12 +25,14 @@ using System.Collections.Generic;
 using System;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Runtime.Serialization;
 using Autodesk.Construction.AccountAdmin.Model;
 using Autodesk.Construction.AccountAdmin.Client;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Autodesk.SDKManager;
+using System.IO;
 
 namespace Autodesk.Construction.AccountAdmin.Http
 {
@@ -986,7 +988,13 @@ namespace Autodesk.Construction.AccountAdmin.Http
                 }
 
 
-                request.Content = new StreamContent(body);
+                var formdata = new MultipartFormDataContent();
+
+                var fileStreamContent = new StreamContent(body);
+                fileStreamContent.Headers.ContentType = new MediaTypeHeaderValue("image/png");
+                formdata.Add(fileStreamContent, "chunk", Path.GetFileName((body as FileStream).Name));
+
+                request.Content = formdata;
 
                 SetHeader("Region", region, request);
 
