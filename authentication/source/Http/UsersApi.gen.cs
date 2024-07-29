@@ -59,7 +59,9 @@ namespace Autodesk.Authentication.Http
     {
         ILogger logger;
 
-        // Manually added because UsersApi has a different base address.
+        /// <summary>
+        /// Manually added because UsersApi has a different base address.
+        /// </summary>
         public Uri BaseAddress { get; set; }
 
         /// <summary>
