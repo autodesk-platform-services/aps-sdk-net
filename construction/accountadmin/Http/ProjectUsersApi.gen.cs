@@ -26,14 +26,13 @@ using System;
 using System.Linq;
 using System.Net.Http;
 using System.Runtime.Serialization;
-using Autodesk.Construction.AccountAdmin.Model;
-using Autodesk.Construction.AccountAdmin.Client;
+using Autodesk.ConstructionAccountAdmin.Model;
+using Autodesk.ConstructionAccountAdmin.Client;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Autodesk.SDKManager;
-using System.Collections;
 
-namespace Autodesk.Construction.AccountAdmin.Http
+namespace Autodesk.ConstructionAccountAdmin.Http
 {
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
@@ -453,7 +452,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
                     {
                       await response.EnsureSuccessStatusCodeAsync();
                     } catch (HttpRequestException ex) {
-                      throw new ConstructionaccountadminApiException(ex.Message, response, ex);
+                      throw new ConstructionAccountAdminApiException(ex.Message, response, ex);
                     }
                 }
                 else if (!response.IsSuccessStatusCode)
@@ -567,7 +566,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
                     {
                       await response.EnsureSuccessStatusCodeAsync();
                     } catch (HttpRequestException ex) {
-                      throw new ConstructionaccountadminApiException(ex.Message, response, ex);
+                      throw new ConstructionAccountAdminApiException(ex.Message, response, ex);
                     }
                 }
                 else if (!response.IsSuccessStatusCode)
@@ -742,7 +741,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
                     {
                       await response.EnsureSuccessStatusCodeAsync();
                     } catch (HttpRequestException ex) {
-                      throw new ConstructionaccountadminApiException(ex.Message, response, ex);
+                      throw new ConstructionAccountAdminApiException(ex.Message, response, ex);
                     }
                 }
                 else if (!response.IsSuccessStatusCode)
@@ -847,7 +846,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
                     {
                       await response.EnsureSuccessStatusCodeAsync();
                     } catch (HttpRequestException ex) {
-                      throw new ConstructionaccountadminApiException(ex.Message, response, ex);
+                      throw new ConstructionAccountAdminApiException(ex.Message, response, ex);
                     }
                 }
                 else if (!response.IsSuccessStatusCode)
@@ -954,7 +953,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
                     {
                       await response.EnsureSuccessStatusCodeAsync();
                     } catch (HttpRequestException ex) {
-                      throw new ConstructionaccountadminApiException(ex.Message, response, ex);
+                      throw new ConstructionAccountAdminApiException(ex.Message, response, ex);
                     }
                 }
                 else if (!response.IsSuccessStatusCode)
@@ -1065,7 +1064,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
                     {
                       await response.EnsureSuccessStatusCodeAsync();
                     } catch (HttpRequestException ex) {
-                      throw new ConstructionaccountadminApiException(ex.Message, response, ex);
+                      throw new ConstructionAccountAdminApiException(ex.Message, response, ex);
                     }
                 }
                 else if (!response.IsSuccessStatusCode)
