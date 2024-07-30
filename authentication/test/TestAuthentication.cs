@@ -17,6 +17,10 @@ public class TestAuthentication
     string authorization_code = "code";
     string redirect_uri = @"redirect_uri";
 
+    string token = "<token>";
+    string threeLeggedTokenAccesstoken = "<threeLeggedTokenAccesstoken>";
+    string refreshToken = "<refresh_token>";
+
     [ClassInitialize]
     public static void ClassInitialize(TestContext testContext)
     {
@@ -56,11 +60,10 @@ public class TestAuthentication
         Assert.IsNotNull(threeLeggedToken_accesstoken);
     }
 
-
     [TestMethod]
     public async Task TestRefreshTokenAsync()
     {
-        ThreeLeggedToken newToken = await _authClient.RefreshTokenAsync(client_id, client_secret, "refreshToken");
+        ThreeLeggedToken newToken = await _authClient.RefreshTokenAsync(client_id, client_secret, refreshToken);
         Assert.IsNotNull(newToken.AccessToken);
     }
 
@@ -82,7 +85,7 @@ public class TestAuthentication
     [TestMethod]
     public async Task TestUserInfoAsync()
     {
-        UserInfo userInfo = await _authClient.GetUserInfoAsync("threeLeggedToken_accesstoken");
+        UserInfo userInfo = await _authClient.GetUserInfoAsync(threeLeggedTokenAccesstoken);
         Assert.IsNotNull(userInfo);
     }
 
@@ -90,15 +93,15 @@ public class TestAuthentication
 
     public async Task TestIntrospectTokenAsync()
     {
-           IntrospectToken introspectToken = await _authClient.IntrospectTokenAsync("token", client_id, client_secret);
-           var exp = introspectToken.Exp;
-           Assert.IsNotNull(exp);
+        IntrospectToken introspectToken = await _authClient.IntrospectTokenAsync(token, client_id, client_secret);
+        var exp = introspectToken.Exp;
+        Assert.IsNotNull(exp);
     }
 
     [TestMethod]
     public async Task TestRevokeTokenAsync()
     {
-         HttpResponseMessage response = await _authClient.RevokeAsync("token", client_id,client_secret);
+        HttpResponseMessage response = await _authClient.RevokeAsync(token, client_id, client_secret);
         Assert.IsTrue(response.IsSuccessStatusCode);
     }
 
