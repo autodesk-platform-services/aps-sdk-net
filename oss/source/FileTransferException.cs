@@ -24,6 +24,9 @@ using System.Net.Http;
 
 namespace Autodesk.Oss
 {
+  /// <summary>
+  /// Represents an exception that occurs during file transfer in the Upload and Download functions.
+  /// </summary>
   public class FileTransferException : ServiceApiException
   {
     public FileTransferException(string message) : base(message) {}
