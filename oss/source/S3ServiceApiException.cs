@@ -23,6 +23,9 @@ using System;
 
 namespace Autodesk.Oss
 {
+  /// <summary>
+  /// An object that is returned when an API call to the S3 service fails.
+  /// </summary>
   public class S3ServiceApiException : ServiceApiException
   {
     public int ErrorCode {get; set;}

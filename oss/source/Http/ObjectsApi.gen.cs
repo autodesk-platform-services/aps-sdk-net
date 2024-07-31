@@ -171,18 +171,9 @@ namespace Autodesk.Oss.Http
         /// <param name="newObjName">
         ///A URL-encoded human friendly name to identify the copied object.
         /// </param>
-        /// <param name="xAdsAcmNamespace">
-        ///This header is used to let the OSS Api Proxy know if ACM is used to authorize access to the given object. If this authorization is used by your service, then you must provide the name of the namespace you want to validate access control policies against. (optional)
-        /// </param>
-        /// <param name="xAdsAcmCheckGroups">
-        ///Informs the OSS Api Proxy know if your service requires ACM authorization to also validate against Oxygen groups. If so, you must pass this header with a value of `true`. Otherwise, the assumption is that checking authorization against Oxygen groups is not required. (optional)
-        /// </param>
-        /// <param name="xAdsAcmGroups">
-        ///Use this header to pass the Oxygen groups you want the OSS Api Proxy to use for group validation for the given user in the OAuth2 token. (optional)
-        /// </param>
         /// <returns>Task of ApiResponse&lt;ObjectDetails&gt;</returns>
 
-        System.Threading.Tasks.Task<ApiResponse<ObjectDetails>> CopyToAsync(string bucketKey, string objectKey, string newObjName, string xAdsAcmNamespace = default(string), string xAdsAcmCheckGroups = default(string), string xAdsAcmGroups = default(string), string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<ApiResponse<ObjectDetails>> CopyToAsync(string bucketKey, string objectKey, string newObjName,  string accessToken = null, bool throwOnError = true);
         /// <summary>
         /// Generate OSS Signed URL
         /// </summary>
@@ -227,18 +218,8 @@ namespace Autodesk.Oss.Http
         /// <param name="objectKey">
         ///The URL-encoded human friendly name of the object.
         /// </param>
-        /// <param name="xAdsAcmNamespace">
-        ///This header is used to let the OSS Api Proxy know if ACM is used to authorize access to the given object. If this authorization is used by your service, then you must provide the name of the namespace you want to validate access control policies against. (optional)
-        /// </param>
-        /// <param name="xAdsAcmCheckGroups">
-        ///Informs the OSS API Proxy know if your service requires ACM authorization to also validate against Oxygen groups. If so, you must pass this header with a value of `true`. Otherwise, the assumption is that checking authorization against Oxygen groups is not required. (optional)
-        /// </param>
-        /// <param name="xAdsAcmGroups">
-        ///Use this header to pass the Oxygen groups you want the OSS Api Proxy to use for group validation for the given user in the OAuth2 token. (optional)
-        /// </param>
-
         /// <returns>Task of HttpResponseMessage</returns>
-        System.Threading.Tasks.Task<HttpResponseMessage> DeleteObjectAsync(string bucketKey, string objectKey, string xAdsAcmNamespace = default(string), string xAdsAcmCheckGroups = default(string), string xAdsAcmGroups = default(string), string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<HttpResponseMessage> DeleteObjectAsync(string bucketKey, string objectKey, string accessToken = null, bool throwOnError = true);
         /// <summary>
         /// Delete Object Using Signed URL
         /// </summary>
@@ -281,21 +262,12 @@ namespace Autodesk.Oss.Http
         /// <param name="ifModifiedSince">
         ///A timestamp in the HTTP date format (Mon, DD Month YYYY HH:MM:SS GMT). The requested data is returned only if the object has been modified since the specified timestamp. If not, a 304 (Not Modified) HTTP status is returned. (optional)
         /// </param>
-        /// <param name="xAdsAcmNamespace">
-        ///This header is used to let the OSS Api Proxy know if ACM is used to authorize access to the given object. If this authorization is used by your service, then you must provide the name of the namespace you want to validate access control policies against. (optional)
-        /// </param>
-        /// <param name="xAdsAcmCheckGroups">
-        ///Informs the OSS Api Proxy know if your service requires ACM authorization to also validate against Oxygen groups. If so, you must pass this header with a value of `true`. Otherwise, the assumption is that checking authorization against Oxygen groups is not required. (optional)
-        /// </param>
-        /// <param name="xAdsAcmGroups">
-        ///Use this header to pass the Oxygen groups you want the OSS Api Proxy to use for group validation for the given user in the OAuth2 token. (optional)
-        /// </param>
         /// <param name="with">
         /// (optional)
         /// </param>
         /// <returns>Task of ApiResponse&lt;ObjectFullDetails&gt;</returns>
 
-        System.Threading.Tasks.Task<ApiResponse<ObjectFullDetails>> GetObjectDetailsAsync(string bucketKey, string objectKey, DateTime? ifModifiedSince = default(DateTime?), string xAdsAcmNamespace = default(string), string xAdsAcmCheckGroups = default(string), string xAdsAcmGroups = default(string), With? with = null, string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<ApiResponse<ObjectFullDetails>> GetObjectDetailsAsync(string bucketKey, string objectKey, DateTime? ifModifiedSince = default(DateTime?), With? with = null, string accessToken = null, bool throwOnError = true);
         /// <summary>
         /// List Objects
         /// </summary>
@@ -396,9 +368,6 @@ namespace Autodesk.Oss.Http
         /// <param name="ifModifiedSince">
         ///A timestamp in the HTTP date format (Mon, DD Month YYYY HH:MM:SS GMT). The signed URL is returned only if the object has been modified since the specified timestamp. If not, a 304 (Not Modified) HTTP status is returned. (optional)
         /// </param>
-        /// <param name="xAdsAcmScopes">
-        ///Optional OSS-compliant scope reference to increase bucket search performance (optional)
-        /// </param>
         /// <param name="responseContentType">
         ///The value of the Content-Type header you want to receive when you download the object using the signed URL. If you do not specify a value, the Content-Type header defaults to the value stored with OSS. (optional)
         /// </param>
@@ -424,12 +393,9 @@ namespace Autodesk.Oss.Http
         ///
         ///`false` : (Default) Returns a URL that points directly to the S3 object. (optional)
         /// </param>
-        /// <param name="redirect">
-        ///Generates a HTTP redirection response (Temporary Redirect 307​) using the generated URL. (optional)
-        /// </param>
         /// <returns>Task of ApiResponse&lt;Signeds3downloadResponse&gt;</returns>
 
-        System.Threading.Tasks.Task<ApiResponse<Signeds3downloadResponse>> SignedS3DownloadAsync(string bucketKey, string objectKey, string ifNoneMatch = default(string), DateTime? ifModifiedSince = default(DateTime?), string xAdsAcmScopes = default(string), string responseContentType = default(string), string responseContentDisposition = default(string), string responseCacheControl = default(string), bool? publicResourceFallback = default(bool?), int? minutesExpiration = default(int?), bool? useCdn = default(bool?), bool? redirect = default(bool?), string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<ApiResponse<Signeds3downloadResponse>> SignedS3DownloadAsync(string bucketKey, string objectKey, string ifNoneMatch = default(string), DateTime? ifModifiedSince = default(DateTime?), string responseContentType = default(string), string responseContentDisposition = default(string), string responseCacheControl = default(string), bool? publicResourceFallback = default(bool?), int? minutesExpiration = default(int?), bool? useCdn = default(bool?), string accessToken = null, bool throwOnError = true);
         /// <summary>
         /// Generate Signed S3 Upload URL
         /// </summary>
@@ -450,9 +416,6 @@ namespace Autodesk.Oss.Http
         /// </param>
         /// <param name="objectKey">
         ///The URL-encoded human friendly name of the object.
-        /// </param>
-        /// <param name="xAdsAcmScopes">
-        ///Optional OSS-compliant scope reference to increase bucket search performance (optional)
         /// </param>
         /// <param name="parts">
         ///The number of parts you intend to chunk the object for uploading. OSS will return that many signed URLs, one URL for each chunk. If you do not specify a value you'll get only one URL to upload the entire object.              (optional)
@@ -475,7 +438,7 @@ namespace Autodesk.Oss.Http
         /// </param>
         /// <returns>Task of ApiResponse&lt;Signeds3uploadResponse&gt;</returns>
 
-        System.Threading.Tasks.Task<ApiResponse<Signeds3uploadResponse>> SignedS3UploadAsync(string bucketKey, string objectKey, string xAdsAcmScopes = default(string), int? parts = default(int?), int? firstPart = default(int?), string uploadKey = default(string), int? minutesExpiration = default(int?), bool? useAcceleration = default(bool?), string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<ApiResponse<Signeds3uploadResponse>> SignedS3UploadAsync(string bucketKey, string objectKey, int? parts = default(int?), int? firstPart = default(int?), string uploadKey = default(string), int? minutesExpiration = default(int?), bool? useAcceleration = default(bool?), string accessToken = null, bool throwOnError = true);
         /// <summary>
         /// Replace Object Using Signed URL
         /// </summary>
@@ -1026,20 +989,9 @@ namespace Autodesk.Oss.Http
         ///The URL-encoded human friendly name of the object.
         /// </param>
         /// <param name="newObjName">
-        ///A URL-encoded human friendly name to identify the copied object.
-        /// </param>
-        /// <param name="xAdsAcmNamespace">
-        ///This header is used to let the OSS Api Proxy know if ACM is used to authorize access to the given object. If this authorization is used by your service, then you must provide the name of the namespace you want to validate access control policies against. (optional)
-        /// </param>
-        /// <param name="xAdsAcmCheckGroups">
-        ///Informs the OSS Api Proxy know if your service requires ACM authorization to also validate against Oxygen groups. If so, you must pass this header with a value of `true`. Otherwise, the assumption is that checking authorization against Oxygen groups is not required. (optional)
-        /// </param>
-        /// <param name="xAdsAcmGroups">
-        ///Use this header to pass the Oxygen groups you want the OSS Api Proxy to use for group validation for the given user in the OAuth2 token. (optional)
-        /// </param>
+        ///A URL-encoded human friendly name to identify the copied object.       
         /// <returns>Task of ApiResponse&lt;ObjectDetails&gt;></returns>
-
-        public async System.Threading.Tasks.Task<ApiResponse<ObjectDetails>> CopyToAsync(string bucketKey, string objectKey, string newObjName, string xAdsAcmNamespace = default(string), string xAdsAcmCheckGroups = default(string), string xAdsAcmGroups = default(string), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ApiResponse<ObjectDetails>> CopyToAsync(string bucketKey, string objectKey, string newObjName, string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into CopyToAsync ");
             using (var request = new HttpRequestMessage())
@@ -1061,12 +1013,6 @@ namespace Autodesk.Oss.Http
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
                 }
-
-
-
-                SetHeader("x-ads-acm-namespace", xAdsAcmNamespace, request);
-                SetHeader("x-ads-acm-check-groups", xAdsAcmCheckGroups, request);
-                SetHeader("x-ads-acm-groups", xAdsAcmGroups, request);
 
                 // tell the underlying pipeline what scope we'd like to use
                 // if (scopes == null)
@@ -1213,18 +1159,10 @@ namespace Autodesk.Oss.Http
         /// <param name="objectKey">
         ///The URL-encoded human friendly name of the object.
         /// </param>
-        /// <param name="xAdsAcmNamespace">
-        ///This header is used to let the OSS Api Proxy know if ACM is used to authorize access to the given object. If this authorization is used by your service, then you must provide the name of the namespace you want to validate access control policies against. (optional)
-        /// </param>
-        /// <param name="xAdsAcmCheckGroups">
-        ///Informs the OSS API Proxy know if your service requires ACM authorization to also validate against Oxygen groups. If so, you must pass this header with a value of `true`. Otherwise, the assumption is that checking authorization against Oxygen groups is not required. (optional)
-        /// </param>
-        /// <param name="xAdsAcmGroups">
-        ///Use this header to pass the Oxygen groups you want the OSS Api Proxy to use for group validation for the given user in the OAuth2 token. (optional)
-        /// </param>
+
 
         /// <returns>Task of HttpResponseMessage</returns>
-        public async System.Threading.Tasks.Task<HttpResponseMessage> DeleteObjectAsync(string bucketKey, string objectKey, string xAdsAcmNamespace = default(string), string xAdsAcmCheckGroups = default(string), string xAdsAcmGroups = default(string), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<HttpResponseMessage> DeleteObjectAsync(string bucketKey, string objectKey, string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into DeleteObjectAsync ");
             using (var request = new HttpRequestMessage())
@@ -1245,12 +1183,6 @@ namespace Autodesk.Oss.Http
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
                 }
-
-
-
-                SetHeader("x-ads-acm-namespace", xAdsAcmNamespace, request);
-                SetHeader("x-ads-acm-check-groups", xAdsAcmCheckGroups, request);
-                SetHeader("x-ads-acm-groups", xAdsAcmGroups, request);
 
                 // tell the underlying pipeline what scope we'd like to use
                 // if (scopes == null)
@@ -1392,21 +1324,13 @@ namespace Autodesk.Oss.Http
         /// <param name="ifModifiedSince">
         ///A timestamp in the HTTP date format (Mon, DD Month YYYY HH:MM:SS GMT). The requested data is returned only if the object has been modified since the specified timestamp. If not, a 304 (Not Modified) HTTP status is returned. (optional)
         /// </param>
-        /// <param name="xAdsAcmNamespace">
-        ///This header is used to let the OSS Api Proxy know if ACM is used to authorize access to the given object. If this authorization is used by your service, then you must provide the name of the namespace you want to validate access control policies against. (optional)
-        /// </param>
-        /// <param name="xAdsAcmCheckGroups">
-        ///Informs the OSS Api Proxy know if your service requires ACM authorization to also validate against Oxygen groups. If so, you must pass this header with a value of `true`. Otherwise, the assumption is that checking authorization against Oxygen groups is not required. (optional)
-        /// </param>
-        /// <param name="xAdsAcmGroups">
-        ///Use this header to pass the Oxygen groups you want the OSS Api Proxy to use for group validation for the given user in the OAuth2 token. (optional)
-        /// </param>
+
         /// <param name="with">
         /// (optional)
         /// </param>
         /// <returns>Task of ApiResponse&lt;ObjectFullDetails&gt;></returns>
 
-        public async System.Threading.Tasks.Task<ApiResponse<ObjectFullDetails>> GetObjectDetailsAsync(string bucketKey, string objectKey, DateTime? ifModifiedSince = default(DateTime?), string xAdsAcmNamespace = default(string), string xAdsAcmCheckGroups = default(string), string xAdsAcmGroups = default(string), With? with = null, string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ApiResponse<ObjectFullDetails>> GetObjectDetailsAsync(string bucketKey, string objectKey, DateTime? ifModifiedSince = default(DateTime?), With? with = null, string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into GetObjectDetailsAsync ");
             using (var request = new HttpRequestMessage())
@@ -1432,9 +1356,7 @@ namespace Autodesk.Oss.Http
 
 
                 SetHeader("If-Modified-Since", ifModifiedSince, request);
-                SetHeader("x-ads-acm-namespace", xAdsAcmNamespace, request);
-                SetHeader("x-ads-acm-check-groups", xAdsAcmCheckGroups, request);
-                SetHeader("x-ads-acm-groups", xAdsAcmGroups, request);
+
 
                 // tell the underlying pipeline what scope we'd like to use
                 // if (scopes == null)
@@ -1731,12 +1653,9 @@ namespace Autodesk.Oss.Http
         ///
         ///`false` : (Default) Returns a URL that points directly to the S3 object. (optional)
         /// </param>
-        /// <param name="redirect">
-        ///Generates a HTTP redirection response (Temporary Redirect 307​) using the generated URL. (optional)
-        /// </param>
         /// <returns>Task of ApiResponse&lt;Signeds3downloadResponse&gt;></returns>
 
-        public async System.Threading.Tasks.Task<ApiResponse<Signeds3downloadResponse>> SignedS3DownloadAsync(string bucketKey, string objectKey, string ifNoneMatch = default(string), DateTime? ifModifiedSince = default(DateTime?), string xAdsAcmScopes = default(string), string responseContentType = default(string), string responseContentDisposition = default(string), string responseCacheControl = default(string), bool? publicResourceFallback = default(bool?), int? minutesExpiration = default(int?), bool? useCdn = default(bool?), bool? redirect = default(bool?), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ApiResponse<Signeds3downloadResponse>> SignedS3DownloadAsync(string bucketKey, string objectKey, string ifNoneMatch = default(string), DateTime? ifModifiedSince = default(DateTime?), string responseContentType = default(string), string responseContentDisposition = default(string), string responseCacheControl = default(string), bool? publicResourceFallback = default(bool?), int? minutesExpiration = default(int?), bool? useCdn = default(bool?), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into SignedS3DownloadAsync ");
             using (var request = new HttpRequestMessage())
@@ -1748,7 +1667,6 @@ namespace Autodesk.Oss.Http
                 SetQueryParameter("public-resource-fallback", publicResourceFallback, queryParam);
                 SetQueryParameter("minutesExpiration", minutesExpiration, queryParam);
                 SetQueryParameter("useCdn", useCdn, queryParam);
-                SetQueryParameter("redirect", redirect, queryParam);
                 request.RequestUri =
                     Marshalling.BuildRequestUri("/oss/v2/buckets/{bucketKey}/objects/{objectKey}/signeds3download",
                         routeParameters: new Dictionary<string, object> {
@@ -1769,7 +1687,6 @@ namespace Autodesk.Oss.Http
 
                 SetHeader("If-None-Match", ifNoneMatch, request);
                 SetHeader("If-Modified-Since", ifModifiedSince, request);
-                SetHeader("x-ads-acm-scopes", xAdsAcmScopes, request);
 
                 // tell the underlying pipeline what scope we'd like to use
                 // if (scopes == null)
@@ -1829,9 +1746,6 @@ namespace Autodesk.Oss.Http
         /// <param name="objectKey">
         ///The URL-encoded human friendly name of the object.
         /// </param>
-        /// <param name="xAdsAcmScopes">
-        ///Optional OSS-compliant scope reference to increase bucket search performance (optional)
-        /// </param>
         /// <param name="parts">
         ///The number of parts you intend to chunk the object for uploading. OSS will return that many signed URLs, one URL for each chunk. If you do not specify a value you'll get only one URL to upload the entire object.              (optional)
         /// </param>
@@ -1853,7 +1767,7 @@ namespace Autodesk.Oss.Http
         /// </param>
         /// <returns>Task of ApiResponse&lt;Signeds3uploadResponse&gt;></returns>
 
-        public async System.Threading.Tasks.Task<ApiResponse<Signeds3uploadResponse>> SignedS3UploadAsync(string bucketKey, string objectKey, string xAdsAcmScopes = default(string), int? parts = default(int?), int? firstPart = default(int?), string uploadKey = default(string), int? minutesExpiration = default(int?), bool? useAcceleration = default(bool?), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ApiResponse<Signeds3uploadResponse>> SignedS3UploadAsync(string bucketKey, string objectKey, int? parts = default(int?), int? firstPart = default(int?), string uploadKey = default(string), int? minutesExpiration = default(int?), bool? useAcceleration = default(bool?), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into SignedS3UploadAsync ");
             using (var request = new HttpRequestMessage())
@@ -1881,8 +1795,6 @@ namespace Autodesk.Oss.Http
                 }
 
 
-
-                SetHeader("x-ads-acm-scopes", xAdsAcmScopes, request);
 
                 // tell the underlying pipeline what scope we'd like to use
                 // if (scopes == null)

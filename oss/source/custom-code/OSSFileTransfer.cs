@@ -263,8 +263,8 @@ namespace Autodesk.Oss
                           parts: parts,
                           firstPart: firstPart,
                           uploadKey: uploadKey,
-                          accessToken: accessToken,
-                          xAdsAcmScopes: projectScope);
+                          accessToken: accessToken);
+                         // xAdsAcmScopes: projectScope);
 
                     return (response.Content, accessToken);
                 }
@@ -424,8 +424,8 @@ namespace Autodesk.Oss
                     var response = await objectsApi.SignedS3DownloadAsync(
                     bucketKey: bucketKey,
                     objectKey: objectKey,
-                    accessToken: accessToken,
-                    xAdsAcmScopes: projectScope);
+                    accessToken: accessToken);
+                    //xAdsAcmScopes: projectScope);
 
                     if (response.Content.Status != DownloadStatus.Complete)
                     {
