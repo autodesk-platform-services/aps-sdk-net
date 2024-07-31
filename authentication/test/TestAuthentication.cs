@@ -14,11 +14,11 @@ public class TestAuthentication
     string client_id = "<client_id>";
     string client_secret = "<client_secret>";
 
-    string authorization_code = "code";
-    string redirect_uri = @"redirect_uri";
+    string authorization_code = "<authorization_code>";
+    string redirect_uri = @"<redirect_uri>";
 
     string token = "<token>";
-    string threeLeggedTokenAccesstoken = "<threeLeggedTokenAccesstoken>";
+    string threeLeggedTokenAccesstoken = "<three_legged_token_accesstoken>";
     string refreshToken = "<refresh_token>";
 
     [ClassInitialize]
