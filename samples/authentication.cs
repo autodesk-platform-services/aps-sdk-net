@@ -74,7 +74,7 @@ namespace Samples
                   // Get Refresh token
                   try
                   {
-                        ThreeLeggedToken newToken = await authenticationClient.RefreshTokenAsync(client_id, client_secret, "refreshToken");
+                        ThreeLeggedToken newToken = await authenticationClient.RefreshTokenAsync("refreshToken", client_id, client_secret);
                         string accessToken = newToken.AccessToken;
 
                   }
