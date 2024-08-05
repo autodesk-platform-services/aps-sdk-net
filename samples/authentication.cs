@@ -9,11 +9,12 @@ namespace Samples
       class Authentication
       {
             AuthenticationClient authenticationClient = null!;
-            string client_id = "<client_id>";
-            string client_secret = "<client_secret>";
-            string redirect_uri = @"<redirect_uri>";
-            string token = "<token>";
-            string authorization_code = "code";
+            string? clientId = Environment.GetEnvironmentVariable("clientId");
+            string? clientSecret = Environment.GetEnvironmentVariable("clientSecret");
+            string? redirectUri = Environment.GetEnvironmentVariable("redirectUri");
+            string? accessToken = Environment.GetEnvironmentVariable("accessToken");
+            string? authorizationCode = Environment.GetEnvironmentVariable("authorizationCode");
+            string? refreshToken = Environment.GetEnvironmentVariable("refreshToken");
 
             public void Initialise()
             {
@@ -33,7 +34,7 @@ namespace Samples
                   // will convert it in '${Base64(<client_id>:<client_secret>)}' format
                   try
                   {
-                        TwoLeggedToken twoLeggedToken = await authenticationClient.GetTwoLeggedTokenAsync(client_id, client_secret, new List<Scopes>() { Scopes.DataRead, Scopes.BucketRead });
+                        TwoLeggedToken twoLeggedToken = await authenticationClient.GetTwoLeggedTokenAsync(clientId, clientSecret, new List<Scopes>() { Scopes.DataRead, Scopes.BucketRead });
                         string accessToken = twoLeggedToken.AccessToken;
                   }
                   catch (AuthenticationApiException ex)
@@ -47,7 +48,7 @@ namespace Samples
             {
                   // Get Authorize url
                   //  List<Scopes
-                  string url = authenticationClient.Authorize(client_id, ResponseType.Code, redirectUri: redirect_uri, scopes: new List<Scopes>() { Scopes.DataRead, Scopes.BucketRead });
+                  string url = authenticationClient.Authorize(clientId, ResponseType.Code, redirectUri: redirectUri, scopes: new List<Scopes>() { Scopes.DataRead, Scopes.BucketRead });
             }
 
 
@@ -58,7 +59,7 @@ namespace Samples
                   // will convert it in Basic ${Base64(<client_id>:<client_secret>)} format
                   try
                   {
-                        ThreeLeggedToken threeLeggedToken = await authenticationClient.GetThreeLeggedTokenAsync(client_id, authorization_code,redirect_uri, clientSecret: client_secret);
+                        ThreeLeggedToken threeLeggedToken = await authenticationClient.GetThreeLeggedTokenAsync(clientId, authorizationCode, redirectUri, clientSecret: clientSecret);
                         string accessToken = threeLeggedToken.AccessToken;
                   }
                   catch (AuthenticationApiException ex)
@@ -74,7 +75,7 @@ namespace Samples
                   // Get Refresh token
                   try
                   {
-                        ThreeLeggedToken newToken = await authenticationClient.RefreshTokenAsync(client_id, client_secret, "refreshToken");
+                        ThreeLeggedToken newToken = await authenticationClient.RefreshTokenAsync(refreshToken, clientId, clientSecret);
                         string accessToken = newToken.AccessToken;
 
                   }
@@ -120,7 +121,7 @@ namespace Samples
                   try
                   {
                         // Retrieves basic information for the given authenticated user.
-                        UserInfo userInfo = await authenticationClient.GetUserInfoAsync(token);
+                        UserInfo userInfo = await authenticationClient.GetUserInfoAsync(accessToken);
                         string userEmail = userInfo.Email;
                   }
                   catch (AuthenticationApiException ex)
@@ -135,7 +136,7 @@ namespace Samples
                   // Returns the status information of the tokens.
                   try
                   {
-                        IntrospectToken introspectToken = await authenticationClient.IntrospectTokenAsync(token, client_id, client_secret);
+                        IntrospectToken introspectToken = await authenticationClient.IntrospectTokenAsync(accessToken, clientId, clientSecret);
                   }
                   catch (AuthenticationApiException ex)
                   {
@@ -150,7 +151,7 @@ namespace Samples
                   // This API endpoint takes an access token or refresh token and revokes it.
                   try
                   {
-                        HttpResponseMessage response = await authenticationClient.RevokeAsync(token, client_id, client_secret);
+                        HttpResponseMessage response = await authenticationClient.RevokeAsync(accessToken, clientId, clientSecret);
                   }
                   catch (AuthenticationApiException ex)
                   {
@@ -164,7 +165,7 @@ namespace Samples
                   string logoutUrl = authenticationClient.Logout();
             }
 
-            public static async void Main()
+            public static async Task Main()
             {
                   Authentication authentication = new Authentication();
                   // Initialise SDKManager & AuthClient

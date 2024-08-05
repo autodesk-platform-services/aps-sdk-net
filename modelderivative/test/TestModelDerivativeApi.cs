@@ -33,43 +33,47 @@ public class TestModelDerivativeAPi
     public async Task TestFormatsAsync()
     {
 
-        Formats formats = await _mdClient.GetFormatsAsync(accessToken: token);
-        Assert.IsTrue(formats.SupportedFormats.Count() == 10);
+        SupportedFormats supportedFormats = await _mdClient.GetFormatsAsync(accessToken: token);
+        Assert.IsInstanceOfType(supportedFormats.Formats, typeof(Dictionary<string, List<string>>));
     }
 
     [TestMethod]
     public async Task TestJobAsync()
     {
         // set output formats
-        List<JobPayloadFormat> outputFormats = new List<JobPayloadFormat>()
-    {
-      // initialising an Svf2 output class will automatically set the type to Svf2.
-      // No need to call Type = TypeEnum.Svf2
-      new JobSvf2OutputFormat()
-      {
+        List<IJobPayloadFormat> outputFormats = new List<IJobPayloadFormat>()
+        {
+        // initialising an Svf2 output class will automatically set the type to Svf2.
+        // No need to call Type = TypeEnum.Svf2
+        new JobPayloadFormatSVF2()
+        {
 
-         Views =  new List<View>()
-                {
-                View._2d,
-                View._3d
-                },
+            Views =  new List<View>()
+                    {
+                    View._2d,
+                    View._3d
+                    },
+                    Advanced = new JobPayloadFormatSVF2AdvancedRVT()
+                    {
+                        GenerateMasterViews =  true
+                    }
 
-      },
+        },
 
-      // initialising a Thumbnail output class will automatically set the type to Thumbnail.
-      // No need to call Type = TypeEnum.Thumbnail
-      new JobThumbnailOutputFormat()
-      {
-            Advanced = new JobThumbnailOutputFormatAdvanced(){
+        // initialising a Thumbnail output class will automatically set the type to Thumbnail.
+        // No need to call Type = TypeEnum.Thumbnail
+        new JobPayloadFormatThumbnail()
+        {
+                Advanced = new JobPayloadFormatAdvancedThumbnail(){
 
-                  Width = Width.NUMBER_100,
-                  Height = Height.NUMBER_100
-            }
+                    Width = Width.NUMBER_100,
+                    Height = Height.NUMBER_100
+                }
 
 
-      }
+        }
 
-    };
+        };
 
 
         // specify Job details
@@ -79,15 +83,10 @@ public class TestModelDerivativeAPi
             {
                 Urn = urn,
                 CompressedUrn = false,
-                RootFilename = "<filename>",
-
-
-
             },
             Output = new JobPayloadOutput()
             {
                 Formats = outputFormats,
-                Destination = Region.US
             },
 
 
@@ -95,14 +94,15 @@ public class TestModelDerivativeAPi
         };
 
         // start the translation job
-        Job jobResponse = await _mdClient.StartJobAsync(jobPayload: Job, accessToken: token);
+        Job jobResponse = await _mdClient.StartJobAsync(jobPayload: Job, accessToken: token, region: Region.US);
         Assert.IsTrue(jobResponse.Result == "created");
     }
 
     [TestMethod]
     public async Task TestGetManifestAsync()
     {
-        Manifest manifestResponse = await _mdClient.GetManifestAsync(urn, accessToken: token);
+        // token
+        Manifest manifestResponse = await _mdClient.GetManifestAsync(accessToken: token, urn);
         string progress = manifestResponse.Progress;
         Assert.IsTrue(progress == "complete");
     }
@@ -110,15 +110,16 @@ public class TestModelDerivativeAPi
     [TestMethod]
     public async Task TestGetMetadataAsync()
     {
-        ModelViews modelViewsResponse = await _mdClient.GetModelViewsAsync(urn, accessToken: token);
+        // token
+        ModelViews modelViewsResponse = await _mdClient.GetModelViewsAsync(accessToken: token, urn);
         Assert.IsTrue(modelViewsResponse.Data.Metadata.Count > 0);
     }
 
     [TestMethod]
     public async Task GetThumbnailAsync()
     {
-
-        Stream thumbnail = await _mdClient.GetThumbnailAsync(urn, Width.NUMBER_100, Height.NUMBER_100, accessToken: token);
+        // token
+        Stream thumbnail = await _mdClient.GetThumbnailAsync(accessToken: token, urn, Width.NUMBER_100, Height.NUMBER_100, Region.US);
         Assert.AreNotSame(thumbnail, null);
 
     }
