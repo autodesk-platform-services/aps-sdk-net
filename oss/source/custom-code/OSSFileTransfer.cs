@@ -113,7 +113,6 @@ namespace Autodesk.Oss
             Stream sourceToUpload,
             string accessToken,
             CancellationToken cancellationToken,
-            string projectScope = "",
             string requestIdPrefix = "",
             IProgress<int> progress = null)
         {
@@ -123,7 +122,6 @@ namespace Autodesk.Oss
             _logger.LogDebug("{requestId} Config retry setting was: {retryCount}", requestId, retryCount);
 
             await ValidateFileSize(requestId, sourceToUpload);
-            ValidateProjectScopeName(requestId, projectScope);
 
             progress?.Report(1);
                 ulong numberOfChunks = (ulong)CalculateNumberOfChunks((ulong)sourceToUpload.Length);
@@ -160,7 +158,7 @@ namespace Autodesk.Oss
                             {
                                 retryUrlExpiryCount++;
 
-                                var (uploadUrlsResponse, currentAccessToken) = await GetUploadUrlsWithRetry(bucketKey, objectKey, (int)numberOfChunks, (int)chunksUploaded, uploadKey, accessToken, projectScope, requestId);
+                                var (uploadUrlsResponse, currentAccessToken) = await GetUploadUrlsWithRetry(bucketKey, objectKey, (int)numberOfChunks, (int)chunksUploaded, uploadKey, accessToken, requestId);
 
                                 uploadKey = uploadUrlsResponse.UploadKey;
                                 uploadUrls = uploadUrlsResponse.Urls;
@@ -245,7 +243,7 @@ namespace Autodesk.Oss
             return fileBytes;
         }
 
-        private async Task<(Signeds3uploadResponse, string)> GetUploadUrlsWithRetry(string bucketKey, string objectKey, int numberOfChunks, int chunksUploaded, string uploadKey, string accessToken, string projectScope, string requestId)
+        private async Task<(Signeds3uploadResponse, string)> GetUploadUrlsWithRetry(string bucketKey, string objectKey, int numberOfChunks, int chunksUploaded, string uploadKey, string accessToken, string requestId)
         {
             var attemptCount = 0;
             var parts = Math.Min(numberOfChunks - chunksUploaded, Constants.BatchSize);
@@ -263,8 +261,8 @@ namespace Autodesk.Oss
                           parts: parts,
                           firstPart: firstPart,
                           uploadKey: uploadKey,
-                          accessToken: accessToken,
-                          xAdsAcmScopes: projectScope);
+                          accessToken: accessToken);
+                         // xAdsAcmScopes: projectScope);
 
                     return (response.Content, accessToken);
                 }
@@ -315,17 +313,15 @@ namespace Autodesk.Oss
             string filePath,
             string accessToken,
             CancellationToken cancellationToken,
-            string projectScope = "",
             string requestIdPrefix = "",
             IProgress<int> progress = null)
         {
 
             var requestId = HandleRequestId(requestIdPrefix, bucketKey, objectKey);
-            ValidateProjectScopeName(requestId, projectScope);
 
             progress?.Report(1);
 
-            var response = await GetS3SignedDownloadUrlWithRetry(bucketKey, objectKey, accessToken, requestId, projectScope);
+            var response = await GetS3SignedDownloadUrlWithRetry(bucketKey, objectKey, accessToken, requestId);
             var fileSize = response.Content.Size;
             double numberOfChunks = CalculateNumberOfChunks((ulong)fileSize);
             double partsDownloaded = 0;
@@ -374,7 +370,7 @@ namespace Autodesk.Oss
                             }
 
                             _logger.LogInformation("{requestId} S3 signed Url is expired. Refreshing the Url", requestId);
-                            response = await GetS3SignedDownloadUrlWithRetry(bucketKey, objectKey, accessToken, requestId, projectScope);
+                            response = await GetS3SignedDownloadUrlWithRetry(bucketKey, objectKey, accessToken, requestId);
                         }
                         catch (Exception ex)
                         {
@@ -410,7 +406,7 @@ namespace Autodesk.Oss
         }
 
         private async Task<ApiResponse<Signeds3downloadResponse>> GetS3SignedDownloadUrlWithRetry(string bucketKey, string objectKey,
-          string accessToken, string requestId, string projectScope)
+          string accessToken, string requestId)
         {
             var attemptCount = 0;
             do
@@ -424,8 +420,7 @@ namespace Autodesk.Oss
                     var response = await objectsApi.SignedS3DownloadAsync(
                     bucketKey: bucketKey,
                     objectKey: objectKey,
-                    accessToken: accessToken,
-                    xAdsAcmScopes: projectScope);
+                    accessToken: accessToken);
 
                     if (response.Content.Status != DownloadStatus.Complete)
                     {
