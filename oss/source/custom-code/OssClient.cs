@@ -80,9 +80,9 @@ namespace Autodesk.Oss
         /// </param>
         /// <returns>Task of &lt;Upload&gt;</returns>
 
-        public async System.Threading.Tasks.Task<ObjectDetails> Upload(string bucketKey, string objectKey, Stream sourceToUpload, string accessToken, CancellationToken cancellationToken, string projectScope = "", string requestIdPrefix = "", IProgress<int> progress = null)
+        public async System.Threading.Tasks.Task<ObjectDetails> Upload(string bucketKey, string objectKey, Stream sourceToUpload, string accessToken, CancellationToken cancellationToken = default, string requestIdPrefix = "", IProgress<int> progress = null)
         {
-            var response = await this.oSSFileTransfer.Upload(bucketKey, objectKey, sourceToUpload, accessToken, cancellationToken, projectScope, requestIdPrefix, progress);
+            var response = await this.oSSFileTransfer.Upload(bucketKey, objectKey, sourceToUpload, accessToken, cancellationToken, requestIdPrefix, progress);
             var apiResponse = new ApiResponse<ObjectDetails>(response, await LocalMarshalling.DeserializeAsync<ObjectDetails>(response.Content));
             return apiResponse.Content;
         }
@@ -123,10 +123,10 @@ namespace Autodesk.Oss
         /// (optional)
         /// </param>
         /// <returns>Task of &lt;Upload&gt;</returns>
-        public async System.Threading.Tasks.Task<ObjectDetails> Upload(string bucketKey, string objectKey, string sourceToUpload, string accessToken, CancellationToken cancellationToken, string projectScope = "", string requestIdPrefix = "", IProgress<int> progress = null)
+        public async System.Threading.Tasks.Task<ObjectDetails> Upload(string bucketKey, string objectKey, string sourceToUpload, string accessToken, CancellationToken cancellationToken = default, string requestIdPrefix = "", IProgress<int> progress = null)
         {
             FileStream fileStream = File.OpenRead(sourceToUpload);
-            var response = await this.oSSFileTransfer.Upload(bucketKey, objectKey, fileStream, accessToken, cancellationToken, projectScope, requestIdPrefix, progress);
+            var response = await this.oSSFileTransfer.Upload(bucketKey, objectKey, fileStream, accessToken, cancellationToken, requestIdPrefix, progress);
             var apiResponse = new ApiResponse<ObjectDetails>(response, await LocalMarshalling.DeserializeAsync<ObjectDetails>(response.Content));
             return apiResponse.Content;
         }
@@ -167,9 +167,9 @@ namespace Autodesk.Oss
         /// (optional)
         /// </param>
         /// <returns>Task of &lt;Downlaod&gt;</returns>
-        public async System.Threading.Tasks.Task Download(string bucketKey, string objectKey, string filePath, string accessToken, CancellationToken cancellationToken, string projectScope = "", string requestIdPrefix = "", IProgress<int> progress = null)
+        public async System.Threading.Tasks.Task Download(string bucketKey, string objectKey, string filePath, string accessToken, CancellationToken cancellationToken = default, string requestIdPrefix = "", IProgress<int> progress = null)
         {
-            await this.oSSFileTransfer.Download(bucketKey, objectKey, filePath, accessToken, cancellationToken, projectScope, requestIdPrefix, progress);
+            await this.oSSFileTransfer.Download(bucketKey, objectKey, filePath, accessToken, cancellationToken, requestIdPrefix, progress);
         }
         /// <summary>
         /// Complete Batch Upload to S3 Signed URLs
