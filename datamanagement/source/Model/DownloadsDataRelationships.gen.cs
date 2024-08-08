@@ -46,13 +46,7 @@ namespace Autodesk.DataManagement.Model
         }
         
         /// <summary>
-        /// Gets or Sets Source
-        /// </summary>
-        [DataMember(Name="source", EmitDefaultValue=false)]
-        public TopFoldersDataRelationshipsParent Source { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Storage
+        ///Gets or Sets Storage
         /// </summary>
         [DataMember(Name="storage", EmitDefaultValue=false)]
         public ProjectsDataRelationshipsRootFolder Storage { get; set; }

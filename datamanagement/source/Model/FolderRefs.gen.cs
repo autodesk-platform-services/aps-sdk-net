@@ -64,6 +64,12 @@ namespace Autodesk.DataManagement.Model
         public List<FolderRefsData> Data { get; set; }
 
         /// <summary>
+        ///Gets or Sets Incuded
+        /// </summary>
+        [DataMember(Name="incuded", EmitDefaultValue=false)]
+        public List<FolderRefsIncuded> Incuded { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
