@@ -89,7 +89,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
          /// </param>
         /// <returns>Task of ApiResponse&lt;List&lt;Company&gt;&gt;</returns>
         
-        System.Threading.Tasks.Task<ApiResponse<List<Company>>> GetCompaniesAsync (string accountId, Region? region= null, decimal? limit= default(decimal?), decimal? offset= default(decimal?), string sort= default(string), string field= default(string),  string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<ApiResponse<List<Company>>> GetCompaniesAsync (string accountId, Region? region= null, int? limit= default(int?), int? offset= default(int?), string sort= default(string), string field= default(string),  string accessToken = null, bool throwOnError = true);
         /// <summary>
         /// Get details of a company
         /// </summary>
@@ -452,7 +452,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
          /// </param>
         /// <returns>Task of ApiResponse&lt;List&lt;Company&gt;&gt;></returns>
         
-        public async System.Threading.Tasks.Task<ApiResponse<List<Company>>> GetCompaniesAsync (string accountId,Region? region= null,decimal? limit= default(decimal?),decimal? offset= default(decimal?),string sort= default(string),string field= default(string), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ApiResponse<List<Company>>> GetCompaniesAsync (string accountId,Region? region= null,int? limit= default(int?),int? offset= default(int?),string sort= default(string),string field= default(string), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into GetCompaniesAsync ");
             using (var request = new HttpRequestMessage())

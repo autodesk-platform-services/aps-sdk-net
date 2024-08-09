@@ -102,10 +102,13 @@ namespace Autodesk.Construction.AccountAdmin.Model
         public string Classification { get; set; }
 
         /// <summary>
-        ///Gets or Sets ProjectValue
+        ///The value of the project. When updating the project value, both the value and currency parameters are required.
         /// </summary>
+        /// <value>
+        ///The value of the project. When updating the project value, both the value and currency parameters are required.
+        /// </value>
         [DataMember(Name="projectValue", EmitDefaultValue=false)]
-        public ProjectProjectValue ProjectValue { get; set; }
+        public Object ProjectValue { get; set; }
 
         /// <summary>
         ///The status of the project.
@@ -345,7 +348,7 @@ namespace Autodesk.Construction.AccountAdmin.Model
         ///An array of the product objects associated with the project.
         /// </value>
         [DataMember(Name="products", EmitDefaultValue=false)]
-        public List<object> Products { get; set; }
+        public List<Object> Products { get; set; }
 
         /// <summary>
         ///The APS platform that the project belongs to.
