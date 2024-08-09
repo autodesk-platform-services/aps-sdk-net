@@ -176,7 +176,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
          /// </param>
         /// <returns>Task of ApiResponse&lt;ProjectUsers&gt;</returns>
         
-        System.Threading.Tasks.Task<ApiResponse<ProjectUsers>> GetProjectUsersAsync (string projectId, string acceptLanguage= default(string), Region? region= null, string userId= default(string), List<Products> filterProducts= default(List<Products>), string filterName= default(string), string filterEmail= default(string), List<StatusFilter> filterStatus= default(List<StatusFilter>), List<AccessLevels> filterAccessLevels= default(List<AccessLevels>), string filterCompanyId= default(string), string filterCompanyName= default(string), List<string> filterAutodeskId= default(List<string>), List<string> filterId= default(List<string>), string filterRoleId= default(string), List<string> filterRoleIds= default(List<string>), List<UserSortBy> sort= default(List<UserSortBy>), List<UserFields> fields= default(List<UserFields>), List<OrFilters> orFilters= default(List<OrFilters>), FilterTextMatch? filterTextMatch= null, decimal? limit= default(decimal?), decimal? offset= default(decimal?),  string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<ApiResponse<ProjectUsers>> GetProjectUsersAsync (string projectId, string acceptLanguage= default(string), Region? region= null, string userId= default(string), List<Products> filterProducts= default(List<Products>), string filterName= default(string), string filterEmail= default(string), List<StatusFilter> filterStatus= default(List<StatusFilter>), List<AccessLevels> filterAccessLevels= default(List<AccessLevels>), string filterCompanyId= default(string), string filterCompanyName= default(string), List<string> filterAutodeskId= default(List<string>), List<string> filterId= default(List<string>), string filterRoleId= default(string), List<string> filterRoleIds= default(List<string>), List<UserSortBy> sort= default(List<UserSortBy>), List<UserFields> fields= default(List<UserFields>), List<OrFilters> orFilters= default(List<OrFilters>), FilterTextMatch? filterTextMatch= null, int? limit= default(int?), int? offset= default(int?),  string accessToken = null, bool throwOnError = true);
         /// <summary>
         /// Assigns multiple users to a project
         /// </summary>
@@ -453,7 +453,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
                     {
                       await response.EnsureSuccessStatusCodeAsync();
                     } catch (HttpRequestException ex) {
-                      throw new ConstructionaccountadminApiException(ex.Message, response, ex);
+                      throw new ConstructionAccountAdminApiException(ex.Message, response, ex);
                     }
                 }
                 else if (!response.IsSuccessStatusCode)
@@ -567,7 +567,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
                     {
                       await response.EnsureSuccessStatusCodeAsync();
                     } catch (HttpRequestException ex) {
-                      throw new ConstructionaccountadminApiException(ex.Message, response, ex);
+                      throw new ConstructionAccountAdminApiException(ex.Message, response, ex);
                     }
                 }
                 else if (!response.IsSuccessStatusCode)
@@ -658,7 +658,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
          /// </param>
         /// <returns>Task of ApiResponse&lt;ProjectUsers&gt;></returns>
         
-        public async System.Threading.Tasks.Task<ApiResponse<ProjectUsers>> GetProjectUsersAsync (string projectId,string acceptLanguage= default(string),Region? region= null,string userId= default(string),List<Products> filterProducts= default(List<Products>),string filterName= default(string),string filterEmail= default(string),List<StatusFilter> filterStatus= default(List<StatusFilter>),List<AccessLevels> filterAccessLevels= default(List<AccessLevels>),string filterCompanyId= default(string),string filterCompanyName= default(string),List<string> filterAutodeskId= default(List<string>),List<string> filterId= default(List<string>),string filterRoleId= default(string),List<string> filterRoleIds= default(List<string>),List<UserSortBy> sort= default(List<UserSortBy>),List<UserFields> fields= default(List<UserFields>),List<OrFilters> orFilters= default(List<OrFilters>),FilterTextMatch? filterTextMatch= null,decimal? limit= default(decimal?),decimal? offset= default(decimal?), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ApiResponse<ProjectUsers>> GetProjectUsersAsync (string projectId,string acceptLanguage= default(string),Region? region= null,string userId= default(string),List<Products> filterProducts= default(List<Products>),string filterName= default(string),string filterEmail= default(string),List<StatusFilter> filterStatus= default(List<StatusFilter>),List<AccessLevels> filterAccessLevels= default(List<AccessLevels>),string filterCompanyId= default(string),string filterCompanyName= default(string),List<string> filterAutodeskId= default(List<string>),List<string> filterId= default(List<string>),string filterRoleId= default(string),List<string> filterRoleIds= default(List<string>),List<UserSortBy> sort= default(List<UserSortBy>),List<UserFields> fields= default(List<UserFields>),List<OrFilters> orFilters= default(List<OrFilters>),FilterTextMatch? filterTextMatch= null,int? limit= default(int?),int? offset= default(int?), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into GetProjectUsersAsync ");
             using (var request = new HttpRequestMessage())
@@ -742,7 +742,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
                     {
                       await response.EnsureSuccessStatusCodeAsync();
                     } catch (HttpRequestException ex) {
-                      throw new ConstructionaccountadminApiException(ex.Message, response, ex);
+                      throw new ConstructionAccountAdminApiException(ex.Message, response, ex);
                     }
                 }
                 else if (!response.IsSuccessStatusCode)
@@ -847,7 +847,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
                     {
                       await response.EnsureSuccessStatusCodeAsync();
                     } catch (HttpRequestException ex) {
-                      throw new ConstructionaccountadminApiException(ex.Message, response, ex);
+                      throw new ConstructionAccountAdminApiException(ex.Message, response, ex);
                     }
                 }
                 else if (!response.IsSuccessStatusCode)
@@ -954,7 +954,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
                     {
                       await response.EnsureSuccessStatusCodeAsync();
                     } catch (HttpRequestException ex) {
-                      throw new ConstructionaccountadminApiException(ex.Message, response, ex);
+                      throw new ConstructionAccountAdminApiException(ex.Message, response, ex);
                     }
                 }
                 else if (!response.IsSuccessStatusCode)
@@ -1065,7 +1065,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
                     {
                       await response.EnsureSuccessStatusCodeAsync();
                     } catch (HttpRequestException ex) {
-                      throw new ConstructionaccountadminApiException(ex.Message, response, ex);
+                      throw new ConstructionAccountAdminApiException(ex.Message, response, ex);
                     }
                 }
                 else if (!response.IsSuccessStatusCode)

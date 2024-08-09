@@ -64,16 +64,22 @@ namespace Autodesk.Construction.AccountAdmin.Model
         public string AccountId { get; set; }
 
         /// <summary>
-        ///Gets or Sets Role
+        ///The role of the user in the account. New user should be account_user only.
         /// </summary>
-        [DataMember(Name="role", EmitDefaultValue=true)]
-        public UserRole Role { get; set; }
+        /// <value>
+        ///The role of the user in the account. New user should be account_user only.
+        /// </value>
+        [DataMember(Name="role", EmitDefaultValue=false)]
+        public string Role { get; set; }
 
         /// <summary>
-        ///Gets or Sets Status
+        ///Status of the user in the system. A new account user is always not_invited.
         /// </summary>
-        [DataMember(Name="status", EmitDefaultValue=true)]
-        public UserStatus Status { get; set; }
+        /// <value>
+        ///Status of the user in the system. A new account user is always not_invited.
+        /// </value>
+        [DataMember(Name="status", EmitDefaultValue=false)]
+        public string Status { get; set; }
 
         /// <summary>
         ///The user’s default company ID in BIM 360

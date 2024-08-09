@@ -122,10 +122,13 @@ namespace Autodesk.Construction.AccountAdmin.Model
         public string Currency { get; set; }
 
         /// <summary>
-        ///Gets or Sets Status
+        ///The status of project.
         /// </summary>
-        [DataMember(Name="status", EmitDefaultValue=true)]
-        public ProjectStatus Status { get; set; }
+        /// <value>
+        ///The status of project.
+        /// </value>
+        [DataMember(Name="status", EmitDefaultValue=false)]
+        public string Status { get; set; }
 
         /// <summary>
         ///Project job number to connect a BIM 360 project to project or job in a financial or ERP system.
@@ -209,22 +212,31 @@ namespace Autodesk.Construction.AccountAdmin.Model
         public string Timezone { get; set; }
 
         /// <summary>
-        ///Gets or Sets Language
+        ///Language of the project; applicable to the BIM 360 Field service only
         /// </summary>
-        [DataMember(Name="language", EmitDefaultValue=true)]
-        public Language Language { get; set; }
+        /// <value>
+        ///Language of the project; applicable to the BIM 360 Field service only
+        /// </value>
+        [DataMember(Name="language", EmitDefaultValue=false)]
+        public string Language { get; set; }
 
         /// <summary>
-        ///Gets or Sets ConstructionType
+        ///Type of construction
         /// </summary>
-        [DataMember(Name="construction_type", EmitDefaultValue=true)]
-        public ConstructionType ConstructionType { get; set; }
+        /// <value>
+        ///Type of construction
+        /// </value>
+        [DataMember(Name="construction_type", EmitDefaultValue=false)]
+        public string ConstructionType { get; set; }
 
         /// <summary>
-        ///Gets or Sets ContractType
+        ///Contract Type for your project
         /// </summary>
-        [DataMember(Name="contract_type", EmitDefaultValue=true)]
-        public ContractType ContractType { get; set; }
+        /// <value>
+        ///Contract Type for your project
+        /// </value>
+        [DataMember(Name="contract_type", EmitDefaultValue=false)]
+        public string ContractType { get; set; }
 
         /// <summary>
         ///Timestamp of the last sign in, YYYY-MM-DDThh:mm:ss.sssZ format

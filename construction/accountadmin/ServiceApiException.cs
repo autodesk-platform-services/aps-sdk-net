@@ -35,9 +35,9 @@ namespace Autodesk.Construction.AccountAdmin
     }
   }
 
-  public class ConstructionaccountadminApiException : ServiceApiException
+  public class ConstructionAccountAdminApiException : ServiceApiException
   {
-    public ConstructionaccountadminApiException(string message) : base(message) {}
-    public ConstructionaccountadminApiException(string message, HttpResponseMessage httpResponseMessage, Exception exception) : base(message, httpResponseMessage, exception) {}
+    public ConstructionAccountAdminApiException(string message) : base(message) {}
+    public ConstructionAccountAdminApiException(string message, HttpResponseMessage httpResponseMessage, Exception exception) : base(message, httpResponseMessage, exception) {}
   }
 }
