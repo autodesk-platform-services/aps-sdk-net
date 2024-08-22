@@ -83,7 +83,11 @@ namespace Autodesk.DataManagement.Http
         }
         private void SetQueryParameter(string name, object value, Dictionary<string, object> dictionary)
         {
-            if(value is Enum)
+            if (value is List<string>)
+            {
+                dictionary.Add(name, string.Join(",", (List<string>)value));
+            }
+            else if (value is Enum)
             {
                 var type = value.GetType();
                 var memberInfos = type.GetMember(value.ToString());
@@ -236,9 +240,9 @@ namespace Autodesk.DataManagement.Http
             using (var request = new HttpRequestMessage())
             {
                 var queryParam = new Dictionary<string, object>();
-                SetQueryParameter("filter_id", filterId, queryParam);
-                SetQueryParameter("filter_name", filterName, queryParam);
-                SetQueryParameter("filter_extension_type", filterExtensionType, queryParam);
+                SetQueryParameter("filter[id]", filterId, queryParam);
+                SetQueryParameter("filter[name]", filterName, queryParam);
+                SetQueryParameter("filter[extension.type]", filterExtensionType, queryParam);
                 request.RequestUri =
                     Marshalling.BuildRequestUri("/project/v1/hubs",
                         routeParameters: new Dictionary<string, object> {
