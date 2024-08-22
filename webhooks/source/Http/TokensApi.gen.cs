@@ -43,35 +43,62 @@ namespace Autodesk.Webhooks.Http
         /// Add a new Webhook secret token
         /// </summary>
         /// <remarks>
-        /// Add a new Webhook secret token
+        ///Add a new Webhook secret token
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="xAdsRegion">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;. (optional)</param>/// <param name="region">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;.  The &#x60;&#x60;x-ads-region&#x60;&#x60; header also specifies the region. If you specify both, &#x60;&#x60;x-ads-region&#x60;&#x60; has precedence.  (optional)</param>/// <param name="tokenPayload">A secret token that is used to generate a hash signature, which is passed along with notification requests to the callback URL (optional)</param>
-        /// <returns>Task of ApiResponse<Token></returns>
+         /// <param name="xAdsRegion">
+         ///Specifies the geographical location (region) of the server that the request is executed on. Supported values are: `EMEA`, `US`. Default is `US`. (optional)
+         /// </param>
+         /// <param name="region">
+         ///Specifies the geographical location (region) of the server that the request is executed on. Supported values are: `EMEA`, `US`. Default is `US`.
+///
+///The `x-ads-region` header also specifies the region. If you specify both, `x-ads-region` has precedence. (optional)
+         /// </param>
+         /// <param name="tokenPayload">
+         /// (optional)
+         /// </param>
+        /// <returns>Task of ApiResponse&lt;Token&gt;</returns>
         
-        System.Threading.Tasks.Task<ApiResponse<Token>> CreateTokenAsync (string xAdsRegion= default(string), string region= default(string), TokenPayload tokenPayload= default(TokenPayload),  string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<ApiResponse<Token>> CreateTokenAsync (XAdsRegion? xAdsRegion= null, Region? region= null, TokenPayload tokenPayload= default(TokenPayload),  string accessToken = null, bool throwOnError = true);
         /// <summary>
         /// Delete a Webhook secret token
         /// </summary>
         /// <remarks>
-        /// Delete a Webhook secret token
+        ///Delete a Webhook secret token
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="xAdsRegion">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;. (optional)</param>/// <param name="region">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;.  The &#x60;&#x60;x-ads-region&#x60;&#x60; header also specifies the region. If you specify both, &#x60;&#x60;x-ads-region&#x60;&#x60; has precedence.  (optional)</param>
+         /// <param name="xAdsRegion">
+         ///Specifies the geographical location (region) of the server that the request is executed on. Supported values are: `EMEA`, `US`. Default is `US`. (optional)
+         /// </param>
+         /// <param name="region">
+         ///Specifies the geographical location (region) of the server that the request is executed on. Supported values are: `EMEA`, `US`. Default is `US`.
+///
+///The `x-ads-region` header also specifies the region. If you specify both, `x-ads-region` has precedence. (optional)
+         /// </param>
         
         /// <returns>Task of HttpResponseMessage</returns>
-        System.Threading.Tasks.Task<HttpResponseMessage> DeleteTokenAsync (string xAdsRegion= default(string), string region= default(string),  string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<HttpResponseMessage> DeleteTokenAsync (XAdsRegion? xAdsRegion= null, Region? region= null,  string accessToken = null, bool throwOnError = true);
         /// <summary>
         /// Update an existing Webhook secret token
         /// </summary>
         /// <remarks>
-        /// Update an existing Webhook secret token
+        ///Update an existing Webhook secret token
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="xAdsRegion">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;. (optional)</param>/// <param name="region">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;.  The &#x60;&#x60;x-ads-region&#x60;&#x60; header also specifies the region. If you specify both, &#x60;&#x60;x-ads-region&#x60;&#x60; has precedence.  (optional)</param>/// <param name="tokenPayload"> (optional)</param>
+         /// <param name="xAdsRegion">
+         ///Specifies the geographical location (region) of the server that the request is executed on. Supported values are: `EMEA`, `US`. Default is `US`. (optional)
+         /// </param>
+         /// <param name="region">
+         ///Specifies the geographical location (region) of the server that the request is executed on. Supported values are: `EMEA`, `US`. Default is `US`.
+///
+///The `x-ads-region` header also specifies the region. If you specify both, `x-ads-region` has precedence. (optional)
+         /// </param>
+         /// <param name="tokenPayload">
+         /// (optional)
+         /// </param>
         
         /// <returns>Task of HttpResponseMessage</returns>
-        System.Threading.Tasks.Task<HttpResponseMessage> PutTokenAsync (string xAdsRegion= default(string), string region= default(string), TokenPayload tokenPayload= default(TokenPayload),  string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<HttpResponseMessage> PutTokenAsync (XAdsRegion? xAdsRegion= null, Region? region= null, TokenPayload tokenPayload= default(TokenPayload),  string accessToken = null, bool throwOnError = true);
     }
 
     /// <summary>
@@ -156,13 +183,23 @@ namespace Autodesk.Webhooks.Http
         /// Add a new Webhook secret token
         /// </summary>
         /// <remarks>
-        /// Add a new Webhook secret token
+        ///Add a new Webhook secret token
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="xAdsRegion">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;. (optional)</param>/// <param name="region">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;.  The &#x60;&#x60;x-ads-region&#x60;&#x60; header also specifies the region. If you specify both, &#x60;&#x60;x-ads-region&#x60;&#x60; has precedence.  (optional)</param>/// <param name="tokenPayload">A secret token that is used to generate a hash signature, which is passed along with notification requests to the callback URL (optional)</param>
-        /// <returns>Task of ApiResponse<Token></returns>
+         /// <param name="xAdsRegion">
+         ///Specifies the geographical location (region) of the server that the request is executed on. Supported values are: `EMEA`, `US`. Default is `US`. (optional)
+         /// </param>
+         /// <param name="region">
+         ///Specifies the geographical location (region) of the server that the request is executed on. Supported values are: `EMEA`, `US`. Default is `US`.
+///
+///The `x-ads-region` header also specifies the region. If you specify both, `x-ads-region` has precedence. (optional)
+         /// </param>
+         /// <param name="tokenPayload">
+         /// (optional)
+         /// </param>
+        /// <returns>Task of ApiResponse&lt;Token&gt;></returns>
         
-        public async System.Threading.Tasks.Task<ApiResponse<Token>> CreateTokenAsync (string xAdsRegion= default(string),string region= default(string),TokenPayload tokenPayload= default(TokenPayload), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ApiResponse<Token>> CreateTokenAsync (XAdsRegion? xAdsRegion= null,Region? region= null,TokenPayload tokenPayload= default(TokenPayload), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into CreateTokenAsync ");
             using (var request = new HttpRequestMessage())
@@ -177,7 +214,7 @@ namespace Autodesk.Webhooks.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/WEBHOOKS/C#/1.0.0");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/WEBHOOKS/C#/2.0.0");
                 if(!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
@@ -227,13 +264,20 @@ namespace Autodesk.Webhooks.Http
         /// Delete a Webhook secret token
         /// </summary>
         /// <remarks>
-        /// Delete a Webhook secret token
+        ///Delete a Webhook secret token
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="xAdsRegion">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;. (optional)</param>/// <param name="region">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;.  The &#x60;&#x60;x-ads-region&#x60;&#x60; header also specifies the region. If you specify both, &#x60;&#x60;x-ads-region&#x60;&#x60; has precedence.  (optional)</param>
+         /// <param name="xAdsRegion">
+         ///Specifies the geographical location (region) of the server that the request is executed on. Supported values are: `EMEA`, `US`. Default is `US`. (optional)
+         /// </param>
+         /// <param name="region">
+         ///Specifies the geographical location (region) of the server that the request is executed on. Supported values are: `EMEA`, `US`. Default is `US`.
+///
+///The `x-ads-region` header also specifies the region. If you specify both, `x-ads-region` has precedence. (optional)
+         /// </param>
         
         /// <returns>Task of HttpResponseMessage</returns>
-        public async System.Threading.Tasks.Task<HttpResponseMessage> DeleteTokenAsync (string xAdsRegion= default(string),string region= default(string), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<HttpResponseMessage> DeleteTokenAsync (XAdsRegion? xAdsRegion= null,Region? region= null, string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into DeleteTokenAsync ");
             using (var request = new HttpRequestMessage())
@@ -248,7 +292,7 @@ namespace Autodesk.Webhooks.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/WEBHOOKS/C#/1.0.0");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/WEBHOOKS/C#/2.0.0");
                 if(!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
@@ -297,13 +341,23 @@ namespace Autodesk.Webhooks.Http
         /// Update an existing Webhook secret token
         /// </summary>
         /// <remarks>
-        /// Update an existing Webhook secret token
+        ///Update an existing Webhook secret token
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="xAdsRegion">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;. (optional)</param>/// <param name="region">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;.  The &#x60;&#x60;x-ads-region&#x60;&#x60; header also specifies the region. If you specify both, &#x60;&#x60;x-ads-region&#x60;&#x60; has precedence.  (optional)</param>/// <param name="tokenPayload"> (optional)</param>
+         /// <param name="xAdsRegion">
+         ///Specifies the geographical location (region) of the server that the request is executed on. Supported values are: `EMEA`, `US`. Default is `US`. (optional)
+         /// </param>
+         /// <param name="region">
+         ///Specifies the geographical location (region) of the server that the request is executed on. Supported values are: `EMEA`, `US`. Default is `US`.
+///
+///The `x-ads-region` header also specifies the region. If you specify both, `x-ads-region` has precedence. (optional)
+         /// </param>
+         /// <param name="tokenPayload">
+         /// (optional)
+         /// </param>
         
         /// <returns>Task of HttpResponseMessage</returns>
-        public async System.Threading.Tasks.Task<HttpResponseMessage> PutTokenAsync (string xAdsRegion= default(string),string region= default(string),TokenPayload tokenPayload= default(TokenPayload), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<HttpResponseMessage> PutTokenAsync (XAdsRegion? xAdsRegion= null,Region? region= null,TokenPayload tokenPayload= default(TokenPayload), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into PutTokenAsync ");
             using (var request = new HttpRequestMessage())
@@ -318,7 +372,7 @@ namespace Autodesk.Webhooks.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/WEBHOOKS/C#/1.0.0");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/WEBHOOKS/C#/2.0.0");
                 if(!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");

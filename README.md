@@ -21,10 +21,14 @@ The Developer Portal has everything APS:
 
 ## Nuget Packages
 
-- [Data Management]()
-- [OSS]()
-- [Model Derivative]()
-- [Webhooks]()
+- [Authentication](https://www.nuget.org/packages/Autodesk.Authentication)
+- [Construction Account Admin](https://www.nuget.org/packages/Autodesk.Construction.AccountAdmin/1.0.0-beta1)
+- [Construction Issues](https://www.nuget.org/packages/Autodesk.Construction.Issues)
+- [Data Management](https://www.nuget.org/packages/Autodesk.DataManagement)
+- [Model Derivative](https://www.nuget.org/packages/Autodesk.ModelDerivative)
+- [OSS](https://www.nuget.org/packages/Autodesk.Oss)
+- [SDK Manager](https://www.nuget.org/packages/Autodesk.SDKManager)
+- [Webhooks](https://www.nuget.org/packages/Autodesk.Webhooks)
 
 #### Looking for Design Automation v3?
 

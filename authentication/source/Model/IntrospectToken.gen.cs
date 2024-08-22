@@ -33,10 +33,10 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Authentication.Model
 {
     /// <summary>
-    /// The response body for the introspection of access token.
+    /// Represents the payload returned for an introspect token request.
     /// </summary>
     [DataContract]
-    public partial class IntrospectToken 
+    public partial class IntrospectToken
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="IntrospectToken" /> class.
@@ -44,44 +44,55 @@ namespace Autodesk.Authentication.Model
         public IntrospectToken()
         {
         }
-        
+
         /// <summary>
-        /// Gets or Sets Active
+        ///`true`: The token is active.
+        ///
+        ///`false`: The token is expired, invalid, or revoked.
         /// </summary>
-        [DataMember(Name="active", EmitDefaultValue=false)]
+        /// <value>
+        ///`true`: The token is active.
+        ///
+        ///`false`: The token is expired, invalid, or revoked.
+        /// </value>
+        [DataMember(Name = "active", EmitDefaultValue = false)]
         public bool? Active { get; set; }
 
         /// <summary>
-        /// Gets or Sets Scope
+        ///A URL-encoded, space separated list of scopes associated with the token.
         /// </summary>
-        [DataMember(Name="scope", EmitDefaultValue=false)]
+        /// <value>
+        ///A URL-encoded, space separated list of scopes associated with the token.
+        /// </value>
+        [DataMember(Name = "scope", EmitDefaultValue = false)]
         public string Scope { get; set; }
 
         /// <summary>
-        /// Gets or Sets ClientId
+        ///The Client ID of the application associated with the token.
         /// </summary>
-        [DataMember(Name="client_id", EmitDefaultValue=false)]
+        /// <value>
+        ///The Client ID of the application associated with the token.
+        /// </value>
+        [DataMember(Name = "client_id", EmitDefaultValue = false)]
         public string ClientId { get; set; }
 
         /// <summary>
-        /// Gets or Sets Exp
+        ///The expiration time of the token, represented as a Unix timestamp.
         /// </summary>
-        [DataMember(Name="exp", EmitDefaultValue=false)]
+        /// <value>
+        ///The expiration time of the token, represented as a Unix timestamp.
+        /// </value>
+        [DataMember(Name = "exp", EmitDefaultValue = false)]
         public int? Exp { get; set; }
 
         /// <summary>
-        /// Gets or Sets Userid
+        ///The ID of the user who authorized the token.
         /// </summary>
-        [DataMember(Name="userid", EmitDefaultValue=false)]
+        /// <value>
+        ///The ID of the user who authorized the token.
+        /// </value>
+        [DataMember(Name = "userid", EmitDefaultValue = false)]
         public string UserId { get; set; }
-
-
-         /// <summary>
-        /// Gets or Sets Token type
-        /// </summary>
-        [DataMember(Name="token_type", EmitDefaultValue=false)]
-        public string TokenType { get; set; }
-
 
         /// <summary>
         /// Returns the string presentation of the object

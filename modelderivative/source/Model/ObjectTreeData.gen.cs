@@ -3,9 +3,9 @@
  *
  * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
- * Model Derivative API
+ * Model Derivative
  *
- * Model Derivative Service Documentation
+ * Use the Model Derivative API to translate designs from one CAD format to another. You can also use this API to extract metadata from a model.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// ObjectTreeData
+    /// Envelope that contains the returned data.
     /// </summary>
     [DataContract]
     public partial class ObjectTreeData 
@@ -46,14 +46,20 @@ namespace Autodesk.ModelDerivative.Model
         }
         
         /// <summary>
-        /// Gets or Sets Type
+        ///The type of data that is returned. Always `objects`.
         /// </summary>
+        /// <value>
+        ///The type of data that is returned. Always `objects`.
+        /// </value>
         [DataMember(Name="type", EmitDefaultValue=false)]
         public string Type { get; set; }
 
         /// <summary>
-        /// Gets or Sets Objects
+        ///Collection of "objects" that constitute the nodes of the object tree.
         /// </summary>
+        /// <value>
+        ///Collection of "objects" that constitute the nodes of the object tree.
+        /// </value>
         [DataMember(Name="objects", EmitDefaultValue=false)]
         public List<ObjectTreeDataObjects> Objects { get; set; }
 

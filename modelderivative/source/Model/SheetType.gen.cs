@@ -1,11 +1,11 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Model Derivative
  *
- * Model Derivative Service Documentation
+ * Use the Model Derivative API to translate designs from one CAD format to another. You can also use this API to extract metadata from a model.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,33 +33,43 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// Export the sheet body to IGES. &#x60;open&#x60;, &#x60;shell&#x60;, &#x60;surface&#x60; or &#x60;wireframe&#x60;. By default, it is set to &#x60;surface&#x60;.
+    /// The sheet body type to export as, when the output is IGES.  Possible values are:
+    ///
+    ///- `open`
+    ///-  `shell` 
+    ///- `surface` - (Default)
+    ///- `wireframe`
     /// </summary>
-    /// <value>Export the sheet body to IGES. &#x60;open&#x60;, &#x60;shell&#x60;, &#x60;surface&#x60; or &#x60;wireframe&#x60;. By default, it is set to &#x60;surface&#x60;.</value>
-    
+    ///<value>The sheet body type to export as, when the output is IGES.  Possible values are:
+    ///
+    ///- `open`
+    ///-  `shell` 
+    ///- `surface` - (Default)
+    ///- `wireframe`</value>
+
     [JsonConverter(typeof(StringEnumConverter))]
-    
+
     public enum SheetType
     {
-        
+
         /// <summary>
         /// Enum Open for value: open
         /// </summary>
         [EnumMember(Value = "open")]
         Open,
-        
+
         /// <summary>
         /// Enum Surface for value: surface
         /// </summary>
         [EnumMember(Value = "surface")]
         Surface,
-        
+
         /// <summary>
         /// Enum Shell for value: shell
         /// </summary>
         [EnumMember(Value = "shell")]
         Shell,
-        
+
         /// <summary>
         /// Enum Wireframe for value: wireframe
         /// </summary>

@@ -46,7 +46,7 @@ namespace Autodesk.Webhooks.Model
         }
         
         /// <summary>
-        /// Gets or Sets Token
+        ///Gets or Sets Token
         /// </summary>
         [DataMember(Name="token", EmitDefaultValue=false)]
         public string Token { get; set; }

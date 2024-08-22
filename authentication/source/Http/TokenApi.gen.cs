@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Authentication
  *
@@ -31,6 +31,7 @@ using Autodesk.Authentication.Client;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Autodesk.SDKManager;
+using System.Collections;
 
 namespace Autodesk.Authentication.Http
 {
@@ -40,82 +41,213 @@ namespace Autodesk.Authentication.Http
     public interface ITokenApi
     {
         /// <summary>
-        /// authorize
+        /// Authorize User
         /// </summary>
         /// <remarks>
-        /// To obtain an authorization code grant or id_token grant.  We rate limit this endpoint. When rate limit reached, then Apigee will throw HTTP 429 Too Many Requests error. See Forge docs on the rate limit: [Forge rate limit](https://forge.autodesk.com/en/docs/oauth/v2/developers_guide/rate-limiting/forge-rate-limits/)  Errors came from OKTA/PF directly.Please refer forge v2 api document for more details &lt;Link&gt;
+        ///Returns a browser URL to redirect an end user in order to acquire the user’s consent to authorize the application to access resources on their behalf.
+        ///
+        ///Invoking this operation is the first step in authenticating users and retrieving an authorization code grant. The authorization code that is generated remains valid for 5 minutes, while the ID token stays valid for 60 minutes. Any access tokens you obtain are valid for 60 minutes, and refresh tokens remain valid for 15 days.
+        ///
+        ///This operation has a rate limit of 500 calls per minute.
+        ///
+        ///**Note:** This operation is intended for use with client-side applications only. It is not suitable for server-side applications.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="clientId">Client ID.</param>/// <param name="responseType">Must be &#x60;code&#x60; for authorization code grant, &#x60;id_token&#x60; for an OpenID Connect ID token.</param>/// <param name="redirectUri">URL-encoded callback URL.</param>/// <param name="state">The payload that authorization flow will pass back verbatim in state query parameter to the callback URL. It can contain alphanumeric, comma, period, underscore, and hyphen characters.</param>/// <param name="nonce">A string value used to associate a Client session with an ID Token, and to mitigate replay attacks. Required if &#x60;response_type&#x60; is &#x60;id_token&#x60; or &#x60;token&#x60; (optional)</param>/// <param name="scope">URL-encoded, a space-delimited list of scopes. Supported values: 1. device_sso 2. All scopes mentioned in [Forge Developers Guide](https://forge.autodesk.com/en/docs/oauth/v3/developers_guide/scopes/) (optional)</param>/// <param name="responseMode">The mode of response for the supplied &#x60;response_type&#x60;. Supported values are &#x60;fragment&#x60;, &#x60;form_post&#x60; or &#x60;query&#x60;. &#x60;query&#x60; is not supported if the &#x60;response_type&#x60; is &#x60;token&#x60;. (optional)</param>/// <param name="prompt">Values supported: &#x60;login&#x60; and &#x60;none&#x60;. &#x60;login&#x60;: Always prompt the user for authentication, regardless of the login session. &#x60;prompt&#x60;: Do not prompt user for authentication. If user is not logged in, the calling application receives an error. (optional)</param>/// <param name="authoptions">A Json object carries information to Identity. (optional)</param>/// <param name="codeChallenge">A challenge for PKCE. The challenge is verified in the access token request. (optional)</param>/// <param name="codeChallengeMethod">Method used to derive the code challenge for PKCE. Must be S256 if &#x60;code_challenge&#x60; is present. (optional)</param>
+        /// <param name="clientId">
+        ///The Client ID of the calling application, as registered with APS.
+        /// </param>
+        /// <param name="responseType">
+        ///The type of response you want to receive. Possible values are: 
+        ///
+        ///-  `code` - Authorization code grant.
+        ///-  `id_token` - OpenID Connect ID token.
+        /// </param>
+        /// <param name="redirectUri">
+        ///The URI that APS redirects users to after they grant or deny access permission to the application. Must match the Callback URL for the application as registered with APS.
+        ///
+        ///Must be specified as a URL-safe string. It can include query parameters or any other valid URL construct.
+        /// </param>
+        /// <param name="nonce">
+        ///A random string that is sent with the request. APS passes back the same string to you so that you can verify whether you received the same string that you sent. This check mitigates token replay attacks (optional)
+        /// </param>
+        /// <param name="state">
+        ///A URL-encoded random string. The authorization flow will pass the same string back to the Callback URL using the `state` query string parameter. This process helps ensure that the callback you receive is a response to what you originally requested. It prevents malicious actors from forging requests.
+        ///
+        ///The string can only contain alphanumeric characters, commas, periods, underscores, and hyphens.             (optional)
+        /// </param>
+        /// <param name="scopes">
+        ///A URL-encoded space-delimited list of requested scopes. See the [Developer's Guide documentation on scopes](/en/docs/oauth/v2/developers_guide/scopes/) for a list of valid values you can provide.
+        ///
+        ///The string you specify for this parameter must not exceed 2000 characters and it cannot contain more than 50 scopes.   (optional)
+        /// </param>
+        /// <param name="responseMode">
+        ///Specifies how the authorization response should be returned. Valid values are:
+        ///
+        ///- `fragment` - Encode the response parameters in the fragment of the redirect URI. A fragment in a URI is the optional part of the URI that appears after a `#` symbol, which refers to a specific section within a resource. For example, `section` in `https://www.mysite.org/myresource#section`.
+        ///- `form_post` - Embed the authorization response parameter in an HTML form.
+        ///- `query` -  Embed the authorization response as a query string parameter of the redirect URI. 
+        ///
+        ///If `id_token` is stated as `response_type`,  only `form_post` is allowed as `response_mode`.' (optional)
+        /// </param>
+        /// <param name="prompt">
+        ///Specifies how to prompt users for authentication. Possible values are: 
+        ///
+        ///- `login` : Always prompt the user for authentication, regardless of the state of the login session. 
+        ///
+        ///**Note:** If you do not specify this parameter, the system will not prompt the user for authentication as long as a login session is active. If a login session is not active, the system will prompt the user for authentication. (optional)
+        /// </param>
+        /// <param name="authoptions">
+        ///A JSON object containing options that specify how to display the sign-in page. Refer the [Developer's Guide documentation on AuthOptions](/en/docs/oauth/v2/developers_guide/authoptions/) for supported values. (optional)
+        /// </param>
+        /// <param name="codeChallenge">
+        ///A URL-encoded string derived from the code verifier sent in the authorization request with the Proof Key for Code Exchange (PKCE) grant flow. (optional)
+        /// </param>
+        /// <param name="codeChallengeMethod">
+        ///The method used to derive the code challenge for the PKCE grant flow. Possible value is:
+        ///
+        ///- `S256`- Hashes the code verifier using the SHA-256 algorithm and then applies Base64 URL encoding. (optional)
+        /// </param>
 
+        /// <returns>string</returns>
+        string Authorize(string clientId, ResponseType responseType, string redirectUri, string nonce = default(string), string state = default(string), List<Scopes> scopes = null, string responseMode = default(string), string prompt = default(string), string authoptions = default(string), string codeChallenge = default(string), string codeChallengeMethod = default(string)/*,  string accessToken = null  ,  bool throwOnError = true */ );
+        /// <summary>
+        /// Acquire Token
+        /// </summary>
+        /// <remarks>
+        ///Returns an access token or refresh token.
+        ///
+        ///* If `grant_type` is `authorization_code`, returns a 3-legged access token for authorization code grant. 
+        ///* If `grant_type` is `client_credentials`, returns a 2-legged access token for client credentials grant.
+        ///* If `grant_type` is `refresh_token`, returns new access token using the refresh token provided in the request.
+        ///
+        ///Traditional Web Apps and Server-to-Server Apps should use the `Authorization` header with Basic Authentication for this operation. Desktop, Mobile, and Single-Page Apps should use `client_id` in the form body instead.
+        ///
+        ///This operation has a rate limit of 500 calls per minute.
+        /// </remarks>
+        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+        /// <param name="authorization">
+        ///Must be `Bearer &lt;BASE64_ENCODED_STRING&gt;` where `&lt;BASE64_ENCODED_STRING&gt;` is the Base64 encoding of the concatenated string `&lt;CLIENT_ID&gt;:&lt;CLIENT_SECRET&gt;`.'
+        ///
+        ///**Note** This header is required only for Traditional Web Apps and Server-to-Server Apps. It is not required for Desktop, Mobile, and Single-Page Apps. (optional)
+        /// </param>
+        /// <param name="grantType">
+        /// (optional)
+        /// </param>
+        /// <param name="code">
+        ///The authorization code that was passed to your application when the user granted access permission to your application. It was passed as the [code` query parameter to the redirect URI when you called `Authorize User](/en/docs/oauth/v2/reference/http/authorize-GET/).   Required if `grant_type` is `authorization_code`.  (optional)
+        /// </param>
+        /// <param name="redirectUri">
+        ///The URI that APS redirects users to after they grant or deny access permission to the application. Must match the Callback URL for the application registered with APS.   Required if `grant_type` is `authorization_code`.  (optional)
+        /// </param>
+        /// <param name="codeVerifier">
+        ///A random URL-encoded string between 43 characters and 128 characters. In a PKCE grant flow, the authentication server uses this string to verify the code challenge that was passed when you called [Authorize User](/en/docs/oauth/v2/reference/http/authorize-GET/).    Required if [grant_type` is `authorization_code` and `code_challenge` was specified when you called `Authorize User](/en/docs/oauth/v2/reference/http/authorize-GET/).  (optional)
+        /// </param>
+        /// <param name="refreshToken">
+        ///The refresh token used to acquire a new access token and a refresh token.  Required if `grant_type` is `refresh_token`.  (optional)
+        /// </param>
+        /// <param name="scopes">
+        /// A URL-encoded space-delimited list of requested scopes. See the [Developer's Guide documentation on scopes](/en/docs/oauth/v2/developers_guide/scopes/) for a list of valid values you can provide. (optional)
+        /// </param>
+        /// <param name="clientId">
+        ///The Client ID of the application making the request.  **Note** This is required only for Traditional Web Apps and Server-to-Server Apps. It is not required for Desktop, Mobile, and Single-Page Apps. (optional)
+        /// </param>
         /// <returns>Task of HttpResponseMessage</returns>
-        string Authorize(string clientId, string responseType, string redirectUri, string state = default(string), string nonce = default(string), string scope = null, string responseMode = default(string), string prompt = default(string), string authoptions = default(string), string codeChallenge = default(string), string codeChallengeMethod = default(string), /*string accessToken = null,*/ bool throwOnError = true);
+
+        System.Threading.Tasks.Task<HttpResponseMessage> FetchTokenAsync(string authorization = default(string), GrantType? grantType = null, string code = default(string), string redirectUri = default(string), string codeVerifier = default(string), string refreshToken = default(string), List<Scopes> scopes = null, string clientId = default(string),/*  string accessToken = null , */ bool throwOnError = true);
         /// <summary>
-        /// token
+        /// Get JWKS
         /// </summary>
         /// <remarks>
-        /// Token endpoint returns access token and refresh token, depending on the request parameters.  The endpoint requires Basic Authorization for confidential clients. For public clients, the Authorization Header should not be in the header and &#x60;client_id&#x60; should be included in the form body.  * If &#x60;grant_type&#x60; is &#x60;authorization_code&#x60;, it returns 3-legged access token for authorization code grant.  * If &#x60;grant_type&#x60; is &#x60;client_credentials&#x60;, it returns 2-legged access token for client credentials grant. * If &#x60;grant_type&#x60; is &#x60;refresh_token&#x60;, it returns new access token by using the refresh token provided in the request. 
+        ///Returns a set of public keys in the JSON Web Key Set (JWKS) format.
+        ///
+        ///Public keys returned by this operation can be used to validate the asymmetric JWT signature of an access token without making network calls. It can be used to validate both two-legged access tokens and three-legged access tokens. 
+        ///
+        ///See the Developer's Guide topic on [Asymmetric Signing](/en/docs/oauth/v2/developers_guide/asymmetric-encryption/) for more information. 
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="authorization">Must be in the form Basic ${Base64(&lt;client_id&gt;:&lt;client_secret&gt;)} (optional)</param>/// <param name="grantType"> (optional)</param>/// <param name="code">Required if &#x60;grant_type&#x60; is &#x60;authorization_code&#x60; (optional)</param>/// <param name="redirectUri">Required if &#x60;grant_type&#x60; is &#x60;authorization_code&#x60; (optional)</param>/// <param name="codeVerifier">Required if &#x60;grant_type&#x60; is &#x60;authorization_code&#x60; and &#x60;code_challenge&#x60; was specified in /authorize request (optional)</param>/// <param name="refreshToken">Required if &#x60;grant_type&#x60; is &#x60;refresh_token&#x60; (optional)</param>/// <param name="scope"> (optional)</param>/// <param name="clientId">This field is required for public client (optional)</param>
-        /// <returns>Task ofHttpResponseMessage</returns>
+        /// <returns>Task of ApiResponse&lt;Jwks&gt;</returns>
 
-        System.Threading.Tasks.Task<HttpResponseMessage> FetchtokenAsync(string authorization = default(string), string grantType = default, string code = default(string), string redirectUri = default(string), string codeVerifier = default(string), string refreshToken = default(string), string scope = null, string clientId = default(string), /*string accessToken = null,*/ bool throwOnError = true);
+        System.Threading.Tasks.Task<ApiResponse<Jwks>> GetKeysAsync(/* string accessToken = null , */ bool throwOnError = true);
         /// <summary>
-        /// keys
+        /// Get OIDC Specification
         /// </summary>
         /// <remarks>
-        /// To return JSON Web Key Set that used to validate JWT token.
+        ///Returns an OpenID Connect Discovery Specification compliant JSON document. It contains a list of the OpenID/OAuth endpoints, supported scopes, claims, public keys used to sign the tokens, and other details.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+        /// <returns>Task of ApiResponse&lt;OidcSpec&gt;</returns>
 
-        /// <returns>Task of ApiResponse<Jwks></returns>
-
-        System.Threading.Tasks.Task<ApiResponse<Jwks>> GetKeysAsync(/*string accessToken = null*/ bool throwOnError = true);
+        System.Threading.Tasks.Task<ApiResponse<OidcSpec>> GetOidcSpecAsync(/* string accessToken = null , */ bool throwOnError = true);
         /// <summary>
-        /// GET OIDC Specification
+        /// Introspect Token
         /// </summary>
         /// <remarks>
-        /// Openid-configuration is a Well-known URI Discovery Mechanism for the Provider Configuration URI and is defined in OpenID Connect (OIDC). Openid-configuration is a URI defined within OpenID Connect which provides configuration information about the Identity Provider (IDP).  This endpoint retrieves the metadata as a JSON listing of OpenID/OAuth endpoints, supported scopes and claims, public keys used to sign the tokens, and other details.
+        ///Returns metadata about the specified access token or reference token.
+        ///
+        ///An application can only introspect its own tokens.
+        ///
+        ///This operation has a rate limit of 500 calls per minute.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-
-        /// <returns>Task of ApiResponse<OidcSpec></returns>
-
-        System.Threading.Tasks.Task<ApiResponse<OidcSpec>> GetOidcSpecAsync(/*string accessToken = null,*/ bool throwOnError = true);
-        /// <summary>
-        /// introspect
-        /// </summary>
-        /// <remarks>
-        /// Examines an access token including the reference token and returns the status information of the tokens.  If the token is active, additional information is returned.  If the token is expired, invalid or revoked, it returns the response as status: inactive.
-        /// </remarks>
-        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="authorization">Must be in the form Basic ${Base64(&lt;client_id&gt;:&lt;client_secret&gt;)} (optional)</param>/// <param name="token"> (optional)</param>/// <param name="clientId"> (optional)</param>
-        /// <returns>Task of ApiResponse<Introspecttoken></returns>
+        /// <param name="authorization">
+        ///Must be `Bearer &lt;BASE64_ENCODED_STRING&gt;` where `&lt;BASE64_ENCODED_STRING&gt;` is the Base64 encoding of the concatenated string `&lt;CLIENT_ID&gt;:&lt;CLIENT_SECRET&gt;`.'
+        ///
+        ///**Note** This header is required only for Traditional Web Apps and Server-to-Server Apps. It is not required for Desktop, Mobile, and Single-Page Apps. (optional)
+        /// </param>
+        /// <param name="token">
+        ///The token to be introspected. (optional)
+        /// </param>
+        /// <param name="clientId">
+        ///The Client ID of the application making the request.  **Note** This is required only for Traditional Web Apps and Server-to-Server Apps. It is not required for Desktop, Mobile, and Single-Page Apps. (optional)
+        /// </param>
+        /// <returns>Task of ApiResponse&lt;IntrospectToken&gt;</returns>
 
         System.Threading.Tasks.Task<ApiResponse<IntrospectToken>> IntrospectTokenAsync(string token, string authorization = default(string), string clientId = default(string), bool throwOnError = true);
         /// <summary>
-        /// logout
+        /// Logout
         /// </summary>
         /// <remarks>
-        /// This API endpoint logs a user out by removing their user browser session and redirects the user to the Autodesk login page.
+        ///Signs out the currently authenticated user from the APS authorization server. Thereafter, this operation redirects the user to the `post_logout_redirect_uri`, or to the Autodesk Sign-in page when no `post_logout_redirect_uri` is provided.
+        ///
+        ///This operation has a rate limit of 500 calls per minute.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="postLogoutRedirectUri">Location to redirect once the logout is performed. Note that the provided domain host should be in the allowed list. Contact #oxygen slack channel for more details. (optional)</param>
+        /// <param name="postLogoutRedirectUri">
+        ///The URI to redirect your users to once logout is performed. If you do not specify this parameter your users are redirected to the Autodesk Sign-in page. 
+        ///
+        ///**Note:**  You must provide a redirect URI that is pre-registered with APS. This precaution is taken to prevent unauthorized applications from hijacking the logout process. (optional)
+        /// </param>
 
-        /// <returns>Task of HttpResponseMessage</returns>
+        /// <returns>string</returns>
         string Logout(string postLogoutRedirectUri = default(string));
         /// <summary>
-        /// revoke
+        /// Revoke Token
         /// </summary>
         /// <remarks>
-        /// This API endpoint takes an access token or refresh token and revokes it. Once the token is revoked, it becomes inactive and returns no body response.  A client can only revoke its own tokens.
+        ///Revokes an active access token or refresh token.
+        ///
+        ///An application can only revoke its own tokens.
+        ///
+        ///This operation has a rate limit of 100 calls per minute.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="token">The token to be revoked. (optional)</param>/// <param name="tokenTypeHint">Should be either &#39;access_token&#39;, &#39;refresh_token&#39; or &#39;device_secret&#39;. (optional)</param>/// <param name="clientId">This field is required for public client. (optional)</param>
+        /// <param name="token">
+        ///The token to be revoked.  
+        /// </param>
+        /// <param name="tokenTypeHint">
+        ///
+        /// </param>
+        /// <param name="authorization">
+        ///Must be `Bearer &lt;BASE64_ENCODED_STRING&gt;` where `&lt;BASE64_ENCODED_STRING&gt;` is the Base64 encoding of the concatenated string `&lt;CLIENT_ID&gt;:&lt;CLIENT_SECRET&gt;`.'
+        ///
+        ///**Note** This header is required only for Traditional Web Apps and Server-to-Server Apps. It is not required for Desktop, Mobile, and Single-Page Apps. (optional)
+        /// </param>
+        /// <param name="clientId">
+        ///The Client ID of the application making the request.  **Note** This is required only for Traditional Web Apps and Server-to-Server Apps. It is not required for Desktop, Mobile, and Single-Page Apps. (optional)
+        /// </param>
         /// <returns>Task of HttpResponseMessage</returns>
 
-        System.Threading.Tasks.Task<HttpResponseMessage> RevokeAsync(string token, string authorization = default(string), string tokenTypeHint = default(string), string clientId = default(string), bool throwOnError = true);
+        System.Threading.Tasks.Task<HttpResponseMessage> RevokeAsync(string token, TokenTypeHint tokenTypeHint, string authorization = default(string), string clientId = default(string)/* , string accessToken = null  */, bool throwOnError = true);
     }
 
     /// <summary>
@@ -154,6 +286,26 @@ namespace Autodesk.Authentication.Http
                 if ((int)value > 0)
                 {
                     dictionary.Add(name, value);
+                }
+            }
+            else if (value is IList)
+            {
+                if (value is List<string>)
+                {
+                    dictionary.Add(name, String.Join(" ", (List<string>)value));
+                }
+                else
+                {
+                    List<string> concatenatedList = new List<string>();
+                    foreach (var x in (IList)value)
+                    {
+                        var type = x.GetType();
+                        var memberInfos = type.GetMember(x.ToString());
+                        var enumValueMemberInfo = memberInfos.FirstOrDefault(m => m.DeclaringType == type);
+                        var valueAttributes = enumValueMemberInfo.GetCustomAttributes(typeof(EnumMemberAttribute), false);
+                        concatenatedList.Add(((EnumMemberAttribute)valueAttributes[0]).Value);
+                    }
+                    dictionary.Add(name, String.Join(" ", concatenatedList));
                 }
             }
             else
@@ -197,16 +349,74 @@ namespace Autodesk.Authentication.Http
         public ForgeService Service { get; set; }
 
         /// <summary>
-        /// authorize
+        /// Authorize User
         /// </summary>
         /// <remarks>
-        /// To obtain an authorization code grant or id_token grant.  We rate limit this endpoint. When rate limit reached, then Apigee will throw HTTP 429 Too Many Requests error. See Forge docs on the rate limit: [Forge rate limit](https://forge.autodesk.com/en/docs/oauth/v2/developers_guide/rate-limiting/forge-rate-limits/)  Errors came from OKTA/PF directly.Please refer forge v2 api document for more details &lt;Link&gt;
+        ///Returns a browser URL to redirect an end user in order to acquire the user’s consent to authorize the application to access resources on their behalf.
+        ///
+        ///Invoking this operation is the first step in authenticating users and retrieving an authorization code grant. The authorization code that is generated remains valid for 5 minutes, while the ID token stays valid for 60 minutes. Any access tokens you obtain are valid for 60 minutes, and refresh tokens remain valid for 15 days.
+        ///
+        ///This operation has a rate limit of 500 calls per minute.
+        ///
+        ///**Note:** This operation is intended for use with client-side applications only. It is not suitable for server-side applications.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="clientId">Client ID.</param>/// <param name="responseType">Must be &#x60;code&#x60; for authorization code grant, &#x60;id_token&#x60; for an OpenID Connect ID token.</param>/// <param name="redirectUri">URL-encoded callback URL.</param>/// <param name="state">The payload that authorization flow will pass back verbatim in state query parameter to the callback URL. It can contain alphanumeric, comma, period, underscore, and hyphen characters.</param>/// <param name="nonce">A string value used to associate a Client session with an ID Token, and to mitigate replay attacks. Required if &#x60;response_type&#x60; is &#x60;id_token&#x60; or &#x60;token&#x60; (optional)</param>/// <param name="scope">URL-encoded, a space-delimited list of scopes. Supported values: 1. device_sso 2. All scopes mentioned in [Forge Developers Guide](https://forge.autodesk.com/en/docs/oauth/v3/developers_guide/scopes/) (optional)</param>/// <param name="responseMode">The mode of response for the supplied &#x60;response_type&#x60;. Supported values are &#x60;fragment&#x60;, &#x60;form_post&#x60; or &#x60;query&#x60;. &#x60;query&#x60; is not supported if the &#x60;response_type&#x60; is &#x60;token&#x60;. (optional)</param>/// <param name="prompt">Values supported: &#x60;login&#x60; and &#x60;none&#x60;. &#x60;login&#x60;: Always prompt the user for authentication, regardless of the login session. &#x60;prompt&#x60;: Do not prompt user for authentication. If user is not logged in, the calling application receives an error. (optional)</param>/// <param name="authoptions">A Json object carries information to Identity. (optional)</param>/// <param name="codeChallenge">A challenge for PKCE. The challenge is verified in the access token request. (optional)</param>/// <param name="codeChallengeMethod">Method used to derive the code challenge for PKCE. Must be S256 if &#x60;code_challenge&#x60; is present. (optional)</param>
-
+        /// <param name="clientId">
+        ///The Client ID of the calling application, as registered with APS.
+        /// </param>
+        /// <param name="responseType">
+        ///The type of response you want to receive. Possible values are: 
+        ///
+        ///-  `code` - Authorization code grant.
+        ///-  `id_token` - OpenID Connect ID token.
+        /// </param>
+        /// <param name="redirectUri">
+        ///The URI that APS redirects users to after they grant or deny access permission to the application. Must match the Callback URL for the application as registered with APS.
+        ///
+        ///Must be specified as a URL-safe string. It can include query parameters or any other valid URL construct.
+        /// </param>
+        /// <param name="nonce">
+        ///A random string that is sent with the request. APS passes back the same string to you so that you can verify whether you received the same string that you sent. This check mitigates token replay attacks (optional)
+        /// </param>
+        /// <param name="state">
+        ///A URL-encoded random string. The authorization flow will pass the same string back to the Callback URL using the `state` query string parameter. This process helps ensure that the callback you receive is a response to what you originally requested. It prevents malicious actors from forging requests.
+        ///
+        ///The string can only contain alphanumeric characters, commas, periods, underscores, and hyphens.             (optional)
+        /// </param>
+        /// <param name="scopes">
+        ///A URL-encoded space-delimited list of requested scopes. See the [Developer's Guide documentation on scopes](/en/docs/oauth/v2/developers_guide/scopes/) for a list of valid values you can provide.
+        ///
+        ///The string you specify for this parameter must not exceed 2000 characters and it cannot contain more than 50 scopes.   (optional)
+        /// </param>
+        /// <param name="responseMode">
+        ///Specifies how the authorization response should be returned. Valid values are:
+        ///
+        ///- `fragment` - Encode the response parameters in the fragment of the redirect URI. A fragment in a URI is the optional part of the URI that appears after a `#` symbol, which refers to a specific section within a resource. For example, `section` in `https://www.mysite.org/myresource#section`.
+        ///- `form_post` - Embed the authorization response parameter in an HTML form.
+        ///- `query` -  Embed the authorization response as a query string parameter of the redirect URI. 
+        ///
+        ///If `id_token` is stated as `response_type`,  only `form_post` is allowed as `response_mode`.' (optional)
+        /// </param>
+        /// <param name="prompt">
+        ///Specifies how to prompt users for authentication. Possible values are: 
+        ///
+        ///- `login` : Always prompt the user for authentication, regardless of the state of the login session. 
+        ///
+        ///**Note:** If you do not specify this parameter, the system will not prompt the user for authentication as long as a login session is active. If a login session is not active, the system will prompt the user for authentication. (optional)
+        /// </param>
+        /// <param name="authoptions">
+        ///A JSON object containing options that specify how to display the sign-in page. Refer the [Developer's Guide documentation on AuthOptions](/en/docs/oauth/v2/developers_guide/authoptions/) for supported values. (optional)
+        /// </param>
+        /// <param name="codeChallenge">
+        ///A URL-encoded string derived from the code verifier sent in the authorization request with the Proof Key for Code Exchange (PKCE) grant flow. (optional)
+        /// </param>
+        /// <param name="codeChallengeMethod">
+        ///The method used to derive the code challenge for the PKCE grant flow. Possible value is:
+        ///
+        ///- `S256`- Hashes the code verifier using the SHA-256 algorithm and then applies Base64 URL encoding. (optional)
+        /// </param>
         /// <returns>string</returns>
-        public string Authorize(string clientId, string responseType, string redirectUri, string state = default(string), string nonce = default(string), string scope = null, string responseMode = default(string), string prompt = default(string), string authoptions = default(string), string codeChallenge = default(string), string codeChallengeMethod = default(string), /*string accessToken = null,*/ bool throwOnError = true)
+        public string Authorize(string clientId, ResponseType responseType, string redirectUri, string nonce = default(string), string state = default(string), List<Scopes> scopes = null, string responseMode = default(string), string prompt = default(string), string authoptions = default(string), string codeChallenge = default(string), string codeChallengeMethod = default(string)/* , string accessToken = null  , bool throwOnError = true */)
         {
             logger.LogInformation("Entered into AuthorizeAsync ");
             // ss manually added. This method does not call any rest endpoints.
@@ -214,11 +424,11 @@ namespace Autodesk.Authentication.Http
             {
                 var queryParam = new Dictionary<string, object>();
                 if (!string.IsNullOrEmpty(clientId)) { SetQueryParameter("client_id", clientId, queryParam); }
-                if (!string.IsNullOrEmpty(responseType)) { SetQueryParameter("response_type", responseType, queryParam); }
+                SetQueryParameter("response_type", responseType, queryParam);
                 if (!string.IsNullOrEmpty(redirectUri)) { SetQueryParameter("redirect_uri", redirectUri, queryParam); }
                 if (!string.IsNullOrEmpty(nonce)) { SetQueryParameter("nonce", nonce, queryParam); }
                 if (!string.IsNullOrEmpty(state)) { SetQueryParameter("state", state, queryParam); }
-                if (!string.IsNullOrEmpty(scope)) { SetQueryParameter("scope", scope, queryParam); }
+                SetQueryParameter("scope", scopes, queryParam);
                 if (!string.IsNullOrEmpty(responseMode)) { SetQueryParameter("response_mode", responseMode, queryParam); }
                 if (!string.IsNullOrEmpty(prompt)) { SetQueryParameter("prompt", prompt, queryParam); }
                 if (!string.IsNullOrEmpty(authoptions)) { SetQueryParameter("authoptions", authoptions, queryParam); }
@@ -238,18 +448,51 @@ namespace Autodesk.Authentication.Http
             } // using
         }
         /// <summary>
-        /// token
+        /// Acquire Token
         /// </summary>
         /// <remarks>
-        /// Token endpoint returns access token and refresh token, depending on the request parameters.  The endpoint requires Basic Authorization for confidential clients. For public clients, the Authorization Header should not be in the header and &#x60;client_id&#x60; should be included in the form body.  * If &#x60;grant_type&#x60; is &#x60;authorization_code&#x60;, it returns 3-legged access token for authorization code grant.  * If &#x60;grant_type&#x60; is &#x60;client_credentials&#x60;, it returns 2-legged access token for client credentials grant. * If &#x60;grant_type&#x60; is &#x60;refresh_token&#x60;, it returns new access token by using the refresh token provided in the request. 
+        ///Returns an access token or refresh token.
+        ///
+        ///* If `grant_type` is `authorization_code`, returns a 3-legged access token for authorization code grant. 
+        ///* If `grant_type` is `client_credentials`, returns a 2-legged access token for client credentials grant.
+        ///* If `grant_type` is `refresh_token`, returns new access token using the refresh token provided in the request.
+        ///
+        ///Traditional Web Apps and Server-to-Server Apps should use the `Authorization` header with Basic Authentication for this operation. Desktop, Mobile, and Single-Page Apps should use `client_id` in the form body instead.
+        ///
+        ///This operation has a rate limit of 500 calls per minute.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="authorization">Must be in the form Basic ${Base64(&lt;client_id&gt;:&lt;client_secret&gt;)} (optional)</param>/// <param name="grantType"> (optional)</param>/// <param name="code">Required if &#x60;grant_type&#x60; is &#x60;authorization_code&#x60; (optional)</param>/// <param name="redirectUri">Required if &#x60;grant_type&#x60; is &#x60;authorization_code&#x60; (optional)</param>/// <param name="codeVerifier">Required if &#x60;grant_type&#x60; is &#x60;authorization_code&#x60; and &#x60;code_challenge&#x60; was specified in /authorize request (optional)</param>/// <param name="refreshToken">Required if &#x60;grant_type&#x60; is &#x60;refresh_token&#x60; (optional)</param>/// <param name="scope"> (optional)</param>/// <param name="clientId">This field is required for public client (optional)</param>
-        /// <returns>Task of HttpResponseMessage</returns>
+        /// <param name="authorization">
+        ///Must be `Bearer &lt;BASE64_ENCODED_STRING&gt;` where `&lt;BASE64_ENCODED_STRING&gt;` is the Base64 encoding of the concatenated string `&lt;CLIENT_ID&gt;:&lt;CLIENT_SECRET&gt;`.'
+        ///
+        ///**Note** This header is required only for Traditional Web Apps and Server-to-Server Apps. It is not required for Desktop, Mobile, and Single-Page Apps. (optional)
+        /// </param>
+        /// <param name="grantType">
+        /// (optional)
+        /// </param>
+        /// <param name="code">
+        ///The authorization code that was passed to your application when the user granted access permission to your application. It was passed as the [code` query parameter to the redirect URI when you called `Authorize User](/en/docs/oauth/v2/reference/http/authorize-GET/).   Required if `grant_type` is `authorization_code`.  (optional)
+        /// </param>
+        /// <param name="redirectUri">
+        ///The URI that APS redirects users to after they grant or deny access permission to the application. Must match the Callback URL for the application registered with APS.   Required if `grant_type` is `authorization_code`.  (optional)
+        /// </param>
+        /// <param name="codeVerifier">
+        ///A random URL-encoded string between 43 characters and 128 characters. In a PKCE grant flow, the authentication server uses this string to verify the code challenge that was passed when you called [Authorize User](/en/docs/oauth/v2/reference/http/authorize-GET/).    Required if [grant_type` is `authorization_code` and `code_challenge` was specified when you called `Authorize User](/en/docs/oauth/v2/reference/http/authorize-GET/).  (optional)
+        /// </param>
+        /// <param name="refreshToken">
+        ///The refresh token used to acquire a new access token and a refresh token.  Required if `grant_type` is `refresh_token`.  (optional)
+        /// </param>
+        /// <param name="scopes">
+        /// A URL-encoded space-delimited list of requested scopes. See the [Developer's Guide documentation on scopes](/en/docs/oauth/v2/developers_guide/scopes/) for a list of valid values you can provide.(optional)
+        /// </param>
+        /// <param name="clientId">
+        ///The Client ID of the application making the request.  **Note** This is required only for Traditional Web Apps and Server-to-Server Apps. It is not required for Desktop, Mobile, and Single-Page Apps. (optional)
+        /// </param>
+        /// <returns>Task of HttpResponseMessage;></returns>
 
-        public async System.Threading.Tasks.Task<HttpResponseMessage> FetchtokenAsync(string authorization = default(string), string grantType = default, string code = default(string), string redirectUri = default(string), string codeVerifier = default(string), string refreshToken = default(string), string scope = null, string clientId = default(string),/* string accessToken = null,*/ bool throwOnError = true)
+        public async System.Threading.Tasks.Task<HttpResponseMessage> FetchTokenAsync(string authorization = default(string), GrantType? grantType = null, string code = default(string), string redirectUri = default(string), string codeVerifier = default(string), string refreshToken = default(string), List<Scopes> scopes = null, string clientId = default(string), /* string accessToken = null, */ bool throwOnError = true)
         {
-            logger.LogInformation("Entered into FetchtokenAsync ");
+            logger.LogInformation("Entered into FetchTokenAsync ");
             using (var request = new HttpRequestMessage())
             {
                 var queryParam = new Dictionary<string, object>();
@@ -262,33 +505,26 @@ namespace Autodesk.Authentication.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/AUTHENTICATION/C#/1.0.0-beta1");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/AUTHENTICATION/C#/2.0.0");
 
-                // *** ss manually added***                
+
                 if (!string.IsNullOrEmpty(authorization))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Basic {authorization}");
                 }
-                // if(!string.IsNullOrEmpty(accessToken))
-                // {
-                //     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
-                // }
-                var formParams = new Dictionary<string, string>();
 
-                if (!string.IsNullOrEmpty(grantType)) { formParams.Add("grant_type", grantType); }
+                var formParams = new Dictionary<string, object>();
+                // convert grantType enum to string
+                SetQueryParameter("grant_type", grantType, formParams);
                 if (!string.IsNullOrEmpty(code)) { formParams.Add("code", code); }
                 if (!string.IsNullOrEmpty(redirectUri)) { formParams.Add("redirect_uri", redirectUri); }
                 if (!string.IsNullOrEmpty(codeVerifier)) { formParams.Add("code_verifier", codeVerifier); }
                 if (!string.IsNullOrEmpty(refreshToken)) { formParams.Add("refresh_token", refreshToken); }
-                if (!string.IsNullOrEmpty(scope)) { formParams.Add("scope", scope); }
+                // convert scopes enum to string
+                SetQueryParameter("scope", scopes, formParams);
                 if (!string.IsNullOrEmpty(clientId)) { formParams.Add("client_id", clientId); }
 
-                request.Content = new FormUrlEncodedContent(formParams);
-
-                // SetHeader("Authorization", authorization, request);
-
-                // *** --- ss *****
-                // tell the underlying pipeline what scope we'd like to use
+                request.Content = new FormUrlEncodedContent(new Dictionary<string, string>(formParams.ToDictionary(k => k.Key, k => k.Value.ToString())));
 
                 request.Method = new HttpMethod("POST");
 
@@ -313,19 +549,21 @@ namespace Autodesk.Authentication.Http
                 }
                 logger.LogInformation($"Exited from FetchtokenAsync with response statusCode: {response.StatusCode}");
                 return response;
-                //return new ApiResponse<Object>(response, await LocalMarshalling.DeserializeAsync<Object>(response.Content));
 
             } // using
         }
         /// <summary>
-        /// keys
+        /// Get JWKS
         /// </summary>
         /// <remarks>
-        /// To return JSON Web Key Set that used to validate JWT token.
+        ///Returns a set of public keys in the JSON Web Key Set (JWKS) format.
+        ///
+        ///Public keys returned by this operation can be used to validate the asymmetric JWT signature of an access token without making network calls. It can be used to validate both two-legged access tokens and three-legged access tokens. 
+        ///
+        ///See the Developer's Guide topic on [Asymmetric Signing](/en/docs/oauth/v2/developers_guide/asymmetric-encryption/) for more information. 
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-
-        /// <returns>Task of ApiResponse<Jwks></returns>
+        /// <returns>Task of ApiResponse&lt;Jwks&gt;></returns>
 
         public async System.Threading.Tasks.Task<ApiResponse<Jwks>> GetKeysAsync(/*string accessToken = null,*/ bool throwOnError = true)
         {
@@ -342,14 +580,8 @@ namespace Autodesk.Authentication.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/AUTHENTICATION/C#/1.0.0-beta1");
-                // if (!string.IsNullOrEmpty(accessToken))
-                // {
-                //     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
-                // }
-
-                // tell the underlying pipeline what scope we'd like to use
-
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/AUTHENTICATION/C#/2.0.0");
+      
                 request.Method = new HttpMethod("GET");
 
                 // make the HTTP request
@@ -377,14 +609,13 @@ namespace Autodesk.Authentication.Http
             } // using
         }
         /// <summary>
-        /// GET OIDC Specification
+        /// Get OIDC Specification
         /// </summary>
         /// <remarks>
-        /// Openid-configuration is a Well-known URI Discovery Mechanism for the Provider Configuration URI and is defined in OpenID Connect (OIDC). Openid-configuration is a URI defined within OpenID Connect which provides configuration information about the Identity Provider (IDP).  This endpoint retrieves the metadata as a JSON listing of OpenID/OAuth endpoints, supported scopes and claims, public keys used to sign the tokens, and other details.
+        ///Returns an OpenID Connect Discovery Specification compliant JSON document. It contains a list of the OpenID/OAuth endpoints, supported scopes, claims, public keys used to sign the tokens, and other details.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-
-        /// <returns>Task of ApiResponse<OidcSpec></returns>
+        /// <returns>Task of ApiResponse&lt;OidcSpec&gt;></returns>
 
         public async System.Threading.Tasks.Task<ApiResponse<OidcSpec>> GetOidcSpecAsync(/*string accessToken = null,*/ bool throwOnError = true)
         {
@@ -401,15 +632,8 @@ namespace Autodesk.Authentication.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/AUTHENTICATION/C#/1.0.0-beta1");
-                // if (!string.IsNullOrEmpty(accessToken))
-                // {
-                //     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
-                // }
-
-
-
-
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/AUTHENTICATION/C#/2.0.0");
+  
                 // tell the underlying pipeline what scope we'd like to use
 
                 request.Method = new HttpMethod("GET");
@@ -439,16 +663,30 @@ namespace Autodesk.Authentication.Http
             } // using
         }
         /// <summary>
-        /// introspect
+        /// Introspect Token
         /// </summary>
         /// <remarks>
-        /// Examines an access token including the reference token and returns the status information of the tokens.  If the token is active, additional information is returned.  If the token is expired, invalid or revoked, it returns the response as status: inactive.
+        ///Returns metadata about the specified access token or reference token.
+        ///
+        ///An application can only introspect its own tokens.
+        ///
+        ///This operation has a rate limit of 500 calls per minute.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="authorization">Must be in the form Basic ${Base64(&lt;client_id&gt;:&lt;client_secret&gt;)} (optional)</param>/// <param name="token"> (optional)</param>/// <param name="clientId"> (optional)</param>
-        /// <returns>Task of ApiResponse<Introspecttoken></returns>
+        /// <param name="authorization">
+        ///Must be `Bearer &lt;BASE64_ENCODED_STRING&gt;` where `&lt;BASE64_ENCODED_STRING&gt;` is the Base64 encoding of the concatenated string `&lt;CLIENT_ID&gt;:&lt;CLIENT_SECRET&gt;`.'
+        ///
+        ///**Note** This header is required only for Traditional Web Apps and Server-to-Server Apps. It is not required for Desktop, Mobile, and Single-Page Apps. (optional)
+        /// </param>
+        /// <param name="token">
+        ///The token to be introspected. (optional)
+        /// </param>
+        /// <param name="clientId">
+        ///The Client ID of the application making the request.  **Note** This is required only for Traditional Web Apps and Server-to-Server Apps. It is not required for Desktop, Mobile, and Single-Page Apps. (optional)
+        /// </param>
+        /// <returns>Task of ApiResponse&lt;IntrospectToken&gt;></returns>
 
-        public async System.Threading.Tasks.Task<ApiResponse<IntrospectToken>> IntrospectTokenAsync(string token,string authorization = default(string),  string clientId = default(string), /*string accessToken = null,*/ bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ApiResponse<IntrospectToken>> IntrospectTokenAsync(string token, string authorization = default(string), string clientId = default(string), /*string accessToken = null,*/ bool throwOnError = true)
         {
             logger.LogInformation("Entered into IntrospectTokenAsync ");
             using (var request = new HttpRequestMessage())
@@ -463,26 +701,12 @@ namespace Autodesk.Authentication.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/AUTHENTICATION/C#/1.0.0-beta1");
-
-
-                // *** ss - Manually added ***
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/AUTHENTICATION/C#/2.0.0");
 
                 if (!string.IsNullOrEmpty(authorization))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Basic {authorization}");
                 }
-
-                // if (!string.IsNullOrEmpty(accessToken))
-                // {
-                //     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
-                // }
-
-
-                // request.Content = new StringContent(token);
-                // request.Content = new StringContent(clientId);
-
-                // SetHeader("Authorization", authorization, request);
 
                 var formParams = new Dictionary<string, string>();
 
@@ -490,10 +714,6 @@ namespace Autodesk.Authentication.Http
                 if (!string.IsNullOrEmpty(clientId)) { formParams.Add("client_id", clientId); }
 
                 request.Content = new FormUrlEncodedContent(formParams);
-
-                // -- ss - end of Manual code
-
-                // tell the underlying pipeline what scope we'd like to use
 
                 request.Method = new HttpMethod("POST");
 
@@ -522,14 +742,21 @@ namespace Autodesk.Authentication.Http
             } // using
         }
         /// <summary>
-        /// logout
+        /// Logout
         /// </summary>
         /// <remarks>
-        /// This API endpoint logs a user out by removing their user browser session and redirects the user to the Autodesk login page.
+        ///Signs out the currently authenticated user from the APS authorization server. Thereafter, this operation redirects the user to the `post_logout_redirect_uri`, or to the Autodesk Sign-in page when no `post_logout_redirect_uri` is provided.
+        ///
+        ///This operation has a rate limit of 500 calls per minute.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="postLogoutRedirectUri">Location to redirect once the logout is performed. Note that the provided domain host should be in the allowed list. Contact #oxygen slack channel for more details. (optional)</param>
-        /// <returns>Redirect uri/returns>
+        /// <param name="postLogoutRedirectUri">
+        ///The URI to redirect your users to once logout is performed. If you do not specify this parameter your users are redirected to the Autodesk Sign-in page. 
+        ///
+        ///**Note:**  You must provide a redirect URI that is pre-registered with APS. This precaution is taken to prevent unauthorized applications from hijacking the logout process. (optional)
+        /// </param>
+
+        /// <returns>Task of HttpResponseMessage</returns>
         public string Logout(string postLogoutRedirectUri = default(string))
         {
             logger.LogInformation("Entered into LogoutAsync ");
@@ -554,16 +781,34 @@ namespace Autodesk.Authentication.Http
             } // using
         }
         /// <summary>
-        /// revoke
+        /// Revoke Token
         /// </summary>
         /// <remarks>
-        /// This API endpoint takes an access token or refresh token and revokes it. Once the token is revoked, it becomes inactive and returns no body response.  A client can only revoke its own tokens.
+        ///Revokes an active access token or refresh token.
+        ///
+        ///An application can only revoke its own tokens.
+        ///
+        ///This operation has a rate limit of 100 calls per minute.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="token">The token to be revoked. (optional)</param>/// <param name="tokenTypeHint">Should be either &#39;access_token&#39;, &#39;refresh_token&#39; or &#39;device_secret&#39;. (optional)</param>/// <param name="clientId">This field is required for public client. (optional)</param>
+        /// <param name="token">
+        ///The token to be revoked.  
+        /// </param>
+        /// <param name="tokenTypeHint">
+        ///
+        /// </param>
+        /// <param name="authorization">
+        ///Must be `Bearer &lt;BASE64_ENCODED_STRING&gt;` where `&lt;BASE64_ENCODED_STRING&gt;` is the Base64 encoding of the concatenated string `&lt;CLIENT_ID&gt;:&lt;CLIENT_SECRET&gt;`.'
+        ///
+        ///**Note** This header is required only for Traditional Web Apps and Server-to-Server Apps. It is not required for Desktop, Mobile, and Single-Page Apps. (optional)
+        /// </param>
+        /// <param name="clientId">
+        ///The Client ID of the application making the request.  **Note** This is required only for Traditional Web Apps and Server-to-Server Apps. It is not required for Desktop, Mobile, and Single-Page Apps. (optional)
+        /// </param>
         /// <returns>Task of HttpResponseMessage</returns>
 
-        public async System.Threading.Tasks.Task<HttpResponseMessage> RevokeAsync(string token, string authorization = default(string), string tokenTypeHint = default(string), string clientId = default(string), bool throwOnError = true)
+
+        public async System.Threading.Tasks.Task<HttpResponseMessage> RevokeAsync(string token, TokenTypeHint tokenTypeHint, string authorization = default(string), string clientId = default(string), /* string accessToken = null, */ bool throwOnError = true)
         {
             logger.LogInformation("Entered into RevokeAsync ");
             using (var request = new HttpRequestMessage())
@@ -578,37 +823,19 @@ namespace Autodesk.Authentication.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/AUTHENTICATION/C#/1.0.0-beta1");
-
-                // ss manually added
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/AUTHENTICATION/C#/2.0.0");
 
                 if (!string.IsNullOrEmpty(authorization))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Basic {authorization}");
                 }
 
-                // if (!string.IsNullOrEmpty(accessToken))
-                // {
-                //     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
-                // }
-
-
-                // request.Content = new StringContent(token);
-                // request.Content = new StringContent(tokenTypeHint);
-                // request.Content = new StringContent(clientId);
-
-
-                var formParams = new Dictionary<string, string>();
-
+                var formParams = new Dictionary<string, object>();
                 if (!string.IsNullOrEmpty(token)) { formParams.Add("token", token); }
-                if (!string.IsNullOrEmpty(tokenTypeHint)) { formParams.Add("token_type_hint", tokenTypeHint); }
+                // convert tokenTypeHint enum to string
+                SetQueryParameter("token_type_hint", tokenTypeHint, formParams);
                 if (!string.IsNullOrEmpty(clientId)) { formParams.Add("client_id", clientId); }
-                request.Content = new FormUrlEncodedContent(formParams);
-
-
-
-                // ss - end of code block
-                // tell the underlying pipeline what scope we'd like to use
+                request.Content = new FormUrlEncodedContent(new Dictionary<string, string>(formParams.ToDictionary(k => k.Key, k => k.Value.ToString())));
 
                 request.Method = new HttpMethod("POST");
 

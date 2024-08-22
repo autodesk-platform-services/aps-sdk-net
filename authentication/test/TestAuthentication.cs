@@ -60,7 +60,7 @@ public class TestAuthentication
     [TestMethod]
     public async Task TestRefreshTokenAsync()
     {
-        RefreshToken newToken = await _authClient.GetRefreshTokenAsync(client_id, client_secret, "refreshToken");
+        ThreeLeggedToken newToken = await _authClient.RefreshTokenAsync(client_id, client_secret, "refreshToken");
         Assert.IsNotNull(newToken.AccessToken);
     }
 

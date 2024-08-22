@@ -33,35 +33,69 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Authentication.Model
 {
     /// <summary>
-    /// Client credentials grant response body.
+    /// Represents the payload returned in response to a client credentials grant request.
     /// </summary>
     [DataContract]
-    public partial class TwoLeggedToken 
+    public partial class TwoLeggedToken
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Model2leggedtoken" /> class.
+        /// Initializes a new instance of the <see cref="TwoLeggedToken" /> class.
         /// </summary>
+
+
         public TwoLeggedToken()
         {
+
         }
-        
+
+        private int? _expiresIn;
+
+        private long? _expiresAt;
         /// <summary>
-        /// Gets or Sets AccessToken
+        ///The access token.
         /// </summary>
-        [DataMember(Name="access_token", EmitDefaultValue=false)]
+        /// <value>
+        ///The access token.
+        /// </value>
+        [DataMember(Name = "access_token", EmitDefaultValue = false)]
         public string AccessToken { get; set; }
 
         /// <summary>
-        /// Gets or Sets TokenType
+        ///Will always be Bearer.
         /// </summary>
-        [DataMember(Name="token_type", EmitDefaultValue=false)]
+        /// <value>
+        ///Will always be Bearer.
+        /// </value>
+        [DataMember(Name = "token_type", EmitDefaultValue = false)]
         public string TokenType { get; set; }
 
         /// <summary>
-        /// Gets or Sets ExpiresIn
+        ///Access token expiration time (in seconds).
         /// </summary>
-        [DataMember(Name="expires_in", EmitDefaultValue=false)]
-        public int? ExpiresIn { get; set; }
+        /// <value>
+        ///Access token expiration time (in seconds).
+        /// </value>
+        [DataMember(Name = "expires_in", EmitDefaultValue = false)]
+        public int? ExpiresIn
+        {
+            get { return _expiresIn; }
+            set
+            {
+                _expiresIn = value;
+                _expiresAt = DateTimeOffset.Now.ToUnixTimeSeconds() + _expiresIn;
+
+            }
+        }
+
+        /// <summary>
+        ///Access token expiration time, in Unix seconds.
+        /// </summary>
+        /// <value>
+        ///Access token expiration time, in Unix seconds.
+        /// </value>
+        [DataMember(Name = "expires_at", EmitDefaultValue = false)]
+        public long? ExpiresAt { get { return _expiresAt; } }
+
 
         /// <summary>
         /// Returns the string presentation of the object

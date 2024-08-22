@@ -5,7 +5,7 @@
  *
  * Model Derivative
  *
- * Model Derivative Service Documentation
+ * Use the Model Derivative API to translate designs from one CAD format to another. You can also use this API to extract metadata from a model.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// DerivativeDownload
+    /// An object that represents the successful response of a Fetch Derivative Download operation.
     /// </summary>
     [DataContract]
     public partial class DerivativeDownload 
@@ -46,37 +46,47 @@ namespace Autodesk.ModelDerivative.Model
         }
         
         /// <summary>
-        /// The calculated ETag hash of the derivative/file, if available.
+        ///The calculated ETag hash of the derivative/file, if available.
         /// </summary>
-        /// <value>The calculated ETag hash of the derivative/file, if available.</value>
+        /// <value>
+        ///The calculated ETag hash of the derivative/file, if available.
+        /// </value>
         [DataMember(Name="etag", EmitDefaultValue=false)]
         public string Etag { get; set; }
 
         /// <summary>
-        /// The size of the derivative/file, in bytes.
+        ///The size of the derivative/file, in bytes.
         /// </summary>
-        /// <value>The size of the derivative/file, in bytes.</value>
+        /// <value>
+        ///The size of the derivative/file, in bytes.
+        /// </value>
         [DataMember(Name="size", EmitDefaultValue=false)]
         public decimal? Size { get; set; }
 
         /// <summary>
-        /// The download URL.
+        ///The download URL.
         /// </summary>
-        /// <value>The download URL.</value>
+        /// <value>
+        ///The download URL.
+        /// </value>
         [DataMember(Name="url", EmitDefaultValue=false)]
         public string Url { get; set; }
 
         /// <summary>
-        /// The content type of the derivative/file.
+        ///The content type of the derivative/file.
         /// </summary>
-        /// <value>The content type of the derivative/file.</value>
+        /// <value>
+        ///The content type of the derivative/file.
+        /// </value>
         [DataMember(Name="content-type", EmitDefaultValue=false)]
         public string ContentType { get; set; }
 
         /// <summary>
-        /// The 13-digit epoch time stamp indicating when the signed cookies expire.
+        ///The 13-digit epoch time stamp indicating the time the signed cookies expire.
         /// </summary>
-        /// <value>The 13-digit epoch time stamp indicating when the signed cookies expire.</value>
+        /// <value>
+        ///The 13-digit epoch time stamp indicating the time the signed cookies expire.
+        /// </value>
         [DataMember(Name="expiration", EmitDefaultValue=false)]
         public decimal? Expiration { get; set; }
 

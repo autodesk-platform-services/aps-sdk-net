@@ -1,11 +1,11 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Model Derivative
  *
- * Model Derivative Service Documentation
+ * Use the Model Derivative API to translate designs from one CAD format to another. You can also use this API to extract metadata from a model.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,30 +30,47 @@ using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-
-
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// Region in which to store references. Possible values: US, EMEA. By default, it is set to US. 
+    /// Specifies where the referenced files are stored. Possible values are: 
+    ///    
+    ///    - `US` - Data center for the US region.
+    ///    - `EMEA` - Data center for the European Union, Middle East, and Africa. 
+    ///    - `APAC` - (Beta) Data centre for the Australia region.
+    ///
+    ///**Note**: Beta features are subject to change. Please avoid using them in production environments.
     /// </summary>
-    /// <value>Region in which to store references. Possible values: US, EMEA. By default, it is set to US. </value>
-   
-    [JsonConverter(typeof(StringEnumConverter))]   
+    ///<value>Specifies where the referenced files are stored. Possible values are: 
+    ///    
+    ///    - `US` - Data center for the US region.
+    ///    - `EMEA` - Data center for the European Union, Middle East, and Africa. 
+    ///    - `APAC` - (Beta) Data centre for the Australia region.
+    ///
+    ///**Note**: Beta features are subject to change. Please avoid using them in production environments.</value>
+
+    [JsonConverter(typeof(StringEnumConverter))]
+
     public enum Region
     {
-        
+
         /// <summary>
         /// Enum US for value: US
         /// </summary>
-        [EnumMember(Value = "us")]
+        [EnumMember(Value = "US")]
         US,
-        
+
         /// <summary>
         /// Enum EMEA for value: EMEA
         /// </summary>
-        [EnumMember(Value = "emea")]
-        EMEA
+        [EnumMember(Value = "EMEA")]
+        EMEA,
+
+        /// <summary>
+        /// Enum APAC for value: APAC
+        /// </summary>
+        [EnumMember(Value = "APAC")]
+        APAC
     }
 
 }

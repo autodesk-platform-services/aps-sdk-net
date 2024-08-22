@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Oss.Model
 {
     /// <summary>
-    /// CreateSignedResource
+    /// The request payload for a Generate OSS Signed URL operation.
     /// </summary>
     [DataContract]
     public partial class CreateSignedResource 
@@ -46,37 +46,55 @@ namespace Autodesk.Oss.Model
         }
         
         /// <summary>
-        /// Expiration time value. Default is 60 minutes.
+        ///The time window (in minutes) the signed URL will remain usable. Acceptable values = 1-60 minutes. Default = 2 minutes.
+///
+///**Tip:** Use the smallest possible time window to minimize exposure of the signed URL.
         /// </summary>
-        /// <value>Expiration time value. Default is 60 minutes.</value>
+        /// <value>
+        ///The time window (in minutes) the signed URL will remain usable. Acceptable values = 1-60 minutes. Default = 2 minutes.
+///
+///**Tip:** Use the smallest possible time window to minimize exposure of the signed URL.
+        /// </value>
         [DataMember(Name="minutesExpiration", EmitDefaultValue=false)]
         public int? MinutesExpiration { get; set; }
 
         /// <summary>
-        /// If it is true, the public URL can only be used once and will expire immediately after use. When downloading an object, URL will expire once the download is complete.
+        ///`true` : The signed URL will expire immediately after use. For example, when downloading an object, URL will expire once the download is complete.
+///
+///`false` : (Default) The signed URL will remain usable for the entire time window specified by `minutesExpiration`. 
         /// </summary>
-        /// <value>If it is true, the public URL can only be used once and will expire immediately after use. When downloading an object, URL will expire once the download is complete.</value>
+        /// <value>
+        ///`true` : The signed URL will expire immediately after use. For example, when downloading an object, URL will expire once the download is complete.
+///
+///`false` : (Default) The signed URL will remain usable for the entire time window specified by `minutesExpiration`. 
+        /// </value>
         [DataMember(Name="singleUse", EmitDefaultValue=false)]
         public bool? SingleUse { get; set; }
 
         /// <summary>
-        /// If set, the public URL will use that value as Content-Type when downloading
+        ///The value to use as the Content-Type when downloading the object using the signed URL.  If this attribute is not provided, it defaults to the value corresponding to the object.
         /// </summary>
-        /// <value>If set, the public URL will use that value as Content-Type when downloading</value>
+        /// <value>
+        ///The value to use as the Content-Type when downloading the object using the signed URL.  If this attribute is not provided, it defaults to the value corresponding to the object.
+        /// </value>
         [DataMember(Name="contentType", EmitDefaultValue=false)]
         public string ContentType { get; set; }
 
         /// <summary>
-        /// If set, the public URL will use that value as Content-Disposition when downloading
+        ///The value to use as the Content-Disposition when downloading the object using the signed URL.  If this attribute is not provided, it defaults to the value corresponding to the object.
         /// </summary>
-        /// <value>If set, the public URL will use that value as Content-Disposition when downloading</value>
+        /// <value>
+        ///The value to use as the Content-Disposition when downloading the object using the signed URL.  If this attribute is not provided, it defaults to the value corresponding to the object.
+        /// </value>
         [DataMember(Name="contentDisposition", EmitDefaultValue=false)]
         public string ContentDisposition { get; set; }
 
         /// <summary>
-        /// If set, the public URL will be restricted to the specified IP addresses. downloads and uploads will be allowed or blocked based on the list of the IP addresses in the X-Forwarded-For header received from Apigee.
+        ///Restricts the signed URL to the specified IP addresses. Downloads and uploads will be allowed only for the list of the IP addresses in the `X-Forwarded-For` header received from Apigee. If not specified, use of the signed URL is not restricted.
         /// </summary>
-        /// <value>If set, the public URL will be restricted to the specified IP addresses. downloads and uploads will be allowed or blocked based on the list of the IP addresses in the X-Forwarded-For header received from Apigee.</value>
+        /// <value>
+        ///Restricts the signed URL to the specified IP addresses. Downloads and uploads will be allowed only for the list of the IP addresses in the `X-Forwarded-For` header received from Apigee. If not specified, use of the signed URL is not restricted.
+        /// </value>
         [DataMember(Name="allowedIpAddresses", EmitDefaultValue=false)]
         public string AllowedIpAddresses { get; set; }
 

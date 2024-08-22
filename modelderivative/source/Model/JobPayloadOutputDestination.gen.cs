@@ -3,9 +3,9 @@
  *
  * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
- * Model Derivative API
+ * Model Derivative
  *
- * Model Derivative Service Documentation
+ * Use the Model Derivative API to translate designs from one CAD format to another. You can also use this API to extract metadata from a model.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,12 +29,11 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System.ComponentModel;
 
 namespace Autodesk.ModelDerivative.Model
 {
     /// <summary>
-    /// JobPayloadOutputDestination
+    /// Specifies where to store generated derivatives.
     /// </summary>
     [DataContract]
     public partial class JobPayloadOutputDestination
@@ -47,11 +46,25 @@ namespace Autodesk.ModelDerivative.Model
         }
 
         /// <summary>
-        /// Gets or Sets Region
+        ///Specifies where to store generated derivatives. Possible values are:
+        ///
+        ///- `US`: (Default) Store derivatives at a data center for the United States of America.
+        ///- `EMEA`: Store derivatives at a data center for the European Union. 
+        ///- `APAC`: (Beta) Store derivatives at a data centre for the Australia region. 
+        ///
+        ///**Note**: Beta features are subject to change. Please avoid using them in production environments.
         /// </summary>
-        [DataMember(Name = "region", EmitDefaultValue = true)]
+        /// <value>
+        ///Specifies where to store generated derivatives. Possible values are:
+        ///
+        ///- `US`: (Default) Store derivatives at a data center for the United States of America.
+        ///- `EMEA`: Store derivatives at a data center for the European Union. 
+        ///- `APAC`: (Beta) Store derivatives at a data centre for the Australia region. 
+        ///
+        ///**Note**: Beta features are subject to change. Please avoid using them in production environments.
+        /// </value>
+        [DataMember(Name = "region", EmitDefaultValue = false)]
         public Region Region { get; set; }
-
 
         /// <summary>
         /// Returns the string presentation of the object
