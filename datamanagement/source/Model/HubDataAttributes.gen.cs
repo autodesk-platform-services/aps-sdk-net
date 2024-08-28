@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// HubDataAttributes
+    /// The properties of the hub.
     /// </summary>
     [DataContract]
     public partial class HubDataAttributes 
@@ -46,22 +46,19 @@ namespace Autodesk.DataManagement.Model
         }
         
         /// <summary>
-        /// Gets or Sets Name
+        ///A human friendly name to identify the hub.
         /// </summary>
+        /// <value>
+        ///A human friendly name to identify the hub.
+        /// </value>
         [DataMember(Name="name", EmitDefaultValue=false)]
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or Sets Extension
+        ///Gets or Sets Extension
         /// </summary>
         [DataMember(Name="extension", EmitDefaultValue=false)]
-        public HubDataAttributesExtension Extension { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Region
-        /// </summary>
-        [DataMember(Name="region", EmitDefaultValue=false)]
-        public string Region { get; set; }
+        public BaseAttributesExtensionObjectWithSchemaLink Extension { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

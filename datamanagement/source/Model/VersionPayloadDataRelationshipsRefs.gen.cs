@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// VersionPayloadDataRelationshipsRefs
+    /// Information on other resources that will share a custom relationship with the version being created.
     /// </summary>
     [DataContract]
     public partial class VersionPayloadDataRelationshipsRefs 
@@ -46,10 +46,13 @@ namespace Autodesk.DataManagement.Model
         }
         
         /// <summary>
-        /// Gets or Sets Data
+        ///An array of object, where each object represents a reference.
         /// </summary>
+        /// <value>
+        ///An array of object, where each object represents a reference.
+        /// </value>
         [DataMember(Name="data", EmitDefaultValue=false)]
-        public VersionPayloadDataRelationshipsRefsData Data { get; set; }
+        public List<VersionPayloadDataRelationshipsRefsData> Data { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

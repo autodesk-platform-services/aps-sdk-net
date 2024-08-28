@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// RelationshipRefsPayloadDataMeta
+    /// The meta-information about this resource.
     /// </summary>
     [DataContract]
     public partial class RelationshipRefsPayloadDataMeta 
@@ -46,10 +46,10 @@ namespace Autodesk.DataManagement.Model
         }
         
         /// <summary>
-        /// Gets or Sets Extension
+        ///Gets or Sets Extension
         /// </summary>
         [DataMember(Name="extension", EmitDefaultValue=false)]
-        public RelationshipRefsPayloadDataMetaExtension Extension { get; set; }
+        public BaseAttributesExtensionObjectWithoutSchemaLink Extension { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

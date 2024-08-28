@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// DownloadPayloadData
+    /// Contains information about the desired download format and the version of the item to convert to this format.
     /// </summary>
     [DataContract]
     public partial class DownloadPayloadData 
@@ -46,19 +46,19 @@ namespace Autodesk.DataManagement.Model
         }
         
         /// <summary>
-        /// Gets or Sets Type
+        ///Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=true)]
         public Type Type { get; set; }
 
         /// <summary>
-        /// Gets or Sets Attributes
+        ///Gets or Sets Attributes
         /// </summary>
         [DataMember(Name="attributes", EmitDefaultValue=false)]
         public DownloadPayloadDataAttributes Attributes { get; set; }
 
         /// <summary>
-        /// Gets or Sets Relationships
+        ///Gets or Sets Relationships
         /// </summary>
         [DataMember(Name="relationships", EmitDefaultValue=false)]
         public DownloadPayloadDataRelationships Relationships { get; set; }

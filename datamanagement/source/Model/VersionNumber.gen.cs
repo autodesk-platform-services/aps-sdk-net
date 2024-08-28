@@ -33,9 +33,9 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// The version of JSON API. Will always be: **1.0**
+    /// Version Number
     /// </summary>
-    /// <value>The version of JSON API. Will always be: **1.0**</value>
+    ///<value>Version Number</value>
     
     [JsonConverter(typeof(StringEnumConverter))]
     

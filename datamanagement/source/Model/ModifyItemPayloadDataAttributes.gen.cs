@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// ModifyItemPayloadDataAttributes
+    /// A container of the attributes to be updated.
     /// </summary>
     [DataContract]
     public partial class ModifyItemPayloadDataAttributes 
@@ -46,8 +46,15 @@ namespace Autodesk.DataManagement.Model
         }
         
         /// <summary>
-        /// Gets or Sets DisplayName
+        ///A human friendly name to identify an item. 
+///
+///**Note:** For BIM 360 projects this attribute is reserved for future releases and should not be used. For such items use a version's `attributes.name` as the item's name.
         /// </summary>
+        /// <value>
+        ///A human friendly name to identify an item. 
+///
+///**Note:** For BIM 360 projects this attribute is reserved for future releases and should not be used. For such items use a version's `attributes.name` as the item's name.
+        /// </value>
         [DataMember(Name="displayName", EmitDefaultValue=false)]
         public string DisplayName { get; set; }
 

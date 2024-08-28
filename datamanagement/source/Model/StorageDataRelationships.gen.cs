@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// StorageDataRelationships
+    /// Contains links to resources that are directly related to the storage location.
     /// </summary>
     [DataContract]
     public partial class StorageDataRelationships 
@@ -46,7 +46,7 @@ namespace Autodesk.DataManagement.Model
         }
         
         /// <summary>
-        /// Gets or Sets Target
+        ///Gets or Sets Target
         /// </summary>
         [DataMember(Name="target", EmitDefaultValue=false)]
         public StorageDataRelationshipsTarget Target { get; set; }

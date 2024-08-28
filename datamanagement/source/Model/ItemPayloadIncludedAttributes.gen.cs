@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// ItemPayloadIncludedAttributes
+    /// The properties of the first version of the item to be created.
     /// </summary>
     [DataContract]
     public partial class ItemPayloadIncludedAttributes 
@@ -46,16 +46,27 @@ namespace Autodesk.DataManagement.Model
         }
         
         /// <summary>
-        /// Gets or Sets Name
+        ///The name of the version (1-255 characters).
+///
+///Avoid using the following reserved characters in the name: `<`, `>`, `:`, `"`, `/`, `\`, `|`, `?`, `*`, `'`, `\n`, `\r`, `\t`, `\0`, `\f`, `¢`, `™`, ``$
+///
+///If you are creating a new item by copying a version of an existing item, the name defaults to the name of the source version.
         /// </summary>
+        /// <value>
+        ///The name of the version (1-255 characters).
+///
+///Avoid using the following reserved characters in the name: `<`, `>`, `:`, `"`, `/`, `\`, `|`, `?`, `*`, `'`, `\n`, `\r`, `\t`, `\0`, `\f`, `¢`, `™`, ``$
+///
+///If you are creating a new item by copying a version of an existing item, the name defaults to the name of the source version.
+        /// </value>
         [DataMember(Name="name", EmitDefaultValue=false)]
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or Sets Extension
+        ///Gets or Sets Extension
         /// </summary>
         [DataMember(Name="extension", EmitDefaultValue=false)]
-        public ItemPayloadDataAttributesExtension Extension { get; set; }
+        public ItemPayloadIncludedAttributesExtension Extension { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

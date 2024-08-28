@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// ItemPayloadDataAttributesExtension
+    /// The Type ID of the schema that defines the structure of the &#x60;&#x60;extension.data&#x60;&#x60; object
     /// </summary>
     [DataContract]
     public partial class ItemPayloadDataAttributesExtension 
@@ -46,22 +46,29 @@ namespace Autodesk.DataManagement.Model
         }
         
         /// <summary>
-        /// Gets or Sets Type
+        ///Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=true)]
         public Type Type { get; set; }
 
         /// <summary>
-        /// Gets or Sets _Version
+        ///Gets or Sets VarVersion
         /// </summary>
         [DataMember(Name="version", EmitDefaultValue=true)]
-        public VersionNumber _Version { get; set; }
+        public VersionNumber VarVersion { get; set; }
 
         /// <summary>
-        /// Gets or Sets Data
+        ///The container of additional properties.
+///
+///The additional properties must follow the schema specified by `extensions.type` and `extensions.version`. Properties that don't follow the schema will be ignored.
         /// </summary>
+        /// <value>
+        ///The container of additional properties.
+///
+///The additional properties must follow the schema specified by `extensions.type` and `extensions.version`. Properties that don't follow the schema will be ignored.
+        /// </value>
         [DataMember(Name="data", EmitDefaultValue=false)]
-        public Object Data { get; set; }
+        public Dictionary<string, Object> Data { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

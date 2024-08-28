@@ -46,22 +46,25 @@ namespace Autodesk.DataManagement.Model
         }
         
         /// <summary>
-        /// Gets or Sets Type
+        ///Gets or Sets Type
         /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; set; }
+        [DataMember(Name="type", EmitDefaultValue=true)]
+        public Type Type { get; set; }
 
         /// <summary>
-        /// Gets or Sets Id
+        ///The ID that uniquely identifies the resource.
         /// </summary>
+        /// <value>
+        ///The ID that uniquely identifies the resource.
+        /// </value>
         [DataMember(Name="id", EmitDefaultValue=false)]
         public string Id { get; set; }
 
         /// <summary>
-        /// Gets or Sets Meta
+        ///Gets or Sets Meta
         /// </summary>
         [DataMember(Name="meta", EmitDefaultValue=false)]
-        public RelationshipRefsDataMeta Meta { get; set; }
+        public MetaRefs Meta { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

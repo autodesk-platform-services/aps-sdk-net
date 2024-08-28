@@ -35,42 +35,8 @@ namespace Autodesk.DataManagement.Model
     /// <summary>
     /// CommandPayloadData
     /// </summary>
-    [DataContract]
-    public partial class CommandPayloadData 
+    public class CommandPayloadData 
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CommandPayloadData" /> class.
-        /// </summary>
-        public CommandPayloadData()
-        {
-        }
-        
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=true)]
-        public Type Type { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Attributes
-        /// </summary>
-        [DataMember(Name="attributes", EmitDefaultValue=false)]
-        public CommandPayloadDataAttributes Attributes { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Relationships
-        /// </summary>
-        [DataMember(Name="relationships", EmitDefaultValue=false)]
-        public CommandPayloadDataRelationships Relationships { get; set; }
-
-        /// <summary>
-        /// Returns the string presentation of the object
-        /// </summary>
-        /// <returns>String presentation of the object</returns>
-        public override string ToString()
-        {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
-        }
     }
 
 }

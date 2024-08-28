@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// FolderPayloadDataRelationshipsParentData
+    /// The data about the parent of the folder to be created.
     /// </summary>
     [DataContract]
     public partial class FolderPayloadDataRelationshipsParentData 
@@ -46,14 +46,27 @@ namespace Autodesk.DataManagement.Model
         }
         
         /// <summary>
-        /// Gets or Sets Type
+        ///Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=true)]
         public Type Type { get; set; }
 
         /// <summary>
-        /// Gets or Sets Id
+        ///The URN of the parent folder. For information on how to find the URN, see the initial steps of the [Download a File](/en/docs/data/v2/tutorials/download-file/) tutorial.
+///
+///Note that for BIM 360 Docs, new folders must be created within an existing folder (e.g., the Plans or Project Files folders), 
+///and not directly within the root folder. Permissions, visibility (e.g., `items:autodesk.bim360:Document` or `items:autodesk.bim360:File`), 
+///and actions (e.g., OCR) are inherited from the existing parent folder. New folders also inherit subscriptions such as the 
+///notifications sent when files are added to a folder.
         /// </summary>
+        /// <value>
+        ///The URN of the parent folder. For information on how to find the URN, see the initial steps of the [Download a File](/en/docs/data/v2/tutorials/download-file/) tutorial.
+///
+///Note that for BIM 360 Docs, new folders must be created within an existing folder (e.g., the Plans or Project Files folders), 
+///and not directly within the root folder. Permissions, visibility (e.g., `items:autodesk.bim360:Document` or `items:autodesk.bim360:File`), 
+///and actions (e.g., OCR) are inherited from the existing parent folder. New folders also inherit subscriptions such as the 
+///notifications sent when files are added to a folder.
+        /// </value>
         [DataMember(Name="id", EmitDefaultValue=false)]
         public string Id { get; set; }
 

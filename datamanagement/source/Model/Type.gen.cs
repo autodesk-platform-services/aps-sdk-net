@@ -35,7 +35,7 @@ namespace Autodesk.DataManagement.Model
     /// <summary>
     /// The type of this resource. Possible values: **folders, items, versions, objects, downloads e.t.c**
     /// </summary>
-    /// <value>The type of this resource. Possible values: **folders, items, versions, objects, downloads e.t.c**</value>
+    ///<value>The type of this resource. Possible values: **folders, items, versions, objects, downloads e.t.c**</value>
     
     [JsonConverter(typeof(StringEnumConverter))]
     
@@ -55,6 +55,18 @@ namespace Autodesk.DataManagement.Model
         Folders,
         
         /// <summary>
+        /// Enum Hubs for value: hubs
+        /// </summary>
+        [EnumMember(Value = "hubs")]
+        Hubs,
+        
+        /// <summary>
+        /// Enum Projects for value: projects
+        /// </summary>
+        [EnumMember(Value = "projects")]
+        Projects,
+        
+        /// <summary>
         /// Enum Downloads for value: downloads
         /// </summary>
         [EnumMember(Value = "downloads")]
@@ -71,6 +83,12 @@ namespace Autodesk.DataManagement.Model
         /// </summary>
         [EnumMember(Value = "items")]
         Items,
+        
+        /// <summary>
+        /// Enum DownloadFormats for value: downloadFormats
+        /// </summary>
+        [EnumMember(Value = "downloadFormats")]
+        DownloadFormats,
         
         /// <summary>
         /// Enum ItemsautodeskBim360File for value: items:autodesk.bim360:File

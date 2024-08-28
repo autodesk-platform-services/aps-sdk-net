@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// StoragePayloadDataAttributes
+    /// Properties of the storage location to be created.
     /// </summary>
     [DataContract]
     public partial class StoragePayloadDataAttributes 
@@ -46,8 +46,11 @@ namespace Autodesk.DataManagement.Model
         }
         
         /// <summary>
-        /// Gets or Sets Name
+        ///A human friendly name to identify the resource.
         /// </summary>
+        /// <value>
+        ///A human friendly name to identify the resource.
+        /// </value>
         [DataMember(Name="name", EmitDefaultValue=false)]
         public string Name { get; set; }
 

@@ -40,25 +40,51 @@ namespace Autodesk.DataManagement.Http
     public interface IHubsApi
     {
         /// <summary>
-        /// Returns data on a specific hub_id
+        /// Get a Hub
         /// </summary>
         /// <remarks>
-        /// Returns data on a specific hub_id.  Note that for BIM 360 Docs, a hub ID corresponds to an account ID in the BIM 360 API. To convert an account ID into a hub ID you need to add a \"b.\" prefix. For example, an account ID of c8b0c73d-3ae9 translates to a hub ID of b.c8b0c73d-3ae9.  New! Autodesk Construction Cloud platform (ACC). Note that this endpoint is compatible with ACC projects. For more information about the Autodesk Construction Cloud APIs, see the Autodesk Construction Cloud documentation.
+        ///Returns the hub specified by the `hub_id` parameter.
+///
+///For BIM 360 Docs, a hub ID corresponds to a BIM 360 account ID. To convert a BIM 360 account ID to a hub ID, prefix the account ID with `b.`. For example, an account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
+///
+///**Note:** This operation supports Autodesk Construction Cloud (ACC) Projects. For more information, see the [ACC Platform API documentation](https://en.docs.acc.v1/overview/introduction/). 
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="hubId">The unique identifier of a hub.</param>/// <param name="xUserId">In a two-legged authentication context, the app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act on behalf of only the user specified. (optional)</param>
-        /// <returns>Task of ApiResponse<Hub></returns>
+         /// <param name="hubId">
+         ///The unique identifier of a hub.
+         /// </param>
+         /// <param name="xUserId">
+         ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
+         /// </param>
+        /// <returns>Task of ApiResponse&lt;Hub&gt;</returns>
         
         System.Threading.Tasks.Task<ApiResponse<Hub>> GetHubAsync (string hubId, string xUserId= default(string),  string accessToken = null, bool throwOnError = true);
         /// <summary>
-        /// Returns a collection of accessible hubs for this member
+        /// List Hubs
         /// </summary>
         /// <remarks>
-        /// Returns a collection of accessible hubs for this member.  Hubs represent BIM 360 Team hubs, Fusion Team hubs (formerly known as A360 Team hubs), A360 Personal hubs, or BIM 360 Docs accounts. Team hubs include **BIM 360** Team hubs and Fusion Team hubs (formerly known as A360 Team hubs). Personal hubs include A360 Personal hubs. Only active hubs are listed.  Note that for BIM 360 Docs, a hub ID corresponds to an account ID in the BIM 360 API. To convert an account ID into a hub ID you need to add a \"b.\" prefix. For example, an account ID of c8b0c73d-3ae9 translates to a hub ID of b.c8b0c73d-3ae9.  New! Autodesk Construction Cloud platform (ACC). Note that this endpoint is compatible with ACC projects. For more information about the Autodesk Construction Cloud APIs, see the Autodesk Construction Cloud documentation.
+        ///Returns a collection of hubs that the user of your app can access.
+///
+///The returned hubs can be BIM 360 Team hubs, Fusion Team hubs (formerly known as A360 Team hubs), A360 Personal hubs, ACC Docs (Autodesk Docs) accounts, or BIM 360 Docs accounts. Only active hubs are returned.
+///
+///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
+///
+///**Note:** This operation supports Autodesk Construction Cloud (ACC) Projects. For more information, see the [ACC Platform API documentation](https://en.docs.acc.v1/overview/introduction/). 
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="xUserId">In a two-legged authentication context, the app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act on behalf of only the user specified. (optional)</param>/// <param name="filterId">Filter by the id of the ref target. (optional)</param>/// <param name="filterName">Filter by the name of the ref target. (optional)</param>/// <param name="filterExtensionType">Filter by the extension type. (optional)</param>
-        /// <returns>Task of ApiResponse<Hubs></returns>
+         /// <param name="xUserId">
+         ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
+         /// </param>
+         /// <param name="filterId">
+         ///Filter by the `id` of the `ref` target. (optional)
+         /// </param>
+         /// <param name="filterName">
+         ///Filter by the `name` of the `ref` target. (optional)
+         /// </param>
+         /// <param name="filterExtensionType">
+         ///Filter by the extension type.  (optional)
+         /// </param>
+        /// <returns>Task of ApiResponse&lt;Hubs&gt;</returns>
         
         System.Threading.Tasks.Task<ApiResponse<Hubs>> GetHubsAsync (string xUserId= default(string), List<string> filterId= default(List<string>), string filterName= default(string), List<string> filterExtensionType= default(List<string>),  string accessToken = null, bool throwOnError = true);
     }
@@ -142,14 +168,23 @@ namespace Autodesk.DataManagement.Http
         public ForgeService Service {get; set;}
 
         /// <summary>
-        /// Returns data on a specific hub_id
+        /// Get a Hub
         /// </summary>
         /// <remarks>
-        /// Returns data on a specific hub_id.  Note that for BIM 360 Docs, a hub ID corresponds to an account ID in the BIM 360 API. To convert an account ID into a hub ID you need to add a \"b.\" prefix. For example, an account ID of c8b0c73d-3ae9 translates to a hub ID of b.c8b0c73d-3ae9.  New! Autodesk Construction Cloud platform (ACC). Note that this endpoint is compatible with ACC projects. For more information about the Autodesk Construction Cloud APIs, see the Autodesk Construction Cloud documentation.
+        ///Returns the hub specified by the `hub_id` parameter.
+///
+///For BIM 360 Docs, a hub ID corresponds to a BIM 360 account ID. To convert a BIM 360 account ID to a hub ID, prefix the account ID with `b.`. For example, an account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
+///
+///**Note:** This operation supports Autodesk Construction Cloud (ACC) Projects. For more information, see the [ACC Platform API documentation](https://en.docs.acc.v1/overview/introduction/). 
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="hubId">The unique identifier of a hub.</param>/// <param name="xUserId">In a two-legged authentication context, the app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act on behalf of only the user specified. (optional)</param>
-        /// <returns>Task of ApiResponse<Hub></returns>
+         /// <param name="hubId">
+         ///The unique identifier of a hub.
+         /// </param>
+         /// <param name="xUserId">
+         ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
+         /// </param>
+        /// <returns>Task of ApiResponse&lt;Hub&gt;></returns>
         
         public async System.Threading.Tasks.Task<ApiResponse<Hub>> GetHubAsync (string hubId,string xUserId= default(string), string accessToken = null, bool throwOnError = true)
         {
@@ -166,7 +201,7 @@ namespace Autodesk.DataManagement.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/1.0.0");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.0");
                 if(!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
@@ -221,14 +256,31 @@ namespace Autodesk.DataManagement.Http
             } // using
         }
         /// <summary>
-        /// Returns a collection of accessible hubs for this member
+        /// List Hubs
         /// </summary>
         /// <remarks>
-        /// Returns a collection of accessible hubs for this member.  Hubs represent BIM 360 Team hubs, Fusion Team hubs (formerly known as A360 Team hubs), A360 Personal hubs, or BIM 360 Docs accounts. Team hubs include **BIM 360** Team hubs and Fusion Team hubs (formerly known as A360 Team hubs). Personal hubs include A360 Personal hubs. Only active hubs are listed.  Note that for BIM 360 Docs, a hub ID corresponds to an account ID in the BIM 360 API. To convert an account ID into a hub ID you need to add a \"b.\" prefix. For example, an account ID of c8b0c73d-3ae9 translates to a hub ID of b.c8b0c73d-3ae9.  New! Autodesk Construction Cloud platform (ACC). Note that this endpoint is compatible with ACC projects. For more information about the Autodesk Construction Cloud APIs, see the Autodesk Construction Cloud documentation.
+        ///Returns a collection of hubs that the user of your app can access.
+///
+///The returned hubs can be BIM 360 Team hubs, Fusion Team hubs (formerly known as A360 Team hubs), A360 Personal hubs, ACC Docs (Autodesk Docs) accounts, or BIM 360 Docs accounts. Only active hubs are returned.
+///
+///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
+///
+///**Note:** This operation supports Autodesk Construction Cloud (ACC) Projects. For more information, see the [ACC Platform API documentation](https://en.docs.acc.v1/overview/introduction/). 
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="xUserId">In a two-legged authentication context, the app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act on behalf of only the user specified. (optional)</param>/// <param name="filterId">Filter by the id of the ref target. (optional)</param>/// <param name="filterName">Filter by the name of the ref target. (optional)</param>/// <param name="filterExtensionType">Filter by the extension type. (optional)</param>
-        /// <returns>Task of ApiResponse<Hubs></returns>
+         /// <param name="xUserId">
+         ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
+         /// </param>
+         /// <param name="filterId">
+         ///Filter by the `id` of the `ref` target. (optional)
+         /// </param>
+         /// <param name="filterName">
+         ///Filter by the `name` of the `ref` target. (optional)
+         /// </param>
+         /// <param name="filterExtensionType">
+         ///Filter by the extension type.  (optional)
+         /// </param>
+        /// <returns>Task of ApiResponse&lt;Hubs&gt;></returns>
         
         public async System.Threading.Tasks.Task<ApiResponse<Hubs>> GetHubsAsync (string xUserId= default(string),List<string> filterId= default(List<string>),string filterName= default(string),List<string> filterExtensionType= default(List<string>), string accessToken = null, bool throwOnError = true)
         {
@@ -236,9 +288,9 @@ namespace Autodesk.DataManagement.Http
             using (var request = new HttpRequestMessage())
             {
                 var queryParam = new Dictionary<string, object>();
-                SetQueryParameter("filter_id", filterId, queryParam);
+                SetQueryParameter("filter[id]", filterId, queryParam);
                 SetQueryParameter("filter_name", filterName, queryParam);
-                SetQueryParameter("filter_extension_type", filterExtensionType, queryParam);
+                SetQueryParameter("filter[extension.type]", filterExtensionType, queryParam);
                 request.RequestUri =
                     Marshalling.BuildRequestUri("/project/v1/hubs",
                         routeParameters: new Dictionary<string, object> {
@@ -247,7 +299,7 @@ namespace Autodesk.DataManagement.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/1.0.0");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.0");
                 if(!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");

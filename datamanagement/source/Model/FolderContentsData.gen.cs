@@ -33,56 +33,12 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// FolderContentsData
+    /// Specifies what objects to query. Contains the parameters to pass to the search service.
     /// </summary>
-    [DataContract]
-    public partial class FolderContentsData 
+    /// <seealso cref="FolderData"/>
+    /// <seealso cref="ItemData"/>
+    public class FolderContentsData
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="FolderContentsData" /> class.
-        /// </summary>
-        public FolderContentsData()
-        {
-        }
-        
-        /// <summary>
-        /// Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; set; }
 
-        /// <summary>
-        /// Gets or Sets Id
-        /// </summary>
-        [DataMember(Name="id", EmitDefaultValue=false)]
-        public string Id { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Attributes
-        /// </summary>
-        [DataMember(Name="attributes", EmitDefaultValue=false)]
-        public FolderContentsDataAttributes Attributes { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Links
-        /// </summary>
-        [DataMember(Name="links", EmitDefaultValue=false)]
-        public HubsLinks Links { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Relationships
-        /// </summary>
-        [DataMember(Name="relationships", EmitDefaultValue=false)]
-        public TopFoldersDataRelationships Relationships { get; set; }
-
-        /// <summary>
-        /// Returns the string presentation of the object
-        /// </summary>
-        /// <returns>String presentation of the object</returns>
-        public override string ToString()
-        {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
-        }
     }
-
 }

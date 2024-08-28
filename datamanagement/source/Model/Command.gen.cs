@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// Successful Retrieval of C4R Model Publish Status (200)
+    /// The request body&#39;s &#x60;&#x60;data&#x60;&#x60; object defines the command to execute and contains any required input data.
     /// </summary>
     [DataContract]
     public partial class Command 
@@ -46,16 +46,16 @@ namespace Autodesk.DataManagement.Model
         }
         
         /// <summary>
-        /// Gets or Sets Data
+        ///Gets or Sets Jsonapi
+        /// </summary>
+        [DataMember(Name="jsonapi", EmitDefaultValue=false)]
+        public JsonApiVersion Jsonapi { get; set; }
+
+        /// <summary>
+        ///Gets or Sets Data
         /// </summary>
         [DataMember(Name="data", EmitDefaultValue=false)]
         public CommandData Data { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Jsonapi
-        /// </summary>
-        [DataMember(Name="jsonapi", EmitDefaultValue=false)]
-        public HubsJsonapi Jsonapi { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

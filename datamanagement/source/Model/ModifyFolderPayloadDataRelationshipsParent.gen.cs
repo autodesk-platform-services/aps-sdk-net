@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// ModifyFolderPayloadDataRelationshipsParent
+    /// Information about the parent folder of this folder.
     /// </summary>
     [DataContract]
     public partial class ModifyFolderPayloadDataRelationshipsParent 
@@ -46,7 +46,7 @@ namespace Autodesk.DataManagement.Model
         }
         
         /// <summary>
-        /// Gets or Sets Data
+        ///Gets or Sets Data
         /// </summary>
         [DataMember(Name="data", EmitDefaultValue=false)]
         public ModifyFolderPayloadDataRelationshipsParentData Data { get; set; }

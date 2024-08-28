@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// ItemPayloadIncludedRelationships
+    /// A container of links to resources that are related to the item to be created.
     /// </summary>
     [DataContract]
     public partial class ItemPayloadIncludedRelationships 
@@ -46,16 +46,16 @@ namespace Autodesk.DataManagement.Model
         }
         
         /// <summary>
-        /// Gets or Sets Storage
+        ///Gets or Sets Storage
         /// </summary>
         [DataMember(Name="storage", EmitDefaultValue=false)]
-        public FolderPayloadDataRelationshipsParent Storage { get; set; }
+        public ItemPayloadIncludedRelationshipsStorage Storage { get; set; }
 
         /// <summary>
-        /// Gets or Sets Refs
+        ///Gets or Sets Refs
         /// </summary>
         [DataMember(Name="refs", EmitDefaultValue=false)]
-        public ItemPayloadIncludedRelationshipsRefs Refs { get; set; }
+        public JsonApiRelationshipsRefs Refs { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

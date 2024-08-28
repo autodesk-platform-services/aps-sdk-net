@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// StorageData
+    /// An object containing information on the storage location.
     /// </summary>
     [DataContract]
     public partial class StorageData 
@@ -46,19 +46,22 @@ namespace Autodesk.DataManagement.Model
         }
         
         /// <summary>
-        /// Gets or Sets Type
+        ///Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=true)]
         public Type Type { get; set; }
 
         /// <summary>
-        /// Gets or Sets Id
+        ///The ID to uniquely identify the storage location.
         /// </summary>
+        /// <value>
+        ///The ID to uniquely identify the storage location.
+        /// </value>
         [DataMember(Name="id", EmitDefaultValue=false)]
         public string Id { get; set; }
 
         /// <summary>
-        /// Gets or Sets Relationships
+        ///Gets or Sets Relationships
         /// </summary>
         [DataMember(Name="relationships", EmitDefaultValue=false)]
         public StorageDataRelationships Relationships { get; set; }

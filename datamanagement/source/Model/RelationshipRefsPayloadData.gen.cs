@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// RelationshipRefsPayloadData
+    /// A container for the data that describes the custom relationship.
     /// </summary>
     [DataContract]
     public partial class RelationshipRefsPayloadData 
@@ -46,19 +46,22 @@ namespace Autodesk.DataManagement.Model
         }
         
         /// <summary>
-        /// Gets or Sets Type
+        ///Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=true)]
         public Type Type { get; set; }
 
         /// <summary>
-        /// Gets or Sets Id
+        ///The ID that uniquely identifies the resource.
         /// </summary>
+        /// <value>
+        ///The ID that uniquely identifies the resource.
+        /// </value>
         [DataMember(Name="id", EmitDefaultValue=false)]
         public string Id { get; set; }
 
         /// <summary>
-        /// Gets or Sets Meta
+        ///Gets or Sets Meta
         /// </summary>
         [DataMember(Name="meta", EmitDefaultValue=false)]
         public RelationshipRefsPayloadDataMeta Meta { get; set; }

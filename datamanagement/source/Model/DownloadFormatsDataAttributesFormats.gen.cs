@@ -46,8 +46,11 @@ namespace Autodesk.DataManagement.Model
         }
         
         /// <summary>
-        /// Gets or Sets FileType
+        ///The file name extension of the supported file format.
         /// </summary>
+        /// <value>
+        ///The file name extension of the supported file format.
+        /// </value>
         [DataMember(Name="fileType", EmitDefaultValue=false)]
         public string FileType { get; set; }
 

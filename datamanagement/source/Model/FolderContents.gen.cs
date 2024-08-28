@@ -36,7 +36,7 @@ namespace Autodesk.DataManagement.Model
     /// Successful retrieval of the folder contents collection associated with a specific folder.
     /// </summary>
     [DataContract]
-    public partial class FolderContents 
+    public partial class FolderContents
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="FolderContents" /> class.
@@ -44,30 +44,36 @@ namespace Autodesk.DataManagement.Model
         public FolderContents()
         {
         }
-        
-        /// <summary>
-        /// Gets or Sets Jsonapi
-        /// </summary>
-        [DataMember(Name="jsonapi", EmitDefaultValue=false)]
-        public HubsJsonapi Jsonapi { get; set; }
 
         /// <summary>
-        /// Gets or Sets Links
+        ///Gets or Sets Jsonapi
         /// </summary>
-        [DataMember(Name="links", EmitDefaultValue=false)]
+        [DataMember(Name = "jsonapi", EmitDefaultValue = false)]
+        public JsonApiVersion Jsonapi { get; set; }
+
+        /// <summary>
+        ///Gets or Sets Links
+        /// </summary>
+        [DataMember(Name = "links", EmitDefaultValue = false)]
         public FolderContentsLinks Links { get; set; }
 
         /// <summary>
-        /// Gets or Sets Data
+        ///The properties of an item or folder, as the case may be.
         /// </summary>
-        [DataMember(Name="data", EmitDefaultValue=false)]
+        /// <value>
+        ///The properties of an item or folder, as the case may be.
+        /// </value>
+        [DataMember(Name = "data", EmitDefaultValue = false)]
         public List<FolderContentsData> Data { get; set; }
 
         /// <summary>
-        /// Gets or Sets Included
+        ///An array of objects, where each element represents a resource included within this resource.
         /// </summary>
-        [DataMember(Name="included", EmitDefaultValue=false)]
-        public List<FolderContentsIncluded> Included { get; set; }
+        /// <value>
+        ///An array of objects, where each element represents a resource included within this resource.
+        /// </value>
+        [DataMember(Name = "included", EmitDefaultValue = false)]
+        public List<VersionData> Included { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

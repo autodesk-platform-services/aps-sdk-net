@@ -33,10 +33,10 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// FolderData
+    /// A container of data describing a folder.
     /// </summary>
     [DataContract]
-    public partial class FolderData 
+    public partial class FolderData : FolderContentsData
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="FolderData" /> class.
@@ -46,34 +46,37 @@ namespace Autodesk.DataManagement.Model
         }
         
         /// <summary>
-        /// Gets or Sets Type
+        ///Gets or Sets Type
         /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; set; }
+        [DataMember(Name="type", EmitDefaultValue=true)]
+        public Type Type { get; set; }
 
         /// <summary>
-        /// Gets or Sets Id
+        ///The unique identifier of the folder.
         /// </summary>
+        /// <value>
+        ///The unique identifier of the folder.
+        /// </value>
         [DataMember(Name="id", EmitDefaultValue=false)]
         public string Id { get; set; }
 
         /// <summary>
-        /// Gets or Sets Attributes
+        ///Gets or Sets Attributes
         /// </summary>
         [DataMember(Name="attributes", EmitDefaultValue=false)]
-        public FolderDataAttributes Attributes { get; set; }
+        public FolderAttributesWithExtensions Attributes { get; set; }
 
         /// <summary>
-        /// Gets or Sets Links
+        ///Gets or Sets Links
         /// </summary>
         [DataMember(Name="links", EmitDefaultValue=false)]
-        public ProjectsDataLinks Links { get; set; }
+        public JsonApiLinksSelfAndWebView Links { get; set; }
 
         /// <summary>
-        /// Gets or Sets Relationships
+        ///Gets or Sets Relationships
         /// </summary>
         [DataMember(Name="relationships", EmitDefaultValue=false)]
-        public TopFoldersDataRelationships Relationships { get; set; }
+        public FolderDataRelationships Relationships { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

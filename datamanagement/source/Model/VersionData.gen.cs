@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// VersionData
+    /// A container of data describing a version.
     /// </summary>
     [DataContract]
     public partial class VersionData 
@@ -46,28 +46,37 @@ namespace Autodesk.DataManagement.Model
         }
         
         /// <summary>
-        /// Gets or Sets Type
+        ///Gets or Sets Type
         /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; set; }
+        [DataMember(Name="type", EmitDefaultValue=true)]
+        public Type Type { get; set; }
 
         /// <summary>
-        /// Gets or Sets Id
+        ///URN of the version object.
         /// </summary>
+        /// <value>
+        ///URN of the version object.
+        /// </value>
         [DataMember(Name="id", EmitDefaultValue=false)]
         public string Id { get; set; }
 
         /// <summary>
-        /// Gets or Sets Attributes
+        ///Gets or Sets Attributes
         /// </summary>
         [DataMember(Name="attributes", EmitDefaultValue=false)]
-        public VersionDataAttributes Attributes { get; set; }
+        public VersionAttributes Attributes { get; set; }
 
         /// <summary>
-        /// Gets or Sets Links
+        ///Gets or Sets Relationships
+        /// </summary>
+        [DataMember(Name="relationships", EmitDefaultValue=false)]
+        public VersionDataRelationships Relationships { get; set; }
+
+        /// <summary>
+        ///Gets or Sets Links
         /// </summary>
         [DataMember(Name="links", EmitDefaultValue=false)]
-        public ProjectsDataLinks Links { get; set; }
+        public JsonApiLinksSelfAndWebView Links { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

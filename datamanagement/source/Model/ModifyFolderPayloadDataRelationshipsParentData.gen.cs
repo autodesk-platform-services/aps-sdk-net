@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// ModifyFolderPayloadDataRelationshipsParentData
+    /// A container for the data that defines the parent of this folder.
     /// </summary>
     [DataContract]
     public partial class ModifyFolderPayloadDataRelationshipsParentData 
@@ -46,14 +46,17 @@ namespace Autodesk.DataManagement.Model
         }
         
         /// <summary>
-        /// Gets or Sets Type
+        ///Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=true)]
         public Type Type { get; set; }
 
         /// <summary>
-        /// Gets or Sets Id
+        ///The URN of the parent folder to which you want to move a folder to.
         /// </summary>
+        /// <value>
+        ///The URN of the parent folder to which you want to move a folder to.
+        /// </value>
         [DataMember(Name="id", EmitDefaultValue=false)]
         public string Id { get; set; }
 

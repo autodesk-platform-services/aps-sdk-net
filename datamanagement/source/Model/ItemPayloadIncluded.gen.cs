@@ -46,25 +46,28 @@ namespace Autodesk.DataManagement.Model
         }
         
         /// <summary>
-        /// Gets or Sets Type
+        ///Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=true)]
         public Type Type { get; set; }
 
         /// <summary>
-        /// Gets or Sets Id
+        ///The version number. Will always be `1`.
         /// </summary>
+        /// <value>
+        ///The version number. Will always be `1`.
+        /// </value>
         [DataMember(Name="id", EmitDefaultValue=false)]
         public string Id { get; set; }
 
         /// <summary>
-        /// Gets or Sets Attributes
+        ///Gets or Sets Attributes
         /// </summary>
         [DataMember(Name="attributes", EmitDefaultValue=false)]
         public ItemPayloadIncludedAttributes Attributes { get; set; }
 
         /// <summary>
-        /// Gets or Sets Relationships
+        ///Gets or Sets Relationships
         /// </summary>
         [DataMember(Name="relationships", EmitDefaultValue=false)]
         public ItemPayloadIncludedRelationships Relationships { get; set; }

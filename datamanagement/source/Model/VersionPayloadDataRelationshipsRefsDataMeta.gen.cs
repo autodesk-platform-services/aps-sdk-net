@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// VersionPayloadDataRelationshipsRefsDataMeta
+    /// Contains meta information about the reference.
     /// </summary>
     [DataContract]
     public partial class VersionPayloadDataRelationshipsRefsDataMeta 
@@ -46,19 +46,19 @@ namespace Autodesk.DataManagement.Model
         }
         
         /// <summary>
-        /// Gets or Sets RefType
+        ///Gets or Sets RefType
         /// </summary>
         [DataMember(Name="refType", EmitDefaultValue=true)]
-        public RefType RefType { get; set; }
+        public ReftypesXref RefType { get; set; }
 
         /// <summary>
-        /// Gets or Sets Direction
+        ///Gets or Sets Direction
         /// </summary>
         [DataMember(Name="direction", EmitDefaultValue=true)]
-        public Direction Direction { get; set; }
+        public MetarefsDirection Direction { get; set; }
 
         /// <summary>
-        /// Gets or Sets Extension
+        ///Gets or Sets Extension
         /// </summary>
         [DataMember(Name="extension", EmitDefaultValue=false)]
         public VersionPayloadDataRelationshipsRefsDataMetaExtension Extension { get; set; }

@@ -46,22 +46,22 @@ namespace Autodesk.DataManagement.Model
         }
         
         /// <summary>
-        /// Gets or Sets Jsonapi
+        ///Gets or Sets Jsonapi
         /// </summary>
         [DataMember(Name="jsonapi", EmitDefaultValue=false)]
-        public ModifyFolderPayloadJsonapi Jsonapi { get; set; }
+        public JsonApiVersion Jsonapi { get; set; }
 
         /// <summary>
-        /// Gets or Sets Data
+        ///Gets or Sets Data
         /// </summary>
         [DataMember(Name="data", EmitDefaultValue=false)]
         public VersionPayloadData Data { get; set; }
 
         /// <summary>
-        /// Gets or Sets Meta
+        ///Gets or Sets Meta
         /// </summary>
         [DataMember(Name="meta", EmitDefaultValue=false)]
-        public VersionPayloadMeta Meta { get; set; }
+        public MetaForWebhooks Meta { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

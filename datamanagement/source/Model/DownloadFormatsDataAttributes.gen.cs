@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// DownloadFormatsDataAttributes
+    /// Contains the list of formats.
     /// </summary>
     [DataContract]
     public partial class DownloadFormatsDataAttributes 
@@ -46,8 +46,11 @@ namespace Autodesk.DataManagement.Model
         }
         
         /// <summary>
-        /// Gets or Sets Formats
+        ///An array of objects, where each object corresponds to a file format.
         /// </summary>
+        /// <value>
+        ///An array of objects, where each object corresponds to a file format.
+        /// </value>
         [DataMember(Name="formats", EmitDefaultValue=false)]
         public List<DownloadFormatsDataAttributesFormats> Formats { get; set; }
 

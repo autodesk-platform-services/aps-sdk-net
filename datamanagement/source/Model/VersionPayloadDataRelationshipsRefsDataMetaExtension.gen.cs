@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// VersionPayloadDataRelationshipsRefsDataMetaExtension
+    /// Contains additional properties that extend the default properties of the relationship.
     /// </summary>
     [DataContract]
     public partial class VersionPayloadDataRelationshipsRefsDataMetaExtension 
@@ -46,22 +46,22 @@ namespace Autodesk.DataManagement.Model
         }
         
         /// <summary>
-        /// Gets or Sets Type
+        ///Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=true)]
         public Type Type { get; set; }
 
         /// <summary>
-        /// Gets or Sets _Version
+        ///Gets or Sets VarVersion
         /// </summary>
-        [DataMember(Name="version", EmitDefaultValue=false)]
-        public string _Version { get; set; }
+        [DataMember(Name="version", EmitDefaultValue=true)]
+        public VersionNumber VarVersion { get; set; }
 
         /// <summary>
-        /// Gets or Sets Data
+        ///Gets or Sets Data
         /// </summary>
         [DataMember(Name="data", EmitDefaultValue=false)]
-        public ItemPayloadIncludedRelationshipsRefsDataMetaExtensionData Data { get; set; }
+        public VersionPayloadDataRelationshipsRefsDataMetaExtensionData Data { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

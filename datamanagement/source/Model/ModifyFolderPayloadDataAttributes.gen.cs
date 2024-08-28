@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// ModifyFolderPayloadDataAttributes
+    /// The properties of the folder that can be modified.
     /// </summary>
     [DataContract]
     public partial class ModifyFolderPayloadDataAttributes 
@@ -46,16 +46,34 @@ namespace Autodesk.DataManagement.Model
         }
         
         /// <summary>
-        /// Gets or Sets Name
+        ///The new folder name (1-255 characters). 
+///
+///Avoid using the following reserved characters in the name: `<`, `>`, `:`, `"`, `/`, `\`, `|`, `?`, `*`, `'`, `\n`, `\r`, `\t`, `\0`, `\f`, `¢`, `™`, `$`, `®`. 
+///
+///When a deleted folder is restored, it keeps its original name. However, if a name conflict occurs, you must provide a new unique name for it. 
         /// </summary>
+        /// <value>
+        ///The new folder name (1-255 characters). 
+///
+///Avoid using the following reserved characters in the name: `<`, `>`, `:`, `"`, `/`, `\`, `|`, `?`, `*`, `'`, `\n`, `\r`, `\t`, `\0`, `\f`, `¢`, `™`, `$`, `®`. 
+///
+///When a deleted folder is restored, it keeps its original name. However, if a name conflict occurs, you must provide a new unique name for it. 
+        /// </value>
         [DataMember(Name="name", EmitDefaultValue=false)]
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or Sets Hidden
+        ///`true` : Delete a BIM 360 Docs folder.
+///
+///`false` : Restore a BIM 360 Docs folder.
         /// </summary>
+        /// <value>
+        ///`true` : Delete a BIM 360 Docs folder.
+///
+///`false` : Restore a BIM 360 Docs folder.
+        /// </value>
         [DataMember(Name="hidden", EmitDefaultValue=false)]
-        public bool? Hidden { get; set; }
+        public bool Hidden { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
