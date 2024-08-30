@@ -27,12 +27,8 @@ class DataManagement
 
     public void Initialise()
     {
-        SDKManager sdkManager = SdkManagerBuilder
-                .Create() // Creates SDK Manager Builder itself.
-                .Build();
-
         StaticAuthenticationProvider staticAuthenticationProvider = new StaticAuthenticationProvider(token);
-        dataManagementClient = new DataManagementClient(sdkManager: sdkManager, authenticationProvider: staticAuthenticationProvider);
+        dataManagementClient = new DataManagementClient(authenticationProvider: staticAuthenticationProvider);
     }
 
 
