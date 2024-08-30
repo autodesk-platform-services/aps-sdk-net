@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using System.Threading.Tasks;
+using Autodesk.SDKManager;
 
 namespace Autodesk.DataManagement
 {
@@ -17,9 +18,13 @@ namespace Autodesk.DataManagement
         public IProjectsApi ProjectsApi { get; }
         public IVersionsApi VersionsApi { get; }
 
-        public DataManagementClient(SDKManager.SDKManager sdkManager, IAuthenticationProvider authenticationProvider = default) : base(authenticationProvider)
+        public DataManagementClient(SDKManager.SDKManager sdkManager = default, IAuthenticationProvider authenticationProvider = default) : base(authenticationProvider)
         {
-       
+            if (sdkManager == null)
+            {
+                sdkManager = SdkManagerBuilder.Create().Build();
+            }
+
             this.CommandsApi = new CommandsApi(sdkManager);
             this.FoldersApi = new FoldersApi(sdkManager);
             this.HubsApi = new HubsApi(sdkManager);
@@ -41,7 +46,14 @@ namespace Autodesk.DataManagement
 
         public async System.Threading.Tasks.Task<CheckPermission> ExecuteCheckPermissionAsync(string projectId, CheckPermissionPayload checkPermissionPayload, string xUserId = default(string), string accessToken = default, bool throwOnError = true)
         {
-            accessToken = await Authenticate(accessToken);
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider.");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             CommandPayload commandPayload = new CommandPayload()
             {
                 Jsonapi = new JsonApiVersion()
@@ -58,7 +70,14 @@ namespace Autodesk.DataManagement
 
         public async System.Threading.Tasks.Task<ListItems> ExecuteListItemsAsync(string projectId, ListItemsPayload listItemsPayload, string xUserId = default(string), string accessToken = default, bool throwOnError = true)
         {
-            accessToken = await Authenticate(accessToken);
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider.");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var commandPayload = new CommandPayload
             {
                 Data = listItemsPayload
@@ -71,7 +90,14 @@ namespace Autodesk.DataManagement
 
         public async System.Threading.Tasks.Task<ListRefs> ExecuteListRefsAsync(string projectId, ListRefsPayload listRefsPayload, string xUserId = default(string), string accessToken = default, bool throwOnError = true)
         {
-            accessToken = await Authenticate(accessToken);
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider.");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var commandPayload = new CommandPayload
             {
                 Data = listRefsPayload
@@ -84,7 +110,14 @@ namespace Autodesk.DataManagement
 
         public async System.Threading.Tasks.Task<GetPublishModelJob> ExecuteGetPublishModelJobAsync(string projectId, GetPublishModelJobPayload getPublishModelJobPayload, string xUserId = default(string), string accessToken = default, bool throwOnError = true)
         {
-            accessToken = await Authenticate(accessToken);
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider.");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var commandPayload = new CommandPayload
             {
                 Data = getPublishModelJobPayload
@@ -97,7 +130,14 @@ namespace Autodesk.DataManagement
 
         public async System.Threading.Tasks.Task<PublishModel> ExecutePublishModelAsync(string projectId, PublishModelPayload publishModelPayload, string xUserId = default(string), string accessToken = default, bool throwOnError = true)
         {
-            accessToken = await Authenticate(accessToken);
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider.");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var commandPayload = new CommandPayload
             {
                 Data = publishModelPayload
@@ -110,7 +150,14 @@ namespace Autodesk.DataManagement
 
         public async System.Threading.Tasks.Task<PublishWithoutLinks> ExecutePublishWithoutLinksAsync(string projectId, PublishWithoutLinksPayload publishWithoutLinksPayload, string xUserId = default(string), string accessToken = default, bool throwOnError = true)
         {
-            accessToken = await Authenticate(accessToken);
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider.");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var commandPayload = new CommandPayload
             {
                 Data = publishWithoutLinksPayload
@@ -137,7 +184,14 @@ namespace Autodesk.DataManagement
 
         public async System.Threading.Tasks.Task<Folder> GetFolderAsync(string projectId, string folderId, DateTime ifModifiedSince = default(DateTime), string xUserId = default(string), string accessToken = default, bool throwOnError = true)
         {
-            accessToken = await Authenticate(accessToken);
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider.");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.FoldersApi.GetFolderAsync(projectId, folderId, ifModifiedSince, xUserId, accessToken, throwOnError);
             return response.Content;
         }
@@ -153,7 +207,14 @@ namespace Autodesk.DataManagement
 
         public async System.Threading.Tasks.Task<FolderContents> GetFolderContentsAsync(string projectId, string folderId, string xUserId = default(string), List<string> filterType = default(List<string>), List<string> filterId = default(List<string>), List<string> filterExtensionType = default(List<string>), List<string> filterLastModifiedTimeRollup = default(List<string>), int pageNumber = 0, int pageLimit = 200, bool includeHidden = false, string accessToken = default, bool throwOnError = true)
         {
-            accessToken = await Authenticate(accessToken);
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider.");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.FoldersApi.GetFolderContentsAsync(projectId, folderId, xUserId, filterType, filterId, filterExtensionType, filterLastModifiedTimeRollup, pageNumber, pageLimit, includeHidden, accessToken, throwOnError);
             return response.Content;
 
@@ -170,7 +231,14 @@ namespace Autodesk.DataManagement
 
         public async System.Threading.Tasks.Task<Folder> GetFolderParentAsync(string projectId, string folderId, string xUserId = default(string), string accessToken = default, bool throwOnError = true)
         {
-            accessToken = await Authenticate(accessToken);
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider.");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.FoldersApi.GetFolderParentAsync(projectId, folderId, xUserId, accessToken, throwOnError);
             return response.Content;
         }
@@ -186,7 +254,14 @@ namespace Autodesk.DataManagement
 
         public async System.Threading.Tasks.Task<FolderRefs> GetFolderRefsAsync(string projectId, string folderId, string xUserId = default(string), List<string> filterType = default(List<string>), List<string> filterId = default(List<string>), List<string> filterExtensionType = default(List<string>), string accessToken = default, bool throwOnError = true)
         {
-            accessToken = await Authenticate(accessToken);
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider.");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.FoldersApi.GetFolderRefsAsync(projectId, folderId, xUserId, filterType, filterId, filterExtensionType, accessToken, throwOnError);
             return response.Content;
         }
@@ -202,7 +277,14 @@ namespace Autodesk.DataManagement
 
         public async System.Threading.Tasks.Task<RelationshipLinks> GetFolderRelationshipsLinksAsync(string projectId, string folderId, string xUserId = default(string), string accessToken = default, bool throwOnError = true)
         {
-            accessToken = await Authenticate(accessToken);
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider.");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.FoldersApi.GetFolderRelationshipsLinksAsync(projectId, folderId, xUserId, accessToken, throwOnError);
             return response.Content;
         }
@@ -218,7 +300,14 @@ namespace Autodesk.DataManagement
 
         public async System.Threading.Tasks.Task<RelationshipRefs> GetFolderRelationshipsRefsAsync(string folderId, string projectId, string xUserId = default(string), List<string> filterType = null, List<string> filterId = default(List<string>), string filterRefType = null, string filterDirection = null, List<string> filterExtensionType = default(List<string>), string accessToken = default, bool throwOnError = true)
         {
-            accessToken = await Authenticate(accessToken);
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider.");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.FoldersApi.GetFolderRelationshipsRefsAsync(folderId, projectId, xUserId, filterType, filterId, filterRefType, filterDirection, filterExtensionType, accessToken, throwOnError);
             return response.Content;
         }
@@ -234,7 +323,14 @@ namespace Autodesk.DataManagement
 
         public async System.Threading.Tasks.Task<Search> GetFolderSearchAsync(string projectId, string folderId, string filter = default(string), int pageNumber = 0, string accessToken = default, bool throwOnError = true)
         {
-            accessToken = await Authenticate(accessToken);
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider.");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.FoldersApi.GetFolderSearchAsync(projectId, folderId, filter, pageNumber, accessToken, throwOnError);
             return response.Content;
         }
@@ -250,7 +346,14 @@ namespace Autodesk.DataManagement
 
         public async System.Threading.Tasks.Task<Folder> PatchFolderAsync(string projectId, string folderId, ModifyFolderPayload modifyFolderPayload, string xUserId = default(string), string accessToken = default, bool throwOnError = true)
         {
-            accessToken = await Authenticate(accessToken);
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider.");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.FoldersApi.PatchFolderAsync(projectId, folderId, xUserId, modifyFolderPayload, accessToken, throwOnError);
             return response.Content;
         }
@@ -266,7 +369,14 @@ namespace Autodesk.DataManagement
 
         public async System.Threading.Tasks.Task<Folder> CreateFolderAsync(string projectId, FolderPayload folderPayload, string xUserId = default(string), string accessToken = default, bool throwOnError = true)
         {
-            accessToken = await Authenticate(accessToken);
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider.");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.FoldersApi.CreateFolderAsync(projectId, xUserId, folderPayload, accessToken, throwOnError);
             return response.Content;
         }
@@ -282,7 +392,14 @@ namespace Autodesk.DataManagement
         /// <returns>Task of HttpResponseMessage</returns>
         public async System.Threading.Tasks.Task<HttpResponseMessage> CreateFolderRelationshipsRefAsync(string folderId, string projectId, RelationshipRefsPayload relationshipRefsPayload, string xUserId = default(string), string accessToken = default, bool throwOnError = true)
         {
-            accessToken = await Authenticate(accessToken);
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider.");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.FoldersApi.CreateFolderRelationshipsRefAsync(folderId, projectId, xUserId, relationshipRefsPayload, accessToken, throwOnError);
             return response;
         }
@@ -302,7 +419,14 @@ namespace Autodesk.DataManagement
 
         public async System.Threading.Tasks.Task<Hub> GetHubAsync(string hubId, string xUserId = default(string), string accessToken = default, bool throwOnError = true)
         {
-            accessToken = await Authenticate(accessToken);
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider.");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.HubsApi.GetHubAsync(hubId, xUserId, accessToken, throwOnError);
             return response.Content;
         }
@@ -318,7 +442,14 @@ namespace Autodesk.DataManagement
 
         public async System.Threading.Tasks.Task<Hubs> GetHubsAsync(string xUserId = default(string), List<string> filterId = default(List<string>), string filterName = default(string), List<string> filterExtensionType = default(List<string>), string accessToken = default, bool throwOnError = true)
         {
-            accessToken = await Authenticate(accessToken);
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider.");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.HubsApi.GetHubsAsync(xUserId, filterId, filterName, filterExtensionType, accessToken, throwOnError);
             return response.Content;
         }
@@ -337,7 +468,14 @@ namespace Autodesk.DataManagement
 
         public async System.Threading.Tasks.Task<Item> GetItemAsync(string projectId, string itemId, string xUserId = default(string), bool includePathInProject = false, string accessToken = default, bool throwOnError = true)
         {
-            accessToken = await Authenticate(accessToken);
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider.");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.ItemsApi.GetItemAsync(projectId, itemId, xUserId, includePathInProject, accessToken, throwOnError);
             return response.Content;
         }
@@ -353,7 +491,14 @@ namespace Autodesk.DataManagement
 
         public async System.Threading.Tasks.Task<Folder> GetItemParentFolderAsync(string projectId, string itemId, string xUserId = default(string), string accessToken = default, bool throwOnError = true)
         {
-            accessToken = await Authenticate(accessToken);
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider.");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.ItemsApi.GetItemParentFolderAsync(projectId, itemId, xUserId, accessToken, throwOnError);
             return response.Content;
         }
@@ -369,7 +514,14 @@ namespace Autodesk.DataManagement
 
         public async System.Threading.Tasks.Task<Refs> GetItemRefsAsync(string projectId, string itemId, string xUserId = default(string), List<string> filterType = null, List<string> filterId = default(List<string>), List<string> filterExtensionType = default(List<string>), string accessToken = default, bool throwOnError = true)
         {
-            accessToken = await Authenticate(accessToken);
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider.");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.ItemsApi.GetItemRefsAsync(projectId, itemId, xUserId, filterType, filterId, filterExtensionType, accessToken, throwOnError);
             return response.Content;
         }
@@ -385,7 +537,14 @@ namespace Autodesk.DataManagement
 
         public async System.Threading.Tasks.Task<RelationshipLinks> GetItemRelationshipsLinksAsync(string projectId, string itemId, string xUserId = default(string), string accessToken = default, bool throwOnError = true)
         {
-            accessToken = await Authenticate(accessToken);
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider.");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.ItemsApi.GetItemRelationshipsLinksAsync(projectId, itemId, xUserId, accessToken, throwOnError);
             return response.Content;
         }
@@ -401,7 +560,14 @@ namespace Autodesk.DataManagement
 
         public async System.Threading.Tasks.Task<RelationshipRefs> GetItemRelationshipsRefsAsync(string projectId, string itemId, string xUserId = default(string), List<string> filterType = null, List<string> filterId = default(List<string>), string filterRefType = null, string filterDirection = null, List<string> filterExtensionType = default(List<string>), string accessToken = default, bool throwOnError = true)
         {
-            accessToken = await Authenticate(accessToken);
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider.");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.ItemsApi.GetItemRelationshipsRefsAsync(projectId, itemId, xUserId, filterType, filterId, filterRefType, filterDirection, filterExtensionType, accessToken, throwOnError);
             return response.Content;
         }
@@ -417,7 +583,14 @@ namespace Autodesk.DataManagement
 
         public async System.Threading.Tasks.Task<ItemTip> GetItemTipAsync(string projectId, string itemId, string xUserId = default(string), string accessToken = default, bool throwOnError = true)
         {
-            accessToken = await Authenticate(accessToken);
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider.");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.ItemsApi.GetItemTipAsync(projectId, itemId, xUserId, accessToken, throwOnError);
             return response.Content;
         }
@@ -433,7 +606,14 @@ namespace Autodesk.DataManagement
 
         public async System.Threading.Tasks.Task<Versions> GetItemVersionsAsync(string projectId, string itemId, string xUserId = default(string), List<string> filterId = default(List<string>), List<string> filterExtensionType = default(List<string>), List<int> filterVersionNumber = default(List<int>), int pageNumber = 0, int pageLimit = 200, string accessToken = default, bool throwOnError = true)
         {
-            accessToken = await Authenticate(accessToken);
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider.");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             // var nonNullableFilterVersionNumber = filterVersionNumber?.Where(v => v.HasValue).Select(v => v.Value).ToList() ?? new List<int>();
             var response = await this.ItemsApi.GetItemVersionsAsync(projectId, itemId, xUserId, filterId, filterExtensionType, filterVersionNumber, pageNumber, pageLimit, accessToken, throwOnError);
             return response.Content;
@@ -450,7 +630,14 @@ namespace Autodesk.DataManagement
 
         public async System.Threading.Tasks.Task<Item> PatchItemAsync(string projectId, string itemId, ModifyItemPayload modifyItemPayload, string xUserId = default(string), string accessToken = default, bool throwOnError = true)
         {
-            accessToken = await Authenticate(accessToken);
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider.");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.ItemsApi.PatchItemAsync(projectId, itemId, xUserId, modifyItemPayload, accessToken, throwOnError);
             return response.Content;
         }
@@ -466,7 +653,14 @@ namespace Autodesk.DataManagement
 
         public async System.Threading.Tasks.Task<Item> CreateItemAsync(string projectId, ItemPayload itemPayload, string copyFrom = default(string), string xUserId = default(string), string accessToken = default, bool throwOnError = true)
         {
-            accessToken = await Authenticate(accessToken);
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider.");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.ItemsApi.CreateItemAsync(projectId, copyFrom, xUserId, itemPayload, accessToken, throwOnError);
             return response.Content;
         }
@@ -482,7 +676,14 @@ namespace Autodesk.DataManagement
         /// <returns>Task of HttpResponseMessage</returns>
         public async System.Threading.Tasks.Task<HttpResponseMessage> CreateItemRelationshipsRefAsync(string projectId, string itemId, RelationshipRefsPayload relationshipRefsPayload, string xUserId = default(string), string accessToken = default, bool throwOnError = true)
         {
-            accessToken = await Authenticate(accessToken);
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider.");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.ItemsApi.CreateItemRelationshipsRefAsync(projectId, itemId, xUserId, relationshipRefsPayload, accessToken, throwOnError);
             return response;
         }
@@ -501,7 +702,14 @@ namespace Autodesk.DataManagement
 
         public async System.Threading.Tasks.Task<Download> GetDownloadAsync(string projectId, string downloadId, string xUserId = default(string), string accessToken = default, bool throwOnError = true)
         {
-            accessToken = await Authenticate(accessToken);
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider.");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.ProjectsApi.GetDownloadAsync(projectId, downloadId, xUserId, accessToken, throwOnError);
             return response.Content;
         }
@@ -517,7 +725,14 @@ namespace Autodesk.DataManagement
 
         public async System.Threading.Tasks.Task<Job> GetDownloadJobAsync(string projectId, string jobId, string xUserId = default(string), string accessToken = default, bool throwOnError = true)
         {
-            accessToken = await Authenticate(accessToken);
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider.");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.ProjectsApi.GetDownloadJobAsync(projectId, jobId, xUserId, accessToken, throwOnError);
             return response.Content;
         }
@@ -533,7 +748,14 @@ namespace Autodesk.DataManagement
 
         public async System.Threading.Tasks.Task<Projects> GetHubProjectsAsync(string hubId, string xUserId = default(string), List<string> filterId = default(List<string>), List<string> filterExtensionType = default(List<string>), int pageNumber = 0, int pageLimit = 200, string accessToken = default, bool throwOnError = true)
         {
-            accessToken = await Authenticate(accessToken);
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider.");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.ProjectsApi.GetHubProjectsAsync(hubId, xUserId, filterId, filterExtensionType, pageNumber, pageLimit, accessToken, throwOnError);
             return response.Content;
         }
@@ -549,7 +771,14 @@ namespace Autodesk.DataManagement
 
         public async System.Threading.Tasks.Task<Project> GetProjectAsync(string hubId, string projectId, string xUserId = default(string), string accessToken = default, bool throwOnError = true)
         {
-            accessToken = await Authenticate(accessToken);
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider.");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.ProjectsApi.GetProjectAsync(hubId, projectId, xUserId, accessToken, throwOnError);
             return response.Content;
         }
@@ -565,7 +794,14 @@ namespace Autodesk.DataManagement
 
         public async System.Threading.Tasks.Task<Hub> GetProjectHubAsync(string hubId, string projectId, string xUserId = default(string), string accessToken = default, bool throwOnError = true)
         {
-            accessToken = await Authenticate(accessToken);
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider.");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.ProjectsApi.GetProjectHubAsync(hubId, projectId, xUserId, accessToken, throwOnError);
             return response.Content;
         }
@@ -581,7 +817,14 @@ namespace Autodesk.DataManagement
 
         public async System.Threading.Tasks.Task<TopFolders> GetProjectTopFoldersAsync(string hubId, string projectId, string xUserId = default(string), bool excludeDeleted = false, bool projectFilesOnly = false, string accessToken = default, bool throwOnError = true)
         {
-            accessToken = await Authenticate(accessToken);
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider.");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.ProjectsApi.GetProjectTopFoldersAsync(hubId, projectId, xUserId, excludeDeleted, projectFilesOnly, accessToken, throwOnError);
             return response.Content;
         }
@@ -597,7 +840,14 @@ namespace Autodesk.DataManagement
 
         public async System.Threading.Tasks.Task<CreatedDownload> StartDownloadAsync(string projectId, DownloadPayload downloadPayload, string xUserId = default(string), string accessToken = default, bool throwOnError = true)
         {
-            accessToken = await Authenticate(accessToken);
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider.");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.ProjectsApi.StartDownloadAsync(projectId, xUserId, downloadPayload, accessToken, throwOnError);
             return response.Content;
         }
@@ -613,7 +863,14 @@ namespace Autodesk.DataManagement
 
         public async System.Threading.Tasks.Task<Storage> CreateStorageAsync(string projectId, StoragePayload storagePayload, string xUserId = default(string), string accessToken = default, bool throwOnError = true)
         {
-            accessToken = await Authenticate(accessToken);
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider.");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.ProjectsApi.CreateStorageAsync(projectId, xUserId, storagePayload, accessToken, throwOnError);
             return response.Content;
         }
@@ -632,7 +889,14 @@ namespace Autodesk.DataManagement
 
         public async System.Threading.Tasks.Task<VersionDetails> GetVersionAsync(string projectId, string versionId, string xUserId = default(string), string accessToken = default, bool throwOnError = true)
         {
-            accessToken = await Authenticate(accessToken);
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider.");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.VersionsApi.GetVersionAsync(projectId, versionId, xUserId, accessToken, throwOnError);
             return response.Content;
         }
@@ -648,7 +912,14 @@ namespace Autodesk.DataManagement
 
         public async System.Threading.Tasks.Task<DownloadFormats> GetVersionDownloadFormatsAsync(string projectId, string versionId, string xUserId = default(string), string accessToken = default, bool throwOnError = true)
         {
-            accessToken = await Authenticate(accessToken);
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider.");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.VersionsApi.GetVersionDownloadFormatsAsync(projectId, versionId, xUserId, accessToken, throwOnError);
             return response.Content;
         }
@@ -664,7 +935,14 @@ namespace Autodesk.DataManagement
 
         public async System.Threading.Tasks.Task<Downloads> GetVersionDownloadsAsync(string projectId, string versionId, string xUserId = default(string), List<string> filterFormatFileType = default(List<string>), string accessToken = default, bool throwOnError = true)
         {
-            accessToken = await Authenticate(accessToken);
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider.");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.VersionsApi.GetVersionDownloadsAsync(projectId, versionId, xUserId, filterFormatFileType, accessToken, throwOnError);
             return response.Content;
         }
@@ -680,7 +958,14 @@ namespace Autodesk.DataManagement
 
         public async System.Threading.Tasks.Task<Item> GetVersionItemAsync(string projectId, string versionId, string xUserId = default(string), string accessToken = default, bool throwOnError = true)
         {
-            accessToken = await Authenticate(accessToken);
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider.");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.VersionsApi.GetVersionItemAsync(projectId, versionId, xUserId, accessToken, throwOnError);
             return response.Content;
         }
@@ -696,7 +981,14 @@ namespace Autodesk.DataManagement
 
         public async System.Threading.Tasks.Task<Refs> GetVersionRefsAsync(string projectId, string versionId, string xUserId = default(string), List<string> filterType = null, List<string> filterId = default(List<string>), List<string> filterExtensionType = default(List<string>), string accessToken = default, bool throwOnError = true)
         {
-            accessToken = await Authenticate(accessToken);
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider.");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.VersionsApi.GetVersionRefsAsync(projectId, versionId, xUserId, filterType, filterId, filterExtensionType, accessToken, throwOnError);
             return response.Content;
         }
@@ -712,7 +1004,14 @@ namespace Autodesk.DataManagement
 
         public async System.Threading.Tasks.Task<RelationshipLinks> GetVersionRelationshipsLinksAsync(string projectId, string versionId, string xUserId = default(string), string accessToken = default, bool throwOnError = true)
         {
-            accessToken = await Authenticate(accessToken);
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider.");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.VersionsApi.GetVersionRelationshipsLinksAsync(projectId, versionId, xUserId, accessToken, throwOnError);
             return response.Content;
         }
@@ -728,7 +1027,14 @@ namespace Autodesk.DataManagement
 
         public async System.Threading.Tasks.Task<RelationshipRefs> GetVersionRelationshipsRefsAsync(string projectId, string versionId, string xUserId = default(string), List<string> filterType = null, List<string> filterId = default(List<string>), string filterRefType = null, string filterDirection = null, List<string> filterExtensionType = default(List<string>), string accessToken = default, bool throwOnError = true)
         {
-            accessToken = await Authenticate(accessToken);
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider.");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.VersionsApi.GetVersionRelationshipsRefsAsync(projectId, versionId, xUserId, filterType, filterId, filterRefType, filterDirection, filterExtensionType, accessToken, throwOnError);
             return response.Content;
         }
@@ -744,7 +1050,14 @@ namespace Autodesk.DataManagement
 
         public async System.Threading.Tasks.Task<VersionDetails> PatchVersionAsync(string projectId, string versionId, ModifyVersionPayload modifyVersionPayload, string accessToken = default, bool throwOnError = true)
         {
-            accessToken = await Authenticate(accessToken);
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider.");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.VersionsApi.PatchVersionAsync(projectId, versionId, modifyVersionPayload, accessToken, throwOnError);
             return response.Content;
         }
@@ -760,7 +1073,14 @@ namespace Autodesk.DataManagement
 
         public async System.Threading.Tasks.Task<CreatedVersion> CreateVersionAsync(string projectId, VersionPayload versionPayload, string xUserId = default(string), string copyFrom = default(string), string accessToken = default, bool throwOnError = true)
         {
-            accessToken = await Authenticate(accessToken);
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider.");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.VersionsApi.CreateVersionAsync(projectId, xUserId, copyFrom, versionPayload, accessToken, throwOnError);
             return response.Content;
         }
@@ -776,26 +1096,18 @@ namespace Autodesk.DataManagement
         /// <returns>Task of HttpResponseMessage</returns>
         public async System.Threading.Tasks.Task<HttpResponseMessage> CreateVersionRelationshipsRefAsync(string projectId, string versionId, RelationshipRefsPayload relationshipRefsPayload, string xUserId = default(string), string accessToken = default, bool throwOnError = true)
         {
-            accessToken = await Authenticate(accessToken);
-            var response = await this.VersionsApi.CreateVersionRelationshipsRefAsync(projectId, versionId, xUserId, relationshipRefsPayload, accessToken, throwOnError);
-            return response;
-        }
-        #endregion VersionsApi
-
-        private async Task<string> Authenticate(string accessToken)
-        {
             if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
             {
                 throw new Exception("Please provide a valid access token or an authentication provider.");
             }
-            else if (this.AuthenticationProvider != null)
+            else if (String.IsNullOrEmpty(accessToken))
             {
                 accessToken = await this.AuthenticationProvider.GetAccessToken();
             }
-
-            return accessToken;
+            var response = await this.VersionsApi.CreateVersionRelationshipsRefAsync(projectId, versionId, xUserId, relationshipRefsPayload, accessToken, throwOnError);
+            return response;
         }
-
+        #endregion VersionsApi
     }
 
 }
