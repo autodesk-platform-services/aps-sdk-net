@@ -156,7 +156,7 @@ namespace Samples
             {
                 ModelViews modelViewsResponse = await modelDerivativeClient.GetModelViewsAsync(urn, region: Region.US);
                 // get guid from response
-               string modelGuid = modelViewsResponse.Data.Metadata.First().Guid;
+                string modelGuid = modelViewsResponse.Data.Metadata.First().Guid;
             }
             catch (Exception ex)
             {
@@ -297,25 +297,25 @@ namespace Samples
 
         #endregion
 
-        public static void Main()
+        public async void Main()
         {
 
             // Initialise SDKManager & ModelDerivativeClient
             ModelDerivative modelDerivative = new ModelDerivative();
             modelDerivative.Initialise();
 
-            // Call respective methods
-            //   modelDerivative.StartJobAsync().Wait();
-            //modelDerivative.GetFormatsAsync().Wait();
-            //modelDerivative.GetManifestAsync().Wait();
-            //  modelDerivative.DeleteManifestAsync().Wait();
-            // modelDerivative.GetThumbnailAsync().Wait();
-            // modelDerivative.GetDerivativeHeadersAsync().Wait();
-            //  modelDerivative.DownloadDerivativeURLAsync().Wait();
-            // modelDerivative.GetModelViewsAsync().Wait();
-          //   modelDerivative.GetObjectTreeAsync().Wait();
-            // modelDerivative.GetAllPropertiesAsync().Wait();
-            modelDerivative.GetSpecificPropertiesAsync().Wait();
+            //Call respective methods
+            await modelDerivative.StartJobAsync();
+            await modelDerivative.GetFormatsAsync();
+            await modelDerivative.GetManifestAsync();
+            await modelDerivative.DeleteManifestAsync();
+            await modelDerivative.GetThumbnailAsync();
+            await modelDerivative.GetDerivativeHeadersAsync();
+            await modelDerivative.DownloadDerivativeURLAsync();
+            await modelDerivative.GetModelViewsAsync();
+            await modelDerivative.GetObjectTreeAsync();
+            await modelDerivative.GetAllPropertiesAsync();
+            await modelDerivative.GetSpecificPropertiesAsync();
 
         }
 
