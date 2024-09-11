@@ -8,15 +8,16 @@ namespace Samples
       {
             string token = "<token>";
             string bucketKey = "<bucket key>";
-            string objectName = "<object name>";
+            string objectKey = "<object key>";
             string sourceToUpload = "<path to source file>";//sourceToUpload can also be a stream object
             string filePath ="<path to source file>";
 
             string hash ="<hash>";
+            string newObjName ="<newObjName>";
+
             OssClient ossClient = null!;
 
-
-            public void Initialise()
+        public void Initialise()
             {
                   // Instantiate SDK manager as below.   
                   // You can also optionally pass configurations, logger, etc. 
@@ -30,7 +31,7 @@ namespace Samples
 
             public async Task GetBucketDetailsAsync()
             {
-                  Bucket bucket = await ossClient.GetBucketDetailsAsync(token, bucketKey);
+                  Bucket bucket = await ossClient.GetBucketDetailsAsync( bucketKey);
                   // query for required properties
                   string bucketkey = bucket.BucketKey;
                   string bucketOwner = bucket.BucketOwner;
@@ -43,24 +44,24 @@ namespace Samples
                   // the steps 2 to 4 in this link (https://aps.autodesk.com/en/docs/data/v2/tutorials/app-managed-bucket/)
 
                   //sourceToUpload can be either file path or stream of the object 
-                  ObjectDetails objectDetails = await ossClient.Upload(bucketKey, objectName, sourceToUpload,token);
+                  ObjectDetails objectDetails = await ossClient.Upload(bucketKey, objectKey, sourceToUpload);
                   // query for required properties
                   string objectId = objectDetails.ObjectId;
-                  string objectKey = objectDetails.ObjectKey;
+                  string objectkey = objectDetails.ObjectKey;
 
             }
             public async Task Download()
             {
                   //The below helper method takes care of the complete Download process, i.e.
-                  await ossClient.Download(bucketKey, objectName, filePath, token);
+                  await ossClient.Download(bucketKey, objectKey, filePath);
             }
 
-            public async function GetBucketsAsync() {
+            public async Task GetBucketsAsync() {
 
-                  const response = await ossClient.GetBucketsAsync(token);
-                  console.log(response);
+                  Buckets response = await ossClient.GetBucketsAsync();
+                  Console.Write(response);
             }
-            public async function BatchSignedS3UploadAsync() { 
+            public async Task BatchSignedS3UploadAsync() { 
 
                   var uploadObject = new Batchsigneds3uploadObject
                   {
@@ -68,7 +69,7 @@ namespace Samples
                         {
                               new Batchsigneds3uploadObjectRequests
                               {
-                              ObjectKey = objectName,
+                              ObjectKey = objectKey,
                               FirstPart = 1,
                               Parts = 5,
                               UploadKey = "" // Start a new upload
@@ -76,70 +77,76 @@ namespace Samples
                         }
                   };
             
-                  const response = await ossClient.BatchSignedS3UploadAsync(token, bucketKey,uploadObjects);
-                  console.log(response);
+                  Batchsigneds3uploadResponse response = await ossClient.BatchSignedS3UploadAsync(bucketKey,uploadObject);
+                  Console.Write(response);
+
             }
 
-            public async function CopyToAsync() {
+            public async Task CopyToAsync() {
 
-                  const response = await ossClient.CopyToAsync(token, bucketKey, objectKey, newObjName);
-                  console.log(response);
+                  ObjectDetails response = await ossClient.CopyToAsync(bucketKey, objectKey, newObjName);
+                  Console.Write(response);
             }
 
-            public async function CreateBucketAsync() {
+            public async Task CreateBucketAsync() {
             
-                  const response = await ossClient.CreateBucketAsync(token,Region.US , new (){
+                  Bucket response = await ossClient.CreateBucketAsync(Region.US , new (){
                               BucketKey=bucketKey,
                               PolicyKey=PolicyKey.Temporary});
-                  console.log(response);
+                  Console.Write(response);
             }
 
-            public async function CreateSignedResourceAsync() {
+            public async Task CreateSignedResourceAsync() {
                   
-                  const response = await ossClient.CreateSignedResourceAsync(token, bucketkey, objectKey);
-                  console.log(response);
+                  CreateObjectSigned response = await ossClient.CreateSignedResourceAsync(bucketKey, objectKey, new(){
+
+                  MinutesExpiration=3,
+                  SingleUse=true                  
+                        
+                  });
+                  Console.Write(response);
             }
 
-            public async function DeleteBucketAsync() {
+            public async Task DeleteBucketAsync() {
                   
-                  const response = await ossClient.DeleteBucketAsync(token, bucketkey);
-                  console.log(response);
+                  var response = await ossClient.DeleteBucketAsync(bucketKey);
+                  Console.Write(response);
             }
             
-            public async function DeleteObjectAsync() {
+            public async Task DeleteObjectAsync() {
                   
-                  const response = await ossClient.DeleteObjectAsync(token,bucketKey,objectName);
-                  console.log(response);
+                  var response = await ossClient.DeleteObjectAsync(bucketKey,objectKey);
+                  Console.Write(response);
             }
             
-            public async function DeleteSignedResourceAsync() {
+            public async Task DeleteSignedResourceAsync() {
                   
-                  const response = await ossClient.DeleteSignedResourceAsync(token, hash);
-                  console.log(response);
+                  var response = await ossClient.DeleteSignedResourceAsync( hash);
+                  Console.Write(response);
             }
 
-            async function GetObjectDetailsAsync() {
+            async Task GetObjectDetailsAsync() {
                   
-                  const response = await ossClient.GetObjectDetailsAsync(token,bucketKey,objectName);
-                  console.log(response);
+                  ObjectFullDetails response = await ossClient.GetObjectDetailsAsync(bucketKey,objectKey);
+                  Console.Write(response);
             }
 
-            async function GetObjectsAsync() {
+            async Task GetObjectsAsync() {
                   
-                  const response = await ossClient.GetObjectsAsync(token, bucketkey);
-                  console.log(response);
+                  BucketObjects response = await ossClient.GetObjectsAsync(bucketKey);
+                  Console.Write(response);
             }
 
-            async function GetSignedResourceAsync() {
+            async Task GetSignedResourceAsync() {
                   
-                  const response = await ossClient.getSignedResource(token, hash);
-                  console.log(response);
+                  Stream response = await ossClient.GetSignedResourceAsync( hash);
+                  Console.Write(response);
             }
 
-            async function SignedS3DownloadAsync() {
+            async Task SignedS3DownloadAsync() {
                   
-                  const response = await ossClient.SignedS3DownloadAsync(token, bucketkey, objectName);
-                  console.log(response);
+                  Signeds3downloadResponse response = await ossClient.SignedS3DownloadAsync( bucketKey, objectKey);
+                  Console.Write(response);
             }
 
             public async void Main()

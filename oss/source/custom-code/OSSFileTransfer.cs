@@ -51,7 +51,8 @@ namespace Autodesk.Oss
         private ILogger _logger;
         private IFileTransferConfigurations _configuration;
         private ObjectsApi objectsApi;
-        private IAuthClient _authentication;
+        // private IAuthClient _authentication;
+        private  IAuthenticationProvider authProvider;
 
         private int _maxRetryOnTokenExpiry;
         private int _maxChunkCountAllowed;
@@ -63,7 +64,9 @@ namespace Autodesk.Oss
         private readonly string _forbiddenMessage = "403 (Forbidden)";
 
         public OSSFileTransfer(IFileTransferConfigurations configuration,
-            IAuthClient authentication,
+            // IAuthClient authentication,
+            SDKManager.SDKManager sdkManager,
+            IAuthenticationProvider authenticationProvider = default,
             AdskEnvironment adskEnvironment = AdskEnvironment.Prd,
             ILogger logger = null)
         {
@@ -75,21 +78,17 @@ namespace Autodesk.Oss
             _forgeService = ForgeService.CreateDefault();
             _configuration = configuration;
             _logger = logger ?? NullLogger.Instance;
-
-            var sdkManager = SdkManagerBuilder
-                .Create()
-                .Add(new ApsConfiguration(adskEnvironment))
-                .Add(ResiliencyConfiguration.CreateDefault())
-                .Add(_logger)
-                // .Add(authentication)
-                .Build();
             objectsApi = new ObjectsApi(sdkManager);
 
             _maxChunkCountAllowed = _configuration.GetMaxChunkCountAllowed();
             _maxRetryOnUrlExpiry = _configuration.GetMaxRetryOnUrlExpiry();
             _maxRetryOnTokenExpiry = _configuration.GetMaxRetryOnTokenExpiry();
+            
+            if(authenticationProvider!=null){
+                authProvider = authenticationProvider;
+            }
 
-            _authentication = authentication;
+            // _authentication = authentication;
         }
 
         private async Task<bool> IsFileSizeAllowed(Stream filePath)
@@ -262,7 +261,6 @@ namespace Autodesk.Oss
                           firstPart: firstPart,
                           uploadKey: uploadKey,
                           accessToken: accessToken);
-                         // xAdsAcmScopes: projectScope);
 
                     return (response.Content, accessToken);
                 }
@@ -272,7 +270,8 @@ namespace Autodesk.Oss
                     {
                         attemptCount++;
 
-                        accessToken = _authentication.GetUpdatedAccessToken();
+                        // accessToken = _authentication.GetUpdatedAccessToken();
+                        accessToken = await authProvider.GetAccessToken();
                         _logger.LogInformation("{requestId} Token expired. Trying to refresh", requestId);
                     }
                     else
@@ -435,7 +434,8 @@ namespace Autodesk.Oss
                     if (ex.Message.Contains(_accessTokenExpiredMessage))
                     {
                         attemptCount++;
-                        accessToken = _authentication.GetUpdatedAccessToken();
+                        // accessToken = _authentication.GetUpdatedAccessToken();
+                        accessToken = await authProvider.GetAccessToken();
                         _logger.LogInformation("{requestId} Token expired. Trying to refresh", requestId);
                     }
                     else
