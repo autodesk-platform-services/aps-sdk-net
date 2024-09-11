@@ -5,7 +5,7 @@
  *
  * Webhooks
  *
- * The Webhooks API enables applications to listen to APS events and receive notifications when they occur. When an event is triggered, the Webhooks service sends a notification to a callback URL you have defined.  You can customize the types of events and resources for which you receive notifications. For example, you can set up a webhook to send notifications when files are modified or deleted in a specified hub or project.  Below is quick summary of this workflow:  1. Identify the data for which you want to receive notifications. 2. Use the Webhooks API to create one or more hooks. 3. The Webhooks service will notify the webhook when there is a change in the data. 
+ * The Webhooks API enables applications to listen to APS events and receive notifications when they occur. When an event is triggered, the Webhooks service sends a notification to a callback URL you have defined. You can customize the types of events and resources for which you receive notifications. For example, you can set up a webhook to send notifications when files are modified or deleted in a specified hub or project. Below is quick summary of this workflow: 1. Identify the data for which you want to receive notifications. 2. Use the Webhooks API to create one or more hooks. 3. The Webhooks service will notify the webhook when there is a change in the data. 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Webhooks.Model
 {
     /// <summary>
-    /// Modify Hook Payload
+    /// Specifies the details of a webhook to be updated. 
     /// </summary>
     [DataContract]
     public partial class ModifyHookPayload 
@@ -48,36 +48,67 @@ namespace Autodesk.Webhooks.Model
         /// <summary>
         ///Gets or Sets Status
         /// </summary>
-        [DataMember(Name="status", EmitDefaultValue=false)]
-        public string Status { get; set; }
+        [DataMember(Name="status", EmitDefaultValue=true)]
+        public StatusRequest Status { get; set; }
 
         /// <summary>
-        ///Gets or Sets AutoReactivateHook
+        ///`true` - Automatically reactivate the webhook if it becomes `inactive`.
+///
+///`false` - (Default) Do not reactivate the webhook if it becomes `inactive`.
+///
+///See [Event Delivery Guarantees](/en/docs/webhooks/v1/developers_guide/event-delivery-guarantees/) for more information on how the webhooks service handles reactivation.
         /// </summary>
+        /// <value>
+        ///`true` - Automatically reactivate the webhook if it becomes `inactive`.
+///
+///`false` - (Default) Do not reactivate the webhook if it becomes `inactive`.
+///
+///See [Event Delivery Guarantees](/en/docs/webhooks/v1/developers_guide/event-delivery-guarantees/) for more information on how the webhooks service handles reactivation.
+        /// </value>
         [DataMember(Name="autoReactivateHook", EmitDefaultValue=false)]
         public bool? AutoReactivateHook { get; set; }
 
         /// <summary>
-        ///Gets or Sets Filter
+        ///A Jsonpath expression that you can use to filter the callbacks you receive.
+///
+///See [Callback Filtering](/en/docs/webhooks/v1/developers_guide/callback-filtering/) for more information.
         /// </summary>
+        /// <value>
+        ///A Jsonpath expression that you can use to filter the callbacks you receive.
+///
+///See [Callback Filtering](/en/docs/webhooks/v1/developers_guide/callback-filtering/) for more information.
+        /// </value>
         [DataMember(Name="filter", EmitDefaultValue=false)]
         public string Filter { get; set; }
 
         /// <summary>
-        ///Gets or Sets HookAttribute
+        ///Specifies the extent to which the event is monitored. For example, if the scope is folder, the webhooks service generates a notification for the specified event occurring in any sub folder or item within that folder.
         /// </summary>
+        /// <value>
+        ///Specifies the extent to which the event is monitored. For example, if the scope is folder, the webhooks service generates a notification for the specified event occurring in any sub folder or item within that folder.
+        /// </value>
         [DataMember(Name="hookAttribute", EmitDefaultValue=false)]
         public Object HookAttribute { get; set; }
 
         /// <summary>
-        ///Gets or Sets Token
+        ///A secret token that is used to generate a hash signature, which is passed along with notification requests to the callback URL.
+///
+///See the [Secret Token](/en/docs/webhooks/v1/developers_guide/basics/#secret-token) section in API Basics for more information.
         /// </summary>
+        /// <value>
+        ///A secret token that is used to generate a hash signature, which is passed along with notification requests to the callback URL.
+///
+///See the [Secret Token](/en/docs/webhooks/v1/developers_guide/basics/#secret-token) section in API Basics for more information.
+        /// </value>
         [DataMember(Name="token", EmitDefaultValue=false)]
         public string Token { get; set; }
 
         /// <summary>
-        ///Gets or Sets HookExpiry
+        ///The date and time the webhook will expire, formatted as an ISO 8601 date/time string. If you set this to null, the webhook will never expire.
         /// </summary>
+        /// <value>
+        ///The date and time the webhook will expire, formatted as an ISO 8601 date/time string. If you set this to null, the webhook will never expire.
+        /// </value>
         [DataMember(Name="hookExpiry", EmitDefaultValue=false)]
         public string HookExpiry { get; set; }
 

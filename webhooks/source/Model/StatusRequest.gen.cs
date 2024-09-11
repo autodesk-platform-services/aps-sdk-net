@@ -33,44 +33,32 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Webhooks.Model
 {
     /// <summary>
-    /// Defines Systems
+    /// Sets the current state of the webhook. Possible values:
+///
+///- `active` - Activates webhook.
+///- `inactive` - Deactivates webhook.
     /// </summary>
-    ///<value></value>
+    ///<value>Sets the current state of the webhook. Possible values:
+///
+///- `active` - Activates webhook.
+///- `inactive` - Deactivates webhook.</value>
     
     [JsonConverter(typeof(StringEnumConverter))]
     
-    public enum Systems
+    public enum StatusRequest
     {
         
         /// <summary>
-        /// Enum Data for value: data
+        /// Enum Active for value: active
         /// </summary>
-        [EnumMember(Value = "data")]
-        Data,
+        [EnumMember(Value = "active")]
+        Active,
         
         /// <summary>
-        /// Enum Derivative for value: derivative
+        /// Enum Inactive for value: inactive
         /// </summary>
-        [EnumMember(Value = "derivative")]
-        Derivative,
-        
-        /// <summary>
-        /// Enum AdskC4r for value: adsk.c4r
-        /// </summary>
-        [EnumMember(Value = "adsk.c4r")]
-        AdskC4r,
-        
-        /// <summary>
-        /// Enum AdskFlcProduction for value: adsk.flc.production
-        /// </summary>
-        [EnumMember(Value = "adsk.flc.production")]
-        AdskFlcProduction,
-        
-        /// <summary>
-        /// Enum AutodeskConstructionCost for value: autodesk.construction.cost
-        /// </summary>
-        [EnumMember(Value = "autodesk.construction.cost")]
-        AutodeskConstructionCost
+        [EnumMember(Value = "inactive")]
+        Inactive
     }
 
 }

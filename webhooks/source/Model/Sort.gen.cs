@@ -33,44 +33,32 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Webhooks.Model
 {
     /// <summary>
-    /// Defines Systems
+    /// Specifies the sorting order of the list of webhooks by their `lastUpdatedDate` attribute. 
+///
+///- `asc` - Ascending order.
+///- `desc` - (Default) Descending order.
     /// </summary>
-    ///<value></value>
+    ///<value>Specifies the sorting order of the list of webhooks by their `lastUpdatedDate` attribute. 
+///
+///- `asc` - Ascending order.
+///- `desc` - (Default) Descending order.</value>
     
     [JsonConverter(typeof(StringEnumConverter))]
     
-    public enum Systems
+    public enum Sort
     {
         
         /// <summary>
-        /// Enum Data for value: data
+        /// Enum Asc for value: asc
         /// </summary>
-        [EnumMember(Value = "data")]
-        Data,
+        [EnumMember(Value = "asc")]
+        Asc,
         
         /// <summary>
-        /// Enum Derivative for value: derivative
+        /// Enum Desc for value: desc
         /// </summary>
-        [EnumMember(Value = "derivative")]
-        Derivative,
-        
-        /// <summary>
-        /// Enum AdskC4r for value: adsk.c4r
-        /// </summary>
-        [EnumMember(Value = "adsk.c4r")]
-        AdskC4r,
-        
-        /// <summary>
-        /// Enum AdskFlcProduction for value: adsk.flc.production
-        /// </summary>
-        [EnumMember(Value = "adsk.flc.production")]
-        AdskFlcProduction,
-        
-        /// <summary>
-        /// Enum AutodeskConstructionCost for value: autodesk.construction.cost
-        /// </summary>
-        [EnumMember(Value = "autodesk.construction.cost")]
-        AutodeskConstructionCost
+        [EnumMember(Value = "desc")]
+        Desc
     }
 
 }

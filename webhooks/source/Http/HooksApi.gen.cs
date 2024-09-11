@@ -5,7 +5,7 @@
  *
  * Webhooks
  *
- * The Webhooks API enables applications to listen to APS events and receive notifications when they occur. When an event is triggered, the Webhooks service sends a notification to a callback URL you have defined.  You can customize the types of events and resources for which you receive notifications. For example, you can set up a webhook to send notifications when files are modified or deleted in a specified hub or project.  Below is quick summary of this workflow:  1. Identify the data for which you want to receive notifications. 2. Use the Webhooks API to create one or more hooks. 3. The Webhooks service will notify the webhook when there is a change in the data. 
+ * The Webhooks API enables applications to listen to APS events and receive notifications when they occur. When an event is triggered, the Webhooks service sends a notification to a callback URL you have defined. You can customize the types of events and resources for which you receive notifications. For example, you can set up a webhook to send notifications when files are modified or deleted in a specified hub or project. Below is quick summary of this workflow: 1. Identify the data for which you want to receive notifications. 2. Use the Webhooks API to create one or more hooks. 3. The Webhooks service will notify the webhook when there is a change in the data. 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,251 +40,442 @@ namespace Autodesk.Webhooks.Http
     public interface IHooksApi
     {
         /// <summary>
-        /// Add new webhook to receive the notification on a specified event.
+        /// Create a Webhook for an Event
         /// </summary>
         /// <remarks>
-        ///Add new webhook to receive the notification on a specified event.
+        ///Adds a new webhook to receive notifications of the occurrence of a specified event for the specified system.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
          /// <param name="system">
-         ///string A system for example data for Data Management
+         ///The ID of the system the webhook applies to. For example data for Data Management. See [Supported Events](/en/docs/webhooks/v1/reference/events/) for a full list of supported systems and their IDs.
          /// </param>
          /// <param name="_event">
-         ///string A system for example data for Data Management
+         ///The ID of the event the webhook monitors.  See [Supported Events](/en/docs/webhooks/v1/reference/events/) for a full list of events.
          /// </param>
          /// <param name="region">
-         ///Specifies the geographical location (region) of the server that the request is executed on. Supported values are: `EMEA`, `US`. Default is `US`.
+         ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make request to your callback URL. Possible values:
 ///
-///The `x-ads-region` header also specifies the region. If you specify both, `x-ads-region` has precedence. (optional)
+///- `US` - (Default) Data center dedicated to serve the United States region.
+///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+///
+///**Note:** 
+///
+///1. Beta features are subject to change. Please avoid using them in production environments.
+///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
          /// </param>
          /// <param name="xAdsRegion">
-         ///Specifies the geographical location (region) of the server that the request is executed on. Supported values are: `EMEA`, `US`. Default is `US`. (optional)
+         ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make requests to your callback URL. Possible values:
+///
+///- `US` - (Default) Data center dedicated to serve the United States region.
+///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+///
+///**Note:** 
+///
+///1. Beta features are subject to change. Please avoid using them in production environments.
+///2. You can also use the `region` query string parameter to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
          /// </param>
          /// <param name="hookPayload">
          /// (optional)
          /// </param>
         
         /// <returns>Task of HttpResponseMessage</returns>
-        System.Threading.Tasks.Task<HttpResponseMessage> CreateSystemEventHookAsync (Systems system, Events _event, Region? region= null, XAdsRegion? xAdsRegion= null, HookPayload hookPayload= default(HookPayload),  string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<HttpResponseMessage> CreateSystemEventHookAsync (string system, string _event, Region? region= null, XAdsRegion? xAdsRegion= null, HookPayload hookPayload= default(HookPayload),  string accessToken = null, bool throwOnError = true);
         /// <summary>
-        /// Add new webhooks to receive the notification on all the events.
+        /// Create Webhooks for All Events
         /// </summary>
         /// <remarks>
-        ///Add new webhooks to receive the notification on all the events.
+        ///Adds a new webhook to receive notifications of all events for the specified system.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
          /// <param name="system">
-         ///string A system for example data for Data Management
+         ///The ID of the system the webhook applies to. For example data for Data Management. See [Supported Events](/en/docs/webhooks/v1/reference/events/) for a full list of supported systems and their IDs.
          /// </param>
          /// <param name="xAdsRegion">
-         ///Specifies the geographical location (region) of the server that the request is executed on. Supported values are: `EMEA`, `US`. Default is `US`. (optional)
+         ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make requests to your callback URL. Possible values:
+///
+///- `US` - (Default) Data center dedicated to serve the United States region.
+///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+///
+///**Note:** 
+///
+///1. Beta features are subject to change. Please avoid using them in production environments.
+///2. You can also use the `region` query string parameter to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
          /// </param>
          /// <param name="region">
-         ///Specifies the geographical location (region) of the server that the request is executed on. Supported values are: `EMEA`, `US`. Default is `US`.
+         ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make request to your callback URL. Possible values:
 ///
-///The `x-ads-region` header also specifies the region. If you specify both, `x-ads-region` has precedence. (optional)
+///- `US` - (Default) Data center dedicated to serve the United States region.
+///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+///
+///**Note:** 
+///
+///1. Beta features are subject to change. Please avoid using them in production environments.
+///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
          /// </param>
          /// <param name="hookPayload">
          /// (optional)
          /// </param>
         /// <returns>Task of ApiResponse&lt;Hook&gt;</returns>
         
-        System.Threading.Tasks.Task<ApiResponse<Hook>> CreateSystemHookAsync (Systems system, XAdsRegion? xAdsRegion= null, Region? region= null, HookPayload hookPayload= default(HookPayload),  string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<ApiResponse<Hook>> CreateSystemHookAsync (string system, XAdsRegion? xAdsRegion= null, Region? region= null, HookPayload hookPayload= default(HookPayload),  string accessToken = null, bool throwOnError = true);
         /// <summary>
-        /// Deletes a webhook based on webhook ID
+        /// Delete a Webhook
         /// </summary>
         /// <remarks>
-        ///Deletes a webhook based on webhook ID
+        ///Deletes the webhook specified by its ID.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
          /// <param name="system">
-         ///string A system for example data for Data Management
+         ///The ID of the system the webhook applies to. For example data for Data Management. See [Supported Events](/en/docs/webhooks/v1/reference/events/) for a full list of supported systems and their IDs.
          /// </param>
          /// <param name="_event">
-         ///string A system for example data for Data Management
+         ///The ID of the event the webhook monitors.  See [Supported Events](/en/docs/webhooks/v1/reference/events/) for a full list of events.
          /// </param>
          /// <param name="hookId">
-         ///Id of the webhook to retrieve
+         ///The ID of the webhook to delete.
          /// </param>
          /// <param name="xAdsRegion">
-         ///Specifies the geographical location (region) of the server that the request is executed on. Supported values are: `EMEA`, `US`. Default is `US`. (optional)
+         ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make requests to your callback URL. Possible values:
+///
+///- `US` - (Default) Data center dedicated to serve the United States region.
+///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+///
+///**Note:** 
+///
+///1. Beta features are subject to change. Please avoid using them in production environments.
+///2. You can also use the `region` query string parameter to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
          /// </param>
          /// <param name="region">
-         ///Specifies the geographical location (region) of the server that the request is executed on. Supported values are: `EMEA`, `US`. Default is `US`.
+         ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make request to your callback URL. Possible values:
 ///
-///The `x-ads-region` header also specifies the region. If you specify both, `x-ads-region` has precedence. (optional)
+///- `US` - (Default) Data center dedicated to serve the United States region.
+///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+///
+///**Note:** 
+///
+///1. Beta features are subject to change. Please avoid using them in production environments.
+///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
          /// </param>
         
         /// <returns>Task of HttpResponseMessage</returns>
-        System.Threading.Tasks.Task<HttpResponseMessage> DeleteSystemEventHookAsync (Systems system, Events _event, string hookId, XAdsRegion? xAdsRegion= null, Region? region= null,  string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<HttpResponseMessage> DeleteSystemEventHookAsync (string system, string _event, string hookId, XAdsRegion? xAdsRegion= null, Region? region= null,  string accessToken = null, bool throwOnError = true);
         /// <summary>
-        /// Retrieves a paginated list of webhooks created in the context of a Client or Application. This API accepts 2-legged token of the application only. If the pageState query string is not specified, the first page is returned.
+        /// List All Webhooks for an App
         /// </summary>
         /// <remarks>
-        ///Retrieves a paginated list of webhooks created in the context of a Client or Application. This API accepts 2-legged token of the application only. If the pageState query string is not specified, the first page is returned.
+        ///Retrieves a paginated list of webhooks created by the calling application. Each page includes up to 200 webhooks.
+///
+///If the `pageState` query string parameter is not provided, the first page of results is returned. Use the `next` value from the previous response to fetch subsequent pages.
+///
+///**Note:** This operation requires an access token through a Client Credentials flow (two-legged OAuth). 
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
          /// <param name="xAdsRegion">
-         ///Specifies the geographical location (region) of the server that the request is executed on. Supported values are: `EMEA`, `US`. Default is `US`. (optional)
+         ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make requests to your callback URL. Possible values:
+///
+///- `US` - (Default) Data center dedicated to serve the United States region.
+///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+///
+///**Note:** 
+///
+///1. Beta features are subject to change. Please avoid using them in production environments.
+///2. You can also use the `region` query string parameter to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
          /// </param>
          /// <param name="pageState">
-         ///Base64 encoded string used to return the next page of the list of webhooks. This can be obtained from the `next` field of the previous page. PagingState instances are not portable and implementation is subject to change across versions. Default page size is 200. (optional)
+         ///Base64 encoded string to fetch the next page of the list of webhooks. If you do not provide this parameter, the first page of results is returned. Use the `next` value from the previous response to fetch subsequent pages. (optional)
          /// </param>
          /// <param name="status">
-         ///Status of the hooks. Options: `active`, `inactive` (optional)
+         ///Filters retrieved webhooks by their current state. Possible values are 
+///
+///- `active` - Successfully delivered most recent event notifications. 
+///- `inactive` - Failed to deliver most recent event notification and has been deactivated.
+///- `reactivated` - Previously inactive but was reactivated. No events have occurred since reactivation.
+///
+///If this parameter is not specified, the filter is not applied. See [Event Delivery Guarantees](/en/docs/webhooks/v1/developers_guide/event-delivery-guarantees/) for more information on how the state of a webhook changes. (optional)
          /// </param>
          /// <param name="sort">
-         ///Sort order of the hooks based on last updated time. Options: ‘asc’, ‘desc’. Default is ‘desc’. (optional)
+         ///Specifies the sorting order of the list of webhooks by their `lastUpdatedDate` attribute. 
+///
+///- `asc` - Ascending order.
+///- `desc` - (Default) Descending order.  (optional)
          /// </param>
          /// <param name="region">
-         ///Specifies the geographical location (region) of the server that the request is executed on. Supported values are: `EMEA`, `US`. Default is `US`.
+         ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make request to your callback URL. Possible values:
 ///
-///The `x-ads-region` header also specifies the region. If you specify both, `x-ads-region` has precedence. (optional)
+///- `US` - (Default) Data center dedicated to serve the United States region.
+///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+///
+///**Note:** 
+///
+///1. Beta features are subject to change. Please avoid using them in production environments.
+///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
          /// </param>
         /// <returns>Task of ApiResponse&lt;Hooks&gt;</returns>
         
-        System.Threading.Tasks.Task<ApiResponse<Hooks>> GetAppHooksAsync (XAdsRegion? xAdsRegion= null, string pageState= default(string), string status= default(string), string sort= default(string), Region? region= null,  string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<ApiResponse<Hooks>> GetAppHooksAsync (XAdsRegion? xAdsRegion= null, string pageState= default(string), StatusFilter? status= null, Sort? sort= null, Region? region= null,  string accessToken = null, bool throwOnError = true);
         /// <summary>
-        /// Get details of a webhook based on its webhook ID
+        /// Get Webhook Details
         /// </summary>
         /// <remarks>
-        ///Get details of a webhook based on its webhook ID
+        ///Retrieves the details of the webhook for the specified event within the specified system.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
          /// <param name="system">
-         ///string A system for example data for Data Management
+         ///The ID of the system the webhook applies to. For example data for Data Management. See [Supported Events](/en/docs/webhooks/v1/reference/events/) for a full list of supported systems and their IDs.
          /// </param>
          /// <param name="_event">
-         ///string A system for example data for Data Management
+         ///The ID of the event the webhook monitors.  See [Supported Events](/en/docs/webhooks/v1/reference/events/) for a full list of events.
          /// </param>
          /// <param name="hookId">
-         ///Id of the webhook to retrieve
+         ///The ID of the webhook to delete.
          /// </param>
          /// <param name="xAdsRegion">
-         ///Specifies the geographical location (region) of the server that the request is executed on. Supported values are: `EMEA`, `US`. Default is `US`. (optional)
+         ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make requests to your callback URL. Possible values:
+///
+///- `US` - (Default) Data center dedicated to serve the United States region.
+///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+///
+///**Note:** 
+///
+///1. Beta features are subject to change. Please avoid using them in production environments.
+///2. You can also use the `region` query string parameter to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
          /// </param>
          /// <param name="region">
-         ///Specifies the geographical location (region) of the server that the request is executed on. Supported values are: `EMEA`, `US`. Default is `US`.
+         ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make request to your callback URL. Possible values:
 ///
-///The `x-ads-region` header also specifies the region. If you specify both, `x-ads-region` has precedence. (optional)
+///- `US` - (Default) Data center dedicated to serve the United States region.
+///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+///
+///**Note:** 
+///
+///1. Beta features are subject to change. Please avoid using them in production environments.
+///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
          /// </param>
         /// <returns>Task of ApiResponse&lt;HookDetails&gt;</returns>
         
-        System.Threading.Tasks.Task<ApiResponse<HookDetails>> GetHookDetailsAsync (Systems system, Events _event, string hookId, XAdsRegion? xAdsRegion= null, Region? region= null,  string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<ApiResponse<HookDetails>> GetHookDetailsAsync (string system, string _event, string hookId, XAdsRegion? xAdsRegion= null, Region? region= null,  string accessToken = null, bool throwOnError = true);
         /// <summary>
-        /// Retrieves a paginated list of all the webhooks. If the pageState query string is not specified, the first page is returned.
+        /// List All Webhooks
         /// </summary>
         /// <remarks>
-        ///Retrieves a paginated list of all the webhooks. If the pageState query string is not specified, the first page is returned.
+        ///Retrieves a paginated list of webhooks available to the provided access token within the specified region. Each page includes up to 200 webhooks.
+///
+///If the `pageState` query string parameter is not provided, the first page of results is returned. Use the `next` value from the previous response to fetch subsequent pages.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
          /// <param name="pageState">
-         ///Base64 encoded string used to return the next page of the list of webhooks. This can be obtained from the next field of the previous page. PagingState instances are not portable and implementation is subject to change across versions. Default page size is 200. (optional)
+         ///Base64 encoded string to fetch the next page of the list of webhooks. If you do not provide this parameter, the first page of results is returned. Use the `next` value from the previous response to fetch subsequent pages. (optional)
          /// </param>
          /// <param name="status">
-         ///Status of the hooks. Options: ‘active’, ‘inactive’ (optional)
+         ///Filters retrieved webhooks by their current state. Possible values are 
+///
+///- `active` - Successfully delivered most recent event notifications. 
+///- `inactive` - Failed to deliver most recent event notification and has been deactivated.
+///- `reactivated` - Previously inactive but was reactivated. No events have occurred since reactivation.
+///
+///If this parameter is not specified, the filter is not applied. See [Event Delivery Guarantees](/en/docs/webhooks/v1/developers_guide/event-delivery-guarantees/) for more information on how the state of a webhook changes. (optional)
          /// </param>
          /// <param name="region">
-         ///Specifies the geographical location (region) of the server that the request is executed on. Supported values are: `EMEA`, `US`. Default is `US`.
+         ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make request to your callback URL. Possible values:
 ///
-///The `x-ads-region` header also specifies the region. If you specify both, `x-ads-region` has precedence. (optional)
+///- `US` - (Default) Data center dedicated to serve the United States region.
+///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+///
+///**Note:** 
+///
+///1. Beta features are subject to change. Please avoid using them in production environments.
+///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
          /// </param>
          /// <param name="xAdsRegion">
-         ///Specifies the geographical location (region) of the server that the request is executed on. Supported values are: EMEA, US. Default is US. (optional)
+         ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make requests to your callback URL. Possible values:
+///
+///- `US` - (Default) Data center dedicated to serve the United States region.
+///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+///
+///**Note:** 
+///
+///1. Beta features are subject to change. Please avoid using them in production environments.
+///2. You can also use the `region` query string parameter to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
          /// </param>
         /// <returns>Task of ApiResponse&lt;Hooks&gt;</returns>
         
-        System.Threading.Tasks.Task<ApiResponse<Hooks>> GetHooksAsync (string pageState= default(string), string status= default(string), Region? region= null, XAdsRegion? xAdsRegion= null,  string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<ApiResponse<Hooks>> GetHooksAsync (string pageState= default(string), StatusFilter? status= null, Region? region= null, XAdsRegion? xAdsRegion= null,  string accessToken = null, bool throwOnError = true);
         /// <summary>
-        /// Retrieves a paginated list of all the webhooks for a specified event. If the pageState query string is not specified, the first page is returned.
+        /// List All Webhooks for an Event
         /// </summary>
         /// <remarks>
-        ///Retrieves a paginated list of all the webhooks for a specified event. If the pageState query string is not specified, the first page is returned.
+        ///Retrieves a paginated list of webhooks for the specified event. The returned list contains a subset of webhooks accessible to the provided access token within the specified region. Each page includes up to 200 webhooks.
+///
+///If the `pageState` query string parameter is not provided, the first page of results is returned. Use the `next` value from the previous response to fetch subsequent pages.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
          /// <param name="system">
-         ///string A system for example data for Data Management
+         ///The ID of the system the webhook applies to. For example data for Data Management. See [Supported Events](/en/docs/webhooks/v1/reference/events/) for a full list of supported systems and their IDs.
          /// </param>
          /// <param name="_event">
-         ///string A system for example data for Data Management
+         ///The ID of the event the webhook monitors.  See [Supported Events](/en/docs/webhooks/v1/reference/events/) for a full list of events.
          /// </param>
          /// <param name="xAdsRegion">
-         ///Specifies the geographical location (region) of the server that the request is executed on. Supported values are: `EMEA`, `US`. Default is `US`. (optional)
+         ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make requests to your callback URL. Possible values:
+///
+///- `US` - (Default) Data center dedicated to serve the United States region.
+///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+///
+///**Note:** 
+///
+///1. Beta features are subject to change. Please avoid using them in production environments.
+///2. You can also use the `region` query string parameter to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
          /// </param>
          /// <param name="region">
-         ///Specifies the geographical location (region) of the server that the request is executed on. Supported values are: `EMEA`, `US`. Default is `US`.
+         ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make request to your callback URL. Possible values:
 ///
-///The `x-ads-region` header also specifies the region. If you specify both, `x-ads-region` has precedence. (optional)
+///- `US` - (Default) Data center dedicated to serve the United States region.
+///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+///
+///**Note:** 
+///
+///1. Beta features are subject to change. Please avoid using them in production environments.
+///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
          /// </param>
          /// <param name="scopeName">
-         ///Scope name used to create hook. For example : folder (optional)
+         ///Filters retrieved webhooks by the scope name used to create hook. For example : `folder`.  If this parameter is not specified, the filter is not applied. (optional)
          /// </param>
          /// <param name="pageState">
-         ///Base64 encoded string used to return the next page of the list of webhooks. This can be obtained from the `next` field of the previous page. PagingState instances are not portable and implementation is subject to change across versions. Default page size is 200. (optional)
+         ///Base64 encoded string to fetch the next page of the list of webhooks. If you do not provide this parameter, the first page of results is returned. Use the `next` value from the previous response to fetch subsequent pages. (optional)
          /// </param>
          /// <param name="status">
-         ///Status of the hooks. Options: `active`, `inactive` (optional)
+         ///Filters retrieved webhooks by their current state. Possible values are 
+///
+///- `active` - Successfully delivered most recent event notifications. 
+///- `inactive` - Failed to deliver most recent event notification and has been deactivated.
+///- `reactivated` - Previously inactive but was reactivated. No events have occurred since reactivation.
+///
+///If this parameter is not specified, the filter is not applied. See [Event Delivery Guarantees](/en/docs/webhooks/v1/developers_guide/event-delivery-guarantees/) for more information on how the state of a webhook changes. (optional)
          /// </param>
         /// <returns>Task of ApiResponse&lt;Hooks&gt;</returns>
         
-        System.Threading.Tasks.Task<ApiResponse<Hooks>> GetSystemEventHooksAsync (Systems system, Events _event, XAdsRegion? xAdsRegion= null, Region? region= null, string scopeName= default(string), string pageState= default(string), string status= default(string),  string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<ApiResponse<Hooks>> GetSystemEventHooksAsync (string system, string _event, XAdsRegion? xAdsRegion= null, Region? region= null, string scopeName= default(string), string pageState= default(string), StatusFilter? status= null,  string accessToken = null, bool throwOnError = true);
         /// <summary>
-        /// Retrieves a paginated list of all the webhooks for a specified system. If the pageState query string is not specified, the first page is returned.
+        /// List All Webhooks for a System
         /// </summary>
         /// <remarks>
-        ///Retrieves a paginated list of all the webhooks for a specified system. If the pageState query string is not specified, the first page is returned.
+        ///Retrieves a paginated list of webhooks for the specified system. The returned list contains a subset of webhooks accessible to the provided access token within the specified region. Each page includes up to 200 webhooks.
+///
+///If the `pageState` query string parameter is not provided, the first page of results is returned. Use the `next` value from the previous response to fetch subsequent pages.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
          /// <param name="system">
-         ///string A system for example data for Data Management
+         ///The ID of the system the webhook applies to. For example data for Data Management. See [Supported Events](/en/docs/webhooks/v1/reference/events/) for a full list of supported systems and their IDs.
          /// </param>
          /// <param name="xAdsRegion">
-         ///Specifies the geographical location (region) of the server that the request is executed on. Supported values are: `EMEA`, `US`. Default is `US`. (optional)
+         ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make requests to your callback URL. Possible values:
+///
+///- `US` - (Default) Data center dedicated to serve the United States region.
+///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+///
+///**Note:** 
+///
+///1. Beta features are subject to change. Please avoid using them in production environments.
+///2. You can also use the `region` query string parameter to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
          /// </param>
          /// <param name="status">
-         ///Status of the hooks. Options: `active`, `inactive` (optional)
+         ///Filters retrieved webhooks by their current state. Possible values are 
+///
+///- `active` - Successfully delivered most recent event notifications. 
+///- `inactive` - Failed to deliver most recent event notification and has been deactivated.
+///- `reactivated` - Previously inactive but was reactivated. No events have occurred since reactivation.
+///
+///If this parameter is not specified, the filter is not applied. See [Event Delivery Guarantees](/en/docs/webhooks/v1/developers_guide/event-delivery-guarantees/) for more information on how the state of a webhook changes. (optional)
          /// </param>
          /// <param name="pageState">
-         ///Base64 encoded string used to return the next page of the list of webhooks. This can be obtained from the `next` field of the previous page. PagingState instances are not portable and implementation is subject to change across versions. Default page size is 200. (optional)
+         ///Base64 encoded string to fetch the next page of the list of webhooks. If you do not provide this parameter, the first page of results is returned. Use the `next` value from the previous response to fetch subsequent pages. (optional)
          /// </param>
          /// <param name="region">
-         ///Specifies the geographical location (region) of the server that the request is executed on. Supported values are: `EMEA`, `US`. Default is `US`.
+         ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make request to your callback URL. Possible values:
 ///
-///The `x-ads-region` header also specifies the region. If you specify both, `x-ads-region` has precedence. (optional)
+///- `US` - (Default) Data center dedicated to serve the United States region.
+///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+///
+///**Note:** 
+///
+///1. Beta features are subject to change. Please avoid using them in production environments.
+///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
          /// </param>
         /// <returns>Task of ApiResponse&lt;Hooks&gt;</returns>
         
-        System.Threading.Tasks.Task<ApiResponse<Hooks>> GetSystemHooksAsync (Systems system, XAdsRegion? xAdsRegion= null, string status= default(string), string pageState= default(string), Region? region= null,  string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<ApiResponse<Hooks>> GetSystemHooksAsync (string system, XAdsRegion? xAdsRegion= null, StatusFilter? status= null, string pageState= default(string), Region? region= null,  string accessToken = null, bool throwOnError = true);
         /// <summary>
-        /// Partially update a webhook based on its webhook ID. The only fields that may be updated are: status, filter, hookAttribute, and hookExpiry.
+        /// Update a Webhook
         /// </summary>
         /// <remarks>
-        ///Partially update a webhook based on its webhook ID. The only fields that may be updated are: status, filter, hookAttribute, and hookExpiry.
+        ///Updates the webhook specified by the `hook_id` parameter. Currently the only attributes you can update are: 
+///
+///- filter
+///- status
+///- hook attribute
+///- token
+///- auto-reactivate hook flag
+///- hook expiry
+///- callbackWithEventPaylaod flag 
+///
+///See the request body documentation for more information.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
          /// <param name="system">
-         ///string A system for example data for Data Management
+         ///The ID of the system the webhook applies to. For example data for Data Management. See [Supported Events](/en/docs/webhooks/v1/reference/events/) for a full list of supported systems and their IDs.
          /// </param>
          /// <param name="_event">
-         ///string A system for example data for Data Management
+         ///The ID of the event the webhook monitors.  See [Supported Events](/en/docs/webhooks/v1/reference/events/) for a full list of events.
          /// </param>
          /// <param name="hookId">
-         ///Id of the webhook to retrieve
+         ///The ID of the webhook to delete.
          /// </param>
          /// <param name="xAdsRegion">
-         ///Specifies the geographical location (region) of the server that the request is executed on. Supported values are: `EMEA`, `US`. Default is `US`. (optional)
+         ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make requests to your callback URL. Possible values:
+///
+///- `US` - (Default) Data center dedicated to serve the United States region.
+///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+///
+///**Note:** 
+///
+///1. Beta features are subject to change. Please avoid using them in production environments.
+///2. You can also use the `region` query string parameter to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
          /// </param>
          /// <param name="region">
-         ///Specifies the geographical location (region) of the server that the request is executed on. Supported values are: `EMEA`, `US`. Default is `US`.
+         ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make request to your callback URL. Possible values:
 ///
-///The `x-ads-region` header also specifies the region. If you specify both, `x-ads-region` has precedence. (optional)
+///- `US` - (Default) Data center dedicated to serve the United States region.
+///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+///
+///**Note:** 
+///
+///1. Beta features are subject to change. Please avoid using them in production environments.
+///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
          /// </param>
          /// <param name="modifyHookPayload">
          /// (optional)
          /// </param>
         
         /// <returns>Task of HttpResponseMessage</returns>
-        System.Threading.Tasks.Task<HttpResponseMessage> PatchSystemEventHookAsync (Systems system, Events _event, string hookId, XAdsRegion? xAdsRegion= null, Region? region= null, ModifyHookPayload modifyHookPayload= default(ModifyHookPayload),  string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<HttpResponseMessage> PatchSystemEventHookAsync (string system, string _event, string hookId, XAdsRegion? xAdsRegion= null, Region? region= null, ModifyHookPayload modifyHookPayload= default(ModifyHookPayload),  string accessToken = null, bool throwOnError = true);
     }
 
     /// <summary>
@@ -366,45 +557,59 @@ namespace Autodesk.Webhooks.Http
         public ForgeService Service {get; set;}
 
         /// <summary>
-        /// Add new webhook to receive the notification on a specified event.
+        /// Create a Webhook for an Event
         /// </summary>
         /// <remarks>
-        ///Add new webhook to receive the notification on a specified event.
+        ///Adds a new webhook to receive notifications of the occurrence of a specified event for the specified system.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
          /// <param name="system">
-         ///string A system for example data for Data Management
+         ///The ID of the system the webhook applies to. For example data for Data Management. See [Supported Events](/en/docs/webhooks/v1/reference/events/) for a full list of supported systems and their IDs.
          /// </param>
          /// <param name="_event">
-         ///string A system for example data for Data Management
+         ///The ID of the event the webhook monitors.  See [Supported Events](/en/docs/webhooks/v1/reference/events/) for a full list of events.
          /// </param>
          /// <param name="region">
-         ///Specifies the geographical location (region) of the server that the request is executed on. Supported values are: `EMEA`, `US`. Default is `US`.
+         ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make request to your callback URL. Possible values:
 ///
-///The `x-ads-region` header also specifies the region. If you specify both, `x-ads-region` has precedence. (optional)
+///- `US` - (Default) Data center dedicated to serve the United States region.
+///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+///
+///**Note:** 
+///
+///1. Beta features are subject to change. Please avoid using them in production environments.
+///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
          /// </param>
          /// <param name="xAdsRegion">
-         ///Specifies the geographical location (region) of the server that the request is executed on. Supported values are: `EMEA`, `US`. Default is `US`. (optional)
+         ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make requests to your callback URL. Possible values:
+///
+///- `US` - (Default) Data center dedicated to serve the United States region.
+///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+///
+///**Note:** 
+///
+///1. Beta features are subject to change. Please avoid using them in production environments.
+///2. You can also use the `region` query string parameter to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
          /// </param>
          /// <param name="hookPayload">
          /// (optional)
          /// </param>
         
         /// <returns>Task of HttpResponseMessage</returns>
-        public async System.Threading.Tasks.Task<HttpResponseMessage> CreateSystemEventHookAsync (Systems system,Events _event,Region? region= null,XAdsRegion? xAdsRegion= null,HookPayload hookPayload= default(HookPayload), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<HttpResponseMessage> CreateSystemEventHookAsync (string system,string _event,Region? region= null,XAdsRegion? xAdsRegion= null,HookPayload hookPayload= default(HookPayload), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into CreateSystemEventHookAsync ");
             using (var request = new HttpRequestMessage())
             {
-                var systemEnumString = Utils.GetEnumString(system);
-                var eventEnumString = Utils.GetEnumString(_event);
                 var queryParam = new Dictionary<string, object>();
                 SetQueryParameter("region", region, queryParam);
                 request.RequestUri =
                     Marshalling.BuildRequestUri("/webhooks/v1/systems/{system}/events/{event}/hooks",
                         routeParameters: new Dictionary<string, object> {
-                            { "system", systemEnumString},
-                            { "event", eventEnumString},
+                            { "system", system},
+                            { "event", _event},
                         },
                         queryParameters: queryParam
                     );
@@ -422,6 +627,15 @@ namespace Autodesk.Webhooks.Http
                 SetHeader("x-ads-region", xAdsRegion, request);
 
                 // tell the underlying pipeline what scope we'd like to use
+                // if (scopes == null)
+                // {
+                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read data:write ");
+                // }
+                // else
+                // {
+                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // }
                 // if (scopes == null)
                 // {
                     // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
@@ -457,40 +671,55 @@ namespace Autodesk.Webhooks.Http
             } // using
         }
         /// <summary>
-        /// Add new webhooks to receive the notification on all the events.
+        /// Create Webhooks for All Events
         /// </summary>
         /// <remarks>
-        ///Add new webhooks to receive the notification on all the events.
+        ///Adds a new webhook to receive notifications of all events for the specified system.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
          /// <param name="system">
-         ///string A system for example data for Data Management
+         ///The ID of the system the webhook applies to. For example data for Data Management. See [Supported Events](/en/docs/webhooks/v1/reference/events/) for a full list of supported systems and their IDs.
          /// </param>
          /// <param name="xAdsRegion">
-         ///Specifies the geographical location (region) of the server that the request is executed on. Supported values are: `EMEA`, `US`. Default is `US`. (optional)
+         ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make requests to your callback URL. Possible values:
+///
+///- `US` - (Default) Data center dedicated to serve the United States region.
+///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+///
+///**Note:** 
+///
+///1. Beta features are subject to change. Please avoid using them in production environments.
+///2. You can also use the `region` query string parameter to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
          /// </param>
          /// <param name="region">
-         ///Specifies the geographical location (region) of the server that the request is executed on. Supported values are: `EMEA`, `US`. Default is `US`.
+         ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make request to your callback URL. Possible values:
 ///
-///The `x-ads-region` header also specifies the region. If you specify both, `x-ads-region` has precedence. (optional)
+///- `US` - (Default) Data center dedicated to serve the United States region.
+///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+///
+///**Note:** 
+///
+///1. Beta features are subject to change. Please avoid using them in production environments.
+///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
          /// </param>
          /// <param name="hookPayload">
          /// (optional)
          /// </param>
         /// <returns>Task of ApiResponse&lt;Hook&gt;></returns>
         
-        public async System.Threading.Tasks.Task<ApiResponse<Hook>> CreateSystemHookAsync (Systems system,XAdsRegion? xAdsRegion= null,Region? region= null,HookPayload hookPayload= default(HookPayload), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ApiResponse<Hook>> CreateSystemHookAsync (string system,XAdsRegion? xAdsRegion= null,Region? region= null,HookPayload hookPayload= default(HookPayload), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into CreateSystemHookAsync ");
             using (var request = new HttpRequestMessage())
             {
-                var systemEnumString = Utils.GetEnumString(system);
                 var queryParam = new Dictionary<string, object>();
                 SetQueryParameter("region", region, queryParam);
                 request.RequestUri =
                     Marshalling.BuildRequestUri("/webhooks/v1/systems/{system}/hooks",
                         routeParameters: new Dictionary<string, object> {
-                            { "system", systemEnumString},
+                            { "system", system},
                         },
                         queryParameters: queryParam
                     );
@@ -508,6 +737,15 @@ namespace Autodesk.Webhooks.Http
                 SetHeader("x-ads-region", xAdsRegion, request);
 
                 // tell the underlying pipeline what scope we'd like to use
+                // if (scopes == null)
+                // {
+                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read data:write ");
+                // }
+                // else
+                // {
+                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // }
                 // if (scopes == null)
                 // {
                     // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
@@ -543,45 +781,59 @@ namespace Autodesk.Webhooks.Http
             } // using
         }
         /// <summary>
-        /// Deletes a webhook based on webhook ID
+        /// Delete a Webhook
         /// </summary>
         /// <remarks>
-        ///Deletes a webhook based on webhook ID
+        ///Deletes the webhook specified by its ID.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
          /// <param name="system">
-         ///string A system for example data for Data Management
+         ///The ID of the system the webhook applies to. For example data for Data Management. See [Supported Events](/en/docs/webhooks/v1/reference/events/) for a full list of supported systems and their IDs.
          /// </param>
          /// <param name="_event">
-         ///string A system for example data for Data Management
+         ///The ID of the event the webhook monitors.  See [Supported Events](/en/docs/webhooks/v1/reference/events/) for a full list of events.
          /// </param>
          /// <param name="hookId">
-         ///Id of the webhook to retrieve
+         ///The ID of the webhook to delete.
          /// </param>
          /// <param name="xAdsRegion">
-         ///Specifies the geographical location (region) of the server that the request is executed on. Supported values are: `EMEA`, `US`. Default is `US`. (optional)
+         ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make requests to your callback URL. Possible values:
+///
+///- `US` - (Default) Data center dedicated to serve the United States region.
+///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+///
+///**Note:** 
+///
+///1. Beta features are subject to change. Please avoid using them in production environments.
+///2. You can also use the `region` query string parameter to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
          /// </param>
          /// <param name="region">
-         ///Specifies the geographical location (region) of the server that the request is executed on. Supported values are: `EMEA`, `US`. Default is `US`.
+         ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make request to your callback URL. Possible values:
 ///
-///The `x-ads-region` header also specifies the region. If you specify both, `x-ads-region` has precedence. (optional)
+///- `US` - (Default) Data center dedicated to serve the United States region.
+///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+///
+///**Note:** 
+///
+///1. Beta features are subject to change. Please avoid using them in production environments.
+///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
          /// </param>
         
         /// <returns>Task of HttpResponseMessage</returns>
-        public async System.Threading.Tasks.Task<HttpResponseMessage> DeleteSystemEventHookAsync (Systems system,Events _event,string hookId,XAdsRegion? xAdsRegion= null,Region? region= null, string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<HttpResponseMessage> DeleteSystemEventHookAsync (string system,string _event,string hookId,XAdsRegion? xAdsRegion= null,Region? region= null, string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into DeleteSystemEventHookAsync ");
             using (var request = new HttpRequestMessage())
             {
-                var systemEnumString = Utils.GetEnumString(system);
-                var eventEnumString = Utils.GetEnumString(_event);
                 var queryParam = new Dictionary<string, object>();
                 SetQueryParameter("region", region, queryParam);
                 request.RequestUri =
                     Marshalling.BuildRequestUri("/webhooks/v1/systems/{system}/events/{event}/hooks/{hook_id}",
                         routeParameters: new Dictionary<string, object> {
-                            { "system", systemEnumString},
-                            { "event", eventEnumString},
+                            { "system", system},
+                            { "event", _event},
                             { "hook_id", hookId},
                         },
                         queryParameters: queryParam
@@ -599,6 +851,15 @@ namespace Autodesk.Webhooks.Http
                 SetHeader("x-ads-region", xAdsRegion, request);
 
                 // tell the underlying pipeline what scope we'd like to use
+                // if (scopes == null)
+                // {
+                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read data:write ");
+                // }
+                // else
+                // {
+                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // }
                 // if (scopes == null)
                 // {
                     // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
@@ -634,32 +895,61 @@ namespace Autodesk.Webhooks.Http
             } // using
         }
         /// <summary>
-        /// Retrieves a paginated list of webhooks created in the context of a Client or Application. This API accepts 2-legged token of the application only. If the pageState query string is not specified, the first page is returned.
+        /// List All Webhooks for an App
         /// </summary>
         /// <remarks>
-        ///Retrieves a paginated list of webhooks created in the context of a Client or Application. This API accepts 2-legged token of the application only. If the pageState query string is not specified, the first page is returned.
+        ///Retrieves a paginated list of webhooks created by the calling application. Each page includes up to 200 webhooks.
+///
+///If the `pageState` query string parameter is not provided, the first page of results is returned. Use the `next` value from the previous response to fetch subsequent pages.
+///
+///**Note:** This operation requires an access token through a Client Credentials flow (two-legged OAuth). 
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
          /// <param name="xAdsRegion">
-         ///Specifies the geographical location (region) of the server that the request is executed on. Supported values are: `EMEA`, `US`. Default is `US`. (optional)
+         ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make requests to your callback URL. Possible values:
+///
+///- `US` - (Default) Data center dedicated to serve the United States region.
+///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+///
+///**Note:** 
+///
+///1. Beta features are subject to change. Please avoid using them in production environments.
+///2. You can also use the `region` query string parameter to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
          /// </param>
          /// <param name="pageState">
-         ///Base64 encoded string used to return the next page of the list of webhooks. This can be obtained from the `next` field of the previous page. PagingState instances are not portable and implementation is subject to change across versions. Default page size is 200. (optional)
+         ///Base64 encoded string to fetch the next page of the list of webhooks. If you do not provide this parameter, the first page of results is returned. Use the `next` value from the previous response to fetch subsequent pages. (optional)
          /// </param>
          /// <param name="status">
-         ///Status of the hooks. Options: `active`, `inactive` (optional)
+         ///Filters retrieved webhooks by their current state. Possible values are 
+///
+///- `active` - Successfully delivered most recent event notifications. 
+///- `inactive` - Failed to deliver most recent event notification and has been deactivated.
+///- `reactivated` - Previously inactive but was reactivated. No events have occurred since reactivation.
+///
+///If this parameter is not specified, the filter is not applied. See [Event Delivery Guarantees](/en/docs/webhooks/v1/developers_guide/event-delivery-guarantees/) for more information on how the state of a webhook changes. (optional)
          /// </param>
          /// <param name="sort">
-         ///Sort order of the hooks based on last updated time. Options: ‘asc’, ‘desc’. Default is ‘desc’. (optional)
+         ///Specifies the sorting order of the list of webhooks by their `lastUpdatedDate` attribute. 
+///
+///- `asc` - Ascending order.
+///- `desc` - (Default) Descending order.  (optional)
          /// </param>
          /// <param name="region">
-         ///Specifies the geographical location (region) of the server that the request is executed on. Supported values are: `EMEA`, `US`. Default is `US`.
+         ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make request to your callback URL. Possible values:
 ///
-///The `x-ads-region` header also specifies the region. If you specify both, `x-ads-region` has precedence. (optional)
+///- `US` - (Default) Data center dedicated to serve the United States region.
+///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+///
+///**Note:** 
+///
+///1. Beta features are subject to change. Please avoid using them in production environments.
+///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
          /// </param>
         /// <returns>Task of ApiResponse&lt;Hooks&gt;></returns>
         
-        public async System.Threading.Tasks.Task<ApiResponse<Hooks>> GetAppHooksAsync (XAdsRegion? xAdsRegion= null,string pageState= default(string),string status= default(string),string sort= default(string),Region? region= null, string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ApiResponse<Hooks>> GetAppHooksAsync (XAdsRegion? xAdsRegion= null,string pageState= default(string),StatusFilter? status= null,Sort? sort= null,Region? region= null, string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into GetAppHooksAsync ");
             using (var request = new HttpRequestMessage())
@@ -723,45 +1013,59 @@ namespace Autodesk.Webhooks.Http
             } // using
         }
         /// <summary>
-        /// Get details of a webhook based on its webhook ID
+        /// Get Webhook Details
         /// </summary>
         /// <remarks>
-        ///Get details of a webhook based on its webhook ID
+        ///Retrieves the details of the webhook for the specified event within the specified system.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
          /// <param name="system">
-         ///string A system for example data for Data Management
+         ///The ID of the system the webhook applies to. For example data for Data Management. See [Supported Events](/en/docs/webhooks/v1/reference/events/) for a full list of supported systems and their IDs.
          /// </param>
          /// <param name="_event">
-         ///string A system for example data for Data Management
+         ///The ID of the event the webhook monitors.  See [Supported Events](/en/docs/webhooks/v1/reference/events/) for a full list of events.
          /// </param>
          /// <param name="hookId">
-         ///Id of the webhook to retrieve
+         ///The ID of the webhook to delete.
          /// </param>
          /// <param name="xAdsRegion">
-         ///Specifies the geographical location (region) of the server that the request is executed on. Supported values are: `EMEA`, `US`. Default is `US`. (optional)
+         ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make requests to your callback URL. Possible values:
+///
+///- `US` - (Default) Data center dedicated to serve the United States region.
+///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+///
+///**Note:** 
+///
+///1. Beta features are subject to change. Please avoid using them in production environments.
+///2. You can also use the `region` query string parameter to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
          /// </param>
          /// <param name="region">
-         ///Specifies the geographical location (region) of the server that the request is executed on. Supported values are: `EMEA`, `US`. Default is `US`.
+         ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make request to your callback URL. Possible values:
 ///
-///The `x-ads-region` header also specifies the region. If you specify both, `x-ads-region` has precedence. (optional)
+///- `US` - (Default) Data center dedicated to serve the United States region.
+///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+///
+///**Note:** 
+///
+///1. Beta features are subject to change. Please avoid using them in production environments.
+///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
          /// </param>
         /// <returns>Task of ApiResponse&lt;HookDetails&gt;></returns>
         
-        public async System.Threading.Tasks.Task<ApiResponse<HookDetails>> GetHookDetailsAsync (Systems system,Events _event,string hookId,XAdsRegion? xAdsRegion= null,Region? region= null, string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ApiResponse<HookDetails>> GetHookDetailsAsync (string system,string _event,string hookId,XAdsRegion? xAdsRegion= null,Region? region= null, string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into GetHookDetailsAsync ");
             using (var request = new HttpRequestMessage())
             {
-                var systemEnumString = Utils.GetEnumString(system);
-                var eventEnumString = Utils.GetEnumString(_event);
                 var queryParam = new Dictionary<string, object>();
                 SetQueryParameter("region", region, queryParam);
                 request.RequestUri =
                     Marshalling.BuildRequestUri("/webhooks/v1/systems/{system}/events/{event}/hooks/{hook_id}",
                         routeParameters: new Dictionary<string, object> {
-                            { "system", systemEnumString},
-                            { "event", eventEnumString},
+                            { "system", system},
+                            { "event", _event},
                             { "hook_id", hookId},
                         },
                         queryParameters: queryParam
@@ -779,6 +1083,15 @@ namespace Autodesk.Webhooks.Http
                 SetHeader("x-ads-region", xAdsRegion, request);
 
                 // tell the underlying pipeline what scope we'd like to use
+                // if (scopes == null)
+                // {
+                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read ");
+                // }
+                // else
+                // {
+                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // }
                 // if (scopes == null)
                 // {
                     // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
@@ -814,29 +1127,53 @@ namespace Autodesk.Webhooks.Http
             } // using
         }
         /// <summary>
-        /// Retrieves a paginated list of all the webhooks. If the pageState query string is not specified, the first page is returned.
+        /// List All Webhooks
         /// </summary>
         /// <remarks>
-        ///Retrieves a paginated list of all the webhooks. If the pageState query string is not specified, the first page is returned.
+        ///Retrieves a paginated list of webhooks available to the provided access token within the specified region. Each page includes up to 200 webhooks.
+///
+///If the `pageState` query string parameter is not provided, the first page of results is returned. Use the `next` value from the previous response to fetch subsequent pages.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
          /// <param name="pageState">
-         ///Base64 encoded string used to return the next page of the list of webhooks. This can be obtained from the next field of the previous page. PagingState instances are not portable and implementation is subject to change across versions. Default page size is 200. (optional)
+         ///Base64 encoded string to fetch the next page of the list of webhooks. If you do not provide this parameter, the first page of results is returned. Use the `next` value from the previous response to fetch subsequent pages. (optional)
          /// </param>
          /// <param name="status">
-         ///Status of the hooks. Options: ‘active’, ‘inactive’ (optional)
+         ///Filters retrieved webhooks by their current state. Possible values are 
+///
+///- `active` - Successfully delivered most recent event notifications. 
+///- `inactive` - Failed to deliver most recent event notification and has been deactivated.
+///- `reactivated` - Previously inactive but was reactivated. No events have occurred since reactivation.
+///
+///If this parameter is not specified, the filter is not applied. See [Event Delivery Guarantees](/en/docs/webhooks/v1/developers_guide/event-delivery-guarantees/) for more information on how the state of a webhook changes. (optional)
          /// </param>
          /// <param name="region">
-         ///Specifies the geographical location (region) of the server that the request is executed on. Supported values are: `EMEA`, `US`. Default is `US`.
+         ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make request to your callback URL. Possible values:
 ///
-///The `x-ads-region` header also specifies the region. If you specify both, `x-ads-region` has precedence. (optional)
+///- `US` - (Default) Data center dedicated to serve the United States region.
+///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+///
+///**Note:** 
+///
+///1. Beta features are subject to change. Please avoid using them in production environments.
+///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
          /// </param>
          /// <param name="xAdsRegion">
-         ///Specifies the geographical location (region) of the server that the request is executed on. Supported values are: EMEA, US. Default is US. (optional)
+         ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make requests to your callback URL. Possible values:
+///
+///- `US` - (Default) Data center dedicated to serve the United States region.
+///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+///
+///**Note:** 
+///
+///1. Beta features are subject to change. Please avoid using them in production environments.
+///2. You can also use the `region` query string parameter to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
          /// </param>
         /// <returns>Task of ApiResponse&lt;Hooks&gt;></returns>
         
-        public async System.Threading.Tasks.Task<ApiResponse<Hooks>> GetHooksAsync (string pageState= default(string),string status= default(string),Region? region= null,XAdsRegion? xAdsRegion= null, string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ApiResponse<Hooks>> GetHooksAsync (string pageState= default(string),StatusFilter? status= null,Region? region= null,XAdsRegion? xAdsRegion= null, string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into GetHooksAsync ");
             using (var request = new HttpRequestMessage())
@@ -873,6 +1210,15 @@ namespace Autodesk.Webhooks.Http
                 // {
                     // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
+                // if (scopes == null)
+                // {
+                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read ");
+                // }
+                // else
+                // {
+                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // }
 
                 request.Method = new HttpMethod("GET");
 
@@ -899,44 +1245,66 @@ namespace Autodesk.Webhooks.Http
             } // using
         }
         /// <summary>
-        /// Retrieves a paginated list of all the webhooks for a specified event. If the pageState query string is not specified, the first page is returned.
+        /// List All Webhooks for an Event
         /// </summary>
         /// <remarks>
-        ///Retrieves a paginated list of all the webhooks for a specified event. If the pageState query string is not specified, the first page is returned.
+        ///Retrieves a paginated list of webhooks for the specified event. The returned list contains a subset of webhooks accessible to the provided access token within the specified region. Each page includes up to 200 webhooks.
+///
+///If the `pageState` query string parameter is not provided, the first page of results is returned. Use the `next` value from the previous response to fetch subsequent pages.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
          /// <param name="system">
-         ///string A system for example data for Data Management
+         ///The ID of the system the webhook applies to. For example data for Data Management. See [Supported Events](/en/docs/webhooks/v1/reference/events/) for a full list of supported systems and their IDs.
          /// </param>
          /// <param name="_event">
-         ///string A system for example data for Data Management
+         ///The ID of the event the webhook monitors.  See [Supported Events](/en/docs/webhooks/v1/reference/events/) for a full list of events.
          /// </param>
          /// <param name="xAdsRegion">
-         ///Specifies the geographical location (region) of the server that the request is executed on. Supported values are: `EMEA`, `US`. Default is `US`. (optional)
+         ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make requests to your callback URL. Possible values:
+///
+///- `US` - (Default) Data center dedicated to serve the United States region.
+///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+///
+///**Note:** 
+///
+///1. Beta features are subject to change. Please avoid using them in production environments.
+///2. You can also use the `region` query string parameter to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
          /// </param>
          /// <param name="region">
-         ///Specifies the geographical location (region) of the server that the request is executed on. Supported values are: `EMEA`, `US`. Default is `US`.
+         ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make request to your callback URL. Possible values:
 ///
-///The `x-ads-region` header also specifies the region. If you specify both, `x-ads-region` has precedence. (optional)
+///- `US` - (Default) Data center dedicated to serve the United States region.
+///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+///
+///**Note:** 
+///
+///1. Beta features are subject to change. Please avoid using them in production environments.
+///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
          /// </param>
          /// <param name="scopeName">
-         ///Scope name used to create hook. For example : folder (optional)
+         ///Filters retrieved webhooks by the scope name used to create hook. For example : `folder`.  If this parameter is not specified, the filter is not applied. (optional)
          /// </param>
          /// <param name="pageState">
-         ///Base64 encoded string used to return the next page of the list of webhooks. This can be obtained from the `next` field of the previous page. PagingState instances are not portable and implementation is subject to change across versions. Default page size is 200. (optional)
+         ///Base64 encoded string to fetch the next page of the list of webhooks. If you do not provide this parameter, the first page of results is returned. Use the `next` value from the previous response to fetch subsequent pages. (optional)
          /// </param>
          /// <param name="status">
-         ///Status of the hooks. Options: `active`, `inactive` (optional)
+         ///Filters retrieved webhooks by their current state. Possible values are 
+///
+///- `active` - Successfully delivered most recent event notifications. 
+///- `inactive` - Failed to deliver most recent event notification and has been deactivated.
+///- `reactivated` - Previously inactive but was reactivated. No events have occurred since reactivation.
+///
+///If this parameter is not specified, the filter is not applied. See [Event Delivery Guarantees](/en/docs/webhooks/v1/developers_guide/event-delivery-guarantees/) for more information on how the state of a webhook changes. (optional)
          /// </param>
         /// <returns>Task of ApiResponse&lt;Hooks&gt;></returns>
         
-        public async System.Threading.Tasks.Task<ApiResponse<Hooks>> GetSystemEventHooksAsync (Systems system,Events _event,XAdsRegion? xAdsRegion= null,Region? region= null,string scopeName= default(string),string pageState= default(string),string status= default(string), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ApiResponse<Hooks>> GetSystemEventHooksAsync (string system,string _event,XAdsRegion? xAdsRegion= null,Region? region= null,string scopeName= default(string),string pageState= default(string),StatusFilter? status= null, string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into GetSystemEventHooksAsync ");
             using (var request = new HttpRequestMessage())
             {
-                var systemEnumString = Utils.GetEnumString(system);
-                var eventEnumString = Utils.GetEnumString(_event);
                 var queryParam = new Dictionary<string, object>();
                 SetQueryParameter("region", region, queryParam);
                 SetQueryParameter("scopeName", scopeName, queryParam);
@@ -945,8 +1313,8 @@ namespace Autodesk.Webhooks.Http
                 request.RequestUri =
                     Marshalling.BuildRequestUri("/webhooks/v1/systems/{system}/events/{event}/hooks",
                         routeParameters: new Dictionary<string, object> {
-                            { "system", systemEnumString},
-                            { "event", eventEnumString},
+                            { "system", system},
+                            { "event", _event},
                         },
                         queryParameters: queryParam
                     );
@@ -967,6 +1335,15 @@ namespace Autodesk.Webhooks.Http
                 // {
                     // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
                     // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read ");
+                // }
+                // else
+                // {
+                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // }
+                // if (scopes == null)
+                // {
+                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
                 // }
                 // else
                 // {
@@ -998,37 +1375,60 @@ namespace Autodesk.Webhooks.Http
             } // using
         }
         /// <summary>
-        /// Retrieves a paginated list of all the webhooks for a specified system. If the pageState query string is not specified, the first page is returned.
+        /// List All Webhooks for a System
         /// </summary>
         /// <remarks>
-        ///Retrieves a paginated list of all the webhooks for a specified system. If the pageState query string is not specified, the first page is returned.
+        ///Retrieves a paginated list of webhooks for the specified system. The returned list contains a subset of webhooks accessible to the provided access token within the specified region. Each page includes up to 200 webhooks.
+///
+///If the `pageState` query string parameter is not provided, the first page of results is returned. Use the `next` value from the previous response to fetch subsequent pages.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
          /// <param name="system">
-         ///string A system for example data for Data Management
+         ///The ID of the system the webhook applies to. For example data for Data Management. See [Supported Events](/en/docs/webhooks/v1/reference/events/) for a full list of supported systems and their IDs.
          /// </param>
          /// <param name="xAdsRegion">
-         ///Specifies the geographical location (region) of the server that the request is executed on. Supported values are: `EMEA`, `US`. Default is `US`. (optional)
+         ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make requests to your callback URL. Possible values:
+///
+///- `US` - (Default) Data center dedicated to serve the United States region.
+///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+///
+///**Note:** 
+///
+///1. Beta features are subject to change. Please avoid using them in production environments.
+///2. You can also use the `region` query string parameter to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
          /// </param>
          /// <param name="status">
-         ///Status of the hooks. Options: `active`, `inactive` (optional)
+         ///Filters retrieved webhooks by their current state. Possible values are 
+///
+///- `active` - Successfully delivered most recent event notifications. 
+///- `inactive` - Failed to deliver most recent event notification and has been deactivated.
+///- `reactivated` - Previously inactive but was reactivated. No events have occurred since reactivation.
+///
+///If this parameter is not specified, the filter is not applied. See [Event Delivery Guarantees](/en/docs/webhooks/v1/developers_guide/event-delivery-guarantees/) for more information on how the state of a webhook changes. (optional)
          /// </param>
          /// <param name="pageState">
-         ///Base64 encoded string used to return the next page of the list of webhooks. This can be obtained from the `next` field of the previous page. PagingState instances are not portable and implementation is subject to change across versions. Default page size is 200. (optional)
+         ///Base64 encoded string to fetch the next page of the list of webhooks. If you do not provide this parameter, the first page of results is returned. Use the `next` value from the previous response to fetch subsequent pages. (optional)
          /// </param>
          /// <param name="region">
-         ///Specifies the geographical location (region) of the server that the request is executed on. Supported values are: `EMEA`, `US`. Default is `US`.
+         ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make request to your callback URL. Possible values:
 ///
-///The `x-ads-region` header also specifies the region. If you specify both, `x-ads-region` has precedence. (optional)
+///- `US` - (Default) Data center dedicated to serve the United States region.
+///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+///
+///**Note:** 
+///
+///1. Beta features are subject to change. Please avoid using them in production environments.
+///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
          /// </param>
         /// <returns>Task of ApiResponse&lt;Hooks&gt;></returns>
         
-        public async System.Threading.Tasks.Task<ApiResponse<Hooks>> GetSystemHooksAsync (Systems system,XAdsRegion? xAdsRegion= null,string status= default(string),string pageState= default(string),Region? region= null, string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ApiResponse<Hooks>> GetSystemHooksAsync (string system,XAdsRegion? xAdsRegion= null,StatusFilter? status= null,string pageState= default(string),Region? region= null, string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into GetSystemHooksAsync ");
             using (var request = new HttpRequestMessage())
             {
-                var systemEnumString = Utils.GetEnumString(system);
                 var queryParam = new Dictionary<string, object>();
                 SetQueryParameter("status", status, queryParam);
                 SetQueryParameter("pageState", pageState, queryParam);
@@ -1036,7 +1436,7 @@ namespace Autodesk.Webhooks.Http
                 request.RequestUri =
                     Marshalling.BuildRequestUri("/webhooks/v1/systems/{system}/hooks",
                         routeParameters: new Dictionary<string, object> {
-                            { "system", systemEnumString},
+                            { "system", system},
                         },
                         queryParameters: queryParam
                     );
@@ -1053,6 +1453,15 @@ namespace Autodesk.Webhooks.Http
                 SetHeader("x-ads-region", xAdsRegion, request);
 
                 // tell the underlying pipeline what scope we'd like to use
+                // if (scopes == null)
+                // {
+                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read ");
+                // }
+                // else
+                // {
+                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // }
                 // if (scopes == null)
                 // {
                     // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
@@ -1088,48 +1497,72 @@ namespace Autodesk.Webhooks.Http
             } // using
         }
         /// <summary>
-        /// Partially update a webhook based on its webhook ID. The only fields that may be updated are: status, filter, hookAttribute, and hookExpiry.
+        /// Update a Webhook
         /// </summary>
         /// <remarks>
-        ///Partially update a webhook based on its webhook ID. The only fields that may be updated are: status, filter, hookAttribute, and hookExpiry.
+        ///Updates the webhook specified by the `hook_id` parameter. Currently the only attributes you can update are: 
+///
+///- filter
+///- status
+///- hook attribute
+///- token
+///- auto-reactivate hook flag
+///- hook expiry
+///- callbackWithEventPaylaod flag 
+///
+///See the request body documentation for more information.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
          /// <param name="system">
-         ///string A system for example data for Data Management
+         ///The ID of the system the webhook applies to. For example data for Data Management. See [Supported Events](/en/docs/webhooks/v1/reference/events/) for a full list of supported systems and their IDs.
          /// </param>
          /// <param name="_event">
-         ///string A system for example data for Data Management
+         ///The ID of the event the webhook monitors.  See [Supported Events](/en/docs/webhooks/v1/reference/events/) for a full list of events.
          /// </param>
          /// <param name="hookId">
-         ///Id of the webhook to retrieve
+         ///The ID of the webhook to delete.
          /// </param>
          /// <param name="xAdsRegion">
-         ///Specifies the geographical location (region) of the server that the request is executed on. Supported values are: `EMEA`, `US`. Default is `US`. (optional)
+         ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make requests to your callback URL. Possible values:
+///
+///- `US` - (Default) Data center dedicated to serve the United States region.
+///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+///
+///**Note:** 
+///
+///1. Beta features are subject to change. Please avoid using them in production environments.
+///2. You can also use the `region` query string parameter to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
          /// </param>
          /// <param name="region">
-         ///Specifies the geographical location (region) of the server that the request is executed on. Supported values are: `EMEA`, `US`. Default is `US`.
+         ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make request to your callback URL. Possible values:
 ///
-///The `x-ads-region` header also specifies the region. If you specify both, `x-ads-region` has precedence. (optional)
+///- `US` - (Default) Data center dedicated to serve the United States region.
+///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+///
+///**Note:** 
+///
+///1. Beta features are subject to change. Please avoid using them in production environments.
+///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
          /// </param>
          /// <param name="modifyHookPayload">
          /// (optional)
          /// </param>
         
         /// <returns>Task of HttpResponseMessage</returns>
-        public async System.Threading.Tasks.Task<HttpResponseMessage> PatchSystemEventHookAsync (Systems system,Events _event,string hookId,XAdsRegion? xAdsRegion= null,Region? region= null,ModifyHookPayload modifyHookPayload= default(ModifyHookPayload), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<HttpResponseMessage> PatchSystemEventHookAsync (string system,string _event,string hookId,XAdsRegion? xAdsRegion= null,Region? region= null,ModifyHookPayload modifyHookPayload= default(ModifyHookPayload), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into PatchSystemEventHookAsync ");
             using (var request = new HttpRequestMessage())
             {
-                var systemEnumString = Utils.GetEnumString(system);
-                var eventEnumString = Utils.GetEnumString(_event);
                 var queryParam = new Dictionary<string, object>();
                 SetQueryParameter("region", region, queryParam);
                 request.RequestUri =
                     Marshalling.BuildRequestUri("/webhooks/v1/systems/{system}/events/{event}/hooks/{hook_id}",
                         routeParameters: new Dictionary<string, object> {
-                            { "system", systemEnumString},
-                            { "event", eventEnumString},
+                            { "system", system},
+                            { "event", _event},
                             { "hook_id", hookId},
                         },
                         queryParameters: queryParam
@@ -1148,6 +1581,15 @@ namespace Autodesk.Webhooks.Http
                 SetHeader("x-ads-region", xAdsRegion, request);
 
                 // tell the underlying pipeline what scope we'd like to use
+                // if (scopes == null)
+                // {
+                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read data:write ");
+                // }
+                // else
+                // {
+                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // }
                 // if (scopes == null)
                 // {
                     // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
