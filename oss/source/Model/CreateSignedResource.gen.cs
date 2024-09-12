@@ -71,33 +71,7 @@ namespace Autodesk.Oss.Model
         [DataMember(Name="singleUse", EmitDefaultValue=false)]
         public bool? SingleUse { get; set; }
 
-        /// <summary>
-        ///The value to use as the Content-Type when downloading the object using the signed URL.  If this attribute is not provided, it defaults to the value corresponding to the object.
-        /// </summary>
-        /// <value>
-        ///The value to use as the Content-Type when downloading the object using the signed URL.  If this attribute is not provided, it defaults to the value corresponding to the object.
-        /// </value>
-        [DataMember(Name="contentType", EmitDefaultValue=false)]
-        public string ContentType { get; set; }
-
-        /// <summary>
-        ///The value to use as the Content-Disposition when downloading the object using the signed URL.  If this attribute is not provided, it defaults to the value corresponding to the object.
-        /// </summary>
-        /// <value>
-        ///The value to use as the Content-Disposition when downloading the object using the signed URL.  If this attribute is not provided, it defaults to the value corresponding to the object.
-        /// </value>
-        [DataMember(Name="contentDisposition", EmitDefaultValue=false)]
-        public string ContentDisposition { get; set; }
-
-        /// <summary>
-        ///Restricts the signed URL to the specified IP addresses. Downloads and uploads will be allowed only for the list of the IP addresses in the `X-Forwarded-For` header received from Apigee. If not specified, use of the signed URL is not restricted.
-        /// </summary>
-        /// <value>
-        ///Restricts the signed URL to the specified IP addresses. Downloads and uploads will be allowed only for the list of the IP addresses in the `X-Forwarded-For` header received from Apigee. If not specified, use of the signed URL is not restricted.
-        /// </value>
-        [DataMember(Name="allowedIpAddresses", EmitDefaultValue=false)]
-        public string AllowedIpAddresses { get; set; }
-
+            
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
