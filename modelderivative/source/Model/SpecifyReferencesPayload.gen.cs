@@ -57,6 +57,7 @@ namespace Autodesk.ModelDerivative.Model
         /// <summary>
         ///Gets or Sets Region
         /// </summary>
+        [Obsolete("This attribute is replaced by the region header.")]
         [DataMember(Name="region", EmitDefaultValue=true)]
         public Region Region { get; set; }
 
