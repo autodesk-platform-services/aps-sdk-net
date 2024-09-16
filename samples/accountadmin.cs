@@ -15,26 +15,27 @@ namespace Samples
 
         public void Initialise()
         {
-            // Instantiate SDK manager as below.  
-            SDKManager sdkManager = SdkManagerBuilder
-                            .Create() // Creates SDK Manager Builder itself.
-                            .Build();
+            // Optionally initialise SDKManager to pass custom configurations. 
+            // SDKManager sdkManager = SdkManagerBuilder.Create().Build();
 
-            // Instantiate AdminClient using the created SDK manager
-            adminClient = new AdminClient(sdkManager);
+            StaticAuthenticationProvider staticAuthenticationProvider = new StaticAuthenticationProvider(token);
+            // Instantiate AdminClient using the auth provider
+            adminClient = new AdminClient(authenticationProvider: staticAuthenticationProvider);
         }
 
         // Get projects by account id
         public async Task getProjects()
         {
-            Projects projectList = await adminClient.GetProjectsAsync(accessToken: token, accountId: accountId, region: Region.US);
+            Projects projectList = await adminClient.GetProjectsAsync(accountId: accountId, region: Region.US);
+            Console.WriteLine(projectList);
         }
 
 
         // Get project details
         public async Task getProject()
         {
-            Project project = await adminClient.GetProjectAsync(projectId: projectId, accessToken: token, fields: [Fields.AccountId, Fields.Name]);
+            Project project = await adminClient.GetProjectAsync(projectId: projectId, fields: [Fields.AccountId, Fields.Name]);
+            Console.WriteLine(project);
         }
 
         //update project image
@@ -42,7 +43,7 @@ namespace Samples
         {
             var filePath = "test.png";
             using (FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read)){
-                var resp = await adminClient.CreateProjectImageAsync(token, projectId, accountId, fileStream, Region.US);
+                var resp = await adminClient.CreateProjectImageAsync(projectId, accountId, fileStream, Region.US);
                 Console.WriteLine(resp);
             }
         }
@@ -58,14 +59,14 @@ namespace Samples
             projectPayload.Country = "United States";
             projectPayload.Timezone = Timezone.AmericaNewYork;
             projectPayload.Platform = Platform.Acc;
-            Project project = await adminClient.CreateProjectAsync(token, accountId, projectPayload: projectPayload);
+            Project project = await adminClient.CreateProjectAsync(accountId, projectPayload: projectPayload);
         }
 
 
         // Get Companies by account id
         public async Task getCompanies()
         {
-            List<Company> companiesList = await adminClient.GetCompaniesAsync(accessToken: token, accountId: accountId, region: Region.US);
+            List<Company> companiesList = await adminClient.GetCompaniesAsync(accountId: accountId, region: Region.US);
         }
 
 
@@ -74,6 +75,7 @@ namespace Samples
         {
             var companyId = "";
             Company company = await adminClient.GetCompanyAsync(companyId: companyId, accountId: accountId, accessToken: token);
+            Console.WriteLine(company);
         }
 
         // Search Companies
@@ -98,7 +100,7 @@ namespace Samples
             companyPayload.City = "New York";
             companyPayload.WebsiteUrl = "http://www.autodesk.com";
             companyPayload.Description = "This is a test company";
-            Company company = await adminClient.CreateCompanyAsync( token, accountId,companyPayload: companyPayload);
+            Company company = await adminClient.CreateCompanyAsync( accountId,companyPayload: companyPayload);
         }
 
         // Import Companies
@@ -113,7 +115,7 @@ namespace Samples
             companyPayload.Description = "This is a test company";
 
             List<CompanyPayload> importCompanyPayload= [companyPayload];
-            CompanyImportResponse response = await adminClient.ImportCompaniesAsync(token, accountId, companyPayload: importCompanyPayload);
+            CompanyImportResponse response = await adminClient.ImportCompaniesAsync(accountId, companyPayload: importCompanyPayload);
         }
 
         //update company details
@@ -125,7 +127,7 @@ namespace Samples
                 Trade = Trade.Concrete,
                 City = "New Jersy"
             };
-            Company response = await adminClient.PatchCompanyDetailsAsync(token, companyId, accountId, region: Region.US, companyPatchPayload:companyPatchPayload);
+            Company response = await adminClient.PatchCompanyDetailsAsync(companyId, accountId, region: Region.US, companyPatchPayload:companyPatchPayload);
             Console.WriteLine(response);
         }
 
@@ -135,7 +137,7 @@ namespace Samples
             var companyId = "";
             var filePath = "test.png";
             using (FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read)){
-                var resp = await adminClient.PatchCompanyImageAsync(token, companyId, accountId, fileStream, Region.US);
+                var resp = await adminClient.PatchCompanyImageAsync(companyId, accountId, fileStream, Region.US);
                 Console.WriteLine(resp);
             }
         }
@@ -143,14 +145,15 @@ namespace Samples
         //list account users
         public async Task listUsers()
         {
-            await adminClient.GetUsersAsync(token, accountId);
+            List<User> response = await adminClient.GetUsersAsync(accountId);
+            Console.Write(response[0]);
         }
 
         //get account user details
         public async Task getUser()
         {
             var userId = "";
-            await adminClient.GetUserAsync(token, accountId, userId);
+            await adminClient.GetUserAsync(accountId, userId);
         }
 
         // Create new User
@@ -162,7 +165,7 @@ namespace Samples
             userPayload.AddressLine1 = "The Fifth Avenue";
             userPayload.City = "New York";
             userPayload.AboutMe = "This is a test user";
-            User response = await adminClient.CreateUserAsync(token, accountId, userPayload: userPayload);
+            User response = await adminClient.CreateUserAsync(accountId, userPayload: userPayload);
         }
 
         // Import Users
@@ -176,7 +179,7 @@ namespace Samples
             userPayload.AboutMe = "This is a test user";
 
             List<UserPayload> importUserPayload= [userPayload];
-            UserImportResponse response = await adminClient.ImportUsersAsync(token, accountId, userPayload: importUserPayload);
+            UserImportResponse response = await adminClient.ImportUsersAsync(accountId, userPayload: importUserPayload);
         }
 
         //update user details
@@ -187,19 +190,20 @@ namespace Samples
             {
                 Status =  UserPatchStatus.Active
             };
-            User response = await adminClient.PatchUserDetailsAsync(token, accountId, userId, region: Region.US, userPatchPayload: userPatchPayload);
+            User response = await adminClient.PatchUserDetailsAsync(accountId, userId, region: Region.US, userPatchPayload: userPatchPayload);
             Console.WriteLine(response);
         }
 
         // get Project Users
         public async Task getProjectUsers() {
-            ProjectUsers response = await adminClient.GetProjectUsersAsync(token, projectId);
+            ProjectUsers response = await adminClient.GetProjectUsersAsync(projectId);
+            Console.WriteLine(response);
         }
 
         // fetch specified user in the project
         public async Task getProjectUser() {
             var userId = "";
-            ProjectUser response = await adminClient.GetProjectUserAsync(token, projectId, userId: userId);
+            ProjectUser response = await adminClient.GetProjectUserAsync(projectId, userId: userId);
         }
 
         //assign user to project
@@ -214,7 +218,7 @@ namespace Samples
                     }
                 ]
             };
-            var response = await adminClient.AssignProjectUserAsync(token, projectId, projectUserPayload: projectUserPayload);
+            var response = await adminClient.AssignProjectUserAsync(projectId, projectUserPayload: projectUserPayload);
         }
 
         // import users to the specified project
@@ -232,7 +236,7 @@ namespace Samples
                     }
                 ]
             };
-            ProjectUsersImportResponse response = await adminClient.ImportProjectUsersAsync(token, projectId, projectUsersImportPayload: projectUsersImportPayload);
+            ProjectUsersImportResponse response = await adminClient.ImportProjectUsersAsync(projectId, projectUsersImportPayload: projectUsersImportPayload);
         }
 
         // Update specified user's details in a project
@@ -244,17 +248,18 @@ namespace Samples
                     "d52d31ee-00f2-43cd-ae11-32aba34490df"
                 ]
             };
-            ProjectUserResponse response = await adminClient.UpdateProjectUserAsync(token, projectId, "4ca99e9a-cce9-40a1-abb7-d69a1fd79178", projectUsersUpdatePayload: projectUsersUpdatePayload);
+            ProjectUserResponse response = await adminClient.UpdateProjectUserAsync(projectId, "4ca99e9a-cce9-40a1-abb7-d69a1fd79178", projectUsersUpdatePayload: projectUsersUpdatePayload);
         }
 
         // Remove the specified user from a project
         public async Task deleteProjectUser() {
-            var response = await adminClient.RemoveProjectUserAsync(token, projectId, "4ca99e9a-cce9-40a1-abb7-d69a1fd79178");
+            var response = await adminClient.RemoveProjectUserAsync(projectId, "4ca99e9a-cce9-40a1-abb7-d69a1fd79178");
         }
 
         // fetch all the business units in a specific account
         public async Task getBusinessUnits() {
-            BusinessUnitsResponse response = await adminClient.GetBusinessUnitsAsync(token, accountId);
+            BusinessUnitsResponse response = await adminClient.GetBusinessUnitsAsync(accountId);
+            Console.Write(response);
         }
 
         // Create business units of a specific account
@@ -267,23 +272,28 @@ namespace Samples
                     }
                 ]
             };
-            BusinessUnitsResponse response = await adminClient.CreateBusinessUnitsAsync(token, accountId, businessUnitsRequestPyload: businessUnitsRequestPyload);
+            BusinessUnitsResponse response = await adminClient.CreateBusinessUnitsAsync(accountId, businessUnitsRequestPyload: businessUnitsRequestPyload);
         }
 
-        public async void Main()
+        public static async Task Main()
         {
+            Admin admin = new Admin();
             // Initialise SDKManager & AdminClient
-            Initialise();
+            admin.Initialise();
             // Call respective methods
-            await getProject();
-            await getProjects();
-            await createProject();
-            await updateProjectImage();
-            await createCompany();
-            await importCompanies();
-            await updateCompany();
-            await updateCompanyImage();
+            // await admin.getProject();
+            // await createProject();
+            // await admin.updateProjectImage();
+            // await admin.createProject();
+            // await admin.getCompanies();
+            // await admin.getCompany();
+            // await createCompany();
+            // await importCompanies();
+            // await updateCompany();
+            // await admin.updateCompanyImage();
+            // await admin.listUsers();
+            // await admin.getProjectUsers();
+            // await admin.getBusinessUnits();
         }
     }
 }
-
