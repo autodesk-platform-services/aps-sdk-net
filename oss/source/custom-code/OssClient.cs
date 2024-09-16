@@ -214,7 +214,7 @@ namespace Autodesk.Oss
         /// (optional)
         /// </param>
         /// <returns>Task of &lt;BatchcompleteuploadResponse&gt;</returns>
-        public async System.Threading.Tasks.Task<BatchcompleteuploadResponse> BatchCompleteUploadAsync(string accessToken, string bucketKey, BatchcompleteuploadObject requests, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<BatchcompleteuploadResponse> BatchCompleteUploadAsync(string bucketKey, BatchcompleteuploadObject requests, string accessToken = default, bool throwOnError = true)
         {
             if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
             {
