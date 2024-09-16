@@ -19,13 +19,12 @@ namespace Samples
 
         public void Initialise()
             {
-                  // Instantiate SDK manager as below.   
-                  // You can also optionally pass configurations, logger, etc. 
-                  SDKManager sdkManager = SdkManagerBuilder
-                        .Create() // Creates SDK Manager Builder itself.
-                        .Build();
-                  // Instantiate OssClient using the created SDK manager
-                  ossClient = new OssClient(sdkManager);
+                  // Optionally initialise SDKManager to pass custom configurations, logger, etc. 
+                  // SDKManager sdkManager = SdkManagerBuilder.Create().Build();
+            
+                  // Instantiate OssClient using the auth provider
+                  StaticAuthenticationProvider staticAuthenticationProvider = new StaticAuthenticationProvider(token);
+                  ossClient = new OssClient(authenticationProvider:staticAuthenticationProvider);
             }
 
 
@@ -35,6 +34,7 @@ namespace Samples
                   // query for required properties
                   string bucketkey = bucket.BucketKey;
                   string bucketOwner = bucket.BucketOwner;
+                  Console.Write(bucket);
             }
 
 
@@ -48,6 +48,7 @@ namespace Samples
                   // query for required properties
                   string objectId = objectDetails.ObjectId;
                   string objectkey = objectDetails.ObjectKey;
+                  Console.Write(objectDetails);
 
             }
             public async Task Download()
