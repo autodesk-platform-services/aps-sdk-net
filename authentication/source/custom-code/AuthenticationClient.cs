@@ -18,13 +18,23 @@ namespace Autodesk.Authentication
 
     public class AuthenticationClient
     {
+        /// <summary>
+        /// Gets the token API instance.
+        /// </summary>
         public ITokenApi tokenApi { get; }
+        /// <summary>
+        /// Gets the users API instance.
+        /// </summary>
         public IUsersApi usersApi { get; }
 
-        public AuthenticationClient(SDKManager.SDKManager sDKManager)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AuthenticationClient"/> class.
+        /// </summary>
+        /// <param name="sdkManager">The SDK manager instance.</param>
+        public AuthenticationClient(SDKManager.SDKManager sdkManager)
         {
-            this.tokenApi = new TokenApi(sDKManager);
-            this.usersApi = new UsersApi(sDKManager);
+            this.tokenApi = new TokenApi(sdkManager);
+            this.usersApi = new UsersApi(sdkManager);
         }
 
 
@@ -38,6 +48,9 @@ namespace Autodesk.Authentication
         /// <exception cref="AuthenticationApiException">Thrown when fails to make API call</exception>
         /// <param name="authorization">
         /// The 3-legged access token of the currently logged in user.
+        /// </param>
+        /// <param name="throwOnError">
+        /// Indicates whether to throw an exception on error.
         /// </param>
         /// <returns>Task of ApiResponse&lt;UserInfo&gt;</returns>
 
@@ -67,6 +80,9 @@ namespace Autodesk.Authentication
         /// </param>       
         /// <param name="scopes">
         ///A list of requested scopes. See the [Developer's Guide documentation on scopes](/en/docs/oauth/v2/developers_guide/scopes/) for a list of valid values you can provide.
+        /// </param>
+        /// <param name="throwOnError">
+        /// Indicates whether to throw an exception on error.
         /// </param>
         /// <returns>Task of &lt;TwoLeggedToken&gt;</returns>
         public async System.Threading.Tasks.Task<TwoLeggedToken> GetTwoLeggedTokenAsync(string clientId, string clientSecret, List<Scopes> scopes, bool throwOnError = true)
@@ -170,6 +186,9 @@ namespace Autodesk.Authentication
         /// <param name="codeVerifier">
         ///A random URL-encoded string between 43 characters and 128 characters. In a PKCE grant flow, the authentication server uses this string to verify the code challenge that was passed when you called [Authorize User](/en/docs/oauth/v2/reference/http/authorize-GET/).    Required if [`code_challenge` was specified when you called [Authorize User](/en/docs/oauth/v2/reference/http/authorize-GET/).  (optional)
         /// </param> 
+        /// <param name="throwOnError">
+        /// Indicates whether to throw an exception on error.
+        /// </param>
         /// <returns>Task of &lt;ThreeLeggedToken&gt;</returns>
         public async System.Threading.Tasks.Task<ThreeLeggedToken> GetThreeLeggedTokenAsync(string clientId, string code, string redirectUri, string clientSecret = default(string), string codeVerifier = default(string), bool throwOnError = true)
         {
@@ -210,6 +229,9 @@ namespace Autodesk.Authentication
         ///A URL-encoded space-delimited list of requested scopes. See the [Developer's Guide documentation on scopes](/en/docs/oauth/v2/developers_guide/scopes/) for a list of valid values you can provide.
         ///If specified, scopes have to be primarily same with or a subset of the scopes used to generate the refresh_token.(optional)
         /// </param>   
+        /// <param name="throwOnError">
+        /// Indicates whether to throw an exception on error.
+        /// </param>
         /// <returns>Task of  &lt;ThreeLeggedToken&gt;</returns>
         public async System.Threading.Tasks.Task<ThreeLeggedToken> RefreshTokenAsync(string refreshToken, string clientId, string clientSecret = default(string), List<Scopes> scopes = null, bool throwOnError = true)
         {
@@ -242,6 +264,9 @@ namespace Autodesk.Authentication
         ///See the Developer's Guide topic on [Asymmetric Signing](/en/docs/oauth/v2/developers_guide/asymmetric-encryption/) for more information. 
         /// </remarks>
         /// <exception cref="AuthenticationApiException">Thrown when fails to make API call</exception>
+        /// <param name="throwOnError">
+        /// Indicates whether to throw an exception on error.
+        /// </param>
         /// <returns>Task of &lt;Jwks&gt;></returns>
 
         public async System.Threading.Tasks.Task<Jwks> GetKeysAsync(bool throwOnError = true)
@@ -257,6 +282,9 @@ namespace Autodesk.Authentication
         ///Returns an OpenID Connect Discovery Specification compliant JSON document. It contains a list of the OpenID/OAuth endpoints, supported scopes, claims, public keys used to sign the tokens, and other details.
         /// </remarks>
         /// <exception cref="AuthenticationApiException">Thrown when fails to make API call</exception>
+        /// <param name="throwOnError">
+        /// Indicates whether to throw an exception on error.
+        /// </param>
         /// <returns>Task of &lt;OidcSpec&gt;></returns>
         public async System.Threading.Tasks.Task<OidcSpec> GetOidcSpecAsync(bool throwOnError = true)
         {
@@ -285,6 +313,9 @@ namespace Autodesk.Authentication
         /// </param>
         /// <param name="clientId">
         ///The Client ID of the calling application, as registered with APS.
+        /// </param>
+        /// <param name="throwOnError">
+        /// Indicates whether to throw an exception on error.
         /// </param>
         /// <returns>Task of &lt;IntrospectToken&gt;></returns>
         public async System.Threading.Tasks.Task<IntrospectToken> IntrospectTokenAsync(string token, string clientId, string clientSecret = default(string), bool throwOnError = true)
@@ -348,6 +379,9 @@ namespace Autodesk.Authentication
         /// </param>
         /// <param name="clientId">
         ///The Client ID of the calling application, as registered with APS.
+        /// </param>
+        /// <param name="throwOnError">
+        /// Indicates whether to throw an exception on error.
         /// </param>
         /// <returns>Task of HttpResponseMessage</returns>
 
