@@ -26,6 +26,9 @@ using Autodesk.Webhooks.Http;
 
 namespace Autodesk.Webhooks
 {
+    /// <summary>
+    /// Provides extension methods for adding Webhooks services to the IServiceCollection.
+    /// </summary>
     public static class ServiceCollectionExtensions
     {
         /// <summary>
