@@ -1,166 +1,859 @@
 using Autodesk.Webhooks.Http;
 using Autodesk.Webhooks.Model;
 using System.Net.Http;
+using Autodesk.SDKManager;
+using System;
 
 namespace Autodesk.Webhooks
 {
-    public class WebhooksClient
+    /// <summary>
+    /// Client for managing webhooks.
+    /// </summary>
+    public class WebhooksClient : BaseClient
     {
+        /// <summary>
+        /// Gets the Hooks API instance.
+        /// </summary>
         public IHooksApi HooksApi { get; }
+        /// <summary>
+        /// Gets the Tokens API instance.
+        /// </summary>
         public ITokensApi TokensApi { get; }
 
 
-        public WebhooksClient(SDKManager.SDKManager sdkManager)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WebhooksClient"/> class.
+        /// </summary>
+        /// <param name="sdkManager">The SDK manager instance.</param>
+        /// <param name="authenticationProvider">The authentication provider instance.</param>
+        public WebhooksClient(SDKManager.SDKManager sdkManager = default, IAuthenticationProvider authenticationProvider = default) : base(authenticationProvider)
         {
-
+            if (sdkManager == null)
+            {
+                sdkManager = SdkManagerBuilder.Create().Build();
+            }
             this.HooksApi = new HooksApi(sdkManager);
             this.TokensApi = new TokensApi(sdkManager);
         }
 
         #region  HooksApi
         /// <summary>
-        /// Add new webhook to receive the notification on a specified event.
+        /// Create a Webhook for an Event
         /// </summary>
         /// <remarks>
-        /// Add new webhook to receive the notification on a specified event.
+        ///Adds a new webhook to receive notifications of the occurrence of a specified event for the specified system.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="system">string A system for example data for Data Management</param>/// <param name="_event">string A system for example data for Data Management</param>/// <param name="xAdsRegion">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;. (optional)</param>/// <param name="region">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;.  The &#x60;&#x60;x-ads-region&#x60;&#x60; header also specifies the region. If you specify both, &#x60;&#x60;x-ads-region&#x60;&#x60; has precedence.  (optional)</param>/// <param name="hookPayload"> (optional)</param>
-
+        /// <param name="system">
+        ///The ID of the system the webhook applies to. For example data for Data Management. See [Supported Events](/en/docs/webhooks/v1/reference/events/) for a full list of supported systems and their IDs.
+        /// </param>
+        /// <param name="_event">
+        ///The ID of the event the webhook monitors.  See [Supported Events](/en/docs/webhooks/v1/reference/events/) for a full list of events.
+        /// </param>
+        /// <param name="region">
+        ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make request to your callback URL. Possible values:
+        ///
+        ///- `US` - (Default) Data center dedicated to serve the United States region.
+        ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+        ///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+        ///
+        ///**Note:** 
+        ///
+        ///1. Beta features are subject to change. Please avoid using them in production environments.
+        ///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
+        /// </param>
+        /// <param name="hookPayload">The payload for the webhook.</param>
+        /// <param name="accessToken">An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().(optional)</param>
+        /// <param name="throwOnError">Specifies whether to throw an exception on error. (optional)</param>
         /// <returns>Task of HttpResponseMessage</returns>
-        public async System.Threading.Tasks.Task<HttpResponseMessage> CreateSystemEventHookAsync(string accessToken, Systems system, Events _event, HookPayload hookPayload, XAdsRegion? xAdsRegion= null, Region? region= null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<HttpResponseMessage> CreateSystemEventHookAsync(string system, string _event, HookPayload hookPayload, Region region = default, string accessToken = default, bool throwOnError = true)
         {
-            var response = await this.HooksApi.CreateSystemEventHookAsync(system, _event, region, xAdsRegion, hookPayload, accessToken, throwOnError);
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
+            var response = await this.HooksApi.CreateSystemEventHookAsync(system, _event, region, null, hookPayload, accessToken, throwOnError);
+            return response;
+        }
+
+        /// <summary>
+        /// Create a Webhook for an Event
+        /// </summary>
+        /// <remarks>
+        ///Adds a new webhook to receive notifications of the occurrence of a specified event for the specified system.
+        /// </remarks>
+        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+        /// <param name="system">
+        ///The ID of the system the webhook applies to. For example data for Data Management. See [Supported Events](/en/docs/webhooks/v1/reference/events/) for a full list of supported systems and their IDs.
+        /// </param>
+        /// <param name="_event">
+        ///The ID of the event the webhook monitors.  See [Supported Events](/en/docs/webhooks/v1/reference/events/) for a full list of events.
+        /// </param>
+        /// <param name="region">
+        ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make request to your callback URL. Possible values:
+        ///
+        ///- `US` - (Default) Data center dedicated to serve the United States region.
+        ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+        ///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+        ///
+        ///**Note:** 
+        ///
+        ///1. Beta features are subject to change. Please avoid using them in production environments.
+        ///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
+        /// </param>
+        /// <param name="hookPayload">The payload for the webhook.</param>
+        /// <param name="accessToken">An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().(optional)</param>
+        /// <param name="throwOnError">Specifies whether to throw an exception on error. (optional)</param>
+        /// <returns>Task of HttpResponseMessage</returns>
+
+        public async System.Threading.Tasks.Task<HttpResponseMessage> CreateSystemEventHookAsync(Systems system, Events _event, HookPayload hookPayload, Region region = default, string accessToken = default, bool throwOnError = true)
+        {
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
+            var systemString = Utils.GetEnumString(system);
+            var eventString = Utils.GetEnumString(_event);
+            var response = await this.HooksApi.CreateSystemEventHookAsync(systemString, eventString, region, null, hookPayload, accessToken, throwOnError);
             return response;
         }
 
 
         /// <summary>
-        /// Add new webhooks to receive the notification on all the events.
+        /// Create Webhooks for All Events
         /// </summary>
         /// <remarks>
-        /// Add new webhooks to receive the notification on all the events.
+        ///Adds a new webhook to receive notifications of all events for the specified system.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="system">string A system for example data for Data Management</param>/// <param name="xAdsRegion">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;. (optional)</param>/// <param name="region">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;.  The &#x60;&#x60;x-ads-region&#x60;&#x60; header also specifies the region. If you specify both, &#x60;&#x60;x-ads-region&#x60;&#x60; has precedence.  (optional)</param>/// <param name="hookPayload"> (optional)</param>
-        /// <returns>Task of HookCreationResult</returns>
+        /// <param name="system">
+        ///The ID of the system the webhook applies to. For example data for Data Management. See [Supported Events](/en/docs/webhooks/v1/reference/events/) for a full list of supported systems and their IDs.
+        /// </param>
+        /// <param name="region">
+        ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make request to your callback URL. Possible values:
+        ///
+        ///- `US` - (Default) Data center dedicated to serve the United States region.
+        ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+        ///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+        ///
+        ///**Note:** 
+        ///
+        ///1. Beta features are subject to change. Please avoid using them in production environments.
+        ///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
+        /// </param>
+        /// <param name="hookPayload">The payload for the webhook.</param>
+        /// <param name="accessToken">An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().(optional)</param>
+        /// <param name="throwOnError">Specifies whether to throw an exception on error. (optional)</param>
+        /// <returns>Task of Hook</returns>
 
-        public async System.Threading.Tasks.Task<Hook> CreateSystemHookAsync(string accessToken, Systems system, HookPayload hookPayload, XAdsRegion? xAdsRegion= null, Region? region= null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<Hook> CreateSystemHookAsync(string system, HookPayload hookPayload, Region region = default, string accessToken = default, bool throwOnError = true)
         {
-            var response = await this.HooksApi.CreateSystemHookAsync(system, xAdsRegion, region, hookPayload, accessToken, throwOnError);
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
+            var response = await this.HooksApi.CreateSystemHookAsync(system, null, region, hookPayload, accessToken, throwOnError);
             return response.Content;
         }
 
         /// <summary>
-        /// Deletes a webhook based on webhook ID
+        /// Create Webhooks for All Events
         /// </summary>
         /// <remarks>
-        /// Deletes a webhook based on webhook ID
+        ///Adds a new webhook to receive notifications of all events for the specified system.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="system">string A system for example data for Data Management</param>/// <param name="_event">string A system for example data for Data Management</param>/// <param name="hookId">Id of the webhook to retrieve</param>/// <param name="xAdsRegion">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;. (optional)</param>/// <param name="region">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;.  The &#x60;&#x60;x-ads-region&#x60;&#x60; header also specifies the region. If you specify both, &#x60;&#x60;x-ads-region&#x60;&#x60; has precedence.  (optional)</param>
+        /// <param name="system">
+        ///The ID of the system the webhook applies to. For example data for Data Management. See [Supported Events](/en/docs/webhooks/v1/reference/events/) for a full list of supported systems and their IDs.
+        /// </param>
+        /// <param name="region">
+        ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make request to your callback URL. Possible values:
+        ///
+        ///- `US` - (Default) Data center dedicated to serve the United States region.
+        ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+        ///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+        ///
+        ///**Note:** 
+        ///
+        ///1. Beta features are subject to change. Please avoid using them in production environments.
+        ///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
+        /// </param>
+        /// <param name="hookPayload">The payload for the webhook.</param>
+        /// <param name="accessToken">An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().(optional)</param>
+        /// <param name="throwOnError">Specifies whether to throw an exception on error. (optional)</param>
+        /// <returns>Task of Hook</returns>
 
-        /// <returns>Task of HttpResponseMessage</returns>
-        public async System.Threading.Tasks.Task<HttpResponseMessage> DeleteSystemEventHookAsync(string accessToken, Systems system, Events _event, string hookId, XAdsRegion? xAdsRegion= null, Region? region= null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<Hook> CreateSystemHookAsync(Systems system, HookPayload hookPayload, Region region = default, string accessToken = default, bool throwOnError = true)
         {
-            var response = await this.HooksApi.DeleteSystemEventHookAsync(system, _event, hookId, xAdsRegion, region, accessToken, throwOnError);
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
+            var systemString = Utils.GetEnumString(system);
+            var response = await this.HooksApi.CreateSystemHookAsync(systemString, null, region, hookPayload, accessToken, throwOnError);
+            return response.Content;
+        }
+
+        /// <summary>
+        /// Delete a Webhook
+        /// </summary>
+        /// <remarks>
+        ///Deletes the webhook specified by its ID.
+        /// </remarks>
+        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+        /// <param name="system">
+        ///The ID of the system the webhook applies to. For example data for Data Management. See [Supported Events](/en/docs/webhooks/v1/reference/events/) for a full list of supported systems and their IDs.
+        /// </param>
+        /// <param name="_event">
+        ///The ID of the event the webhook monitors.  See [Supported Events](/en/docs/webhooks/v1/reference/events/) for a full list of events.
+        /// </param>
+        /// <param name="hookId">
+        ///The ID of the webhook to delete.
+        /// </param>
+        /// <param name="region">
+        ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make request to your callback URL. Possible values:
+        ///
+        ///- `US` - (Default) Data center dedicated to serve the United States region.
+        ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+        ///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+        ///
+        ///**Note:** 
+        ///
+        ///1. Beta features are subject to change. Please avoid using them in production environments.
+        ///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
+        /// </param>
+        /// <param name="accessToken">An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().(optional)</param>
+        /// <param name="throwOnError">Specifies whether to throw an exception on error. (optional)</param>
+        /// <returns>Task of HttpResponseMessage</returns>
+        public async System.Threading.Tasks.Task<HttpResponseMessage> DeleteSystemEventHookAsync(string system, string _event, string hookId, Region region = default, string accessToken = default, bool throwOnError = true)
+        {
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
+            var response = await this.HooksApi.DeleteSystemEventHookAsync(system, _event, hookId, null, region, accessToken, throwOnError);
             return response;
         }
 
         /// <summary>
-        /// Retrieves a paginated list of webhooks created in the context of a Client or Application. This API accepts 2-legged token of the application only. If the pageState query string is not specified, the first page is returned.
+        /// Delete a Webhook
         /// </summary>
         /// <remarks>
-        /// Retrieves a paginated list of webhooks created in the context of a Client or Application. This API accepts 2-legged token of the application only. If the pageState query string is not specified, the first page is returned.
+        ///Deletes the webhook specified by its ID.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="xAdsRegion">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;. (optional)</param>/// <param name="pageState">Base64 encoded string used to return the next page of the list of webhooks. This can be obtained from the &#x60;&#x60;next&#x60;&#x60; field of the previous page. PagingState instances are not portable and implementation is subject to change across versions. Default page size is 200. (optional)</param>/// <param name="status">Status of the hooks. Options: &#x60;&#x60;active&#x60;&#x60;, &#x60;&#x60;inactive&#x60;&#x60; (optional)</param>/// <param name="sort">Sort order of the hooks based on last updated time. Options: ‘asc’, ‘desc’. Default is ‘desc’. (optional)</param>/// <param name="region">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;.  The &#x60;&#x60;x-ads-region&#x60;&#x60; header also specifies the region. If you specify both, &#x60;&#x60;x-ads-region&#x60;&#x60; has precedence.  (optional)</param>
-        /// <returns>Task of HooksResult</returns>
-
-        public async System.Threading.Tasks.Task<Hooks> GetAppHooksAsync(string accessToken, XAdsRegion? xAdsRegion= null, Region? region= null, string pageState = default(string), string status = default(string), string sort = default(string), bool throwOnError = true)
-        {
-            var response = await this.HooksApi.GetAppHooksAsync(xAdsRegion, pageState, status, sort, region, accessToken, throwOnError);
-            return response.Content;
-        }
-
-
-        /// <summary>
-        /// Get details of a webhook based on its webhook ID
-        /// </summary>
-        /// <remarks>
-        /// Get details of a webhook based on its webhook ID
-        /// </remarks>
-        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="system">string A system for example data for Data Management</param>/// <param name="_event">string A system for example data for Data Management</param>/// <param name="hookId">Id of the webhook to retrieve</param>/// <param name="xAdsRegion">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;. (optional)</param>/// <param name="region">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;.  The &#x60;&#x60;x-ads-region&#x60;&#x60; header also specifies the region. If you specify both, &#x60;&#x60;x-ads-region&#x60;&#x60; has precedence.  (optional)</param>
-        /// <returns>Task of HookDetailsResult</returns>
-
-        public async System.Threading.Tasks.Task<HookDetails> GetHookDetailsAsync(string accessToken, Systems system, Events _event, string hookId, XAdsRegion? xAdsRegion= null, Region? region= null, bool throwOnError = true)
-        {
-            var response = await this.HooksApi.GetHookDetailsAsync(system, _event, hookId, xAdsRegion, region, accessToken, throwOnError);
-            return response.Content;
-
-        }
-
-        /// <summary>
-        /// Retrieves a paginated list of all the webhooks. If the pageState query string is not specified, the first page is returned.
-        /// </summary>
-        /// <remarks>
-        /// Retrieves a paginated list of all the webhooks. If the pageState query string is not specified, the first page is returned.
-        /// </remarks>
-        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="pageState">Base64 encoded string used to return the next page of the list of webhooks. This can be obtained from the next field of the previous page. PagingState instances are not portable and implementation is subject to change across versions. Default page size is 200. (optional)</param>/// <param name="status">Status of the hooks. Options: ‘active’, ‘inactive’ (optional)</param>/// <param name="region">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;.  The &#x60;&#x60;x-ads-region&#x60;&#x60; header also specifies the region. If you specify both, &#x60;&#x60;x-ads-region&#x60;&#x60; has precedence.  (optional)</param>/// <param name="xAdsRegion">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: EMEA, US. Default is US. (optional)</param>
-        /// <returns>Task of HooksResult</returns>
-
-        public async System.Threading.Tasks.Task<Hooks> GetHooksAsync(string accessToken, string pageState = default(string), string status = default(string), XAdsRegion? xAdsRegion= null, Region? region= null, bool throwOnError = true)
-        {
-            var response = await this.HooksApi.GetHooksAsync(pageState, status, region, xAdsRegion, accessToken, throwOnError);
-            return response.Content;
-
-        }
-
-        /// <summary>
-        /// Retrieves a paginated list of all the webhooks for a specified event. If the pageState query string is not specified, the first page is returned.
-        /// </summary>
-        /// <remarks>
-        /// Retrieves a paginated list of all the webhooks for a specified event. If the pageState query string is not specified, the first page is returned.
-        /// </remarks>
-        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="system">string A system for example data for Data Management</param>/// <param name="_event">string A system for example data for Data Management</param>/// <param name="xAdsRegion">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;. (optional)</param>/// <param name="region">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;.  The &#x60;&#x60;x-ads-region&#x60;&#x60; header also specifies the region. If you specify both, &#x60;&#x60;x-ads-region&#x60;&#x60; has precedence.  (optional)</param>/// <param name="scopeName">Scope name used to create hook. For example : folder (optional)</param>/// <param name="pageState">Base64 encoded string used to return the next page of the list of webhooks. This can be obtained from the &#x60;&#x60;next&#x60;&#x60; field of the previous page. PagingState instances are not portable and implementation is subject to change across versions. Default page size is 200. (optional)</param>/// <param name="status">Status of the hooks. Options: &#x60;&#x60;active&#x60;&#x60;, &#x60;&#x60;inactive&#x60;&#x60; (optional)</param>
-        /// <returns>Task of HooksResult</returns>
-
-        public async System.Threading.Tasks.Task<Hooks> GetSystemEventHooksAsync(string accessToken, Systems system, Events _event, XAdsRegion? xAdsRegion= null, Region? region= null, string scopeName = default(string), string pageState = default(string), string status = default(string), bool throwOnError = true)
-        {
-            var response = await this.HooksApi.GetSystemEventHooksAsync(system, _event, xAdsRegion, region, scopeName, pageState, status, accessToken, throwOnError);
-            return response.Content;
-        }
-        /// <summary>
-        /// Retrieves a paginated list of all the webhooks for a specified system. If the pageState query string is not specified, the first page is returned.
-        /// </summary>
-        /// <remarks>
-        /// Retrieves a paginated list of all the webhooks for a specified system. If the pageState query string is not specified, the first page is returned.
-        /// </remarks>
-        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="system">string A system for example data for Data Management</param>/// <param name="xAdsRegion">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;. (optional)</param>/// <param name="status">Status of the hooks. Options: &#x60;&#x60;active&#x60;&#x60;, &#x60;&#x60;inactive&#x60;&#x60; (optional)</param>/// <param name="pageState">Base64 encoded string used to return the next page of the list of webhooks. This can be obtained from the &#x60;&#x60;next&#x60;&#x60; field of the previous page. PagingState instances are not portable and implementation is subject to change across versions. Default page size is 200. (optional)</param>/// <param name="region">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;.  The &#x60;&#x60;x-ads-region&#x60;&#x60; header also specifies the region. If you specify both, &#x60;&#x60;x-ads-region&#x60;&#x60; has precedence.  (optional)</param>
-        /// <returns>Task of HooksResult</returns>
-
-        public async System.Threading.Tasks.Task<Hooks> GetSystemHooksAsync(string accessToken, Systems system, XAdsRegion? xAdsRegion= null, Region? region= null, string status = default(string), string pageState = default(string), bool throwOnError = true)
-        {
-            var response = await this.HooksApi.GetSystemHooksAsync(system, xAdsRegion, status, pageState, region, accessToken, throwOnError);
-            return response.Content;
-        }
-        /// <summary>
-        /// Partially update a webhook based on its webhook ID. The only fields that may be updated are: status, filter, hookAttribute, and hookExpiry.
-        /// </summary>
-        /// <remarks>
-        /// Partially update a webhook based on its webhook ID. The only fields that may be updated are: status, filter, hookAttribute, and hookExpiry.
-        /// </remarks>
-        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="system">string A system for example data for Data Management</param>/// <param name="_event">string A system for example data for Data Management</param>/// <param name="hookId">Id of the webhook to retrieve</param>/// <param name="xAdsRegion">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;. (optional)</param>/// <param name="region">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;.  The &#x60;&#x60;x-ads-region&#x60;&#x60; header also specifies the region. If you specify both, &#x60;&#x60;x-ads-region&#x60;&#x60; has precedence.  (optional)</param>/// <param name="modifyHookPayload"> (optional)</param>
-
+        /// <param name="system">
+        ///The ID of the system the webhook applies to. For example data for Data Management. See [Supported Events](/en/docs/webhooks/v1/reference/events/) for a full list of supported systems and their IDs.
+        /// </param>
+        /// <param name="_event">
+        ///The ID of the event the webhook monitors.  See [Supported Events](/en/docs/webhooks/v1/reference/events/) for a full list of events.
+        /// </param>
+        /// <param name="hookId">
+        ///The ID of the webhook to delete.
+        /// </param>
+        /// <param name="region">
+        ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make request to your callback URL. Possible values:
+        ///
+        ///- `US` - (Default) Data center dedicated to serve the United States region.
+        ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+        ///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+        ///
+        ///**Note:** 
+        ///
+        ///1. Beta features are subject to change. Please avoid using them in production environments.
+        ///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
+        /// </param>
+        /// <param name="accessToken">An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().(optional)</param>
+        /// <param name="throwOnError">Specifies whether to throw an exception on error. (optional)</param>
         /// <returns>Task of HttpResponseMessage</returns>
-        public async System.Threading.Tasks.Task<HttpResponseMessage> PatchSystemEventHookAsync(string accessToken, Systems system, Events _event, string hookId, ModifyHookPayload modifyHookPayload, XAdsRegion? xAdsRegion= null, Region? region= null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<HttpResponseMessage> DeleteSystemEventHookAsync(Systems system, Events _event, string hookId, Region region = default, string accessToken = default, bool throwOnError = true)
         {
-            var response = await this.HooksApi.PatchSystemEventHookAsync(system, _event, hookId, xAdsRegion, region, modifyHookPayload, accessToken, throwOnError);
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
+            var systemString = Utils.GetEnumString(system);
+            var eventString = Utils.GetEnumString(_event);
+            var response = await this.HooksApi.DeleteSystemEventHookAsync(systemString, eventString, hookId, null, region, accessToken, throwOnError);
+            return response;
+        }
+
+        /// <summary>
+        /// List All Webhooks for an App
+        /// </summary>
+        /// <remarks>
+        ///Retrieves a paginated list of webhooks created by the calling application. Each page includes up to 200 webhooks.
+        ///
+        ///If the `pageState` query string parameter is not provided, the first page of results is returned. Use the `next` value from the previous response to fetch subsequent pages.
+        ///
+        ///**Note:** This operation requires an access token through a Client Credentials flow (two-legged OAuth). 
+        /// </remarks>
+        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+        /// <param name="pageState">
+        ///Base64 encoded string to fetch the next page of the list of webhooks. If you do not provide this parameter, the first page of results is returned. Use the `next` value from the previous response to fetch subsequent pages. (optional)
+        /// </param>
+        /// <param name="status">
+        ///Filters retrieved webhooks by their current state. Possible values are 
+        ///
+        ///- `active` - Successfully delivered most recent event notifications. 
+        ///- `inactive` - Failed to deliver most recent event notification and has been deactivated.
+        ///- `reactivated` - Previously inactive but was reactivated. No events have occurred since reactivation.
+        ///
+        ///If this parameter is not specified, the filter is not applied. See [Event Delivery Guarantees](/en/docs/webhooks/v1/developers_guide/event-delivery-guarantees/) for more information on how the state of a webhook changes. (optional)
+        /// </param>
+        /// <param name="region">
+        ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make request to your callback URL. Possible values:
+        ///
+        ///- `US` - (Default) Data center dedicated to serve the United States region.
+        ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+        ///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+        ///
+        ///**Note:** 
+        ///
+        ///1. Beta features are subject to change. Please avoid using them in production environments.
+        ///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
+        /// </param>
+        /// <param name="sort">
+        ///Specifies the sorting order of the list of webhooks by their `lastUpdatedDate` attribute. 
+        ///
+        ///- `asc` - Ascending order.
+        ///- `desc` - (Default) Descending order.  (optional)
+        /// </param>
+        /// <param name="accessToken">An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().(optional)</param>
+        /// <param name="throwOnError">Specifies whether to throw an exception on error. (optional)</param>
+        /// <returns>Task of Hooks</returns>
+
+        public async System.Threading.Tasks.Task<Hooks> GetAppHooksAsync(Region region = default, string pageState = default(string), StatusFilter status = default, Sort sort = default, string accessToken = default, bool throwOnError = true)
+        {
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
+            var response = await this.HooksApi.GetAppHooksAsync(null, pageState, status, sort, region, accessToken, throwOnError);
+            return response.Content;
+        }
+
+
+        /// <summary>
+        /// Get Webhook Details
+        /// </summary>
+        /// <remarks>
+        ///Retrieves the details of the webhook for the specified event within the specified system.
+        /// </remarks>
+        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+        /// <param name="system">
+        ///The ID of the system the webhook applies to. For example data for Data Management. See [Supported Events](/en/docs/webhooks/v1/reference/events/) for a full list of supported systems and their IDs.
+        /// </param>
+        /// <param name="_event">
+        ///The ID of the event the webhook monitors.  See [Supported Events](/en/docs/webhooks/v1/reference/events/) for a full list of events.
+        /// </param>
+        /// <param name="hookId">
+        ///The ID of the webhook to delete.
+        /// </param>
+        /// <param name="region">
+        ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make request to your callback URL. Possible values:
+        ///
+        ///- `US` - (Default) Data center dedicated to serve the United States region.
+        ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+        ///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+        ///
+        ///**Note:** 
+        ///
+        ///1. Beta features are subject to change. Please avoid using them in production environments.
+        ///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
+        /// </param>
+        /// <param name="accessToken">An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().(optional)</param>
+        /// <param name="throwOnError">Specifies whether to throw an exception on error. (optional)</param>
+        /// <returns>Task of HookDetails</returns>
+
+        public async System.Threading.Tasks.Task<HookDetails> GetHookDetailsAsync(string system, string _event, string hookId, Region region = default, string accessToken = default, bool throwOnError = true)
+        {
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
+            var response = await this.HooksApi.GetHookDetailsAsync(system, _event, hookId, null, region, accessToken, throwOnError);
+            return response.Content;
+        }
+
+        /// <summary>
+        /// Get Webhook Details
+        /// </summary>
+        /// <remarks>
+        ///Retrieves the details of the webhook for the specified event within the specified system.
+        /// </remarks>
+        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+        /// <param name="system">
+        ///The ID of the system the webhook applies to. For example data for Data Management. See [Supported Events](/en/docs/webhooks/v1/reference/events/) for a full list of supported systems and their IDs.
+        /// </param>
+        /// <param name="_event">
+        ///The ID of the event the webhook monitors.  See [Supported Events](/en/docs/webhooks/v1/reference/events/) for a full list of events.
+        /// </param>
+        /// <param name="hookId">
+        ///The ID of the webhook to delete.
+        /// </param>
+        /// <param name="region">
+        ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make request to your callback URL. Possible values:
+        ///
+        ///- `US` - (Default) Data center dedicated to serve the United States region.
+        ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+        ///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+        ///
+        ///**Note:** 
+        ///
+        ///1. Beta features are subject to change. Please avoid using them in production environments.
+        ///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
+        /// </param>
+        /// <param name="accessToken">An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().(optional)</param>
+        /// <param name="throwOnError">Specifies whether to throw an exception on error. (optional)</param>
+        /// <returns>Task of HookDetails</returns>
+        public async System.Threading.Tasks.Task<HookDetails> GetHookDetailsAsync(Systems system, Events _event, string hookId, Region region = default, string accessToken = default, bool throwOnError = true)
+        {
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
+            var systemString = Utils.GetEnumString(system);
+            var eventString = Utils.GetEnumString(_event);
+            var response = await this.HooksApi.GetHookDetailsAsync(systemString, eventString, hookId, null, region, accessToken, throwOnError);
+            return response.Content;
+        }
+
+        /// <summary>
+        /// List All Webhooks
+        /// </summary>
+        /// <remarks>
+        ///Retrieves a paginated list of webhooks available to the provided access token within the specified region. Each page includes up to 200 webhooks.
+        ///
+        ///If the `pageState` query string parameter is not provided, the first page of results is returned. Use the `next` value from the previous response to fetch subsequent pages.
+        /// </remarks>
+        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+        /// <param name="pageState">
+        ///Base64 encoded string to fetch the next page of the list of webhooks. If you do not provide this parameter, the first page of results is returned. Use the `next` value from the previous response to fetch subsequent pages. (optional)
+        /// </param>
+        /// <param name="status">
+        ///Filters retrieved webhooks by their current state. Possible values are 
+        ///
+        ///- `active` - Successfully delivered most recent event notifications. 
+        ///- `inactive` - Failed to deliver most recent event notification and has been deactivated.
+        ///- `reactivated` - Previously inactive but was reactivated. No events have occurred since reactivation.
+        ///
+        ///If this parameter is not specified, the filter is not applied. See [Event Delivery Guarantees](/en/docs/webhooks/v1/developers_guide/event-delivery-guarantees/) for more information on how the state of a webhook changes. (optional)
+        /// </param>
+        /// <param name="region">
+        ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make request to your callback URL. Possible values:
+        ///
+        ///- `US` - (Default) Data center dedicated to serve the United States region.
+        ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+        ///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+        ///
+        ///**Note:** 
+        ///
+        ///1. Beta features are subject to change. Please avoid using them in production environments.
+        ///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
+        /// </param>
+        /// <param name="accessToken">An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().(optional)</param>
+        /// <param name="throwOnError">Specifies whether to throw an exception on error. (optional)</param>
+        /// <returns>Task of Hooks</returns>
+
+        public async System.Threading.Tasks.Task<Hooks> GetHooksAsync(string pageState = default(string), StatusFilter status = default, Region region = default, string accessToken = default, bool throwOnError = true)
+        {
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
+            var response = await this.HooksApi.GetHooksAsync(pageState, status, region, null, accessToken, throwOnError);
+            return response.Content;
+
+        }
+
+        /// <summary>
+        /// List All Webhooks for an Event
+        /// </summary>
+        /// <remarks>
+        ///Retrieves a paginated list of webhooks for the specified event. The returned list contains a subset of webhooks accessible to the provided access token within the specified region. Each page includes up to 200 webhooks.
+        ///
+        ///If the `pageState` query string parameter is not provided, the first page of results is returned. Use the `next` value from the previous response to fetch subsequent pages.
+        /// </remarks>
+        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+        /// <param name="system">
+        ///The ID of the system the webhook applies to. For example data for Data Management. See [Supported Events](/en/docs/webhooks/v1/reference/events/) for a full list of supported systems and their IDs.
+        /// </param>
+        /// <param name="_event">
+        ///The ID of the event the webhook monitors.  See [Supported Events](/en/docs/webhooks/v1/reference/events/) for a full list of events.
+        /// </param>
+        /// <param name="region">
+        ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make request to your callback URL. Possible values:
+        ///
+        ///- `US` - (Default) Data center dedicated to serve the United States region.
+        ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+        ///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+        ///
+        ///**Note:** 
+        ///
+        ///1. Beta features are subject to change. Please avoid using them in production environments.
+        ///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
+        /// </param>
+        /// <param name="scopeName">
+        ///Filters retrieved webhooks by the scope name used to create hook. For example : `folder`.  If this parameter is not specified, the filter is not applied. (optional)
+        /// </param>
+        /// <param name="pageState">
+        ///Base64 encoded string to fetch the next page of the list of webhooks. If you do not provide this parameter, the first page of results is returned. Use the `next` value from the previous response to fetch subsequent pages. (optional)
+        /// </param>
+        /// <param name="status">
+        ///Filters retrieved webhooks by their current state. Possible values are 
+        ///
+        ///- `active` - Successfully delivered most recent event notifications. 
+        ///- `inactive` - Failed to deliver most recent event notification and has been deactivated.
+        ///- `reactivated` - Previously inactive but was reactivated. No events have occurred since reactivation.
+        ///
+        ///If this parameter is not specified, the filter is not applied. See [Event Delivery Guarantees](/en/docs/webhooks/v1/developers_guide/event-delivery-guarantees/) for more information on how the state of a webhook changes. (optional)
+        /// </param>
+        /// <param name="accessToken">An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().(optional)</param>
+        /// <param name="throwOnError">Specifies whether to throw an exception on error. (optional)</param>
+
+        /// <returns>Task of Hooks</returns>
+
+        public async System.Threading.Tasks.Task<Hooks> GetSystemEventHooksAsync(string system, string _event, Region region = default, string scopeName = default(string), string pageState = default(string), StatusFilter status = default, string accessToken = default, bool throwOnError = true)
+        {
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
+            var response = await this.HooksApi.GetSystemEventHooksAsync(system, _event, null, region, scopeName, pageState, status, accessToken, throwOnError);
+            return response.Content;
+        }
+
+        /// <summary>
+        /// List All Webhooks for an Event
+        /// </summary>
+        /// <remarks>
+        ///Retrieves a paginated list of webhooks for the specified event. The returned list contains a subset of webhooks accessible to the provided access token within the specified region. Each page includes up to 200 webhooks.
+        ///
+        ///If the `pageState` query string parameter is not provided, the first page of results is returned. Use the `next` value from the previous response to fetch subsequent pages.
+        /// </remarks>
+        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+        /// <param name="system">
+        ///The ID of the system the webhook applies to. For example data for Data Management. See [Supported Events](/en/docs/webhooks/v1/reference/events/) for a full list of supported systems and their IDs.
+        /// </param>
+        /// <param name="_event">
+        ///The ID of the event the webhook monitors.  See [Supported Events](/en/docs/webhooks/v1/reference/events/) for a full list of events.
+        /// </param>
+        /// <param name="region">
+        ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make request to your callback URL. Possible values:
+        ///
+        ///- `US` - (Default) Data center dedicated to serve the United States region.
+        ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+        ///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+        ///
+        ///**Note:** 
+        ///
+        ///1. Beta features are subject to change. Please avoid using them in production environments.
+        ///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
+        /// </param>
+        /// <param name="scopeName">
+        ///Filters retrieved webhooks by the scope name used to create hook. For example : `folder`.  If this parameter is not specified, the filter is not applied. (optional)
+        /// </param>
+        /// <param name="pageState">
+        ///Base64 encoded string to fetch the next page of the list of webhooks. If you do not provide this parameter, the first page of results is returned. Use the `next` value from the previous response to fetch subsequent pages. (optional)
+        /// </param>
+        /// <param name="status">
+        ///Filters retrieved webhooks by their current state. Possible values are 
+        ///
+        ///- `active` - Successfully delivered most recent event notifications. 
+        ///- `inactive` - Failed to deliver most recent event notification and has been deactivated.
+        ///- `reactivated` - Previously inactive but was reactivated. No events have occurred since reactivation.
+        ///
+        ///If this parameter is not specified, the filter is not applied. See [Event Delivery Guarantees](/en/docs/webhooks/v1/developers_guide/event-delivery-guarantees/) for more information on how the state of a webhook changes. (optional)
+        /// </param>
+        /// <param name="accessToken">An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().(optional)</param>
+        /// <param name="throwOnError">Specifies whether to throw an exception on error. (optional)</param>
+        /// <returns>Task of Hooks</returns>
+        public async System.Threading.Tasks.Task<Hooks> GetSystemEventHooksAsync(Systems system, Events _event, Region region = default, string scopeName = default(string), string pageState = default(string), StatusFilter status = default, string accessToken = default, bool throwOnError = true)
+        {
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
+            var systemString = Utils.GetEnumString(system);
+            var eventString = Utils.GetEnumString(_event);
+            var response = await this.HooksApi.GetSystemEventHooksAsync(systemString, eventString, null, region, scopeName, pageState, status, accessToken, throwOnError);
+            return response.Content;
+        }
+
+        /// <summary>
+        /// List All Webhooks for a System
+        /// </summary>
+        /// <remarks>
+        ///Retrieves a paginated list of webhooks for the specified system. The returned list contains a subset of webhooks accessible to the provided access token within the specified region. Each page includes up to 200 webhooks.
+        ///
+        ///If the `pageState` query string parameter is not provided, the first page of results is returned. Use the `next` value from the previous response to fetch subsequent pages.
+        /// </remarks>
+        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+        /// <param name="system">
+        ///The ID of the system the webhook applies to. For example data for Data Management. See [Supported Events](/en/docs/webhooks/v1/reference/events/) for a full list of supported systems and their IDs.
+        /// </param>
+        /// <param name="status">
+        ///Filters retrieved webhooks by their current state. Possible values are 
+        ///
+        ///- `active` - Successfully delivered most recent event notifications. 
+        ///- `inactive` - Failed to deliver most recent event notification and has been deactivated.
+        ///- `reactivated` - Previously inactive but was reactivated. No events have occurred since reactivation.
+        ///
+        ///If this parameter is not specified, the filter is not applied. See [Event Delivery Guarantees](/en/docs/webhooks/v1/developers_guide/event-delivery-guarantees/) for more information on how the state of a webhook changes. (optional)
+        /// </param>
+        /// <param name="pageState">
+        ///Base64 encoded string to fetch the next page of the list of webhooks. If you do not provide this parameter, the first page of results is returned. Use the `next` value from the previous response to fetch subsequent pages. (optional)
+        /// </param>
+        /// <param name="region">
+        ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make request to your callback URL. Possible values:
+        ///
+        ///- `US` - (Default) Data center dedicated to serve the United States region.
+        ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+        ///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+        ///
+        ///**Note:** 
+        ///
+        ///1. Beta features are subject to change. Please avoid using them in production environments.
+        ///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
+        /// </param>
+        /// <param name="accessToken">An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().(optional)</param>
+        /// <param name="throwOnError">Specifies whether to throw an exception on error. (optional)</param>
+        /// <returns>Task of Hooks</returns>
+
+        public async System.Threading.Tasks.Task<Hooks> GetSystemHooksAsync(string system, Region region = default, StatusFilter status = default, string pageState = default(string), string accessToken = default, bool throwOnError = true)
+        {
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
+            var response = await this.HooksApi.GetSystemHooksAsync(system, null, status, pageState, region, accessToken, throwOnError);
+            return response.Content;
+        }
+
+
+        /// <summary>
+        /// List All Webhooks for a System
+        /// </summary>
+        /// <remarks>
+        ///Retrieves a paginated list of webhooks for the specified system. The returned list contains a subset of webhooks accessible to the provided access token within the specified region. Each page includes up to 200 webhooks.
+        ///
+        ///If the `pageState` query string parameter is not provided, the first page of results is returned. Use the `next` value from the previous response to fetch subsequent pages.
+        /// </remarks>
+        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+        /// <param name="system">
+        ///The ID of the system the webhook applies to. For example data for Data Management. See [Supported Events](/en/docs/webhooks/v1/reference/events/) for a full list of supported systems and their IDs.
+        /// </param>
+        /// <param name="status">
+        ///Filters retrieved webhooks by their current state. Possible values are 
+        ///
+        ///- `active` - Successfully delivered most recent event notifications. 
+        ///- `inactive` - Failed to deliver most recent event notification and has been deactivated.
+        ///- `reactivated` - Previously inactive but was reactivated. No events have occurred since reactivation.
+        ///
+        ///If this parameter is not specified, the filter is not applied. See [Event Delivery Guarantees](/en/docs/webhooks/v1/developers_guide/event-delivery-guarantees/) for more information on how the state of a webhook changes. (optional)
+        /// </param>
+        /// <param name="pageState">
+        ///Base64 encoded string to fetch the next page of the list of webhooks. If you do not provide this parameter, the first page of results is returned. Use the `next` value from the previous response to fetch subsequent pages. (optional)
+        /// </param>
+        /// <param name="region">
+        ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make request to your callback URL. Possible values:
+        ///
+        ///- `US` - (Default) Data center dedicated to serve the United States region.
+        ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+        ///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+        ///
+        ///**Note:** 
+        ///
+        ///1. Beta features are subject to change. Please avoid using them in production environments.
+        ///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
+        /// </param>
+        /// <param name="accessToken">An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().(optional)</param>
+        /// <param name="throwOnError">Specifies whether to throw an exception on error. (optional)</param>
+        /// <returns>Task of Hooks</returns>
+        public async System.Threading.Tasks.Task<Hooks> GetSystemHooksAsync(Systems system, Region region = default, StatusFilter status = default, string pageState = default(string), string accessToken = default, bool throwOnError = true)
+        {
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
+            var systemString = Utils.GetEnumString(system);
+            var response = await this.HooksApi.GetSystemHooksAsync(systemString, null, status, pageState, region, accessToken, throwOnError);
+            return response.Content;
+        }
+
+
+        /// <summary>
+        /// Update a Webhook
+        /// </summary>
+        /// <remarks>
+        ///Updates the webhook specified by the `hook_id` parameter. Currently the only attributes you can update are: 
+        ///
+        ///- filter
+        ///- status
+        ///- hook attribute
+        ///- token
+        ///- auto-reactivate hook flag
+        ///- hook expiry
+        ///- callbackWithEventPaylaod flag 
+        ///
+        ///See the request body documentation for more information.
+        /// </remarks>
+        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+        /// <param name="system">
+        ///The ID of the system the webhook applies to. For example data for Data Management. See [Supported Events](/en/docs/webhooks/v1/reference/events/) for a full list of supported systems and their IDs.
+        /// </param>
+        /// <param name="_event">
+        ///The ID of the event the webhook monitors.  See [Supported Events](/en/docs/webhooks/v1/reference/events/) for a full list of events.
+        /// </param>
+        /// <param name="hookId">
+        ///The ID of the webhook to delete.
+        /// </param>
+        /// <param name="modifyHookPayload">
+        ///The payload containing the modifications to be applied to the webhook.
+        /// </param>
+        /// <param name="region">
+        ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make request to your callback URL. Possible values:
+        ///
+        ///- `US` - (Default) Data center dedicated to serve the United States region.
+        ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+        ///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+        ///
+        ///**Note:** 
+        ///
+        ///1. Beta features are subject to change. Please avoid using them in production environments.
+        ///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
+        /// </param>   
+        /// <param name="accessToken">An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().(optional)</param>
+        /// <param name="throwOnError">Specifies whether to throw an exception on error. (optional)</param>
+        /// <returns>Task of HttpResponseMessage</returns>
+        public async System.Threading.Tasks.Task<HttpResponseMessage> PatchSystemEventHookAsync(string system, string _event, string hookId, ModifyHookPayload modifyHookPayload, Region region = default, string accessToken = default, bool throwOnError = true)
+        {
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
+            var response = await this.HooksApi.PatchSystemEventHookAsync(system, _event, hookId, null, region, modifyHookPayload, accessToken, throwOnError);
+            return response;
+        }
+
+        /// <summary>
+        /// Update a Webhook
+        /// </summary>
+        /// <remarks>
+        ///Updates the webhook specified by the `hook_id` parameter. Currently the only attributes you can update are: 
+        ///
+        ///- filter
+        ///- status
+        ///- hook attribute
+        ///- token
+        ///- auto-reactivate hook flag
+        ///- hook expiry
+        ///- callbackWithEventPaylaod flag 
+        ///
+        ///See the request body documentation for more information.
+        /// </remarks>
+        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+        /// <param name="system">
+        ///The ID of the system the webhook applies to. For example data for Data Management. See [Supported Events](/en/docs/webhooks/v1/reference/events/) for a full list of supported systems and their IDs.
+        /// </param>
+        /// <param name="_event">
+        ///The ID of the event the webhook monitors.  See [Supported Events](/en/docs/webhooks/v1/reference/events/) for a full list of events.
+        /// </param>
+        /// <param name="hookId">
+        ///The ID of the webhook to delete.
+        /// </param>
+        /// <param name="modifyHookPayload">
+        ///The payload containing the modifications to be applied to the webhook.
+        /// </param>
+        /// <param name="region">
+        ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make request to your callback URL. Possible values:
+        ///
+        ///- `US` - (Default) Data center dedicated to serve the United States region.
+        ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+        ///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+        ///
+        ///**Note:** 
+        ///
+        ///1. Beta features are subject to change. Please avoid using them in production environments.
+        ///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
+        /// </param>   
+        /// <param name="accessToken">An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().(optional)</param>
+        /// <param name="throwOnError">Specifies whether to throw an exception on error. (optional)</param>
+        /// <returns>Task of HttpResponseMessage</returns>
+        public async System.Threading.Tasks.Task<HttpResponseMessage> PatchSystemEventHookAsync(Systems system, Events _event, string hookId, ModifyHookPayload modifyHookPayload, Region region = default, string accessToken = default, bool throwOnError = true)
+        {
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
+            var systemString = Utils.GetEnumString(system);
+            var eventString = Utils.GetEnumString(_event);
+            var response = await this.HooksApi.PatchSystemEventHookAsync(systemString, eventString, hookId, null, region, modifyHookPayload, accessToken, throwOnError);
             return response;
         }
         #endregion HooksApi
@@ -168,50 +861,148 @@ namespace Autodesk.Webhooks
         #region  TokensApi
 
         /// <summary>
-        /// Add a new Webhook secret token
+        /// Create Secret Token
         /// </summary>
         /// <remarks>
-        /// Add a new Webhook secret token
+        ///Sets a secret token to verify the authenticity of webhook payloads. 
+        ///
+        ///When a webhook event occurs, the service calculates a hash signature using the token and includes it in the event notification. The receiving application listening at the callback URL can verify the payload's integrity by comparing the calculated signature to the one received.
+        ///
+        ///The webhooks affected by this operation are determined by the type of access token you use.
+        ///
+        ///- Two-legged Access Token: Sets the secret token for all webhooks owned by calling the app.
+        ///- Three-legged Access Token: Sets the secret token for all webhooks owned by the calling user
+        ///
+        ///**Note:** Use the [Update Webhook operation](/en/docs/webhooks/v1/reference/http/webhooks/systems-system-events-event-hooks-hook_id-PATCH/) to set a token for a specific webhook.
+        ///
+        ///
+        ///See the [Secret Token](/en/docs/webhooks/v1/developers_guide/basics/#secret-token) section in API Basics for more information.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="xAdsRegion">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;. (optional)</param>/// <param name="region">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;.  The &#x60;&#x60;x-ads-region&#x60;&#x60; header also specifies the region. If you specify both, &#x60;&#x60;x-ads-region&#x60;&#x60; has precedence.  (optional)</param>/// <param name="tokenPayload">A secret token that is used to generate a hash signature, which is passed along with notification requests to the callback URL (optional)</param>
-        /// <returns>Task of TokenCreationResult</returns>
-
-        public async System.Threading.Tasks.Task<Token> CreateTokenAsync(string accessToken, TokenPayload tokenPayload, XAdsRegion? xAdsRegion= null, Region? region= null, bool throwOnError = true)
+        /// <param name="tokenPayload">The payload containing the token information.</param>
+        /// <param name="region">
+        ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make request to your callback URL. Possible values:
+        ///
+        ///- `US` - (Default) Data center dedicated to serve the United States region.
+        ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+        ///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+        ///
+        ///**Note:** 
+        ///
+        ///1. Beta features are subject to change. Please avoid using them in production environments.
+        ///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
+        /// </param>
+        /// <param name="accessToken">An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().(optional)</param>
+        /// <param name="throwOnError">Specifies whether to throw an exception on error. (optional)</param>
+        /// <returns>Task of Token</returns>
+        public async System.Threading.Tasks.Task<Token> CreateTokenAsync(TokenPayload tokenPayload, Region region = default, string accessToken = default, bool throwOnError = true)
         {
-            var response = await this.TokensApi.CreateTokenAsync(xAdsRegion, region, tokenPayload, accessToken, throwOnError);
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
+            var response = await this.TokensApi.CreateTokenAsync(null, region, tokenPayload, accessToken, throwOnError);
             return response.Content;
 
         }
+
+
         /// <summary>
-        /// Delete a Webhook secret token
+        /// Delete Secret Token
         /// </summary>
         /// <remarks>
-        /// Delete a Webhook secret token
+        ///Removes an existing secret token from the webhooks impacted by this operation. 
+        ///
+        ///The webhooks affected by this operation are determined by the type of access token you use.
+        ///
+        ///- Two-legged Access Token: Sets the secret token for all webhooks owned by calling the app.
+        ///- Three-legged Access Token: Sets the secrety token for all webhooks owned by the calling user
+        ///
+        ///Note that there can be a delay of up to 10 minutes while the change takes effect. We recommend that your callback accept both secret token values for a period of time to allow all requests to go through.
+        ///
+        ///See the [Secret Token](/en/docs/webhooks/v1/developers_guide/basics/#secret-token) section in API Basics for more information.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="xAdsRegion">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;. (optional)</param>/// <param name="region">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;.  The &#x60;&#x60;x-ads-region&#x60;&#x60; header also specifies the region. If you specify both, &#x60;&#x60;x-ads-region&#x60;&#x60; has precedence.  (optional)</param>
-
+        /// <param name="region">
+        ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make request to your callback URL. Possible values:
+        ///
+        ///- `US` - (Default) Data center dedicated to serve the United States region.
+        ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+        ///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+        ///
+        ///**Note:** 
+        ///
+        ///1. Beta features are subject to change. Please avoid using them in production environments.
+        ///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
+        /// </param>
+        /// <param name="accessToken">An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().(optional)</param>
+        /// <param name="throwOnError">Specifies whether to throw an exception on error. (optional)</param>       
         /// <returns>Task of HttpResponseMessage</returns>
-        public async System.Threading.Tasks.Task<HttpResponseMessage> DeleteTokenAsync(string accessToken, XAdsRegion? xAdsRegion= null, Region? region= null, bool throwOnError = true)
+        /// 
+        public async System.Threading.Tasks.Task<HttpResponseMessage> DeleteTokenAsync(Region region = default, string accessToken = default, bool throwOnError = true)
         {
-            var response = await this.TokensApi.DeleteTokenAsync(xAdsRegion, region, accessToken, throwOnError);
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
+            var response = await this.TokensApi.DeleteTokenAsync(null, region, accessToken, throwOnError);
             return response;
         }
 
         /// <summary>
-        /// Update an existing Webhook secret token
+        /// Update Secret Token
         /// </summary>
         /// <remarks>
-        /// Update an existing Webhook secret token
+        ///Replaces an existing secret token with a new one. 
+        ///
+        ///Note that there can be a delay of up to 10 minutes while the change takes effect. We recommend that your callback accept both secret token values for a period of time to allow all requests to go through.
+        ///
+        ///The webhooks affected by this operation are determined by the type of access token you use.
+        ///
+        ///- Two-legged Access Token: Sets the secret token for all webhooks owned by calling the app.
+        ///- Three-legged Access Token: Sets the secrety token for all webhooks owned by the calling user
+        ///
+        ///**Note:** Use the [Update Webhook operation](/en/docs/webhooks/v1/reference/http/webhooks/systems-system-events-event-hooks-hook_id-PATCH/) to set a token for a specific webhook.
+        ///
+        ///
+        ///See the [Secret Token](/en/docs/webhooks/v1/developers_guide/basics/#secret-token) section in API Basics for more information.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="xAdsRegion">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;. (optional)</param>/// <param name="region">Specifies the geographical location (region) of the server that the request is executed on. Supported values are: &#x60;&#x60;EMEA&#x60;&#x60;, &#x60;&#x60;US&#x60;&#x60;. Default is &#x60;&#x60;US&#x60;&#x60;.  The &#x60;&#x60;x-ads-region&#x60;&#x60; header also specifies the region. If you specify both, &#x60;&#x60;x-ads-region&#x60;&#x60; has precedence.  (optional)</param>/// <param name="tokenPayload"> (optional)</param>
-
+        /// <param name="tokenPayload">The payload containing the token information.</param>
+        /// <param name="region">
+        ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make request to your callback URL. Possible values:
+        ///
+        ///- `US` - (Default) Data center dedicated to serve the United States region.
+        ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+        ///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+        ///
+        ///**Note:** 
+        ///
+        ///1. Beta features are subject to change. Please avoid using them in production environments.
+        ///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
+        /// </param>
+        /// <param name="accessToken">An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().(optional)</param>
+        /// <param name="throwOnError">Specifies whether to throw an exception on error. (optional)</param>       
         /// <returns>Task of HttpResponseMessage</returns>
-        public async System.Threading.Tasks.Task<HttpResponseMessage> PutTokenAsync(string accessToken, TokenPayload tokenPayload, XAdsRegion? xAdsRegion= null, Region? region= null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<HttpResponseMessage> PutTokenAsync(TokenPayload tokenPayload, Region region = default, string accessToken = default, bool throwOnError = true)
         {
-            var response = await this.TokensApi.PutTokenAsync(xAdsRegion, region, tokenPayload, accessToken, throwOnError);
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
+            var response = await this.TokensApi.PutTokenAsync(null, region, tokenPayload, accessToken, throwOnError);
             return response;
         }
         #endregion TokensApi

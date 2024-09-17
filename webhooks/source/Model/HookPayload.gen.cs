@@ -5,7 +5,7 @@
  *
  * Webhooks
  *
- * The Webhooks API enables applications to listen to APS events and receive notifications when they occur. When an event is triggered, the Webhooks service sends a notification to a callback URL you have defined.  You can customize the types of events and resources for which you receive notifications. For example, you can set up a webhook to send notifications when files are modified or deleted in a specified hub or project.  Below is quick summary of this workflow:  1. Identify the data for which you want to receive notifications. 2. Use the Webhooks API to create one or more hooks. 3. The Webhooks service will notify the webhook when there is a change in the data. 
+ * The Webhooks API enables applications to listen to APS events and receive notifications when they occur. When an event is triggered, the Webhooks service sends a notification to a callback URL you have defined. You can customize the types of events and resources for which you receive notifications. For example, you can set up a webhook to send notifications when files are modified or deleted in a specified hub or project. Below is quick summary of this workflow: 1. Identify the data for which you want to receive notifications. 2. Use the Webhooks API to create one or more hooks. 3. The Webhooks service will notify the webhook when there is a change in the data. 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Webhooks.Model
 {
     /// <summary>
-    /// Hook Payload
+    /// Specifies the details of a webhook to be created. 
     /// </summary>
     [DataContract]
     public partial class HookPayload 
@@ -46,62 +46,118 @@ namespace Autodesk.Webhooks.Model
         }
         
         /// <summary>
-        ///Gets or Sets CallbackUrl
+        ///The URL to send notifications to when the 
+///event is triggered. 
         /// </summary>
+        /// <value>
+        ///The URL to send notifications to when the 
+///event is triggered. 
+        /// </value>
         [DataMember(Name="callbackUrl", EmitDefaultValue=false)]
         public string CallbackUrl { get; set; }
 
         /// <summary>
-        ///Gets or Sets AutoReactivateHook
+        ///`true` - Automatically reactivate the webhook if it becomes `inactive`.
+///
+///`false` - (Default) Do not reactivate the webhook if it becomes `inactive`.
+///
+///See [Event Delivery Guarantees](/en/docs/webhooks/v1/developers_guide/event-delivery-guarantees/) for more information on how the webhooks service handles reactivation.
         /// </summary>
+        /// <value>
+        ///`true` - Automatically reactivate the webhook if it becomes `inactive`.
+///
+///`false` - (Default) Do not reactivate the webhook if it becomes `inactive`.
+///
+///See [Event Delivery Guarantees](/en/docs/webhooks/v1/developers_guide/event-delivery-guarantees/) for more information on how the webhooks service handles reactivation.
+        /// </value>
         [DataMember(Name="autoReactivateHook", EmitDefaultValue=false)]
         public bool? AutoReactivateHook { get; set; }
 
         /// <summary>
-        ///Gets or Sets Scope
+        ///Specifies the extent to which the event is monitored. For example, if the scope is folder, the webhooks service generates a notification for the specified event occurring in any sub folder or item within that folder.
         /// </summary>
-        [DataMember(Name="scope", EmitDefaultValue=true)]
-        public Dictionary<Scopes, string> Scope { get; set; }
+        /// <value>
+        ///Specifies the extent to which the event is monitored. For example, if the scope is folder, the webhooks service generates a notification for the specified event occurring in any sub folder or item within that folder.
+        /// </value>
+        [DataMember(Name="scope", EmitDefaultValue=false)]
+        public Object Scope { get; set; }
 
         /// <summary>
-        ///Gets or Sets HookAttribute
+        ///Specifies the extent to which the event is monitored. For example, if the scope is folder, the webhooks service generates a notification for the specified event occurring in any sub folder or item within that folder.
         /// </summary>
+        /// <value>
+        ///Specifies the extent to which the event is monitored. For example, if the scope is folder, the webhooks service generates a notification for the specified event occurring in any sub folder or item within that folder.
+        /// </value>
         [DataMember(Name="hookAttribute", EmitDefaultValue=false)]
         public Object HookAttribute { get; set; }
 
         /// <summary>
-        ///Gets or Sets HookExpiry
+        ///The date and time the webhook will expire, formatted as an ISO 8601 date/time string. If you do not specify this attribute or set it to null, the webhook will never expire.
         /// </summary>
+        /// <value>
+        ///The date and time the webhook will expire, formatted as an ISO 8601 date/time string. If you do not specify this attribute or set it to null, the webhook will never expire.
+        /// </value>
         [DataMember(Name="hookExpiry", EmitDefaultValue=false)]
         public string HookExpiry { get; set; }
 
         /// <summary>
-        ///Gets or Sets Filter
+        ///A Jsonpath expression that you can use to filter the callbacks you receive.
+///
+///See [Callback Filtering](/en/docs/webhooks/v1/developers_guide/callback-filtering/) for more information.
         /// </summary>
+        /// <value>
+        ///A Jsonpath expression that you can use to filter the callbacks you receive.
+///
+///See [Callback Filtering](/en/docs/webhooks/v1/developers_guide/callback-filtering/) for more information.
+        /// </value>
         [DataMember(Name="filter", EmitDefaultValue=false)]
         public string Filter { get; set; }
 
         /// <summary>
-        ///Gets or Sets HubId
+        ///The ID of the hub that contains the entity that you want to monitor. Specify this attribute if the user calling this operation is a member of a large number of projects.
+///
+///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
         /// </summary>
+        /// <value>
+        ///The ID of the hub that contains the entity that you want to monitor. Specify this attribute if the user calling this operation is a member of a large number of projects.
+///
+///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
+        /// </value>
         [DataMember(Name="hubId", EmitDefaultValue=false)]
         public string HubId { get; set; }
 
         /// <summary>
-        ///Gets or Sets ProjectId
+        ///The ID of the project that contains the entity that you want to monitor Specify this attribute if the user calling this operation is a member of a large number of projects.
+///
+///BIM 360 and ACC project IDs are different to Data Management project IDs. To convert a BIM 360 and ACC project IDs to  Data Management project IDs, prefix the BIM 360 or ACC Project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
         /// </summary>
+        /// <value>
+        ///The ID of the project that contains the entity that you want to monitor Specify this attribute if the user calling this operation is a member of a large number of projects.
+///
+///BIM 360 and ACC project IDs are different to Data Management project IDs. To convert a BIM 360 and ACC project IDs to  Data Management project IDs, prefix the BIM 360 or ACC Project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
+        /// </value>
         [DataMember(Name="projectId", EmitDefaultValue=false)]
         public string ProjectId { get; set; }
 
         /// <summary>
-        ///Gets or Sets Tenant
+        ///The tenant associated with the event. If specified on the webhook, the event's tenant must match the webhook's tenant.
         /// </summary>
+        /// <value>
+        ///The tenant associated with the event. If specified on the webhook, the event's tenant must match the webhook's tenant.
+        /// </value>
         [DataMember(Name="tenant", EmitDefaultValue=false)]
         public string Tenant { get; set; }
 
         /// <summary>
-        ///Gets or Sets CallbackWithEventPayloadOnly
+        ///`true` - The callback request payload must only contain information about the event. It must not contain any information about the webhook.
+///
+///`false` - (Default) The callback request payload must contain information about the event as well as the webhook.
         /// </summary>
+        /// <value>
+        ///`true` - The callback request payload must only contain information about the event. It must not contain any information about the webhook.
+///
+///`false` - (Default) The callback request payload must contain information about the event as well as the webhook.
+        /// </value>
         [DataMember(Name="callbackWithEventPayloadOnly", EmitDefaultValue=false)]
         public bool? CallbackWithEventPayloadOnly { get; set; }
 

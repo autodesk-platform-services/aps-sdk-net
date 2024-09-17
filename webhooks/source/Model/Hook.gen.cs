@@ -5,7 +5,7 @@
  *
  * Webhooks
  *
- * The Webhooks API enables applications to listen to APS events and receive notifications when they occur. When an event is triggered, the Webhooks service sends a notification to a callback URL you have defined.  You can customize the types of events and resources for which you receive notifications. For example, you can set up a webhook to send notifications when files are modified or deleted in a specified hub or project.  Below is quick summary of this workflow:  1. Identify the data for which you want to receive notifications. 2. Use the Webhooks API to create one or more hooks. 3. The Webhooks service will notify the webhook when there is a change in the data. 
+ * The Webhooks API enables applications to listen to APS events and receive notifications when they occur. When an event is triggered, the Webhooks service sends a notification to a callback URL you have defined. You can customize the types of events and resources for which you receive notifications. For example, you can set up a webhook to send notifications when files are modified or deleted in a specified hub or project. Below is quick summary of this workflow: 1. Identify the data for which you want to receive notifications. 2. Use the Webhooks API to create one or more hooks. 3. The Webhooks service will notify the webhook when there is a change in the data. 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Webhooks.Model
 {
     /// <summary>
-    /// Hook
+    /// Contains the response to a Create Webhooks for All Events request.
     /// </summary>
     [DataContract]
     public partial class Hook 
@@ -46,10 +46,13 @@ namespace Autodesk.Webhooks.Model
         }
         
         /// <summary>
-        ///Gets or Sets Hooks
+        ///An array of objects, where each object represents a webhook that was created.
         /// </summary>
+        /// <value>
+        ///An array of objects, where each object represents a webhook that was created.
+        /// </value>
         [DataMember(Name="hooks", EmitDefaultValue=false)]
-        public List<HookHooks> Hooks { get; set; }
+        public List<HookDetails> Hooks { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

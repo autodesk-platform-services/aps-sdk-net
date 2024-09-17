@@ -5,7 +5,7 @@
  *
  * Webhooks
  *
- * The Webhooks API enables applications to listen to APS events and receive notifications when they occur. When an event is triggered, the Webhooks service sends a notification to a callback URL you have defined.  You can customize the types of events and resources for which you receive notifications. For example, you can set up a webhook to send notifications when files are modified or deleted in a specified hub or project.  Below is quick summary of this workflow:  1. Identify the data for which you want to receive notifications. 2. Use the Webhooks API to create one or more hooks. 3. The Webhooks service will notify the webhook when there is a change in the data. 
+ * The Webhooks API enables applications to listen to APS events and receive notifications when they occur. When an event is triggered, the Webhooks service sends a notification to a callback URL you have defined. You can customize the types of events and resources for which you receive notifications. For example, you can set up a webhook to send notifications when files are modified or deleted in a specified hub or project. Below is quick summary of this workflow: 1. Identify the data for which you want to receive notifications. 2. Use the Webhooks API to create one or more hooks. 3. The Webhooks service will notify the webhook when there is a change in the data. 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Webhooks.Model
 {
     /// <summary>
-    /// HookDetailsScope
+    /// Represents the extent to which the event is monitored. For example, if the scope is folder, the webhooks service generates a notification for the specified event occurring in any sub folder or item within that folder.
     /// </summary>
     [DataContract]
     public partial class HookDetailsScope 
@@ -46,10 +46,30 @@ namespace Autodesk.Webhooks.Model
         }
         
         /// <summary>
-        ///Gets or Sets Folder
+        ///The URN of the folder the scope is set to. Present only for Data Management events. 
+///
+///See [Creating a Webhook and Listening to Data Management Events](/en/docs/webhooks/v1/tutorials/create-a-hook-data-management/) for more information.
         /// </summary>
+        /// <value>
+        ///The URN of the folder the scope is set to. Present only for Data Management events. 
+///
+///See [Creating a Webhook and Listening to Data Management Events](/en/docs/webhooks/v1/tutorials/create-a-hook-data-management/) for more information.
+        /// </value>
         [DataMember(Name="folder", EmitDefaultValue=false)]
         public string Folder { get; set; }
+
+        /// <summary>
+        ///The ID of a Model Derivative workflow the scope is set to. Present only for Model Derivative events.
+///
+///See [Creating a Webhook and Listening to Model Derivative Events](/en/docs/webhooks/v1/tutorials/create-a-hook-model-derivative/) for more information.
+        /// </summary>
+        /// <value>
+        ///The ID of a Model Derivative workflow the scope is set to. Present only for Model Derivative events.
+///
+///See [Creating a Webhook and Listening to Model Derivative Events](/en/docs/webhooks/v1/tutorials/create-a-hook-model-derivative/) for more information.
+        /// </value>
+        [DataMember(Name="workflow", EmitDefaultValue=false)]
+        public string Workflow { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
