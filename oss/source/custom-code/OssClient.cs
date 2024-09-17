@@ -6,14 +6,14 @@ using Autodesk.Oss.Model;
 using Autodesk.Oss.Client;
 using System.Threading;
 using System.IO;
+using Autodesk.SDKManager;
 
 namespace Autodesk.Oss
 {
-
     /// <summary>
     /// Represents the OSS client.
     /// </summary>
-    public class OssClient
+    public class OssClient : BaseClient
     {
         /// <summary>
         /// The API for interacting with Oss buckets.
@@ -34,11 +34,15 @@ namespace Autodesk.Oss
         /// Initializes a new instance of the <see cref="OssClient"/> class.
         /// </summary>
         /// <param name="sdkManager">The SDK manager.</param>
-        public OssClient(SDKManager.SDKManager sdkManager)
+        /// <param name="authenticationProvider"></param>
+        public OssClient( SDKManager.SDKManager sdkManager = default, IAuthenticationProvider authenticationProvider = default): base(authenticationProvider)
         {
+            if(sdkManager == null){
+                sdkManager= SdkManagerBuilder.Create().Build();
+            }
             this.bucketsApi = new BucketsApi(sdkManager);
             this.objectsApi = new ObjectsApi(sdkManager);
-            this.oSSFileTransfer = new OSSFileTransfer(new FileTransferConfigurations(3), null);
+            this.oSSFileTransfer = new OSSFileTransfer(new FileTransferConfigurations(3),sdkManager,authenticationProvider);
 
         }
 
@@ -59,17 +63,9 @@ namespace Autodesk.Oss
         ///Stream of the of file to be uploded or 
         ///Path of the file to be uploaded  
         /// </param>
-        /// <param name="accessToken">
-        /// An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().
-        /// </param>
         /// <param name="cancellationToken">
         /// A token to monitor cancellation requests.
         /// (optional)
-        /// </param>
-        /// <param name="projectScope">
-        ///  A project scope to which the upload should be limited.    
-        /// (optional)
-        /// </param>
         /// <param name="requestIdPrefix">
         /// (optional)
         /// A prefix to be added to the request ID.
@@ -78,10 +74,21 @@ namespace Autodesk.Oss
         /// An IProgress object to report upload progress.
         /// (optional)
         /// </param>
+        /// <param name="accessToken">
+        /// An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().
+        /// (optional)
+        /// </param>
         /// <returns>Task of &lt;Upload&gt;</returns>
-
-        public async System.Threading.Tasks.Task<ObjectDetails> Upload(string bucketKey, string objectKey, Stream sourceToUpload, string accessToken, CancellationToken cancellationToken = default, string requestIdPrefix = "", IProgress<int> progress = null)
+        public async System.Threading.Tasks.Task<ObjectDetails> Upload(string bucketKey, string objectKey, Stream sourceToUpload, CancellationToken cancellationToken = default, string requestIdPrefix = "", IProgress<int> progress = null, string accessToken = default)
         {
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.oSSFileTransfer.Upload(bucketKey, objectKey, sourceToUpload, accessToken, cancellationToken, requestIdPrefix, progress);
             var apiResponse = new ApiResponse<ObjectDetails>(response, await LocalMarshalling.DeserializeAsync<ObjectDetails>(response.Content));
             return apiResponse.Content;
@@ -103,15 +110,8 @@ namespace Autodesk.Oss
         /// Stream of the of file to be uploaded or 
         /// Path of the file to be uploaded  
         /// </param>
-        /// <param name="accessToken">
-        /// An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().
-        /// </param>
         /// <param name="cancellationToken">
         /// A token to monitor cancellation requests.
-        /// (optional)
-        /// </param>
-        /// <param name="projectScope">
-        /// A project scope to which the upload should be limited.
         /// (optional)
         /// </param>
         /// <param name="requestIdPrefix">
@@ -122,9 +122,22 @@ namespace Autodesk.Oss
         /// An IProgress object to report upload progress.
         /// (optional)
         /// </param>
+        /// <param name="accessToken">
+        /// An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().
+        /// (optional)
+        /// </param>
         /// <returns>Task of &lt;Upload&gt;</returns>
-        public async System.Threading.Tasks.Task<ObjectDetails> Upload(string bucketKey, string objectKey, string sourceToUpload, string accessToken, CancellationToken cancellationToken = default, string requestIdPrefix = "", IProgress<int> progress = null)
+        public async System.Threading.Tasks.Task<ObjectDetails> Upload(string bucketKey, string objectKey, string sourceToUpload, CancellationToken cancellationToken = default,  string requestIdPrefix = "", IProgress<int> progress = null, string accessToken = default)
         {
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
+
             FileStream fileStream = File.OpenRead(sourceToUpload);
             var response = await this.oSSFileTransfer.Upload(bucketKey, objectKey, fileStream, accessToken, cancellationToken, requestIdPrefix, progress);
             var apiResponse = new ApiResponse<ObjectDetails>(response, await LocalMarshalling.DeserializeAsync<ObjectDetails>(response.Content));
@@ -147,15 +160,8 @@ namespace Autodesk.Oss
         /// <param name="filePath">
         /// The Path of the file to be downloaded.
         /// </param>
-        /// <param name="accessToken">
-        /// An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().
-        /// </param>
         /// <param name="cancellationToken">
         /// A token to monitor cancellation requests.
-        /// (optional)
-        /// </param>
-        /// <param name="projectScope">
-        /// A project scope to which the upload should be limited.
         /// (optional)
         /// </param>
         /// <param name="requestIdPrefix">
@@ -166,9 +172,21 @@ namespace Autodesk.Oss
         /// An IProgress object to report upload progress.
         /// (optional)
         /// </param>
+        /// <param name="accessToken">
+        /// An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().
+        /// (optional)
+        /// </param>
         /// <returns>Task of &lt;Downlaod&gt;</returns>
-        public async System.Threading.Tasks.Task Download(string bucketKey, string objectKey, string filePath, string accessToken, CancellationToken cancellationToken = default, string requestIdPrefix = "", IProgress<int> progress = null)
+        public async System.Threading.Tasks.Task Download(string bucketKey, string objectKey, string filePath, CancellationToken cancellationToken = default,  string requestIdPrefix = "", IProgress<int> progress = null,string accessToken = default)
         {
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             await this.oSSFileTransfer.Download(bucketKey, objectKey, filePath, accessToken, cancellationToken, requestIdPrefix, progress);
         }
         /// <summary>
@@ -180,9 +198,6 @@ namespace Autodesk.Oss
         ///You can specify up to 25 objects in this operation. 
         /// </remarks>
         /// <exception cref="OssApiException">Thrown when fails to make API call</exception>
-        /// <param name="accessToken">
-        /// An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().
-        /// </param>
         /// <param name="bucketKey">
         ///The bucket key of the bucket that contains the objects you are operating on.
         /// </param>
@@ -190,13 +205,25 @@ namespace Autodesk.Oss
         /// The request payload for the Complete Batch Upload to S3 Signed URLs operation.
         /// (optional)
         /// </param>
+        /// <param name="accessToken">
+        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync(). 
+        ///(optional)
+        /// </param>
         /// <param name="throwOnError">
         /// Specifies whether to throw an error if the API call fails.
         /// (optional)
         /// </param>
         /// <returns>Task of &lt;BatchcompleteuploadResponse&gt;</returns>
-        public async System.Threading.Tasks.Task<BatchcompleteuploadResponse> BatchCompleteUploadAsync(string accessToken, string bucketKey, BatchcompleteuploadObject requests, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<BatchcompleteuploadResponse> BatchCompleteUploadAsync(string bucketKey, BatchcompleteuploadObject requests, string accessToken = default, bool throwOnError = true)
         {
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.objectsApi.BatchCompleteUploadAsync(bucketKey, requests, accessToken, throwOnError);
             return response.Content;
         }
@@ -210,9 +237,6 @@ namespace Autodesk.Oss
         ///Only the application that owns the bucket can call this operation. All other applications that call this operation will receive a "403 Forbidden" error.
         /// </remarks>
         /// <exception cref="OssApiException">Thrown when fails to make API call</exception>
-        /// <param name="accessToken">
-        /// An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().
-        /// </param>
         /// <param name="bucketKey">
         ///The bucket key of the bucket that contains the objects you are operating on.
         /// </param>
@@ -231,12 +255,24 @@ namespace Autodesk.Oss
         ///**Tip:** Use the smallest possible time window to minimize exposure of the signed URL. (optional)
         /// </param>
         /// <returns>Task of &lt;Batchsigneds3downloadResponse&gt;</returns>
+        /// <param name="accessToken">
+        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync(). 
+        ///(optional)
+        /// </param>
         /// <param name="throwOnError">
         /// Specifies whether to throw an error if the API call fails.
         /// (optional)
         /// </param>
-        public async System.Threading.Tasks.Task<Batchsigneds3downloadResponse> BatchSignedS3DownloadAsync(string accessToken, string bucketKey, Batchsigneds3downloadObject requests, bool? publicResourceFallback = default(bool?), int? minutesExpiration = default(int?), bool throwOnError = true)
+        public async System.Threading.Tasks.Task<Batchsigneds3downloadResponse> BatchSignedS3DownloadAsync(string bucketKey, Batchsigneds3downloadObject requests, bool? publicResourceFallback = default(bool?), int? minutesExpiration = default(int?), string accessToken = default, bool throwOnError = true)
         {
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.objectsApi.BatchSignedS3DownloadAsync(bucketKey, requests, publicResourceFallback, minutesExpiration, accessToken, throwOnError);
             return response.Content;
         }
@@ -254,9 +290,6 @@ namespace Autodesk.Oss
         ///If an upload fails after the validity period of a signed URL has elapsed, you can call this operation again to obtain fresh signed URLs. However, you must use the same `uploadKey` that was returned when you originally called this operation. 
         /// </remarks>
         /// <exception cref="OssApiException">Thrown when fails to make API call</exception>
-        /// <param name="accessToken">
-        /// An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().
-        /// </param>
         /// <param name="bucketKey">
         ///The bucket key of the bucket that contains the objects you are operating on.
         /// </param>
@@ -273,14 +306,26 @@ namespace Autodesk.Oss
         ///
         ///**Tip:** Use the smallest possible time window to minimize exposure of the signed URL. (optional)
         /// </param>
+        /// <param name="accessToken">
+        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync(). 
+        ///(optional)
+        /// </param>
         /// <param name="throwOnError">
         /// Specifies whether to throw an error if the API call fails.
         /// (optional)
         /// </param>      
         /// <returns>Task of &lt;Batchsigneds3uploadResponse&gt;</returns>
 
-        public async System.Threading.Tasks.Task<Batchsigneds3uploadResponse> BatchSignedS3UploadAsync(string accessToken, string bucketKey, Batchsigneds3uploadObject requests, bool? useAcceleration = default(bool?), int? minutesExpiration = default(int?), bool throwOnError = true)
+        public async System.Threading.Tasks.Task<Batchsigneds3uploadResponse> BatchSignedS3UploadAsync(string bucketKey, Batchsigneds3uploadObject requests , bool? useAcceleration = default(bool?), int? minutesExpiration = default(int?), string accessToken = default, bool throwOnError = true)
         {
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.objectsApi.BatchSignedS3UploadAsync(bucketKey, useAcceleration, minutesExpiration, requests, accessToken, throwOnError);
             return response.Content;
         }
@@ -292,9 +337,6 @@ namespace Autodesk.Oss
         ///Requests OSS to assemble and reconstitute the object that was uploaded using signed S3 upload URL. You must call this operation only after all parts/chunks of the object has been uploaded.
         /// </remarks>
         /// <exception cref="OssApiException">Thrown when fails to make API call</exception>
-        /// <param name="accessToken">
-        /// An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().
-        /// </param>
         /// <param name="bucketKey">
         ///The bucket key of the bucket that contains the objects you are operating on.
         /// </param>
@@ -322,13 +364,25 @@ namespace Autodesk.Oss
         /// <param name="xAdsUserDefinedMetadata">
         ///Custom metadata to be stored with the object, which can be retrieved later on download or when retrieving object details. Must be a JSON object that is less than 100 bytes. (optional)
         /// </param>
+        /// <param name="accessToken">
+        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync(). 
+        ///(optional)
+        /// </param>
         /// <param name="throwOnError">
         /// Specifies whether to throw an error if the API call fails.
         /// (optional)
         /// </param>
         /// <returns>Task of HttpResponseMessage</returns>
-        public async System.Threading.Tasks.Task<HttpResponseMessage> CompleteSignedS3UploadAsync(string accessToken, string bucketKey, string objectKey, string contentType, Completes3uploadBody body, string xAdsMetaContentType = default(string), string xAdsMetaContentDisposition = default(string), string xAdsMetaContentEncoding = default(string), string xAdsMetaCacheControl = default(string), string xAdsUserDefinedMetadata = default(string), bool throwOnError = true)
+        public async System.Threading.Tasks.Task<HttpResponseMessage> CompleteSignedS3UploadAsync(string bucketKey, string objectKey, string contentType, Completes3uploadBody body, string xAdsMetaContentType = default(string), string xAdsMetaContentDisposition = default(string), string xAdsMetaContentEncoding = default(string), string xAdsMetaCacheControl = default(string), string xAdsUserDefinedMetadata = default(string), string accessToken = default, bool throwOnError = true)
         {
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.objectsApi.CompleteSignedS3UploadAsync(bucketKey, objectKey, contentType, body, xAdsMetaContentType, xAdsMetaContentDisposition, xAdsMetaContentEncoding, xAdsMetaCacheControl, xAdsUserDefinedMetadata, accessToken, throwOnError);
             return response;
         }
@@ -340,9 +394,6 @@ namespace Autodesk.Oss
         ///Creates a copy of an object within the bucket.
         /// </remarks>
         /// <exception cref="OssApiException">Thrown when fails to make API call</exception>
-        /// <param name="accessToken">
-        /// An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().
-        /// </param>
         /// <param name="bucketKey">
         ///The bucket key of the bucket that contains the objects you are operating on.
         /// </param>
@@ -352,14 +403,26 @@ namespace Autodesk.Oss
         /// <param name="newObjName">
         ///A URL-encoded human friendly name to identify the copied object.
         /// </param>
+        /// <param name="accessToken">
+        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync(). 
+        ///(optional)
+        /// </param>
         /// <param name="throwOnError">
         /// Specifies whether to throw an error if the API call fails.
         /// (optional)
         /// </param>
         /// <returns>Task of &lt;ObjectDetails&gt;</returns>
 
-        public async System.Threading.Tasks.Task<ObjectDetails> CopyToAsync(string accessToken, string bucketKey, string objectKey, string newObjName, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ObjectDetails> CopyToAsync(string bucketKey, string objectKey, string newObjName, string accessToken = default, bool throwOnError = true)
         {
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.objectsApi.CopyToAsync(bucketKey, objectKey, newObjName, accessToken, throwOnError);
             return response.Content;
         }
@@ -376,9 +439,6 @@ namespace Autodesk.Oss
         ///**Note:** Do not use this operation to create buckets for BIM360 Document Management. Use [POST projects/{project_id}/storage](/en/docs/data/v2/reference/http/projects-project_id-storage-POST>) instead. For details, see [Upload Files to BIM 360 Document Management](/en/docs/bim360/v1/tutorials/document-management/upload-document).
         /// </remarks>
         /// <exception cref="OssApiException">Thrown when fails to make API call</exception>
-        /// <param name="accessToken">
-        /// An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().
-        /// </param>
         /// <param name="xAdsRegion">
         ///Specifies where the bucket must be stored. Possible values are:
         ///- `US` - (Default) Data center for the US region.
@@ -389,13 +449,25 @@ namespace Autodesk.Oss
         /// <param name="bucketsPayload">
         /// The payload containing bucket creation details.
         /// </param>
+        /// <param name="accessToken">
+        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync(). 
+        ///(optional)
+        /// </param>
         /// <param name="throwOnError">
         /// Specifies whether to throw an error if the API call fails.
         /// (optional)
         /// </param>
         /// <returns>Task of &lt;Bucket&gt;</returns>
-        public async System.Threading.Tasks.Task<Bucket> CreateBucketAsync(string accessToken, Region xAdsRegion, CreateBucketsPayload bucketsPayload, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<Bucket> CreateBucketAsync(Region xAdsRegion, CreateBucketsPayload bucketsPayload, string accessToken = default, bool throwOnError = true)
         {
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.bucketsApi.CreateBucketAsync(bucketsPayload, xAdsRegion, accessToken, throwOnError);
             return response.Content;
         }
@@ -410,9 +482,6 @@ namespace Autodesk.Oss
         ///Only the application that owns the bucket containing the object can call this operation.
         /// </remarks>
         /// <exception cref="OssApiException">Thrown when fails to make API call</exception>
-        /// <param name="accessToken">
-        /// An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().
-        /// </param>
         /// <param name="bucketKey">
         ///The bucket key of the bucket that contains the objects you are operating on.
         /// </param>
@@ -431,14 +500,26 @@ namespace Autodesk.Oss
         ///
         ///`false` : (Default) Returns an Autodesk URL (one that points to a location on https://developer.api.autodesk.com) to the object. (optional)
         /// </param>
+        /// <param name="accessToken">
+        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync(). 
+        ///(optional)
+        /// </param>
         /// <param name="throwOnError">
         /// Specifies whether to throw an error if the API call fails.
         /// (optional)
         /// </param>       
         /// <returns>Task of &lt;CreateObjectSigned&gt;</returns>
 
-        public async System.Threading.Tasks.Task<CreateObjectSigned> CreateSignedResourceAsync(string accessToken, string bucketKey, string objectKey, CreateSignedResource createSignedResource, Access? access = null, bool? useCdn = default(bool?), bool throwOnError = true)
+        public async System.Threading.Tasks.Task<CreateObjectSigned> CreateSignedResourceAsync(string bucketKey, string objectKey, CreateSignedResource createSignedResource, Access? access = null, bool? useCdn = default(bool?), string accessToken = default, bool throwOnError = true)
         {
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.objectsApi.CreateSignedResourceAsync(bucketKey, objectKey, access, useCdn, createSignedResource, accessToken, throwOnError);
             return response.Content;
         }
@@ -453,11 +534,12 @@ namespace Autodesk.Oss
         ///**Note:** Bucket keys will not be immediately available for reuse. 
         /// </remarks>
         /// <exception cref="OssApiException">Thrown when fails to make API call</exception>
-        /// <param name="accessToken">
-        /// An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().
-        /// </param>
         /// <param name="bucketKey">
         ///The bucket key of the bucket to delete.
+        /// </param>
+        /// <param name="accessToken">
+        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync(). 
+        ///(optional)
         /// </param>
         /// <param name="throwOnError">
         /// Specifies whether to throw an error if the API call fails.
@@ -465,8 +547,16 @@ namespace Autodesk.Oss
         /// </param>
 
         /// <returns>Task of HttpResponseMessage</returns>
-        public async System.Threading.Tasks.Task<HttpResponseMessage> DeleteBucketAsync(string accessToken, string bucketKey, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<HttpResponseMessage> DeleteBucketAsync(string bucketKey, string accessToken = default, bool throwOnError = true)
         {
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.bucketsApi.DeleteBucketAsync(bucketKey, accessToken, throwOnError);
             return response;
         }
@@ -479,22 +569,31 @@ namespace Autodesk.Oss
         ///Deletes an object from the bucket.
         /// </remarks>
         /// <exception cref="OssApiException">Thrown when fails to make API call</exception>
-        /// <param name="accessToken">
-        /// An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().
-        /// </param>
         /// <param name="bucketKey">
         ///The bucket key of the bucket that contains the objects you are operating on.
         /// </param>
         /// <param name="objectKey">
         ///The URL-encoded human friendly name of the object.
         /// </param>
+        /// <param name="accessToken">
+        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync(). 
+        ///(optional)
+        /// </param>
         /// <param name="throwOnError">
         /// Specifies whether to throw an error if the API call fails.
         /// (optional)
         /// </param>
         /// <returns>Task of HttpResponseMessage</returns>
-        public async System.Threading.Tasks.Task<HttpResponseMessage> DeleteObjectAsync(string accessToken, string bucketKey, string objectKey, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<HttpResponseMessage> DeleteObjectAsync(string bucketKey, string objectKey,string accessToken = default, bool throwOnError = true)
         {
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.objectsApi.DeleteObjectAsync(bucketKey, objectKey, accessToken, throwOnError);
             return response;
 
@@ -508,9 +607,6 @@ namespace Autodesk.Oss
         ///Only applications that own the bucket containing the object can call this operation. 
         /// </remarks>
         /// <exception cref="OssApiException">Thrown when fails to make API call</exception>
-        /// <param name="accessToken">
-        /// An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().
-        /// </param>
         /// <param name="hash">
         ///The ID component of the signed URL.
         ///
@@ -525,14 +621,26 @@ namespace Autodesk.Oss
         ///
         ///**Note:** Beta features are subject to change. Please do not use in production environments. (optional)
         /// </param>
+        /// <param name="accessToken">
+        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync(). 
+        ///(optional)
+        /// </param>
         /// <param name="throwOnError">
         /// Specifies whether to throw an error if the API call fails.
         /// (optional)
         /// </param>
 
         /// <returns>Task of HttpResponseMessage</returns>
-        public async System.Threading.Tasks.Task<HttpResponseMessage> DeleteSignedResourceAsync(string accessToken, string hash, Region? region = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<HttpResponseMessage> DeleteSignedResourceAsync(string hash, Region? region = null, string accessToken = default, bool throwOnError = true)
         {
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.objectsApi.DeleteSignedResourceAsync(hash, region, accessToken, throwOnError);
             return response;
         }
@@ -545,9 +653,6 @@ namespace Autodesk.Oss
         ///**Note:** Only the application that owns the bucket can call this operation. All other applications that call this operation will receive a "403 Forbidden" error. 
         /// </remarks>
         /// <exception cref="OssApiException">Thrown when fails to make API call</exception>
-        /// <param name="accessToken">
-        /// An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().
-        /// </param>
         /// <param name="bucketKey">
         ///The bucket key of the bucket to query.
         /// </param>
@@ -557,8 +662,16 @@ namespace Autodesk.Oss
         /// </param>
         /// <returns>Task of &lt;Bucket&gt;</returns>
 
-        public async System.Threading.Tasks.Task<Bucket> GetBucketDetailsAsync(string accessToken, string bucketKey, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<Bucket> GetBucketDetailsAsync(string bucketKey, string accessToken = default, bool throwOnError = true)
         {
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.bucketsApi.GetBucketDetailsAsync(bucketKey, accessToken, throwOnError);
             return response.Content;
         }
@@ -569,9 +682,6 @@ namespace Autodesk.Oss
         ///Returns a list of buckets owned by the application. 
         /// </remarks>
         /// <exception cref="OssApiException">Thrown when fails to make API call</exception>
-        /// <param name="accessToken">
-        /// An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().
-        /// </param>
         /// <param name="region">
         ///Specifies where the bucket containing the object stored. Possible values are:
         ///
@@ -588,13 +698,25 @@ namespace Autodesk.Oss
         /// <param name="startAt">
         ///The ID of the last item that was returned in the previous result set.  It enables the system to return subsequent items starting from the next one after the specified ID. (optional)
         /// </param>
+        /// <param name="accessToken">
+        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync(). 
+        ///(optional)
+        /// </param>
         /// <param name="throwOnError">
         /// Specifies whether to throw an error if the API call fails.
         /// (optional)
         /// </param>
         /// <returns>Task of &lt;Buckets&gt;</returns>
-        public async System.Threading.Tasks.Task<Buckets> GetBucketsAsync(string accessToken, Region? region = null, int? limit = default(int?), string startAt = default(string), bool throwOnError = true)
+        public async System.Threading.Tasks.Task<Buckets> GetBucketsAsync(Region? region = null, int? limit = default(int?), string startAt = default(string), string accessToken = default, bool throwOnError = true)
         {
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.bucketsApi.GetBucketsAsync(region, limit, startAt, accessToken, throwOnError);
             return response.Content;
         }
@@ -605,9 +727,6 @@ namespace Autodesk.Oss
         ///Returns detailed information about the specified object.
         /// </remarks>
         /// <exception cref="OssApiException">Thrown when fails to make API call</exception>
-        /// <param name="accessToken">
-        /// An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().
-        /// </param>
         /// <param name="bucketKey">
         ///The bucket key of the bucket that contains the objects you are operating on.
         /// </param>
@@ -621,13 +740,25 @@ namespace Autodesk.Oss
         /// Specifies additional information to include in the response. Possible values: - `createdDate` - `lastAccessedDate` - `lastModifiedDate` - `userDefinedMetadata`
         /// (optional)
         /// </param>
+        /// <param name="accessToken">
+        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync(). 
+        ///(optional)
+        /// </param>
         /// <param name="throwOnError">
         /// Specifies whether to throw an error if the API call fails.
         /// (optional)
         /// </param>
         /// <returns>Task of &lt;ObjectFullDetails&gt;</returns>
-        public async System.Threading.Tasks.Task<ObjectFullDetails> GetObjectDetailsAsync(string accessToken, string bucketKey, string objectKey, DateTime? ifModifiedSince = default(DateTime?), With? with = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ObjectFullDetails> GetObjectDetailsAsync(string bucketKey, string objectKey, DateTime? ifModifiedSince = default(DateTime?), With? with = null, string accessToken = default, bool throwOnError = true)
         {
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.objectsApi.GetObjectDetailsAsync(bucketKey, objectKey, ifModifiedSince, with, accessToken, throwOnError);
             return response.Content;
         }
@@ -640,9 +771,6 @@ namespace Autodesk.Oss
         ///Only the application that owns the bucket can call this operation. All other applications that call this operation will receive a "403 Forbidden" error.
         /// </remarks>
         /// <exception cref="OssApiException">Thrown when fails to make API call</exception>
-        /// <param name="accessToken">
-        /// An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().
-        /// </param>
         /// <param name="bucketKey">
         ///The bucket key of the bucket that contains the objects you are operating on.
         /// </param>
@@ -656,13 +784,25 @@ namespace Autodesk.Oss
         /// <param name="startAt">
         ///The ID of the last item that was returned in the previous result set.  It enables the system to return subsequent items starting from the next one after the specified ID. (optional)
         /// </param>
+        /// <param name="accessToken">
+        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync(). 
+        ///(optional)
+        /// </param>
         /// <param name="throwOnError">
         /// Specifies whether to throw an error if the API call fails.
         /// (optional)
         /// </param>
         /// <returns>Task of &lt;BucketObjects&gt;</returns>
-        public async System.Threading.Tasks.Task<BucketObjects> GetObjectsAsync(string accessToken, string bucketKey, int? limit = default(int?), string beginsWith = default(string), string startAt = default(string), bool throwOnError = true)
+        public async System.Threading.Tasks.Task<BucketObjects> GetObjectsAsync(string bucketKey, int? limit = default(int?), string beginsWith = default(string), string startAt = default(string), string accessToken = default, bool throwOnError = true)
         {
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.objectsApi.GetObjectsAsync(bucketKey, limit, beginsWith, startAt, accessToken, throwOnError);
             return response.Content;
         }
@@ -675,9 +815,6 @@ namespace Autodesk.Oss
         ///**Note:** The signed URL returned by [Generate OSS Signed URL](/en/docs/data/v2/reference/http/signedresources-:id-GET/)  contains the `hash` URI parameter as well. 
         /// </remarks>
         /// <exception cref="OssApiException">Thrown when fails to make API call</exception>
-        /// <param name="accessToken">
-        /// An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().
-        /// </param>
         /// <param name="hash">
         ///The ID component of the signed URL.
         ///
@@ -714,13 +851,25 @@ namespace Autodesk.Oss
         /// <param name="responseContentType">
         ///The value of the Content-Type header you want to receive when you download the object using the signed URL. If you do not specify a value, the Content-Type header defaults to the value stored with OSS. (optional)
         /// </param>
+        /// <param name="accessToken">
+        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync(). 
+        ///(optional)
+        /// </param>
         /// <param name="throwOnError">
         /// Specifies whether to throw an error if the API call fails.
         /// (optional)
         /// </param>
         /// <returns>Task of &lt;System.IO.Stream&gt;</returns>
-        public async System.Threading.Tasks.Task<System.IO.Stream> GetSignedResourceAsync(string accessToken, string hash, string range = default(string), string ifNoneMatch = default(string), DateTime? ifModifiedSince = default(DateTime?), string acceptEncoding = default(string), Region? region = null, string responseContentDisposition = default(string), string responseContentType = default(string), bool throwOnError = true)
+        public async System.Threading.Tasks.Task<System.IO.Stream> GetSignedResourceAsync(string hash, string range = default(string), string ifNoneMatch = default(string), DateTime? ifModifiedSince = default(DateTime?), string acceptEncoding = default(string), Region? region = null, string responseContentDisposition = default(string), string responseContentType = default(string), string accessToken = default, bool throwOnError = true)
         {
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.objectsApi.GetSignedResourceAsync(hash, range, ifNoneMatch, ifModifiedSince, acceptEncoding, region, responseContentDisposition, responseContentType, accessToken, throwOnError);
             return response.Content;
         }
@@ -740,9 +889,6 @@ namespace Autodesk.Oss
         ///In addition to this operation that generates S3 signed URLs, OSS provides an operation to generate OSS signed URLs. S3 signed URLs allow direct upload/download from S3 but are restricted to bucket owners. OSS signed URLs also allow upload/download and can be configured for access by other applications, making them suitable for sharing objects across applications.
         /// </remarks>
         /// <exception cref="OssApiException">Thrown when fails to make API call</exception>
-        /// <param name="accessToken">
-        /// An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().
-        /// </param>
         /// <param name="bucketKey">
         ///The bucket key of the bucket that contains the objects you are operating on.
         /// </param>
@@ -783,13 +929,25 @@ namespace Autodesk.Oss
         ///
         ///`false` : (Default) Returns a URL that points directly to the S3 object. (optional)
         /// </param>
+        /// <param name="accessToken">
+        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync(). 
+        ///(optional)
+        /// </param>
         /// <param name="throwOnError">
         /// Specifies whether to throw an error if the API call fails.
         /// (optional)
         /// </param>
         /// <returns>Task of &lt;Signeds3downloadResponse&gt;</returns>
-        public async System.Threading.Tasks.Task<Signeds3downloadResponse> SignedS3DownloadAsync(string accessToken, string bucketKey, string objectKey, string ifNoneMatch = default(string), DateTime? ifModifiedSince = default(DateTime?), string xAdsAcmScopes = default(string), string responseContentType = default(string), string responseContentDisposition = default(string), string responseCacheControl = default(string), bool? publicResourceFallback = default(bool?), int? minutesExpiration = default(int?), bool? useCdn = default(bool?), bool throwOnError = true)
+        public async System.Threading.Tasks.Task<Signeds3downloadResponse> SignedS3DownloadAsync(string bucketKey, string objectKey, string ifNoneMatch = default(string), DateTime? ifModifiedSince = default(DateTime?), string xAdsAcmScopes = default(string), string responseContentType = default(string), string responseContentDisposition = default(string), string responseCacheControl = default(string), bool? publicResourceFallback = default(bool?), int? minutesExpiration = default(int?), bool? useCdn = default(bool?), string accessToken = default, bool throwOnError = true)
         {
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.objectsApi.SignedS3DownloadAsync(bucketKey, objectKey, ifNoneMatch, ifModifiedSince, responseContentType, responseContentDisposition, responseCacheControl, publicResourceFallback, minutesExpiration, useCdn, accessToken, throwOnError);
             return response.Content;
         }
@@ -810,9 +968,6 @@ namespace Autodesk.Oss
         ///In addition to this operation that generates S3 signed URLs, OSS provides an operation to generate OSS signed URLs. S3 signed URLs allow direct upload/download from S3 but are restricted to bucket owners. OSS signed URLs also allow upload/download and can be configured for access by other applications, making them suitable for sharing objects across applications.    
         /// </remarks>
         /// <exception cref="OssApiException">Thrown when fails to make API call</exception>
-        /// <param name="accessToken">
-        /// An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().
-        /// </param>
         /// <param name="bucketKey">
         ///The bucket key of the bucket that contains the objects you are operating on.
         /// </param>
@@ -838,14 +993,26 @@ namespace Autodesk.Oss
         ///
         ///`false`: Generates a standard S3 signed URL. (optional)
         /// </param>
+        /// <param name="accessToken">
+        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync(). 
+        ///(optional)
+        /// </param>
         /// <param name="throwOnError">
         /// Specifies whether to throw an error if the API call fails.
         /// (optional)
         /// </param>
         /// <returns>Task of &lt;Signeds3uploadResponse&gt;</returns>
 
-        public async System.Threading.Tasks.Task<Signeds3uploadResponse> SignedS3UploadAsync(string accessToken, string bucketKey, string objectKey, int? parts = default(int?), int? firstPart = default(int?), string uploadKey = default(string), int? minutesExpiration = default(int?), bool? useAcceleration = default(bool?), bool throwOnError = true)
+        public async System.Threading.Tasks.Task<Signeds3uploadResponse> SignedS3UploadAsync(string bucketKey, string objectKey, int? parts = default(int?), int? firstPart = default(int?), string uploadKey = default(string), int? minutesExpiration = default(int?), bool? useAcceleration = default(bool?), string accessToken = default, bool throwOnError = true)
         {
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.objectsApi.SignedS3UploadAsync(bucketKey, objectKey, parts, firstPart, uploadKey, minutesExpiration, useAcceleration, accessToken, throwOnError);
             return response.Content;
         }
@@ -861,9 +1028,6 @@ namespace Autodesk.Oss
         ///- It was generated with `write` or `readwrite` for the `access` parameter.
         /// </remarks>
         /// <exception cref="OssApiException">Thrown when fails to make API call</exception>
-        /// <param name="accessToken">
-        /// An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().
-        /// </param>
         /// <param name="hash">
         ///The ID component of the signed URL.
         ///
@@ -893,14 +1057,26 @@ namespace Autodesk.Oss
         /// <param name="ifMatch">
         ///The current value of the `sha1` attribute of the object you want to replace. OSS checks the `If-Match` header against the `sha1` attribute of the object in OSS. If they match, OSS allows the object to be overwritten. Otherwise, it means that the object on OSS has been modified since you retrieved the `sha1` and the request fails. (optional)
         /// </param>
+        /// <param name="accessToken">
+        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync(). 
+        ///(optional)
+        /// </param>
         /// <param name="throwOnError">
         /// Specifies whether to throw an error if the API call fails.
         /// (optional)
         /// </param>
         /// <returns>Task of &lt;ObjectDetails&gt;</returns>
 
-        public async System.Threading.Tasks.Task<ObjectDetails> UploadSignedResourceAsync(string accessToken, string hash, int? contentLength, System.IO.Stream body, string contentType = default(string), string contentDisposition = default(string), Region? xAdsRegion = null, string ifMatch = default(string), bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ObjectDetails> UploadSignedResourceAsync(string hash, int? contentLength, System.IO.Stream body, string contentType = default(string), string contentDisposition = default(string), Region? xAdsRegion = null, string ifMatch = default(string), string accessToken = default, bool throwOnError = true)
         {
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.objectsApi.UploadSignedResourceAsync(hash, contentLength, body, contentType, contentDisposition, xAdsRegion, ifMatch, accessToken, throwOnError);
             return response.Content;
         }
@@ -913,9 +1089,6 @@ namespace Autodesk.Oss
         ///**Note:** The signed URL returned by [Generate OSS Signed URL](/en/docs/data/v2/reference/http/signedresources-:id-GET/) contains the `hash` as a URI parameter. 
         /// </remarks>
         /// <exception cref="OssApiException">Thrown when fails to make API call</exception>
-        /// <param name="accessToken">
-        /// An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().
-        /// </param>
         /// <param name="hash">
         ///The ID component of the signed URL.
         ///
@@ -945,14 +1118,26 @@ namespace Autodesk.Oss
         ///
         ///**Note:** Beta features are subject to change. Please do not use in production environments. (optional)
         /// </param>
+        /// <param name="accessToken">
+        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync(). 
+        ///(optional)
+        /// </param>
         /// <param name="throwOnError">
         /// Specifies whether to throw an error if the API call fails.
         /// (optional)
         /// </param>
         /// <returns>Task of &lt;ObjectDetails&gt;</returns>
 
-        public async System.Threading.Tasks.Task<ObjectDetails> UploadSignedResourcesChunkAsync(string accessToken, string hash, string contentRange, string sessionId, System.IO.Stream body, string contentType = default(string), string contentDisposition = default(string), Region? xAdsRegion = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ObjectDetails> UploadSignedResourcesChunkAsync(string hash, string contentRange, string sessionId, System.IO.Stream body, string contentType = default(string), string contentDisposition = default(string), Region? xAdsRegion = null, string accessToken = default, bool throwOnError = true)
         {
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.objectsApi.UploadSignedResourcesChunkAsync(hash, contentRange, sessionId, body, contentType, contentDisposition, xAdsRegion, accessToken, throwOnError);
             return response.Content;
         }
