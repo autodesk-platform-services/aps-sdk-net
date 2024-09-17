@@ -24,6 +24,9 @@ using System.Net.Http;
 
 namespace Autodesk.Construction.AccountAdmin
 {
+  /// <summary>
+  /// An object that is returned when an API call fails.
+  /// </summary>
   public abstract class ServiceApiException : HttpRequestException
   {
     public HttpResponseMessage HttpResponseMessage {get; set;}
@@ -35,6 +38,9 @@ namespace Autodesk.Construction.AccountAdmin
     }
   }
 
+  /// <summary>
+  /// An object that is returned when an API call to the AccountAdmin service fails.
+  /// </summary>
   public class ConstructionAccountAdminApiException : ServiceApiException
   {
     public ConstructionAccountAdminApiException(string message) : base(message) {}
