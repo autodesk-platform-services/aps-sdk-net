@@ -15,15 +15,14 @@ namespace Samples
 
         public void Initialise()
         {
-            // Instantiate SDK manager as below.   
-            // You can also optionally pass configurations, logger, etc. 
-            SDKManager sdkManager = SdkManagerBuilder
-                  .Create() // Creates SDK Manager Builder itself.
-                  .Build();
+            //  
+            // Optionally initialise SDKManager to pass custom configurations, logger, etc. 
+            // SDKManager sdkManager = SdkManagerBuilder.Create().Build();
 
+            StaticAuthenticationProvider staticAuthenticationProvider = new StaticAuthenticationProvider(token);
+            // Instantiate ModelDerivativeClient using the auth provider
+            modelDerivativeClient = new ModelDerivativeClient(authenticationProvider: staticAuthenticationProvider);
 
-            // Instantiate ModelDerivativeClient using the created SDK manager
-            modelDerivativeClient = new ModelDerivativeClient(sdkManager);
         }
 
 
@@ -41,7 +40,7 @@ namespace Samples
                     {
                         View._2d,
                         View._3d
-                    },  
+                    },
                     Advanced = new JobPayloadFormatSVF2AdvancedRVT()
                     {
                         GenerateMasterViews =  true
@@ -80,13 +79,13 @@ namespace Samples
             // start the translation job
             try
             {
-                Job jobResponse = await modelDerivativeClient.StartJobAsync(jobPayload: Job, accessToken: token, region: Region.US);
+                Job jobResponse = await modelDerivativeClient.StartJobAsync(jobPayload: Job, region: Region.US);
                 // query for urn, result etc...
                 string jobUrn = jobResponse.Urn;
                 string jobResult = jobResponse.Result;
             }
             catch
-            (ModelDerivativeApiException ex)
+            (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -102,14 +101,14 @@ namespace Samples
             // fetch manifest response
             try
             {
-                Manifest manifestResponse = await modelDerivativeClient.GetManifestAsync(accessToken: token, urn, region: Region.US);
+                Manifest manifestResponse = await modelDerivativeClient.GetManifestAsync(urn, region: Region.US);
                 // query for urn, progress etc...
                 string manifestUrn = manifestResponse.Urn;
                 string progress = manifestResponse.Progress;
                 // get list of derivatives. Query further to get children etc.
                 List<ManifestDerivative> derivatives = manifestResponse.Derivatives;
             }
-            catch (ModelDerivativeApiException ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -120,10 +119,10 @@ namespace Samples
         {
             try
             {
-                DeleteManifest deleteManifest = await modelDerivativeClient.DeleteManifestAsync(accessToken: token, urn, Region.US);
+                DeleteManifest deleteManifest = await modelDerivativeClient.DeleteManifestAsync(urn, Region.US);
                 var result = deleteManifest.Result;
             }
-            catch (ModelDerivativeApiException ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -137,10 +136,10 @@ namespace Samples
         {
             try
             {
-                SupportedFormats formatsResponse = await modelDerivativeClient.GetFormatsAsync(accessToken: token);
+                SupportedFormats formatsResponse = await modelDerivativeClient.GetFormatsAsync();
                 Dictionary<string, List<string>> supportedformats = formatsResponse.Formats;
             }
-            catch (ModelDerivativeApiException ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -153,14 +152,13 @@ namespace Samples
         // Get list of model views
         public async Task GetModelViewsAsync()
         {
-            string modelGuid =  Environment.GetEnvironmentVariable("modelGuid")!;
             try
             {
-                ModelViews modelViewsResponse = await modelDerivativeClient.GetModelViewsAsync(accessToken: token, urn, region: Region.US);
+                ModelViews modelViewsResponse = await modelDerivativeClient.GetModelViewsAsync(urn, region: Region.US);
                 // get guid from response
-                modelGuid = modelViewsResponse.Data.Metadata.First().Guid;
+                string modelGuid = modelViewsResponse.Data.Metadata.First().Guid;
             }
-            catch (ModelDerivativeApiException ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -173,14 +171,14 @@ namespace Samples
             string modelGuid = Environment.GetEnvironmentVariable("modelGuid")!;
             try
             {
-                ObjectTree objectTree = await modelDerivativeClient.GetObjectTreeAsync(accessToken: token, urn, modelGuid, Region.US);
+                ObjectTree objectTree = await modelDerivativeClient.GetObjectTreeAsync(urn, modelGuid, Region.US);
                 if (objectTree.IsProcessing)
                 {
                     // 202 response. Call the endpoint again or iteratively to get 200 OK.
                 }
                 List<ObjectTreeDataObjects> treeObjects = objectTree.Data.Objects;
             }
-            catch (ModelDerivativeApiException ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -196,23 +194,23 @@ namespace Samples
             SpecificPropertiesPayload payload = new SpecificPropertiesPayload()
             {
 
-                Query = new MatchId() 
+                Query = new MatchId()
                 {
-                    In = new List<object> { MatchIdType.ObjectId, 167 }
+                    In = new List<object> { MatchIdType.ObjectId, 4088 }
                 }
-                
+
             };
 
             try
             {
-                SpecificProperties specificProperties = await modelDerivativeClient.FetchSpecificPropertiesAsync(accessToken: token, urn, modelGuid, specificPropertiesPayload: payload, Region.US);
+                SpecificProperties specificProperties = await modelDerivativeClient.FetchSpecificPropertiesAsync(urn, modelGuid, specificPropertiesPayload: payload, Region.US);
                 if (specificProperties.IsProcessing)
                 {
                     // 202 response. Call the endpoint again or iteratively to get 200 OK.
                 }
                 List<PropertiesDataCollection> propertiesDataCollections = specificProperties.Data.Collection;
             }
-            catch (ModelDerivativeApiException ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -222,17 +220,17 @@ namespace Samples
         // Fetch all properties
         public async Task GetAllPropertiesAsync()
         {
-            string modelGuid =  Environment.GetEnvironmentVariable("modelGuid")!;
+            string modelGuid = Environment.GetEnvironmentVariable("modelGuid")!;
             try
             {
-                Properties allProperties = await modelDerivativeClient.GetAllPropertiesAsync(accessToken: token, urn, modelGuid);
+                Properties allProperties = await modelDerivativeClient.GetAllPropertiesAsync(urn, modelGuid);
                 if (allProperties.IsProcessing)
                 {
                     // 202 response. Call the endpoint again or iteratively to get 200 OK.
                 }
                 List<PropertiesDataCollection> propertiesDataCollections = allProperties.Data.Collection;
             }
-            catch (ModelDerivativeApiException ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -246,14 +244,14 @@ namespace Samples
         {
             try
             {
-                Stream thumbnail = await modelDerivativeClient.GetThumbnailAsync(accessToken: token, urn, Width.NUMBER_400, Height.NUMBER_400, Region.US);
+                Stream thumbnail = await modelDerivativeClient.GetThumbnailAsync(urn, Width.NUMBER_400, Height.NUMBER_400, Region.US);
                 // save thumbnail to local file
                 using (var fileStream = new FileStream("/full/path/including/filename", FileMode.Create, FileAccess.Write))
                 {
                     thumbnail.CopyTo(fileStream);
                 }
             }
-            catch (ModelDerivativeApiException ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -268,11 +266,11 @@ namespace Samples
             try
             {
                 string derivativeUrn = Environment.GetEnvironmentVariable("derivativeUrn")!;
-                DerivativeDownload derivativeDownload = await modelDerivativeClient.GetDerivativeUrlAsync(accessToken: token, derivativeUrn, urn, Region.US);
+                DerivativeDownload derivativeDownload = await modelDerivativeClient.GetDerivativeUrlAsync(derivativeUrn, urn, Region.US);
                 // the below returns a downloadable url including the coookies
                 var url = derivativeDownload.Url;
             }
-            catch (ModelDerivativeApiException ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -284,14 +282,14 @@ namespace Samples
             try
             {
                 string derivativeUrn = Environment.GetEnvironmentVariable("derivativeUrn")!;
-                HttpResponseMessage derivativeHeaders = await modelDerivativeClient.HeadCheckDerivativeAsync(accessToken: token, urn, derivativeUrn, Region.US);
+                HttpResponseMessage derivativeHeaders = await modelDerivativeClient.HeadCheckDerivativeAsync(urn, derivativeUrn, Region.US);
                 if (derivativeHeaders.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
                     // 202 response. Call the endpoint again or iteratively to get 200 OK.
                 }
                 var ContentLength = derivativeHeaders.Content.Headers.ContentLength;
             }
-            catch (ModelDerivativeApiException ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -306,19 +304,19 @@ namespace Samples
             ModelDerivative modelDerivative = new ModelDerivative();
             modelDerivative.Initialise();
 
-            // Call respective methods
-            await StartJobAsync();
-            await GetFormatsAsync();
-            await GetManifestAsync();
-            await DeleteManifestAsync();
-            await GetThumbnailAsync();
-            await GetDerivativeHeadersAsync();
-            await DownloadDerivativeURLAsync();
-            await GetModelViewsAsync();
-            await GetObjectTreeAsync();
-            await GetAllPropertiesAsync();
-            await GetSpecificPropertiesAsync();
-      
+            //Call respective methods
+            await modelDerivative.StartJobAsync();
+            await modelDerivative.GetFormatsAsync();
+            await modelDerivative.GetManifestAsync();
+            await modelDerivative.DeleteManifestAsync();
+            await modelDerivative.GetThumbnailAsync();
+            await modelDerivative.GetDerivativeHeadersAsync();
+            await modelDerivative.DownloadDerivativeURLAsync();
+            await modelDerivative.GetModelViewsAsync();
+            await modelDerivative.GetObjectTreeAsync();
+            await modelDerivative.GetAllPropertiesAsync();
+            await modelDerivative.GetSpecificPropertiesAsync();
+
         }
 
     }
