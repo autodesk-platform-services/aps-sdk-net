@@ -59,8 +59,7 @@ namespace Autodesk.Webhooks
         ///
         ///**Note:** 
         ///
-        ///1. Beta features are subject to change. Please avoid using them in production environments.
-        ///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
+        /// Beta features are subject to change. Please avoid using them in production environments.
         /// </param>
         /// <param name="hookPayload">The payload for the webhook.</param>
         /// <param name="accessToken">An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().(optional)</param>
@@ -102,8 +101,7 @@ namespace Autodesk.Webhooks
         ///
         ///**Note:** 
         ///
-        ///1. Beta features are subject to change. Please avoid using them in production environments.
-        ///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
+        /// Beta features are subject to change. Please avoid using them in production environments.
         /// </param>
         /// <param name="hookPayload">The payload for the webhook.</param>
         /// <param name="accessToken">An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().(optional)</param>
@@ -146,8 +144,7 @@ namespace Autodesk.Webhooks
         ///
         ///**Note:** 
         ///
-        ///1. Beta features are subject to change. Please avoid using them in production environments.
-        ///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
+        /// Beta features are subject to change. Please avoid using them in production environments.
         /// </param>
         /// <param name="hookPayload">The payload for the webhook.</param>
         /// <param name="accessToken">An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().(optional)</param>
@@ -187,8 +184,7 @@ namespace Autodesk.Webhooks
         ///
         ///**Note:** 
         ///
-        ///1. Beta features are subject to change. Please avoid using them in production environments.
-        ///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
+        /// Beta features are subject to change. Please avoid using them in production environments.
         /// </param>
         /// <param name="hookPayload">The payload for the webhook.</param>
         /// <param name="accessToken">An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().(optional)</param>
@@ -235,8 +231,7 @@ namespace Autodesk.Webhooks
         ///
         ///**Note:** 
         ///
-        ///1. Beta features are subject to change. Please avoid using them in production environments.
-        ///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
+        /// Beta features are subject to change. Please avoid using them in production environments.
         /// </param>
         /// <param name="accessToken">An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().(optional)</param>
         /// <param name="throwOnError">Specifies whether to throw an exception on error. (optional)</param>
@@ -280,8 +275,7 @@ namespace Autodesk.Webhooks
         ///
         ///**Note:** 
         ///
-        ///1. Beta features are subject to change. Please avoid using them in production environments.
-        ///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
+        /// Beta features are subject to change. Please avoid using them in production environments.
         /// </param>
         /// <param name="accessToken">An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().(optional)</param>
         /// <param name="throwOnError">Specifies whether to throw an exception on error. (optional)</param>
@@ -334,8 +328,7 @@ namespace Autodesk.Webhooks
         ///
         ///**Note:** 
         ///
-        ///1. Beta features are subject to change. Please avoid using them in production environments.
-        ///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
+        /// Beta features are subject to change. Please avoid using them in production environments.
         /// </param>
         /// <param name="sort">
         ///Specifies the sorting order of the list of webhooks by their `lastUpdatedDate` attribute. 
@@ -387,8 +380,7 @@ namespace Autodesk.Webhooks
         ///
         ///**Note:** 
         ///
-        ///1. Beta features are subject to change. Please avoid using them in production environments.
-        ///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
+        /// Beta features are subject to change. Please avoid using them in production environments.
         /// </param>
         /// <param name="accessToken">An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().(optional)</param>
         /// <param name="throwOnError">Specifies whether to throw an exception on error. (optional)</param>
@@ -433,8 +425,7 @@ namespace Autodesk.Webhooks
         ///
         ///**Note:** 
         ///
-        ///1. Beta features are subject to change. Please avoid using them in production environments.
-        ///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
+        /// Beta features are subject to change. Please avoid using them in production environments.
         /// </param>
         /// <param name="accessToken">An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().(optional)</param>
         /// <param name="throwOnError">Specifies whether to throw an exception on error. (optional)</param>
@@ -485,8 +476,7 @@ namespace Autodesk.Webhooks
         ///
         ///**Note:** 
         ///
-        ///1. Beta features are subject to change. Please avoid using them in production environments.
-        ///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
+        /// Beta features are subject to change. Please avoid using them in production environments.
         /// </param>
         /// <param name="accessToken">An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().(optional)</param>
         /// <param name="throwOnError">Specifies whether to throw an exception on error. (optional)</param>
@@ -531,8 +521,7 @@ namespace Autodesk.Webhooks
         ///
         ///**Note:** 
         ///
-        ///1. Beta features are subject to change. Please avoid using them in production environments.
-        ///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
+        /// Beta features are subject to change. Please avoid using them in production environments.
         /// </param>
         /// <param name="scopeName">
         ///Filters retrieved webhooks by the scope name used to create hook. For example : `folder`.  If this parameter is not specified, the filter is not applied. (optional)
@@ -592,8 +581,7 @@ namespace Autodesk.Webhooks
         ///
         ///**Note:** 
         ///
-        ///1. Beta features are subject to change. Please avoid using them in production environments.
-        ///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
+        /// Beta features are subject to change. Please avoid using them in production environments.
         /// </param>
         /// <param name="scopeName">
         ///Filters retrieved webhooks by the scope name used to create hook. For example : `folder`.  If this parameter is not specified, the filter is not applied. (optional)
@@ -662,8 +650,7 @@ namespace Autodesk.Webhooks
         ///
         ///**Note:** 
         ///
-        ///1. Beta features are subject to change. Please avoid using them in production environments.
-        ///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
+        /// Beta features are subject to change. Please avoid using them in production environments.
         /// </param>
         /// <param name="accessToken">An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().(optional)</param>
         /// <param name="throwOnError">Specifies whether to throw an exception on error. (optional)</param>
@@ -717,8 +704,7 @@ namespace Autodesk.Webhooks
         ///
         ///**Note:** 
         ///
-        ///1. Beta features are subject to change. Please avoid using them in production environments.
-        ///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
+        /// Beta features are subject to change. Please avoid using them in production environments.
         /// </param>
         /// <param name="accessToken">An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().(optional)</param>
         /// <param name="throwOnError">Specifies whether to throw an exception on error. (optional)</param>
@@ -777,8 +763,7 @@ namespace Autodesk.Webhooks
         ///
         ///**Note:** 
         ///
-        ///1. Beta features are subject to change. Please avoid using them in production environments.
-        ///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
+        /// Beta features are subject to change. Please avoid using them in production environments.
         /// </param>   
         /// <param name="accessToken">An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().(optional)</param>
         /// <param name="throwOnError">Specifies whether to throw an exception on error. (optional)</param>
@@ -835,8 +820,7 @@ namespace Autodesk.Webhooks
         ///
         ///**Note:** 
         ///
-        ///1. Beta features are subject to change. Please avoid using them in production environments.
-        ///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
+        /// Beta features are subject to change. Please avoid using them in production environments.
         /// </param>   
         /// <param name="accessToken">An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().(optional)</param>
         /// <param name="throwOnError">Specifies whether to throw an exception on error. (optional)</param>
@@ -889,8 +873,7 @@ namespace Autodesk.Webhooks
         ///
         ///**Note:** 
         ///
-        ///1. Beta features are subject to change. Please avoid using them in production environments.
-        ///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
+        /// Beta features are subject to change. Please avoid using them in production environments.
         /// </param>
         /// <param name="accessToken">An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().(optional)</param>
         /// <param name="throwOnError">Specifies whether to throw an exception on error. (optional)</param>
@@ -936,8 +919,7 @@ namespace Autodesk.Webhooks
         ///
         ///**Note:** 
         ///
-        ///1. Beta features are subject to change. Please avoid using them in production environments.
-        ///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
+        /// Beta features are subject to change. Please avoid using them in production environments.
         /// </param>
         /// <param name="accessToken">An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().(optional)</param>
         /// <param name="throwOnError">Specifies whether to throw an exception on error. (optional)</param>       
@@ -986,8 +968,7 @@ namespace Autodesk.Webhooks
         ///
         ///**Note:** 
         ///
-        ///1. Beta features are subject to change. Please avoid using them in production environments.
-        ///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
+        /// Beta features are subject to change. Please avoid using them in production environments.
         /// </param>
         /// <param name="accessToken">An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().(optional)</param>
         /// <param name="throwOnError">Specifies whether to throw an exception on error. (optional)</param>       

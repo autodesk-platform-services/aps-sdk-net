@@ -8,7 +8,7 @@
     <PackageDescription>Client SDK for Data Management OSS API</PackageDescription>
     <Copyright>Autodesk Inc.</Copyright>
     <PackageId>Autodesk.Oss</PackageId>
-    <PackageVersion>1.1.1</PackageVersion>
+    <PackageVersion>2.0.0-beta</PackageVersion>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/autodesk-platform-services/aps-sdk-net.git</RepositoryUrl> 
@@ -21,7 +21,7 @@
       <PackageReference Include="Microsoft.Extensions.Options" Version="6.0.0" />
       <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-      <PackageReference Include="Autodesk.SDKManager" Version="1.0.0" />
+      <PackageReference Include="Autodesk.SDKManager" Version="1.1.0" />
       <None Include="../../LICENSE.txt" Pack="true" PackagePath=""/>
       <None Include="../../README.md" Pack="true" PackagePath=""/>
     </ItemGroup>
