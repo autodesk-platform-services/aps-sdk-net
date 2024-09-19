@@ -20,39 +20,30 @@
  * limitations under the License.
  */
 using System;
-using System.Linq;
-using System.IO;
-using System.Text;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Net.Http;
 
-namespace Autodesk.Construction.AccountAdmin.Model
+namespace Autodesk.Construction.AccountAdmin
 {
-    /// <summary>
-    /// Defines construction_type
-    /// </summary>
-    ///<value></value>
-    
-    [JsonConverter(typeof(StringEnumConverter))]
-    
-    public enum ConstructionType
-    {
-        
-        /// <summary>
-        /// Enum NewConstruction for value: New Construction
-        /// </summary>
-        [EnumMember(Value = "New Construction")]
-        NewConstruction,
-        
-        /// <summary>
-        /// Enum Renovation for value: Renovation
-        /// </summary>
-        [EnumMember(Value = "Renovation")]
-        Renovation
-    }
+  /// <summary>
+  /// An object that is returned when an API call fails.
+  /// </summary>
+  public abstract class ServiceApiException : HttpRequestException
+  {
+    public HttpResponseMessage HttpResponseMessage {get; set;}
 
+    public ServiceApiException(string message) : base(message) {}
+    public ServiceApiException(string message, HttpResponseMessage httpResponseMessage, Exception exception) : base(message, exception)
+    {
+      this.HttpResponseMessage = httpResponseMessage;
+    }
+  }
+
+  /// <summary>
+  /// An object that is returned when an API call to the AccountAdmin service fails.
+  /// </summary>
+  public class ConstructionAccountAdminApiException : ServiceApiException
+  {
+    public ConstructionAccountAdminApiException(string message) : base(message) {}
+    public ConstructionAccountAdminApiException(string message, HttpResponseMessage httpResponseMessage, Exception exception) : base(message, httpResponseMessage, exception) {}
+  }
 }

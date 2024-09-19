@@ -25,12 +25,14 @@ using System.Collections.Generic;
 using System;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Runtime.Serialization;
 using Autodesk.Construction.AccountAdmin.Model;
 using Autodesk.Construction.AccountAdmin.Client;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Autodesk.SDKManager;
+using System.IO;
 
 namespace Autodesk.Construction.AccountAdmin.Http
 {
@@ -87,7 +89,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
          /// </param>
         /// <returns>Task of ApiResponse&lt;List&lt;Company&gt;&gt;</returns>
         
-        System.Threading.Tasks.Task<ApiResponse<List<Company>>> GetCompaniesAsync (string accountId, Region? region= null, decimal? limit= default(decimal?), decimal? offset= default(decimal?), string sort= default(string), string field= default(string),  string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<ApiResponse<List<Company>>> GetCompaniesAsync (string accountId, Region? region= null, int? limit= default(int?), int? offset= default(int?), string sort= default(string), string field= default(string),  string accessToken = null, bool throwOnError = true);
         /// <summary>
         /// Get details of a company
         /// </summary>
@@ -409,7 +411,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
                     {
                       await response.EnsureSuccessStatusCodeAsync();
                     } catch (HttpRequestException ex) {
-                      throw new ConstructionaccountadminApiException(ex.Message, response, ex);
+                      throw new ConstructionAccountAdminApiException(ex.Message, response, ex);
                     }
                 }
                 else if (!response.IsSuccessStatusCode)
@@ -450,7 +452,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
          /// </param>
         /// <returns>Task of ApiResponse&lt;List&lt;Company&gt;&gt;></returns>
         
-        public async System.Threading.Tasks.Task<ApiResponse<List<Company>>> GetCompaniesAsync (string accountId,Region? region= null,decimal? limit= default(decimal?),decimal? offset= default(decimal?),string sort= default(string),string field= default(string), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ApiResponse<List<Company>>> GetCompaniesAsync (string accountId,Region? region= null,int? limit= default(int?),int? offset= default(int?),string sort= default(string),string field= default(string), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into GetCompaniesAsync ");
             using (var request = new HttpRequestMessage())
@@ -519,7 +521,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
                     {
                       await response.EnsureSuccessStatusCodeAsync();
                     } catch (HttpRequestException ex) {
-                      throw new ConstructionaccountadminApiException(ex.Message, response, ex);
+                      throw new ConstructionAccountAdminApiException(ex.Message, response, ex);
                     }
                 }
                 else if (!response.IsSuccessStatusCode)
@@ -616,7 +618,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
                     {
                       await response.EnsureSuccessStatusCodeAsync();
                     } catch (HttpRequestException ex) {
-                      throw new ConstructionaccountadminApiException(ex.Message, response, ex);
+                      throw new ConstructionAccountAdminApiException(ex.Message, response, ex);
                     }
                 }
                 else if (!response.IsSuccessStatusCode)
@@ -730,7 +732,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
                     {
                       await response.EnsureSuccessStatusCodeAsync();
                     } catch (HttpRequestException ex) {
-                      throw new ConstructionaccountadminApiException(ex.Message, response, ex);
+                      throw new ConstructionAccountAdminApiException(ex.Message, response, ex);
                     }
                 }
                 else if (!response.IsSuccessStatusCode)
@@ -828,7 +830,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
                     {
                       await response.EnsureSuccessStatusCodeAsync();
                     } catch (HttpRequestException ex) {
-                      throw new ConstructionaccountadminApiException(ex.Message, response, ex);
+                      throw new ConstructionAccountAdminApiException(ex.Message, response, ex);
                     }
                 }
                 else if (!response.IsSuccessStatusCode)
@@ -929,7 +931,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
                     {
                       await response.EnsureSuccessStatusCodeAsync();
                     } catch (HttpRequestException ex) {
-                      throw new ConstructionaccountadminApiException(ex.Message, response, ex);
+                      throw new ConstructionAccountAdminApiException(ex.Message, response, ex);
                     }
                 }
                 else if (!response.IsSuccessStatusCode)
@@ -986,7 +988,13 @@ namespace Autodesk.Construction.AccountAdmin.Http
                 }
 
 
-                request.Content = new StreamContent(body);
+                var formdata = new MultipartFormDataContent();
+
+                var fileStreamContent = new StreamContent(body);
+                fileStreamContent.Headers.ContentType = new MediaTypeHeaderValue("image/png");
+                formdata.Add(fileStreamContent, "chunk", Path.GetFileName((body as FileStream).Name));
+
+                request.Content = formdata;
 
                 SetHeader("Region", region, request);
 
@@ -1030,7 +1038,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
                     {
                       await response.EnsureSuccessStatusCodeAsync();
                     } catch (HttpRequestException ex) {
-                      throw new ConstructionaccountadminApiException(ex.Message, response, ex);
+                      throw new ConstructionAccountAdminApiException(ex.Message, response, ex);
                     }
                 }
                 else if (!response.IsSuccessStatusCode)
@@ -1156,7 +1164,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
                     {
                       await response.EnsureSuccessStatusCodeAsync();
                     } catch (HttpRequestException ex) {
-                      throw new ConstructionaccountadminApiException(ex.Message, response, ex);
+                      throw new ConstructionAccountAdminApiException(ex.Message, response, ex);
                     }
                 }
                 else if (!response.IsSuccessStatusCode)

@@ -3,9 +3,9 @@
  *
  * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
- * Construction.Account.Admin
+ * Webhooks
  *
- * The Account Admin API automates creating and managing projects, assigning and managing project users, and managing member and partner company directories. You can also synchronize data with external systems. 
+ * The Webhooks API enables applications to listen to APS events and receive notifications when they occur. When an event is triggered, the Webhooks service sends a notification to a callback URL you have defined. You can customize the types of events and resources for which you receive notifications. For example, you can set up a webhook to send notifications when files are modified or deleted in a specified hub or project. Below is quick summary of this workflow: 1. Identify the data for which you want to receive notifications. 2. Use the Webhooks API to create one or more hooks. 3. The Webhooks service will notify the webhook when there is a change in the data. 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,41 +30,35 @@ using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace Autodesk.Construction.AccountAdmin.Model
+namespace Autodesk.Webhooks.Model
 {
     /// <summary>
-    /// Defines projectStatus
+    /// Specifies the sorting order of the list of webhooks by their `lastUpdatedDate` attribute. 
+///
+///- `asc` - Ascending order.
+///- `desc` - (Default) Descending order.
     /// </summary>
-    ///<value></value>
+    ///<value>Specifies the sorting order of the list of webhooks by their `lastUpdatedDate` attribute. 
+///
+///- `asc` - Ascending order.
+///- `desc` - (Default) Descending order.</value>
     
     [JsonConverter(typeof(StringEnumConverter))]
     
-    public enum ProjectStatus
+    public enum Sort
     {
         
         /// <summary>
-        /// Enum Active for value: active
+        /// Enum Asc for value: asc
         /// </summary>
-        [EnumMember(Value = "active")]
-        Active,
+        [EnumMember(Value = "asc")]
+        Asc,
         
         /// <summary>
-        /// Enum Pending for value: pending
+        /// Enum Desc for value: desc
         /// </summary>
-        [EnumMember(Value = "pending")]
-        Pending,
-        
-        /// <summary>
-        /// Enum Inactive for value: inactive
-        /// </summary>
-        [EnumMember(Value = "inactive")]
-        Inactive,
-        
-        /// <summary>
-        /// Enum Archived for value: archived
-        /// </summary>
-        [EnumMember(Value = "archived")]
-        Archived
+        [EnumMember(Value = "desc")]
+        Desc
     }
 
 }

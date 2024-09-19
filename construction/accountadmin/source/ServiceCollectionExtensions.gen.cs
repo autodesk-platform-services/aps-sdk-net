@@ -34,15 +34,15 @@ namespace Autodesk.Construction.AccountAdmin
         /// <param name="services"></param>
         /// <param name="configuration"></param>
         /// <returns></returns>
-        public static IHttpClientBuilder AddConstructionaccountadmin(this IServiceCollection services, IConfiguration configuration)
+        public static IHttpClientBuilder AddConstructionAccountAdmin(this IServiceCollection services, IConfiguration configuration)
         {
-            // services.Configure<Configuration>(configuration.GetSection("Forge").GetSection("Constructionaccountadmin"));
+            // services.Configure<Configuration>(configuration.GetSection("Forge").GetSection("ConstructionAccountAdmin"));
             services.AddTransient<IAccountUsersApi,AccountUsersApi>();
             services.AddTransient<IBusinessUnitsApi,BusinessUnitsApi>();
             services.AddTransient<ICompaniesApi,CompaniesApi>();
             services.AddTransient<IProjectUsersApi,ProjectUsersApi>();
             services.AddTransient<IProjectsApi,ProjectsApi>();
-            // services.AddTransient<ConstructionaccountadminClient>();
+            // services.AddTransient<ConstructionAccountAdminClient>();
             return services.AddForgeService(configuration);
         }
     }

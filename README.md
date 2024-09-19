@@ -22,8 +22,8 @@ The Developer Portal has everything APS:
 ## Nuget Packages
 
 - [Authentication](https://www.nuget.org/packages/Autodesk.Authentication)
-- [Construction Account Admin](https://www.nuget.org/packages/Autodesk.Construction.AccountAdmin/1.0.0-beta1)
-- [Construction Issues](https://www.nuget.org/packages/Autodesk.Construction.Issues)
+- [ACC Account Admin](https://www.nuget.org/packages/Autodesk.Construction.AccountAdmin/1.0.0-beta1)
+- [ACC Issues](https://www.nuget.org/packages/Autodesk.Construction.Issues)
 - [Data Management](https://www.nuget.org/packages/Autodesk.DataManagement)
 - [Model Derivative](https://www.nuget.org/packages/Autodesk.ModelDerivative)
 - [OSS](https://www.nuget.org/packages/Autodesk.Oss)
@@ -33,3 +33,7 @@ The Developer Portal has everything APS:
 #### Looking for Design Automation v3?
 
 The Design Automation .NET is maintained in a separate [repo](https://github.com/Autodesk-Forge/forge-api-dotnet-design.automation) and [nuget package](https://www.nuget.org/packages/Autodesk.Forge.DesignAutomation).
+
+## Contributions
+
+Contributions are welcome! Please make sure to read the [contribution guidelines](CONTRIBUTING.md).

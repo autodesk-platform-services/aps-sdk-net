@@ -35,7 +35,6 @@ namespace Autodesk.Oss
             Stream sourceToUpload,
             string accessToken,
             CancellationToken cancellationToken,
-            string projectScope = "",
             string requestIdPrefix = "",
             IProgress<int> progress = null);
     
@@ -45,7 +44,6 @@ namespace Autodesk.Oss
             string filePath,
             string accessToken,
             CancellationToken cancellationToken,
-            string projectScope = "",
             string requestIdPrefix = "",
             IProgress<int> progress = null);
     }
