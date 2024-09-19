@@ -4,10 +4,9 @@
 
 [Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v2...HEAD)
 
-**Merged pull requests:**
+**Closed issues:**
 
-- Update AutoChangeLog.yml [\#68](https://github.com/autodesk-platform-services/aps-sdk-net/pull/68) ([sajith-subramanian](https://github.com/sajith-subramanian))
-- Update AutoChangeLog.yml [\#67](https://github.com/autodesk-platform-services/aps-sdk-net/pull/67) ([sajith-subramanian](https://github.com/sajith-subramanian))
+- OssClient.DeleteObjectAsync\(\) & OssClient.GetObjectDetailsAsync\(\) NullReferenceException [\#62](https://github.com/autodesk-platform-services/aps-sdk-net/issues/62)
 
 ## [v2](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v2) (2024-07-26)
 
