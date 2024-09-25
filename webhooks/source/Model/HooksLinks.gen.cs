@@ -5,7 +5,7 @@
  *
  * Webhooks
  *
- * The Webhooks API enables applications to listen to APS events and receive notifications when they occur. When an event is triggered, the Webhooks service sends a notification to a callback URL you have defined.  You can customize the types of events and resources for which you receive notifications. For example, you can set up a webhook to send notifications when files are modified or deleted in a specified hub or project.  Below is quick summary of this workflow:  1. Identify the data for which you want to receive notifications. 2. Use the Webhooks API to create one or more hooks. 3. The Webhooks service will notify the webhook when there is a change in the data. 
+ * The Webhooks API enables applications to listen to APS events and receive notifications when they occur. When an event is triggered, the Webhooks service sends a notification to a callback URL you have defined. You can customize the types of events and resources for which you receive notifications. For example, you can set up a webhook to send notifications when files are modified or deleted in a specified hub or project. Below is quick summary of this workflow: 1. Identify the data for which you want to receive notifications. 2. Use the Webhooks API to create one or more hooks. 3. The Webhooks service will notify the webhook when there is a change in the data. 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Webhooks.Model
 {
     /// <summary>
-    /// HooksLinks
+    /// Contains an object with the address of the next page of the list of webhooks.
     /// </summary>
     [DataContract]
     public partial class HooksLinks 
@@ -46,8 +46,11 @@ namespace Autodesk.Webhooks.Model
         }
         
         /// <summary>
-        ///Gets or Sets Next
+        ///Base64 encoded string to retrieve the next page of the list of webhooks.
         /// </summary>
+        /// <value>
+        ///Base64 encoded string to retrieve the next page of the list of webhooks.
+        /// </value>
         [DataMember(Name="next", EmitDefaultValue=false)]
         public string Next { get; set; }
 

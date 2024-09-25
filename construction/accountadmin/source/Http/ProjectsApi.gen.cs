@@ -25,6 +25,7 @@ using System.Collections.Generic;
 using System;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Runtime.Serialization;
 using Autodesk.Construction.AccountAdmin.Model;
 using Autodesk.Construction.AccountAdmin.Client;
@@ -176,7 +177,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
          /// </param>
         /// <returns>Task of ApiResponse&lt;Projects&gt;</returns>
         
-        System.Threading.Tasks.Task<ApiResponse<Projects>> GetProjectsAsync (string accountId, string acceptLanguage= default(string), Region? region= null, string userId= default(string), List<Fields> fields= default(List<Fields>), List<Classification> filterClassification= default(List<Classification>), List<Platform> filterPlatform= default(List<Platform>), List<Products> filterProducts= default(List<Products>), string filterName= default(string), List<string> filterType= default(List<string>), List<Status> filterStatus= default(List<Status>), string filterBusinessUnitId= default(string), string filterJobNumber= default(string), string filterUpdatedAt= default(string), FilterTextMatch? filterTextMatch= null, List<SortBy> sort= default(List<SortBy>), decimal? limit= default(decimal?), decimal? offset= default(decimal?),  string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<ApiResponse<Projects>> GetProjectsAsync (string accountId, string acceptLanguage= default(string), Region? region= null, string userId= default(string), List<Fields> fields= default(List<Fields>), List<Classification> filterClassification= default(List<Classification>), List<Platform> filterPlatform= default(List<Platform>), List<Products> filterProducts= default(List<Products>), string filterName= default(string), List<string> filterType= default(List<string>), List<Status> filterStatus= default(List<Status>), string filterBusinessUnitId= default(string), string filterJobNumber= default(string), string filterUpdatedAt= default(string), FilterTextMatch? filterTextMatch= null, List<SortBy> sort= default(List<SortBy>), int? limit= default(int?), int? offset= default(int?),  string accessToken = null, bool throwOnError = true);
     }
 
     /// <summary>
@@ -371,7 +372,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
                     {
                       await response.EnsureSuccessStatusCodeAsync();
                     } catch (HttpRequestException ex) {
-                      throw new ConstructionaccountadminApiException(ex.Message, response, ex);
+                      throw new ConstructionAccountAdminApiException(ex.Message, response, ex);
                     }
                 }
                 else if (!response.IsSuccessStatusCode)
@@ -426,14 +427,13 @@ namespace Autodesk.Construction.AccountAdmin.Http
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
                 }
-                // var content = new MultipartFormDataContent();
-                // content.Add(new StreamContent(File.OpenRead(@"C:/Users/n078/OneDrive - Autodesk/Desktop/sdk.png")), "chunk", @"C:/Users/n078/OneDrive - Autodesk/Desktop/sdk.png");
-                // request.Content = content;
 
-                var formdata = new MultipartFormDataContent
-                {
-                    { new StreamContent(body), "chunk", Path.GetFileName((body as FileStream).Name) }
-                };
+                var formdata = new MultipartFormDataContent();
+
+                var fileStreamContent = new StreamContent(body);
+                fileStreamContent.Headers.ContentType = new MediaTypeHeaderValue("image/png");
+                formdata.Add(fileStreamContent, "chunk", Path.GetFileName((body as FileStream).Name));
+
                 request.Content = formdata;
 
                 SetHeader("Region", region, request);
@@ -478,7 +478,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
                     {
                       await response.EnsureSuccessStatusCodeAsync();
                     } catch (HttpRequestException ex) {
-                      throw new ConstructionaccountadminApiException(ex.Message, response, ex);
+                      throw new ConstructionAccountAdminApiException(ex.Message, response, ex);
                     }
                 }
                 else if (!response.IsSuccessStatusCode)
@@ -583,7 +583,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
                     {
                       await response.EnsureSuccessStatusCodeAsync();
                     } catch (HttpRequestException ex) {
-                      throw new ConstructionaccountadminApiException(ex.Message, response, ex);
+                      throw new ConstructionAccountAdminApiException(ex.Message, response, ex);
                     }
                 }
                 else if (!response.IsSuccessStatusCode)
@@ -659,7 +659,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
          /// </param>
         /// <returns>Task of ApiResponse&lt;Projects&gt;></returns>
         
-        public async System.Threading.Tasks.Task<ApiResponse<Projects>> GetProjectsAsync (string accountId,string acceptLanguage= default(string),Region? region= null,string userId= default(string),List<Fields> fields= default(List<Fields>),List<Classification> filterClassification= default(List<Classification>),List<Platform> filterPlatform= default(List<Platform>),List<Products> filterProducts= default(List<Products>),string filterName= default(string),List<string> filterType= default(List<string>),List<Status> filterStatus= default(List<Status>),string filterBusinessUnitId= default(string),string filterJobNumber= default(string),string filterUpdatedAt= default(string),FilterTextMatch? filterTextMatch= null,List<SortBy> sort= default(List<SortBy>),decimal? limit= default(decimal?),decimal? offset= default(decimal?), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ApiResponse<Projects>> GetProjectsAsync (string accountId,string acceptLanguage= default(string),Region? region= null,string userId= default(string),List<Fields> fields= default(List<Fields>),List<Classification> filterClassification= default(List<Classification>),List<Platform> filterPlatform= default(List<Platform>),List<Products> filterProducts= default(List<Products>),string filterName= default(string),List<string> filterType= default(List<string>),List<Status> filterStatus= default(List<Status>),string filterBusinessUnitId= default(string),string filterJobNumber= default(string),string filterUpdatedAt= default(string),FilterTextMatch? filterTextMatch= null,List<SortBy> sort= default(List<SortBy>),int? limit= default(int?),int? offset= default(int?), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into GetProjectsAsync ");
             using (var request = new HttpRequestMessage())
@@ -740,7 +740,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
                     {
                       await response.EnsureSuccessStatusCodeAsync();
                     } catch (HttpRequestException ex) {
-                      throw new ConstructionaccountadminApiException(ex.Message, response, ex);
+                      throw new ConstructionAccountAdminApiException(ex.Message, response, ex);
                     }
                 }
                 else if (!response.IsSuccessStatusCode)

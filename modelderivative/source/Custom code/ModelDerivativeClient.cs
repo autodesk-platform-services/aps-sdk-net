@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using Autodesk.ModelDerivative.Http;
 using Autodesk.ModelDerivative.Model;
+using Autodesk.SDKManager;
 using Newtonsoft.Json;
 
 
@@ -12,17 +13,45 @@ namespace Autodesk.ModelDerivative
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public class ModelDerivativeClient
+    public class ModelDerivativeClient : BaseClient
     {
 
+        /// <summary>
+        /// Gets the instance of the IDerivativesApi interface.
+        /// </summary>
         public IDerivativesApi DerivativesApi { get; }
+        /// <summary>
+        /// Gets the instance of the IInformationalApi interface.
+        /// </summary>
         public IInformationalApi InformationalApi { get; }
+        /// <summary>
+        /// Gets the instance of the IJobsApi interface.
+        /// </summary>
         public IJobsApi JobsApi { get; }
+        /// <summary>
+        /// Gets the instance of the IManifestApi interface.
+        /// </summary>
         public IManifestApi ManifestApi { get; }
+        /// <summary>
+        /// Gets the instance of the IMetadataApi interface.
+        /// </summary>
         public IMetadataApi MetadataApi { get; }
+        /// <summary>
+        /// Gets the instance of the IThumbnailsApi interface.
+        /// </summary>
         public IThumbnailsApi ThumbnailsApi { get; }
-        public ModelDerivativeClient(SDKManager.SDKManager sdkManager)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ModelDerivativeClient"/> class.
+        /// </summary>
+        /// <param name="sdkManager">The SDK manager.</param>
+        /// <param name="authenticationProvider">The authentication provider.</param>
+        public ModelDerivativeClient(SDKManager.SDKManager sdkManager = default, IAuthenticationProvider authenticationProvider = default)
+            : base(authenticationProvider)
         {
+            if (sdkManager == null)
+            {
+                sdkManager = SdkManagerBuilder.Create().Build();
+            }
             this.DerivativesApi = new DerivativesApi(sdkManager);
             this.InformationalApi = new InformationalApi(sdkManager);
             this.JobsApi = new JobsApi(sdkManager);
@@ -44,9 +73,6 @@ namespace Autodesk.ModelDerivative
         ///**Note:** We keep adding new file formats to our supported translations list, constantly.
         /// </remarks>
         /// <exception cref="ModelDerivativeApiException">Thrown when fails to make API call</exception>
-        /// <param name="accessToken">
-        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().
-        /// </param>
         /// <param name="ifModifiedSince">
         ///Specifies a date in the `Day of the week, DD Month YYYY HH:MM:SS GMT` format. The response will contain only the formats modified since the specified date and time. If you specify an invalid date, the response will contain all supported formats. If no changes have been made after the specified date, the service returns HTTP status `304`, NOT MODIFIED. (optional)
         /// </param>
@@ -55,10 +81,23 @@ namespace Autodesk.ModelDerivative
         ///
         ///If you specify `gzip` or `*`, content is compressed and returned in gzip format. (optional)
         /// </param>
+        /// <param name="throwOnError">
+        /// <param name="accessToken">
+        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync(). (optional)
+        /// </param>
+        ///Indicates whether to throw an exception on error.(optional)
+        /// </param>
         /// <returns>Task of SupportedFormats</returns>
-        public async System.Threading.Tasks.Task<SupportedFormats> GetFormatsAsync(string accessToken, string ifModifiedSince = default, string acceptEncoding = default, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<SupportedFormats> GetFormatsAsync(string ifModifiedSince = default, string acceptEncoding = default, string accessToken = default, bool throwOnError = true)
         {
-
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.InformationalApi.GetFormatsAsync(ifModifiedSince, acceptEncoding, accessToken, throwOnError);
             return response.Content;
 
@@ -79,9 +118,6 @@ namespace Autodesk.ModelDerivative
         ///If necessary, you can set the `x-ads-force` parameter to `true`. Then, the system will delete the existing manifest and create a new one. However, be aware that doing so will also delete all previously generated derivatives.
         /// </remarks>
         /// <exception cref="ModelDerivativeApiException">Thrown when fails to make API call</exception>
-        /// <param name="accessToken">
-        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().
-        /// </param>
         /// <param name="xAdsForce">
         ///`true`: Forces the system to parse property data all over again. Use this option to retrieve an object tree when previous attempts have failed.
         ///
@@ -117,10 +153,24 @@ namespace Autodesk.ModelDerivative
         /// </param>
         /// <param name="jobPayload">
         /// </param>
+        /// <param name="accessToken">
+        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync(). (optional)
+        /// </param>
+        /// <param name="throwOnError">
+        ///Indicates whether to throw an exception on error.(optional)
+        /// </param>
         /// <returns>Task of Job</returns>
         #region Jobs
-        public async System.Threading.Tasks.Task<Job> StartJobAsync(string accessToken, JobPayload jobPayload, Region region = default, bool xAdsForce = default, XAdsDerivativeFormat xAdsDerivativeFormat = default, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<Job> StartJobAsync(JobPayload jobPayload, Region region = default, bool xAdsForce = default, XAdsDerivativeFormat xAdsDerivativeFormat = default, string accessToken = default, bool throwOnError = true)
         {
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.JobsApi.StartJobAsync(xAdsForce, xAdsDerivativeFormat, region, jobPayload, accessToken, throwOnError);
             return response.Content;
         }
@@ -135,9 +185,6 @@ namespace Autodesk.ModelDerivative
         ///When you call [Create Translation Job](/en/docs/model-derivative/v2/reference/http/job-POST), set  `checkReferences` to `true`.   The Model Derivative service will then use the details you specify in this operation to locate and download the referenced files.
         /// </remarks>
         /// <exception cref="ModelDerivativeApiException">Thrown when fails to make API call</exception>
-        /// <param name="accessToken">
-        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().
-        /// </param>
         /// <param name="urn">
         ///The Base64 (URL Safe) encoded design URN.
         /// </param>
@@ -150,12 +197,26 @@ namespace Autodesk.ModelDerivative
         ///
         ///**Note**: Beta features are subject to change. Please avoid using them in production environments. (optional)
         /// </param>
-        /// <param name="specifyReferencesPayload">
+        /// <param name="referencesPayload">
         /// (optional)
         /// </param>
+        /// <param name="accessToken">
+        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync(). (optional)
+        /// </param>
+        /// <param name="throwOnError">
+        ///Indicates whether to throw an exception on error.(optional)
+        /// </param>
         /// <returns>Task of SpecifyReferences</returns>
-        public async System.Threading.Tasks.Task<SpecifyReferences> SpecifyReferencesAsync(string accessToken, string urn, SpecifyReferencesPayload referencesPayload, Region region = default, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<SpecifyReferences> SpecifyReferencesAsync(string urn, SpecifyReferencesPayload referencesPayload, Region region = default, string accessToken = default, bool throwOnError = true)
         {
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.JobsApi.SpecifyReferencesAsync(urn, region, referencesPayload, accessToken, throwOnError);
             return response.Content;
         }
@@ -180,9 +241,6 @@ namespace Autodesk.ModelDerivative
         ///**Note:** You cannot download 3D SVF2 derivatives.
         /// </remarks>
         /// <exception cref="ModelDerivativeApiException">Thrown when fails to make API call</exception>
-        /// <param name="accessToken">
-        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().
-        /// </param>
         /// <param name="urn">
         ///The URL-safe Base64 encoded URN of the source design.
         /// </param>
@@ -200,9 +258,23 @@ namespace Autodesk.ModelDerivative
         ///
         ///**Note**: Beta features are subject to change. Please avoid using them in production environments. (optional)
         /// </param>
+        /// <param name="accessToken">
+        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync(). (optional)
+        /// </param>
+        /// <param name="throwOnError">
+        ///Indicates whether to throw an exception on error.(optional)
+        /// </param>
         /// <returns>Task of Manifest</returns>
-        public async System.Threading.Tasks.Task<Manifest> GetManifestAsync(string accessToken, string urn, Region region = default, string acceptEncoding = default, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<Manifest> GetManifestAsync(string urn, Region region = default, string acceptEncoding = default, string accessToken = default, bool throwOnError = true)
         {
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.ManifestApi.GetManifestAsync(urn, acceptEncoding, region, accessToken, throwOnError);
             return response.Content;
         }
@@ -217,9 +289,6 @@ namespace Autodesk.ModelDerivative
         ///**Note:** This operation is idempotent. So, if you call it multiple times, even when no manifest exists, will still return a successful response (200).
         /// </remarks>
         /// <exception cref="ModelDerivativeApiException">Thrown when fails to make API call</exception>
-        /// <param name="accessToken">
-        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().
-        /// </param>
         /// <param name="urn">
         ///The URL-safe Base64 encoded URN of the source design.
         /// </param>
@@ -232,9 +301,23 @@ namespace Autodesk.ModelDerivative
         ///
         ///**Note**: Beta features are subject to change. Please avoid using them in production environments. (optional)
         /// </param>
+        /// <param name="accessToken">
+        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync(). (optional)
+        /// </param>
+        /// <param name="throwOnError">
+        ///Indicates whether to throw an exception on error.(optional)
+        /// </param>
         /// <returns>Task of DeleteManifest</returns>
-        public async System.Threading.Tasks.Task<DeleteManifest> DeleteManifestAsync(string accessToken, string urn, Region region = default, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<DeleteManifest> DeleteManifestAsync(string urn, Region region = default, string accessToken = default, bool throwOnError = true)
         {
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.ManifestApi.DeleteManifestAsync(urn, region, accessToken, throwOnError);
             return response.Content;
         }
@@ -251,9 +334,6 @@ namespace Autodesk.ModelDerivative
         ///Returns a download URL and a set of signed cookies, which lets you securely download the derivative specified by the `derivativeUrn` URI parameter. The signed cookies have a lifetime of 6 hours. You can use range headers with the returned download URL to download the derivative in chunks, in parallel.
         /// </remarks>
         /// <exception cref="ModelDerivativeApiException">Thrown when fails to make API call</exception>
-        /// <param name="accessToken">
-        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().
-        /// </param>
         /// <param name="derivativeUrn">
         ///The URL-encoded URN of the derivative. Use the [Fetch Manifest operation](/en/docs/model-derivative/v2/reference/http/manifest/urn-manifest-GET/)to obtain the URNs of derivatives for the specified source design.
         /// </param>
@@ -275,9 +355,24 @@ namespace Autodesk.ModelDerivative
         ///
         ///**Note**: Beta features are subject to change. Please avoid using them in production environments. (optional)
         /// </param>
+        /// <param name="accessToken">
+        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync(). (optional)
+        /// </param>
+        /// <param name="throwOnError">
+        /// Indicates whether to throw an exception on error.(optional)
+        /// </param>
         /// <returns>Task of DerivativeDownload</returns>
-        public async System.Threading.Tasks.Task<DerivativeDownload> GetDerivativeUrlAsync(string accessToken, string derivativeUrn, string urn, Region region = default, int minutesExpiration = default, string responseContentDisposition = default, bool throwOnError = true)
+
+        public async System.Threading.Tasks.Task<DerivativeDownload> GetDerivativeUrlAsync(string derivativeUrn, string urn, Region region = default, int minutesExpiration = default, string responseContentDisposition = default, string accessToken = default, bool throwOnError = true)
         {
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.DerivativesApi.GetDerivativeUrlAsync(derivativeUrn, urn, minutesExpiration, responseContentDisposition, region, accessToken, throwOnError);
             if (response.HttpResponse.Headers != null)
             {
@@ -301,9 +396,6 @@ namespace Autodesk.ModelDerivative
         ///Use this operation to determine the total content length of a derivative before you download it. If the derivative is large, you can choose to download the derivative in chunks, by specifying a chunk size using the `Range` header parameter.
         /// </remarks>
         /// <exception cref="ModelDerivativeApiException">Thrown when fails to make API call</exception>
-        /// <param name="accessToken">
-        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().
-        /// </param>
         /// <param name="urn">
         ///The URL-safe Base64 encoded URN of the source design.
         /// </param>
@@ -319,10 +411,23 @@ namespace Autodesk.ModelDerivative
         ///
         ///**Note**: Beta features are subject to change. Please avoid using them in production environments. (optional)
         /// </param>
-
+        /// <param name="accessToken">
+        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync(). (optional)
+        /// </param>
+        /// <param name="throwOnError">
+        /// Indicates whether to throw an exception on error.(optional)
+        /// </param>
         /// <returns>Task of HttpResponseMessage</returns>
-        public async System.Threading.Tasks.Task<HttpResponseMessage> HeadCheckDerivativeAsync(string accessToken, string urn, string derivativeUrn, Region region = default, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<HttpResponseMessage> HeadCheckDerivativeAsync(string urn, string derivativeUrn, Region region = default, string accessToken = default, bool throwOnError = true)
         {
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.DerivativesApi.HeadCheckDerivativeAsync(urn, derivativeUrn, region, accessToken, throwOnError);
             return response;
         }
@@ -337,9 +442,6 @@ namespace Autodesk.ModelDerivative
         ///Downloads a thumbnail of the specified source design.
         /// </remarks>
         /// <exception cref="ModelDerivativeApiException">Thrown when fails to make API call</exception>
-        /// <param name="accessToken">
-        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().
-        /// </param>
         /// <param name="urn">
         ///The URL-safe Base64 encoded URN of the source design.
         /// </param>
@@ -366,9 +468,23 @@ namespace Autodesk.ModelDerivative
         ///
         ///**Note**: Beta features are subject to change. Please avoid using them in production environments. (optional)
         /// </param>
+        /// <param name="accessToken">
+        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync(). (optional)
+        /// </param>
+        /// <param name="throwOnError">
+        /// Indicates whether to throw an exception on error.(optional)
+        /// </param>
         /// <returns>Task of System.IO.Stream</returns>
-        public async System.Threading.Tasks.Task<System.IO.Stream> GetThumbnailAsync(string accessToken, string urn, Width width = Width.NUMBER_200, Height height = Height.NUMBER_200, Region region = default, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<System.IO.Stream> GetThumbnailAsync(string urn, Width width = Width.NUMBER_200, Height height = Height.NUMBER_200, Region region = default, string accessToken = default, bool throwOnError = true)
         {
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.ThumbnailsApi.GetThumbnailAsync(urn, region, width, height, accessToken, throwOnError);
             return response.Content;
         }
@@ -388,9 +504,6 @@ namespace Autodesk.ModelDerivative
         ///**Note:** You can retrieve metadata only from a design that has already been translated to SVF or SVF2.
         /// </remarks>
         /// <exception cref="ModelDerivativeApiException">Thrown when fails to make API call</exception>
-        /// <param name="accessToken">
-        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().
-        /// </param>
         /// <param name="urn">
         ///The URL-safe Base64 encoded URN of the source design.
         /// </param>
@@ -408,10 +521,24 @@ namespace Autodesk.ModelDerivative
         ///
         ///**Note**: Beta features are subject to change. Please avoid using them in production environments. (optional)
         /// </param>
+        /// <param name="accessToken">
+        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync(). (optional)
+        /// </param>
+        /// <param name="throwOnError">
+        /// Indicates whether to throw an exception on error.(optional)
+        /// </param>
         /// <returns>Task of ModelViews</returns>
 
-        public async System.Threading.Tasks.Task<ModelViews> GetModelViewsAsync(string accessToken, string urn, Region region = default, string acceptEncoding = default, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ModelViews> GetModelViewsAsync(string urn, Region region = default, string acceptEncoding = default, string accessToken = default, bool throwOnError = true)
         {
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.MetadataApi.GetModelViewsAsync(urn, acceptEncoding, region, accessToken, throwOnError);
             return response.Content;
         }
@@ -430,9 +557,6 @@ namespace Autodesk.ModelDerivative
         ///- Pick the ID of the Model View you want to query and specify that ID as the value for the `modelGuid`  parameter.
         /// </remarks>
         /// <exception cref="ModelDerivativeApiException">Thrown when fails to make API call</exception>
-        /// <param name="accessToken">
-        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().
-        /// </param>
         /// <param name="urn">
         ///The URL-safe Base64 encoded URN of the source design.
         /// </param>
@@ -486,10 +610,23 @@ namespace Autodesk.ModelDerivative
         /// <param name="level">
         ///Specifies how many child levels of the hierarchy to return, when the `objectid`  parameter is specified. Currently supports only `level` = `1`. (optional)
         /// </param>
+        /// <param name="accessToken">
+        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync(). (optional)
+        /// </param>
+        /// <param name="throwOnError">
+        /// Indicates whether to throw an exception on error.(optional)
+        /// </param>
         /// <returns>Task of ObjectTree</returns>
-
-        public async System.Threading.Tasks.Task<ObjectTree> GetObjectTreeAsync(string accessToken, string urn, string modelGuid, Region region = default, string acceptEncoding = default, bool xAdsForce = default, XAdsDerivativeFormat xAdsDerivativeFormat = default, string forceget = default, int objectid = default, string level = default, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ObjectTree> GetObjectTreeAsync(string urn, string modelGuid, Region region = default, string acceptEncoding = default, bool xAdsForce = default, XAdsDerivativeFormat xAdsDerivativeFormat = default, string forceget = default, int objectid = default, string level = default, string accessToken = default, bool throwOnError = true)
         {
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.MetadataApi.GetObjectTreeAsync(urn, modelGuid, acceptEncoding, region, xAdsForce, xAdsDerivativeFormat, forceget, objectid, level, accessToken, throwOnError);
             if (response.HttpResponse.StatusCode == System.Net.HttpStatusCode.Accepted)
                 return (new ObjectTree() { IsProcessing = true });
@@ -516,11 +653,7 @@ namespace Autodesk.ModelDerivative
         ///- Pick the ID of the Model View you want to query and specify that ID as the value for the `modelGuid` parameter.
         ///
         ///**Tip**: Use [Fetch Specific Properties](/en/docs/model-derivative/v2/reference/http/metadata/urn-metadata-guid-properties-query-POST/) to retrieve only the objects and properties of interest. What’s more, the response is paginated. So, when the number of properties returned is large, responses start arriving more promptly.
-        /// </remarks>
-        /// <exception cref="ModelDerivativeApiException">Thrown when fails to make API call</exception>
-        /// <param name="accessToken">
-        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().
-        /// </param>
+        /// </remarks>      
         /// <param name="urn">
         ///The URL-safe Base64 encoded URN of the source design.
         /// </param>
@@ -571,10 +704,25 @@ namespace Autodesk.ModelDerivative
         ///
         ///`false`: (Default) Does not retrieve resources if they are larger than 20 MB. (optional)
         /// </param>
+        /// <exception cref="ModelDerivativeApiException">Thrown when fails to make API call</exception>
+        /// <param name="accessToken">
+        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync(). (optional)
+        /// </param>
+        /// <param name="throwOnError">
+        /// Indicates whether to throw an exception on error.(optional)
+        /// </param>
         /// <returns>Task of Properties</returns>
 
-        public async System.Threading.Tasks.Task<Properties> GetAllPropertiesAsync(string accessToken, string urn, string modelGuid, Region region = default, string acceptEncoding = default, bool xAdsForce = default, XAdsDerivativeFormat xAdsDerivativeFormat = default, int objectid = default, string forceget = default, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<Properties> GetAllPropertiesAsync(string urn, string modelGuid, Region region = default, string acceptEncoding = default, bool xAdsForce = default, XAdsDerivativeFormat xAdsDerivativeFormat = default, int objectid = default, string forceget = default, string accessToken = default, bool throwOnError = true)
         {
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.MetadataApi.GetAllPropertiesAsync(urn, modelGuid, acceptEncoding, xAdsForce, xAdsDerivativeFormat, region, objectid, forceget, accessToken, throwOnError);
             if (response.HttpResponse.StatusCode == System.Net.HttpStatusCode.Accepted)
                 return (new Properties() { IsProcessing = true });
@@ -595,14 +743,14 @@ namespace Autodesk.ModelDerivative
         ///- Pick the ID of the Model View you want to query and specify that ID as the value for the `modelGuid`  parameter.
         /// </remarks>
         /// <exception cref="ModelDerivativeApiException">Thrown when fails to make API call</exception>
-        /// <param name="accessToken">
-        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().
-        /// </param>
         /// <param name="urn">
         ///The URL-safe Base64 encoded URN of the source design.
         /// </param>
         /// <param name="modelGuid">
         ///The ID of the Model View you are querying. Use the [List Model Views](/en/docs/model-derivative/v2/reference/http/metadata/urn-metadata-GET) operation to get the IDs of the Model Views in the source design.
+        /// </param>
+        /// <param name="specificPropertiesPayload">
+        ///The payload containing the specific properties to be fetched.
         /// </param>
         /// <param name="acceptEncoding">
         ///A comma separated list of the algorithms you want the response to be encoded in, specified in the order of preference.  
@@ -634,13 +782,24 @@ namespace Autodesk.ModelDerivative
         ///   - [Fetch Object Tree](/en/docs/model-derivative/v2/reference/http/urn-metadata-modelguid-GET)
         ///   - [Fetch All Properties](/en/docs/model-derivative/v2/reference/http/urn-metadata-guid-properties-GET)
         ///   - [Fetch Specific Properties](en/docs/model-derivative/v2/reference/http/metadata/urn-metadata-guid-properties-query-POST) (optional)
+        /// </param>  
+        /// <param name="accessToken">
+        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync(). (optional)
         /// </param>
-        /// <param name="specificPropertiesPayload">
-        /// (optional)
+        /// <param name="throwOnError">
+        /// Indicates whether to throw an exception on error.(optional)
         /// </param>
         /// <returns>Task of SpecificProperties</returns>
-        public async System.Threading.Tasks.Task<SpecificProperties> FetchSpecificPropertiesAsync(string accessToken, string urn, string modelGuid, SpecificPropertiesPayload specificPropertiesPayload, Region region = default, XAdsDerivativeFormat xAdsDerivativeFormat = default, string acceptEncoding = default, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<SpecificProperties> FetchSpecificPropertiesAsync(string urn, string modelGuid, SpecificPropertiesPayload specificPropertiesPayload, Region region = default, XAdsDerivativeFormat xAdsDerivativeFormat = default, string acceptEncoding = default, string accessToken = default, bool throwOnError = true)
         {
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
             var response = await this.MetadataApi.FetchSpecificPropertiesAsync(urn, modelGuid, acceptEncoding, region, xAdsDerivativeFormat, specificPropertiesPayload, accessToken, throwOnError);
             if (response.HttpResponse.StatusCode == System.Net.HttpStatusCode.Accepted)
                 return (new SpecificProperties() { IsProcessing = true });

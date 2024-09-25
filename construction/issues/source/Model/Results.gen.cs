@@ -152,7 +152,7 @@ namespace Autodesk.Construction.Issues.Model
                 ///Gets or Sets AssignedToType
                 /// </summary>
                 [DataMember(Name = "assignedToType", EmitDefaultValue = true)]
-                public AssignedToType AssignedToType { get; set; }
+                public string AssignedToType { get; set; }
 
                 /// <summary>
                 ///The due date of the issue, in ISO8601 format.

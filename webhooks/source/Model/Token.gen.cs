@@ -5,7 +5,7 @@
  *
  * Webhooks
  *
- * The Webhooks API enables applications to listen to APS events and receive notifications when they occur. When an event is triggered, the Webhooks service sends a notification to a callback URL you have defined.  You can customize the types of events and resources for which you receive notifications. For example, you can set up a webhook to send notifications when files are modified or deleted in a specified hub or project.  Below is quick summary of this workflow:  1. Identify the data for which you want to receive notifications. 2. Use the Webhooks API to create one or more hooks. 3. The Webhooks service will notify the webhook when there is a change in the data. 
+ * The Webhooks API enables applications to listen to APS events and receive notifications when they occur. When an event is triggered, the Webhooks service sends a notification to a callback URL you have defined. You can customize the types of events and resources for which you receive notifications. For example, you can set up a webhook to send notifications when files are modified or deleted in a specified hub or project. Below is quick summary of this workflow: 1. Identify the data for which you want to receive notifications. 2. Use the Webhooks API to create one or more hooks. 3. The Webhooks service will notify the webhook when there is a change in the data. 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,16 +46,22 @@ namespace Autodesk.Webhooks.Model
         }
         
         /// <summary>
-        ///Gets or Sets Status
+        ///A repetition of the HTTP status code returned in the response headers, which indicates the outcome of the request.
         /// </summary>
+        /// <value>
+        ///A repetition of the HTTP status code returned in the response headers, which indicates the outcome of the request.
+        /// </value>
         [DataMember(Name="status", EmitDefaultValue=false)]
         public decimal? Status { get; set; }
 
         /// <summary>
-        ///Gets or Sets Detail
+        ///An array of strings, where each string is a human-readable description of the request's outcome.
         /// </summary>
+        /// <value>
+        ///An array of strings, where each string is a human-readable description of the request's outcome.
+        /// </value>
         [DataMember(Name="detail", EmitDefaultValue=false)]
-        public List<Object> Detail { get; set; }
+        public List<string> Detail { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

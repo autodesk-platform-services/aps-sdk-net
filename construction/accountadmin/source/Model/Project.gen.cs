@@ -93,22 +93,31 @@ namespace Autodesk.Construction.AccountAdmin.Model
         public string Type { get; set; }
 
         /// <summary>
-        ///Gets or Sets Classification
+        ///The project’s purpose. Possible values: production, template, component, sample
         /// </summary>
-        [DataMember(Name="classification", EmitDefaultValue=true)]
-        public Classification Classification { get; set; }
+        /// <value>
+        ///The project’s purpose. Possible values: production, template, component, sample
+        /// </value>
+        [DataMember(Name="classification", EmitDefaultValue=false)]
+        public string Classification { get; set; }
 
         /// <summary>
-        ///Gets or Sets ProjectValue
+        ///The value of the project. When updating the project value, both the value and currency parameters are required.
         /// </summary>
+        /// <value>
+        ///The value of the project. When updating the project value, both the value and currency parameters are required.
+        /// </value>
         [DataMember(Name="projectValue", EmitDefaultValue=false)]
-        public ProjectProjectValue ProjectValue { get; set; }
+        public Object ProjectValue { get; set; }
 
         /// <summary>
-        ///Gets or Sets Status
+        ///The status of the project.
         /// </summary>
-        [DataMember(Name="status", EmitDefaultValue=true)]
-        public Status Status { get; set; }
+        /// <value>
+        ///The status of the project.
+        /// </value>
+        [DataMember(Name="status", EmitDefaultValue=false)]
+        public string Status { get; set; }
 
         /// <summary>
         ///A job identifier that’s defined for the project by the user. This ID was defined when the project was created.
@@ -339,13 +348,16 @@ namespace Autodesk.Construction.AccountAdmin.Model
         ///An array of the product objects associated with the project.
         /// </value>
         [DataMember(Name="products", EmitDefaultValue=false)]
-        public List<object> Products { get; set; }
+        public List<Object> Products { get; set; }
 
         /// <summary>
-        ///Gets or Sets Platform
+        ///The APS platform that the project belongs to.
         /// </summary>
-        [DataMember(Name="platform", EmitDefaultValue=true)]
-        public Platform Platform { get; set; }
+        /// <value>
+        ///The APS platform that the project belongs to.
+        /// </value>
+        [DataMember(Name="platform", EmitDefaultValue=false)]
+        public string Platform { get; set; }
 
         /// <summary>
         ///The total number of companies associated with the project.

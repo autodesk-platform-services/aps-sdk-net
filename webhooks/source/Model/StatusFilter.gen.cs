@@ -33,44 +33,44 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Webhooks.Model
 {
     /// <summary>
-    /// Defines Systems
+    /// Filters retrieved webhooks by their current state. Possible values are 
+///
+///- `active` - Successfully delivered most recent event notifications. 
+///- `inactive` - Failed to deliver most recent event notification and has been deactivated.
+///- `reactivated` - Previously inactive but was reactivated. No events have occurred since reactivation.
+///
+///If this parameter is not specified, the filter is not applied. See [Event Delivery Guarantees](/en/docs/webhooks/v1/developers_guide/event-delivery-guarantees/) for more information on how the state of a webhook changes.
     /// </summary>
-    ///<value></value>
+    ///<value>Filters retrieved webhooks by their current state. Possible values are 
+///
+///- `active` - Successfully delivered most recent event notifications. 
+///- `inactive` - Failed to deliver most recent event notification and has been deactivated.
+///- `reactivated` - Previously inactive but was reactivated. No events have occurred since reactivation.
+///
+///If this parameter is not specified, the filter is not applied. See [Event Delivery Guarantees](/en/docs/webhooks/v1/developers_guide/event-delivery-guarantees/) for more information on how the state of a webhook changes.</value>
     
     [JsonConverter(typeof(StringEnumConverter))]
     
-    public enum Systems
+    public enum StatusFilter
     {
         
         /// <summary>
-        /// Enum Data for value: data
+        /// Enum Active for value: active
         /// </summary>
-        [EnumMember(Value = "data")]
-        Data,
+        [EnumMember(Value = "active")]
+        Active,
         
         /// <summary>
-        /// Enum Derivative for value: derivative
+        /// Enum Inactive for value: inactive
         /// </summary>
-        [EnumMember(Value = "derivative")]
-        Derivative,
+        [EnumMember(Value = "inactive")]
+        Inactive,
         
         /// <summary>
-        /// Enum AdskC4r for value: adsk.c4r
+        /// Enum Reactivated for value: reactivated
         /// </summary>
-        [EnumMember(Value = "adsk.c4r")]
-        AdskC4r,
-        
-        /// <summary>
-        /// Enum AdskFlcProduction for value: adsk.flc.production
-        /// </summary>
-        [EnumMember(Value = "adsk.flc.production")]
-        AdskFlcProduction,
-        
-        /// <summary>
-        /// Enum AutodeskConstructionCost for value: autodesk.construction.cost
-        /// </summary>
-        [EnumMember(Value = "autodesk.construction.cost")]
-        AutodeskConstructionCost
+        [EnumMember(Value = "reactivated")]
+        Reactivated
     }
 
 }

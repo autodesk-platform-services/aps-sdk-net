@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.Serialization;
 using Autodesk.Webhooks.Model;
 
@@ -7,30 +9,14 @@ namespace Autodesk.Webhooks.Model
 {
     public static class Utils
     {
-
-        public static Dictionary<Scopes, string> SetScope(this Dictionary<Scopes, string> scope, Scopes scopeEnum, string value)
+        public static string GetEnumString<T>(T enumValue) where T : Enum
         {
-            if (scope == null)
-                scope = new Dictionary<Scopes, string>();
+            var fieldInfo = typeof(T).GetField(enumValue.ToString());
+            var attribute = fieldInfo?.GetCustomAttribute<EnumMemberAttribute>();
 
-            var scopeEnumString = Utils.GetEnumString(scopeEnum);
-            scope.Add(scopeEnum, value);
-            return scope;
-        }
-
-        internal static string GetEnumString<T>(T enumVal)
-        {
-            var enumType = typeof(T);
-            var memInfo = enumType.GetMember(enumVal?.ToString());
-            var attr = memInfo[0].GetCustomAttributes(false).OfType<EnumMemberAttribute>().FirstOrDefault();
-            if (attr != null)
-            {
-                return attr.Value;
-            }
-            return null;
+            return attribute?.Value ?? enumValue.ToString();
         }
 
     }
-
 
 }
