@@ -38,10 +38,10 @@ namespace Autodesk.Oss
             string requestIdPrefix = "",
             IProgress<int> progress = null);
     
-        Task Download(
+        Task<Stream> Download(
             string bucketKey,
             string objectKey,
-            string filePath,
+            //string filePath,
             string accessToken,
             CancellationToken cancellationToken,
             string requestIdPrefix = "",

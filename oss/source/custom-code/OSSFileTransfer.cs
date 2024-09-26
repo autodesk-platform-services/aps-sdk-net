@@ -52,7 +52,7 @@ namespace Autodesk.Oss
         private IFileTransferConfigurations _configuration;
         private ObjectsApi objectsApi;
         // private IAuthClient _authentication;
-        private  IAuthenticationProvider authProvider;
+        private IAuthenticationProvider authProvider;
 
         private int _maxRetryOnTokenExpiry;
         private int _maxChunkCountAllowed;
@@ -70,7 +70,7 @@ namespace Autodesk.Oss
             AdskEnvironment adskEnvironment = AdskEnvironment.Prd,
             ILogger logger = null)
         {
-        //Commented out since Authentication is not implemented
+            //Commented out since Authentication is not implemented
             // if (authentication == null)
             // {
             //     throw new ArgumentNullException("IAuthentication");
@@ -83,8 +83,9 @@ namespace Autodesk.Oss
             _maxChunkCountAllowed = _configuration.GetMaxChunkCountAllowed();
             _maxRetryOnUrlExpiry = _configuration.GetMaxRetryOnUrlExpiry();
             _maxRetryOnTokenExpiry = _configuration.GetMaxRetryOnTokenExpiry();
-            
-            if(authenticationProvider!=null){
+
+            if (authenticationProvider != null)
+            {
                 authProvider = authenticationProvider;
             }
 
@@ -96,12 +97,12 @@ namespace Autodesk.Oss
             return await Task.Run(() =>
             {
 
-                    long fileSize = filePath.Length;
-                    double numberOfChunks = CalculateNumberOfChunks((ulong)fileSize);
-                    if (numberOfChunks > this._maxChunkCountAllowed)
-                    {
-                        return false;
-                    }
+                long fileSize = filePath.Length;
+                double numberOfChunks = CalculateNumberOfChunks((ulong)fileSize);
+                if (numberOfChunks > this._maxChunkCountAllowed)
+                {
+                    return false;
+                }
                 return true;
             });
         }
@@ -123,112 +124,112 @@ namespace Autodesk.Oss
             await ValidateFileSize(requestId, sourceToUpload);
 
             progress?.Report(1);
-                ulong numberOfChunks = (ulong)CalculateNumberOfChunks((ulong)sourceToUpload.Length);
-                ulong chunksUploaded = 0;
+            ulong numberOfChunks = (ulong)CalculateNumberOfChunks((ulong)sourceToUpload.Length);
+            ulong chunksUploaded = 0;
 
-                long start = 0;
-                List<string> uploadUrls = new List<string>();
-                string uploadKey = null;
+            long start = 0;
+            List<string> uploadUrls = new List<string>();
+            string uploadKey = null;
 
-                _logger.LogInformation("{requestId} Total chunk to be uploaded: {numberOfChunks}", requestId, numberOfChunks);
+            _logger.LogInformation("{requestId} Total chunk to be uploaded: {numberOfChunks}", requestId, numberOfChunks);
 
-                using (BinaryReader reader = new BinaryReader(sourceToUpload))
+            using (BinaryReader reader = new BinaryReader(sourceToUpload))
+            {
+                while (chunksUploaded < numberOfChunks)
                 {
-                    while (chunksUploaded < numberOfChunks)
+                    ThrowIfCancellationRequested(cancellationToken, requestId);
+
+                    int attempts = 0;
+
+                    long end = Math.Min((long)((chunksUploaded + 1) * Constants.ChunkSize), sourceToUpload.Length);
+                    byte[] fileBytes = readFileBytes(reader, start, end);
+
+                    var retryUrlExpiryCount = 0;
+
+                    while (true)
                     {
                         ThrowIfCancellationRequested(cancellationToken, requestId);
 
-                        int attempts = 0;
+                        attempts++;
 
-                        long end = Math.Min((long)((chunksUploaded + 1) * Constants.ChunkSize), sourceToUpload.Length);
-                        byte[] fileBytes = readFileBytes(reader, start, end);
+                        _logger.LogInformation("{requestId} Uploading part {chunksUploaded}, attempt {attempts}", requestId, chunksUploaded + 1, attempts);
 
-                        var retryUrlExpiryCount = 0;
+                        if (uploadUrls.Count == 0)
+                        {
+                            retryUrlExpiryCount++;
 
-                        while (true)
+                            var (uploadUrlsResponse, currentAccessToken) = await GetUploadUrlsWithRetry(bucketKey, objectKey, (int)numberOfChunks, (int)chunksUploaded, uploadKey, accessToken, requestId);
+
+                            uploadKey = uploadUrlsResponse.UploadKey;
+                            uploadUrls = uploadUrlsResponse.Urls;
+
+                            accessToken = currentAccessToken;
+                        }
+
+                        string currentUrl = uploadUrls[0];
+                        uploadUrls.RemoveAt(0);
+                        try
                         {
                             ThrowIfCancellationRequested(cancellationToken, requestId);
 
-                            attempts++;
+                            var responseBuffer = await UploadToURL(currentUrl, fileBytes);
+                            int statusCode = (int)responseBuffer.StatusCode;
 
-                            _logger.LogInformation("{requestId} Uploading part {chunksUploaded}, attempt {attempts}", requestId, chunksUploaded + 1, attempts);
-
-                            if (uploadUrls.Count == 0)
+                            if (statusCode == (int)HttpStatusCode.Forbidden && retryUrlExpiryCount == _maxRetryOnUrlExpiry)
                             {
-                                retryUrlExpiryCount++;
-
-                                var (uploadUrlsResponse, currentAccessToken) = await GetUploadUrlsWithRetry(bucketKey, objectKey, (int)numberOfChunks, (int)chunksUploaded, uploadKey, accessToken, requestId);
-
-                                uploadKey = uploadUrlsResponse.UploadKey;
-                                uploadUrls = uploadUrlsResponse.Urls;
-
-                                accessToken = currentAccessToken;
+                                _logger.LogDebug("{requestId} URL can not be refreshed.", requestId);
+                                throw new S3ServiceApiException($"{requestId} URL can not be refreshed", statusCode);
                             }
 
-                            string currentUrl = uploadUrls[0];
-                            uploadUrls.RemoveAt(0);
-                            try
+                            if (statusCode == (int)HttpStatusCode.Forbidden)
                             {
-                                ThrowIfCancellationRequested(cancellationToken, requestId);
-
-                                var responseBuffer = await UploadToURL(currentUrl, fileBytes);
-                                int statusCode = (int)responseBuffer.StatusCode;
-
-                                if (statusCode == (int)HttpStatusCode.Forbidden && retryUrlExpiryCount == _maxRetryOnUrlExpiry)
-                                {
-                                    _logger.LogDebug("{requestId} URL can not be refreshed.", requestId);
-                                    throw new S3ServiceApiException($"{requestId} URL can not be refreshed", statusCode);
-                                }
-
-                                if (statusCode == (int)HttpStatusCode.Forbidden)
-                                {
-                                    _logger.LogWarning("{requestId} 403, refreshing urls, attempt: {retryUrlExpiryCount}", requestId, retryUrlExpiryCount);
-                                    uploadUrls = new List<string>();
-                                    continue;
-                                }
-
-                                if (statusCode >= (int)HttpStatusCode.BadRequest)
-                                {
-                                    throw new S3ServiceApiException($"{requestId} {responseBuffer.Content}", statusCode);
-                                }
-
-                                goto NextChunk;
-
+                                _logger.LogWarning("{requestId} 403, refreshing urls, attempt: {retryUrlExpiryCount}", requestId, retryUrlExpiryCount);
+                                uploadUrls = new List<string>();
+                                continue;
                             }
-                            catch (Exception ex)
+
+                            if (statusCode >= (int)HttpStatusCode.BadRequest)
                             {
-                                _logger.LogError(ex.Message);
-                                if (attempts == Constants.MaxRetry)
-                                {
-                                    _logger.LogError("{requestId} Couldn't upload chunk after max retry of {maxRetry}", requestId, Constants.MaxRetry);
-                                    throw new S3ServiceApiException($"{requestId} {ex.Message}", 500);
-                                }
+                                throw new S3ServiceApiException($"{requestId} {responseBuffer.Content}", statusCode);
+                            }
+
+                            goto NextChunk;
+
+                        }
+                        catch (Exception ex)
+                        {
+                            _logger.LogError(ex.Message);
+                            if (attempts == Constants.MaxRetry)
+                            {
+                                _logger.LogError("{requestId} Couldn't upload chunk after max retry of {maxRetry}", requestId, Constants.MaxRetry);
+                                throw new S3ServiceApiException($"{requestId} {ex.Message}", 500);
                             }
                         }
-
-                    NextChunk:
-                        chunksUploaded++;
-                        start = end;
-
-                        int percentCompleted = (int)(((double)chunksUploaded / (double)numberOfChunks) * 100);
-                        progress?.Report(percentCompleted);
-
-                        _logger.LogInformation("{requestId} Number of chunks uploaded : {chunksUploaded}", requestId, chunksUploaded);
                     }
+
+                NextChunk:
+                    chunksUploaded++;
+                    start = end;
+
+                    int percentCompleted = (int)(((double)chunksUploaded / (double)numberOfChunks) * 100);
+                    progress?.Report(percentCompleted);
+
+                    _logger.LogInformation("{requestId} Number of chunks uploaded : {chunksUploaded}", requestId, chunksUploaded);
                 }
+            }
 
-                var completeResponse = await objectsApi.CompleteSignedS3UploadAsync(
-                    bucketKey: bucketKey,
-                    objectKey: objectKey,
-                    contentType: "application/json",
-                    body: new Completes3uploadBody()
-                    {
-                        UploadKey = uploadKey
-                    },
-                    accessToken: accessToken);
+            var completeResponse = await objectsApi.CompleteSignedS3UploadAsync(
+                bucketKey: bucketKey,
+                objectKey: objectKey,
+                contentType: "application/json",
+                body: new Completes3uploadBody()
+                {
+                    UploadKey = uploadKey
+                },
+                accessToken: accessToken);
 
-                progress?.Report(100);
-                return completeResponse;
+            progress?.Report(100);
+            return completeResponse;
         }
 
         private byte[] readFileBytes(BinaryReader reader, long start, long end)
@@ -308,8 +309,7 @@ namespace Autodesk.Oss
             return await _forgeService.Client.PutAsync(url, httpContent);
         }
 
-        public async Task Download(string bucketKey, string objectKey,
-            string filePath,
+        public async Task<Stream> Download(string bucketKey, string objectKey,
             string accessToken,
             CancellationToken cancellationToken,
             string requestIdPrefix = "",
@@ -326,7 +326,7 @@ namespace Autodesk.Oss
             double partsDownloaded = 0;
             double start = 0;
 
-            using (FileStream fileStream = new FileStream(filePath, FileMode.Append, FileAccess.Write))
+            MemoryStream memoryStream = new MemoryStream();
             {
                 while (partsDownloaded < numberOfChunks)
                 {
@@ -346,7 +346,7 @@ namespace Autodesk.Oss
                         {
                             attemptCount++;
                             _logger.LogDebug("{requestId} Downloading file range : {start} - {end}", requestId, start, end);
-                            await WriteToFileStreamFromUrl(fileStream, response.Content.Url, start, end, requestId);
+                            await WriteToFileStreamFromUrl(memoryStream, response.Content.Url, start, end, requestId);
                             start = end + 1;
                             partsDownloaded++;
                             int percentCompleted = (int)(((double)partsDownloaded / (double)numberOfChunks) * 100);
@@ -360,11 +360,13 @@ namespace Autodesk.Oss
                                 _logger.LogDebug(
                                 "{requestId} Reached maximum retries. S3 signed Url can not be renewed.",
                                 requestId);
+                                memoryStream.Dispose();
                                 throw new S3ServiceApiException($"{requestId} URL can not be renewed", (int)HttpStatusCode.InternalServerError);
                             }
                             if (!ex.Message.Contains(_forbiddenMessage))
                             {
                                 _logger.LogDebug("{requestId} Error: {errorMessage}", requestId, ex.Message);
+                                memoryStream.Dispose();
                                 throw new S3ServiceApiException($"{requestId} Error {ex.Message}", (int)HttpStatusCode.InternalServerError);
                             }
 
@@ -374,21 +376,23 @@ namespace Autodesk.Oss
                         catch (Exception ex)
                         {
                             _logger.LogError("{requestId} Error: {errorMessage}", requestId, ex.Message);
+                            memoryStream.Dispose();
                             throw new FileTransferException($"{requestId} Error {ex.Message}");
                         }
                     }
                 }
+                return memoryStream;
             }
         }
 
-        private async Task WriteToFileStreamFromUrl(FileStream fileStream, string contentUrl, double start, double end,
+        private async Task WriteToFileStreamFromUrl(Stream memoryStream, string contentUrl, double start, double end,
             string requestId)
         {
             _forgeService.Client.DefaultRequestHeaders.Add("Range", "bytes=" + start + "-" + end);
             var streamAsync = _forgeService.Client.GetByteArrayAsync(contentUrl);
             _forgeService.Client.DefaultRequestHeaders.Remove("Range");
             var available = streamAsync.Result.Length;
-            await fileStream.WriteAsync(streamAsync.Result, 0, available);
+            await memoryStream.WriteAsync(streamAsync.Result, 0, available);
         }
 
         private string HandleRequestId(string parentRequestId, string bucketKey, string objectKey)
