@@ -49,13 +49,13 @@ namespace Autodesk.DataManagement.Model
         /// Gets or Sets Tip
         /// </summary>
         [DataMember(Name="tip", EmitDefaultValue=false)]
-        public FolderPayloadDataRelationshipsParent Tip { get; set; }
+        public ItemPayloadDataRelationshipsTip Tip { get; set; }
 
         /// <summary>
         /// Gets or Sets Parent
         /// </summary>
         [DataMember(Name="parent", EmitDefaultValue=false)]
-        public FolderPayloadDataRelationshipsParent Parent { get; set; }
+        public ItemPayloadDataRelationshipsTip Parent { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

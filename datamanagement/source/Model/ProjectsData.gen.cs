@@ -48,8 +48,8 @@ namespace Autodesk.DataManagement.Model
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; set; }
+        [DataMember(Name="type", EmitDefaultValue=true)]
+        public Type Type { get; set; }
 
         /// <summary>
         /// Gets or Sets Id

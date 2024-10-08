@@ -61,7 +61,7 @@ namespace Autodesk.DataManagement.Model
         /// Gets or Sets Attributes
         /// </summary>
         [DataMember(Name="attributes", EmitDefaultValue=false)]
-        public ModifyItemPayloadDataAttributes Attributes { get; set; }
+        public Object Attributes { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
