@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Data Management
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,7 +34,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// ItemPayloadIncludedRelationships
+    /// A container of links to resources that are related to the item to be created.
     /// </summary>
     [DataContract]
     public partial class ItemPayloadIncludedRelationships 
@@ -46,16 +47,16 @@ namespace Autodesk.DataManagement.Model
         }
         
         /// <summary>
-        /// Gets or Sets Storage
+        ///Gets or Sets Storage
         /// </summary>
         [DataMember(Name="storage", EmitDefaultValue=false)]
-        public FolderPayloadDataRelationshipsParent Storage { get; set; }
+        public ItemPayloadIncludedRelationshipsStorage Storage { get; set; }
 
         /// <summary>
-        /// Gets or Sets Refs
+        ///Gets or Sets Refs
         /// </summary>
         [DataMember(Name="refs", EmitDefaultValue=false)]
-        public ItemPayloadIncludedRelationshipsRefs Refs { get; set; }
+        public JsonApiRelationshipsRefs Refs { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

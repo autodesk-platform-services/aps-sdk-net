@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Data Management
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,7 +34,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// ModifyFolderPayloadData
+    /// The data that describes what must be modified.
     /// </summary>
     [DataContract]
     public partial class ModifyFolderPayloadData 
@@ -46,25 +47,36 @@ namespace Autodesk.DataManagement.Model
         }
         
         /// <summary>
-        /// Gets or Sets Type
+        ///Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=true)]
-        public Type Type { get; set; }
+        public TypeFolder Type { get; set; }
 
         /// <summary>
-        /// Gets or Sets Id
+        ///The URN of the folder.
+///
+///For information on how to find the URN, see the initial steps of the [Download a File](/en/docs/data/v2/tutorials/download-file/) tutorial.
+///
+///Note that this should NOT be URL-encoded.
         /// </summary>
+        /// <value>
+        ///The URN of the folder.
+///
+///For information on how to find the URN, see the initial steps of the [Download a File](/en/docs/data/v2/tutorials/download-file/) tutorial.
+///
+///Note that this should NOT be URL-encoded.
+        /// </value>
         [DataMember(Name="id", EmitDefaultValue=false)]
         public string Id { get; set; }
 
         /// <summary>
-        /// Gets or Sets Attributes
+        ///Gets or Sets Attributes
         /// </summary>
         [DataMember(Name="attributes", EmitDefaultValue=false)]
         public ModifyFolderPayloadDataAttributes Attributes { get; set; }
 
         /// <summary>
-        /// Gets or Sets Relationships
+        ///Gets or Sets Relationships
         /// </summary>
         [DataMember(Name="relationships", EmitDefaultValue=false)]
         public ModifyFolderPayloadDataRelationships Relationships { get; set; }

@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Data Management
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,7 +34,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// DownloadData
+    /// A container of the details of the download object.
     /// </summary>
     [DataContract]
     public partial class DownloadData 
@@ -46,28 +47,37 @@ namespace Autodesk.DataManagement.Model
         }
         
         /// <summary>
-        /// Gets or Sets Type
+        ///Gets or Sets Type
         /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; set; }
+        [DataMember(Name="type", EmitDefaultValue=true)]
+        public TypeDownloads Type { get; set; }
 
         /// <summary>
-        /// Gets or Sets Id
+        ///An ID to uniquely identify this download. It is identical to the Job ID that was used to generate this download.
         /// </summary>
+        /// <value>
+        ///An ID to uniquely identify this download. It is identical to the Job ID that was used to generate this download.
+        /// </value>
         [DataMember(Name="id", EmitDefaultValue=false)]
         public string Id { get; set; }
 
         /// <summary>
-        /// Gets or Sets Attributes
+        ///Gets or Sets Attributes
         /// </summary>
         [DataMember(Name="attributes", EmitDefaultValue=false)]
         public DownloadDataAttributes Attributes { get; set; }
 
         /// <summary>
-        /// Gets or Sets Links
+        ///Gets or Sets Links
         /// </summary>
         [DataMember(Name="links", EmitDefaultValue=false)]
-        public HubsLinks Links { get; set; }
+        public JsonApiLinksSelf Links { get; set; }
+
+        /// <summary>
+        ///Gets or Sets Relationships
+        /// </summary>
+        [DataMember(Name="relationships", EmitDefaultValue=false)]
+        public DownloadDataRelationships Relationships { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

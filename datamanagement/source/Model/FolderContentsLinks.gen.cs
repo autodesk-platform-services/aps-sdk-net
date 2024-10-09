@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Data Management
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,7 +34,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// FolderContentsLinks
+    /// Information on links for this resource. &#x60;&#x60;first&#x60;&#x60;, &#x60;&#x60;prev&#x60;&#x60;, and &#x60;&#x60;next&#x60;&#x60; are available only when the response is paginated.
     /// </summary>
     [DataContract]
     public partial class FolderContentsLinks 
@@ -46,28 +47,28 @@ namespace Autodesk.DataManagement.Model
         }
         
         /// <summary>
-        /// Gets or Sets Self
+        ///Gets or Sets Self
         /// </summary>
         [DataMember(Name="self", EmitDefaultValue=false)]
-        public HubsLinksSelf Self { get; set; }
+        public JsonApiLink Self { get; set; }
 
         /// <summary>
-        /// Gets or Sets First
+        ///Gets or Sets First
         /// </summary>
         [DataMember(Name="first", EmitDefaultValue=false)]
-        public HubsLinksSelf First { get; set; }
+        public JsonApiLink First { get; set; }
 
         /// <summary>
-        /// Gets or Sets Prev
+        ///Gets or Sets Prev
         /// </summary>
         [DataMember(Name="prev", EmitDefaultValue=false)]
-        public HubsLinksSelf Prev { get; set; }
+        public JsonApiLink Prev { get; set; }
 
         /// <summary>
-        /// Gets or Sets Next
+        ///Gets or Sets Next
         /// </summary>
         [DataMember(Name="next", EmitDefaultValue=false)]
-        public HubsLinksSelf Next { get; set; }
+        public JsonApiLink Next { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

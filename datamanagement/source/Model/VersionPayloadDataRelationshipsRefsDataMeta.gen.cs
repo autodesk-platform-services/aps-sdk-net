@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Data Management
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,7 +34,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// VersionPayloadDataRelationshipsRefsDataMeta
+    /// Contains meta information about the reference.
     /// </summary>
     [DataContract]
     public partial class VersionPayloadDataRelationshipsRefsDataMeta 
@@ -46,19 +47,19 @@ namespace Autodesk.DataManagement.Model
         }
         
         /// <summary>
-        /// Gets or Sets RefType
+        ///Gets or Sets RefType
         /// </summary>
         [DataMember(Name="refType", EmitDefaultValue=true)]
-        public RefType RefType { get; set; }
+        public ReftypesXref RefType { get; set; }
 
         /// <summary>
-        /// Gets or Sets Direction
+        ///Gets or Sets Direction
         /// </summary>
         [DataMember(Name="direction", EmitDefaultValue=true)]
-        public Direction Direction { get; set; }
+        public MetarefsDirection Direction { get; set; }
 
         /// <summary>
-        /// Gets or Sets Extension
+        ///Gets or Sets Extension
         /// </summary>
         [DataMember(Name="extension", EmitDefaultValue=false)]
         public VersionPayloadDataRelationshipsRefsDataMetaExtension Extension { get; set; }

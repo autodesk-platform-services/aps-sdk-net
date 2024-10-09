@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Data Management
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,7 +34,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// ModifyItemPayloadData
+    /// The data that describes what must be modified.
     /// </summary>
     [DataContract]
     public partial class ModifyItemPayloadData 
@@ -46,19 +47,22 @@ namespace Autodesk.DataManagement.Model
         }
         
         /// <summary>
-        /// Gets or Sets Type
+        ///Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=true)]
-        public Type Type { get; set; }
+        public TypeItem Type { get; set; }
 
         /// <summary>
-        /// Gets or Sets Id
+        ///The ID of the item to be patched.
         /// </summary>
+        /// <value>
+        ///The ID of the item to be patched.
+        /// </value>
         [DataMember(Name="id", EmitDefaultValue=false)]
         public string Id { get; set; }
 
         /// <summary>
-        /// Gets or Sets Attributes
+        ///Gets or Sets Attributes
         /// </summary>
         [DataMember(Name="attributes", EmitDefaultValue=false)]
         public ModifyItemPayloadDataAttributes Attributes { get; set; }

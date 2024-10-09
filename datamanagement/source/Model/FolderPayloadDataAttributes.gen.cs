@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Data Management
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,7 +34,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// FolderPayloadDataAttributes
+    /// The properties of the folder to be created.
     /// </summary>
     [DataContract]
     public partial class FolderPayloadDataAttributes 
@@ -46,16 +47,27 @@ namespace Autodesk.DataManagement.Model
         }
         
         /// <summary>
-        /// Gets or Sets Name
+        ///The name of the new folder (1-255 characters).
+///
+///Avoid using the following reserved characters in the name: `<`, `>`, `:`, `"`, `/`, `\`, `|`, `?`, `*`, `'`, `\n`, `\r`, `\t`, `\0`, `\f`, `¢`, `™`, `$`, `®`.
+///
+///If you assign the name of a deleted folder to this folder, and later you decide to restore the deleted folder, you will have to rename the deleted folder.
         /// </summary>
+        /// <value>
+        ///The name of the new folder (1-255 characters).
+///
+///Avoid using the following reserved characters in the name: `<`, `>`, `:`, `"`, `/`, `\`, `|`, `?`, `*`, `'`, `\n`, `\r`, `\t`, `\0`, `\f`, `¢`, `™`, `$`, `®`.
+///
+///If you assign the name of a deleted folder to this folder, and later you decide to restore the deleted folder, you will have to rename the deleted folder.
+        /// </value>
         [DataMember(Name="name", EmitDefaultValue=false)]
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or Sets Extension
+        ///Gets or Sets Extension
         /// </summary>
         [DataMember(Name="extension", EmitDefaultValue=false)]
-        public RelationshipRefsPayloadDataMetaExtension Extension { get; set; }
+        public FolderPayloadDataAttributesExtension Extension { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

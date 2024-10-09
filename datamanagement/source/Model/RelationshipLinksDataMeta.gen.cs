@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Data Management
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,7 +34,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// RelationshipLinksDataMeta
+    /// The meta-information of the links of this resource.
     /// </summary>
     [DataContract]
     public partial class RelationshipLinksDataMeta 
@@ -46,28 +47,31 @@ namespace Autodesk.DataManagement.Model
         }
         
         /// <summary>
-        /// Gets or Sets Link
+        ///Gets or Sets Link
         /// </summary>
         [DataMember(Name="link", EmitDefaultValue=false)]
-        public HubsLinksSelf Link { get; set; }
+        public JsonApiLink Link { get; set; }
 
         /// <summary>
-        /// Gets or Sets Data
+        ///Gets or Sets Data
         /// </summary>
         [DataMember(Name="data", EmitDefaultValue=false)]
-        public HubsDataRelationshipsPimCollectionData Data { get; set; }
+        public RelationshipLinksDataMetaData Data { get; set; }
 
         /// <summary>
-        /// Gets or Sets MimeType
+        ///The MIME type of the content of the resource.
         /// </summary>
+        /// <value>
+        ///The MIME type of the content of the resource.
+        /// </value>
         [DataMember(Name="mimeType", EmitDefaultValue=false)]
         public string MimeType { get; set; }
 
         /// <summary>
-        /// Gets or Sets Extension
+        ///Gets or Sets Extension
         /// </summary>
         [DataMember(Name="extension", EmitDefaultValue=false)]
-        public RelationshipLinksDataMetaExtension Extension { get; set; }
+        public BaseAttributesExtensionObjectWithSchemaLink Extension { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

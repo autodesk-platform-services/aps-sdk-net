@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Data Management
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,7 +34,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// VersionPayloadDataRelationshipsRefsDataMetaExtension
+    /// Contains additional properties that extend the default properties of the relationship.
     /// </summary>
     [DataContract]
     public partial class VersionPayloadDataRelationshipsRefsDataMetaExtension 
@@ -46,22 +47,25 @@ namespace Autodesk.DataManagement.Model
         }
         
         /// <summary>
-        /// Gets or Sets Type
+        ///Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=true)]
-        public Type Type { get; set; }
+        public ExtensionTypeCoreXref Type { get; set; }
 
         /// <summary>
-        /// Gets or Sets _Version
+        ///The version of the xref type. Currently must be `1.1.0`.
         /// </summary>
+        /// <value>
+        ///The version of the xref type. Currently must be `1.1.0`.
+        /// </value>
         [DataMember(Name="version", EmitDefaultValue=false)]
-        public string _Version { get; set; }
+        public string VarVersion { get; set; }
 
         /// <summary>
-        /// Gets or Sets Data
+        ///Gets or Sets Data
         /// </summary>
         [DataMember(Name="data", EmitDefaultValue=false)]
-        public ItemPayloadIncludedRelationshipsRefsDataMetaExtensionData Data { get; set; }
+        public VersionPayloadDataRelationshipsRefsDataMetaExtensionData Data { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

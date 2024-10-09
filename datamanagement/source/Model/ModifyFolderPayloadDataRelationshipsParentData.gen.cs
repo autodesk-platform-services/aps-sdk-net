@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Data Management
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,7 +34,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// ModifyFolderPayloadDataRelationshipsParentData
+    /// A container for the data that defines the parent of this folder.
     /// </summary>
     [DataContract]
     public partial class ModifyFolderPayloadDataRelationshipsParentData 
@@ -46,14 +47,20 @@ namespace Autodesk.DataManagement.Model
         }
         
         /// <summary>
-        /// Gets or Sets Type
+        ///The type of the resource. Must be `folders`
         /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=true)]
-        public Type Type { get; set; }
+        /// <value>
+        ///The type of the resource. Must be `folders`
+        /// </value>
+        [DataMember(Name="type", EmitDefaultValue=false)]
+        public string Type { get; set; }
 
         /// <summary>
-        /// Gets or Sets Id
+        ///The URN of the parent folder to which you want to move a folder to.
         /// </summary>
+        /// <value>
+        ///The URN of the parent folder to which you want to move a folder to.
+        /// </value>
         [DataMember(Name="id", EmitDefaultValue=false)]
         public string Id { get; set; }
 

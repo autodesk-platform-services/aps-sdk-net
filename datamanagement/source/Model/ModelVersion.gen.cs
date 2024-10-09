@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Data Management
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,7 +34,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// Successful creation of a version.
+    /// An object that represdents a version.
     /// </summary>
     [DataContract]
     public partial class ModelVersion 
@@ -46,34 +47,22 @@ namespace Autodesk.DataManagement.Model
         }
         
         /// <summary>
-        /// Gets or Sets Jsonapi
+        ///Gets or Sets Jsonapi
         /// </summary>
         [DataMember(Name="jsonapi", EmitDefaultValue=false)]
-        public HubsJsonapi Jsonapi { get; set; }
+        public JsonApiVersion Jsonapi { get; set; }
 
         /// <summary>
-        /// Gets or Sets Links
+        ///Gets or Sets Links
         /// </summary>
         [DataMember(Name="links", EmitDefaultValue=false)]
-        public HubsLinks Links { get; set; }
+        public JsonApiLinksSelf Links { get; set; }
 
         /// <summary>
-        /// Gets or Sets Data
+        ///Gets or Sets Data
         /// </summary>
         [DataMember(Name="data", EmitDefaultValue=false)]
         public VersionData Data { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Included
-        /// </summary>
-        [DataMember(Name="included", EmitDefaultValue=false)]
-        public List<VersionIncluded> Included { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Meta
-        /// </summary>
-        [DataMember(Name="meta", EmitDefaultValue=false)]
-        public VersionMeta Meta { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

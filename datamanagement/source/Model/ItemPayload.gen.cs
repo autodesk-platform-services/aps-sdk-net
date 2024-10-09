@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Data Management
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -46,28 +47,31 @@ namespace Autodesk.DataManagement.Model
         }
         
         /// <summary>
-        /// Gets or Sets Jsonapi
+        ///Gets or Sets Jsonapi
         /// </summary>
         [DataMember(Name="jsonapi", EmitDefaultValue=false)]
-        public ModifyFolderPayloadJsonapi Jsonapi { get; set; }
+        public JsonApiVersion Jsonapi { get; set; }
 
         /// <summary>
-        /// Gets or Sets Data
+        ///Gets or Sets Data
         /// </summary>
         [DataMember(Name="data", EmitDefaultValue=false)]
         public ItemPayloadData Data { get; set; }
 
         /// <summary>
-        /// Gets or Sets Included
+        ///An array of objects, where each object represents a version of the item to be created. In this case there will only be one element in the array.
         /// </summary>
+        /// <value>
+        ///An array of objects, where each object represents a version of the item to be created. In this case there will only be one element in the array.
+        /// </value>
         [DataMember(Name="included", EmitDefaultValue=false)]
         public List<ItemPayloadIncluded> Included { get; set; }
 
         /// <summary>
-        /// Gets or Sets Meta
+        ///Gets or Sets Meta
         /// </summary>
         [DataMember(Name="meta", EmitDefaultValue=false)]
-        public ItemPayloadMeta Meta { get; set; }
+        public MetaForWebhooks Meta { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
