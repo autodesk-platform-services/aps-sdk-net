@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Data Management
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,43 +34,32 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// An object that contains properties  specific to the GetPublishModelJob command,   extending the default properties of a command.
+    /// The type of resource the storage location is related to. Possible values are:
+///
+///- `folders` - The storage location is for a new item. 
+///- `items`   -  The storage location is for a new version of an existing item.
     /// </summary>
-    [DataContract]
-    public partial class GetPublishModelJobPayloadAttributesExtension 
+    ///<value>The type of resource the storage location is related to. Possible values are:
+///
+///- `folders` - The storage location is for a new item. 
+///- `items`   -  The storage location is for a new version of an existing item.</value>
+    
+    [JsonConverter(typeof(StringEnumConverter))]
+    
+    public enum TypeFolderItemsForStorage
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="GetPublishModelJobPayloadAttributesExtension" /> class.
-        /// </summary>
-        public GetPublishModelJobPayloadAttributesExtension()
-        {
-        }
         
         /// <summary>
-        ///Gets or Sets Type
+        /// Enum Folders for value: folders
         /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=true)]
-        public Type Type { get; set; }
-
+        [EnumMember(Value = "folders")]
+        Folders,
+        
         /// <summary>
-        ///The version of the schema. Must be `1.0.0` 
-///for the GetPublishModelJob command. 
+        /// Enum Items for value: items
         /// </summary>
-        /// <value>
-        ///The version of the schema. Must be `1.0.0` 
-///for the GetPublishModelJob command. 
-        /// </value>
-        [DataMember(Name="version", EmitDefaultValue=false)]
-        public string VarVersion { get; set; }
-
-        /// <summary>
-        /// Returns the string presentation of the object
-        /// </summary>
-        /// <returns>String presentation of the object</returns>
-        public override string ToString()
-        {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
-        }
+        [EnumMember(Value = "items")]
+        Items
     }
 
 }

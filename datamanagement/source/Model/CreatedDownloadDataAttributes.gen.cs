@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Data Management
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -46,13 +47,10 @@ namespace Autodesk.DataManagement.Model
         }
         
         /// <summary>
-        ///Indicates the current status of the job. Possible values are `queued`, `processing`, `failed`, and  `finished`
+        ///Gets or Sets Status
         /// </summary>
-        /// <value>
-        ///Indicates the current status of the job. Possible values are `queued`, `processing`, `failed`, and  `finished`
-        /// </value>
-        [DataMember(Name="status", EmitDefaultValue=false)]
-        public string Status { get; set; }
+        [DataMember(Name="status", EmitDefaultValue=true)]
+        public DownloadsStatus Status { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

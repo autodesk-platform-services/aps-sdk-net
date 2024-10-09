@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Data Management
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,38 +34,26 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// Contains the properties of the response to the GetPublishModelJob command.
+    /// The type of the resource. Possible values are `folders`, `items`.
     /// </summary>
-    [DataContract]
-    public partial class GetPublishModelJobAttributes 
+    ///<value>The type of the resource. Possible values are `folders`, `items`.</value>
+    
+    [JsonConverter(typeof(StringEnumConverter))]
+    
+    public enum TypeFolderItems
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="GetPublishModelJobAttributes" /> class.
-        /// </summary>
-        public GetPublishModelJobAttributes()
-        {
-        }
         
         /// <summary>
-        ///Gets or Sets Status
+        /// Enum Folders for value: folders
         /// </summary>
-        [DataMember(Name="status", EmitDefaultValue=true)]
-        public CommandExecutionStatus Status { get; set; }
-
+        [EnumMember(Value = "folders")]
+        Folders,
+        
         /// <summary>
-        ///Gets or Sets Extension
+        /// Enum Items for value: items
         /// </summary>
-        [DataMember(Name="extension", EmitDefaultValue=false)]
-        public GetPublishModelJobPayloadAttributesExtension Extension { get; set; }
-
-        /// <summary>
-        /// Returns the string presentation of the object
-        /// </summary>
-        /// <returns>String presentation of the object</returns>
-        public override string ToString()
-        {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
-        }
+        [EnumMember(Value = "items")]
+        Items
     }
 
 }

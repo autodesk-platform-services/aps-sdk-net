@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Data Management
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,38 +34,23 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// The &#x60;&#x60;data&#x60;&#x60; object returned by the GetPublishModelJob command, if the model needs publishing. If the model is already published, the &#x60;&#x60;data&#x60;&#x60; object will bed &#x60;&#x60;null&#x60;&#x60;. 
+    /// A container of the inputs for the command.
     /// </summary>
     [DataContract]
-    public partial class GetPublishModelJob : CommandData
+    public partial class PublishModelJobPayloadAttributes 
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="GetPublishModelJob" /> class.
+        /// Initializes a new instance of the <see cref="PublishModelJobPayloadAttributes" /> class.
         /// </summary>
-        public GetPublishModelJob()
+        public PublishModelJobPayloadAttributes()
         {
         }
         
         /// <summary>
-        ///Gets or Sets Type
+        ///Gets or Sets Extension
         /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=true)]
-        public Type Type { get; set; }
-
-        /// <summary>
-        ///A unique ID assigned to the process executing the command.
-        /// </summary>
-        /// <value>
-        ///A unique ID assigned to the process executing the command.
-        /// </value>
-        [DataMember(Name="id", EmitDefaultValue=false)]
-        public string Id { get; set; }
-
-        /// <summary>
-        ///Gets or Sets Attributes
-        /// </summary>
-        [DataMember(Name="attributes", EmitDefaultValue=false)]
-        public GetPublishModelJobAttributes Attributes { get; set; }
+        [DataMember(Name="extension", EmitDefaultValue=false)]
+        public PublishModelJobPayloadAttributesExtension Extension { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Data Management
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using Autodesk.Forge.Core;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
@@ -31,6 +32,7 @@ using Autodesk.DataManagement.Client;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Autodesk.SDKManager;
+using System.Collections;
 
 namespace Autodesk.DataManagement.Http
 {
@@ -137,9 +139,9 @@ namespace Autodesk.DataManagement.Http
          /// <param name="xUserId">
          ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
          /// </param>
-        /// <returns>Task of ApiResponse&lt;VersionDetails&gt;</returns>
+        /// <returns>Task of ApiResponse&lt;ModelVersion&gt;</returns>
         
-        System.Threading.Tasks.Task<ApiResponse<VersionDetails>> GetVersionAsync (string projectId, string versionId, string xUserId= default(string),  string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<ApiResponse<ModelVersion>> GetVersionAsync (string projectId, string versionId, string xUserId= default(string),  string accessToken = null, bool throwOnError = true);
         /// <summary>
         /// List Supported Download Formats
         /// </summary>
@@ -257,7 +259,7 @@ namespace Autodesk.DataManagement.Http
          /// </param>
         /// <returns>Task of ApiResponse&lt;Refs&gt;</returns>
         
-        System.Threading.Tasks.Task<ApiResponse<Refs>> GetVersionRefsAsync (string projectId, string versionId, string xUserId= default(string), List<string> filterType= null, List<string> filterId= default(List<string>), List<string> filterExtensionType= default(List<string>),  string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<ApiResponse<Refs>> GetVersionRefsAsync (string projectId, string versionId, string xUserId= default(string), List<FilterTypeVersion> filterType= default(List<FilterTypeVersion>), List<string> filterId= default(List<string>), List<string> filterExtensionType= default(List<string>),  string accessToken = null, bool throwOnError = true);
         /// <summary>
         /// List Links for a Version
         /// </summary>
@@ -329,7 +331,7 @@ namespace Autodesk.DataManagement.Http
          /// </param>
         /// <returns>Task of ApiResponse&lt;RelationshipRefs&gt;</returns>
         
-        System.Threading.Tasks.Task<ApiResponse<RelationshipRefs>> GetVersionRelationshipsRefsAsync (string projectId, string versionId, string xUserId= default(string), List<string> filterType= null, List<string> filterId= default(List<string>), string filterRefType= null, string filterDirection= null, List<string> filterExtensionType= default(List<string>),  string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<ApiResponse<RelationshipRefs>> GetVersionRelationshipsRefsAsync (string projectId, string versionId, string xUserId= default(string), List<FilterTypeVersion> filterType= default(List<FilterTypeVersion>), List<string> filterId= default(List<string>), FilterRefType? filterRefType= null, FilterDirection? filterDirection= null, List<string> filterExtensionType= default(List<string>),  string accessToken = null, bool throwOnError = true);
         /// <summary>
         /// Update a Version
         /// </summary>
@@ -352,9 +354,9 @@ namespace Autodesk.DataManagement.Http
          /// <param name="modifyVersionPayload">
          /// (optional)
          /// </param>
-        /// <returns>Task of ApiResponse&lt;VersionDetails&gt;</returns>
+        /// <returns>Task of ApiResponse&lt;ModelVersion&gt;</returns>
         
-        System.Threading.Tasks.Task<ApiResponse<VersionDetails>> PatchVersionAsync (string projectId, string versionId, ModifyVersionPayload modifyVersionPayload= default(ModifyVersionPayload),  string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<ApiResponse<ModelVersion>> PatchVersionAsync (string projectId, string versionId, ModifyVersionPayload modifyVersionPayload= default(ModifyVersionPayload),  string accessToken = null, bool throwOnError = true);
     }
 
     /// <summary>
@@ -377,27 +379,49 @@ namespace Autodesk.DataManagement.Http
         }
         private void SetQueryParameter(string name, object value, Dictionary<string, object> dictionary)
         {
-            if(value is Enum)
+            if (value is Enum)
             {
                 var type = value.GetType();
                 var memberInfos = type.GetMember(value.ToString());
                 var enumValueMemberInfo = memberInfos.FirstOrDefault(m => m.DeclaringType == type);
                 var valueAttributes = enumValueMemberInfo.GetCustomAttributes(typeof(EnumMemberAttribute), false);
-                if(valueAttributes.Length > 0)
+                if (valueAttributes.Length > 0)
                 {
                     dictionary.Add(name, ((EnumMemberAttribute)valueAttributes[0]).Value);
                 }
             }
-            else if(value is int)
+            else if (value is int)
             {
-                if((int)value > 0)
+                if ((int)value > 0)
                 {
                     dictionary.Add(name, value);
                 }
             }
+            else if (value is IList)
+            {
+                if (value is List<string>)
+                {
+                    value = String.Join(",", (List<string>)value);
+                    dictionary.Add(name, value);
+                }
+                else
+                {
+                    List<string> newlist = new List<string>();
+                    foreach (var x in (IList)value)
+                    {
+                        var type = x.GetType();
+                        var memberInfos = type.GetMember(x.ToString());
+                        var enumValueMemberInfo = memberInfos.FirstOrDefault(m => m.DeclaringType == type);
+                        var valueAttributes = enumValueMemberInfo.GetCustomAttributes(typeof(EnumMemberAttribute), false);
+                        newlist.Add(((EnumMemberAttribute)valueAttributes[0]).Value);
+                    }
+                    string joinedString = String.Join(",", newlist);
+                    dictionary.Add(name, joinedString);
+                }
+            }
             else
             {
-                if(value != null)
+                if (value != null)
                 {
                     dictionary.Add(name, value);
                 }
@@ -500,7 +524,7 @@ namespace Autodesk.DataManagement.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.0");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.3");
                 if(!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
@@ -596,7 +620,7 @@ namespace Autodesk.DataManagement.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.0");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.3");
                 if(!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
@@ -673,9 +697,9 @@ namespace Autodesk.DataManagement.Http
          /// <param name="xUserId">
          ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
          /// </param>
-        /// <returns>Task of ApiResponse&lt;VersionDetails&gt;></returns>
+        /// <returns>Task of ApiResponse&lt;ModelVersion&gt;></returns>
         
-        public async System.Threading.Tasks.Task<ApiResponse<VersionDetails>> GetVersionAsync (string projectId,string versionId,string xUserId= default(string), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ApiResponse<ModelVersion>> GetVersionAsync (string projectId,string versionId,string xUserId= default(string), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into GetVersionAsync ");
             using (var request = new HttpRequestMessage())
@@ -691,7 +715,7 @@ namespace Autodesk.DataManagement.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.0");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.3");
                 if(!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
@@ -738,10 +762,10 @@ namespace Autodesk.DataManagement.Http
                 else if (!response.IsSuccessStatusCode)
                 {
                     logger.LogError($"response unsuccess with status code: {response.StatusCode}");
-                    return new ApiResponse<VersionDetails>(response, default(VersionDetails));
+                    return new ApiResponse<ModelVersion>(response, default(ModelVersion));
                 }
                 logger.LogInformation($"Exited from GetVersionAsync with response statusCode: {response.StatusCode}");
-                return new ApiResponse<VersionDetails>(response, await LocalMarshalling.DeserializeAsync<VersionDetails>(response.Content));
+                return new ApiResponse<ModelVersion>(response, await LocalMarshalling.DeserializeAsync<ModelVersion>(response.Content));
 
             } // using
         }
@@ -785,7 +809,7 @@ namespace Autodesk.DataManagement.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.0");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.3");
                 if(!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
@@ -872,7 +896,7 @@ namespace Autodesk.DataManagement.Http
             using (var request = new HttpRequestMessage())
             {
                 var queryParam = new Dictionary<string, object>();
-                SetQueryParameter("filter_format_fileType", filterFormatFileType, queryParam);
+                SetQueryParameter("filter[format.fileType]", filterFormatFileType, queryParam);
                 request.RequestUri =
                     Marshalling.BuildRequestUri("/data/v1/projects/{project_id}/versions/{version_id}/downloads",
                         routeParameters: new Dictionary<string, object> {
@@ -883,7 +907,7 @@ namespace Autodesk.DataManagement.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.0");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.3");
                 if(!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
@@ -977,7 +1001,7 @@ namespace Autodesk.DataManagement.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.0");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.3");
                 if(!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
@@ -1070,7 +1094,7 @@ namespace Autodesk.DataManagement.Http
          /// </param>
         /// <returns>Task of ApiResponse&lt;Refs&gt;></returns>
         
-        public async System.Threading.Tasks.Task<ApiResponse<Refs>> GetVersionRefsAsync (string projectId,string versionId,string xUserId= default(string),List<string> filterType= null,List<string> filterId= default(List<string>),List<string> filterExtensionType= default(List<string>), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ApiResponse<Refs>> GetVersionRefsAsync (string projectId,string versionId,string xUserId= default(string),List<FilterTypeVersion> filterType= default(List<FilterTypeVersion>),List<string> filterId= default(List<string>),List<string> filterExtensionType= default(List<string>), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into GetVersionRefsAsync ");
             using (var request = new HttpRequestMessage())
@@ -1089,7 +1113,7 @@ namespace Autodesk.DataManagement.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.0");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.3");
                 if(!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
@@ -1183,7 +1207,7 @@ namespace Autodesk.DataManagement.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.0");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.3");
                 if(!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
@@ -1283,7 +1307,7 @@ namespace Autodesk.DataManagement.Http
          /// </param>
         /// <returns>Task of ApiResponse&lt;RelationshipRefs&gt;></returns>
         
-        public async System.Threading.Tasks.Task<ApiResponse<RelationshipRefs>> GetVersionRelationshipsRefsAsync (string projectId,string versionId,string xUserId= default(string),List<string> filterType= null,List<string> filterId= default(List<string>),string filterRefType= null,string filterDirection= null,List<string> filterExtensionType= default(List<string>), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ApiResponse<RelationshipRefs>> GetVersionRelationshipsRefsAsync (string projectId,string versionId,string xUserId= default(string),List<FilterTypeVersion> filterType= default(List<FilterTypeVersion>),List<string> filterId= default(List<string>),FilterRefType? filterRefType= null,FilterDirection? filterDirection= null,List<string> filterExtensionType= default(List<string>), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into GetVersionRelationshipsRefsAsync ");
             using (var request = new HttpRequestMessage())
@@ -1304,7 +1328,7 @@ namespace Autodesk.DataManagement.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.0");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.3");
                 if(!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
@@ -1380,9 +1404,9 @@ namespace Autodesk.DataManagement.Http
          /// <param name="modifyVersionPayload">
          /// (optional)
          /// </param>
-        /// <returns>Task of ApiResponse&lt;VersionDetails&gt;></returns>
+        /// <returns>Task of ApiResponse&lt;ModelVersion&gt;></returns>
         
-        public async System.Threading.Tasks.Task<ApiResponse<VersionDetails>> PatchVersionAsync (string projectId,string versionId,ModifyVersionPayload modifyVersionPayload= default(ModifyVersionPayload), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ApiResponse<ModelVersion>> PatchVersionAsync (string projectId,string versionId,ModifyVersionPayload modifyVersionPayload= default(ModifyVersionPayload), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into PatchVersionAsync ");
             using (var request = new HttpRequestMessage())
@@ -1398,7 +1422,7 @@ namespace Autodesk.DataManagement.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.0");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.3");
                 if(!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
@@ -1445,10 +1469,10 @@ namespace Autodesk.DataManagement.Http
                 else if (!response.IsSuccessStatusCode)
                 {
                     logger.LogError($"response unsuccess with status code: {response.StatusCode}");
-                    return new ApiResponse<VersionDetails>(response, default(VersionDetails));
+                    return new ApiResponse<ModelVersion>(response, default(ModelVersion));
                 }
                 logger.LogInformation($"Exited from PatchVersionAsync with response statusCode: {response.StatusCode}");
-                return new ApiResponse<VersionDetails>(response, await LocalMarshalling.DeserializeAsync<VersionDetails>(response.Content));
+                return new ApiResponse<ModelVersion>(response, await LocalMarshalling.DeserializeAsync<ModelVersion>(response.Content));
 
             } // using
         }

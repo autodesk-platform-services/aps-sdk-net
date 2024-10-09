@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Data Management
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -36,7 +37,7 @@ namespace Autodesk.DataManagement.Model
     /// An object that contains the input data required to execute the CheckPermission command.  The CheckPermission command checks if a user has permission to perform specified actions on specified resources. The user’s identity is derived from the &#x60;&#x60;x-user-id&#x60;&#x60; header (in a 2-Legged call), or from the access token (in a 3-Legged call).   See the [Developer&#39;s Guide topic on the CheckPermission command](/en/docs/data/v2/developers_guide/commands/checkpermission/) for more information. 
     /// </summary>
     [DataContract]
-    public partial class CheckPermissionPayload : CommandPayloadData
+    public partial class CheckPermissionPayload : ICommandPayloadData
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="CheckPermissionPayload" /> class.
@@ -49,7 +50,7 @@ namespace Autodesk.DataManagement.Model
         ///Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=true)]
-        public Type Type { get; set; }
+        public TypeCommands Type { get; set; }
 
         /// <summary>
         ///Gets or Sets Attributes

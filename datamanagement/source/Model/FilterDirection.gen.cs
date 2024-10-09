@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Data Management
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,32 +34,26 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// A container of the inputs for the command.
+    /// Filter by the direction of the reference. Possible values: `from` and `to`.
     /// </summary>
-    [DataContract]
-    public partial class GetPublishModelJobPayloadAttributes 
+    ///<value>Filter by the direction of the reference. Possible values: `from` and `to`.</value>
+    
+    [JsonConverter(typeof(StringEnumConverter))]
+    
+    public enum FilterDirection
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="GetPublishModelJobPayloadAttributes" /> class.
-        /// </summary>
-        public GetPublishModelJobPayloadAttributes()
-        {
-        }
         
         /// <summary>
-        ///Gets or Sets Extension
+        /// Enum From for value: from
         /// </summary>
-        [DataMember(Name="extension", EmitDefaultValue=false)]
-        public GetPublishModelJobPayloadAttributesExtension Extension { get; set; }
-
+        [EnumMember(Value = "from")]
+        From,
+        
         /// <summary>
-        /// Returns the string presentation of the object
+        /// Enum To for value: to
         /// </summary>
-        /// <returns>String presentation of the object</returns>
-        public override string ToString()
-        {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
-        }
+        [EnumMember(Value = "to")]
+        To
     }
 
 }

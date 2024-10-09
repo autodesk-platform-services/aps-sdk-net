@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Data Management
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,37 +34,20 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// Contains the list of items to check.
+    /// The version of JSON API. Will always be `1.0`.
     /// </summary>
-    [DataContract]
-    public partial class GetPublishModelJobPayloadRelationshipsResources 
+    ///<value>The version of JSON API. Will always be `1.0`.</value>
+    
+    [JsonConverter(typeof(StringEnumConverter))]
+    
+    public enum JsonApiVersionValue
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="GetPublishModelJobPayloadRelationshipsResources" /> class.
-        /// </summary>
-        public GetPublishModelJobPayloadRelationshipsResources()
-        {
-        }
         
         /// <summary>
-        ///An array of objects, where each object 
-///represents an item to check. 
+        /// Enum _10 for value: 1.0
         /// </summary>
-        /// <value>
-        ///An array of objects, where each object 
-///represents an item to check. 
-        /// </value>
-        [DataMember(Name="data", EmitDefaultValue=false)]
-        public List<GetPublishModelJobPayloadRelationshipsResourcesData> Data { get; set; }
-
-        /// <summary>
-        /// Returns the string presentation of the object
-        /// </summary>
-        /// <returns>String presentation of the object</returns>
-        public override string ToString()
-        {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
-        }
+        [EnumMember(Value = "1.0")]
+        _10
     }
 
 }

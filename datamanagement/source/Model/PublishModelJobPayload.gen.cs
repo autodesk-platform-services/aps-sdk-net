@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Data Management
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,15 +34,15 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// GetPublishModelJobPayloadRelationshipsResourcesData
+    /// An object that contains the input data required to execute the GetPublishModelJob command.  The ListRefs verifies whether a Collaboration for Revit (C4R) model needs to be published to BIM 360 Docs. For more information, see the [GetPublishModelJob topic in the overview section](/en/docs/data/v2/developers_guide/commands/getpublishmodeljob).
     /// </summary>
     [DataContract]
-    public partial class GetPublishModelJobPayloadRelationshipsResourcesData 
+    public partial class PublishModelJobPayload : ICommandPayloadData
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="GetPublishModelJobPayloadRelationshipsResourcesData" /> class.
+        /// Initializes a new instance of the <see cref="PublishModelJobPayload" /> class.
         /// </summary>
-        public GetPublishModelJobPayloadRelationshipsResourcesData()
+        public PublishModelJobPayload()
         {
         }
         
@@ -49,20 +50,28 @@ namespace Autodesk.DataManagement.Model
         ///Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=true)]
-        public Type Type { get; set; }
+        public TypeCommands Type { get; set; }
 
         /// <summary>
-        ///The URN of the item to check. Use the 
-///[Get an Item](/en/docs/data/v2/reference/http/projects-project_id-items-item_id-GET/) 
-///operation to verify the URN.
+        ///A unique ID assigned to the process executing the command.
         /// </summary>
         /// <value>
-        ///The URN of the item to check. Use the 
-///[Get an Item](/en/docs/data/v2/reference/http/projects-project_id-items-item_id-GET/) 
-///operation to verify the URN.
+        ///A unique ID assigned to the process executing the command.
         /// </value>
         [DataMember(Name="id", EmitDefaultValue=false)]
         public string Id { get; set; }
+
+        /// <summary>
+        ///Gets or Sets Attributes
+        /// </summary>
+        [DataMember(Name="attributes", EmitDefaultValue=false)]
+        public PublishModelJobPayloadAttributes Attributes { get; set; }
+
+        /// <summary>
+        ///Gets or Sets Relationships
+        /// </summary>
+        [DataMember(Name="relationships", EmitDefaultValue=false)]
+        public PublishModelJobPayloadRelationships Relationships { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

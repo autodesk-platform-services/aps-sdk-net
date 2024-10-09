@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Data Management
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -36,7 +37,7 @@ namespace Autodesk.DataManagement.Model
     /// An object that contains the input data required to execute the ListItems command.  The ListItems command retrieves metadata for up to 50 specified items. For example, an item name, or the date it was created. It also returns the tip (latest) version of the items.
     /// </summary>
     [DataContract]
-    public partial class ListItemsPayload : CommandPayloadData
+    public partial class ListItemsPayload : ICommandPayloadData
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ListItemsPayload" /> class.
@@ -49,7 +50,7 @@ namespace Autodesk.DataManagement.Model
         ///Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=true)]
-        public Type Type { get; set; }
+        public TypeCommands Type { get; set; }
 
         /// <summary>
         ///Gets or Sets Attributes

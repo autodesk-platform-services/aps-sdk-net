@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Data Management
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,44 +34,28 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// An object that represents an item.
+    /// Contains the list of items to check.
     /// </summary>
     [DataContract]
-    public partial class ItemObject 
+    public partial class PublishModelJobPayloadRelationshipsResources 
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ItemObject" /> class.
+        /// Initializes a new instance of the <see cref="PublishModelJobPayloadRelationshipsResources" /> class.
         /// </summary>
-        public ItemObject()
+        public PublishModelJobPayloadRelationshipsResources()
         {
         }
         
         /// <summary>
-        ///Gets or Sets Jsonapi
-        /// </summary>
-        [DataMember(Name="jsonapi", EmitDefaultValue=false)]
-        public JsonApiVersion Jsonapi { get; set; }
-
-        /// <summary>
-        ///Gets or Sets Links
-        /// </summary>
-        [DataMember(Name="links", EmitDefaultValue=false)]
-        public JsonApiLinksSelf Links { get; set; }
-
-        /// <summary>
-        ///Gets or Sets Data
-        /// </summary>
-        [DataMember(Name="data", EmitDefaultValue=false)]
-        public ItemData Data { get; set; }
-
-        /// <summary>
-        ///An object containing information about the tip version of this item.
+        ///An array of objects, where each object 
+///represents an item to check. 
         /// </summary>
         /// <value>
-        ///An object containing information about the tip version of this item.
+        ///An array of objects, where each object 
+///represents an item to check. 
         /// </value>
-        [DataMember(Name="included", EmitDefaultValue=false)]
-        public List<VersionData> Included { get; set; }
+        [DataMember(Name="data", EmitDefaultValue=false)]
+        public List<PublishModelJobPayloadRelationshipsResourcesData> Data { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Data Management
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -36,7 +37,7 @@ namespace Autodesk.DataManagement.Model
     /// An object that contains the input data to execute the PublishWithoutLinks command.  The PublishWithoutLinks command publishes the latest version of a Collaboration for Revit (C4R) model without the links it contains to BIM 360 Docs. See the [Developer&#39;s Guide topic on the PublishWithoutLinks command](/en/docs/data/v2/developers_guide/commands/publishwithoutlinks/) for more information. 
     /// </summary>
     [DataContract]
-    public partial class PublishWithoutLinksPayload : CommandPayloadData
+    public partial class PublishWithoutLinksPayload : ICommandPayloadData
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="PublishWithoutLinksPayload" /> class.
@@ -49,7 +50,7 @@ namespace Autodesk.DataManagement.Model
         ///Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=true)]
-        public Type Type { get; set; }
+        public TypeCommands Type { get; set; }
 
         /// <summary>
         ///Gets or Sets Attributes

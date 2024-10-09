@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Data Management
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -46,16 +47,30 @@ namespace Autodesk.DataManagement.Model
         }
         
         /// <summary>
-        ///Gets or Sets Type
+        ///The type of the extension.
+///
+///For BIM 360 Docs files, use `items:autodesk.bim360:File`.
+///
+///For all other services, use `items:autodesk.core:File`.
         /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=true)]
-        public Type Type { get; set; }
+        /// <value>
+        ///The type of the extension.
+///
+///For BIM 360 Docs files, use `items:autodesk.bim360:File`.
+///
+///For all other services, use `items:autodesk.core:File`.
+        /// </value>
+        [DataMember(Name="type", EmitDefaultValue=false)]
+        public string Type { get; set; }
 
         /// <summary>
-        ///Gets or Sets VarVersion
+        ///The version of the schema that applies to the `extension.data` object.
         /// </summary>
-        [DataMember(Name="version", EmitDefaultValue=true)]
-        public VersionNumber VarVersion { get; set; }
+        /// <value>
+        ///The version of the schema that applies to the `extension.data` object.
+        /// </value>
+        [DataMember(Name="version", EmitDefaultValue=false)]
+        public string VarVersion { get; set; }
 
         /// <summary>
         ///The container of additional properties.

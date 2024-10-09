@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Data Management
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -55,7 +56,7 @@ namespace Autodesk.DataManagement.Model
         ///Gets or Sets Links
         /// </summary>
         [DataMember(Name="links", EmitDefaultValue=false)]
-        public RelationshipRefsLinks Links { get; set; }
+        public IRelationshipRefsLinks Links { get; set; }
 
         /// <summary>
         ///An array of objects where each object represents the data of a folder, item, or resource.
@@ -73,7 +74,7 @@ namespace Autodesk.DataManagement.Model
         ///An array of objects, where each object represents a folder, item, or version included within this resource.
         /// </value>
         [DataMember(Name="included", EmitDefaultValue=false)]
-        public List<RelationshipRefsIncluded> Included { get; set; }
+        public List<IRelationshipRefsIncluded> Included { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

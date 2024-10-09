@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Data Management
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using Autodesk.Forge.Core;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
@@ -31,6 +32,7 @@ using Autodesk.DataManagement.Client;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Autodesk.SDKManager;
+using System.Collections;
 
 namespace Autodesk.DataManagement.Http
 {
@@ -86,7 +88,7 @@ namespace Autodesk.DataManagement.Http
          /// </param>
         /// <returns>Task of ApiResponse&lt;Hubs&gt;</returns>
         
-        System.Threading.Tasks.Task<ApiResponse<Hubs>> GetHubsAsync (string xUserId= default(string), List<string> filterId= default(List<string>), string filterName= default(string), List<string> filterExtensionType= default(List<string>),  string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<ApiResponse<Hubs>> GetHubsAsync (string xUserId= default(string), List<string> filterId= default(List<string>), List<string> filterName= default(List<string>), List<string> filterExtensionType= default(List<string>),  string accessToken = null, bool throwOnError = true);
     }
 
     /// <summary>
@@ -109,27 +111,49 @@ namespace Autodesk.DataManagement.Http
         }
         private void SetQueryParameter(string name, object value, Dictionary<string, object> dictionary)
         {
-            if(value is Enum)
+            if (value is Enum)
             {
                 var type = value.GetType();
                 var memberInfos = type.GetMember(value.ToString());
                 var enumValueMemberInfo = memberInfos.FirstOrDefault(m => m.DeclaringType == type);
                 var valueAttributes = enumValueMemberInfo.GetCustomAttributes(typeof(EnumMemberAttribute), false);
-                if(valueAttributes.Length > 0)
+                if (valueAttributes.Length > 0)
                 {
                     dictionary.Add(name, ((EnumMemberAttribute)valueAttributes[0]).Value);
                 }
             }
-            else if(value is int)
+            else if (value is int)
             {
-                if((int)value > 0)
+                if ((int)value > 0)
                 {
                     dictionary.Add(name, value);
                 }
             }
+            else if (value is IList)
+            {
+                if (value is List<string>)
+                {
+                    value = String.Join(",", (List<string>)value);
+                    dictionary.Add(name, value);
+                }
+                else
+                {
+                    List<string> newlist = new List<string>();
+                    foreach (var x in (IList)value)
+                    {
+                        var type = x.GetType();
+                        var memberInfos = type.GetMember(x.ToString());
+                        var enumValueMemberInfo = memberInfos.FirstOrDefault(m => m.DeclaringType == type);
+                        var valueAttributes = enumValueMemberInfo.GetCustomAttributes(typeof(EnumMemberAttribute), false);
+                        newlist.Add(((EnumMemberAttribute)valueAttributes[0]).Value);
+                    }
+                    string joinedString = String.Join(",", newlist);
+                    dictionary.Add(name, joinedString);
+                }
+            }
             else
             {
-                if(value != null)
+                if (value != null)
                 {
                     dictionary.Add(name, value);
                 }
@@ -201,7 +225,7 @@ namespace Autodesk.DataManagement.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.0");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.3");
                 if(!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
@@ -282,14 +306,14 @@ namespace Autodesk.DataManagement.Http
          /// </param>
         /// <returns>Task of ApiResponse&lt;Hubs&gt;></returns>
         
-        public async System.Threading.Tasks.Task<ApiResponse<Hubs>> GetHubsAsync (string xUserId= default(string),List<string> filterId= default(List<string>),string filterName= default(string),List<string> filterExtensionType= default(List<string>), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ApiResponse<Hubs>> GetHubsAsync (string xUserId= default(string),List<string> filterId= default(List<string>),List<string> filterName= default(List<string>),List<string> filterExtensionType= default(List<string>), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into GetHubsAsync ");
             using (var request = new HttpRequestMessage())
             {
                 var queryParam = new Dictionary<string, object>();
                 SetQueryParameter("filter[id]", filterId, queryParam);
-                SetQueryParameter("filter_name", filterName, queryParam);
+                SetQueryParameter("filter[name]", filterName, queryParam);
                 SetQueryParameter("filter[extension.type]", filterExtensionType, queryParam);
                 request.RequestUri =
                     Marshalling.BuildRequestUri("/project/v1/hubs",
@@ -299,7 +323,7 @@ namespace Autodesk.DataManagement.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.0");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.3");
                 if(!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");

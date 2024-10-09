@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Data Management
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using Autodesk.Forge.Core;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
@@ -31,6 +32,7 @@ using Autodesk.DataManagement.Client;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Autodesk.SDKManager;
+using System.Collections;
 
 namespace Autodesk.DataManagement.Http
 {
@@ -39,6 +41,29 @@ namespace Autodesk.DataManagement.Http
     /// </summary>
     public interface IProjectsApi
     {
+        /// <summary>
+        /// Create Download
+        /// </summary>
+        /// <remarks>
+        ///Kicks off a job to generate the specified download format of the version. Once the job completes, the specified format becomes available for download. 
+        /// </remarks>
+        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+         /// <param name="projectId">
+         ///The unique identifier of a project. 
+///
+///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
+///
+///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
+         /// </param>
+         /// <param name="xUserId">
+         ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
+         /// </param>
+         /// <param name="downloadPayload">
+         /// (optional)
+         /// </param>
+        /// <returns>Task of ApiResponse&lt;CreatedDownload&gt;</returns>
+        
+        System.Threading.Tasks.Task<ApiResponse<CreatedDownload>> CreateDownloadAsync (string projectId, string xUserId= default(string), DownloadPayload downloadPayload= default(DownloadPayload),  string accessToken = null, bool throwOnError = true);
         /// <summary>
         /// Create a Storage Location in OSS
         /// </summary>
@@ -241,29 +266,6 @@ namespace Autodesk.DataManagement.Http
         /// <returns>Task of ApiResponse&lt;TopFolders&gt;</returns>
         
         System.Threading.Tasks.Task<ApiResponse<TopFolders>> GetProjectTopFoldersAsync (string hubId, string projectId, string xUserId= default(string), bool excludeDeleted= default(bool), bool projectFilesOnly= default(bool),  string accessToken = null, bool throwOnError = true);
-        /// <summary>
-        /// Create Download
-        /// </summary>
-        /// <remarks>
-        ///Kicks off a job to generate the specified download format of the version. Once the job completes, the specified format becomes available for download. 
-        /// </remarks>
-        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-         /// <param name="projectId">
-         ///The unique identifier of a project. 
-///
-///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
-///
-///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
-         /// </param>
-         /// <param name="xUserId">
-         ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
-         /// </param>
-         /// <param name="downloadPayload">
-         /// (optional)
-         /// </param>
-        /// <returns>Task of ApiResponse&lt;CreatedDownload&gt;</returns>
-        
-        System.Threading.Tasks.Task<ApiResponse<CreatedDownload>> StartDownloadAsync (string projectId, string xUserId= default(string), DownloadPayload downloadPayload= default(DownloadPayload),  string accessToken = null, bool throwOnError = true);
     }
 
     /// <summary>
@@ -286,27 +288,49 @@ namespace Autodesk.DataManagement.Http
         }
         private void SetQueryParameter(string name, object value, Dictionary<string, object> dictionary)
         {
-            if(value is Enum)
+            if (value is Enum)
             {
                 var type = value.GetType();
                 var memberInfos = type.GetMember(value.ToString());
                 var enumValueMemberInfo = memberInfos.FirstOrDefault(m => m.DeclaringType == type);
                 var valueAttributes = enumValueMemberInfo.GetCustomAttributes(typeof(EnumMemberAttribute), false);
-                if(valueAttributes.Length > 0)
+                if (valueAttributes.Length > 0)
                 {
                     dictionary.Add(name, ((EnumMemberAttribute)valueAttributes[0]).Value);
                 }
             }
-            else if(value is int)
+            else if (value is int)
             {
-                if((int)value > 0)
+                if ((int)value > 0)
                 {
                     dictionary.Add(name, value);
                 }
             }
+            else if (value is IList)
+            {
+                if (value is List<string>)
+                {
+                    value = String.Join(",", (List<string>)value);
+                    dictionary.Add(name, value);
+                }
+                else
+                {
+                    List<string> newlist = new List<string>();
+                    foreach (var x in (IList)value)
+                    {
+                        var type = x.GetType();
+                        var memberInfos = type.GetMember(x.ToString());
+                        var enumValueMemberInfo = memberInfos.FirstOrDefault(m => m.DeclaringType == type);
+                        var valueAttributes = enumValueMemberInfo.GetCustomAttributes(typeof(EnumMemberAttribute), false);
+                        newlist.Add(((EnumMemberAttribute)valueAttributes[0]).Value);
+                    }
+                    string joinedString = String.Join(",", newlist);
+                    dictionary.Add(name, joinedString);
+                }
+            }
             else
             {
-                if(value != null)
+                if (value != null)
                 {
                     dictionary.Add(name, value);
                 }
@@ -344,6 +368,98 @@ namespace Autodesk.DataManagement.Http
         /// <value>An instance of the ForgeService</value>
         public ForgeService Service {get; set;}
 
+        /// <summary>
+        /// Create Download
+        /// </summary>
+        /// <remarks>
+        ///Kicks off a job to generate the specified download format of the version. Once the job completes, the specified format becomes available for download. 
+        /// </remarks>
+        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+         /// <param name="projectId">
+         ///The unique identifier of a project. 
+///
+///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
+///
+///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
+         /// </param>
+         /// <param name="xUserId">
+         ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
+         /// </param>
+         /// <param name="downloadPayload">
+         /// (optional)
+         /// </param>
+        /// <returns>Task of ApiResponse&lt;CreatedDownload&gt;></returns>
+        
+        public async System.Threading.Tasks.Task<ApiResponse<CreatedDownload>> CreateDownloadAsync (string projectId,string xUserId= default(string),DownloadPayload downloadPayload= default(DownloadPayload), string accessToken = null, bool throwOnError = true)
+        {
+            logger.LogInformation("Entered into CreateDownloadAsync ");
+            using (var request = new HttpRequestMessage())
+            {
+                var queryParam = new Dictionary<string, object>();
+                request.RequestUri =
+                    Marshalling.BuildRequestUri("/data/v1/projects/{project_id}/downloads",
+                        routeParameters: new Dictionary<string, object> {
+                            { "project_id", projectId},
+                        },
+                        queryParameters: queryParam
+                    );
+
+                request.Headers.TryAddWithoutValidation("Accept", "application/json");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.3");
+                if(!string.IsNullOrEmpty(accessToken))
+                {
+                    request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
+                }
+
+                request.Content = Marshalling.Serialize(downloadPayload); // http body (model) parameter
+
+
+                SetHeader("x-user-id", xUserId, request);
+
+                // tell the underlying pipeline what scope we'd like to use
+                // if (scopes == null)
+                // {
+                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:create ");
+                // }
+                // else
+                // {
+                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // }
+                // if (scopes == null)
+                // {
+                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:create ");
+                // }
+                // else
+                // {
+                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // }
+
+                request.Method = new HttpMethod("POST");
+
+                // make the HTTP request
+                var response = await this.Service.Client.SendAsync(request);
+
+                if (throwOnError)
+                {
+                    try
+                    {
+                      await response.EnsureSuccessStatusCodeAsync();
+                    } catch (HttpRequestException ex) {
+                      throw new DataManagementApiException(ex.Message, response, ex);
+                    }
+                }
+                else if (!response.IsSuccessStatusCode)
+                {
+                    logger.LogError($"response unsuccess with status code: {response.StatusCode}");
+                    return new ApiResponse<CreatedDownload>(response, default(CreatedDownload));
+                }
+                logger.LogInformation($"Exited from CreateDownloadAsync with response statusCode: {response.StatusCode}");
+                return new ApiResponse<CreatedDownload>(response, await LocalMarshalling.DeserializeAsync<CreatedDownload>(response.Content));
+
+            } // using
+        }
         /// <summary>
         /// Create a Storage Location in OSS
         /// </summary>
@@ -383,7 +499,7 @@ namespace Autodesk.DataManagement.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.0");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.3");
                 if(!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
@@ -476,7 +592,7 @@ namespace Autodesk.DataManagement.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.0");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.3");
                 if(!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
@@ -570,7 +686,7 @@ namespace Autodesk.DataManagement.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.0");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.3");
                 if(!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
@@ -676,7 +792,7 @@ namespace Autodesk.DataManagement.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.0");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.3");
                 if(!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
@@ -774,7 +890,7 @@ namespace Autodesk.DataManagement.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.0");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.3");
                 if(!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
@@ -868,7 +984,7 @@ namespace Autodesk.DataManagement.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.0");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.3");
                 if(!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
@@ -980,7 +1096,7 @@ namespace Autodesk.DataManagement.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.0");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.3");
                 if(!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
@@ -1031,98 +1147,6 @@ namespace Autodesk.DataManagement.Http
                 }
                 logger.LogInformation($"Exited from GetProjectTopFoldersAsync with response statusCode: {response.StatusCode}");
                 return new ApiResponse<TopFolders>(response, await LocalMarshalling.DeserializeAsync<TopFolders>(response.Content));
-
-            } // using
-        }
-        /// <summary>
-        /// Create Download
-        /// </summary>
-        /// <remarks>
-        ///Kicks off a job to generate the specified download format of the version. Once the job completes, the specified format becomes available for download. 
-        /// </remarks>
-        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-         /// <param name="projectId">
-         ///The unique identifier of a project. 
-///
-///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
-///
-///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
-         /// </param>
-         /// <param name="xUserId">
-         ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
-         /// </param>
-         /// <param name="downloadPayload">
-         /// (optional)
-         /// </param>
-        /// <returns>Task of ApiResponse&lt;CreatedDownload&gt;></returns>
-        
-        public async System.Threading.Tasks.Task<ApiResponse<CreatedDownload>> StartDownloadAsync (string projectId,string xUserId= default(string),DownloadPayload downloadPayload= default(DownloadPayload), string accessToken = null, bool throwOnError = true)
-        {
-            logger.LogInformation("Entered into StartDownloadAsync ");
-            using (var request = new HttpRequestMessage())
-            {
-                var queryParam = new Dictionary<string, object>();
-                request.RequestUri =
-                    Marshalling.BuildRequestUri("/data/v1/projects/{project_id}/downloads",
-                        routeParameters: new Dictionary<string, object> {
-                            { "project_id", projectId},
-                        },
-                        queryParameters: queryParam
-                    );
-
-                request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.0");
-                if(!string.IsNullOrEmpty(accessToken))
-                {
-                    request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
-                }
-
-                request.Content = Marshalling.Serialize(downloadPayload); // http body (model) parameter
-
-
-                SetHeader("x-user-id", xUserId, request);
-
-                // tell the underlying pipeline what scope we'd like to use
-                // if (scopes == null)
-                // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:create ");
-                // }
-                // else
-                // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
-                // }
-                // if (scopes == null)
-                // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:create ");
-                // }
-                // else
-                // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
-                // }
-
-                request.Method = new HttpMethod("POST");
-
-                // make the HTTP request
-                var response = await this.Service.Client.SendAsync(request);
-
-                if (throwOnError)
-                {
-                    try
-                    {
-                      await response.EnsureSuccessStatusCodeAsync();
-                    } catch (HttpRequestException ex) {
-                      throw new DataManagementApiException(ex.Message, response, ex);
-                    }
-                }
-                else if (!response.IsSuccessStatusCode)
-                {
-                    logger.LogError($"response unsuccess with status code: {response.StatusCode}");
-                    return new ApiResponse<CreatedDownload>(response, default(CreatedDownload));
-                }
-                logger.LogInformation($"Exited from StartDownloadAsync with response statusCode: {response.StatusCode}");
-                return new ApiResponse<CreatedDownload>(response, await LocalMarshalling.DeserializeAsync<CreatedDownload>(response.Content));
 
             } // using
         }

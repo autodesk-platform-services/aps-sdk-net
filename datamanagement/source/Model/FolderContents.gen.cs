@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Data Management
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -36,7 +37,7 @@ namespace Autodesk.DataManagement.Model
     /// Successful retrieval of the folder contents collection associated with a specific folder.
     /// </summary>
     [DataContract]
-    public partial class FolderContents
+    public partial class FolderContents 
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="FolderContents" /> class.
@@ -44,17 +45,17 @@ namespace Autodesk.DataManagement.Model
         public FolderContents()
         {
         }
-
+        
         /// <summary>
         ///Gets or Sets Jsonapi
         /// </summary>
-        [DataMember(Name = "jsonapi", EmitDefaultValue = false)]
+        [DataMember(Name="jsonapi", EmitDefaultValue=false)]
         public JsonApiVersion Jsonapi { get; set; }
 
         /// <summary>
         ///Gets or Sets Links
         /// </summary>
-        [DataMember(Name = "links", EmitDefaultValue = false)]
+        [DataMember(Name="links", EmitDefaultValue=false)]
         public FolderContentsLinks Links { get; set; }
 
         /// <summary>
@@ -63,8 +64,8 @@ namespace Autodesk.DataManagement.Model
         /// <value>
         ///The properties of an item or folder, as the case may be.
         /// </value>
-        [DataMember(Name = "data", EmitDefaultValue = false)]
-        public List<FolderContentsData> Data { get; set; }
+        [DataMember(Name="data", EmitDefaultValue=false)]
+        public List<IFolderContentsData> Data { get; set; }
 
         /// <summary>
         ///An array of objects, where each element represents a resource included within this resource.
@@ -72,7 +73,7 @@ namespace Autodesk.DataManagement.Model
         /// <value>
         ///An array of objects, where each element represents a resource included within this resource.
         /// </value>
-        [DataMember(Name = "included", EmitDefaultValue = false)]
+        [DataMember(Name="included", EmitDefaultValue=false)]
         public List<VersionData> Included { get; set; }
 
         /// <summary>

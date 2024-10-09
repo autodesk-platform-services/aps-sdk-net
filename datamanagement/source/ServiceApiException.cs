@@ -1,9 +1,9 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
- * Data Management API
+ * Data Management
  *
  * The Data Management API provides a unified and consistent way to access data across BIM 360 Team, Fusion Team (formerly known as A360 Team), BIM 360 Docs, A360 Personal, and the Object Storage Service.  With this API, you can accomplish a number of workflows, including accessing a Fusion model in Fusion Team and getting an ordered structure of items, IDs, and properties for generating a bill of materials in a 3rd-party process. Or, you might want to superimpose a Fusion model and a building model to use in the Viewer.
  *
@@ -19,25 +19,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Net.Http;
 
 namespace Autodesk.DataManagement
 {
+  /// <summary>
+  /// An object that is returned when an API call fails.
+  /// </summary>
   public abstract class ServiceApiException : HttpRequestException
   {
-    public HttpResponseMessage HttpResponseMessage {get; set;}
+    public HttpResponseMessage HttpResponseMessage { get; set; }
 
-    public ServiceApiException(string message) : base(message) {}
+    public ServiceApiException(string message) : base(message) { }
     public ServiceApiException(string message, HttpResponseMessage httpResponseMessage, Exception exception) : base(message, exception)
     {
       this.HttpResponseMessage = httpResponseMessage;
     }
   }
 
+  /// <summary>
+  /// An object that is returned when an API call to the Data Management service fails.
+  /// </summary>
   public class DataManagementApiException : ServiceApiException
   {
-    public DataManagementApiException(string message) : base(message) {}
-    public DataManagementApiException(string message, HttpResponseMessage httpResponseMessage, Exception exception) : base(message, httpResponseMessage, exception) {}
+    public DataManagementApiException(string message) : base(message) { }
+    public DataManagementApiException(string message, HttpResponseMessage httpResponseMessage, Exception exception) : base(message, httpResponseMessage, exception) { }
   }
 }

@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Data Management
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,32 +34,20 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// GetHubs401Response
+    /// The type of this resource. Possible values are `jobs`.
     /// </summary>
-    [DataContract]
-    public partial class GetHubs401Response 
+    ///<value>The type of this resource. Possible values are `jobs`.</value>
+    
+    [JsonConverter(typeof(StringEnumConverter))]
+    
+    public enum TypeJob
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="GetHubs401Response" /> class.
-        /// </summary>
-        public GetHubs401Response()
-        {
-        }
         
         /// <summary>
-        ///Gets or Sets Id
+        /// Enum Downloads for value: downloads
         /// </summary>
-        [DataMember(Name="id", EmitDefaultValue=false)]
-        public string Id { get; set; }
-
-        /// <summary>
-        /// Returns the string presentation of the object
-        /// </summary>
-        /// <returns>String presentation of the object</returns>
-        public override string ToString()
-        {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
-        }
+        [EnumMember(Value = "downloads")]
+        Downloads
     }
 
 }

@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Data Management
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,20 +34,20 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// Version Number
+    /// The type of this resource. Possible values are `downloads`.
     /// </summary>
-    ///<value>Version Number</value>
+    ///<value>The type of this resource. Possible values are `downloads`.</value>
     
     [JsonConverter(typeof(StringEnumConverter))]
     
-    public enum VersionNumber
+    public enum TypeDownloads
     {
         
         /// <summary>
-        /// Enum _10 for value: 1.0
+        /// Enum Downloads for value: downloads
         /// </summary>
-        [EnumMember(Value = "1.0")]
-        _10
+        [EnumMember(Value = "downloads")]
+        Downloads
     }
 
 }
