@@ -65,6 +65,7 @@ namespace Autodesk.DataManagement.Model
         ///The properties of an item or folder, as the case may be.
         /// </value>
         [DataMember(Name="data", EmitDefaultValue=false)]
+        [JsonConverter(typeof(FolderContentsDataConverter))]
         public List<IFolderContentsData> Data { get; set; }
 
         /// <summary>

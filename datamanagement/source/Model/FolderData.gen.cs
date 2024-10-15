@@ -37,7 +37,7 @@ namespace Autodesk.DataManagement.Model
     /// A container of data describing a folder.
     /// </summary>
     [DataContract]
-    public partial class FolderData : IFolderContentsData, IFolderRefsData, IRefsData, IRelationshipRefsIncluded
+    public partial class FolderData : IFolderContentsData
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="FolderData" /> class.

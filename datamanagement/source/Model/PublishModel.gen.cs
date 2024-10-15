@@ -37,7 +37,7 @@ namespace Autodesk.DataManagement.Model
     /// The &#x60;&#x60;data&#x60;&#x60; object returned by the PublishModel command.
     /// </summary>
     [DataContract]
-    public partial class PublishModel : ICommandData
+    public partial class PublishModel 
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="PublishModel" /> class.

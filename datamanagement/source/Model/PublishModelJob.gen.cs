@@ -37,7 +37,7 @@ namespace Autodesk.DataManagement.Model
     /// The &#x60;&#x60;data&#x60;&#x60; object returned by the GetPublishModelJob command, if the model needs publishing. If the model is already published, the &#x60;&#x60;data&#x60;&#x60; object will bed &#x60;&#x60;null&#x60;&#x60;. 
     /// </summary>
     [DataContract]
-    public partial class PublishModelJob : ICommandData
+    public partial class PublishModelJob 
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="PublishModelJob" /> class.

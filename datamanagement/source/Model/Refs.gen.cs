@@ -65,7 +65,7 @@ namespace Autodesk.DataManagement.Model
         ///An array of objects, where each object represents a referenced resource (folder, item, or version).
         /// </value>
         [DataMember(Name="data", EmitDefaultValue=false)]
-        public List<IRefsData> Data { get; set; }
+        public List<RefsData> Data { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

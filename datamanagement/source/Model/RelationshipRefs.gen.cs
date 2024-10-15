@@ -56,7 +56,7 @@ namespace Autodesk.DataManagement.Model
         ///Gets or Sets Links
         /// </summary>
         [DataMember(Name="links", EmitDefaultValue=false)]
-        public IRelationshipRefsLinks Links { get; set; }
+        public RelationshipRefsLinks Links { get; set; }
 
         /// <summary>
         ///An array of objects where each object represents the data of a folder, item, or resource.
@@ -74,7 +74,7 @@ namespace Autodesk.DataManagement.Model
         ///An array of objects, where each object represents a folder, item, or version included within this resource.
         /// </value>
         [DataMember(Name="included", EmitDefaultValue=false)]
-        public List<IRelationshipRefsIncluded> Included { get; set; }
+        public List<RelationshipRefsIncluded> Included { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

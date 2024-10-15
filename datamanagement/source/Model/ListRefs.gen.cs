@@ -37,7 +37,7 @@ namespace Autodesk.DataManagement.Model
     /// The &#x60;&#x60;data&#x60;&#x60; object returned by the ListRefs command.
     /// </summary>
     [DataContract]
-    public partial class ListRefs : ICommandData
+    public partial class ListRefs 
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ListRefs" /> class.
@@ -82,7 +82,7 @@ namespace Autodesk.DataManagement.Model
 ///represents a referenced resource.
         /// </value>
         [DataMember(Name="included", EmitDefaultValue=false)]
-        public List<IListRefsIncluded> Included { get; set; }
+        public List<ListRefsIncluded> Included { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

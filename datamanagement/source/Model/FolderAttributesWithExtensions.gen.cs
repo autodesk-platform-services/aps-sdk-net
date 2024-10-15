@@ -146,10 +146,10 @@ namespace Autodesk.DataManagement.Model
         public bool Hidden { get; set; }
 
         /// <summary>
-        ///Gets or Sets Extensions
+        ///Gets or Sets Extension
         /// </summary>
-        [DataMember(Name="extensions", EmitDefaultValue=false)]
-        public FolderExtensionWithSchemaLink Extensions { get; set; }
+        [DataMember(Name="extension", EmitDefaultValue=false)]
+        public FolderExtensionWithSchemaLink Extension { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

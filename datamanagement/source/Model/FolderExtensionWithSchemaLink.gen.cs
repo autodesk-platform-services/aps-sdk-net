@@ -71,10 +71,13 @@ namespace Autodesk.DataManagement.Model
         public JsonApiLink Schema { get; set; }
 
         /// <summary>
-        ///Gets or Sets Data
+        ///The object that contains the additional properties, which makes this resource extensible.
         /// </summary>
+        /// <value>
+        ///The object that contains the additional properties, which makes this resource extensible.
+        /// </value>
         [DataMember(Name="data", EmitDefaultValue=false)]
-        public FolderExtensionWithSchemaLinkData Data { get; set; }
+        public Dictionary<string, Object> Data { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

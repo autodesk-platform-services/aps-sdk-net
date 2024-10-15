@@ -1,12 +1,17 @@
 using Autodesk.DataManagement.Http;
 using Autodesk.DataManagement.Model;
+using Autodesk.DataManagement.Client;
 using System.Net.Http;
 using System.Collections.Generic;
 using System.Linq;
 using System;
-using System.Threading.Tasks;
+using System.Threading;
 using Autodesk.SDKManager;
 using Newtonsoft.Json;
+using System.Text;
+using Newtonsoft.Json.Linq;
+
+
 
 namespace Autodesk.DataManagement
 {
@@ -578,7 +583,6 @@ namespace Autodesk.DataManagement
             }
             var response = await this.FoldersApi.GetFolderContentsAsync(projectId, folderId, xUserId, filterType, filterId, filterExtensionType, filterLastModifiedTimeRollup, pageNumber, pageLimit, includeHidden, accessToken, throwOnError);
             return response.Content;
-
         }
         /// <summary>
         /// nt folder (if it exists)
@@ -1837,9 +1841,7 @@ namespace Autodesk.DataManagement
                 Data = checkPermissionPayload
             };
             var response = await this.CommandsApi.ExecuteCommandAsync(projectId, xUserId, commandPayload, accessToken, throwOnError);
-            var commandResponse = response.Content as Command;
-            var checkPermission = commandResponse.Data as CheckPermission;
-            return checkPermission;
+            return JsonConvert.DeserializeObject<CheckPermission>(response.Content.Data.ToString());
         }
 
         /// <summary>

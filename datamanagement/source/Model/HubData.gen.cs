@@ -68,12 +68,6 @@ namespace Autodesk.DataManagement.Model
         public HubDataAttributes Attributes { get; set; }
 
         /// <summary>
-        ///Gets or Sets Region
-        /// </summary>
-        [DataMember(Name="region", EmitDefaultValue=true)]
-        public Region Region { get; set; }
-
-        /// <summary>
         ///Gets or Sets Relationships
         /// </summary>
         [DataMember(Name="relationships", EmitDefaultValue=false)]

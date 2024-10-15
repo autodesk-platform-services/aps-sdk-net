@@ -47,10 +47,13 @@ namespace Autodesk.DataManagement.Model
         }
         
         /// <summary>
-        ///Gets or Sets Type
+        ///The type of the resource. Will always be `versions`.
         /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=true)]
-        public TypeVersion Type { get; set; }
+        /// <value>
+        ///The type of the resource. Will always be `versions`.
+        /// </value>
+        [DataMember(Name="type", EmitDefaultValue=false)]
+        public string Type { get; set; }
 
         /// <summary>
         ///The version number. Will always be `1`.

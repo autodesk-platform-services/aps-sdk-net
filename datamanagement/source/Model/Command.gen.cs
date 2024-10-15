@@ -56,7 +56,7 @@ namespace Autodesk.DataManagement.Model
         ///Gets or Sets Data
         /// </summary>
         [DataMember(Name="data", EmitDefaultValue=false)]
-        public ICommandData Data { get; set; }
+        public Object Data { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

@@ -37,7 +37,7 @@ namespace Autodesk.DataManagement.Model
     /// The &#x60;&#x60;data&#x60;&#x60; object returned by the PublishWithoutLinks command.
     /// </summary>
     [DataContract]
-    public partial class PublishWithoutLinks : ICommandData
+    public partial class PublishWithoutLinks 
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="PublishWithoutLinks" /> class.

@@ -62,6 +62,12 @@ namespace Autodesk.DataManagement.Model
         public BaseAttributesExtensionObjectWithSchemaLink Extension { get; set; }
 
         /// <summary>
+        ///Gets or Sets Region
+        /// </summary>
+        [DataMember(Name="region", EmitDefaultValue=true)]
+        public Region Region { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>

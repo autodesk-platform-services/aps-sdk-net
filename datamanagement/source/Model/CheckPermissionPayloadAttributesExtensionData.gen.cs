@@ -81,7 +81,7 @@ namespace Autodesk.DataManagement.Model
 ///- `share`- Share the specified resource.
         /// </value>
         [DataMember(Name="requiredActions", EmitDefaultValue=false)]
-        public List<RequiredActions> RequiredActions { get; set; }
+        public List<string> RequiredActions { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

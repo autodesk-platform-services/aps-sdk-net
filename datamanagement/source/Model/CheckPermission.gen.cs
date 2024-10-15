@@ -37,7 +37,7 @@ namespace Autodesk.DataManagement.Model
     /// The &#x60;&#x60;data&#x60;&#x60; object returned by the CheckPermission command.
     /// </summary>
     [DataContract]
-    public partial class CheckPermission : ICommandData
+    public partial class CheckPermission 
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="CheckPermission" /> class.

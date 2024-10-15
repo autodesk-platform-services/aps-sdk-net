@@ -37,7 +37,7 @@ namespace Autodesk.DataManagement.Model
     /// The &#x60;&#x60;data&#x60;&#x60; object returned by the ListItems command.
     /// </summary>
     [DataContract]
-    public partial class ListItems : ICommandData
+    public partial class ListItems 
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ListItems" /> class.

@@ -24,11 +24,15 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     
     <!-- Local package reference -->
-    <PackageReference Include="Autodesk.SDKManager" Version="1.1.0-beta1" />
+    <!-- <PackageReference Include="Autodesk.SDKManager" Version="1.1.0-beta1" /> -->
     
     <!-- Include License and Readme in the package -->
     <None Include="../../LICENSE.txt" Pack="true" PackagePath=""/>
     <None Include="../../README.md" Pack="true" PackagePath=""/>
   </ItemGroup>
+
+  <!-- <PropertyGroup>
+    <RestoreSources>$(RestoreSources);c:\Users\gitundh\Downloads\</RestoreSources>
+  </PropertyGroup> -->
 
 </Project>

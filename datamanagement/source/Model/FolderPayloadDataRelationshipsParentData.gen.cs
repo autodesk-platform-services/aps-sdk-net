@@ -47,10 +47,13 @@ namespace Autodesk.DataManagement.Model
         }
         
         /// <summary>
-        ///Gets or Sets Type
+        ///The type of the resource. Must be `folders`.
         /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=true)]
-        public TypeFolder Type { get; set; }
+        /// <value>
+        ///The type of the resource. Must be `folders`.
+        /// </value>
+        [DataMember(Name="type", EmitDefaultValue=false)]
+        public string Type { get; set; }
 
         /// <summary>
         ///The URN of the parent folder. For information on how to find the URN, see the initial steps of the [Download a File](/en/docs/data/v2/tutorials/download-file/) tutorial.

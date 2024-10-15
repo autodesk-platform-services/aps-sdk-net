@@ -37,7 +37,7 @@ namespace Autodesk.DataManagement.Model
     /// A container of data describing an item.
     /// </summary>
     [DataContract]
-    public partial class ItemData : IFolderContentsData, IFolderRefsData, IRefsData, IRelationshipRefsIncluded, IListRefsIncluded
+    public partial class ItemData : IFolderContentsData
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ItemData" /> class.

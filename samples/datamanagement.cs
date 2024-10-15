@@ -5,7 +5,7 @@ using Autodesk.SDKManager;
 
 class DataManagement
 {
-    string? token = Environment.GetEnvironmentVariable("token") ?? "";
+    string? token = Environment.GetEnvironmentVariable("token") ?? "eyJhbGciOiJSUzI1NiIsImtpZCI6IlhrUFpfSmhoXzlTYzNZS01oRERBZFBWeFowOF9SUzI1NiIsInBpLmF0bSI6ImFzc2MifQ.eyJzY29wZSI6WyJkYXRhOnJlYWQiLCJkYXRhOndyaXRlIiwiZGF0YTpjcmVhdGUiLCJkYXRhOnNlYXJjaCJdLCJjbGllbnRfaWQiOiJlV3JEdHVOeFZ1R2x5bXdsNFV3YmViUlRsdW5td084ZyIsImlzcyI6Imh0dHBzOi8vZGV2ZWxvcGVyLmFwaS5hdXRvZGVzay5jb20iLCJhdWQiOiJodHRwczovL2F1dG9kZXNrLmNvbSIsImp0aSI6IlV4ZlR3eWFFdUp5R0ljQmp1bEhNWnBaOWxmd21TbG0zWDVJQWw1eENIWjU2SHNLdjlwcE9CR1RWTXNpV05odlEiLCJleHAiOjE3Mjg5ODA3NDQsInVzZXJpZCI6IjRRN0NSWFVDM1RCUyJ9.NTCAcSCs_a0LFrLs1btw0vap0JHNogASQKgZBCcZt6Enht-9vGHorJ1F0F38YFBnWECTgJGNsVV-wA-ryIvyAcv_MlA3OOPl8c4rVxtxk_tBmLcaedrnEc1RTx5skg0sxiJE6-w1-zxGw0lHh25xvqcDhJ7inWbJqOJYiJEQFL5J6OqngqwTFPzY2ye-YsIKSlq_jFbMv3gbKZ-GKSsFe0gZDyXcxHfqTsZNq44ykwiW0EZX3-4UmQ-Tj9902JpP1ODqdPCWf3mKXaHuIBgzMysxWGARHHHU4oOHqKjbY5WTqgyzommeqny5yfXp-c1O-okL8bwDrzh-jLbrfwyRSg";
     string? folder_id = Environment.GetEnvironmentVariable("folder_id");
     string? project_top_folder_one_id = Environment.GetEnvironmentVariable("project_top_folder_one_id");
     string? project_top_folder_two_id = Environment.GetEnvironmentVariable("project_top_folder_two_id");
@@ -252,8 +252,10 @@ class DataManagement
     public async Task GetFolderContentsAsync()
     {
         FolderContents folderContents = await dataManagementClient.GetFolderContentsAsync(projectId: project_id, folderId: folder_id);
+        FolderData folderData = (FolderData)folderContents.Data[0];
 
-        Console.WriteLine(folderContents);
+        Console.WriteLine(folderData.Id);
+        Console.WriteLine(folderData.Type);
     }
 
     public async Task GetFolderParentAsync()
@@ -273,15 +275,17 @@ class DataManagement
     {
         FolderRefs folderRefs = await dataManagementClient.GetFolderRefsAsync(projectId: project_id, folderId: folder_id);
 
-        List<FolderRefsData> folderRefsData = folderRefs.Data;
-        foreach (var folderRefData in folderRefsData)
-        {
-            TypeVersion folderRefDataType = folderRefData.Type;
-            string folderRefDataId = folderRefData.Id;
+        Console.WriteLine(folderRefs);
 
-            Console.WriteLine(folderRefDataType);
-            Console.WriteLine(folderRefDataId);
-        }
+        // List<IFolderRefsData> folderRefsData = folderRefs.Data;
+        // foreach (var folderRefData in folderRefsData)
+        // {
+        //     TypeVersion folderRefDataType = folderRefData.Type;
+        //     string folderRefDataId = folderRefData.Id;
+
+        //     Console.WriteLine(folderRefDataType);
+        //     Console.WriteLine(folderRefDataId);
+        // }
     }
 
     public async Task GetFolderRelationshipsLinksAsync()
@@ -357,7 +361,8 @@ class DataManagement
                     {
                         Data = new FolderPayloadDataRelationshipsParentData()
                         {
-                            Type = TypeFolder.Folders,
+                            // Type = TypeFolder.Folders,
+                            Type = "folders",
                             Id = folder_id
                         }
                     }
@@ -472,15 +477,17 @@ class DataManagement
     {
         Refs refs = await dataManagementClient.GetItemRefsAsync(projectId: project_id, itemId: item_id);
 
-        List<RefsData> refsData = refs.Data;
-        foreach (var refData in refsData)
-        {
-            TypeVersion refDataType = refData.Type;
-            string refDataId = refData.Id;
+        Console.WriteLine(refs);
 
-            Console.WriteLine(refDataType);
-            Console.WriteLine(refDataId);
-        }
+        // List<IRefsData> refsData = refs.Data;
+        // foreach (var refData in refsData)
+        // {
+        //     TypeVersion refDataType = refData.Type;
+        //     string refDataId = refData.Id;
+
+        //     Console.WriteLine(refDataType);
+        //     Console.WriteLine(refDataId);
+        // }
     }
 
     public async Task GetItemRelationshipsLinksAsync()
@@ -584,7 +591,8 @@ class DataManagement
             {
                 new ItemPayloadIncluded()
                 {
-                    Type = TypeVersion.Versions,
+                    // Type = TypeVersion.Versions,
+                    Type = "versions",
                     Id = "1",
                     Attributes = new ItemPayloadIncludedAttributes()
                     {
@@ -727,15 +735,15 @@ class DataManagement
     {
         Refs refs = await dataManagementClient.GetVersionRefsAsync(projectId: project_id, versionId: version_id);
 
-        List<RefsData> refsData = refs.Data;
-        foreach (var refData in refsData)
-        {
-            TypeVersion refDataType = refData.Type;
-            string refDataId = refData.Id;
+        // List<IRefsData> refsData = refs.Data;
+        // foreach (var refData in refsData)
+        // {
+        //     TypeVersion refDataType = refData.Type;
+        //     string refDataId = refData.Id;
 
-            Console.WriteLine(refDataType);
-            Console.WriteLine(refDataId);
-        }
+        //     Console.WriteLine(refDataType);
+        //     Console.WriteLine(refDataId);
+        // }
     }
 
     public async Task GetVersionRelationshipsLinksAsync()
@@ -897,10 +905,10 @@ class DataManagement
                     Data = new CheckPermissionPayloadAttributesExtensionData()
                     {
 
-                        RequiredActions = new List<RequiredActions>
+                        RequiredActions = new List<string>
                             {
-                               RequiredActions.Download,
-                               RequiredActions.View,
+                               "download",
+                               "view",
                             }
                     }
                 }
@@ -921,17 +929,55 @@ class DataManagement
             }
         };
 
-        Console.WriteLine(checkPermissionPayload);
-
         CheckPermission checkPermission = await dataManagementClient.ExecuteCheckPermissionAsync(projectId: project_id, checkPermissionPayload: checkPermissionPayload);
 
+        TypeCommands checkPermissionType = checkPermission.Type;
+        string checkPermissionId = checkPermission.Id;
+
+
         Console.WriteLine(checkPermission);
+        Console.WriteLine(checkPermissionType);
+        Console.WriteLine(checkPermissionId);
+    }
 
-        // TypeCommands checkPermissionType = checkPermission.Type;
-        // string checkPermissionId = checkPermission.Id;
+    public async Task ExecuteListRefsCommandAsync()
+    {
+        ListRefsPayload listRefsPayload = new ListRefsPayload()
+        {
+            Type = TypeCommands.Commands,
+            Attributes = new ListRefsPayloadAttributes()
+            {
+                Extension = new ListRefsPayloadAttributesExtension()
+                {
+                    Type = TypeCommandtypeListRefs.CommandsautodeskCoreListRefs,
+                    VarVersion = "1.0.0"
+                }
+            },
+            Relationships = new ListRefsPayloadRelationships()
+            {
+                Resources = new ListRefsPayloadRelationshipsResources()
+                {
+                    Data = new List<ListRefsPayloadRelationshipsResourcesData>
+                        {
+                            new ListRefsPayloadRelationshipsResourcesData
+                            {
+                                Type = TypeVersion.Versions,
+                                Id = version_id
+                            },
+                        }
+                }
+            }
+        };
 
-        // Console.WriteLine(checkPermissionType);
-        // Console.WriteLine(checkPermissionId);
+        ListRefs listRefs = await dataManagementClient.ExecuteListRefsAsync(projectId: project_id, listRefsPayload: listRefsPayload);
+
+        Console.WriteLine(listRefs);
+
+        TypeCommands listRefsType = listRefs.Type;
+        string listRefsId = listRefs.Id;
+
+        Console.WriteLine(listRefsType);
+        Console.WriteLine(listRefsId);
     }
 
     #endregion commands
@@ -961,7 +1007,7 @@ class DataManagement
 
         // Folders
         // await dataManagement.GetFolderAsync();
-        // await dataManagement.GetFolderContentsAsync();
+        await dataManagement.GetFolderContentsAsync();
         // await dataManagement.GetFolderParentAsync();
         // await dataManagement.GetFolderRefsAsync();
         // await dataManagement.GetFolderRelationshipsLinksAsync();
@@ -996,7 +1042,8 @@ class DataManagement
         // await dataManagement.PatchVersionAsync();
 
         // Commands
-        await dataManagement.ExecuteCheckPermissionCommandAsync();
+        // await dataManagement.ExecuteCheckPermissionCommandAsync();
+        // await dataManagement.ExecuteListRefsCommandAsync();
     }
 }
 
