@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Data Management
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,7 +34,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// FolderPayloadDataRelationshipsParentData
+    /// The data about the parent of the folder to be created.
     /// </summary>
     [DataContract]
     public partial class FolderPayloadDataRelationshipsParentData 
@@ -46,14 +47,30 @@ namespace Autodesk.DataManagement.Model
         }
         
         /// <summary>
-        /// Gets or Sets Type
+        ///The type of the resource. Must be `folders`.
         /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=true)]
-        public Type Type { get; set; }
+        /// <value>
+        ///The type of the resource. Must be `folders`.
+        /// </value>
+        [DataMember(Name="type", EmitDefaultValue=false)]
+        public string Type { get; set; }
 
         /// <summary>
-        /// Gets or Sets Id
+        ///The URN of the parent folder. For information on how to find the URN, see the initial steps of the [Download a File](/en/docs/data/v2/tutorials/download-file/) tutorial.
+///
+///Note that for BIM 360 Docs, new folders must be created within an existing folder (e.g., the Plans or Project Files folders), 
+///and not directly within the root folder. Permissions, visibility (e.g., `items:autodesk.bim360:Document` or `items:autodesk.bim360:File`), 
+///and actions (e.g., OCR) are inherited from the existing parent folder. New folders also inherit subscriptions such as the 
+///notifications sent when files are added to a folder.
         /// </summary>
+        /// <value>
+        ///The URN of the parent folder. For information on how to find the URN, see the initial steps of the [Download a File](/en/docs/data/v2/tutorials/download-file/) tutorial.
+///
+///Note that for BIM 360 Docs, new folders must be created within an existing folder (e.g., the Plans or Project Files folders), 
+///and not directly within the root folder. Permissions, visibility (e.g., `items:autodesk.bim360:Document` or `items:autodesk.bim360:File`), 
+///and actions (e.g., OCR) are inherited from the existing parent folder. New folders also inherit subscriptions such as the 
+///notifications sent when files are added to a folder.
+        /// </value>
         [DataMember(Name="id", EmitDefaultValue=false)]
         public string Id { get; set; }
 

@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Data Management
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using Autodesk.Forge.Core;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
@@ -31,6 +32,7 @@ using Autodesk.DataManagement.Client;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Autodesk.SDKManager;
+using System.Collections;
 
 namespace Autodesk.DataManagement.Http
 {
@@ -40,93 +42,230 @@ namespace Autodesk.DataManagement.Http
     public interface IProjectsApi
     {
         /// <summary>
-        /// Request the creation of a new download for a specific and supported file type
+        /// Create Download
         /// </summary>
         /// <remarks>
-        /// Request the creation of a new download for a specific and supported file type. The fileType specified in the POST body needs to be contained in the list of supported file types returned by the GET /data/v1/projects/:project_id/downloads endpoint for the specified version_id.
+        ///Kicks off a job to generate the specified download format of the version. Once the job completes, the specified format becomes available for download. 
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="projectId">The unique identifier of a project. For BIM 360 Docs, the project ID in the Data Management API corresponds to the project ID in the BIM 360 API. To convert a project ID in the BIM 360 API into a project ID in the Data Management API you need to add a “b.\&quot; prefix. For example, a project ID of c8b0c73d-3ae9 translates to a project ID of b.c8b0c73d-3ae9.</param>/// <param name="xUserId">In a two-legged authentication context, the app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act on behalf of only the user specified. (optional)</param>/// <param name="downloadPayload">Describe the download to be created. (optional)</param>
-        /// <returns>Task of ApiResponse<Download></returns>
+         /// <param name="projectId">
+         ///The unique identifier of a project. 
+///
+///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
+///
+///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
+         /// </param>
+         /// <param name="xUserId">
+         ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
+         /// </param>
+         /// <param name="downloadPayload">
+         /// (optional)
+         /// </param>
+        /// <returns>Task of ApiResponse&lt;CreatedDownload&gt;</returns>
         
-        System.Threading.Tasks.Task<ApiResponse<Download>> CreateDownloadAsync (string projectId, string xUserId= default(string), DownloadPayload downloadPayload= default(DownloadPayload),  string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<ApiResponse<CreatedDownload>> CreateDownloadAsync (string projectId, string xUserId= default(string), DownloadPayload downloadPayload= default(DownloadPayload),  string accessToken = null, bool throwOnError = true);
         /// <summary>
-        /// Creates a storage location in the OSS where data can be uploaded to
+        /// Create a Storage Location in OSS
         /// </summary>
         /// <remarks>
-        /// Creates a storage location in the OSS where data can be uploaded to.  New! Autodesk Construction Cloud platform (ACC). Note that this endpoint is compatible with ACC projects. For more information about the Autodesk Construction Cloud APIs, see the Autodesk Construction Cloud documentation.
+        ///Creates a placeholder for an item or a version of an item in the OSS. Later, you can upload the binary content for the item or version to this storage location.
+///
+///**Note:** This operation supports Autodesk Construction Cloud (ACC) Projects. For more information, see the [ACC Platform API documentation](https://en.docs.acc.v1/overview/introduction/). 
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="projectId">The unique identifier of a project. For BIM 360 Docs, the project ID in the Data Management API corresponds to the project ID in the BIM 360 API. To convert a project ID in the BIM 360 API into a project ID in the Data Management API you need to add a “b.\&quot; prefix. For example, a project ID of c8b0c73d-3ae9 translates to a project ID of b.c8b0c73d-3ae9.</param>/// <param name="xUserId">In a two-legged authentication context, the app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act on behalf of only the user specified. (optional)</param>/// <param name="storagePayload">Describe the file the storage is created for. (optional)</param>
-        /// <returns>Task of ApiResponse<Storage></returns>
+         /// <param name="projectId">
+         ///The unique identifier of a project. 
+///
+///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
+///
+///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
+         /// </param>
+         /// <param name="xUserId">
+         ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
+         /// </param>
+         /// <param name="storagePayload">
+         /// (optional)
+         /// </param>
+        /// <returns>Task of ApiResponse&lt;Storage&gt;</returns>
         
         System.Threading.Tasks.Task<ApiResponse<Storage>> CreateStorageAsync (string projectId, string xUserId= default(string), StoragePayload storagePayload= default(StoragePayload),  string accessToken = null, bool throwOnError = true);
         /// <summary>
-        /// Returns the details for a specific download
+        /// Get Download Details
         /// </summary>
         /// <remarks>
-        /// Returns the details for a specific ``download``. 
+        ///Returns the details of a downloadable format of a version of an item.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="projectId">The unique identifier of a project. For BIM 360 Docs, the project ID in the Data Management API corresponds to the project ID in the BIM 360 API. To convert a project ID in the BIM 360 API into a project ID in the Data Management API you need to add a “b.\&quot; prefix. For example, a project ID of c8b0c73d-3ae9 translates to a project ID of b.c8b0c73d-3ae9.</param>/// <param name="downloadId">The unique identifier of a download job.</param>/// <param name="xUserId">In a two-legged authentication context, the app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act on behalf of only the user specified. (optional)</param>
-        /// <returns>Task of ApiResponse<DownloadDetails></returns>
+         /// <param name="projectId">
+         ///The unique identifier of a project. 
+///
+///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
+///
+///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
+         /// </param>
+         /// <param name="downloadId">
+         ///The Job ID of the job used to generate the download.
+         /// </param>
+         /// <param name="xUserId">
+         ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
+         /// </param>
+        /// <returns>Task of ApiResponse&lt;Download&gt;</returns>
         
-        System.Threading.Tasks.Task<ApiResponse<DownloadDetails>> GetDownloadAsync (string projectId, string downloadId, string xUserId= default(string),  string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<ApiResponse<Download>> GetDownloadAsync (string projectId, string downloadId, string xUserId= default(string),  string accessToken = null, bool throwOnError = true);
         /// <summary>
-        /// Returns the job_id object
+        /// Check Download Creation Progress
         /// </summary>
         /// <remarks>
-        /// Returns the ``job_id`` object. 
+        ///Checks the status of a job that generates a downloadable format of a version of an item. 
+///
+///**Note**: If the job has finished, this operation returns a HTTP status 303, with the `location` return header set to the URI that returns the details of the download.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="projectId">The unique identifier of a project. For BIM 360 Docs, the project ID in the Data Management API corresponds to the project ID in the BIM 360 API. To convert a project ID in the BIM 360 API into a project ID in the Data Management API you need to add a “b.\&quot; prefix. For example, a project ID of c8b0c73d-3ae9 translates to a project ID of b.c8b0c73d-3ae9.</param>/// <param name="jobId">The unique identifier of a job.</param>/// <param name="xUserId">In a two-legged authentication context, the app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act on behalf of only the user specified. (optional)</param>
-        /// <returns>Task of ApiResponse<Job></returns>
+         /// <param name="projectId">
+         ///The unique identifier of a project. 
+///
+///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
+///
+///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
+         /// </param>
+         /// <param name="jobId">
+         ///The unique identifier of a job.
+         /// </param>
+         /// <param name="xUserId">
+         ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
+         /// </param>
+        /// <returns>Task of ApiResponse&lt;Job&gt;</returns>
         
         System.Threading.Tasks.Task<ApiResponse<Job>> GetDownloadJobAsync (string projectId, string jobId, string xUserId= default(string),  string accessToken = null, bool throwOnError = true);
         /// <summary>
-        /// Returns a collection of projects for a given hub_id
+        /// Get Projects
         /// </summary>
         /// <remarks>
-        /// Returns a collection of projects for a given hub_id. A project represents a BIM 360 Team project, a Fusion Team project, a BIM 360 Docs project, or an A360 Personal project. Multiple projects can be created within a single hub. Only active projects are listed.  Note that for BIM 360 Docs, a hub ID corresponds to an account ID in the BIM 360 API. To convert an account ID into a hub ID you need to add a \"b.\" prefix. For example, an account ID of c8b0c73d-3ae9 translates to a hub ID of b.c8b0c73d-3ae9.  Similarly, for BIM 360 Docs, the project ID in the Data Management API corresponds to the project ID in the BIM 360 API. To convert a project ID in the BIM 360 API into a project ID in the Data Management API you need to add a \"b.\" prefix. For example, a project ID of c8b0c73d-3ae9 translates to a project ID of b.c8b0c73d-3ae9.  New! Autodesk Construction Cloud platform (ACC). Note that this endpoint is compatible with ACC projects. For more information about the Autodesk Construction Cloud APIs, see the Autodesk Construction Cloud documentation.
+        ///Returns a collection of active projects within the specified hub. The returned projects can be Autodesk Construction Cloud (ACC), BIM 360, BIM 360 Team, Fusion Team, and A360 Personal projects. 
+///
+///For BIM 360 and ACC projects a hub ID corresponds to an Account ID. To convert an Account ID to a hub ID, prefix the account ID with `b.`. For example, a BIM 360 account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
+///
+///Similarly, to convert a BIM 360 and ACC project IDs to  Data Management project IDs prefix the BIM 360 or ACC Project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
+///
+///**Note:** This operation supports Autodesk Construction Cloud (ACC) Projects. For more information, see the [ACC Platform API documentation](https://en.docs.acc.v1/overview/introduction/). 
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="hubId">The unique identifier of a hub.</param>/// <param name="xUserId">In a two-legged authentication context, the app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act on behalf of only the user specified. (optional)</param>/// <param name="filterId">Filter by the id of the ref target. (optional)</param>/// <param name="filterExtensionType">Filter by the extension type. (optional)</param>/// <param name="pageNumber">Specifies what page to return. Page numbers are 0-based (the first page is page 0). (optional)</param>/// <param name="pageLimit">Specifies the maximum number of elements to return in the page. The default value is 200. The min value is 1. The max value is 200. (optional)</param>
-        /// <returns>Task of ApiResponse<Projects></returns>
+         /// <param name="hubId">
+         ///The unique identifier of a hub.
+         /// </param>
+         /// <param name="xUserId">
+         ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
+         /// </param>
+         /// <param name="filterId">
+         ///Filter by the `id` of the `ref` target. (optional)
+         /// </param>
+         /// <param name="filterExtensionType">
+         ///Filter by the extension type.  (optional)
+         /// </param>
+         /// <param name="pageNumber">
+         ///Specifies what page to return. Page numbers are 0-based (the first page is page 0). (optional)
+         /// </param>
+         /// <param name="pageLimit">
+         ///Specifies the maximum number of elements to return in the page. The default value is 200. The min value is 1. The max value is 200. (optional)
+         /// </param>
+        /// <returns>Task of ApiResponse&lt;Projects&gt;</returns>
         
-        System.Threading.Tasks.Task<ApiResponse<Projects>> GetHubProjectsAsync (string hubId, string xUserId= default(string), List<string> filterId= default(List<string>), List<string> filterExtensionType= default(List<string>), int? pageNumber= default(int?), int? pageLimit= default(int?),  string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<ApiResponse<Projects>> GetHubProjectsAsync (string hubId, string xUserId= default(string), List<string> filterId= default(List<string>), List<string> filterExtensionType= default(List<string>), int pageNumber= default(int), int pageLimit= default(int),  string accessToken = null, bool throwOnError = true);
         /// <summary>
-        /// Returns a project for a given project_id
+        /// Get a Project
         /// </summary>
         /// <remarks>
-        /// Returns a project for a given project_id.  Note that for BIM 360 Docs, a hub ID corresponds to an account ID in the BIM 360 API. To convert an account ID into a hub ID you need to add a \"b.\" prefix. For example, an account ID of c8b0c73d-3ae9 translates to a hub ID of b.c8b0c73d-3ae9.  Similarly, for BIM 360 Docs, the project ID in the Data Management API corresponds to the project ID in the BIM 360 API. To convert a project ID in the BIM 360 API into a project ID in the Data Management API you need to add a \"b.\" prefix. For example, a project ID of c8b0c73d-3ae9 translates to a project ID of b.c8b0c73d-3ae9.  New! Autodesk Construction Cloud platform (ACC). Note that this endpoint is compatible with ACC projects. For more information about the Autodesk Construction Cloud APIs, see the Autodesk Construction Cloud documentation.
+        ///Returns the specified project from within the specified hub.
+///
+///For BIM 360 Docs, a hub ID corresponds to a BIM 360 account ID. To convert a BIM 360 account ID to a hub ID, prefix the account ID with `b.`. For example, an account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
+///
+///Similarly, to convert a BIM 360 project ID to a Data Management project ID prefix the BIM 360 Project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
+///
+///**Note:** This operation supports Autodesk Construction Cloud (ACC) Projects. For more information, see the [ACC Platform API documentation](https://en.docs.acc.v1/overview/introduction/). 
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="hubId">The unique identifier of a hub.</param>/// <param name="projectId">The unique identifier of a project. For BIM 360 Docs, the project ID in the Data Management API corresponds to the project ID in the BIM 360 API. To convert a project ID in the BIM 360 API into a project ID in the Data Management API you need to add a “b.\&quot; prefix. For example, a project ID of c8b0c73d-3ae9 translates to a project ID of b.c8b0c73d-3ae9.</param>/// <param name="xUserId">In a two-legged authentication context, the app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act on behalf of only the user specified. (optional)</param>
-        /// <returns>Task of ApiResponse<Project></returns>
+         /// <param name="hubId">
+         ///The unique identifier of a hub.
+         /// </param>
+         /// <param name="projectId">
+         ///The unique identifier of a project. 
+///
+///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
+///
+///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
+         /// </param>
+         /// <param name="xUserId">
+         ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
+         /// </param>
+        /// <returns>Task of ApiResponse&lt;Project&gt;</returns>
         
         System.Threading.Tasks.Task<ApiResponse<Project>> GetProjectAsync (string hubId, string projectId, string xUserId= default(string),  string accessToken = null, bool throwOnError = true);
         /// <summary>
-        /// Returns the hub for a given project_id
+        /// Get Hub for Project
         /// </summary>
         /// <remarks>
-        /// Returns the hub for a given project_id.  New! Autodesk Construction Cloud platform (ACC). Note that this endpoint is compatible with ACC projects. For more information about the Autodesk Construction Cloud APIs, see the Autodesk Construction Cloud documentation.
+        ///Returns the hub that contains the project specified by the  `project_id` parameter.
+///
+///**Note:** This operation supports Autodesk Construction Cloud (ACC) Projects. For more information, see the [ACC Platform API documentation](https://en.docs.acc.v1/overview/introduction/). 
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="hubId">The unique identifier of a hub.</param>/// <param name="projectId">The unique identifier of a project. For BIM 360 Docs, the project ID in the Data Management API corresponds to the project ID in the BIM 360 API. To convert a project ID in the BIM 360 API into a project ID in the Data Management API you need to add a “b.\&quot; prefix. For example, a project ID of c8b0c73d-3ae9 translates to a project ID of b.c8b0c73d-3ae9.</param>/// <param name="xUserId">In a two-legged authentication context, the app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act on behalf of only the user specified. (optional)</param>
-        /// <returns>Task of ApiResponse<Hub></returns>
+         /// <param name="hubId">
+         ///The unique identifier of a hub.
+         /// </param>
+         /// <param name="projectId">
+         ///The unique identifier of a project. 
+///
+///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
+///
+///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
+         /// </param>
+         /// <param name="xUserId">
+         ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
+         /// </param>
+        /// <returns>Task of ApiResponse&lt;Hub&gt;</returns>
         
         System.Threading.Tasks.Task<ApiResponse<Hub>> GetProjectHubAsync (string hubId, string projectId, string xUserId= default(string),  string accessToken = null, bool throwOnError = true);
         /// <summary>
-        /// Returns the details of the highest level folders the user has access to for a given project
+        /// List Top-level Project Folders
         /// </summary>
         /// <remarks>
-        /// Returns the details of the highest level folders the user has access to for a given project. The user must have at least read access to the folders.  If the user is a Project Admin, it returns all top level folders in the project. Otherwise, it returns all the highest level folders in the folder hierarchy the user has access to.  Note that when users have access to a folder, access is automatically granted to its subfolders.  New! Autodesk Construction Cloud platform (ACC). Note that this endpoint is compatible with ACC projects. For more information about the Autodesk Construction Cloud APIs, see the Autodesk Construction Cloud documentation.
+        ///Returns the details of the highest level folders within a project that the user calling this operation has access to. The user must have at least read access to the folders.
+///
+///If the user is a Project Admin, it returns all top-level folders in the project. Otherwise, it returns all the highest level folders in the folder hierarchy the user has access to.
+///
+///Users with access permission to a folder has access permission to all its subfolders.
+///
+///**Note:** This operation supports Autodesk Construction Cloud (ACC) Projects. For more information, see the [ACC Platform API documentation](https://en.docs.acc.v1/overview/introduction/). 
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="hubId">The unique identifier of a hub.</param>/// <param name="projectId">The unique identifier of a project. For BIM 360 Docs, the project ID in the Data Management API corresponds to the project ID in the BIM 360 API. To convert a project ID in the BIM 360 API into a project ID in the Data Management API you need to add a “b.\&quot; prefix. For example, a project ID of c8b0c73d-3ae9 translates to a project ID of b.c8b0c73d-3ae9.</param>/// <param name="xUserId">In a two-legged authentication context, the app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act on behalf of only the user specified. (optional)</param>/// <param name="excludeDeleted">Specify whether to exclude deleted folders in response for BIM 360 Docs projects when user context is provided. true: response will exclude deleted folders for BIM 360 Docs projects.  false (default): response will not exclude deleted folders for BIM 360 Docs projects. (optional)</param>/// <param name="projectFilesOnly">Specify whether only Project Files folder or its subfolders will be returned for BIM 360 Docs projects when user context is provided. true: response will include only Project Files folder and its subfolders for BIM 360 Docs projects.  false (default): response will include all available folders. (optional)</param>
-        /// <returns>Task of ApiResponse<TopFolders></returns>
+         /// <param name="hubId">
+         ///The unique identifier of a hub.
+         /// </param>
+         /// <param name="projectId">
+         ///The unique identifier of a project. 
+///
+///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
+///
+///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
+         /// </param>
+         /// <param name="xUserId">
+         ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
+         /// </param>
+         /// <param name="excludeDeleted">
+         ///Specifies whether deleted folders are excluded from the response for BIM 360 Docs projects, when user context is provided. 
+///
+///- `true`: Response excludes deleted folders for BIM 360 Docs projects.  
+///- `false`: (Default) Response will not exclude deleted folders for BIM 360 Docs projects. (optional)
+         /// </param>
+         /// <param name="projectFilesOnly">
+         ///Specifies what folders and subfolders to return for BIM 360 Docs projects, when user context is provided. 
+///
+///- `true`: Response will be restricted to folder and subfolders containing project files for BIM 360 Docs projects.  
+///- `false`: (Default) Response will include all available folders. (optional)
+         /// </param>
+        /// <returns>Task of ApiResponse&lt;TopFolders&gt;</returns>
         
-        System.Threading.Tasks.Task<ApiResponse<TopFolders>> GetProjectTopFoldersAsync (string hubId, string projectId, string xUserId= default(string), bool? excludeDeleted= default(bool?), bool? projectFilesOnly= default(bool?),  string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<ApiResponse<TopFolders>> GetProjectTopFoldersAsync (string hubId, string projectId, string xUserId= default(string), bool excludeDeleted= default(bool), bool projectFilesOnly= default(bool),  string accessToken = null, bool throwOnError = true);
     }
 
     /// <summary>
@@ -149,27 +288,49 @@ namespace Autodesk.DataManagement.Http
         }
         private void SetQueryParameter(string name, object value, Dictionary<string, object> dictionary)
         {
-            if(value is Enum)
+            if (value is Enum)
             {
                 var type = value.GetType();
                 var memberInfos = type.GetMember(value.ToString());
                 var enumValueMemberInfo = memberInfos.FirstOrDefault(m => m.DeclaringType == type);
                 var valueAttributes = enumValueMemberInfo.GetCustomAttributes(typeof(EnumMemberAttribute), false);
-                if(valueAttributes.Length > 0)
+                if (valueAttributes.Length > 0)
                 {
                     dictionary.Add(name, ((EnumMemberAttribute)valueAttributes[0]).Value);
                 }
             }
-            else if(value is int)
+            else if (value is int)
             {
-                if((int)value > 0)
+                if ((int)value > 0)
                 {
                     dictionary.Add(name, value);
                 }
             }
+            else if (value is IList)
+            {
+                if (value is List<string>)
+                {
+                    value = String.Join(",", (List<string>)value);
+                    dictionary.Add(name, value);
+                }
+                else
+                {
+                    List<string> newlist = new List<string>();
+                    foreach (var x in (IList)value)
+                    {
+                        var type = x.GetType();
+                        var memberInfos = type.GetMember(x.ToString());
+                        var enumValueMemberInfo = memberInfos.FirstOrDefault(m => m.DeclaringType == type);
+                        var valueAttributes = enumValueMemberInfo.GetCustomAttributes(typeof(EnumMemberAttribute), false);
+                        newlist.Add(((EnumMemberAttribute)valueAttributes[0]).Value);
+                    }
+                    string joinedString = String.Join(",", newlist);
+                    dictionary.Add(name, joinedString);
+                }
+            }
             else
             {
-                if(value != null)
+                if (value != null)
                 {
                     dictionary.Add(name, value);
                 }
@@ -208,16 +369,28 @@ namespace Autodesk.DataManagement.Http
         public ForgeService Service {get; set;}
 
         /// <summary>
-        /// Request the creation of a new download for a specific and supported file type
+        /// Create Download
         /// </summary>
         /// <remarks>
-        /// Request the creation of a new download for a specific and supported file type. The fileType specified in the POST body needs to be contained in the list of supported file types returned by the GET /data/v1/projects/:project_id/downloads endpoint for the specified version_id.
+        ///Kicks off a job to generate the specified download format of the version. Once the job completes, the specified format becomes available for download. 
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="projectId">The unique identifier of a project. For BIM 360 Docs, the project ID in the Data Management API corresponds to the project ID in the BIM 360 API. To convert a project ID in the BIM 360 API into a project ID in the Data Management API you need to add a “b.\&quot; prefix. For example, a project ID of c8b0c73d-3ae9 translates to a project ID of b.c8b0c73d-3ae9.</param>/// <param name="xUserId">In a two-legged authentication context, the app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act on behalf of only the user specified. (optional)</param>/// <param name="downloadPayload">Describe the download to be created. (optional)</param>
-        /// <returns>Task of ApiResponse<Download></returns>
+         /// <param name="projectId">
+         ///The unique identifier of a project. 
+///
+///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
+///
+///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
+         /// </param>
+         /// <param name="xUserId">
+         ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
+         /// </param>
+         /// <param name="downloadPayload">
+         /// (optional)
+         /// </param>
+        /// <returns>Task of ApiResponse&lt;CreatedDownload&gt;></returns>
         
-        public async System.Threading.Tasks.Task<ApiResponse<Download>> CreateDownloadAsync (string projectId,string xUserId= default(string),DownloadPayload downloadPayload= default(DownloadPayload), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ApiResponse<CreatedDownload>> CreateDownloadAsync (string projectId,string xUserId= default(string),DownloadPayload downloadPayload= default(DownloadPayload), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into CreateDownloadAsync ");
             using (var request = new HttpRequestMessage())
@@ -232,7 +405,7 @@ namespace Autodesk.DataManagement.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/1.0.0");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.3");
                 if(!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
@@ -280,22 +453,36 @@ namespace Autodesk.DataManagement.Http
                 else if (!response.IsSuccessStatusCode)
                 {
                     logger.LogError($"response unsuccess with status code: {response.StatusCode}");
-                    return new ApiResponse<Download>(response, default(Download));
+                    return new ApiResponse<CreatedDownload>(response, default(CreatedDownload));
                 }
                 logger.LogInformation($"Exited from CreateDownloadAsync with response statusCode: {response.StatusCode}");
-                return new ApiResponse<Download>(response, await LocalMarshalling.DeserializeAsync<Download>(response.Content));
+                return new ApiResponse<CreatedDownload>(response, await LocalMarshalling.DeserializeAsync<CreatedDownload>(response.Content));
 
             } // using
         }
         /// <summary>
-        /// Creates a storage location in the OSS where data can be uploaded to
+        /// Create a Storage Location in OSS
         /// </summary>
         /// <remarks>
-        /// Creates a storage location in the OSS where data can be uploaded to.  New! Autodesk Construction Cloud platform (ACC). Note that this endpoint is compatible with ACC projects. For more information about the Autodesk Construction Cloud APIs, see the Autodesk Construction Cloud documentation.
+        ///Creates a placeholder for an item or a version of an item in the OSS. Later, you can upload the binary content for the item or version to this storage location.
+///
+///**Note:** This operation supports Autodesk Construction Cloud (ACC) Projects. For more information, see the [ACC Platform API documentation](https://en.docs.acc.v1/overview/introduction/). 
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="projectId">The unique identifier of a project. For BIM 360 Docs, the project ID in the Data Management API corresponds to the project ID in the BIM 360 API. To convert a project ID in the BIM 360 API into a project ID in the Data Management API you need to add a “b.\&quot; prefix. For example, a project ID of c8b0c73d-3ae9 translates to a project ID of b.c8b0c73d-3ae9.</param>/// <param name="xUserId">In a two-legged authentication context, the app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act on behalf of only the user specified. (optional)</param>/// <param name="storagePayload">Describe the file the storage is created for. (optional)</param>
-        /// <returns>Task of ApiResponse<Storage></returns>
+         /// <param name="projectId">
+         ///The unique identifier of a project. 
+///
+///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
+///
+///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
+         /// </param>
+         /// <param name="xUserId">
+         ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
+         /// </param>
+         /// <param name="storagePayload">
+         /// (optional)
+         /// </param>
+        /// <returns>Task of ApiResponse&lt;Storage&gt;></returns>
         
         public async System.Threading.Tasks.Task<ApiResponse<Storage>> CreateStorageAsync (string projectId,string xUserId= default(string),StoragePayload storagePayload= default(StoragePayload), string accessToken = null, bool throwOnError = true)
         {
@@ -312,7 +499,7 @@ namespace Autodesk.DataManagement.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/1.0.0");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.3");
                 if(!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
@@ -368,16 +555,28 @@ namespace Autodesk.DataManagement.Http
             } // using
         }
         /// <summary>
-        /// Returns the details for a specific download
+        /// Get Download Details
         /// </summary>
         /// <remarks>
-        /// Returns the details for a specific ``download``. 
+        ///Returns the details of a downloadable format of a version of an item.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="projectId">The unique identifier of a project. For BIM 360 Docs, the project ID in the Data Management API corresponds to the project ID in the BIM 360 API. To convert a project ID in the BIM 360 API into a project ID in the Data Management API you need to add a “b.\&quot; prefix. For example, a project ID of c8b0c73d-3ae9 translates to a project ID of b.c8b0c73d-3ae9.</param>/// <param name="downloadId">The unique identifier of a download job.</param>/// <param name="xUserId">In a two-legged authentication context, the app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act on behalf of only the user specified. (optional)</param>
-        /// <returns>Task of ApiResponse<DownloadDetails></returns>
+         /// <param name="projectId">
+         ///The unique identifier of a project. 
+///
+///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
+///
+///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
+         /// </param>
+         /// <param name="downloadId">
+         ///The Job ID of the job used to generate the download.
+         /// </param>
+         /// <param name="xUserId">
+         ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
+         /// </param>
+        /// <returns>Task of ApiResponse&lt;Download&gt;></returns>
         
-        public async System.Threading.Tasks.Task<ApiResponse<DownloadDetails>> GetDownloadAsync (string projectId,string downloadId,string xUserId= default(string), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ApiResponse<Download>> GetDownloadAsync (string projectId,string downloadId,string xUserId= default(string), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into GetDownloadAsync ");
             using (var request = new HttpRequestMessage())
@@ -393,7 +592,7 @@ namespace Autodesk.DataManagement.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/1.0.0");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.3");
                 if(!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
@@ -440,22 +639,36 @@ namespace Autodesk.DataManagement.Http
                 else if (!response.IsSuccessStatusCode)
                 {
                     logger.LogError($"response unsuccess with status code: {response.StatusCode}");
-                    return new ApiResponse<DownloadDetails>(response, default(DownloadDetails));
+                    return new ApiResponse<Download>(response, default(Download));
                 }
                 logger.LogInformation($"Exited from GetDownloadAsync with response statusCode: {response.StatusCode}");
-                return new ApiResponse<DownloadDetails>(response, await LocalMarshalling.DeserializeAsync<DownloadDetails>(response.Content));
+                return new ApiResponse<Download>(response, await LocalMarshalling.DeserializeAsync<Download>(response.Content));
 
             } // using
         }
         /// <summary>
-        /// Returns the job_id object
+        /// Check Download Creation Progress
         /// </summary>
         /// <remarks>
-        /// Returns the ``job_id`` object. 
+        ///Checks the status of a job that generates a downloadable format of a version of an item. 
+///
+///**Note**: If the job has finished, this operation returns a HTTP status 303, with the `location` return header set to the URI that returns the details of the download.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="projectId">The unique identifier of a project. For BIM 360 Docs, the project ID in the Data Management API corresponds to the project ID in the BIM 360 API. To convert a project ID in the BIM 360 API into a project ID in the Data Management API you need to add a “b.\&quot; prefix. For example, a project ID of c8b0c73d-3ae9 translates to a project ID of b.c8b0c73d-3ae9.</param>/// <param name="jobId">The unique identifier of a job.</param>/// <param name="xUserId">In a two-legged authentication context, the app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act on behalf of only the user specified. (optional)</param>
-        /// <returns>Task of ApiResponse<Job></returns>
+         /// <param name="projectId">
+         ///The unique identifier of a project. 
+///
+///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
+///
+///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
+         /// </param>
+         /// <param name="jobId">
+         ///The unique identifier of a job.
+         /// </param>
+         /// <param name="xUserId">
+         ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
+         /// </param>
+        /// <returns>Task of ApiResponse&lt;Job&gt;></returns>
         
         public async System.Threading.Tasks.Task<ApiResponse<Job>> GetDownloadJobAsync (string projectId,string jobId,string xUserId= default(string), string accessToken = null, bool throwOnError = true)
         {
@@ -473,7 +686,7 @@ namespace Autodesk.DataManagement.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/1.0.0");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.3");
                 if(!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
@@ -528,25 +741,48 @@ namespace Autodesk.DataManagement.Http
             } // using
         }
         /// <summary>
-        /// Returns a collection of projects for a given hub_id
+        /// Get Projects
         /// </summary>
         /// <remarks>
-        /// Returns a collection of projects for a given hub_id. A project represents a BIM 360 Team project, a Fusion Team project, a BIM 360 Docs project, or an A360 Personal project. Multiple projects can be created within a single hub. Only active projects are listed.  Note that for BIM 360 Docs, a hub ID corresponds to an account ID in the BIM 360 API. To convert an account ID into a hub ID you need to add a \"b.\" prefix. For example, an account ID of c8b0c73d-3ae9 translates to a hub ID of b.c8b0c73d-3ae9.  Similarly, for BIM 360 Docs, the project ID in the Data Management API corresponds to the project ID in the BIM 360 API. To convert a project ID in the BIM 360 API into a project ID in the Data Management API you need to add a \"b.\" prefix. For example, a project ID of c8b0c73d-3ae9 translates to a project ID of b.c8b0c73d-3ae9.  New! Autodesk Construction Cloud platform (ACC). Note that this endpoint is compatible with ACC projects. For more information about the Autodesk Construction Cloud APIs, see the Autodesk Construction Cloud documentation.
+        ///Returns a collection of active projects within the specified hub. The returned projects can be Autodesk Construction Cloud (ACC), BIM 360, BIM 360 Team, Fusion Team, and A360 Personal projects. 
+///
+///For BIM 360 and ACC projects a hub ID corresponds to an Account ID. To convert an Account ID to a hub ID, prefix the account ID with `b.`. For example, a BIM 360 account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
+///
+///Similarly, to convert a BIM 360 and ACC project IDs to  Data Management project IDs prefix the BIM 360 or ACC Project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
+///
+///**Note:** This operation supports Autodesk Construction Cloud (ACC) Projects. For more information, see the [ACC Platform API documentation](https://en.docs.acc.v1/overview/introduction/). 
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="hubId">The unique identifier of a hub.</param>/// <param name="xUserId">In a two-legged authentication context, the app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act on behalf of only the user specified. (optional)</param>/// <param name="filterId">Filter by the id of the ref target. (optional)</param>/// <param name="filterExtensionType">Filter by the extension type. (optional)</param>/// <param name="pageNumber">Specifies what page to return. Page numbers are 0-based (the first page is page 0). (optional)</param>/// <param name="pageLimit">Specifies the maximum number of elements to return in the page. The default value is 200. The min value is 1. The max value is 200. (optional)</param>
-        /// <returns>Task of ApiResponse<Projects></returns>
+         /// <param name="hubId">
+         ///The unique identifier of a hub.
+         /// </param>
+         /// <param name="xUserId">
+         ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
+         /// </param>
+         /// <param name="filterId">
+         ///Filter by the `id` of the `ref` target. (optional)
+         /// </param>
+         /// <param name="filterExtensionType">
+         ///Filter by the extension type.  (optional)
+         /// </param>
+         /// <param name="pageNumber">
+         ///Specifies what page to return. Page numbers are 0-based (the first page is page 0). (optional)
+         /// </param>
+         /// <param name="pageLimit">
+         ///Specifies the maximum number of elements to return in the page. The default value is 200. The min value is 1. The max value is 200. (optional)
+         /// </param>
+        /// <returns>Task of ApiResponse&lt;Projects&gt;></returns>
         
-        public async System.Threading.Tasks.Task<ApiResponse<Projects>> GetHubProjectsAsync (string hubId,string xUserId= default(string),List<string> filterId= default(List<string>),List<string> filterExtensionType= default(List<string>),int? pageNumber= default(int?),int? pageLimit= default(int?), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ApiResponse<Projects>> GetHubProjectsAsync (string hubId,string xUserId= default(string),List<string> filterId= default(List<string>),List<string> filterExtensionType= default(List<string>),int pageNumber= default(int),int pageLimit= default(int), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into GetHubProjectsAsync ");
             using (var request = new HttpRequestMessage())
             {
                 var queryParam = new Dictionary<string, object>();
-                SetQueryParameter("filter_id", filterId, queryParam);
-                SetQueryParameter("filter_extension_type", filterExtensionType, queryParam);
-                SetQueryParameter("page_number", pageNumber, queryParam);
-                SetQueryParameter("page_limit", pageLimit, queryParam);
+                SetQueryParameter("filter[id]", filterId, queryParam);
+                SetQueryParameter("filter[extension.type]", filterExtensionType, queryParam);
+                SetQueryParameter("page[number]", pageNumber, queryParam);
+                SetQueryParameter("page[limit]", pageLimit, queryParam);
                 request.RequestUri =
                     Marshalling.BuildRequestUri("/project/v1/hubs/{hub_id}/projects",
                         routeParameters: new Dictionary<string, object> {
@@ -556,7 +792,7 @@ namespace Autodesk.DataManagement.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/1.0.0");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.3");
                 if(!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
@@ -611,14 +847,32 @@ namespace Autodesk.DataManagement.Http
             } // using
         }
         /// <summary>
-        /// Returns a project for a given project_id
+        /// Get a Project
         /// </summary>
         /// <remarks>
-        /// Returns a project for a given project_id.  Note that for BIM 360 Docs, a hub ID corresponds to an account ID in the BIM 360 API. To convert an account ID into a hub ID you need to add a \"b.\" prefix. For example, an account ID of c8b0c73d-3ae9 translates to a hub ID of b.c8b0c73d-3ae9.  Similarly, for BIM 360 Docs, the project ID in the Data Management API corresponds to the project ID in the BIM 360 API. To convert a project ID in the BIM 360 API into a project ID in the Data Management API you need to add a \"b.\" prefix. For example, a project ID of c8b0c73d-3ae9 translates to a project ID of b.c8b0c73d-3ae9.  New! Autodesk Construction Cloud platform (ACC). Note that this endpoint is compatible with ACC projects. For more information about the Autodesk Construction Cloud APIs, see the Autodesk Construction Cloud documentation.
+        ///Returns the specified project from within the specified hub.
+///
+///For BIM 360 Docs, a hub ID corresponds to a BIM 360 account ID. To convert a BIM 360 account ID to a hub ID, prefix the account ID with `b.`. For example, an account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
+///
+///Similarly, to convert a BIM 360 project ID to a Data Management project ID prefix the BIM 360 Project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
+///
+///**Note:** This operation supports Autodesk Construction Cloud (ACC) Projects. For more information, see the [ACC Platform API documentation](https://en.docs.acc.v1/overview/introduction/). 
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="hubId">The unique identifier of a hub.</param>/// <param name="projectId">The unique identifier of a project. For BIM 360 Docs, the project ID in the Data Management API corresponds to the project ID in the BIM 360 API. To convert a project ID in the BIM 360 API into a project ID in the Data Management API you need to add a “b.\&quot; prefix. For example, a project ID of c8b0c73d-3ae9 translates to a project ID of b.c8b0c73d-3ae9.</param>/// <param name="xUserId">In a two-legged authentication context, the app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act on behalf of only the user specified. (optional)</param>
-        /// <returns>Task of ApiResponse<Project></returns>
+         /// <param name="hubId">
+         ///The unique identifier of a hub.
+         /// </param>
+         /// <param name="projectId">
+         ///The unique identifier of a project. 
+///
+///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
+///
+///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
+         /// </param>
+         /// <param name="xUserId">
+         ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
+         /// </param>
+        /// <returns>Task of ApiResponse&lt;Project&gt;></returns>
         
         public async System.Threading.Tasks.Task<ApiResponse<Project>> GetProjectAsync (string hubId,string projectId,string xUserId= default(string), string accessToken = null, bool throwOnError = true)
         {
@@ -636,7 +890,7 @@ namespace Autodesk.DataManagement.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/1.0.0");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.3");
                 if(!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
@@ -691,14 +945,28 @@ namespace Autodesk.DataManagement.Http
             } // using
         }
         /// <summary>
-        /// Returns the hub for a given project_id
+        /// Get Hub for Project
         /// </summary>
         /// <remarks>
-        /// Returns the hub for a given project_id.  New! Autodesk Construction Cloud platform (ACC). Note that this endpoint is compatible with ACC projects. For more information about the Autodesk Construction Cloud APIs, see the Autodesk Construction Cloud documentation.
+        ///Returns the hub that contains the project specified by the  `project_id` parameter.
+///
+///**Note:** This operation supports Autodesk Construction Cloud (ACC) Projects. For more information, see the [ACC Platform API documentation](https://en.docs.acc.v1/overview/introduction/). 
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="hubId">The unique identifier of a hub.</param>/// <param name="projectId">The unique identifier of a project. For BIM 360 Docs, the project ID in the Data Management API corresponds to the project ID in the BIM 360 API. To convert a project ID in the BIM 360 API into a project ID in the Data Management API you need to add a “b.\&quot; prefix. For example, a project ID of c8b0c73d-3ae9 translates to a project ID of b.c8b0c73d-3ae9.</param>/// <param name="xUserId">In a two-legged authentication context, the app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act on behalf of only the user specified. (optional)</param>
-        /// <returns>Task of ApiResponse<Hub></returns>
+         /// <param name="hubId">
+         ///The unique identifier of a hub.
+         /// </param>
+         /// <param name="projectId">
+         ///The unique identifier of a project. 
+///
+///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
+///
+///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
+         /// </param>
+         /// <param name="xUserId">
+         ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
+         /// </param>
+        /// <returns>Task of ApiResponse&lt;Hub&gt;></returns>
         
         public async System.Threading.Tasks.Task<ApiResponse<Hub>> GetProjectHubAsync (string hubId,string projectId,string xUserId= default(string), string accessToken = null, bool throwOnError = true)
         {
@@ -716,7 +984,7 @@ namespace Autodesk.DataManagement.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/1.0.0");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.3");
                 if(!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
@@ -771,16 +1039,46 @@ namespace Autodesk.DataManagement.Http
             } // using
         }
         /// <summary>
-        /// Returns the details of the highest level folders the user has access to for a given project
+        /// List Top-level Project Folders
         /// </summary>
         /// <remarks>
-        /// Returns the details of the highest level folders the user has access to for a given project. The user must have at least read access to the folders.  If the user is a Project Admin, it returns all top level folders in the project. Otherwise, it returns all the highest level folders in the folder hierarchy the user has access to.  Note that when users have access to a folder, access is automatically granted to its subfolders.  New! Autodesk Construction Cloud platform (ACC). Note that this endpoint is compatible with ACC projects. For more information about the Autodesk Construction Cloud APIs, see the Autodesk Construction Cloud documentation.
+        ///Returns the details of the highest level folders within a project that the user calling this operation has access to. The user must have at least read access to the folders.
+///
+///If the user is a Project Admin, it returns all top-level folders in the project. Otherwise, it returns all the highest level folders in the folder hierarchy the user has access to.
+///
+///Users with access permission to a folder has access permission to all its subfolders.
+///
+///**Note:** This operation supports Autodesk Construction Cloud (ACC) Projects. For more information, see the [ACC Platform API documentation](https://en.docs.acc.v1/overview/introduction/). 
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="hubId">The unique identifier of a hub.</param>/// <param name="projectId">The unique identifier of a project. For BIM 360 Docs, the project ID in the Data Management API corresponds to the project ID in the BIM 360 API. To convert a project ID in the BIM 360 API into a project ID in the Data Management API you need to add a “b.\&quot; prefix. For example, a project ID of c8b0c73d-3ae9 translates to a project ID of b.c8b0c73d-3ae9.</param>/// <param name="xUserId">In a two-legged authentication context, the app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act on behalf of only the user specified. (optional)</param>/// <param name="excludeDeleted">Specify whether to exclude deleted folders in response for BIM 360 Docs projects when user context is provided. true: response will exclude deleted folders for BIM 360 Docs projects.  false (default): response will not exclude deleted folders for BIM 360 Docs projects. (optional)</param>/// <param name="projectFilesOnly">Specify whether only Project Files folder or its subfolders will be returned for BIM 360 Docs projects when user context is provided. true: response will include only Project Files folder and its subfolders for BIM 360 Docs projects.  false (default): response will include all available folders. (optional)</param>
-        /// <returns>Task of ApiResponse<TopFolders></returns>
+         /// <param name="hubId">
+         ///The unique identifier of a hub.
+         /// </param>
+         /// <param name="projectId">
+         ///The unique identifier of a project. 
+///
+///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
+///
+///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
+         /// </param>
+         /// <param name="xUserId">
+         ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
+         /// </param>
+         /// <param name="excludeDeleted">
+         ///Specifies whether deleted folders are excluded from the response for BIM 360 Docs projects, when user context is provided. 
+///
+///- `true`: Response excludes deleted folders for BIM 360 Docs projects.  
+///- `false`: (Default) Response will not exclude deleted folders for BIM 360 Docs projects. (optional)
+         /// </param>
+         /// <param name="projectFilesOnly">
+         ///Specifies what folders and subfolders to return for BIM 360 Docs projects, when user context is provided. 
+///
+///- `true`: Response will be restricted to folder and subfolders containing project files for BIM 360 Docs projects.  
+///- `false`: (Default) Response will include all available folders. (optional)
+         /// </param>
+        /// <returns>Task of ApiResponse&lt;TopFolders&gt;></returns>
         
-        public async System.Threading.Tasks.Task<ApiResponse<TopFolders>> GetProjectTopFoldersAsync (string hubId,string projectId,string xUserId= default(string),bool? excludeDeleted= default(bool?),bool? projectFilesOnly= default(bool?), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ApiResponse<TopFolders>> GetProjectTopFoldersAsync (string hubId,string projectId,string xUserId= default(string),bool excludeDeleted= default(bool),bool projectFilesOnly= default(bool), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into GetProjectTopFoldersAsync ");
             using (var request = new HttpRequestMessage())
@@ -798,7 +1096,7 @@ namespace Autodesk.DataManagement.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/1.0.0");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.3");
                 if(!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");

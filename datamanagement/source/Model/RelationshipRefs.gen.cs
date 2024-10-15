@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Data Management
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,7 +34,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// Successful retrieval of the refs collection associated with a specific resource.
+    /// RelationshipRefs
     /// </summary>
     [DataContract]
     public partial class RelationshipRefs 
@@ -46,26 +47,32 @@ namespace Autodesk.DataManagement.Model
         }
         
         /// <summary>
-        /// Gets or Sets Jsonapi
+        ///Gets or Sets Jsonapi
         /// </summary>
         [DataMember(Name="jsonapi", EmitDefaultValue=false)]
-        public HubsJsonapi Jsonapi { get; set; }
+        public JsonApiVersion Jsonapi { get; set; }
 
         /// <summary>
-        /// Gets or Sets Links
+        ///Gets or Sets Links
         /// </summary>
         [DataMember(Name="links", EmitDefaultValue=false)]
-        public TopFoldersDataRelationshipsRefsLinks Links { get; set; }
+        public RelationshipRefsLinks Links { get; set; }
 
         /// <summary>
-        /// Gets or Sets Data
+        ///An array of objects where each object represents the data of a folder, item, or resource.
         /// </summary>
+        /// <value>
+        ///An array of objects where each object represents the data of a folder, item, or resource.
+        /// </value>
         [DataMember(Name="data", EmitDefaultValue=false)]
         public List<RelationshipRefsData> Data { get; set; }
 
         /// <summary>
-        /// Gets or Sets Included
+        ///An array of objects, where each object represents a folder, item, or version included within this resource.
         /// </summary>
+        /// <value>
+        ///An array of objects, where each object represents a folder, item, or version included within this resource.
+        /// </value>
         [DataMember(Name="included", EmitDefaultValue=false)]
         public List<RelationshipRefsIncluded> Included { get; set; }
 

@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Data Management
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,7 +34,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// HubDataAttributes
+    /// The properties of the hub.
     /// </summary>
     [DataContract]
     public partial class HubDataAttributes 
@@ -46,22 +47,25 @@ namespace Autodesk.DataManagement.Model
         }
         
         /// <summary>
-        /// Gets or Sets Name
+        ///A human friendly name to identify the hub.
         /// </summary>
+        /// <value>
+        ///A human friendly name to identify the hub.
+        /// </value>
         [DataMember(Name="name", EmitDefaultValue=false)]
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or Sets Extension
+        ///Gets or Sets Extension
         /// </summary>
         [DataMember(Name="extension", EmitDefaultValue=false)]
-        public HubDataAttributesExtension Extension { get; set; }
+        public BaseAttributesExtensionObjectWithSchemaLink Extension { get; set; }
 
         /// <summary>
-        /// Gets or Sets Region
+        ///Gets or Sets Region
         /// </summary>
-        [DataMember(Name="region", EmitDefaultValue=false)]
-        public string Region { get; set; }
+        [DataMember(Name="region", EmitDefaultValue=true)]
+        public Region Region { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

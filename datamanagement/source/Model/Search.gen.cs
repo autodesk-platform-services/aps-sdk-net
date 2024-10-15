@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Data Management
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -46,22 +47,34 @@ namespace Autodesk.DataManagement.Model
         }
         
         /// <summary>
-        /// Gets or Sets Jsonapi
+        ///Gets or Sets Jsonapi
         /// </summary>
         [DataMember(Name="jsonapi", EmitDefaultValue=false)]
-        public HubsJsonapi Jsonapi { get; set; }
+        public JsonApiVersion Jsonapi { get; set; }
 
         /// <summary>
-        /// Gets or Sets Data
+        ///Gets or Sets Links
         /// </summary>
+        [DataMember(Name="links", EmitDefaultValue=false)]
+        public PaginationInfo Links { get; set; }
+
+        /// <summary>
+        ///The object containing information on this resource.
+        /// </summary>
+        /// <value>
+        ///The object containing information on this resource.
+        /// </value>
         [DataMember(Name="data", EmitDefaultValue=false)]
-        public List<SearchData> Data { get; set; }
+        public List<VersionData> Data { get; set; }
 
         /// <summary>
-        /// Gets or Sets Included
+        ///Information on the latest versions of the items in this resource.
         /// </summary>
+        /// <value>
+        ///Information on the latest versions of the items in this resource.
+        /// </value>
         [DataMember(Name="included", EmitDefaultValue=false)]
-        public List<SearchIncluded> Included { get; set; }
+        public List<ItemData> Included { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
