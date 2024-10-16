@@ -8,7 +8,7 @@
     <PackageDescription>Client SDK for DataManagement API</PackageDescription>
     <Copyright>Autodesk Inc.</Copyright>
     <PackageId>Autodesk.DataManagement</PackageId>
-    <PackageVersion>1.0.0</PackageVersion>
+    <PackageVersion>2.0.0-beta2</PackageVersion>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/autodesk-platform-services/aps-sdk-net.git</RepositoryUrl>
