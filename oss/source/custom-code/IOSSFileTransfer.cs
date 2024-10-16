@@ -41,9 +41,9 @@ namespace Autodesk.Oss
         Task<Stream> Download(
             string bucketKey,
             string objectKey,
-            //string filePath,
             string accessToken,
             CancellationToken cancellationToken,
+            string filePath = null,
             string requestIdPrefix = "",
             IProgress<int> progress = null);
     }

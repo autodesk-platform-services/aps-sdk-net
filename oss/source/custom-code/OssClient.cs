@@ -188,19 +188,12 @@ namespace Autodesk.Oss
             {
                 accessToken = await this.AuthenticationProvider.GetAccessToken();
             }
-            using (Stream downloadStream = await this.oSSFileTransfer.Download(bucketKey, objectKey, accessToken, cancellationToken, requestIdPrefix, progress))
-            {
-                using (FileStream fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
-                {
-                    downloadStream.Position = 0;
-                    downloadStream.CopyTo(fileStream);
-                }
-            }
+            await this.oSSFileTransfer.Download(bucketKey, objectKey, accessToken, cancellationToken,filePath, requestIdPrefix, progress);
 
         }
 
         /// <summary>
-        /// Dwonload a File
+        /// Dwonload a File Stream
         /// </summary>
         /// <remarks>
         ///Downloads a file by transparently handling operations like obtaining signed download URLs and chunking large files for optimal transfer.
@@ -239,7 +232,7 @@ namespace Autodesk.Oss
             {
                 accessToken = await this.AuthenticationProvider.GetAccessToken();
             }
-            return await this.oSSFileTransfer.Download(bucketKey, objectKey, accessToken, cancellationToken, requestIdPrefix, progress);
+            return await this.oSSFileTransfer.Download(bucketKey, objectKey, accessToken, cancellationToken,null, requestIdPrefix, progress);
         }
 
         /// <summary>

@@ -312,6 +312,7 @@ namespace Autodesk.Oss
         public async Task<Stream> Download(string bucketKey, string objectKey,
             string accessToken,
             CancellationToken cancellationToken,
+            string filePath = null,
             string requestIdPrefix = "",
             IProgress<int> progress = null)
         {
@@ -325,9 +326,11 @@ namespace Autodesk.Oss
             double numberOfChunks = CalculateNumberOfChunks((ulong)fileSize);
             double partsDownloaded = 0;
             double start = 0;
-
-            MemoryStream memoryStream = new MemoryStream();
-            {
+            Stream outputStream ;
+            
+            if(filePath==null) outputStream=new MemoryStream() ;
+            else outputStream = new FileStream(filePath, FileMode.Append, FileAccess.Write);
+                
                 while (partsDownloaded < numberOfChunks)
                 {
                     ThrowIfCancellationRequested(cancellationToken, requestId);
@@ -346,7 +349,7 @@ namespace Autodesk.Oss
                         {
                             attemptCount++;
                             _logger.LogDebug("{requestId} Downloading file range : {start} - {end}", requestId, start, end);
-                            await WriteToFileStreamFromUrl(memoryStream, response.Content.Url, start, end, requestId);
+                            await WriteToFileStreamFromUrl(outputStream, response.Content.Url, start, end, requestId);
                             start = end + 1;
                             partsDownloaded++;
                             int percentCompleted = (int)(((double)partsDownloaded / (double)numberOfChunks) * 100);
@@ -360,13 +363,13 @@ namespace Autodesk.Oss
                                 _logger.LogDebug(
                                 "{requestId} Reached maximum retries. S3 signed Url can not be renewed.",
                                 requestId);
-                                memoryStream.Dispose();
+                                outputStream.Dispose();
                                 throw new S3ServiceApiException($"{requestId} URL can not be renewed", (int)HttpStatusCode.InternalServerError);
                             }
                             if (!ex.Message.Contains(_forbiddenMessage))
                             {
                                 _logger.LogDebug("{requestId} Error: {errorMessage}", requestId, ex.Message);
-                                memoryStream.Dispose();
+                                outputStream.Dispose();
                                 throw new S3ServiceApiException($"{requestId} Error {ex.Message}", (int)HttpStatusCode.InternalServerError);
                             }
 
@@ -376,23 +379,23 @@ namespace Autodesk.Oss
                         catch (Exception ex)
                         {
                             _logger.LogError("{requestId} Error: {errorMessage}", requestId, ex.Message);
-                            memoryStream.Dispose();
+                            outputStream.Dispose();
                             throw new FileTransferException($"{requestId} Error {ex.Message}");
                         }
                     }
                 }
-                return memoryStream;
-            }
+                if(filePath==null) return outputStream;
+                return null;
         }
 
-        private async Task WriteToFileStreamFromUrl(Stream memoryStream, string contentUrl, double start, double end,
+        private async Task WriteToFileStreamFromUrl(Stream outStream, string contentUrl, double start, double end,
             string requestId)
         {
             _forgeService.Client.DefaultRequestHeaders.Add("Range", "bytes=" + start + "-" + end);
             var streamAsync = _forgeService.Client.GetByteArrayAsync(contentUrl);
             _forgeService.Client.DefaultRequestHeaders.Remove("Range");
             var available = streamAsync.Result.Length;
-            await memoryStream.WriteAsync(streamAsync.Result, 0, available);
+            await outStream.WriteAsync(streamAsync.Result, 0, available);
         }
 
         private string HandleRequestId(string parentRequestId, string bucketKey, string objectKey)
