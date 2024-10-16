@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Data Management
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,7 +34,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// ModifyItemPayloadDataAttributes
+    /// A container of the attributes to be updated.
     /// </summary>
     [DataContract]
     public partial class ModifyItemPayloadDataAttributes 
@@ -46,8 +47,15 @@ namespace Autodesk.DataManagement.Model
         }
         
         /// <summary>
-        /// Gets or Sets DisplayName
+        ///A human friendly name to identify an item. 
+///
+///**Note:** For BIM 360 projects this attribute is reserved for future releases and should not be used. For such items use a version's `attributes.name` as the item's name.
         /// </summary>
+        /// <value>
+        ///A human friendly name to identify an item. 
+///
+///**Note:** For BIM 360 projects this attribute is reserved for future releases and should not be used. For such items use a version's `attributes.name` as the item's name.
+        /// </value>
         [DataMember(Name="displayName", EmitDefaultValue=false)]
         public string DisplayName { get; set; }
 
