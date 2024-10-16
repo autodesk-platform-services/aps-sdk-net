@@ -65,7 +65,8 @@ namespace Autodesk.DataManagement.Model
         ///An array of objects, where each object represents a folder, item, or version.
         /// </value>
         [DataMember(Name="data", EmitDefaultValue=false)]
-        public List<FolderRefsData> Data { get; set; }
+        [JsonConverter(typeof(FolderRefsDataConverter))]
+        public List<IFolderRefsData> Data { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

@@ -1888,9 +1888,7 @@ namespace Autodesk.DataManagement
                 Data = listItemsPayload
             };
             var response = await this.CommandsApi.ExecuteCommandAsync(projectId, xUserId, commandPayload, accessToken, throwOnError);
-            var commandResponse = response.Content as Command;
-            var listItemsData = commandResponse.Data as ListItems;
-            return listItemsData;
+            return JsonConvert.DeserializeObject<ListItems>(response.Content.Data.ToString());;
         }
 
         /// <summary>
@@ -1937,9 +1935,7 @@ namespace Autodesk.DataManagement
                 Data = listRefsPayload
             };
             var response = await this.CommandsApi.ExecuteCommandAsync(projectId, xUserId, commandPayload, accessToken, throwOnError);
-            var commandResponse = response.Content as Command;
-            var listRefsData = commandResponse.Data as ListRefs;
-            return listRefsData;
+            return JsonConvert.DeserializeObject<ListRefs>(response.Content.Data.ToString());
         }
 
         /// <summary>
@@ -1986,9 +1982,7 @@ namespace Autodesk.DataManagement
                 Data = PublishModelJobPayload
             };
             var response = await this.CommandsApi.ExecuteCommandAsync(projectId, xUserId, commandPayload, accessToken, throwOnError);
-            var commandResponse = response.Content as Command;
-            var getPublishModelJobData = commandResponse.Data as PublishModelJob;
-            return getPublishModelJobData;
+            return JsonConvert.DeserializeObject<PublishModelJob>(response.Content.Data.ToString());
         }
 
         /// <summary>
@@ -2035,9 +2029,7 @@ namespace Autodesk.DataManagement
                 Data = publishModelPayload
             };
             var response = await this.CommandsApi.ExecuteCommandAsync(projectId, xUserId, commandPayload, accessToken, throwOnError);
-            var commandResponse = response.Content as Command;
-            var publishModelData = commandResponse.Data as PublishModel;
-            return publishModelData;
+            return JsonConvert.DeserializeObject<PublishModel>(response.Content.Data.ToString());
         }
 
         /// <summary>
@@ -2084,9 +2076,7 @@ namespace Autodesk.DataManagement
                 Data = publishWithoutLinksPayload
             };
             var response = await this.CommandsApi.ExecuteCommandAsync(projectId, xUserId, commandPayload, accessToken, throwOnError);
-            var commandResponse = response.Content as Command;
-            var publishWithoutLinksData = commandResponse.Data as PublishWithoutLinks;
-            return publishWithoutLinksData;
+            return JsonConvert.DeserializeObject<PublishWithoutLinks>(response.Content.Data.ToString());
         }
 
         #endregion CommandsApi

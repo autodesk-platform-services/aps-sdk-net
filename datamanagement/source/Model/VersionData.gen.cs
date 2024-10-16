@@ -37,7 +37,7 @@ namespace Autodesk.DataManagement.Model
     /// A container of data describing a version.
     /// </summary>
     [DataContract]
-    public partial class VersionData 
+    public partial class VersionData : IFolderRefsData, IRefsData, IRelationshipRefsIncluded, IListRefsIncluded
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="VersionData" /> class.

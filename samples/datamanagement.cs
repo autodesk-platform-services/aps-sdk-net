@@ -5,12 +5,12 @@ using Autodesk.SDKManager;
 
 class DataManagement
 {
-    string? token = Environment.GetEnvironmentVariable("token") ?? "eyJhbGciOiJSUzI1NiIsImtpZCI6IlhrUFpfSmhoXzlTYzNZS01oRERBZFBWeFowOF9SUzI1NiIsInBpLmF0bSI6ImFzc2MifQ.eyJzY29wZSI6WyJkYXRhOnJlYWQiLCJkYXRhOndyaXRlIiwiZGF0YTpjcmVhdGUiLCJkYXRhOnNlYXJjaCJdLCJjbGllbnRfaWQiOiJlV3JEdHVOeFZ1R2x5bXdsNFV3YmViUlRsdW5td084ZyIsImlzcyI6Imh0dHBzOi8vZGV2ZWxvcGVyLmFwaS5hdXRvZGVzay5jb20iLCJhdWQiOiJodHRwczovL2F1dG9kZXNrLmNvbSIsImp0aSI6IlV4ZlR3eWFFdUp5R0ljQmp1bEhNWnBaOWxmd21TbG0zWDVJQWw1eENIWjU2SHNLdjlwcE9CR1RWTXNpV05odlEiLCJleHAiOjE3Mjg5ODA3NDQsInVzZXJpZCI6IjRRN0NSWFVDM1RCUyJ9.NTCAcSCs_a0LFrLs1btw0vap0JHNogASQKgZBCcZt6Enht-9vGHorJ1F0F38YFBnWECTgJGNsVV-wA-ryIvyAcv_MlA3OOPl8c4rVxtxk_tBmLcaedrnEc1RTx5skg0sxiJE6-w1-zxGw0lHh25xvqcDhJ7inWbJqOJYiJEQFL5J6OqngqwTFPzY2ye-YsIKSlq_jFbMv3gbKZ-GKSsFe0gZDyXcxHfqTsZNq44ykwiW0EZX3-4UmQ-Tj9902JpP1ODqdPCWf3mKXaHuIBgzMysxWGARHHHU4oOHqKjbY5WTqgyzommeqny5yfXp-c1O-okL8bwDrzh-jLbrfwyRSg";
+    string? token = Environment.GetEnvironmentVariable("token");
     string? folder_id = Environment.GetEnvironmentVariable("folder_id");
     string? project_top_folder_one_id = Environment.GetEnvironmentVariable("project_top_folder_one_id");
     string? project_top_folder_two_id = Environment.GetEnvironmentVariable("project_top_folder_two_id");
     string? hub_id = Environment.GetEnvironmentVariable("hub_id");
-    string? project_id = Environment.GetEnvironmentVariable("project_id") ?? "b.cdf001dc-4105-4440-a740-0fd0c54b1ef6";
+    string? project_id = Environment.GetEnvironmentVariable("project_id");
     string? download_id = Environment.GetEnvironmentVariable("download_id");
     string? job_id = Environment.GetEnvironmentVariable("job_id");
     string? item_id = Environment.GetEnvironmentVariable("item_id");
@@ -251,11 +251,24 @@ class DataManagement
     }
     public async Task GetFolderContentsAsync()
     {
-        FolderContents folderContents = await dataManagementClient.GetFolderContentsAsync(projectId: project_id, folderId: folder_id);
-        FolderData folderData = (FolderData)folderContents.Data[0];
+        List<FilterType> filter_type = new List<FilterType> { FilterType.Items, FilterType.Folders };
 
-        Console.WriteLine(folderData.Id);
-        Console.WriteLine(folderData.Type);
+        FolderContents folderContents = await dataManagementClient.GetFolderContentsAsync(projectId: project_id, folderId: folder_id, filterType: filter_type);
+        List<IFolderContentsData> folderContentsData = folderContents.Data;
+        foreach (var current in folderContentsData)
+        {
+            if (current is FolderData folder)
+            {
+                Console.WriteLine(folder.Id);
+                Console.WriteLine(folder.Type);
+                Console.WriteLine(folder.Relationships.Parent.Data.Type);
+            }
+            else if (current is ItemData item)
+            {
+                Console.WriteLine(item.Id);
+                Console.WriteLine(item.Type);
+            }
+        }
     }
 
     public async Task GetFolderParentAsync()
@@ -274,18 +287,26 @@ class DataManagement
     public async Task GetFolderRefsAsync()
     {
         FolderRefs folderRefs = await dataManagementClient.GetFolderRefsAsync(projectId: project_id, folderId: folder_id);
-
-        Console.WriteLine(folderRefs);
-
-        // List<IFolderRefsData> folderRefsData = folderRefs.Data;
-        // foreach (var folderRefData in folderRefsData)
-        // {
-        //     TypeVersion folderRefDataType = folderRefData.Type;
-        //     string folderRefDataId = folderRefData.Id;
-
-        //     Console.WriteLine(folderRefDataType);
-        //     Console.WriteLine(folderRefDataId);
-        // }
+        List<IFolderRefsData> folderRefsData = folderRefs.Data;
+        foreach (var current in folderRefsData)
+        {
+            if (current is FolderData folder)
+            {
+                Console.WriteLine(folder.Id);
+                Console.WriteLine(folder.Type);
+                Console.WriteLine(folder.Relationships.Parent.Data.Type);
+            }
+            else if (current is ItemData item)
+            {
+                Console.WriteLine(item.Id);
+                Console.WriteLine(item.Type);
+            }
+            else if (current is VersionData version)
+            {
+                Console.WriteLine(version.Id);
+                Console.WriteLine(version.Type);
+            }
+        }
     }
 
     public async Task GetFolderRelationshipsLinksAsync()
@@ -307,6 +328,9 @@ class DataManagement
     {
         RelationshipRefs relationshipRefs = await dataManagementClient.GetFolderRelationshipsRefsAsync(folderId: folder_id, projectId: project_id);
 
+        IRelationshipRefsLinks links = relationshipRefs.Links;
+        Console.WriteLine(links);
+
         List<RelationshipRefsData> relationshipRefsData = relationshipRefs.Data;
         foreach (var relationshipRefData in relationshipRefsData)
         {
@@ -315,6 +339,27 @@ class DataManagement
 
             Console.WriteLine(relationshipRefDataType);
             Console.WriteLine(relationshipRefDataId);
+        }
+
+        List<IRelationshipRefsIncluded> relationshipRefsIncluded = relationshipRefs.Included;
+        foreach (var current in relationshipRefsIncluded)
+        {
+            if (current is FolderData folder)
+            {
+                Console.WriteLine(folder.Id);
+                Console.WriteLine(folder.Type);
+                Console.WriteLine(folder.Relationships.Parent.Data.Type);
+            }
+            else if (current is ItemData item)
+            {
+                Console.WriteLine(item.Id);
+                Console.WriteLine(item.Type);
+            }
+            else if (current is VersionData version)
+            {
+                Console.WriteLine(version.Id);
+                Console.WriteLine(version.Type);
+            }
         }
     }
 
@@ -344,11 +389,10 @@ class DataManagement
             },
             Data = new FolderPayloadData()
             {
-                // TypeFolder.Folders
                 Type = TypeFolder.Folders,
                 Attributes = new FolderPayloadDataAttributes()
                 {
-                    Name = "Preject 2025",
+                    Name = "Preject 2029",
                     Extension = new FolderPayloadDataAttributesExtension()
                     {
                         Type = "folders:autodesk.bim360:Folder",
@@ -361,8 +405,7 @@ class DataManagement
                     {
                         Data = new FolderPayloadDataRelationshipsParentData()
                         {
-                            // Type = TypeFolder.Folders,
-                            Type = "folders",
+                            Type = TypeFolder.Folders,
                             Id = folder_id
                         }
                     }
@@ -422,7 +465,6 @@ class DataManagement
             },
             Data = new ModifyFolderPayloadData()
             {
-                // Type = TypeFolder.Folders,
                 Type = TypeFolder.Folders,
                 Id = folder_id,
                 Attributes = new ModifyFolderPayloadDataAttributes()
@@ -477,17 +519,26 @@ class DataManagement
     {
         Refs refs = await dataManagementClient.GetItemRefsAsync(projectId: project_id, itemId: item_id);
 
-        Console.WriteLine(refs);
-
-        // List<IRefsData> refsData = refs.Data;
-        // foreach (var refData in refsData)
-        // {
-        //     TypeVersion refDataType = refData.Type;
-        //     string refDataId = refData.Id;
-
-        //     Console.WriteLine(refDataType);
-        //     Console.WriteLine(refDataId);
-        // }
+        List<IRefsData> refsData = refs.Data;
+        foreach (var current in refsData)
+        {
+            if (current is FolderData folder)
+            {
+                Console.WriteLine(folder.Id);
+                Console.WriteLine(folder.Type);
+                Console.WriteLine(folder.Relationships.Parent.Data.Type);
+            }
+            else if (current is ItemData item)
+            {
+                Console.WriteLine(item.Id);
+                Console.WriteLine(item.Type);
+            }
+            else if (current is VersionData version)
+            {
+                Console.WriteLine(version.Id);
+                Console.WriteLine(version.Type);
+            }
+        }
     }
 
     public async Task GetItemRelationshipsLinksAsync()
@@ -509,6 +560,9 @@ class DataManagement
     {
         RelationshipRefs relationshipRefs = await dataManagementClient.GetItemRelationshipsRefsAsync(projectId: project_id, itemId: item_id);
 
+        IRelationshipRefsLinks links = relationshipRefs.Links;
+        Console.WriteLine(links);
+
         List<RelationshipRefsData> relationshipRefsData = relationshipRefs.Data;
         foreach (var relationshipRefData in relationshipRefsData)
         {
@@ -517,6 +571,27 @@ class DataManagement
 
             Console.WriteLine(relationshipRefDataType);
             Console.WriteLine(relationshipRefDataId);
+        }
+
+        List<IRelationshipRefsIncluded> relationshipRefsIncluded = relationshipRefs.Included;
+        foreach (var current in relationshipRefsIncluded)
+        {
+            if (current is FolderData folder)
+            {
+                Console.WriteLine(folder.Id);
+                Console.WriteLine(folder.Type);
+                Console.WriteLine(folder.Relationships.Parent.Data.Type);
+            }
+            else if (current is ItemData item)
+            {
+                Console.WriteLine(item.Id);
+                Console.WriteLine(item.Type);
+            }
+            else if (current is VersionData version)
+            {
+                Console.WriteLine(version.Id);
+                Console.WriteLine(version.Type);
+            }
         }
     }
 
@@ -591,8 +666,7 @@ class DataManagement
             {
                 new ItemPayloadIncluded()
                 {
-                    // Type = TypeVersion.Versions,
-                    Type = "versions",
+                    Type = TypeVersion.Versions,
                     Id = "1",
                     Attributes = new ItemPayloadIncludedAttributes()
                     {
@@ -735,15 +809,26 @@ class DataManagement
     {
         Refs refs = await dataManagementClient.GetVersionRefsAsync(projectId: project_id, versionId: version_id);
 
-        // List<IRefsData> refsData = refs.Data;
-        // foreach (var refData in refsData)
-        // {
-        //     TypeVersion refDataType = refData.Type;
-        //     string refDataId = refData.Id;
-
-        //     Console.WriteLine(refDataType);
-        //     Console.WriteLine(refDataId);
-        // }
+        List<IRefsData> refsData = refs.Data;
+        foreach (var current in refsData)
+        {
+            if (current is FolderData folder)
+            {
+                Console.WriteLine(folder.Id);
+                Console.WriteLine(folder.Type);
+                Console.WriteLine(folder.Relationships.Parent.Data.Type);
+            }
+            else if (current is ItemData item)
+            {
+                Console.WriteLine(item.Id);
+                Console.WriteLine(item.Type);
+            }
+            else if (current is VersionData version)
+            {
+                Console.WriteLine(version.Id);
+                Console.WriteLine(version.Type);
+            }
+        }
     }
 
     public async Task GetVersionRelationshipsLinksAsync()
@@ -765,6 +850,9 @@ class DataManagement
     {
         RelationshipRefs relationshipRefs = await dataManagementClient.GetVersionRelationshipsRefsAsync(projectId: project_id, versionId: version_id);
 
+        IRelationshipRefsLinks links = relationshipRefs.Links;
+        Console.WriteLine(links);
+
         List<RelationshipRefsData> relationshipRefsData = relationshipRefs.Data;
         foreach (var relationshipRefData in relationshipRefsData)
         {
@@ -773,6 +861,27 @@ class DataManagement
 
             Console.WriteLine(relationshipRefDataType);
             Console.WriteLine(relationshipRefDataId);
+        }
+
+        List<IRelationshipRefsIncluded> relationshipRefsIncluded = relationshipRefs.Included;
+        foreach (var current in relationshipRefsIncluded)
+        {
+            if (current is FolderData folder)
+            {
+                Console.WriteLine(folder.Id);
+                Console.WriteLine(folder.Type);
+                Console.WriteLine(folder.Relationships.Parent.Data.Type);
+            }
+            else if (current is ItemData item)
+            {
+                Console.WriteLine(item.Id);
+                Console.WriteLine(item.Type);
+            }
+            else if (current is VersionData version)
+            {
+                Console.WriteLine(version.Id);
+                Console.WriteLine(version.Type);
+            }
         }
     }
 
@@ -971,13 +1080,28 @@ class DataManagement
 
         ListRefs listRefs = await dataManagementClient.ExecuteListRefsAsync(projectId: project_id, listRefsPayload: listRefsPayload);
 
-        Console.WriteLine(listRefs);
-
         TypeCommands listRefsType = listRefs.Type;
         string listRefsId = listRefs.Id;
 
         Console.WriteLine(listRefsType);
         Console.WriteLine(listRefsId);
+
+        Console.WriteLine(listRefs);
+
+        List<IListRefsIncluded> listRefsIncluded = listRefs.Included;
+        foreach (var current in listRefsIncluded)
+        {
+            if (current is ItemData item)
+            {
+                Console.WriteLine(item.Id);
+                Console.WriteLine(item.Type);
+            }
+            else if (current is VersionData version)
+            {
+                Console.WriteLine(version.Id);
+                Console.WriteLine(version.Type);
+            }
+        }
     }
 
     #endregion commands
@@ -1007,7 +1131,7 @@ class DataManagement
 
         // Folders
         // await dataManagement.GetFolderAsync();
-        await dataManagement.GetFolderContentsAsync();
+        // await dataManagement.GetFolderContentsAsync();
         // await dataManagement.GetFolderParentAsync();
         // await dataManagement.GetFolderRefsAsync();
         // await dataManagement.GetFolderRelationshipsLinksAsync();

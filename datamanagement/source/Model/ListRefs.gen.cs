@@ -37,7 +37,7 @@ namespace Autodesk.DataManagement.Model
     /// The &#x60;&#x60;data&#x60;&#x60; object returned by the ListRefs command.
     /// </summary>
     [DataContract]
-    public partial class ListRefs 
+    public partial class ListRefs
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ListRefs" /> class.
@@ -45,11 +45,11 @@ namespace Autodesk.DataManagement.Model
         public ListRefs()
         {
         }
-        
+
         /// <summary>
         ///Gets or Sets Type
         /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=true)]
+        [DataMember(Name = "type", EmitDefaultValue = true)]
         public TypeCommands Type { get; set; }
 
         /// <summary>
@@ -58,31 +58,32 @@ namespace Autodesk.DataManagement.Model
         /// <value>
         ///A unique ID assigned to the process executing the command.
         /// </value>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        [DataMember(Name = "id", EmitDefaultValue = false)]
         public string Id { get; set; }
 
         /// <summary>
         ///Gets or Sets Attributes
         /// </summary>
-        [DataMember(Name="attributes", EmitDefaultValue=false)]
+        [DataMember(Name = "attributes", EmitDefaultValue = false)]
         public ListRefsAttributes Attributes { get; set; }
 
         /// <summary>
         ///Gets or Sets Relationships
         /// </summary>
-        [DataMember(Name="relationships", EmitDefaultValue=false)]
+        [DataMember(Name = "relationships", EmitDefaultValue = false)]
         public ListRefsRelationships Relationships { get; set; }
 
         /// <summary>
         ///An array of objects, where each object 
-///represents a referenced resource.
+        ///represents a referenced resource.
         /// </summary>
         /// <value>
         ///An array of objects, where each object 
-///represents a referenced resource.
+        ///represents a referenced resource.
         /// </value>
-        [DataMember(Name="included", EmitDefaultValue=false)]
-        public List<ListRefsIncluded> Included { get; set; }
+        [DataMember(Name = "included", EmitDefaultValue = false)]
+        [JsonConverter(typeof(ListRefsIncludedConverter))]
+        public List<IListRefsIncluded> Included { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

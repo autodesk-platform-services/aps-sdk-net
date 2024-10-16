@@ -53,7 +53,7 @@ namespace Autodesk.DataManagement.Model
         ///The type of the resource. Must be `folders`
         /// </value>
         [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; set; }
+        public TypeFolder Type { get; set; }
 
         /// <summary>
         ///The URN of the parent folder to which you want to move a folder to.

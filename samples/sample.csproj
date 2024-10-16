@@ -7,17 +7,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
    <ItemGroup>
-    <!-- <PackageReference Include="Autodesk.ModelDerivative" Version="1.0.0"/>
-    <PackageReference Include="Autodesk.Webhooks" Version="1.0.0"/> -->
+    <PackageReference Include="Autodesk.ModelDerivative" Version="1.0.0"/>
+    <PackageReference Include="Autodesk.Webhooks" Version="1.0.0"/>
     <PackageReference Include="Autodesk.DataManagement" Version="1.0.0"/>
-    <!-- <PackageReference Include="Autodesk.Oss" Version="1.0.0"/>   
+    <PackageReference Include="Autodesk.Oss" Version="1.0.0"/>   
     <PackageReference Include="Autodesk.Authentication" Version="1.0.0"/>   
-     <PackageReference Include="Autodesk.Construction.Issues" Version="1.0.0-beta1"/>    -->
-    <PackageReference Include="Autodesk.SDKManager" Version="1.1.0-beta1" />
+     <PackageReference Include="Autodesk.Construction.Issues" Version="1.0.0-beta1"/>   
+    <PackageReference Include="Autodesk.SDKManager" Version="1.1.0" />
     <PackageReference Include="DotNetEnv" Version="3.1.1" />
   </ItemGroup>
-
-    <PropertyGroup>
-    <RestoreSources>$(RestoreSources);c:\Users\gitundh\Downloads\</RestoreSources>
-  </PropertyGroup>
 </Project>

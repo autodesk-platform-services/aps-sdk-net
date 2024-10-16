@@ -37,7 +37,7 @@ namespace Autodesk.DataManagement.Model
     /// Contains the endpoint you can use to retrieve the related resources.
     /// </summary>
     [DataContract]
-    public partial class JsonApiLinksRelated 
+    public partial class JsonApiLinksRelated : IRelationshipRefsLinks
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonApiLinksRelated" /> class.

@@ -33,39 +33,8 @@ using Newtonsoft.Json.Converters;
 
 namespace Autodesk.DataManagement.Model
 {
-    /// <summary>
-    /// Information on links to this resource.
-    /// </summary>
-    [DataContract]
-    public partial class RelationshipRefsLinks 
+    public interface IRelationshipRefsLinks 
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="RelationshipRefsLinks" /> class.
-        /// </summary>
-        public RelationshipRefsLinks()
-        {
-        }
-        
-        /// <summary>
-        ///Gets or Sets Self
-        /// </summary>
-        [DataMember(Name="self", EmitDefaultValue=false)]
-        public JsonApiLinksSelfSelf Self { get; set; }
-
-        /// <summary>
-        ///Gets or Sets Related
-        /// </summary>
-        [DataMember(Name="related", EmitDefaultValue=false)]
-        public JsonApiLinksRelatedRelated Related { get; set; }
-
-        /// <summary>
-        /// Returns the string presentation of the object
-        /// </summary>
-        /// <returns>String presentation of the object</returns>
-        public override string ToString()
-        {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
-        }
     }
 
 }

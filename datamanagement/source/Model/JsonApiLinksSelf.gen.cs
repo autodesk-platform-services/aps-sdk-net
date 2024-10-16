@@ -37,7 +37,7 @@ namespace Autodesk.DataManagement.Model
     /// An object containing the URI of the endpoint to access this resource.
     /// </summary>
     [DataContract]
-    public partial class JsonApiLinksSelf 
+    public partial class JsonApiLinksSelf : IRelationshipRefsLinks
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonApiLinksSelf" /> class.

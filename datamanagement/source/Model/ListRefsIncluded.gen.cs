@@ -33,60 +33,8 @@ using Newtonsoft.Json.Converters;
 
 namespace Autodesk.DataManagement.Model
 {
-    /// <summary>
-    /// ListRefsIncluded
-    /// </summary>
-    [DataContract]
-    public partial class ListRefsIncluded 
+    public interface IListRefsIncluded 
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ListRefsIncluded" /> class.
-        /// </summary>
-        public ListRefsIncluded()
-        {
-        }
-        
-        /// <summary>
-        ///Gets or Sets Type
-        /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=true)]
-        public TypeVersion Type { get; set; }
-
-        /// <summary>
-        ///URN of the version object.
-        /// </summary>
-        /// <value>
-        ///URN of the version object.
-        /// </value>
-        [DataMember(Name="id", EmitDefaultValue=false)]
-        public string Id { get; set; }
-
-        /// <summary>
-        ///Gets or Sets Attributes
-        /// </summary>
-        [DataMember(Name="attributes", EmitDefaultValue=false)]
-        public VersionAttributes Attributes { get; set; }
-
-        /// <summary>
-        ///Gets or Sets Relationships
-        /// </summary>
-        [DataMember(Name="relationships", EmitDefaultValue=false)]
-        public VersionDataRelationships Relationships { get; set; }
-
-        /// <summary>
-        ///Gets or Sets Links
-        /// </summary>
-        [DataMember(Name="links", EmitDefaultValue=false)]
-        public JsonApiLinksSelfAndWebView Links { get; set; }
-
-        /// <summary>
-        /// Returns the string presentation of the object
-        /// </summary>
-        /// <returns>String presentation of the object</returns>
-        public override string ToString()
-        {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
-        }
     }
 
 }
