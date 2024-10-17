@@ -179,6 +179,15 @@ namespace Autodesk.Webhooks.Model
         public string HookExpiry { get; set; }
 
         /// <summary>
+        ///Custom metadata which will be less than 1KB in size.
+        /// </summary>
+        /// <value>
+        ///Custom metadata which will be less than 1KB in size.
+        /// </value>
+        [DataMember(Name="hookAttribute", EmitDefaultValue=false)]
+        public Object HookAttribute { get; set; }
+
+        /// <summary>
         ///Gets or Sets Scope
         /// </summary>
         [DataMember(Name="scope", EmitDefaultValue=false)]
