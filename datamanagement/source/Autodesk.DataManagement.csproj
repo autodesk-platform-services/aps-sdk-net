@@ -5,7 +5,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Authors>Autodesk Platform Services SDK Team</Authors>
-    <PackageDescription>Client SDK for DataManagement API</PackageDescription>
+    <PackageDescription>Client SDK for Data Management API</PackageDescription>
     <Copyright>Autodesk Inc.</Copyright>
     <PackageId>Autodesk.DataManagement</PackageId>
     <PackageVersion>2.0.0-beta2</PackageVersion>
