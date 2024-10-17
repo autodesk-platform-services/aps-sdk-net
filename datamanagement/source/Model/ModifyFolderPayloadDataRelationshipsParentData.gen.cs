@@ -47,12 +47,9 @@ namespace Autodesk.DataManagement.Model
         }
         
         /// <summary>
-        ///The type of the resource. Must be `folders`
+        ///Gets or Sets Type
         /// </summary>
-        /// <value>
-        ///The type of the resource. Must be `folders`
-        /// </value>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [DataMember(Name="type", EmitDefaultValue=true)]
         public TypeFolder Type { get; set; }
 
         /// <summary>

@@ -37,7 +37,7 @@ namespace Autodesk.DataManagement.Model
     /// The &#x60;&#x60;data&#x60;&#x60; object returned by the PublishModel command.
     /// </summary>
     [DataContract]
-    public partial class PublishModel 
+    public partial class PublishModel
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="PublishModel" /> class.
@@ -45,17 +45,26 @@ namespace Autodesk.DataManagement.Model
         public PublishModel()
         {
         }
-        
+
         /// <summary>
         ///Gets or Sets Type
         /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=true)]
+        [DataMember(Name = "type", EmitDefaultValue = true)]
         public TypeCommands Type { get; set; }
+
+        /// <summary>
+        ///A unique ID assigned to the process executing the command.
+        /// </summary>
+        /// <value>
+        ///A unique ID assigned to the process executing the command.
+        /// </value>
+        [DataMember(Name = "id", EmitDefaultValue = false)]
+        public string Id { get; set; }
 
         /// <summary>
         ///Gets or Sets Attributes
         /// </summary>
-        [DataMember(Name="attributes", EmitDefaultValue=false)]
+        [DataMember(Name = "attributes", EmitDefaultValue = false)]
         public PublishModelAttributes Attributes { get; set; }
 
         /// <summary>

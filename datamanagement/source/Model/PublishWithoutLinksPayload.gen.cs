@@ -62,7 +62,7 @@ namespace Autodesk.DataManagement.Model
         ///Gets or Sets Relationships
         /// </summary>
         [DataMember(Name="relationships", EmitDefaultValue=false)]
-        public PublishModelPayloadRelationships Relationships { get; set; }
+        public PublishWithoutLinksPayloadRelationships Relationships { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

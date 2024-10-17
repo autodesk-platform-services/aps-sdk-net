@@ -55,7 +55,7 @@ namespace Autodesk.DataManagement.Model
 ///represents an item to check. 
         /// </value>
         [DataMember(Name="data", EmitDefaultValue=false)]
-        public List<PublishModelJobPayloadRelationshipsResourcesData> Data { get; set; }
+        public List<ListItemsPayloadRelationshipsResourcesData> Data { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
