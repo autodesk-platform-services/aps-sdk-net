@@ -34,15 +34,15 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// The &#x60;&#x60;data&#x60;&#x60; object returned by the PublishWithoutLinks command.
+    /// ListItemsPayloadRelationshipsResourcesData
     /// </summary>
     [DataContract]
-    public partial class PublishWithoutLinks
+    public partial class ListItemsPayloadRelationshipsResourcesData
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PublishWithoutLinks" /> class.
+        /// Initializes a new instance of the <see cref="ListItemsPayloadRelationshipsResourcesData" /> class.
         /// </summary>
-        public PublishWithoutLinks()
+        public ListItemsPayloadRelationshipsResourcesData()
         {
         }
 
@@ -50,22 +50,20 @@ namespace Autodesk.DataManagement.Model
         ///Gets or Sets Type
         /// </summary>
         [DataMember(Name = "type", EmitDefaultValue = true)]
-        public TypeCommands Type { get; set; }
+        public TypeItem Type { get; set; }
 
         /// <summary>
-        ///A unique ID assigned to the process executing the command.
+        ///The URN of the item to check. Use the 
+        ///[Get an Item](/en/docs/data/v2/reference/http/projects-project_id-items-item_id-GET/) 
+        ///operation to verify the URN.
         /// </summary>
         /// <value>
-        ///A unique ID assigned to the process executing the command.
+        ///The URN of the item to check. Use the 
+        ///[Get an Item](/en/docs/data/v2/reference/http/projects-project_id-items-item_id-GET/) 
+        ///operation to verify the URN.
         /// </value>
         [DataMember(Name = "id", EmitDefaultValue = false)]
         public string Id { get; set; }
-
-        /// <summary>
-        ///Gets or Sets Attributes
-        /// </summary>
-        [DataMember(Name = "attributes", EmitDefaultValue = false)]
-        public PublishWithoutLinksAttributes Attributes { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

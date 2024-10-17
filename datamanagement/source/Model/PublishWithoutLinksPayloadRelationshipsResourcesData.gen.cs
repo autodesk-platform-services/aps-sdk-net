@@ -34,38 +34,40 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// The &#x60;&#x60;data&#x60;&#x60; object returned by the PublishWithoutLinks command.
+    /// PublishModelPayloadRelationshipsResourcesData
     /// </summary>
     [DataContract]
-    public partial class PublishWithoutLinks
+    public partial class PublishWithoutLinksPayloadRelationshipsResourcesData 
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PublishWithoutLinks" /> class.
+        /// Initializes a new instance of the <see cref="PublishWithoutLinksPayloadRelationshipsResourcesData" /> class.
         /// </summary>
-        public PublishWithoutLinks()
+        public PublishWithoutLinksPayloadRelationshipsResourcesData()
         {
         }
-
+        
         /// <summary>
         ///Gets or Sets Type
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
-        public TypeCommands Type { get; set; }
+        [DataMember(Name="type", EmitDefaultValue=true)]
+        public TypeItem Type { get; set; }
 
         /// <summary>
-        ///A unique ID assigned to the process executing the command.
+        ///The URN of the resource. For information about 
+///finding the URN, see the initial steps 
+///of the 
+///[Publish a C4R Model to BIM 360 Docs](/en/docs/data/v2/tutorials/publish-model/) 
+///tutorial.
         /// </summary>
         /// <value>
-        ///A unique ID assigned to the process executing the command.
+        ///The URN of the resource. For information about 
+///finding the URN, see the initial steps 
+///of the 
+///[Publish a C4R Model to BIM 360 Docs](/en/docs/data/v2/tutorials/publish-model/) 
+///tutorial.
         /// </value>
-        [DataMember(Name = "id", EmitDefaultValue = false)]
+        [DataMember(Name="id", EmitDefaultValue=false)]
         public string Id { get; set; }
-
-        /// <summary>
-        ///Gets or Sets Attributes
-        /// </summary>
-        [DataMember(Name = "attributes", EmitDefaultValue = false)]
-        public PublishWithoutLinksAttributes Attributes { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

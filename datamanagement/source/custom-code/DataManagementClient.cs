@@ -1963,7 +1963,7 @@ namespace Autodesk.DataManagement
         /// An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync(). (optional)
         /// </param>
         /// <returns>Task of PublishModelJob</returns>
-        public async System.Threading.Tasks.Task<PublishModelJob> ExecuteGetPublishModelJobAsync(string projectId, PublishModelJobPayload PublishModelJobPayload, string xUserId = default(string), string accessToken = default, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<PublishModelJob> ExecuteGetPublishModelJobAsync(string projectId, PublishModelJobPayload publishModelJobPayload, string xUserId = default(string), string accessToken = default, bool throwOnError = true)
         {
             if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
             {
@@ -1979,7 +1979,7 @@ namespace Autodesk.DataManagement
                 {
                     VarVersion = JsonApiVersionValue._10
                 },
-                Data = PublishModelJobPayload
+                Data = publishModelJobPayload
             };
             var response = await this.CommandsApi.ExecuteCommandAsync(projectId, xUserId, commandPayload, accessToken, throwOnError);
             return JsonConvert.DeserializeObject<PublishModelJob>(response.Content.Data.ToString());

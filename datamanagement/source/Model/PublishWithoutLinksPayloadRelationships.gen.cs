@@ -34,38 +34,23 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// The &#x60;&#x60;data&#x60;&#x60; object returned by the PublishWithoutLinks command.
+    /// Contains a list of resources required for execution of the command.
     /// </summary>
     [DataContract]
-    public partial class PublishWithoutLinks
+    public partial class PublishWithoutLinksPayloadRelationships 
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PublishWithoutLinks" /> class.
+        /// Initializes a new instance of the <see cref="PublishWithoutLinksPayloadRelationships" /> class.
         /// </summary>
-        public PublishWithoutLinks()
+        public PublishWithoutLinksPayloadRelationships()
         {
         }
-
+        
         /// <summary>
-        ///Gets or Sets Type
+        ///Gets or Sets Resources
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
-        public TypeCommands Type { get; set; }
-
-        /// <summary>
-        ///A unique ID assigned to the process executing the command.
-        /// </summary>
-        /// <value>
-        ///A unique ID assigned to the process executing the command.
-        /// </value>
-        [DataMember(Name = "id", EmitDefaultValue = false)]
-        public string Id { get; set; }
-
-        /// <summary>
-        ///Gets or Sets Attributes
-        /// </summary>
-        [DataMember(Name = "attributes", EmitDefaultValue = false)]
-        public PublishWithoutLinksAttributes Attributes { get; set; }
+        [DataMember(Name="resources", EmitDefaultValue=false)]
+        public PublishWithoutLinksPayloadRelationshipsResources Resources { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

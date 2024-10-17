@@ -392,7 +392,7 @@ class DataManagement
                 Type = TypeFolder.Folders,
                 Attributes = new FolderPayloadDataAttributes()
                 {
-                    Name = "Preject 2029",
+                    Name = "Preject 2030",
                     Extension = new FolderPayloadDataAttributesExtension()
                     {
                         Type = "folders:autodesk.bim360:Folder",
@@ -406,7 +406,7 @@ class DataManagement
                         Data = new FolderPayloadDataRelationshipsParentData()
                         {
                             Type = TypeFolder.Folders,
-                            Id = folder_id
+                            Id = folder_id,
                         }
                     }
                 }
@@ -635,7 +635,7 @@ class DataManagement
                 Type = TypeItem.Items,
                 Attributes = new ItemPayloadDataAttributes()
                 {
-                    DisplayName = "drawing.rvt",
+                    DisplayName = "drawingmyt.rvt",
                     Extension = new ItemPayloadDataAttributesExtension()
                     {
                         Type = "items:autodesk.bim360:File",
@@ -670,7 +670,7 @@ class DataManagement
                     Id = "1",
                     Attributes = new ItemPayloadIncludedAttributes()
                     {
-                        Name = "drawing.rvt",
+                        Name = "drawingmyt.rvt",
                         Extension = new ItemPayloadIncludedAttributesExtension()
                         {
                             Type = "versions:autodesk.bim360:File",
@@ -898,7 +898,7 @@ class DataManagement
                 Type = TypeVersion.Versions,
                 Attributes = new VersionPayloadDataAttributes()
                 {
-                    Name = "racted.rvt",
+                    Name = "racteded.rvt",
                     Extension = new VersionPayloadDataAttributesExtension()
                     {
                         Type = "versions:autodesk.bim360:File",
@@ -1104,6 +1104,166 @@ class DataManagement
         }
     }
 
+    public async Task ExecuteListItemsCommandAsync()
+    {
+        ListItemsPayload listItemsPayload = new ListItemsPayload()
+        {
+            Type = TypeCommands.Commands,
+            Attributes = new ListItemsPayloadAttributes()
+            {
+                Extension = new ListItemsPayloadAttributesExtension()
+                {
+                    Type = TypeCommandtypeListItems.CommandsautodeskCoreListItems,
+                    VarVersion = "1.0.0"
+                }
+            },
+            Relationships = new ListItemsPayloadRelationships()
+            {
+                Resources = new ListItemsPayloadRelationshipsResources()
+                {
+                    Data = new List<ListItemsPayloadRelationshipsResourcesData>
+                        {
+                            new ListItemsPayloadRelationshipsResourcesData
+                            {
+                                Type = TypeItem.Items,
+                                Id = item_id
+                            },
+                        }
+                }
+            }
+        };
+
+        ListItems listItems = await dataManagementClient.ExecuteListItemsAsync(projectId: project_id, listItemsPayload: listItemsPayload);
+
+        TypeCommands listItemsType = listItems.Type;
+        string listItemsId = listItems.Id;
+
+        Console.WriteLine(listItemsType);
+        Console.WriteLine(listItemsId);
+
+        Console.WriteLine(listItems);
+    }
+
+    public async Task ExecuteGetPublishModelJobAsync()
+    {
+        PublishModelJobPayload publishModelJobPayload = new PublishModelJobPayload()
+        {
+            Type = TypeCommands.Commands,
+            Attributes = new PublishModelJobPayloadAttributes()
+            {
+                Extension = new PublishModelJobPayloadAttributesExtension()
+                {
+                    Type = TypeCommandtypeGetPublishModelJob.CommandsautodeskBim360C4RModelGetPublishJob,
+                    VarVersion = "1.0.0"
+                }
+            },
+            Relationships = new PublishModelJobPayloadRelationships()
+            {
+                Resources = new PublishModelJobPayloadRelationshipsResources()
+                {
+                    Data = new List<PublishModelJobPayloadRelationshipsResourcesData>
+                        {
+                            new PublishModelJobPayloadRelationshipsResourcesData
+                            {
+                                Type = TypeItem.Items,
+                                Id = item_id
+                            },
+                        }
+                }
+            }
+        };
+
+        PublishModelJob publishModelJob = await dataManagementClient.ExecuteGetPublishModelJobAsync(projectId: project_id, publishModelJobPayload: publishModelJobPayload);
+
+        TypeCommands publishModelJobType = publishModelJob.Type;
+        string publishModelJobId = publishModelJob.Id;
+
+        Console.WriteLine(publishModelJobType);
+        Console.WriteLine(publishModelJobId);
+
+        Console.WriteLine(publishModelJob);
+    }
+
+    public async Task ExecutePublishModelAsync()
+    {
+        PublishModelPayload publishModelPayload = new PublishModelPayload()
+        {
+            Type = TypeCommands.Commands,
+            Attributes = new PublishModelPayloadAttributes()
+            {
+                Extension = new PublishModelPayloadAttributesExtension()
+                {
+                    Type = TypeCommandtypePublishmodel.CommandsautodeskBim360C4RModelPublish,
+                    VarVersion = "1.0.0"
+                }
+            },
+            Relationships = new PublishModelPayloadRelationships()
+            {
+                Resources = new PublishModelPayloadRelationshipsResources()
+                {
+                    Data = new List<PublishModelPayloadRelationshipsResourcesData>
+                        {
+                            new PublishModelPayloadRelationshipsResourcesData
+                            {
+                                Type = TypeItem.Items,
+                                Id = item_id
+                            },
+                        }
+                }
+            }
+        };
+
+        PublishModel publishModel = await dataManagementClient.ExecutePublishModelAsync(projectId: project_id, publishModelPayload: publishModelPayload);
+
+        TypeCommands publishModelType = publishModel.Type;
+        string publishModelId = publishModel.Id;
+
+        Console.WriteLine(publishModelType);
+        Console.WriteLine(publishModelId);
+
+        Console.WriteLine(publishModel);
+    }
+
+    public async Task ExecutePublishWithoutLinksAsync()
+    {
+        PublishWithoutLinksPayload publishWithoutLinksPayload = new PublishWithoutLinksPayload()
+        {
+            Type = TypeCommands.Commands,
+            Attributes = new PublishWithoutLinksPayloadAttributes()
+            {
+                Extension = new PublishWithoutLinksPayloadAttributesExtension()
+                {
+                    Type = TypeCommandtypePublishWithoutLinks.CommandsautodeskBim360C4RPublishWithoutLinks,
+                    VarVersion = "1.0.0"
+                }
+            },
+            Relationships = new PublishWithoutLinksPayloadRelationships()
+            {
+                Resources = new PublishWithoutLinksPayloadRelationshipsResources()
+                {
+                    Data = new List<PublishWithoutLinksPayloadRelationshipsResourcesData>
+                        {
+                            new PublishWithoutLinksPayloadRelationshipsResourcesData
+                            {
+                                Type = TypeItem.Items,
+                                Id = item_id
+                            },
+                        }
+                }
+            }
+        };
+
+        PublishWithoutLinks publishWithoutLinks = await dataManagementClient.ExecutePublishWithoutLinksAsync(projectId: project_id, publishWithoutLinksPayload: publishWithoutLinksPayload);
+
+        TypeCommands publishWithoutLinksType = publishWithoutLinks.Type;
+        string publishWithoutLinksId = publishWithoutLinks.Id;
+
+        Console.WriteLine(publishWithoutLinksType);
+        Console.WriteLine(publishWithoutLinksId);
+
+        Console.WriteLine(publishWithoutLinks);
+    }
+
     #endregion commands
 
     public static async Task Main(string[] args)
@@ -1124,9 +1284,9 @@ class DataManagement
         // await dataManagement.GetProjectAsync();
         // await dataManagement.GetProjectHubAsync();
         // await dataManagement.GetProjectTopFoldersAsync();
-        // await dataManagement.GetDownloadAsync(); --
-        // await dataManagement.GetDownloadJobAsync(); --
-        // await dataManagement.StartDownloadAsync(); --
+        // await dataManagement.GetDownloadAsync();
+        // await dataManagement.GetDownloadJobAsync();
+        // await dataManagement.StartDownloadAsync();
         // await dataManagement.CreateStorageAsync();
 
         // Folders
@@ -1137,7 +1297,7 @@ class DataManagement
         // await dataManagement.GetFolderRelationshipsLinksAsync();
         // await dataManagement.GetFolderRelationshipsRefsAsync();
         // await dataManagement.GetFolderSearchAsync();
-        // await dataManagement.CreateFolderAsync();
+        // await dataManagement.CreateFolderAsync(); 
         // await dataManagement.CreateFolderRelationshipsRefAsync();
         // await dataManagement.PatchFolderAsync();
 
@@ -1149,7 +1309,7 @@ class DataManagement
         // await dataManagement.GetItemRelationshipsRefsAsync();
         // await dataManagement.GetItemTipAsync();
         // await dataManagement.GetItemVersionsAsync();
-        // await dataManagement.CreateItemAsync();
+        // await dataManagement.CreateItemAsync(); 
         // await dataManagement.CreateItemRelationshipsRefAsync();
         // await dataManagement.PatchItemAsync();
 
@@ -1168,6 +1328,10 @@ class DataManagement
         // Commands
         // await dataManagement.ExecuteCheckPermissionCommandAsync();
         // await dataManagement.ExecuteListRefsCommandAsync();
+        // await dataManagement.ExecuteListItemsCommandAsync();
+        // await dataManagement.ExecuteGetPublishModelJobAsync();
+        // await dataManagement.ExecutePublishModelAsync();
+        // await dataManagement.ExecutePublishWithoutLinksAsync();
     }
 }
 
