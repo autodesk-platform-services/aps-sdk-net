@@ -779,9 +779,10 @@ namespace Autodesk.DataManagement
         /// <param name="folderId">
         /// The unique identifier of a folder.
         /// </param>
-        /// <param name="filter">
-        /// Filter the data. See the Filtering section for details. (optional)
-        /// </param>
+        /// <param name="filterFieldName"></param>
+        /// Field name for filtering the data. See the Filtering section for details. (optional)
+        /// <param name="filterValue"></param>
+        /// Value to match the filter with. See the Filtering section for details. (optional)
         /// <param name="pageNumber">
         /// Specifies what page to return. Page numbers are 0-based (the first page is page 0). (optional)
         /// </param>
@@ -793,7 +794,7 @@ namespace Autodesk.DataManagement
         /// </param>
         /// <returns>Task of Search</returns>
 
-        public async System.Threading.Tasks.Task<Search> GetFolderSearchAsync(string projectId, string folderId, List<string> filter = default(List<string>), int pageNumber = 0, string accessToken = default, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<Search> GetFolderSearchAsync(string projectId, string folderId, string filterFieldName = default, List<string> filterValue = default(List<string>), int pageNumber = 0, string accessToken = default, bool throwOnError = true)
         {
             if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
             {
@@ -803,7 +804,7 @@ namespace Autodesk.DataManagement
             {
                 accessToken = await this.AuthenticationProvider.GetAccessToken();
             }
-            var response = await this.FoldersApi.GetFolderSearchAsync(projectId, folderId, filter, pageNumber, accessToken, throwOnError);
+            var response = await this.FoldersApi.GetFolderSearchAsync(projectId, folderId,filterFieldName, filterValue, pageNumber, accessToken, throwOnError);
             return response.Content;
         }
         /// <summary>

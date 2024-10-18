@@ -49,14 +49,14 @@ namespace Autodesk.DataManagement.Model
         /// <summary>
         ///The new folder name (1-255 characters). 
 ///
-///Avoid using the following reserved characters in the name: `<`, `>`, `:`, `"`, `/`, `\`, `|`, `?`, `*`, `'`, `\n`, `\r`, `\t`, `\0`, `\f`, `¢`, `™`, `$`, `®`. 
+///Avoid using the following reserved characters in the name: `&lt;`, `&gt;`, `:`, `"`, `/`, `\`, `|`, `?`, `*`, `'`, `\n`, `\r`, `\t`, `\0`, `\f`, `¢`, `™`, `$`, `®`. 
 ///
 ///When a deleted folder is restored, it keeps its original name. However, if a name conflict occurs, you must provide a new unique name for it. 
         /// </summary>
         /// <value>
         ///The new folder name (1-255 characters). 
 ///
-///Avoid using the following reserved characters in the name: `<`, `>`, `:`, `"`, `/`, `\`, `|`, `?`, `*`, `'`, `\n`, `\r`, `\t`, `\0`, `\f`, `¢`, `™`, `$`, `®`. 
+///Avoid using the following reserved characters in the name: `&lt;, `>`, `:`, `"`, `/`, `\`, `|`, `?`, `*`, `'`, `\n`, `\r`, `\t`, `\0`, `\f`, `¢`, `™`, `$`, `®`. 
 ///
 ///When a deleted folder is restored, it keeps its original name. However, if a name conflict occurs, you must provide a new unique name for it. 
         /// </value>

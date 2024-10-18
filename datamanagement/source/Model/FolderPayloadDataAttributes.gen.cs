@@ -37,7 +37,7 @@ namespace Autodesk.DataManagement.Model
     /// The properties of the folder to be created.
     /// </summary>
     [DataContract]
-    public partial class FolderPayloadDataAttributes 
+    public partial class FolderPayloadDataAttributes
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="FolderPayloadDataAttributes" /> class.
@@ -45,28 +45,28 @@ namespace Autodesk.DataManagement.Model
         public FolderPayloadDataAttributes()
         {
         }
-        
+
         /// <summary>
         ///The name of the new folder (1-255 characters).
-///
-///Avoid using the following reserved characters in the name: `<`, `>`, `:`, `"`, `/`, `\`, `|`, `?`, `*`, `'`, `\n`, `\r`, `\t`, `\0`, `\f`, `¢`, `™`, `$`, `®`.
-///
-///If you assign the name of a deleted folder to this folder, and later you decide to restore the deleted folder, you will have to rename the deleted folder.
+        ///
+        ///Avoid using the following reserved characters in the name: `&lt;`, `&gt;`, `:`, `"`, `/`, `\`, `|`, `?`, `*`, `'`, `\n`, `\r`, `\t`, `\0`, `\f`, `¢`, `™`, `$`, `®`.
+        ///
+        ///If you assign the name of a deleted folder to this folder, and later you decide to restore the deleted folder, you will have to rename the deleted folder.
         /// </summary>
         /// <value>
         ///The name of the new folder (1-255 characters).
-///
-///Avoid using the following reserved characters in the name: `<`, `>`, `:`, `"`, `/`, `\`, `|`, `?`, `*`, `'`, `\n`, `\r`, `\t`, `\0`, `\f`, `¢`, `™`, `$`, `®`.
-///
-///If you assign the name of a deleted folder to this folder, and later you decide to restore the deleted folder, you will have to rename the deleted folder.
+        ///
+        ///Avoid using the following reserved characters in the name: `&lt;`, `&gt;`, `:`, `"`, `/`, `\`, `|`, `?`, `*`, `'`, `\n`, `\r`, `\t`, `\0`, `\f`, `¢`, `™`, `$`, `®`.
+        ///
+        ///If you assign the name of a deleted folder to this folder, and later you decide to restore the deleted folder, you will have to rename the deleted folder.
         /// </value>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [DataMember(Name = "name", EmitDefaultValue = false)]
         public string Name { get; set; }
 
         /// <summary>
         ///Gets or Sets Extension
         /// </summary>
-        [DataMember(Name="extension", EmitDefaultValue=false)]
+        [DataMember(Name = "extension", EmitDefaultValue = false)]
         public FolderPayloadDataAttributesExtension Extension { get; set; }
 
         /// <summary>

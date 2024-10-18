@@ -347,7 +347,7 @@ namespace Autodesk.DataManagement.Http
          /// </param>
         /// <returns>Task of ApiResponse&lt;Search&gt;</returns>
         
-        System.Threading.Tasks.Task<ApiResponse<Search>> GetFolderSearchAsync (string projectId, string folderId, List<string> filter= default(List<string>), int pageNumber= default(int),  string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<ApiResponse<Search>> GetFolderSearchAsync (string projectId, string folderId,string filterFieldName =default, List<string> filterValue = default(List<string>), int pageNumber= default(int),  string accessToken = null, bool throwOnError = true);
         /// <summary>
         /// Modify a Folder
         /// </summary>
@@ -1357,13 +1357,13 @@ namespace Autodesk.DataManagement.Http
          /// </param>
         /// <returns>Task of ApiResponse&lt;Search&gt;></returns>
         
-        public async System.Threading.Tasks.Task<ApiResponse<Search>> GetFolderSearchAsync (string projectId,string folderId,List<string> filter= default(List<string>),int pageNumber= default(int), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ApiResponse<Search>> GetFolderSearchAsync (string projectId,string folderId,string filterFieldName = default, List<string> filterValue = default(List<string>),int pageNumber= default(int), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into GetFolderSearchAsync ");
             using (var request = new HttpRequestMessage())
             {
                 var queryParam = new Dictionary<string, object>();
-                SetQueryParameter("filter[*]", filter, queryParam);
+                SetQueryParameter($"filter[{filterFieldName}]", filterValue, queryParam);
                 SetQueryParameter("page[number]", pageNumber, queryParam);
                 request.RequestUri =
                     Marshalling.BuildRequestUri("/data/v1/projects/{project_id}/folders/{folder_id}/search",

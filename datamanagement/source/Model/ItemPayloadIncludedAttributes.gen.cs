@@ -49,14 +49,14 @@ namespace Autodesk.DataManagement.Model
         /// <summary>
         ///The name of the version (1-255 characters).
 ///
-///Avoid using the following reserved characters in the name: `<`, `>`, `:`, `"`, `/`, `\`, `|`, `?`, `*`, `'`, `\n`, `\r`, `\t`, `\0`, `\f`, `¢`, `™`, ``$
+///Avoid using the following reserved characters in the name: `&lt;`, `&gt;`, `:`, `"`, `/`, `\`, `|`, `?`, `*`, `'`, `\n`, `\r`, `\t`, `\0`, `\f`, `¢`, `™`, ``$
 ///
 ///If you are creating a new item by copying a version of an existing item, the name defaults to the name of the source version.
         /// </summary>
         /// <value>
         ///The name of the version (1-255 characters).
 ///
-///Avoid using the following reserved characters in the name: `<`, `>`, `:`, `"`, `/`, `\`, `|`, `?`, `*`, `'`, `\n`, `\r`, `\t`, `\0`, `\f`, `¢`, `™`, ``$
+///Avoid using the following reserved characters in the name: `&lt;`, `&gt;`, `:`, `"`, `/`, `\`, `|`, `?`, `*`, `'`, `\n`, `\r`, `\t`, `\0`, `\f`, `¢`, `™`, ``$
 ///
 ///If you are creating a new item by copying a version of an existing item, the name defaults to the name of the source version.
         /// </value>

@@ -34,7 +34,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// The &#x60;&#x60;data&#x60;&#x60; object returned by the GetPublishModelJob command, if the model needs publishing. If the model is already published, the &#x60;&#x60;data&#x60;&#x60; object will bed &#x60;&#x60;null&#x60;&#x60;. 
+    /// The &#x60;&#x60;data&#x60;&#x60; object returned by the GetPublishModelJob command, if the model needs publishing. If the model is already published, the &#x60;&#x60;data&#x60;&#x60; object will be &#x60;&#x60;null&#x60;&#x60;. 
     /// </summary>
     [DataContract]
     public partial class PublishModelJob 

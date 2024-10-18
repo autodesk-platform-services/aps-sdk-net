@@ -365,8 +365,8 @@ class DataManagement
 
     public async Task GetFolderSearchAsync()
     {
-        List<string> filter = new List<string> { };
-        Search search = await dataManagementClient.GetFolderSearchAsync(projectId: project_id, folderId: folder_id, pageNumber: 0);
+        List<string> filter = new List<string> { "John Doe" };
+        Search search = await dataManagementClient.GetFolderSearchAsync(projectId: project_id, folderId: folder_id,filterFieldName:"createUserName",filterValue: filter, pageNumber: 0);
 
         List<VersionData> searchData = search.Data;
         foreach (var currentSearchData in searchData)
