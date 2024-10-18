@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Data Management
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,7 +34,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// ItemPayloadDataAttributes
+    /// The properties of the item to be created.
     /// </summary>
     [DataContract]
     public partial class ItemPayloadDataAttributes 
@@ -46,13 +47,20 @@ namespace Autodesk.DataManagement.Model
         }
         
         /// <summary>
-        /// Gets or Sets DisplayName
+        ///The name of the new item (1-255 characters).
+///
+///Avoid using the following reserved characters in the name: `&lt;`, `&gt;`, `:`, `"`, `/`, `\`, `|`, `?`, `*`, `'`, `\n`, `\r`, `\t`, `\0`, `\f`, `¢`, `™`, `$`, `®`.
         /// </summary>
+        /// <value>
+        ///The name of the new item (1-255 characters).
+///
+///Avoid using the following reserved characters in the name: `&lt;`, `&gt;`, `:`, `"`, `/`, `\`, `|`, `?`, `*`, `'`, `\n`, `\r`, `\t`, `\0`, `\f`, `¢`, `™`, `$`, `®`.
+        /// </value>
         [DataMember(Name="displayName", EmitDefaultValue=false)]
         public string DisplayName { get; set; }
 
         /// <summary>
-        /// Gets or Sets Extension
+        ///Gets or Sets Extension
         /// </summary>
         [DataMember(Name="extension", EmitDefaultValue=false)]
         public ItemPayloadDataAttributesExtension Extension { get; set; }

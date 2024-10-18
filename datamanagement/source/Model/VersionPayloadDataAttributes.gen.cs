@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Data Management
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,7 +34,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// VersionPayloadDataAttributes
+    /// The properties of the version to be created.
     /// </summary>
     [DataContract]
     public partial class VersionPayloadDataAttributes 
@@ -46,20 +47,34 @@ namespace Autodesk.DataManagement.Model
         }
         
         /// <summary>
-        /// Gets or Sets Name
+        ///The file name to be used when synced to local disk (1-255 characters). 
+///
+///Avoid using the following reserved characters in the name: `&lt;, `>`, `:`, `"`, `/`, `\`, `|`, `?`, `*`, `'`, `\n`, `\r`, `\t`, `\0`, `\f`, `¢`, `™`, `$`, `®`.
+///
+///If you are creating the new version by copying an existing version of another item, the system uses the name of the source by default. However, if you specify a name, it will override the default name.
         /// </summary>
+        /// <value>
+        ///The file name to be used when synced to local disk (1-255 characters). 
+///
+///Avoid using the following reserved characters in the name: `&lt;, `>`, `:`, `"`, `/`, `\`, `|`, `?`, `*`, `'`, `\n`, `\r`, `\t`, `\0`, `\f`, `¢`, `™`, `$`, `®`.
+///
+///If you are creating the new version by copying an existing version of another item, the system uses the name of the source by default. However, if you specify a name, it will override the default name.
+        /// </value>
         [DataMember(Name="name", EmitDefaultValue=false)]
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or Sets Extension
+        ///Gets or Sets Extension
         /// </summary>
         [DataMember(Name="extension", EmitDefaultValue=false)]
-        public RelationshipRefsPayloadDataMetaExtension Extension { get; set; }
+        public VersionPayloadDataAttributesExtension Extension { get; set; }
 
         /// <summary>
-        /// Gets or Sets DisplayName
+        ///Reserved for future use. Use `data.attributes.name` for the name.
         /// </summary>
+        /// <value>
+        ///Reserved for future use. Use `data.attributes.name` for the name.
+        /// </value>
         [DataMember(Name="displayName", EmitDefaultValue=false)]
         public string DisplayName { get; set; }
 

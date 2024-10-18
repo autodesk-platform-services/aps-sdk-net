@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Data Management
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,7 +34,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// Successful retrieval of a specific item.
+    /// An object that represents an item.
     /// </summary>
     [DataContract]
     public partial class Item 
@@ -46,28 +47,31 @@ namespace Autodesk.DataManagement.Model
         }
         
         /// <summary>
-        /// Gets or Sets Jsonapi
+        ///Gets or Sets Jsonapi
         /// </summary>
         [DataMember(Name="jsonapi", EmitDefaultValue=false)]
-        public HubsJsonapi Jsonapi { get; set; }
+        public JsonApiVersion Jsonapi { get; set; }
 
         /// <summary>
-        /// Gets or Sets Links
+        ///Gets or Sets Links
         /// </summary>
         [DataMember(Name="links", EmitDefaultValue=false)]
-        public HubsLinks Links { get; set; }
+        public JsonApiLinksSelf Links { get; set; }
 
         /// <summary>
-        /// Gets or Sets Data
+        ///Gets or Sets Data
         /// </summary>
         [DataMember(Name="data", EmitDefaultValue=false)]
         public ItemData Data { get; set; }
 
         /// <summary>
-        /// Gets or Sets Included
+        ///An object containing information about the tip version of this item.
         /// </summary>
+        /// <value>
+        ///An object containing information about the tip version of this item.
+        /// </value>
         [DataMember(Name="included", EmitDefaultValue=false)]
-        public List<ItemIncluded> Included { get; set; }
+        public List<VersionData> Included { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

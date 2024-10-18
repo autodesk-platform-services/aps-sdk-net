@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Data Management
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,7 +34,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.DataManagement.Model
 {
     /// <summary>
-    /// ModifyVersionPayloadDataAttributes
+    /// Contains the properties to update
     /// </summary>
     [DataContract]
     public partial class ModifyVersionPayloadDataAttributes 
@@ -46,8 +47,15 @@ namespace Autodesk.DataManagement.Model
         }
         
         /// <summary>
-        /// Gets or Sets Name
+        ///The file name to be used when synced to local disk (1-255 characters). 
+///
+///Avoid using the following reserved characters in the name: `&lt;, `>`, `:`, `"`, `/`, `\`, `|`, `?`, `*`, `'`, `\n`, `\r`, `\t`, `\0`, `\f`, `¢`, `™`, `$`, `®`.
         /// </summary>
+        /// <value>
+        ///The file name to be used when synced to local disk (1-255 characters). 
+///
+///Avoid using the following reserved characters in the name: `&lt;, `>`, `:`, `"`, `/`, `\`, `|`, `?`, `*`, `'`, `\n`, `\r`, `\t`, `\0`, `\f`, `¢`, `™`, `$`, `®`.
+        /// </value>
         [DataMember(Name="name", EmitDefaultValue=false)]
         public string Name { get; set; }
 
