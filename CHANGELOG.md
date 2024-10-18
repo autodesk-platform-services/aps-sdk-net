@@ -6,7 +6,11 @@
 
 **Closed issues:**
 
+- `JsonSerializationException` on `IssuesClient.GetIssuesAsync()` [\#91](https://github.com/autodesk-platform-services/aps-sdk-net/issues/91)
 - OssClient.DeleteObjectAsync\(\) & OssClient.GetObjectDetailsAsync\(\) NullReferenceException [\#62](https://github.com/autodesk-platform-services/aps-sdk-net/issues/62)
+- Compile sources with documentation. [\#27](https://github.com/autodesk-platform-services/aps-sdk-net/issues/27)
+- GetRefreshTokenAsync questions [\#25](https://github.com/autodesk-platform-services/aps-sdk-net/issues/25)
+- Incorrect links in readme [\#23](https://github.com/autodesk-platform-services/aps-sdk-net/issues/23)
 
 ## [v2](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v2) (2024-07-26)
 
