@@ -53,7 +53,7 @@ namespace Autodesk.DataManagement.Model
         ///The type of the resource. Will always be `objects`.
         /// </value>
         [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; set; }
+        public TypeObject Type { get; set; }
 
         /// <summary>
         ///The URN indicating the location of the binary data. This is represented by the `objectId`  returned when [uploading the file](/en/docs/data/v2/reference/http/buckets-:bucketKey-objects-:objectKey-PUT/).
