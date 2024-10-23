@@ -8,7 +8,7 @@
     <PackageDescription>Client SDK for Data Management OSS API</PackageDescription>
     <Copyright>Autodesk Inc.</Copyright>
     <PackageId>Autodesk.Oss</PackageId>
-    <PackageVersion>2.0.0-beta</PackageVersion>
+    <PackageVersion>2.0.0-beta2</PackageVersion>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/autodesk-platform-services/aps-sdk-net.git</RepositoryUrl> 
