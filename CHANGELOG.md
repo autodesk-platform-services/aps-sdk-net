@@ -6,8 +6,15 @@
 
 **Closed issues:**
 
+- Create issue without assignee fails [\#96](https://github.com/autodesk-platform-services/aps-sdk-net/issues/96)
+- x-ads-force value is sent in header as True instead of true and gets ignored by MD [\#95](https://github.com/autodesk-platform-services/aps-sdk-net/issues/95)
+- HookData object does not contain any HookAttributes like ProjectId [\#94](https://github.com/autodesk-platform-services/aps-sdk-net/issues/94)
 - `JsonSerializationException` on `IssuesClient.GetIssuesAsync()` [\#91](https://github.com/autodesk-platform-services/aps-sdk-net/issues/91)
 - OssClient.DeleteObjectAsync\(\) & OssClient.GetObjectDetailsAsync\(\) NullReferenceException [\#62](https://github.com/autodesk-platform-services/aps-sdk-net/issues/62)
+- Error while using DataManagementClient.GetFolderContentsAsync [\#61](https://github.com/autodesk-platform-services/aps-sdk-net/issues/61)
+- DataManagement - Missing relationships field in VersionData model [\#32](https://github.com/autodesk-platform-services/aps-sdk-net/issues/32)
+- `FolderContentsIncludedAttributes.StorageSize`: An `int?` data type is insufficient for large files [\#31](https://github.com/autodesk-platform-services/aps-sdk-net/issues/31)
+- DataManagement - VersionsDataAttributes does not contain FileType and other properties [\#30](https://github.com/autodesk-platform-services/aps-sdk-net/issues/30)
 - Compile sources with documentation. [\#27](https://github.com/autodesk-platform-services/aps-sdk-net/issues/27)
 - GetRefreshTokenAsync questions [\#25](https://github.com/autodesk-platform-services/aps-sdk-net/issues/25)
 - Incorrect links in readme [\#23](https://github.com/autodesk-platform-services/aps-sdk-net/issues/23)
