@@ -61,15 +61,16 @@ namespace Autodesk.Oss
         ///The URL-encoded human friendly name of the object.
         /// </param>
         /// <param name="sourceToUpload">
-        ///Stream of the of file to be uploded or 
+        ///Stream of the of file to be uploaded or 
         ///Path of the file to be uploaded  
         /// </param>
         /// <param name="cancellationToken">
         /// A token to monitor cancellation requests.
         /// (optional)
+        /// </param>
         /// <param name="requestIdPrefix">
-        /// (optional)
         /// A prefix to be added to the request ID.
+        /// (optional)
         /// </param>
         /// <param name="progress">
         /// An IProgress object to report upload progress.
@@ -188,7 +189,7 @@ namespace Autodesk.Oss
             {
                 accessToken = await this.AuthenticationProvider.GetAccessToken();
             }
-            await this.oSSFileTransfer.Download(bucketKey, objectKey, accessToken, cancellationToken,filePath, requestIdPrefix, progress);
+            await this.oSSFileTransfer.Download(bucketKey, objectKey, accessToken, cancellationToken, filePath, requestIdPrefix, progress);
 
         }
 
@@ -232,7 +233,7 @@ namespace Autodesk.Oss
             {
                 accessToken = await this.AuthenticationProvider.GetAccessToken();
             }
-            return await this.oSSFileTransfer.Download(bucketKey, objectKey, accessToken, cancellationToken,null, requestIdPrefix, progress);
+            return await this.oSSFileTransfer.Download(bucketKey, objectKey, accessToken, cancellationToken, null, requestIdPrefix, progress);
         }
 
         /// <summary>
@@ -701,6 +702,10 @@ namespace Autodesk.Oss
         /// <exception cref="OssApiException">Thrown when fails to make API call</exception>
         /// <param name="bucketKey">
         ///The bucket key of the bucket to query.
+        /// </param>
+        /// <param name="accessToken">
+        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync(). 
+        ///(optional)
         /// </param>
         /// <param name="throwOnError">
         /// Specifies whether to throw an error if the API call fails.
