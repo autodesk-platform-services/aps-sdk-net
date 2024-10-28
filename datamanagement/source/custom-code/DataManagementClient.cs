@@ -881,9 +881,10 @@ namespace Autodesk.DataManagement
         /// <param name="folderId">
         ///The unique identifier of a folder.
         /// </param>
-        /// <param name="filter">
-        ///Filter the data. See the [Filtering](/en/docs/data/v2/overview/filtering/) section for details. (optional)
-        /// </param>
+        /// <param name="filterFieldName"></param>
+        /// Field name for filtering the data. See the [Filtering](/en/docs/data/v2/overview/filtering/) section for details. (optional)
+        /// <param name="filterValue"></param>
+        /// Value to match the filter with. See the [Filtering](/en/docs/data/v2/overview/filtering/) section for details. (optional)
         /// <param name="pageNumber">
         ///Specifies what page to return. Page numbers are 0-based (the first page is page 0). (optional)
         /// </param>
