@@ -48,6 +48,10 @@ namespace Autodesk.ModelDerivative.Client
                 // https://docs.microsoft.com/en-us/dotnet/standard/base-types/standard-date-and-time-format-strings#Roundtrip
                 return ((DateTime)obj).ToString ("o");
             }
+            if (obj is Boolean)
+            {
+                return (Boolean)obj ? "true" : "false";
+            }
             else
             {
                 return Convert.ToString (obj);
