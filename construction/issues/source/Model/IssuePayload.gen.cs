@@ -103,7 +103,7 @@ namespace Autodesk.Construction.Issues.Model
                 /// <summary>
                 ///Gets or Sets AssignedToType
                 /// </summary>
-                [DataMember(Name = "assignedToType", EmitDefaultValue = true)]
+                [DataMember(Name = "assignedToType", EmitDefaultValue = false)]
                 public AssignedToType AssignedToType { get; set; }
 
                 /// <summary>

@@ -35,14 +35,15 @@ namespace Autodesk.Oss
         /// </summary>
         /// <param name="sdkManager">The SDK manager.</param>
         /// <param name="authenticationProvider"></param>
-        public OssClient( SDKManager.SDKManager sdkManager = default, IAuthenticationProvider authenticationProvider = default): base(authenticationProvider)
+        public OssClient(SDKManager.SDKManager sdkManager = default, IAuthenticationProvider authenticationProvider = default) : base(authenticationProvider)
         {
-            if(sdkManager == null){
-                sdkManager= SdkManagerBuilder.Create().Build();
+            if (sdkManager == null)
+            {
+                sdkManager = SdkManagerBuilder.Create().Build();
             }
             this.bucketsApi = new BucketsApi(sdkManager);
             this.objectsApi = new ObjectsApi(sdkManager);
-            this.oSSFileTransfer = new OSSFileTransfer(new FileTransferConfigurations(3),sdkManager,authenticationProvider);
+            this.oSSFileTransfer = new OSSFileTransfer(new FileTransferConfigurations(3), sdkManager, authenticationProvider);
 
         }
 
@@ -60,15 +61,16 @@ namespace Autodesk.Oss
         ///The URL-encoded human friendly name of the object.
         /// </param>
         /// <param name="sourceToUpload">
-        ///Stream of the of file to be uploded or 
+        ///Stream of the of file to be uploaded or 
         ///Path of the file to be uploaded  
         /// </param>
         /// <param name="cancellationToken">
         /// A token to monitor cancellation requests.
         /// (optional)
+        /// </param>
         /// <param name="requestIdPrefix">
-        /// (optional)
         /// A prefix to be added to the request ID.
+        /// (optional)
         /// </param>
         /// <param name="progress">
         /// An IProgress object to report upload progress.
@@ -127,7 +129,7 @@ namespace Autodesk.Oss
         /// (optional)
         /// </param>
         /// <returns>Task of &lt;Upload&gt;</returns>
-        public async System.Threading.Tasks.Task<ObjectDetails> Upload(string bucketKey, string objectKey, string sourceToUpload, CancellationToken cancellationToken = default,  string requestIdPrefix = "", IProgress<int> progress = null, string accessToken = default)
+        public async System.Threading.Tasks.Task<ObjectDetails> Upload(string bucketKey, string objectKey, string sourceToUpload, CancellationToken cancellationToken = default, string requestIdPrefix = "", IProgress<int> progress = null, string accessToken = default)
         {
             if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
             {
@@ -177,7 +179,7 @@ namespace Autodesk.Oss
         /// (optional)
         /// </param>
         /// <returns>Task of &lt;Downlaod&gt;</returns>
-        public async System.Threading.Tasks.Task Download(string bucketKey, string objectKey, string filePath, CancellationToken cancellationToken = default,  string requestIdPrefix = "", IProgress<int> progress = null,string accessToken = default)
+        public async System.Threading.Tasks.Task Download(string bucketKey, string objectKey, string filePath, CancellationToken cancellationToken = default, string requestIdPrefix = "", IProgress<int> progress = null, string accessToken = default)
         {
             if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
             {
@@ -187,8 +189,53 @@ namespace Autodesk.Oss
             {
                 accessToken = await this.AuthenticationProvider.GetAccessToken();
             }
-            await this.oSSFileTransfer.Download(bucketKey, objectKey, filePath, accessToken, cancellationToken, requestIdPrefix, progress);
+            await this.oSSFileTransfer.Download(bucketKey, objectKey, accessToken, cancellationToken, filePath, requestIdPrefix, progress);
+
         }
+
+        /// <summary>
+        /// Dwonload a File Stream
+        /// </summary>
+        /// <remarks>
+        ///Downloads a file by transparently handling operations like obtaining signed download URLs and chunking large files for optimal transfer.
+        /// </remarks>
+        /// <exception cref="OssApiException">Thrown when fails to make API call</exception>
+        /// <param name="bucketKey">
+        ///The bucket key of the bucket that contains the objects you are operating on.
+        /// </param>
+        /// <param name="objectKey">
+        ///The URL-encoded human friendly name of the object.
+        /// </param>      
+        /// <param name="cancellationToken">
+        /// A token to monitor cancellation requests.
+        /// (optional)
+        /// </param>
+        /// <param name="requestIdPrefix">
+        /// A prefix to be added to the request ID.
+        /// (optional)
+        /// </param>
+        /// <param name="progress">
+        /// An IProgress object to report upload progress.
+        /// (optional)
+        /// </param>
+        /// <param name="accessToken">
+        /// An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().
+        /// (optional)
+        /// </param>
+        /// <returns>Task of &lt;Stream&gt;</returns>
+        public async System.Threading.Tasks.Task<Stream> Download(string bucketKey, string objectKey, CancellationToken cancellationToken = default, string requestIdPrefix = "", IProgress<int> progress = null, string accessToken = default)
+        {
+            if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider");
+            }
+            else if (String.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await this.AuthenticationProvider.GetAccessToken();
+            }
+            return await this.oSSFileTransfer.Download(bucketKey, objectKey, accessToken, cancellationToken, null, requestIdPrefix, progress);
+        }
+
         /// <summary>
         /// Complete Batch Upload to S3 Signed URLs
         /// </summary>
@@ -316,7 +363,7 @@ namespace Autodesk.Oss
         /// </param>      
         /// <returns>Task of &lt;Batchsigneds3uploadResponse&gt;</returns>
 
-        public async System.Threading.Tasks.Task<Batchsigneds3uploadResponse> BatchSignedS3UploadAsync(string bucketKey, Batchsigneds3uploadObject requests , bool? useAcceleration = default(bool?), int? minutesExpiration = default(int?), string accessToken = default, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<Batchsigneds3uploadResponse> BatchSignedS3UploadAsync(string bucketKey, Batchsigneds3uploadObject requests, bool? useAcceleration = default(bool?), int? minutesExpiration = default(int?), string accessToken = default, bool throwOnError = true)
         {
             if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
             {
@@ -584,7 +631,7 @@ namespace Autodesk.Oss
         /// (optional)
         /// </param>
         /// <returns>Task of HttpResponseMessage</returns>
-        public async System.Threading.Tasks.Task<HttpResponseMessage> DeleteObjectAsync(string bucketKey, string objectKey,string accessToken = default, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<HttpResponseMessage> DeleteObjectAsync(string bucketKey, string objectKey, string accessToken = default, bool throwOnError = true)
         {
             if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
             {
@@ -655,6 +702,10 @@ namespace Autodesk.Oss
         /// <exception cref="OssApiException">Thrown when fails to make API call</exception>
         /// <param name="bucketKey">
         ///The bucket key of the bucket to query.
+        /// </param>
+        /// <param name="accessToken">
+        ///An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync(). 
+        ///(optional)
         /// </param>
         /// <param name="throwOnError">
         /// Specifies whether to throw an error if the API call fails.

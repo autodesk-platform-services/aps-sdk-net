@@ -60,11 +60,12 @@ namespace Autodesk.Construction.Issues.Model
         [EnumMember(Value = " role")]
         Role,
 
-        /// <summary>
-        /// Enum Null for value: null
-        /// </summary>
-        [EnumMember(Value = "null")]
-        Null
+        // Documented but the endpoint doesn't support null so commenting it out.
+        // /// <summary>
+        // /// Enum Null for value: null
+        // /// </summary>
+        // [EnumMember(Value = "null")]
+        // Null
     }
 
 }
