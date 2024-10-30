@@ -8,7 +8,7 @@
     <PackageDescription>Client SDK for Authentication API</PackageDescription>
     <Copyright>Autodesk Inc.</Copyright>
     <PackageId>Autodesk.Authentication</PackageId>
-    <PackageVersion>2.0.0-beta3</PackageVersion>
+    <PackageVersion>2.0.0-beta4</PackageVersion>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>   
    <RepositoryUrl>https://github.com/autodesk-platform-services/aps-sdk-net.git</RepositoryUrl>
