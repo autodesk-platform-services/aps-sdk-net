@@ -52,7 +52,7 @@ namespace Autodesk.DataManagement.Model
         /// <value>
         ///The type of the resource. Will always be `objects`.
         /// </value>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [DataMember(Name="type", EmitDefaultValue=true)]
         public TypeObject Type { get; set; }
 
         /// <summary>
