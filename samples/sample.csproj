@@ -2,18 +2,19 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
    <ItemGroup>
-    <PackageReference Include="Autodesk.ModelDerivative" Version="1.0.0"/>
-    <PackageReference Include="Autodesk.Webhooks" Version="2.0.0"/>
-    <PackageReference Include="Autodesk.DataManagement" Version="1.0.0"/>
-    <PackageReference Include="Autodesk.Oss" Version="1.0.0"/>   
-    <PackageReference Include="Autodesk.Authentication" Version="1.0.0"/>   
-     <PackageReference Include="Autodesk.Construction.Issues" Version="1.0.0-beta1"/>   
     <PackageReference Include="Autodesk.SDKManager" Version="1.1.1" />
+    <PackageReference Include="Autodesk.ModelDerivative" Version="2.0.0"/>
+    <PackageReference Include="Autodesk.Webhooks" Version="3.0.0"/>
+    <PackageReference Include="Autodesk.DataManagement" Version="2.0.0"/>
+    <PackageReference Include="Autodesk.Oss" Version="2.0.0"/>   
+    <PackageReference Include="Autodesk.Authentication" Version="2.0.0"/>   
+    <PackageReference Include="Autodesk.Construction.Issues" Version="2.0.0"/>   
+    <PackageReference Include="Autodesk.Construction.AccountAdmin" Version="2.0.0"/>   
     <PackageReference Include="DotNetEnv" Version="3.1.1" />
   </ItemGroup>
 

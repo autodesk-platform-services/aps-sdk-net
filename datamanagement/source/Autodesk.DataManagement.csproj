@@ -6,9 +6,10 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Authors>Autodesk Platform Services SDK Team</Authors>
     <PackageDescription>Client SDK for Data Management API</PackageDescription>
+    <PackageReleaseNotes>Update to .NET 8.0</PackageReleaseNotes>
     <Copyright>Autodesk Inc.</Copyright>
     <PackageId>Autodesk.DataManagement</PackageId>
-    <PackageVersion>2.0.0-beta4</PackageVersion>
+    <PackageVersion>2.0.0</PackageVersion>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/autodesk-platform-services/aps-sdk-net.git</RepositoryUrl>
