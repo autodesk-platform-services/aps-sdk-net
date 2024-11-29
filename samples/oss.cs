@@ -38,23 +38,27 @@ namespace Samples
             }
 
 
-            public async Task Upload()
+            public async Task UploadObjectAsync ()
             {
                   //The below helper method takes care of the complete upload process, i.e. 
                   // the steps 2 to 4 in this link (https://aps.autodesk.com/en/docs/data/v2/tutorials/app-managed-bucket/)
 
                   //sourceToUpload can be either file path or stream of the object 
-                  ObjectDetails objectDetails = await ossClient.Upload(bucketKey, objectKey, sourceToUpload);
+                  ObjectDetails objectDetails = await ossClient.UploadObjectAsync(bucketKey, objectKey, sourceToUpload);
                   // query for required properties
                   string objectId = objectDetails.ObjectId;
                   string objectkey = objectDetails.ObjectKey;
                   Console.Write(objectDetails);
 
             }
-            public async Task Download()
+            public async Task DownloadObjectAsync ()
             {
                   //The below helper method takes care of the complete Download process, i.e.
-                  await ossClient.Download(bucketKey, objectKey, filePath);
+
+                  await ossClient.DownloadObjectAsync(bucketKey, objectKey, filePath);
+                  
+                  //we can also download the file as stream of files .
+                  Stream fileStream= await ossClient.DownloadObjectAsync(bucketKey, objectKey);
             }
 
             public async Task GetBucketsAsync() {
@@ -157,8 +161,8 @@ namespace Samples
                   Initialise();
                   // Call respective methods
                   await GetBucketDetailsAsync();
-                  await Upload();
-                  await Download();
+                  await UploadObjectAsync();
+                  await DownloadObjectAsync ();
                   await GetBucketsAsync();
                   await CopyToAsync();
                   await BatchSignedS3UploadAsync();
