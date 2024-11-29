@@ -1,6 +1,6 @@
 # APS SDK for .NET
 
-![.NET](https://img.shields.io/badge/.NET%20Standard-2.0-blue.svg)
+![.NET](https://img.shields.io/badge/-.NET%208.0-blueviolet?logo=dotnet)
 
 The **Autodesk Platform Services (APS) SDK for .NET** helps .NET developer create applications that leverage the various APS services: Model Derivative, Data Management, OSS, Webhooks. More services soon.
 
