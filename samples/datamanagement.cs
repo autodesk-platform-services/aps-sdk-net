@@ -2,6 +2,7 @@ using Autodesk.DataManagement;
 using Autodesk.DataManagement.Http;
 using Autodesk.DataManagement.Model;
 using Autodesk.SDKManager;
+using Newtonsoft.Json;
 
 class DataManagement
 {
@@ -254,7 +255,24 @@ class DataManagement
         List<FilterType> filter_type = new List<FilterType> { FilterType.Items, FilterType.Folders };
 
         FolderContents folderContents = await dataManagementClient.GetFolderContentsAsync(projectId: project_id, folderId: folder_id, filterType: filter_type);
+        Console.WriteLine(folderContents);
         List<IFolderContentsData> folderContentsData = folderContents.Data;
+
+        // Prepare to serialize using the FolderContentsDataConverter
+        var converter = new FolderContentsDataConverter();
+        var serializer = new JsonSerializer();
+
+        using (var stringWriter = new StringWriter())
+        using (var jsonWriter = new JsonTextWriter(stringWriter))
+        {
+            // Call WriteJson manually
+            converter.WriteJson(jsonWriter, folderContents.Data, serializer);
+
+            // Output the resulting JSON string
+            string jsonOutput = stringWriter.ToString();
+            Console.WriteLine(jsonOutput);
+        }
+
         foreach (var current in folderContentsData)
         {
             if (current is FolderData folder)
@@ -366,7 +384,7 @@ class DataManagement
     public async Task GetFolderSearchAsync()
     {
         List<string> filter = new List<string> { "John Doe" };
-        Search search = await dataManagementClient.GetFolderSearchAsync(projectId: project_id, folderId: folder_id,filterFieldName:"createUserName",filterValue: filter, pageNumber: 0);
+        Search search = await dataManagementClient.GetFolderSearchAsync(projectId: project_id, folderId: folder_id, filterFieldName: "createUserName", filterValue: filter, pageNumber: 0);
 
         List<VersionData> searchData = search.Data;
         foreach (var currentSearchData in searchData)
@@ -635,7 +653,7 @@ class DataManagement
                 Type = TypeItem.Items,
                 Attributes = new ItemPayloadDataAttributes()
                 {
-                    DisplayName = "drawingmyt.rvt",
+                    DisplayName = "drawingmytmz.rvt",
                     Extension = new ItemPayloadDataAttributesExtension()
                     {
                         Type = "items:autodesk.bim360:File",
@@ -670,11 +688,22 @@ class DataManagement
                     Id = "1",
                     Attributes = new ItemPayloadIncludedAttributes()
                     {
-                        Name = "drawingmyt.rvt",
+                        Name = "drawingmytmz.rvt",
                         Extension = new ItemPayloadIncludedAttributesExtension()
                         {
                             Type = "versions:autodesk.bim360:File",
                             VarVersion = "1.0"
+                        }
+                    },
+                    Relationships = new ItemPayloadIncludedRelationships()
+                    {
+                        Storage = new ItemPayloadIncludedRelationshipsStorage()
+                        {
+                            Data = new ItemPayloadIncludedRelationshipsStorageData()
+                            {
+                                Type = TypeObject.Objects,
+                                Id = "urn:adsk.objects:os.object:wip.dm.prod/462aed7c-8d5d-47a1-ae5f-5c930a35931c.rvt"
+                            }
                         }
                     }
                 }
@@ -1088,6 +1117,22 @@ class DataManagement
 
         Console.WriteLine(listRefs);
 
+
+        // Prepare to serialize using the ListRefsIncludedConverter
+        var converter = new ListRefsIncludedConverter();
+        var serializer = new JsonSerializer();
+
+        using (var stringWriter = new StringWriter())
+        using (var jsonWriter = new JsonTextWriter(stringWriter))
+        {
+            // Call WriteJson manually
+            converter.WriteJson(jsonWriter, listRefs.Included, serializer);
+
+            // Output the resulting JSON string
+            string jsonOutput = stringWriter.ToString();
+            Console.WriteLine(jsonOutput);
+        }
+
         List<IListRefsIncluded> listRefsIncluded = listRefs.Included;
         foreach (var current in listRefsIncluded)
         {
@@ -1309,7 +1354,7 @@ class DataManagement
         // await dataManagement.GetItemRelationshipsRefsAsync();
         // await dataManagement.GetItemTipAsync();
         // await dataManagement.GetItemVersionsAsync();
-        // await dataManagement.CreateItemAsync(); 
+        // await dataManagement.CreateItemAsync();
         // await dataManagement.CreateItemRelationshipsRefAsync();
         // await dataManagement.PatchItemAsync();
 

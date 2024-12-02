@@ -53,9 +53,61 @@ namespace Autodesk.DataManagement
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            // Serialize list of objects
-            serializer.Serialize(writer, value);
+            var list = value as List<IFolderContentsData>;
+            if (list == null)
+                throw new JsonSerializationException("Expected a List<IFolderContentsData> object.");
+
+            writer.WriteStartArray();
+
+            foreach (var item in list)
+            {
+                if (item is FolderData)
+                {
+                    var folderData = item as FolderData;
+                    writer.WriteStartObject();
+                    writer.WritePropertyName("type");
+                    writer.WriteValue("folders");
+
+                    // Serialize remaining properties of FolderData, excluding "type"
+                    foreach (var property in typeof(FolderData).GetProperties())
+                    {
+                        if (property.Name != "Type")
+                        {
+                            writer.WritePropertyName(property.Name);
+                            serializer.Serialize(writer, property.GetValue(folderData));
+                        }
+                    }
+
+                    writer.WriteEndObject();
+                }
+                else if (item is ItemData)
+                {
+                    var itemData = item as ItemData;
+                    writer.WriteStartObject();
+                    writer.WritePropertyName("type");
+                    writer.WriteValue("items");
+
+                    // Serialize remaining properties of ItemData, excluding "type"
+                    foreach (var property in typeof(ItemData).GetProperties())
+                    {
+                        if (property.Name != "Type")
+                        {
+                            writer.WritePropertyName(property.Name);
+                            serializer.Serialize(writer, property.GetValue(itemData));
+                        }
+                    }
+
+                    writer.WriteEndObject();
+                }
+                else
+                {
+                    throw new JsonSerializationException("Unknown type in list.");
+                }
+            }
+
+            writer.WriteEndArray();
         }
+
     }
 
     public class FolderRefsDataConverter : JsonConverter
@@ -108,8 +160,78 @@ namespace Autodesk.DataManagement
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            // Serialize list of objects
-            serializer.Serialize(writer, value);
+            var list = value as List<IFolderRefsData>;
+            if (list == null)
+                throw new JsonSerializationException("Expected a List<IFolderRefsData> object.");
+
+            writer.WriteStartArray();
+
+            foreach (var item in list)
+            {
+                if (item is FolderData)
+                {
+                    var folderData = item as FolderData;
+                    writer.WriteStartObject();
+                    writer.WritePropertyName("type");
+                    writer.WriteValue("folders");
+
+                    // Serialize remaining properties of FolderData, excluding "type"
+                    foreach (var property in typeof(FolderData).GetProperties())
+                    {
+                        if (property.Name != "Type")
+                        {
+                            writer.WritePropertyName(property.Name);
+                            serializer.Serialize(writer, property.GetValue(folderData));
+                        }
+                    }
+
+                    writer.WriteEndObject();
+                }
+                else if (item is ItemData)
+                {
+                    var itemData = item as ItemData;
+                    writer.WriteStartObject();
+                    writer.WritePropertyName("type");
+                    writer.WriteValue("items");
+
+                    // Serialize remaining properties of ItemData, excluding "type"
+                    foreach (var property in typeof(ItemData).GetProperties())
+                    {
+                        if (property.Name != "Type")
+                        {
+                            writer.WritePropertyName(property.Name);
+                            serializer.Serialize(writer, property.GetValue(itemData));
+                        }
+                    }
+
+                    writer.WriteEndObject();
+                }
+                else if (item is VersionData)
+                {
+                    var versionData = item as VersionData;
+                    writer.WriteStartObject();
+                    writer.WritePropertyName("type");
+                    writer.WriteValue("versions");
+
+                    // Serialize remaining properties of VersionData, excluding "type"
+                    foreach (var property in typeof(VersionData).GetProperties())
+                    {
+                        if (property.Name != "Type")
+                        {
+                            writer.WritePropertyName(property.Name);
+                            serializer.Serialize(writer, property.GetValue(versionData));
+                        }
+                    }
+
+                    writer.WriteEndObject();
+                }
+                else
+                {
+                    throw new JsonSerializationException("Unknown type in list.");
+                }
+            }
+
+            writer.WriteEndArray();
         }
     }
 
@@ -163,8 +285,78 @@ namespace Autodesk.DataManagement
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            // Serialize list of objects
-            serializer.Serialize(writer, value);
+            var list = value as List<IRefsData>;
+            if (list == null)
+                throw new JsonSerializationException("Expected a List<IRefsData> object.");
+
+            writer.WriteStartArray();
+
+            foreach (var item in list)
+            {
+                if (item is FolderData)
+                {
+                    var folderData = item as FolderData;
+                    writer.WriteStartObject();
+                    writer.WritePropertyName("type");
+                    writer.WriteValue("folders");
+
+                    // Serialize remaining properties of FolderData, excluding "type"
+                    foreach (var property in typeof(FolderData).GetProperties())
+                    {
+                        if (property.Name != "Type")
+                        {
+                            writer.WritePropertyName(property.Name);
+                            serializer.Serialize(writer, property.GetValue(folderData));
+                        }
+                    }
+
+                    writer.WriteEndObject();
+                }
+                else if (item is ItemData)
+                {
+                    var itemData = item as ItemData;
+                    writer.WriteStartObject();
+                    writer.WritePropertyName("type");
+                    writer.WriteValue("items");
+
+                    // Serialize remaining properties of ItemData, excluding "type"
+                    foreach (var property in typeof(ItemData).GetProperties())
+                    {
+                        if (property.Name != "Type")
+                        {
+                            writer.WritePropertyName(property.Name);
+                            serializer.Serialize(writer, property.GetValue(itemData));
+                        }
+                    }
+
+                    writer.WriteEndObject();
+                }
+                else if (item is VersionData)
+                {
+                    var versionData = item as VersionData;
+                    writer.WriteStartObject();
+                    writer.WritePropertyName("type");
+                    writer.WriteValue("versions");
+
+                    // Serialize remaining properties of VersionData, excluding "type"
+                    foreach (var property in typeof(VersionData).GetProperties())
+                    {
+                        if (property.Name != "Type")
+                        {
+                            writer.WritePropertyName(property.Name);
+                            serializer.Serialize(writer, property.GetValue(versionData));
+                        }
+                    }
+
+                    writer.WriteEndObject();
+                }
+                else
+                {
+                    throw new JsonSerializationException("Unknown type in list.");
+                }
+            }
+
+            writer.WriteEndArray();
         }
     }
 
@@ -258,9 +450,80 @@ namespace Autodesk.DataManagement
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            // Serialize list of objects
-            serializer.Serialize(writer, value);
+            var list = value as List<IRelationshipRefsIncluded>;
+            if (list == null)
+                throw new JsonSerializationException("Expected a List<IRelationshipRefsIncluded> object.");
+
+            writer.WriteStartArray();
+
+            foreach (var item in list)
+            {
+                if (item is FolderData)
+                {
+                    var folderData = item as FolderData;
+                    writer.WriteStartObject();
+                    writer.WritePropertyName("type");
+                    writer.WriteValue("folders");
+
+                    // Serialize remaining properties of FolderData, excluding "type"
+                    foreach (var property in typeof(FolderData).GetProperties())
+                    {
+                        if (property.Name != "Type")
+                        {
+                            writer.WritePropertyName(property.Name);
+                            serializer.Serialize(writer, property.GetValue(folderData));
+                        }
+                    }
+
+                    writer.WriteEndObject();
+                }
+                else if (item is ItemData)
+                {
+                    var itemData = item as ItemData;
+                    writer.WriteStartObject();
+                    writer.WritePropertyName("type");
+                    writer.WriteValue("items");
+
+                    // Serialize remaining properties of ItemData, excluding "type"
+                    foreach (var property in typeof(ItemData).GetProperties())
+                    {
+                        if (property.Name != "Type")
+                        {
+                            writer.WritePropertyName(property.Name);
+                            serializer.Serialize(writer, property.GetValue(itemData));
+                        }
+                    }
+
+                    writer.WriteEndObject();
+                }
+                else if (item is VersionData)
+                {
+                    var versionData = item as VersionData;
+                    writer.WriteStartObject();
+                    writer.WritePropertyName("type");
+                    writer.WriteValue("versions");
+
+                    // Serialize remaining properties of VersionData, excluding "type"
+                    foreach (var property in typeof(VersionData).GetProperties())
+                    {
+                        if (property.Name != "Type")
+                        {
+                            writer.WritePropertyName(property.Name);
+                            serializer.Serialize(writer, property.GetValue(versionData));
+                        }
+                    }
+
+                    writer.WriteEndObject();
+                }
+                else
+                {
+                    throw new JsonSerializationException("Unknown type in list.");
+                }
+            }
+
+            writer.WriteEndArray();
         }
+
     }
 
     public class ListRefsIncludedConverter : JsonConverter
@@ -309,8 +572,59 @@ namespace Autodesk.DataManagement
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            // Serialize list of objects
-            serializer.Serialize(writer, value);
+            var list = value as List<IListRefsIncluded>;
+            if (list == null)
+                throw new JsonSerializationException("Expected a List<IListRefsIncluded> object.");
+
+            writer.WriteStartArray();
+
+            foreach (var item in list)
+            {
+                if (item is ItemData)
+                {
+                    var itemData = item as ItemData;
+                    writer.WriteStartObject();
+                    writer.WritePropertyName("type");
+                    writer.WriteValue("items");
+
+                    // Serialize remaining properties of ItemData, excluding "type"
+                    foreach (var property in typeof(ItemData).GetProperties())
+                    {
+                        if (property.Name != "Type")
+                        {
+                            writer.WritePropertyName(property.Name);
+                            serializer.Serialize(writer, property.GetValue(itemData));
+                        }
+                    }
+
+                    writer.WriteEndObject();
+                }
+                else if (item is VersionData)
+                {
+                    var versionData = item as VersionData;
+                    writer.WriteStartObject();
+                    writer.WritePropertyName("type");
+                    writer.WriteValue("versions");
+
+                    // Serialize remaining properties of VersionData, excluding "type"
+                    foreach (var property in typeof(VersionData).GetProperties())
+                    {
+                        if (property.Name != "Type")
+                        {
+                            writer.WritePropertyName(property.Name);
+                            serializer.Serialize(writer, property.GetValue(versionData));
+                        }
+                    }
+
+                    writer.WriteEndObject();
+                }
+                else
+                {
+                    throw new JsonSerializationException("Unknown type in list.");
+                }
+            }
+
+            writer.WriteEndArray();
         }
     }
 }

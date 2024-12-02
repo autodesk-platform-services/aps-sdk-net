@@ -81,7 +81,7 @@ namespace Autodesk.Oss
         /// (optional)
         /// </param>
         /// <returns>Task of &lt;Upload&gt;</returns>
-        public async System.Threading.Tasks.Task<ObjectDetails> Upload(string bucketKey, string objectKey, Stream sourceToUpload, CancellationToken cancellationToken = default, string requestIdPrefix = "", IProgress<int> progress = null, string accessToken = default)
+        public async System.Threading.Tasks.Task<ObjectDetails> UploadObjectAsync(string bucketKey, string objectKey, Stream sourceToUpload, CancellationToken cancellationToken = default, string requestIdPrefix = "", IProgress<int> progress = null, string accessToken = default)
         {
             if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
             {
@@ -129,7 +129,7 @@ namespace Autodesk.Oss
         /// (optional)
         /// </param>
         /// <returns>Task of &lt;Upload&gt;</returns>
-        public async System.Threading.Tasks.Task<ObjectDetails> Upload(string bucketKey, string objectKey, string sourceToUpload, CancellationToken cancellationToken = default, string requestIdPrefix = "", IProgress<int> progress = null, string accessToken = default)
+        public async System.Threading.Tasks.Task<ObjectDetails> UploadObjectAsync(string bucketKey, string objectKey, string sourceToUpload, CancellationToken cancellationToken = default, string requestIdPrefix = "", IProgress<int> progress = null, string accessToken = default)
         {
             if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
             {
@@ -179,7 +179,7 @@ namespace Autodesk.Oss
         /// (optional)
         /// </param>
         /// <returns>Task of &lt;Downlaod&gt;</returns>
-        public async System.Threading.Tasks.Task Download(string bucketKey, string objectKey, string filePath, CancellationToken cancellationToken = default, string requestIdPrefix = "", IProgress<int> progress = null, string accessToken = default)
+        public async System.Threading.Tasks.Task DownloadObjectAsync(string bucketKey, string objectKey, string filePath, CancellationToken cancellationToken = default, string requestIdPrefix = "", IProgress<int> progress = null, string accessToken = default)
         {
             if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
             {
@@ -223,7 +223,7 @@ namespace Autodesk.Oss
         /// (optional)
         /// </param>
         /// <returns>Task of &lt;Stream&gt;</returns>
-        public async System.Threading.Tasks.Task<Stream> Download(string bucketKey, string objectKey, CancellationToken cancellationToken = default, string requestIdPrefix = "", IProgress<int> progress = null, string accessToken = default)
+        public async System.Threading.Tasks.Task<Stream> DownloadObjectAsync(string bucketKey, string objectKey, CancellationToken cancellationToken = default, string requestIdPrefix = "", IProgress<int> progress = null, string accessToken = default)
         {
             if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
             {

@@ -3,21 +3,19 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Authors>Autodesk Platform Services SDK Team</Authors>
-    <PackageDescription>Client SDK for Construction Account Admin API</PackageDescription>
+    <PackageDescription>Common SDK Manager to support the various APS SDK's.</PackageDescription>
     <PackageReleaseNotes>Update to .NET 8.0</PackageReleaseNotes>
     <Copyright>Autodesk Inc.</Copyright>
-    <PackageId>Autodesk.Construction.AccountAdmin</PackageId>
-    <PackageVersion>2.0.0</PackageVersion>
+    <PackageId>Autodesk.SDKManager</PackageId>
+    <PackageVersion>1.1.1</PackageVersion>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/autodesk-platform-services/aps-sdk-net.git</RepositoryUrl>
   </PropertyGroup>
     <ItemGroup>
-      <PackageReference Include="Autodesk.SDKManager" Version="1.1.1" />
-      <None Include="../../../LICENSE.txt" Pack="true" PackagePath=""/>
-      <None Include="../../../README.md" Pack="true" PackagePath=""/>
+      <PackageReference Include="Autodesk.Forge.Core" Version="4.0.0" />
+      <None Include="LICENSE.txt" Pack="true" PackagePath=""/>
+      <None Include="README.md" Pack="true" PackagePath=""/>
     </ItemGroup>
-
 </Project>

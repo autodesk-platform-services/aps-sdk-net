@@ -7,6 +7,7 @@ using Autodesk.Authentication.Client;
 using System.Net.Http;
 using System.Net.Cache;
 using System.Text.Json.Nodes;
+using Autodesk.SDKManager;
 
 namespace Autodesk.Authentication
 {
@@ -31,8 +32,12 @@ namespace Autodesk.Authentication
         /// Initializes a new instance of the <see cref="AuthenticationClient"/> class.
         /// </summary>
         /// <param name="sdkManager">The SDK manager instance.</param>
-        public AuthenticationClient(SDKManager.SDKManager sdkManager)
+        public AuthenticationClient(SDKManager.SDKManager sdkManager = default)
         {
+            if (sdkManager == null)
+            {
+                sdkManager = SdkManagerBuilder.Create().Build();
+            }
             this.tokenApi = new TokenApi(sdkManager);
             this.usersApi = new UsersApi(sdkManager);
         }
