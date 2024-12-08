@@ -1,6 +1,6 @@
+using Autodesk.Oss.Model;
 using Autodesk.SDKManager;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Autodesk.Oss.Model;
 using System.Net;
 
 namespace Autodesk.Oss.Test;
@@ -34,7 +34,7 @@ public class TestOss
 	#region Buckets
 
 	[TestMethod]
-	public async Task CreateBucketAsync()
+	public async Task TestCreateBucketAsync()
 	{
 		Bucket bucket = await _ossClient.CreateBucketAsync(
 			accessToken: token,
@@ -48,7 +48,7 @@ public class TestOss
 	}
 
 	[TestMethod]
-	public async Task GetBucketDetailsAsync()
+	public async Task TestGetBucketDetailsAsync()
 	{
 		Bucket bucket = await _ossClient.GetBucketDetailsAsync(
 			 accessToken: token,
@@ -57,14 +57,14 @@ public class TestOss
 	}
 
 	[TestMethod]
-	public async Task GetBucketsAsync()
+	public async Task TestGetBucketsAsync()
 	{
 		Buckets buckets = await _ossClient.GetBucketsAsync(accessToken: token);
 		Assert.IsInstanceOfType(buckets.Items, typeof(List<BucketsItems>));
 	}
 
 	[TestMethod]
-	public async Task DeleteBucketAsync()
+	public async Task TestDeleteBucketAsync()
 	{
 		HttpResponseMessage httpResponseMessage = await _ossClient.DeleteBucketAsync(
 			 accessToken: token,
@@ -77,7 +77,7 @@ public class TestOss
 	#region Objects
 
 	[TestMethod]
-	public async Task UploadObjectAsync()
+	public async Task TestUploadObjectAsync()
 	{
 		ObjectDetails objectDetails = await _ossClient.UploadObjectAsync(
 			accessToken: token,
@@ -89,7 +89,7 @@ public class TestOss
 	}
 
 	[TestMethod]
-	public async Task CopyToAsync()
+	public async Task TestCopyToAsync()
 	{
 		ObjectDetails objectDetails = await _ossClient.CopyToAsync(
 			accessToken: token,
@@ -100,7 +100,7 @@ public class TestOss
 	}
 
 	[TestMethod]
-	public async Task DownloadObjectAsync()
+	public async Task TestDownloadObjectAsync()
 	{
 		await _ossClient.DownloadObjectAsync(
 			accessToken: token,
@@ -111,7 +111,7 @@ public class TestOss
 	}
 
 	[TestMethod]
-	public async Task GetObjectDetailsAsync()
+	public async Task TestGetObjectDetailsAsync()
 	{
 		ObjectFullDetails objectFullDetails = await _ossClient.GetObjectDetailsAsync(
 			accessToken: token,
@@ -121,7 +121,7 @@ public class TestOss
 	}
 
 	[TestMethod]
-	public async Task GetObjectsAsync()
+	public async Task TestGetObjectsAsync()
 	{
 		BucketObjects bucketObjects = await _ossClient.GetObjectsAsync(
 			accessToken: token,
@@ -130,7 +130,7 @@ public class TestOss
 	}
 
 	[TestMethod]
-	public async Task DeleteObjectAsync()
+	public async Task TestDeleteObjectAsync()
 	{
 		HttpResponseMessage httpResponseMessage = await _ossClient.DeleteObjectAsync(
 			accessToken: token,
@@ -144,7 +144,7 @@ public class TestOss
 	#region Signed Resources
 
 	[TestMethod]
-	public async Task CreateSignedResourceAsync()
+	public async Task TestCreateSignedResourceAsync()
 	{
 		CreateObjectSigned? signedObject = await _ossClient.CreateSignedResourceAsync(
 			accessToken: token,
@@ -159,7 +159,7 @@ public class TestOss
 	}
 
 	[TestMethod]
-	public async Task GetSignedResourceAsync()
+	public async Task TestGetSignedResourceAsync()
 	{
 		string hash = signedUrl[(signedUrl.LastIndexOf('/') + 1)..signedUrl.IndexOf('?')];
 		Stream? signedResource = await _ossClient.GetSignedResourceAsync(
@@ -169,7 +169,7 @@ public class TestOss
 	}
 
 	[TestMethod]
-	public async Task DeleteSignedResourceAsync()
+	public async Task TestDeleteSignedResourceAsync()
 	{
 		string hash = signedUrl[(signedUrl.LastIndexOf('/') + 1)..signedUrl.IndexOf('?')];
 		HttpResponseMessage httpResponseMessage = await _ossClient.DeleteSignedResourceAsync(
