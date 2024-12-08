@@ -23,7 +23,7 @@ public class TestDataManagement
     string? hubId = Environment.GetEnvironmentVariable("HUB_ID");
     string? projectId = Environment.GetEnvironmentVariable("PROJECT_ID");
     string? downloadId = Environment.GetEnvironmentVariable("DOWNLOAD_ID");
-    string? jobId = Environment.GetEnvironmentVariable("JOB_ID") ?? "";
+    string? jobId = Environment.GetEnvironmentVariable("JOB_ID");
     string? folderId = Environment.GetEnvironmentVariable("FOLDER_ID");
     string? itemId = Environment.GetEnvironmentVariable("ITEM_ID");
     string? versionId = Environment.GetEnvironmentVariable("VERSION_ID");
