@@ -2,20 +2,19 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
    <ItemGroup>
-    <PackageReference Include="Autodesk.SDKManager" Version="1.1.1" />
-    <PackageReference Include="Autodesk.ModelDerivative" Version="2.0.0"/>
-    <PackageReference Include="Autodesk.Webhooks" Version="3.0.0"/>
-    <PackageReference Include="Autodesk.DataManagement" Version="2.0.0"/>
-    <PackageReference Include="Autodesk.Oss" Version="2.0.0"/>   
-    <PackageReference Include="Autodesk.Authentication" Version="2.0.0"/>   
-    <PackageReference Include="Autodesk.Construction.Issues" Version="2.0.0"/>   
-    <PackageReference Include="Autodesk.Construction.AccountAdmin" Version="2.0.0"/>   
-    <PackageReference Include="DotNetEnv" Version="3.1.1" />
+    <PackageReference Include="Autodesk.SDKManager" />
+    <PackageReference Include="Autodesk.ModelDerivative" />
+    <PackageReference Include="Autodesk.Webhooks" />
+    <PackageReference Include="Autodesk.DataManagement" />
+    <PackageReference Include="Autodesk.Oss" />   
+    <PackageReference Include="Autodesk.Authentication" />   
+    <PackageReference Include="Autodesk.Construction.Issues" />   
+    <PackageReference Include="Autodesk.Construction.AccountAdmin" />   
+    <PackageReference Include="DotNetEnv" />
   </ItemGroup>
 
 </Project>
