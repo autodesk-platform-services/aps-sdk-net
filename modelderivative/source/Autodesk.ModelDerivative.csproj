@@ -1,7 +1,6 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-   <TargetFramework>net8.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Authors>Autodesk Platform Services SDK Team</Authors>
@@ -15,7 +14,7 @@
     <RepositoryUrl>https://github.com/autodesk-platform-services/aps-sdk-net.git</RepositoryUrl>
    </PropertyGroup>
     <ItemGroup>
-      <PackageReference Include="Autodesk.SDKManager" Version="1.1.1" />
+      <PackageReference Include="Autodesk.SDKManager" />
       <None Include="../../LICENSE.txt" Pack="true" PackagePath=""/>
       <None Include="../../README.md" Pack="true" PackagePath=""/>
     </ItemGroup>

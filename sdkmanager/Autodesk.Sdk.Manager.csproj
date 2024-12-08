@@ -1,7 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Autodesk Platform Services SDK Team</Authors>
     <PackageDescription>Common SDK Manager to support the various APS SDK's.</PackageDescription>
@@ -14,8 +13,8 @@
     <RepositoryUrl>https://github.com/autodesk-platform-services/aps-sdk-net.git</RepositoryUrl>
   </PropertyGroup>
     <ItemGroup>
-      <PackageReference Include="Autodesk.Forge.Core" Version="4.0.0" />
-      <None Include="LICENSE.txt" Pack="true" PackagePath=""/>
+      <PackageReference Include="Autodesk.Forge.Core" />
+      <None Include="../LICENSE.txt" Pack="true" PackagePath=""/>
       <None Include="README.md" Pack="true" PackagePath=""/>
     </ItemGroup>
 </Project>
