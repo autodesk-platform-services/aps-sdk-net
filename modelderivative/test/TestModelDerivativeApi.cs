@@ -102,7 +102,7 @@ public class TestModelDerivativeAPi
     public async Task TestGetManifestAsync()
     {
         // token
-        Manifest manifestResponse = await _mdClient.GetManifestAsync(accessToken: token, urn);
+        Manifest manifestResponse = await _mdClient.GetManifestAsync(urn, accessToken: token);
         string progress = manifestResponse.Progress;
         Assert.IsTrue(progress == "complete");
     }
@@ -111,7 +111,7 @@ public class TestModelDerivativeAPi
     public async Task TestGetMetadataAsync()
     {
         // token
-        ModelViews modelViewsResponse = await _mdClient.GetModelViewsAsync(accessToken: token, urn);
+        ModelViews modelViewsResponse = await _mdClient.GetModelViewsAsync(urn, accessToken: token);
         Assert.IsTrue(modelViewsResponse.Data.Metadata.Count > 0);
     }
 
@@ -119,7 +119,7 @@ public class TestModelDerivativeAPi
     public async Task GetThumbnailAsync()
     {
         // token
-        Stream thumbnail = await _mdClient.GetThumbnailAsync(accessToken: token, urn, Width.NUMBER_100, Height.NUMBER_100, Region.US);
+        Stream thumbnail = await _mdClient.GetThumbnailAsync(urn, Width.NUMBER_100, Height.NUMBER_100, Region.US, accessToken: token);
         Assert.AreNotSame(thumbnail, null);
 
     }

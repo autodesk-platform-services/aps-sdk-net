@@ -4,7 +4,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Autodesk.SDKManager;
 using Autodesk.Authentication.Model;
 using Autodesk.Authentication;
-using NuGet.Frameworks;
 
 [TestClass]
 public class TestAuthentication

@@ -1,12 +1,6 @@
-using Autodesk.Forge.Core;
-using Autodesk.DataManagement;
-using Autodesk.DataManagement.Http;
 using Autodesk.DataManagement.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Autodesk.SDKManager;
-using Type = Autodesk.DataManagement.Model.Type;
-using System.Reflection.Metadata.Ecma335;
-using System.Data.Common;
 
 namespace Autodesk.DataManagement.Test;
 
@@ -25,14 +19,14 @@ public class TestDataManagement
     // string itemId = Environment.GetEnvironmentVariable("ITEM_ID");
     // string versionId = Environment.GetEnvironmentVariable("VERSION_ID");
 
-    string token = Environment.GetEnvironmentVariable("ACCESS_TOKEN") ?? "eyJhbGciOiJSUzI1NiIsImtpZCI6IjY0RE9XMnJoOE9tbjNpdk1NU0xlNGQ2VHEwUV9SUzI1NiIsInBpLmF0bSI6ImFzc2MifQ.eyJzY29wZSI6WyJ2aWV3YWJsZXM6cmVhZCIsImRhdGE6cmVhZCIsImRhdGE6d3JpdGUiLCJkYXRhOmNyZWF0ZSIsImRhdGE6c2VhcmNoIiwiYnVja2V0OmNyZWF0ZSIsImJ1Y2tldDpyZWFkIiwiYnVja2V0OnVwZGF0ZSIsImJ1Y2tldDpkZWxldGUiXSwiY2xpZW50X2lkIjoiZVdyRHR1TnhWdUdseW13bDRVd2JlYlJUbHVubXdPOGciLCJpc3MiOiJodHRwczovL2RldmVsb3Blci5hcGkuYXV0b2Rlc2suY29tIiwiYXVkIjoiaHR0cHM6Ly9hdXRvZGVzay5jb20iLCJqdGkiOiJqdk5vSDRFbWRuNnFaTHlRTWRwQzJSQWowNXBtUmpNbEN5dWFlUGNFU3NXZGpFRW5Pb21ia0ZTOXNwTmZWczhyIiwiZXhwIjoxNzIzNDQ5Njc5LCJ1c2VyaWQiOiI0UTdDUlhVQzNUQlMifQ.W1JYmpbmIUu0A6Ln4Mh6wTL1eSRmd-Z3qzXc05rdyQABdiuajjT_WyL9AAQnkWpEYJIPPJ7ARhy0ewTItfod87rnwg_CF3-6K9-qjmotiWYisymdUBan8K_-oQNbNhYbfeFxy3dQx1na7rFkE_phH87muhFH0U8QFrllLTgLm0O2GKGMIGhXbmNWTukCAWtQP8PtP5iBQ17reJqK6mXu4_RvRWZAhmfcy2eLZA-ixQmwzGMrFwUD6bgYHmRQdZyBoACkjAbuZd0ip2TDVZA3U2BdA3PmC1xWleekec6Vyr8I5Z6A4TYqxOM8KfkMUKAodKBtZG6vtg0nuuVknFbOoA";
-    string hubId = Environment.GetEnvironmentVariable("HUB_ID") ?? "b.a4f95080-84fe-4281-8d0a-bd8c885695e0";
-    string projectId = Environment.GetEnvironmentVariable("PROJECT_ID") ?? "b.d85232c9-5502-40be-8f8e-fa1caedc7dd9";
-    string downloadId = Environment.GetEnvironmentVariable("DOWNLOAD_ID") ?? "";
-    string jobId = Environment.GetEnvironmentVariable("JOB_ID") ?? "";
-    string folderId = Environment.GetEnvironmentVariable("FOLDER_ID") ?? "urn:adsk.wipprod:fs.folder:co.1v45wu_tRduU909XcnKkkA";
-    string itemId = Environment.GetEnvironmentVariable("ITEM_ID") ?? "urn:adsk.wipprod:fs.file:vf.CmyiDjYZT4CozBc2V2dTOg";
-    string versionId = Environment.GetEnvironmentVariable("VERSION_ID") ?? "urn:adsk.wipprod:fs.file:vf.CmyiDjYZT4CozBc2V2dTOg?version=1";
+    string? token = Environment.GetEnvironmentVariable("ACCESS_TOKEN");
+    string? hubId = Environment.GetEnvironmentVariable("HUB_ID");
+    string? projectId = Environment.GetEnvironmentVariable("PROJECT_ID");
+    string? downloadId = Environment.GetEnvironmentVariable("DOWNLOAD_ID");
+    string? jobId = Environment.GetEnvironmentVariable("JOB_ID");
+    string? folderId = Environment.GetEnvironmentVariable("FOLDER_ID");
+    string? itemId = Environment.GetEnvironmentVariable("ITEM_ID");
+    string? versionId = Environment.GetEnvironmentVariable("VERSION_ID");
 
 
     [ClassInitialize]
@@ -202,14 +196,14 @@ public class TestDataManagement
     {
         Folder folder = await _DataManagement.GetFolderParentAsync(projectId: projectId, folderId: folderId, accessToken: token);
         FolderData folderData = folder.Data;
-        Assert.IsTrue(folderData.Type == Type.Folders);
+      Assert.IsTrue(folderData.Type == TypeFolder.Folders);
     }
 
     [TestMethod]
     public async Task TestGetFolderRefsAsync()
     {
         FolderRefs folderRefs = await _DataManagement.GetFolderRefsAsync(projectId: projectId, folderId: folderId, accessToken: token);
-        Assert.IsInstanceOfType(folderRefs.Data, typeof(List<FolderRefsData>));
+        Assert.IsInstanceOfType(folderRefs.Data, typeof(List<IFolderRefsData>));
     }
 
     [TestMethod]
@@ -505,9 +499,9 @@ public class TestDataManagement
     [TestMethod]
     public async Task TestGetVersionAsync()
     {
-        VersionDetails versionDetails = await _DataManagement.GetVersionAsync(projectId: projectId, versionId: versionId, accessToken: token);
+        ModelVersion versionDetails = await _DataManagement.GetVersionAsync(projectId: projectId, versionId: versionId, accessToken: token);
         VersionData versionDetailsData = versionDetails.Data;
-        Assert.IsTrue(versionDetailsData.Type == Type.Versions);
+        Assert.IsTrue(versionDetailsData.Type == TypeVersion.Versions);
     }
 
     [TestMethod]
@@ -515,7 +509,7 @@ public class TestDataManagement
     {
         DownloadFormats downloadFormats = await _DataManagement.GetVersionDownloadFormatsAsync(projectId: projectId, versionId: versionId, accessToken: token);
         DownloadFormatsData downloadFormatsData = downloadFormats.Data;
-        Assert.IsTrue(downloadFormatsData.Type == Type.DownloadFormats);
+        Assert.IsTrue(downloadFormatsData.Type == TypeDownloadformats.DownloadFormats);
     }
 
     // [TestMethod]
@@ -530,14 +524,14 @@ public class TestDataManagement
     {
         Item item = await _DataManagement.GetVersionItemAsync(projectId: projectId, versionId: versionId, accessToken: token);
         ItemData itemData = item.Data;
-        Assert.IsTrue(itemData.Type == Type.Items);
+        Assert.IsTrue(itemData.Type == TypeItem.Items);
     }
 
     [TestMethod]
     public async Task TestGetVersionRefsAsync()
     {
         Refs refs = await _DataManagement.GetVersionRefsAsync(projectId: projectId, versionId: versionId, accessToken: token);
-        Assert.IsInstanceOfType(refs.Data, typeof(List<RefsData>));
+        Assert.IsInstanceOfType(refs.Data, typeof(List<IRefsData>));
     }
 
     // [TestMethod]
