@@ -13,10 +13,10 @@ public class TestWebhooks
 {
     private static WebhooksClient _webhooksApi = null!;
 
-    string token = Environment.GetEnvironmentVariable("TWO_LEGGED_ACCESS_TOKEN");
-    string callbackUrl = Environment.GetEnvironmentVariable("CALLBACK_URL");
-    string workFlowId = Environment.GetEnvironmentVariable("WORKFLOW_ID");
-    string hookId = Environment.GetEnvironmentVariable("HOOK_ID");
+    string? token = Environment.GetEnvironmentVariable("TWO_LEGGED_ACCESS_TOKEN");
+    string? callbackUrl = Environment.GetEnvironmentVariable("CALLBACK_URL");
+    string? workFlowId = Environment.GetEnvironmentVariable("WORKFLOW_ID");
+    string? hookId = Environment.GetEnvironmentVariable("HOOK_ID");
 
     [ClassInitialize]
     public static void ClassInitialize(TestContext testContext)
@@ -68,7 +68,7 @@ public class TestWebhooks
     [TestMethod]
     public async Task TestGetAppHooksAsync()
     {
-        Hooks getAppHooks = await _webhooksApi.GetAppHooksAsync(accessToken: token, xAdsRegion: XAdsRegion.APAC);
+        Hooks getAppHooks = await _webhooksApi.GetAppHooksAsync(accessToken: token, region: Region.APAC);
         Assert.IsTrue(getAppHooks.Data.Count > 0);
     }
 
@@ -78,9 +78,12 @@ public class TestWebhooks
     {
         HookPayload createSystemEventHook = new HookPayload();
         createSystemEventHook.CallbackUrl = callbackUrl;
-        createSystemEventHook.Scope = createSystemEventHook.Scope.SetScope(Scopes.Workflow, workFlowId);
+        createSystemEventHook.Scope = createSystemEventHook.Scope = new
+		  {
+			  workflow = workFlowId,
+		  };
 
-        HttpResponseMessage createSystemEventHookResponse = await _webhooksApi.CreateSystemEventHookAsync(system: Systems.Derivative, _event: Events.ExtractionFinished, hookPayload: createSystemEventHook, accessToken: token);
+		HttpResponseMessage createSystemEventHookResponse = await _webhooksApi.CreateSystemEventHookAsync(system: Systems.Derivative, _event: Events.ExtractionFinished, hookPayload: createSystemEventHook, accessToken: token);
         var statusCode = createSystemEventHookResponse.StatusCode;
         string statusCodeString = statusCode.ToString();
         Assert.IsTrue(statusCodeString == "Created");
@@ -92,9 +95,12 @@ public class TestWebhooks
     {
         HookPayload createSystemHook = new HookPayload();
         createSystemHook.CallbackUrl = callbackUrl;
-        createSystemHook.Scope = createSystemHook.Scope.SetScope(Scopes.Workflow, workFlowId);
+        createSystemHook.Scope = createSystemHook.Scope = new
+		  {
+			  workflow = workFlowId,
+		  };
 
-        Hook createSystemHookResponse = await _webhooksApi.CreateSystemHookAsync(system: Systems.Derivative, hookPayload: createSystemHook, accessToken: token);
+		Hook createSystemHookResponse = await _webhooksApi.CreateSystemHookAsync(system: Systems.Derivative, hookPayload: createSystemHook, accessToken: token);
         Assert.IsTrue(createSystemHookResponse.Hooks.Count > 0);
     }
 
@@ -103,7 +109,7 @@ public class TestWebhooks
     public async Task TestPatchSystemEventHookAsync()
     {
         ModifyHookPayload updateHook = new ModifyHookPayload();
-        updateHook.Status = "inactive";
+        updateHook.Status = StatusRequest.Inactive;
 
         // Successful deactivation of a webhook:
         HttpResponseMessage updateHookResponse = await _webhooksApi.PatchSystemEventHookAsync(system: Systems.Data, _event: Events.DmVersionAdded, hookId: hookId, modifyHookPayload: updateHook, accessToken: token);
