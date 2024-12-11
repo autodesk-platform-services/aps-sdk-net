@@ -3,7 +3,7 @@
 		<ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageVersion Include="Autodesk.Forge.Core" Version="4.0.0" />
+		<PackageVersion Include="Autodesk.Forge.Core" Version="4.1.1" />
 		<PackageVersion Include="Autodesk.SDKManager" Version="1.1.1" />
 		<PackageVersion Include="Autodesk.ModelDerivative" Version="2.0.0"/>
 		<PackageVersion Include="Autodesk.Webhooks" Version="3.0.0"/>
