@@ -2,18 +2,19 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
    <ItemGroup>
-    <PackageReference Include="Autodesk.ModelDerivative" Version="2.0.0-beta2" />
-    <PackageReference Include="Autodesk.Webhooks" Version="2.0.0-beta2" />
-    <PackageReference Include="Autodesk.DataManagement" Version="1.0.0" />
-    <PackageReference Include="Autodesk.Oss" Version="2.0.0-beta" />   
-    <PackageReference Include="Autodesk.Authentication" Version="2.0.0-beta2" />   
-    <PackageReference Include="Autodesk.Construction.Issues" Version="2.0.0-beta" />   
-    <PackageReference Include="Autodesk.Construction.AccountAdmin" Version="2.0.0-beta" />   
-    <PackageReference Include="Autodesk.SdkManager" Version="1.1.0" />
+    <PackageReference Include="Autodesk.SDKManager" />
+    <PackageReference Include="Autodesk.ModelDerivative" />
+    <PackageReference Include="Autodesk.Webhooks" />
+    <PackageReference Include="Autodesk.DataManagement" />
+    <PackageReference Include="Autodesk.Oss" />   
+    <PackageReference Include="Autodesk.Authentication" />   
+    <PackageReference Include="Autodesk.Construction.Issues" />   
+    <PackageReference Include="Autodesk.Construction.AccountAdmin" />   
+    <PackageReference Include="DotNetEnv" />
   </ItemGroup>
+
 </Project>

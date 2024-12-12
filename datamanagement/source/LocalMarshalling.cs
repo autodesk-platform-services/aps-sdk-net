@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Data Management
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using Newtonsoft.Json;
 using System.Net.Http;
@@ -46,23 +47,23 @@ namespace Autodesk.DataManagement.Client
             if (obj is DateTime)
             {
                 // https://docs.microsoft.com/en-us/dotnet/standard/base-types/standard-date-and-time-format-strings#Roundtrip
-                return ((DateTime)obj).ToString("o");
+                return ((DateTime)obj).ToString ("o");
             }
             else
             {
-                return Convert.ToString(obj);
+                return Convert.ToString (obj);
             }
         }
         public static async Task<T> DeserializeAsync<T>(HttpContent content)
         {
-            if (content == null)
+            if (content==null)
             {
                 throw new ArgumentNullException(nameof(content));
             }
             // Don't deserialize Stream - this is fix for download scenarios.
-            if (typeof(T) == typeof(System.IO.Stream))
+            if(typeof(T) == typeof(System.IO.Stream))
             {
-                return await (dynamic)content.ReadAsStreamAsync();
+                return await (dynamic) content.ReadAsStreamAsync();
             }
 
             string mediaType = content.Headers.ContentType?.MediaType;

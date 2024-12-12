@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Data Management
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using Autodesk.Forge.Core;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
@@ -31,6 +32,7 @@ using Autodesk.DataManagement.Client;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Autodesk.SDKManager;
+using System.Collections;
 
 namespace Autodesk.DataManagement.Http
 {
@@ -40,16 +42,34 @@ namespace Autodesk.DataManagement.Http
     public interface ICommandsApi
     {
         /// <summary>
-        /// Create commands
+        /// Execute a Command
         /// </summary>
         /// <remarks>
-        /// Commands enable you to perform general operations on multiple resources. For example, you can check whether a user has permission to delete specific versions, items, and folders. Commands are executed by sending requests in the body payload. See the [Commands](/en/docs/data/v2/overview/commands/) section for more information. 
+        ///Executes the command that you specify in the request body. Commands enable you to perform general operations on multiple resources.
+///
+///For example, you can check whether a user has permission to delete a collection of versions, items, and folders.
+///
+///The command as well as the input data for the command are specified using the `data` object of the request body. 
+///
+///For more information about commands see the [Commands](/en/docs/data/v2/overview/commands/) section in the Developer's Guide.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="projectId">The unique identifier of a project. For BIM 360 Docs, the project ID in the Data Management API corresponds to the project ID in the BIM 360 API. To convert a project ID in the BIM 360 API into a project ID in the Data Management API you need to add a “b.\&quot; prefix. For example, a project ID of c8b0c73d-3ae9 translates to a project ID of b.c8b0c73d-3ae9.</param>/// <param name="xUserId">In a two-legged authentication context, the app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act on behalf of only the user specified. (optional)</param>/// <param name="commandPayload">The POST body is a JSON object with the following attributes. (optional)</param>
-        /// <returns>Task of ApiResponse<Command></returns>
+         /// <param name="projectId">
+         ///The unique identifier of a project. 
+///
+///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
+///
+///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
+         /// </param>
+         /// <param name="xUserId">
+         ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
+         /// </param>
+         /// <param name="commandPayload">
+         /// (optional)
+         /// </param>
+        /// <returns>Task of ApiResponse&lt;Command&gt;</returns>
         
-        System.Threading.Tasks.Task<ApiResponse<Command>> PostCommandAsync (string projectId, string xUserId= default(string), CommandPayload commandPayload= default(CommandPayload),  string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<ApiResponse<Command>> ExecuteCommandAsync (string projectId, string xUserId= default(string), CommandPayload commandPayload= default(CommandPayload),  string accessToken = null, bool throwOnError = true);
     }
 
     /// <summary>
@@ -72,27 +92,49 @@ namespace Autodesk.DataManagement.Http
         }
         private void SetQueryParameter(string name, object value, Dictionary<string, object> dictionary)
         {
-            if(value is Enum)
+            if (value is Enum)
             {
                 var type = value.GetType();
                 var memberInfos = type.GetMember(value.ToString());
                 var enumValueMemberInfo = memberInfos.FirstOrDefault(m => m.DeclaringType == type);
                 var valueAttributes = enumValueMemberInfo.GetCustomAttributes(typeof(EnumMemberAttribute), false);
-                if(valueAttributes.Length > 0)
+                if (valueAttributes.Length > 0)
                 {
                     dictionary.Add(name, ((EnumMemberAttribute)valueAttributes[0]).Value);
                 }
             }
-            else if(value is int)
+            else if (value is int)
             {
-                if((int)value > 0)
+                if ((int)value > 0)
                 {
                     dictionary.Add(name, value);
                 }
             }
+            else if (value is IList)
+            {
+                if (value is List<string>)
+                {
+                    value = String.Join(",", (List<string>)value);
+                    dictionary.Add(name, value);
+                }
+                else
+                {
+                    List<string> newlist = new List<string>();
+                    foreach (var x in (IList)value)
+                    {
+                        var type = x.GetType();
+                        var memberInfos = type.GetMember(x.ToString());
+                        var enumValueMemberInfo = memberInfos.FirstOrDefault(m => m.DeclaringType == type);
+                        var valueAttributes = enumValueMemberInfo.GetCustomAttributes(typeof(EnumMemberAttribute), false);
+                        newlist.Add(((EnumMemberAttribute)valueAttributes[0]).Value);
+                    }
+                    string joinedString = String.Join(",", newlist);
+                    dictionary.Add(name, joinedString);
+                }
+            }
             else
             {
-                if(value != null)
+                if (value != null)
                 {
                     dictionary.Add(name, value);
                 }
@@ -131,18 +173,36 @@ namespace Autodesk.DataManagement.Http
         public ForgeService Service {get; set;}
 
         /// <summary>
-        /// Create commands
+        /// Execute a Command
         /// </summary>
         /// <remarks>
-        /// Commands enable you to perform general operations on multiple resources. For example, you can check whether a user has permission to delete specific versions, items, and folders. Commands are executed by sending requests in the body payload. See the [Commands](/en/docs/data/v2/overview/commands/) section for more information. 
+        ///Executes the command that you specify in the request body. Commands enable you to perform general operations on multiple resources.
+///
+///For example, you can check whether a user has permission to delete a collection of versions, items, and folders.
+///
+///The command as well as the input data for the command are specified using the `data` object of the request body. 
+///
+///For more information about commands see the [Commands](/en/docs/data/v2/overview/commands/) section in the Developer's Guide.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="projectId">The unique identifier of a project. For BIM 360 Docs, the project ID in the Data Management API corresponds to the project ID in the BIM 360 API. To convert a project ID in the BIM 360 API into a project ID in the Data Management API you need to add a “b.\&quot; prefix. For example, a project ID of c8b0c73d-3ae9 translates to a project ID of b.c8b0c73d-3ae9.</param>/// <param name="xUserId">In a two-legged authentication context, the app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act on behalf of only the user specified. (optional)</param>/// <param name="commandPayload">The POST body is a JSON object with the following attributes. (optional)</param>
-        /// <returns>Task of ApiResponse<Command></returns>
+         /// <param name="projectId">
+         ///The unique identifier of a project. 
+///
+///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
+///
+///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
+         /// </param>
+         /// <param name="xUserId">
+         ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
+         /// </param>
+         /// <param name="commandPayload">
+         /// (optional)
+         /// </param>
+        /// <returns>Task of ApiResponse&lt;Command&gt;></returns>
         
-        public async System.Threading.Tasks.Task<ApiResponse<Command>> PostCommandAsync (string projectId,string xUserId= default(string),CommandPayload commandPayload= default(CommandPayload), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ApiResponse<Command>> ExecuteCommandAsync (string projectId,string xUserId= default(string),CommandPayload commandPayload= default(CommandPayload), string accessToken = null, bool throwOnError = true)
         {
-            logger.LogInformation("Entered into PostCommandAsync ");
+            logger.LogInformation("Entered into ExecuteCommandAsync ");
             using (var request = new HttpRequestMessage())
             {
                 var queryParam = new Dictionary<string, object>();
@@ -155,7 +215,7 @@ namespace Autodesk.DataManagement.Http
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
-                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/1.0.0");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.3");
                 if(!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
@@ -205,7 +265,7 @@ namespace Autodesk.DataManagement.Http
                     logger.LogError($"response unsuccess with status code: {response.StatusCode}");
                     return new ApiResponse<Command>(response, default(Command));
                 }
-                logger.LogInformation($"Exited from PostCommandAsync with response statusCode: {response.StatusCode}");
+                logger.LogInformation($"Exited from ExecuteCommandAsync with response statusCode: {response.StatusCode}");
                 return new ApiResponse<Command>(response, await LocalMarshalling.DeserializeAsync<Command>(response.Content));
 
             } // using

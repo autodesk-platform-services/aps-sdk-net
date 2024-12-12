@@ -1,0 +1,90 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "modelderivative", "modelderivative", "{3E6CDD5D-9AEA-4A9C-9085-00D791DD34E4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autodesk.ModelDerivative", "modelderivative\source\Autodesk.ModelDerivative.csproj", "{ED05FF2A-8775-4552-B0FF-C9BCD6CB66D4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "webhooks", "webhooks", "{50380220-FCC6-401E-B36A-5BD6CFE0D70E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autodesk.Webhooks", "webhooks\source\Autodesk.Webhooks.csproj", "{5F54DA01-35E8-460D-9E11-5BD8A595E0AA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "datamanagement", "datamanagement", "{46B7D388-D640-40F4-AB18-5CE712DD5A36}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autodesk.DataManagement", "datamanagement\source\Autodesk.DataManagement.csproj", "{EDD91D74-7221-4859-8EFD-2DC2E3549B55}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "oss", "oss", "{1ADC317D-E69E-48A8-999D-CB00EB1EBD88}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autodesk.Oss", "oss\source\Autodesk.Oss.csproj", "{007F105D-E656-4744-82A3-9080099B10DC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "authentication", "authentication", "{F4C92067-B21E-4309-A426-C7CEC0BD6213}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autodesk.Authentication", "authentication\source\Autodesk.Authentication.csproj", "{6FD0F8C7-0547-4ED7-93A2-525B4A3411A9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "issues", "issues", "{0CDF551D-4B04-4860-BB8F-F3A77BC899ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autodesk.Construction.Issues", "construction\issues\source\Autodesk.Construction.Issues.csproj", "{8C6376C9-61E6-4836-831E-8B3E8FDAE65F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "construction", "construction", "{A291A1E6-780A-4EDD-A053-BD03218434FD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "accountadmin", "accountadmin", "{2E7E4313-B859-4A56-9B52-A4A170C255B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autodesk.Construction.AccountAdmin", "construction\accountadmin\source\Autodesk.Construction.AccountAdmin.csproj", "{5929BCE7-665A-472C-8498-A368E6675645}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autodesk.Sdk.Manager", "sdkmanager\Autodesk.Sdk.Manager.csproj", "{38D360E7-663C-4A84-ADAF-D795FBF2426B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ED05FF2A-8775-4552-B0FF-C9BCD6CB66D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED05FF2A-8775-4552-B0FF-C9BCD6CB66D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED05FF2A-8775-4552-B0FF-C9BCD6CB66D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED05FF2A-8775-4552-B0FF-C9BCD6CB66D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F54DA01-35E8-460D-9E11-5BD8A595E0AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F54DA01-35E8-460D-9E11-5BD8A595E0AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F54DA01-35E8-460D-9E11-5BD8A595E0AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F54DA01-35E8-460D-9E11-5BD8A595E0AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDD91D74-7221-4859-8EFD-2DC2E3549B55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDD91D74-7221-4859-8EFD-2DC2E3549B55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDD91D74-7221-4859-8EFD-2DC2E3549B55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDD91D74-7221-4859-8EFD-2DC2E3549B55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{007F105D-E656-4744-82A3-9080099B10DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{007F105D-E656-4744-82A3-9080099B10DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{007F105D-E656-4744-82A3-9080099B10DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{007F105D-E656-4744-82A3-9080099B10DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FD0F8C7-0547-4ED7-93A2-525B4A3411A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FD0F8C7-0547-4ED7-93A2-525B4A3411A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FD0F8C7-0547-4ED7-93A2-525B4A3411A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FD0F8C7-0547-4ED7-93A2-525B4A3411A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C6376C9-61E6-4836-831E-8B3E8FDAE65F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C6376C9-61E6-4836-831E-8B3E8FDAE65F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C6376C9-61E6-4836-831E-8B3E8FDAE65F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C6376C9-61E6-4836-831E-8B3E8FDAE65F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5929BCE7-665A-472C-8498-A368E6675645}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5929BCE7-665A-472C-8498-A368E6675645}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5929BCE7-665A-472C-8498-A368E6675645}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5929BCE7-665A-472C-8498-A368E6675645}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38D360E7-663C-4A84-ADAF-D795FBF2426B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38D360E7-663C-4A84-ADAF-D795FBF2426B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38D360E7-663C-4A84-ADAF-D795FBF2426B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38D360E7-663C-4A84-ADAF-D795FBF2426B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{ED05FF2A-8775-4552-B0FF-C9BCD6CB66D4} = {3E6CDD5D-9AEA-4A9C-9085-00D791DD34E4}
+		{5F54DA01-35E8-460D-9E11-5BD8A595E0AA} = {50380220-FCC6-401E-B36A-5BD6CFE0D70E}
+		{EDD91D74-7221-4859-8EFD-2DC2E3549B55} = {46B7D388-D640-40F4-AB18-5CE712DD5A36}
+		{007F105D-E656-4744-82A3-9080099B10DC} = {1ADC317D-E69E-48A8-999D-CB00EB1EBD88}
+		{6FD0F8C7-0547-4ED7-93A2-525B4A3411A9} = {F4C92067-B21E-4309-A426-C7CEC0BD6213}
+		{8C6376C9-61E6-4836-831E-8B3E8FDAE65F} = {0CDF551D-4B04-4860-BB8F-F3A77BC899ED}
+		{2E7E4313-B859-4A56-9B52-A4A170C255B9} = {A291A1E6-780A-4EDD-A053-BD03218434FD}
+		{5929BCE7-665A-472C-8498-A368E6675645} = {2E7E4313-B859-4A56-9B52-A4A170C255B9}
+	EndGlobalSection
+EndGlobal

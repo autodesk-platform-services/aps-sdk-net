@@ -8,7 +8,7 @@ namespace Samples
     class Webhooks
     {
         string token = "<token>";
-        string hookId = "<hook-id>";
+        string hookId = "<hookId>";
         WebhooksClient webhooksClient = null!;
 
         public void Initialise()
@@ -27,18 +27,21 @@ namespace Samples
         public async Task CreateSystemEventHookAsync()
         {
             HookPayload createSpecifiedEventHook = new HookPayload();
-            createSpecifiedEventHook.CallbackUrl = "https://example.com/callback_four_new";
-            createSpecifiedEventHook.Scope = new 
+            createSpecifiedEventHook.CallbackUrl = "<callbackUrl>";
+            createSpecifiedEventHook.Scope = new
             {
-                folder, "<my-folder-id>"
+                folder = "<folderUrn>"
             };
-            createSpecifiedEventHook.HookExpiry = "2024-09-11T17:04:10.444Z";
-            createSpecifiedEventHook.HookAttribute =  new {
+
+            createSpecifiedEventHook.HookExpiry = "<hookExpiry>";
+            createSpecifiedEventHook.HookAttribute = new
+            {
                 // /* Custom metadata */
-                myfoo= 76,
-                projectId= "someURN",
-                myobject= new {
-                    abc= true,
+                myfoo = 76,
+                projectId = "<projectId>",
+                myobject = new
+                {
+                    abc = true,
                 }
             };
 
@@ -72,6 +75,9 @@ namespace Samples
                 Status status = currentHook.Status;
                 bool? auto_reactivate_hook = currentHook.AutoReactivateHook;
                 string hook_expiry = currentHook.HookExpiry;
+
+                Console.WriteLine(hook_Id);
+                Console.WriteLine(hook_event);
             }
 
         }
@@ -80,7 +86,7 @@ namespace Samples
         // Retrieves a paginated list of webhooks created in the context of a Client or Application. This API accepts 2-legged token of the application only. If the pageState query string is not specified, the first page is returned.
         public async Task GetAppHooksAsync()
         {
-            Hooks getAppHooks = await webhooksClient.GetAppHooksAsync();;
+            Hooks getAppHooks = await webhooksClient.GetAppHooksAsync(); ;
             // get hooks next link meant for pagination
             string getAppHooksLink = getAppHooks.Links.Next;
             // Get a list of hooks data
@@ -107,7 +113,7 @@ namespace Samples
         // Retrieves a paginated list of all the webhooks for a specified system. If the pageState query string is not specified, the first page is returned.
         public async Task GetSystemHooksAsync()
         {
-            Hooks getSystemHooks = await webhooksClient.GetSystemHooksAsync(system: "data", status: StatusFilter.Active );
+            Hooks getSystemHooks = await webhooksClient.GetSystemHooksAsync(system: "data", status: StatusFilter.Active);
             Console.WriteLine(getSystemHooks);
             // get hooks next link meant for pagination
             string getSystemHooksLink = getSystemHooks.Links.Next;
@@ -167,11 +173,6 @@ namespace Samples
             string callbackUrl = getSystemEventHook.CallbackUrl;
             Console.WriteLine(getSystemEventHook);
 
-
-            // HttpResponseMessage deleteHookResponse = await webhooksClient.DeleteSystemEventHookAsync(system: Systems.Data, _event: Events.DmVersionAdded, hookId: hookId);
-            // Console.WriteLine(deleteHookResponse.StatusCode);
-            // Console.WriteLine(deleteHookResponse.Content);
-
         }
 
 
@@ -187,15 +188,21 @@ namespace Samples
             Console.WriteLine(updateHookResponse.Content);
         }
 
+        public async Task DeleteSystemEventHookAsync()
+        {
+            HttpResponseMessage deleteHookResponse = await webhooksClient.DeleteSystemEventHookAsync(system: Systems.Data, _event: Events.DmVersionAdded, hookId: hookId);
+            Console.WriteLine(deleteHookResponse.StatusCode);
+        }
+
 
         // Create post request body to receive the notification on all the events.
         public async Task CreateSystemHookAsync()
         {
             HookPayload createAllEventsHook = new HookPayload();
             createAllEventsHook.CallbackUrl = "<callbackUrl>";
-            createAllEventsHook.Scope = createAllEventsHook.Scope = new 
+            createAllEventsHook.Scope = new
             {
-                workflow= "<my-workflow-id>",
+                workflow = "<my-workflow-id>",
             };
 
 
@@ -220,24 +227,55 @@ namespace Samples
 
                 HookDetailsScope scope = currentHook.Scope;
                 string folderId = scope.Folder;
+
+                Console.WriteLine(hook_Id);
+                Console.WriteLine(hook_event);
             }
         }
 
+        public async Task CreateTokenAsync()
+        {
+            TokenPayload tokenPayload = new TokenPayload();
+            tokenPayload.Token = "<token>";
+            Token createdToken = await webhooksClient.CreateTokenAsync(tokenPayload: tokenPayload);
+            Console.WriteLine(createdToken.Status);
+            Console.WriteLine(createdToken);
+        }
 
-         public static async Task Main(string[] args)
+        public async Task PutTokenAsync()
+        {
+            TokenPayload tokenPayload = new TokenPayload();
+            tokenPayload.Token = "<token>";
+            HttpResponseMessage httpResponseMessage = await webhooksClient.PutTokenAsync(tokenPayload: tokenPayload);
+            Console.WriteLine(httpResponseMessage.StatusCode);
+            Console.WriteLine(httpResponseMessage.Content);
+        }
+
+        public async Task DeleteTokenAsync()
+        {
+            HttpResponseMessage httpResponseMessage = await webhooksClient.DeleteTokenAsync();
+            Console.WriteLine(httpResponseMessage.StatusCode);
+            Console.WriteLine(httpResponseMessage.Content);
+        }
+
+        public static async Task Main(string[] args)
         {
             var webhooks = new Webhooks();
             // Initialise SDKManager & WebhooksClient
             webhooks.Initialise();
             // Call respective methods
             // await webhooks.CreateSystemEventHookAsync();
-            await webhooks.GetHooksAsync();
+            // await webhooks.GetHooksAsync();
             // await webhooks.GetAppHooksAsync();
             // await webhooks.GetSystemHooksAsync();
             // await webhooks.GetSystemEventHooksAsync();
             // await webhooks.GetHookDetailsAsync();
             // await webhooks.PatchSystemEventHookAsync();
+            // await webhooks.DeleteSystemEventHookAsync();
             // await webhooks.CreateSystemHookAsync();
+            // await webhooks.CreateTokenAsync();
+            // await webhooks.PutTokenAsync();
+            // await webhooks.DeleteTokenAsync();
         }
     }
 }

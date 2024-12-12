@@ -8,6 +8,9 @@
 # or wget:
 # wget --no-check-certificate http://gist.githubusercontent.com/kmorcinek/2710267/raw/.gitignore
 
+# Env Variables
+*.env
+
 # User-specific files
 *.suo
 *.user
@@ -25,7 +28,7 @@ x64/
 # NuGet Packages
 #*.nupkg
 # The packages folder can be ignored because of Package Restore
-#**/packages/*
+**/packages/*
 # except build/, which is used as an MSBuild target.
 !**/packages/build/
 # Uncomment if necessary however generally it will be regenerated when needed

@@ -297,7 +297,7 @@ namespace Samples
 
         #endregion
 
-        public async void Main()
+        public async static Task Main()
         {
 
             // Initialise SDKManager & ModelDerivativeClient
