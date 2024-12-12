@@ -33,6 +33,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "accountadmin", "accountadmi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autodesk.Construction.AccountAdmin", "construction\accountadmin\source\Autodesk.Construction.AccountAdmin.csproj", "{5929BCE7-665A-472C-8498-A368E6675645}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autodesk.Sdk.Manager", "sdkmanager\Autodesk.Sdk.Manager.csproj", "{38D360E7-663C-4A84-ADAF-D795FBF2426B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -70,6 +72,10 @@ Global
 		{5929BCE7-665A-472C-8498-A368E6675645}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5929BCE7-665A-472C-8498-A368E6675645}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5929BCE7-665A-472C-8498-A368E6675645}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38D360E7-663C-4A84-ADAF-D795FBF2426B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38D360E7-663C-4A84-ADAF-D795FBF2426B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38D360E7-663C-4A84-ADAF-D795FBF2426B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38D360E7-663C-4A84-ADAF-D795FBF2426B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{ED05FF2A-8775-4552-B0FF-C9BCD6CB66D4} = {3E6CDD5D-9AEA-4A9C-9085-00D791DD34E4}
