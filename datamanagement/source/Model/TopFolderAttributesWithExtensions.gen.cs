@@ -148,8 +148,8 @@ namespace Autodesk.DataManagement.Model
         /// <summary>
         ///Gets or Sets Extensions
         /// </summary>
-        [DataMember(Name="extensions", EmitDefaultValue=false)]
-        public TopFolderExtensionWithSchemaLink Extensions { get; set; }
+        [DataMember(Name="extension", EmitDefaultValue=false)]
+        public TopFolderExtensionWithSchemaLink Extension { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
