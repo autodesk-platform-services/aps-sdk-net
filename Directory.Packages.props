@@ -7,10 +7,10 @@
 		<PackageVersion Include="Autodesk.SDKManager" Version="1.1.2" />
 		<PackageVersion Include="Autodesk.ModelDerivative" Version="2.0.0"/>
 		<PackageVersion Include="Autodesk.Webhooks" Version="3.0.0"/>
-		<PackageVersion Include="Autodesk.DataManagement" Version="2.0.0"/>
+		<PackageVersion Include="Autodesk.DataManagement" Version="2.0.1"/>
 		<PackageVersion Include="Autodesk.Oss" Version="2.0.0"/>
 		<PackageVersion Include="Autodesk.Authentication" Version="2.0.0"/>
-		<PackageVersion Include="Autodesk.Construction.Issues" Version="2.0.0"/>
+		<PackageVersion Include="Autodesk.Construction.Issues" Version="2.0.1"/>
 		<PackageVersion Include="Autodesk.Construction.AccountAdmin" Version="2.0.0"/>
 		<PackageVersion Include="coverlet.collector" Version="6.0.2" />
 		<PackageVersion Include="DotNetEnv" Version="3.1.1" />

@@ -52,7 +52,7 @@ namespace Autodesk.Construction.Issues.Model
         ///The x-value of the position in the viewable.
         /// </value>
         [DataMember(Name = "x", EmitDefaultValue = false)]
-        public int? X { get; set; }
+        public double? X { get; set; }
 
         /// <summary>
         ///The y-value of the position in the viewable.
@@ -61,7 +61,7 @@ namespace Autodesk.Construction.Issues.Model
         ///The y-value of the position in the viewable.
         /// </value>
         [DataMember(Name = "y", EmitDefaultValue = false)]
-        public int? Y { get; set; }
+        public double? Y { get; set; }
 
         /// <summary>
         ///The z-value of the position in the viewable.
@@ -70,7 +70,7 @@ namespace Autodesk.Construction.Issues.Model
         ///The z-value of the position in the viewable.
         /// </value>
         [DataMember(Name = "z", EmitDefaultValue = false)]
-        public int? Z { get; set; }
+        public double? Z { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

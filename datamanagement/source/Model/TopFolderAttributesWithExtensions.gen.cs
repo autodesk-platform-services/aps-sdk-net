@@ -145,11 +145,19 @@ namespace Autodesk.DataManagement.Model
         [DataMember(Name="hidden", EmitDefaultValue=false)]
         public bool Hidden { get; set; }
 
-        /// <summary>
-        ///Gets or Sets Extensions
+
+         /// <summary>
+        ///Gets or Sets Extensions(Obsolete)
         /// </summary>
+        [Obsolete("This property is deprecated. Use `Extension` instead.")]
         [DataMember(Name="extensions", EmitDefaultValue=false)]
         public TopFolderExtensionWithSchemaLink Extensions { get; set; }
+
+        /// <summary>
+        ///Gets or Sets Extension
+        /// </summary>
+        [DataMember(Name="extension", EmitDefaultValue=false)]
+        public TopFolderExtensionWithSchemaLink Extension { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
