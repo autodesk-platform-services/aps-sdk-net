@@ -1089,8 +1089,9 @@ namespace Autodesk.Oss.Http
                 var queryParam = new Dictionary<string, object>();
                 SetQueryParameter("access", access, queryParam);
                 SetQueryParameter("useCdn", useCdn, queryParam);
+                string url = $"/oss/v2/buckets/{bucketKey}/objects/{objectKey}/signed";
                 request.RequestUri =
-                    Marshalling.BuildRequestUri("/oss/v2/buckets/{bucketKey}/objects/{objectKey}/signed",
+                    Marshalling.BuildRequestUri(url,
                         routeParameters: new Dictionary<string, object> {
                             { "bucketKey", bucketKey},
                             { "objectKey", objectKey},
@@ -1667,8 +1668,9 @@ namespace Autodesk.Oss.Http
                 SetQueryParameter("public-resource-fallback", publicResourceFallback, queryParam);
                 SetQueryParameter("minutesExpiration", minutesExpiration, queryParam);
                 SetQueryParameter("useCdn", useCdn, queryParam);
+                string url = $"/oss/v2/buckets/{bucketKey}/objects/{objectKey}/signeds3download";
                 request.RequestUri =
-                    Marshalling.BuildRequestUri("/oss/v2/buckets/{bucketKey}/objects/{objectKey}/signeds3download",
+                    Marshalling.BuildRequestUri(url,
                         routeParameters: new Dictionary<string, object> {
                             { "bucketKey", bucketKey},
                             { "objectKey", objectKey},
