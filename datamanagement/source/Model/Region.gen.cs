@@ -38,13 +38,15 @@ namespace Autodesk.DataManagement.Model
 ///
 ///- `US` - Data center for the US region.
 ///- `EMEA` - Data center for the European Union, Middle East, and Africa regions.
-///- `APAC` - Data center for the Australia region.
+///- `APAC` - Data center for the Australia region (obsolete).
+///- `AUS` - Data center for the Australia region.
     /// </summary>
     ///<value>Specifies where the hub is stored. Possible values are:
 ///
 ///- `US` - Data center for the US region.
 ///- `EMEA` - Data center for the European Union, Middle East, and Africa regions.
-///- `APAC` - Data center for the Australia region.</value>
+///- `APAC` - Data center for the Australia region (obsolete).
+///- `AUS` - Data center for the Australia region.</value>
     
     [JsonConverter(typeof(StringEnumConverter))]
     
@@ -67,7 +69,14 @@ namespace Autodesk.DataManagement.Model
         /// Enum APAC for value: APAC
         /// </summary>
         [EnumMember(Value = "APAC")]
-        APAC
+        [Obsolete("APAC is obsolete. Use AUS instead.")]
+        APAC,
+
+        /// <summary>
+        /// Enum AUS for value: AUS
+        /// </summary>
+        [EnumMember(Value = "AUS")]
+        AUS
     }
 
 }
