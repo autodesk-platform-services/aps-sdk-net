@@ -347,7 +347,7 @@ namespace Autodesk.DataManagement.Http
          /// </param>
         /// <returns>Task of ApiResponse&lt;Search&gt;</returns>
         
-        System.Threading.Tasks.Task<ApiResponse<Search>> GetFolderSearchAsync (string projectId, string folderId,string filterFieldName =default, List<string> filterValue = default(List<string>), int pageNumber= default(int),  string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<ApiResponse<Search>> GetFolderSearchAsync (string projectId, string folderId, List<(string fieldName, ComparisonTypes? operatorType, List<string> values)> filters = null, int pageNumber= default(int),  string accessToken = null, bool throwOnError = true);
         /// <summary>
         /// Modify a Folder
         /// </summary>
@@ -410,7 +410,9 @@ namespace Autodesk.DataManagement.Http
                 var valueAttributes = enumValueMemberInfo.GetCustomAttributes(typeof(EnumMemberAttribute), false);
                 if (valueAttributes.Length > 0)
                 {
-                    dictionary.Add(name, ((EnumMemberAttribute)valueAttributes[0]).Value);
+                    // Get the value from EnumMember attribute (which will contain the operator, e.g., -eq, -lt)
+                    var enumValue = ((EnumMemberAttribute)valueAttributes[0]).Value;
+                    dictionary.Add(name, enumValue);
                 }
             }
             else if (value is int)
@@ -442,6 +444,11 @@ namespace Autodesk.DataManagement.Http
                     dictionary.Add(name, joinedString);
                 }
             }
+            // If the value is a complex filter expression (tuple), build the string accordingly
+            else if (value is string && name.StartsWith("filter"))
+            {
+                dictionary.Add(name, value);
+            }
             else
             {
                 if (value != null)
@@ -450,6 +457,7 @@ namespace Autodesk.DataManagement.Http
                 }
             }
         }
+
         private void SetHeader(string baseName, object value, HttpRequestMessage req)
         {
                 if(value is DateTime)
@@ -1357,68 +1365,101 @@ namespace Autodesk.DataManagement.Http
          /// </param>
         /// <returns>Task of ApiResponse&lt;Search&gt;></returns>
         
-        public async System.Threading.Tasks.Task<ApiResponse<Search>> GetFolderSearchAsync (string projectId,string folderId,string filterFieldName = default, List<string> filterValue = default(List<string>),int pageNumber= default(int), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ApiResponse<Search>> GetFolderSearchAsync(
+                    string projectId,
+                    string folderId,
+                    List<(string fieldName, ComparisonTypes? operatorType, List<string> values)> filters = null,
+                    int pageNumber = 1,
+                    string accessToken = null,
+                    bool throwOnError = true)
         {
-            logger.LogInformation("Entered into GetFolderSearchAsync ");
+            logger.LogInformation("Entered into GetFolderSearchAsync");
+
             using (var request = new HttpRequestMessage())
             {
                 var queryParam = new Dictionary<string, object>();
-                SetQueryParameter($"filter[{filterFieldName}]", filterValue, queryParam);
+
+                if (filters != null && filters.Count > 0)
+                {
+                    foreach (var filter in filters)
+                    {
+                        var operatorType = filter.operatorType;
+
+                        string operatorTypeValue = null;
+                        if (operatorType != null && operatorType.GetType().IsEnum)
+                        {
+                            var type = operatorType.GetType();
+                            var memberInfos = type.GetMember(operatorType.ToString());
+                            var enumValueMemberInfo = memberInfos.FirstOrDefault(m => m.DeclaringType == type);
+                            var valueAttributes = enumValueMemberInfo.GetCustomAttributes(typeof(EnumMemberAttribute), false);
+                            operatorTypeValue = valueAttributes.Length > 0
+                                ? ((EnumMemberAttribute)valueAttributes[0]).Value
+                                : operatorType.ToString();
+                        }
+                        else
+                        {
+                            operatorTypeValue = operatorType.ToString();
+                        }
+
+                        string filterKey = $"filter[{filter.fieldName}]{operatorTypeValue}";
+                        string filterExpression = string.Join(",", filter.values);  
+
+                        SetQueryParameter(filterKey, filterExpression, queryParam);
+                    }
+                }
+
+                // Apply pagination
                 SetQueryParameter("page[number]", pageNumber, queryParam);
+
+                // Build the URI for the request
                 request.RequestUri =
                     Marshalling.BuildRequestUri("/data/v1/projects/{project_id}/folders/{folder_id}/search",
                         routeParameters: new Dictionary<string, object> {
-                            { "project_id", projectId},
-                            { "folder_id", folderId},
+                            { "project_id", projectId },
+                            { "folder_id", folderId },
                         },
                         queryParameters: queryParam
                     );
 
+                // Add headers
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
                 request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.3");
-                if(!string.IsNullOrEmpty(accessToken))
+
+                // Add the Authorization token if available
+                if (!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
                 }
 
+                // Set HTTP method to GET
+                request.Method = HttpMethod.Get;
 
-
-
-                // tell the underlying pipeline what scope we'd like to use
-                // if (scopes == null)
-                // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read ");
-                // }
-                // else
-                // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
-                // }
-
-                request.Method = new HttpMethod("GET");
-
-                // make the HTTP request
+                // Make the HTTP request
                 var response = await this.Service.Client.SendAsync(request);
 
                 if (throwOnError)
                 {
                     try
                     {
-                      await response.EnsureSuccessStatusCodeAsync();
-                    } catch (HttpRequestException ex) {
-                      throw new DataManagementApiException(ex.Message, response, ex);
+                        await response.EnsureSuccessStatusCodeAsync();
+                    }
+                    catch (HttpRequestException ex)
+                    {
+                        throw new DataManagementApiException(ex.Message, response, ex);
                     }
                 }
                 else if (!response.IsSuccessStatusCode)
                 {
-                    logger.LogError($"response unsuccess with status code: {response.StatusCode}");
+                    logger.LogError($"response unsuccessful with status code: {response.StatusCode}");
                     return new ApiResponse<Search>(response, default(Search));
                 }
+
                 logger.LogInformation($"Exited from GetFolderSearchAsync with response statusCode: {response.StatusCode}");
                 return new ApiResponse<Search>(response, await LocalMarshalling.DeserializeAsync<Search>(response.Content));
-
-            } // using
+            }
         }
+
+
         /// <summary>
         /// Modify a Folder
         /// </summary>
