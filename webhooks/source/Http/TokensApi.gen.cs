@@ -63,7 +63,7 @@ namespace Autodesk.Webhooks.Http
 ///
 ///- `US` - (Default) Data center dedicated to serve the United States region.
 ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
-///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
 ///
 ///**Note:** 
 ///
@@ -75,7 +75,7 @@ namespace Autodesk.Webhooks.Http
 ///
 ///- `US` - (Default) Data center dedicated to serve the United States region.
 ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
-///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
 ///
 ///**Note:** 
 ///
@@ -109,7 +109,7 @@ namespace Autodesk.Webhooks.Http
 ///
 ///- `US` - (Default) Data center dedicated to serve the United States region.
 ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
-///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
 ///
 ///**Note:** 
 ///
@@ -121,7 +121,7 @@ namespace Autodesk.Webhooks.Http
 ///
 ///- `US` - (Default) Data center dedicated to serve the United States region.
 ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
-///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
 ///
 ///**Note:** 
 ///
@@ -155,7 +155,7 @@ namespace Autodesk.Webhooks.Http
 ///
 ///- `US` - (Default) Data center dedicated to serve the United States region.
 ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
-///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
 ///
 ///**Note:** 
 ///
@@ -167,7 +167,7 @@ namespace Autodesk.Webhooks.Http
 ///
 ///- `US` - (Default) Data center dedicated to serve the United States region.
 ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
-///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
 ///
 ///**Note:** 
 ///
@@ -284,7 +284,7 @@ namespace Autodesk.Webhooks.Http
 ///
 ///- `US` - (Default) Data center dedicated to serve the United States region.
 ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
-///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
 ///
 ///**Note:** 
 ///
@@ -296,7 +296,7 @@ namespace Autodesk.Webhooks.Http
 ///
 ///- `US` - (Default) Data center dedicated to serve the United States region.
 ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
-///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
 ///
 ///**Note:** 
 ///
@@ -399,7 +399,7 @@ namespace Autodesk.Webhooks.Http
 ///
 ///- `US` - (Default) Data center dedicated to serve the United States region.
 ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
-///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
 ///
 ///**Note:** 
 ///
@@ -411,7 +411,7 @@ namespace Autodesk.Webhooks.Http
 ///
 ///- `US` - (Default) Data center dedicated to serve the United States region.
 ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
-///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
 ///
 ///**Note:** 
 ///
@@ -513,7 +513,7 @@ namespace Autodesk.Webhooks.Http
 ///
 ///- `US` - (Default) Data center dedicated to serve the United States region.
 ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
-///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
 ///
 ///**Note:** 
 ///
@@ -525,7 +525,7 @@ namespace Autodesk.Webhooks.Http
 ///
 ///- `US` - (Default) Data center dedicated to serve the United States region.
 ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
-///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
 ///
 ///**Note:** 
 ///
