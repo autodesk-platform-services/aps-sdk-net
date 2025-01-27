@@ -7,10 +7,10 @@ namespace Samples
 {
     class Webhooks
     {
-       string? token = Environment.GetEnvironmentVariable("token") ?? "eyJhbGciOiJSUzI1NiIsImtpZCI6IlhrUFpfSmhoXzlTYzNZS01oRERBZFBWeFowOF9SUzI1NiIsInBpLmF0bSI6ImFzc2MifQ.eyJzY29wZSI6WyJ2aWV3YWJsZXM6cmVhZCIsImRhdGE6cmVhZCIsImRhdGE6d3JpdGUiLCJkYXRhOmNyZWF0ZSIsImRhdGE6c2VhcmNoIiwiYnVja2V0OmNyZWF0ZSIsImJ1Y2tldDpyZWFkIiwiYnVja2V0OnVwZGF0ZSIsImJ1Y2tldDpkZWxldGUiXSwiY2xpZW50X2lkIjoiZVdyRHR1TnhWdUdseW13bDRVd2JlYlJUbHVubXdPOGciLCJpc3MiOiJodHRwczovL2RldmVsb3Blci5hcGkuYXV0b2Rlc2suY29tIiwiYXVkIjoiaHR0cHM6Ly9hdXRvZGVzay5jb20iLCJqdGkiOiJCWW9tOE43UVhJZmdURzRZaldteUp4SUhCZ1dBYUtidjJxeWxtUHVwYVlqUHdnOWkzVTNQdnhoRmduNFI3TWM0IiwiZXhwIjoxNzM3OTUzNzgwLCJ1c2VyaWQiOiI0UTdDUlhVQzNUQlMifQ.e1KaXGok_KYM0Q_5WsGzUUZPPWOjFkSmDUS_l6OvXPxWViYYYbjShM_DM7PZP82vbimFaNSs7Theu4UA6_EpE8_bFxqJa-nnfoU1Bb691A5JwqrmUO9WxQ-dTa7vBi8i_v53Btj04TIc3E4CfNGGeoQHoqB4W-qNZ1UNpisMa5LiDbOaGfhoWUEIVcLqHzYERT151-oGYXGD1i46CStFPFW1Kd2yx9il7wuON6eAJ1gQHx7lr9HMMraMm2iKBFFDNZ1qwYeLPmiSS-Hq0IXpXstL21Imb9jlgR71UVuHm-XS5f-c2270D20ONnAHa5rFQDGekHOewFVhb9b_SMLtwQ";
+       string? token = Environment.GetEnvironmentVariable("token") ?? "";
 
        string? projectId = Environment.GetEnvironmentVariable("project_id");
-       string? folderId = Environment.GetEnvironmentVariable("folder_id") ?? "urn:adsk.wipprodanz:fs.folder:co.CupGMpJ6Us22RMRpssYNqA";
+       string? folderId = Environment.GetEnvironmentVariable("folder_id") ?? "";
 
         string hookId = "<hookId>";
         
