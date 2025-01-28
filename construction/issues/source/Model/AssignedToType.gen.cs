@@ -51,13 +51,13 @@ namespace Autodesk.Construction.Issues.Model
         /// <summary>
         /// Enum Company for value:  company
         /// </summary>
-        [EnumMember(Value = " company")]
+        [EnumMember(Value = "company")]
         Company,
 
         /// <summary>
         /// Enum Role for value:  role
         /// </summary>
-        [EnumMember(Value = " role")]
+        [EnumMember(Value = "role")]
         Role,
 
         // Documented but the endpoint doesn't support null so commenting it out.
