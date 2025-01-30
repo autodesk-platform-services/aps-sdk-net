@@ -490,7 +490,7 @@ namespace Autodesk.Oss
         ///Specifies where the bucket must be stored. Possible values are:
         ///- `US` - (Default) Data center for the US region.
         ///- `EMEA` - Data center for the European Union, Middle East, and Africa.
-        ///- `APAC` -  (Beta) Data center for Australia.
+        ///- `AUS` -  (Beta) Data center for Australia.
         ///**Note:** Beta features are subject to change. Please do not use in production environments. (optional)
         /// </param>     
         /// <param name="bucketsPayload">
@@ -664,7 +664,7 @@ namespace Autodesk.Oss
         ///
         ///- `US` - (Default) Data center for the US region.
         ///- `EMEA` - Data center for the European Union, Middle East, and Africa.
-        ///- `APAC` -  (Beta) Data center for Australia.
+        ///- `AUS` -  (Beta) Data center for Australia.
         ///
         ///**Note:** Beta features are subject to change. Please do not use in production environments. (optional)
         /// </param>
@@ -738,7 +738,7 @@ namespace Autodesk.Oss
         ///
         ///- `US` - (Default) Data center for the US region.
         ///- `EMEA` - Data center for the European Union, Middle East, and Africa.
-        ///- `APAC` -  (Beta) Data center for Australia.
+        ///- `AUS` -  (Beta) Data center for Australia.
         ///
         ///**Note:** Beta features are subject to change. Please do not use in production environments. (optional)
         /// </param>
@@ -892,7 +892,7 @@ namespace Autodesk.Oss
         ///
         ///- `US` - (Default) Data center for the US region.
         ///- `EMEA` - Data center for the European Union, Middle East, and Africa.
-        ///- `APAC` -  (Beta) Data center for Australia.
+        ///- `AUS` -  (Beta) Data center for Australia.
         ///
         ///**Note:** Beta features are subject to change. Please do not use in production environments. (optional)
         /// </param>
@@ -1101,7 +1101,7 @@ namespace Autodesk.Oss
         ///
         ///- `US` - (Default) Data center for the US region.
         ///- `EMEA` - Data center for the European Union, Middle East, and Africa.
-        ///- `APAC` -  (Beta) Data center for Australia.
+        ///- `AUS` -  (Beta) Data center for Australia.
         ///
         ///**Note:** Beta features are subject to change. Please do not use in production environments. (optional)
         /// </param>
@@ -1165,7 +1165,7 @@ namespace Autodesk.Oss
         ///
         ///- `US` - (Default) Data center for the US region.
         ///- `EMEA` - Data center for the European Union, Middle East, and Africa.
-        ///- `APAC` -  (Beta) Data center for Australia.
+        ///- `AUS` -  (Beta) Data center for Australia.
         ///
         ///**Note:** Beta features are subject to change. Please do not use in production environments. (optional)
         /// </param>

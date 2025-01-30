@@ -57,7 +57,7 @@ namespace Autodesk.Oss.Http
         ///Specifies where the bucket must be stored. Possible values are:
         ///- `US` - (Default) Data center for the US region.
         ///- `EMEA` - Data center for the European Union, Middle East, and Africa.
-        ///- `APAC` -  (Beta) Data center for Australia.
+        ///- `AUS` -  (Beta) Data center for Australia.
         ///**Note:** Beta features are subject to change. Please do not use in production environments. (optional)
         /// </param>
         /// <returns>Task of ApiResponse&lt;Bucket&gt;</returns>
@@ -107,7 +107,7 @@ namespace Autodesk.Oss.Http
         ///
         ///- `US` - (Default) Data center for the US region.
         ///- `EMEA` - Data center for the European Union, Middle East, and Africa.
-        ///- `APAC` -  (Beta) Data center for Australia.
+        ///- `AUS` -  (Beta) Data center for Australia.
         ///
         ///**Note:** Beta features are subject to change. Please do not use in production environments. (optional)
         /// </param>
@@ -219,7 +219,7 @@ namespace Autodesk.Oss.Http
         ///Specifies where the bucket must be stored. Possible values are:
         ///- `US` - (Default) Data center for the US region.
         ///- `EMEA` - Data center for the European Union, Middle East, and Africa.
-        ///- `APAC` -  (Beta) Data center for Australia.
+        ///- `AUS` -  (Beta) Data center for Australia.
         ///**Note:** Beta features are subject to change. Please do not use in production environments. (optional)
         /// </param>
         /// <returns>Task of ApiResponse&lt;Bucket&gt;></returns>
@@ -451,7 +451,7 @@ namespace Autodesk.Oss.Http
         ///
         ///- `US` - (Default) Data center for the US region.
         ///- `EMEA` - Data center for the European Union, Middle East, and Africa.
-        ///- `APAC` -  (Beta) Data center for Australia.
+        ///- `AUS` -  (Beta) Data center for Australia.
         ///
         ///**Note:** Beta features are subject to change. Please do not use in production environments. (optional)
         /// </param>
