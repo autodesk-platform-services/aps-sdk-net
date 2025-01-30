@@ -58,7 +58,7 @@ namespace Autodesk.Construction.AccountAdmin.Model
         /// Enum APAC for value: APAC
         /// </summary>
         [EnumMember(Value = "APAC")]
-        [Obsolete("APAC is obsolete. Use AUS instead.")]
+        [Obsolete("Please use AUS instead.")]
         APAC,
 
         /// <summary>
