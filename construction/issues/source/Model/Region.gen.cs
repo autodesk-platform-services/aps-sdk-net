@@ -60,11 +60,12 @@ namespace Autodesk.Construction.Issues.Model
         /// </summary>
         [EnumMember(Value = "EMEA")]
         EMEA,
-        [Obsolete]
+        
         /// <summary>
         /// Enum APAC for value: APAC
         /// </summary>
         [EnumMember(Value = "APAC")]
+        [Obsolete("Please use AUS instead.")]
         APAC,
 
         /// <summary>
