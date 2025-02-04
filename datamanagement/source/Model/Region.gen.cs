@@ -69,7 +69,7 @@ namespace Autodesk.DataManagement.Model
         /// Enum APAC for value: APAC
         /// </summary>
         [EnumMember(Value = "APAC")]
-        [Obsolete("APAC is obsolete. Use AUS instead.")]
+        [Obsolete("Use AUS instead.")]
         APAC,
 
         /// <summary>
