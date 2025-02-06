@@ -408,7 +408,7 @@ namespace Autodesk.Oss
 
         private string GenerateSdkRequestId(string bucketKey, string objectKey)
         {
-            return bucketKey + "/" + objectKey;
+            return Uri.EscapeDataString(bucketKey + "/" + objectKey);
         }
 
         private async Task<ApiResponse<Signeds3downloadResponse>> GetS3SignedDownloadUrlWithRetry(string bucketKey, string objectKey,

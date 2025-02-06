@@ -239,7 +239,7 @@ namespace Autodesk.Oss.Http
         ///
         ///- `US` - (Default) Data center for the US region.
         ///- `EMEA` - Data center for the European Union, Middle East, and Africa.
-        ///- `APAC` -  (Beta) Data center for Australia.
+        ///- `AUS` -  (Beta) Data center for Australia.
         ///
         ///**Note:** Beta features are subject to change. Please do not use in production environments. (optional)
         /// </param>
@@ -328,7 +328,7 @@ namespace Autodesk.Oss.Http
         ///
         ///- `US` - (Default) Data center for the US region.
         ///- `EMEA` - Data center for the European Union, Middle East, and Africa.
-        ///- `APAC` -  (Beta) Data center for Australia.
+        ///- `AUS` -  (Beta) Data center for Australia.
         ///
         ///**Note:** Beta features are subject to change. Please do not use in production environments. (optional)
         /// </param>
@@ -473,7 +473,7 @@ namespace Autodesk.Oss.Http
         ///
         ///- `US` - (Default) Data center for the US region.
         ///- `EMEA` - Data center for the European Union, Middle East, and Africa.
-        ///- `APAC` -  (Beta) Data center for Australia.
+        ///- `AUS` -  (Beta) Data center for Australia.
         ///
         ///**Note:** Beta features are subject to change. Please do not use in production environments. (optional)
         /// </param>
@@ -517,7 +517,7 @@ namespace Autodesk.Oss.Http
         ///
         ///- `US` - (Default) Data center for the US region.
         ///- `EMEA` - Data center for the European Union, Middle East, and Africa.
-        ///- `APAC` -  (Beta) Data center for Australia.
+        ///- `AUS` -  (Beta) Data center for Australia.
         ///
         ///**Note:** Beta features are subject to change. Please do not use in production environments. (optional)
         /// </param>
@@ -628,7 +628,7 @@ namespace Autodesk.Oss.Http
             {
                 var queryParam = new Dictionary<string, object>();
                 request.RequestUri =
-                    Marshalling.BuildRequestUri("/oss/v2/buckets/{bucketKey}/objects/batchcompleteupload",
+                    Marshalling.BuildRequestUri($"/oss/v2/buckets/{bucketKey}/objects/batchcompleteupload",
                         routeParameters: new Dictionary<string, object> {
                             { "bucketKey", bucketKey},
                         },
@@ -720,7 +720,7 @@ namespace Autodesk.Oss.Http
                 SetQueryParameter("public-resource-fallback", publicResourceFallback, queryParam);
                 SetQueryParameter("minutesExpiration", minutesExpiration, queryParam);
                 request.RequestUri =
-                    Marshalling.BuildRequestUri("/oss/v2/buckets/{bucketKey}/objects/batchsigneds3download",
+                    Marshalling.BuildRequestUri($"/oss/v2/buckets/{bucketKey}/objects/batchsigneds3download",
                         routeParameters: new Dictionary<string, object> {
                             { "bucketKey", bucketKey},
                         },
@@ -815,7 +815,7 @@ namespace Autodesk.Oss.Http
                 SetQueryParameter("useAcceleration", useAcceleration, queryParam);
                 SetQueryParameter("minutesExpiration", minutesExpiration, queryParam);
                 request.RequestUri =
-                    Marshalling.BuildRequestUri("/oss/v2/buckets/{bucketKey}/objects/batchsigneds3upload",
+                    Marshalling.BuildRequestUri($"/oss/v2/buckets/{bucketKey}/objects/batchsigneds3upload",
                         routeParameters: new Dictionary<string, object> {
                             { "bucketKey", bucketKey},
                         },
@@ -913,7 +913,7 @@ namespace Autodesk.Oss.Http
             {
                 var queryParam = new Dictionary<string, object>();
                 request.RequestUri =
-                    Marshalling.BuildRequestUri("/oss/v2/buckets/{bucketKey}/objects/{objectKey}/signeds3upload",
+                    Marshalling.BuildRequestUri($"/oss/v2/buckets/{bucketKey}/objects/{objectKey}/signeds3upload",
                         routeParameters: new Dictionary<string, object> {
                             { "bucketKey", bucketKey},
                             { "objectKey", objectKey},
@@ -998,7 +998,7 @@ namespace Autodesk.Oss.Http
             {
                 var queryParam = new Dictionary<string, object>();
                 request.RequestUri =
-                    Marshalling.BuildRequestUri("/oss/v2/buckets/{bucketKey}/objects/{objectKey}/copyto/{newObjName}",
+                    Marshalling.BuildRequestUri($"/oss/v2/buckets/{bucketKey}/objects/{objectKey}/copyto/{newObjName}",
                         routeParameters: new Dictionary<string, object> {
                             { "bucketKey", bucketKey},
                             { "objectKey", objectKey},
@@ -1090,7 +1090,7 @@ namespace Autodesk.Oss.Http
                 SetQueryParameter("access", access, queryParam);
                 SetQueryParameter("useCdn", useCdn, queryParam);
                 request.RequestUri =
-                    Marshalling.BuildRequestUri("/oss/v2/buckets/{bucketKey}/objects/{objectKey}/signed",
+                    Marshalling.BuildRequestUri($"/oss/v2/buckets/{bucketKey}/objects/{objectKey}/signed",
                         routeParameters: new Dictionary<string, object> {
                             { "bucketKey", bucketKey},
                             { "objectKey", objectKey},
@@ -1169,7 +1169,7 @@ namespace Autodesk.Oss.Http
             {
                 var queryParam = new Dictionary<string, object>();
                 request.RequestUri =
-                    Marshalling.BuildRequestUri("/oss/v2/buckets/{bucketKey}/objects/{objectKey}",
+                    Marshalling.BuildRequestUri($"/oss/v2/buckets/{bucketKey}/objects/{objectKey}",
                         routeParameters: new Dictionary<string, object> {
                             { "bucketKey", bucketKey},
                             { "objectKey", objectKey},
@@ -1240,7 +1240,7 @@ namespace Autodesk.Oss.Http
         ///
         ///- `US` - (Default) Data center for the US region.
         ///- `EMEA` - Data center for the European Union, Middle East, and Africa.
-        ///- `APAC` -  (Beta) Data center for Australia.
+        ///- `AUS` -  (Beta) Data center for Australia.
         ///
         ///**Note:** Beta features are subject to change. Please do not use in production environments. (optional)
         /// </param>
@@ -1253,7 +1253,7 @@ namespace Autodesk.Oss.Http
             {
                 var queryParam = new Dictionary<string, object>();
                 request.RequestUri =
-                    Marshalling.BuildRequestUri("/oss/v2/signedresources/{hash}",
+                    Marshalling.BuildRequestUri($"/oss/v2/signedresources/{hash}",
                         routeParameters: new Dictionary<string, object> {
                             { "hash", hash},
                         },
@@ -1338,7 +1338,7 @@ namespace Autodesk.Oss.Http
                 var queryParam = new Dictionary<string, object>();
                 SetQueryParameter("with", with, queryParam);
                 request.RequestUri =
-                    Marshalling.BuildRequestUri("/oss/v2/buckets/{bucketKey}/objects/{objectKey}/details",
+                    Marshalling.BuildRequestUri($"/oss/v2/buckets/{bucketKey}/objects/{objectKey}/details",
                         routeParameters: new Dictionary<string, object> {
                             { "bucketKey", bucketKey},
                             { "objectKey", objectKey},
@@ -1429,7 +1429,7 @@ namespace Autodesk.Oss.Http
                 SetQueryParameter("beginsWith", beginsWith, queryParam);
                 SetQueryParameter("startAt", startAt, queryParam);
                 request.RequestUri =
-                    Marshalling.BuildRequestUri("/oss/v2/buckets/{bucketKey}/objects",
+                    Marshalling.BuildRequestUri($"/oss/v2/buckets/{bucketKey}/objects",
                         routeParameters: new Dictionary<string, object> {
                             { "bucketKey", bucketKey},
                         },
@@ -1442,10 +1442,6 @@ namespace Autodesk.Oss.Http
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
                 }
-
-
-
-
                 // tell the underlying pipeline what scope we'd like to use
                 // if (scopes == null)
                 // {
@@ -1518,7 +1514,7 @@ namespace Autodesk.Oss.Http
         ///
         ///- `US` - (Default) Data center for the US region.
         ///- `EMEA` - Data center for the European Union, Middle East, and Africa.
-        ///- `APAC` -  (Beta) Data center for Australia.
+        ///- `AUS` -  (Beta) Data center for Australia.
         ///
         ///**Note:** Beta features are subject to change. Please do not use in production environments. (optional)
         /// </param>
@@ -1540,7 +1536,7 @@ namespace Autodesk.Oss.Http
                 SetQueryParameter("response-content-disposition", responseContentDisposition, queryParam);
                 SetQueryParameter("response-content-type", responseContentType, queryParam);
                 request.RequestUri =
-                    Marshalling.BuildRequestUri("/oss/v2/signedresources/{hash}",
+                    Marshalling.BuildRequestUri($"/oss/v2/signedresources/{hash}",
                         routeParameters: new Dictionary<string, object> {
                             { "hash", hash},
                         },
@@ -1668,7 +1664,7 @@ namespace Autodesk.Oss.Http
                 SetQueryParameter("minutesExpiration", minutesExpiration, queryParam);
                 SetQueryParameter("useCdn", useCdn, queryParam);
                 request.RequestUri =
-                    Marshalling.BuildRequestUri("/oss/v2/buckets/{bucketKey}/objects/{objectKey}/signeds3download",
+                    Marshalling.BuildRequestUri($"/oss/v2/buckets/{bucketKey}/objects/{objectKey}/signeds3download",
                         routeParameters: new Dictionary<string, object> {
                             { "bucketKey", bucketKey},
                             { "objectKey", objectKey},
@@ -1779,7 +1775,7 @@ namespace Autodesk.Oss.Http
                 SetQueryParameter("minutesExpiration", minutesExpiration, queryParam);
                 SetQueryParameter("useAcceleration", useAcceleration, queryParam);
                 request.RequestUri =
-                    Marshalling.BuildRequestUri("/oss/v2/buckets/{bucketKey}/objects/{objectKey}/signeds3upload",
+                    Marshalling.BuildRequestUri($"/oss/v2/buckets/{bucketKey}/objects/{objectKey}/signeds3upload",
                         routeParameters: new Dictionary<string, object> {
                             { "bucketKey", bucketKey},
                             { "objectKey", objectKey},
@@ -1867,7 +1863,7 @@ namespace Autodesk.Oss.Http
         ///
         ///- `US` - (Default) Data center for the US region.
         ///- `EMEA` - Data center for the European Union, Middle East, and Africa.
-        ///- `APAC` -  (Beta) Data center for Australia.
+        ///- `AUS` -  (Beta) Data center for Australia.
         ///
         ///**Note:** Beta features are subject to change. Please do not use in production environments. (optional)
         /// </param>
@@ -1883,7 +1879,7 @@ namespace Autodesk.Oss.Http
             {
                 var queryParam = new Dictionary<string, object>();
                 request.RequestUri =
-                    Marshalling.BuildRequestUri("/oss/v2/signedresources/{hash}",
+                    Marshalling.BuildRequestUri($"/oss/v2/signedresources/{hash}",
                         routeParameters: new Dictionary<string, object> {
                             { "hash", hash},
                         },
@@ -1977,7 +1973,7 @@ namespace Autodesk.Oss.Http
         ///
         ///- `US` - (Default) Data center for the US region.
         ///- `EMEA` - Data center for the European Union, Middle East, and Africa.
-        ///- `APAC` -  (Beta) Data center for Australia.
+        ///- `AUS` -  (Beta) Data center for Australia.
         ///
         ///**Note:** Beta features are subject to change. Please do not use in production environments. (optional)
         /// </param>
@@ -1990,7 +1986,7 @@ namespace Autodesk.Oss.Http
             {
                 var queryParam = new Dictionary<string, object>();
                 request.RequestUri =
-                    Marshalling.BuildRequestUri("/oss/v2/signedresources/{hash}/resumable",
+                    Marshalling.BuildRequestUri($"/oss/v2/signedresources/{hash}/resumable",
                         routeParameters: new Dictionary<string, object> {
                             { "hash", hash},
                         },
