@@ -53,7 +53,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
          ///The account ID of the company. This corresponds to hub ID in the Data Management API. To convert a hub ID into an account ID you need to remove the “b.” prefix. For example, a hub ID of b.c8b0c73d-3ae9 translates to an account ID of c8b0c73d-3ae9.
          /// </param>
          /// <param name="region">
-         ///The geographic area where the data is stored. Acceptable values: US, EMEA. By default, it is set to US. (optional)
+         ///The geographic area where the data is stored. Acceptable values: US, EMEA, AUS. By default, it is set to US. (optional)
          /// </param>
          /// <param name="companyPayload">
          /// (optional)
@@ -73,7 +73,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
          ///The account ID of the company. This corresponds to hub ID in the Data Management API. To convert a hub ID into an account ID you need to remove the “b.” prefix. For example, a hub ID of b.c8b0c73d-3ae9 translates to an account ID of c8b0c73d-3ae9.
          /// </param>
          /// <param name="region">
-         ///The geographic area where the data is stored. Acceptable values: US, EMEA. By default, it is set to US. (optional)
+         ///The geographic area where the data is stored. Acceptable values: US, EMEA, AUS. By default, it is set to US. (optional)
          /// </param>
          /// <param name="limit">
          ///Response array’s size Default value: 10 Max limit: 100 (optional)
@@ -104,7 +104,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
          ///The account ID of the company.
          /// </param>
          /// <param name="region">
-         ///The geographic area where the data is stored. Acceptable values: US, EMEA. By default, it is set to US. (optional)
+         ///The geographic area where the data is stored. Acceptable values: US, EMEA, AUS. By default, it is set to US. (optional)
          /// </param>
         /// <returns>Task of ApiResponse&lt;Company&gt;</returns>
         
@@ -124,7 +124,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
          ///The ID of the project. 
          /// </param>
          /// <param name="region">
-         ///The geographic area where the data is stored. Acceptable values: US, EMEA. By default, it is set to US. (optional)
+         ///The geographic area where the data is stored. Acceptable values: US, EMEA, AUS. By default, it is set to US. (optional)
          /// </param>
          /// <param name="limit">
          ///Response array’s size Default value: 10 Max limit: 100 (optional)
@@ -153,7 +153,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
          ///The account ID of the company. This corresponds to hub ID in the Data Management API. To convert a hub ID into an account ID you need to remove the “b.” prefix. For example, a hub ID of b.c8b0c73d-3ae9 translates to an account ID of c8b0c73d-3ae9.
          /// </param>
          /// <param name="region">
-         ///The geographic area where the data is stored. Acceptable values: US, EMEA. By default, it is set to US. (optional)
+         ///The geographic area where the data is stored. Acceptable values: US, EMEA, AUS. By default, it is set to US. (optional)
          /// </param>
          /// <param name="companyPayload">
          /// (optional)
@@ -175,7 +175,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
          ///The account ID of the company.
          /// </param>
          /// <param name="region">
-         ///The geographic area where the data is stored. Acceptable values: US, EMEA. By default, it is set to US. (optional)
+         ///The geographic area where the data is stored. Acceptable values: US, EMEA, AUS. By default, it is set to US. (optional)
          /// </param>
          /// <param name="companyPatchPayload">
          /// (optional)
@@ -200,7 +200,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
          ///The file to be uploaded as HTTP multipart (chunk) data. Supported MIME types are image/png, image/jpeg, image/jpg, image/bmp, and image/gif.
          /// </param>
          /// <param name="region">
-         ///The geographic area where the data is stored. Acceptable values: US, EMEA. By default, it is set to US. (optional)
+         ///The geographic area where the data is stored. Acceptable values: US, EMEA, AUS. By default, it is set to US. (optional)
          /// </param>
         /// <returns>Task of ApiResponse&lt;Company&gt;</returns>
         
@@ -217,7 +217,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
          ///The account ID of the company.
          /// </param>
          /// <param name="region">
-         ///The geographic area where the data is stored. Acceptable values: US, EMEA. By default, it is set to US. (optional)
+         ///The geographic area where the data is stored. Acceptable values: US, EMEA, AUS. By default, it is set to US. (optional)
          /// </param>
          /// <param name="name">
          ///Company name to match Max length: 255 (optional)
@@ -338,7 +338,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
          ///The account ID of the company. This corresponds to hub ID in the Data Management API. To convert a hub ID into an account ID you need to remove the “b.” prefix. For example, a hub ID of b.c8b0c73d-3ae9 translates to an account ID of c8b0c73d-3ae9.
          /// </param>
          /// <param name="region">
-         ///The geographic area where the data is stored. Acceptable values: US, EMEA. By default, it is set to US. (optional)
+         ///The geographic area where the data is stored. Acceptable values: US, EMEA, AUS. By default, it is set to US. (optional)
          /// </param>
          /// <param name="companyPayload">
          /// (optional)
@@ -436,7 +436,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
          ///The account ID of the company. This corresponds to hub ID in the Data Management API. To convert a hub ID into an account ID you need to remove the “b.” prefix. For example, a hub ID of b.c8b0c73d-3ae9 translates to an account ID of c8b0c73d-3ae9.
          /// </param>
          /// <param name="region">
-         ///The geographic area where the data is stored. Acceptable values: US, EMEA. By default, it is set to US. (optional)
+         ///The geographic area where the data is stored. Acceptable values: US, EMEA, AUS. By default, it is set to US. (optional)
          /// </param>
          /// <param name="limit">
          ///Response array’s size Default value: 10 Max limit: 100 (optional)
@@ -548,7 +548,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
          ///The account ID of the company.
          /// </param>
          /// <param name="region">
-         ///The geographic area where the data is stored. Acceptable values: US, EMEA. By default, it is set to US. (optional)
+         ///The geographic area where the data is stored. Acceptable values: US, EMEA, AUS. By default, it is set to US. (optional)
          /// </param>
         /// <returns>Task of ApiResponse&lt;Company&gt;></returns>
         
@@ -646,7 +646,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
          ///The ID of the project. 
          /// </param>
          /// <param name="region">
-         ///The geographic area where the data is stored. Acceptable values: US, EMEA. By default, it is set to US. (optional)
+         ///The geographic area where the data is stored. Acceptable values: US, EMEA, AUS. By default, it is set to US. (optional)
          /// </param>
          /// <param name="limit">
          ///Response array’s size Default value: 10 Max limit: 100 (optional)
@@ -757,7 +757,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
          ///The account ID of the company. This corresponds to hub ID in the Data Management API. To convert a hub ID into an account ID you need to remove the “b.” prefix. For example, a hub ID of b.c8b0c73d-3ae9 translates to an account ID of c8b0c73d-3ae9.
          /// </param>
          /// <param name="region">
-         ///The geographic area where the data is stored. Acceptable values: US, EMEA. By default, it is set to US. (optional)
+         ///The geographic area where the data is stored. Acceptable values: US, EMEA, AUS. By default, it is set to US. (optional)
          /// </param>
          /// <param name="companyPayload">
          /// (optional)
@@ -857,7 +857,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
          ///The account ID of the company.
          /// </param>
          /// <param name="region">
-         ///The geographic area where the data is stored. Acceptable values: US, EMEA. By default, it is set to US. (optional)
+         ///The geographic area where the data is stored. Acceptable values: US, EMEA, AUS. By default, it is set to US. (optional)
          /// </param>
          /// <param name="companyPatchPayload">
          /// (optional)
@@ -961,7 +961,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
          ///The file to be uploaded as HTTP multipart (chunk) data. Supported MIME types are image/png, image/jpeg, image/jpg, image/bmp, and image/gif.
          /// </param>
          /// <param name="region">
-         ///The geographic area where the data is stored. Acceptable values: US, EMEA. By default, it is set to US. (optional)
+         ///The geographic area where the data is stored. Acceptable values: US, EMEA, AUS. By default, it is set to US. (optional)
          /// </param>
         /// <returns>Task of ApiResponse&lt;Company&gt;></returns>
         
@@ -1063,7 +1063,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
          ///The account ID of the company.
          /// </param>
          /// <param name="region">
-         ///The geographic area where the data is stored. Acceptable values: US, EMEA. By default, it is set to US. (optional)
+         ///The geographic area where the data is stored. Acceptable values: US, EMEA, AUS. By default, it is set to US. (optional)
          /// </param>
          /// <param name="name">
          ///Company name to match Max length: 255 (optional)

@@ -56,7 +56,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
          ///This header is not currently supported in the Account Admin API. (optional)
          /// </param>
          /// <param name="region">
-         ///The region where the bucket resides. Acceptable values: US, EMEA. (optional)
+         ///The region where the bucket resides. Acceptable values: US, EMEA, AUS. (optional)
          /// </param>
          /// <param name="userId">
          ///Note that this header is not relevant for Account Admin GET endpoints. The ID of a user on whose behalf your API request is acting. Required if you’re using a 2-legged authentication context, which must be 2-legged OAuth2 security with user impersonation.  Your app has access to all users specified by the administrator in the SaaS integrations UI. Provide this header value to identify the user to be affected by the request.  You can use either the user’s ACC ID (id), or their Autodesk ID (autodeskId). (optional)
@@ -84,7 +84,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
          ///The file to be uploaded as HTTP multipart (chunk) data. Supported MIME types are image/png, image/jpeg, image/jpg, image/bmp, and image/gif.
          /// </param>
          /// <param name="region">
-         ///The geographic area where the data is stored. Acceptable values: US, EMEA. By default, it is set to US. (optional)
+         ///The geographic area where the data is stored. Acceptable values: US, EMEA, AUS. By default, it is set to US. (optional)
          /// </param>
         /// <returns>Task of ApiResponse&lt;ProjectPatchResponse&gt;</returns>
         
@@ -103,7 +103,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
          ///This header is not currently supported in the Account Admin API. (optional)
          /// </param>
          /// <param name="region">
-         ///The region where the bucket resides. Acceptable values: US, EMEA. (optional)
+         ///The region where the bucket resides. Acceptable values: US, EMEA, AUS. (optional)
          /// </param>
          /// <param name="userId">
          ///Note that this header is not relevant for Account Admin GET endpoints. The ID of a user on whose behalf your API request is acting. Required if you’re using a 2-legged authentication context, which must be 2-legged OAuth2 security with user impersonation.  Your app has access to all users specified by the administrator in the SaaS integrations UI. Provide this header value to identify the user to be affected by the request.  You can use either the user’s ACC ID (id), or their Autodesk ID (autodeskId). (optional)
@@ -128,7 +128,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
          ///This header is not currently supported in the Account Admin API. (optional)
          /// </param>
          /// <param name="region">
-         ///The region where the bucket resides. Acceptable values: US, EMEA. (optional)
+         ///The region where the bucket resides. Acceptable values: US, EMEA, AUS. (optional)
          /// </param>
          /// <param name="userId">
          ///Note that this header is not relevant for Account Admin GET endpoints. The ID of a user on whose behalf your API request is acting. Required if you’re using a 2-legged authentication context, which must be 2-legged OAuth2 security with user impersonation.  Your app has access to all users specified by the administrator in the SaaS integrations UI. Provide this header value to identify the user to be affected by the request.  You can use either the user’s ACC ID (id), or their Autodesk ID (autodeskId). (optional)
@@ -294,7 +294,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
          ///This header is not currently supported in the Account Admin API. (optional)
          /// </param>
          /// <param name="region">
-         ///The region where the bucket resides. Acceptable values: US, EMEA. (optional)
+         ///The region where the bucket resides. Acceptable values: US, EMEA, AUS. (optional)
          /// </param>
          /// <param name="userId">
          ///Note that this header is not relevant for Account Admin GET endpoints. The ID of a user on whose behalf your API request is acting. Required if you’re using a 2-legged authentication context, which must be 2-legged OAuth2 security with user impersonation.  Your app has access to all users specified by the administrator in the SaaS integrations UI. Provide this header value to identify the user to be affected by the request.  You can use either the user’s ACC ID (id), or their Autodesk ID (autodeskId). (optional)
@@ -402,7 +402,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
          ///The file to be uploaded as HTTP multipart (chunk) data. Supported MIME types are image/png, image/jpeg, image/jpg, image/bmp, and image/gif.
          /// </param>
          /// <param name="region">
-         ///The geographic area where the data is stored. Acceptable values: US, EMEA. By default, it is set to US. (optional)
+         ///The geographic area where the data is stored. Acceptable values: US, EMEA, AUS. By default, it is set to US. (optional)
          /// </param>
         /// <returns>Task of ApiResponse&lt;ProjectPatchResponse&gt;></returns>
         
@@ -505,7 +505,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
          ///This header is not currently supported in the Account Admin API. (optional)
          /// </param>
          /// <param name="region">
-         ///The region where the bucket resides. Acceptable values: US, EMEA. (optional)
+         ///The region where the bucket resides. Acceptable values: US, EMEA, AUS. (optional)
          /// </param>
          /// <param name="userId">
          ///Note that this header is not relevant for Account Admin GET endpoints. The ID of a user on whose behalf your API request is acting. Required if you’re using a 2-legged authentication context, which must be 2-legged OAuth2 security with user impersonation.  Your app has access to all users specified by the administrator in the SaaS integrations UI. Provide this header value to identify the user to be affected by the request.  You can use either the user’s ACC ID (id), or their Autodesk ID (autodeskId). (optional)
@@ -610,7 +610,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
          ///This header is not currently supported in the Account Admin API. (optional)
          /// </param>
          /// <param name="region">
-         ///The region where the bucket resides. Acceptable values: US, EMEA. (optional)
+         ///The region where the bucket resides. Acceptable values: US, EMEA, AUS. (optional)
          /// </param>
          /// <param name="userId">
          ///Note that this header is not relevant for Account Admin GET endpoints. The ID of a user on whose behalf your API request is acting. Required if you’re using a 2-legged authentication context, which must be 2-legged OAuth2 security with user impersonation.  Your app has access to all users specified by the administrator in the SaaS integrations UI. Provide this header value to identify the user to be affected by the request.  You can use either the user’s ACC ID (id), or their Autodesk ID (autodeskId). (optional)
