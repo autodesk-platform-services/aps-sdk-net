@@ -37,7 +37,8 @@ namespace Autodesk.Webhooks.Model
 ///
 ///- `US` - (Default) Data center dedicated to serve the United States region.
 ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
-///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+///- `APAC` - (Beta) Data center dedicated to serve the Australia region (obsolete).
+///- `AUS` - Data center for the Australia region.
 ///
 ///**Note:** Beta features are subject to change. Please avoid using them in production environments.
     /// </summary>
@@ -45,7 +46,8 @@ namespace Autodesk.Webhooks.Model
 ///
 ///- `US` - (Default) Data center dedicated to serve the United States region.
 ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
-///- `APAC` - (Beta) Data center dedicated to serve the Australia region.
+///- `APAC` - (Beta) Data center dedicated to serve the Australia region (obsolete).
+///- `AUS` - Data center for the Australia region.
 ///
 ///**Note:** Beta features are subject to change. Please avoid using them in production environments.</value>
     
@@ -70,7 +72,14 @@ namespace Autodesk.Webhooks.Model
         /// Enum APAC for value: APAC
         /// </summary>
         [EnumMember(Value = "APAC")]
-        APAC
+        [Obsolete("Use AUS instead.")]
+        APAC,
+
+        /// <summary>
+        /// Enum AUS for value: AUS
+        /// </summary>
+        [EnumMember(Value = "AUS")]
+        AUS
     }
 
 }

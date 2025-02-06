@@ -7,8 +7,13 @@ namespace Samples
 {
     class Webhooks
     {
-        string token = "<token>";
+       string? token = Environment.GetEnvironmentVariable("token") ?? "";
+
+       string? projectId = Environment.GetEnvironmentVariable("project_id");
+       string? folderId = Environment.GetEnvironmentVariable("folder_id") ?? "";
+
         string hookId = "<hookId>";
+        
         WebhooksClient webhooksClient = null!;
 
         public void Initialise()
@@ -27,18 +32,18 @@ namespace Samples
         public async Task CreateSystemEventHookAsync()
         {
             HookPayload createSpecifiedEventHook = new HookPayload();
-            createSpecifiedEventHook.CallbackUrl = "<callbackUrl>";
+            createSpecifiedEventHook.CallbackUrl = "https://example.com/callback_fifth_newest";
             createSpecifiedEventHook.Scope = new
             {
-                folder = "<folderUrn>"
+                folder = folderId
             };
 
-            createSpecifiedEventHook.HookExpiry = "<hookExpiry>";
+            createSpecifiedEventHook.HookExpiry = "2025-12-12T17:04:10.444Z";
             createSpecifiedEventHook.HookAttribute = new
             {
                 // /* Custom metadata */
                 myfoo = 76,
-                projectId = "<projectId>",
+                projectId = projectId,
                 myobject = new
                 {
                     abc = true,
@@ -46,7 +51,8 @@ namespace Samples
             };
 
             // Add new webhook to receive the notification on a specified event.
-            HttpResponseMessage createSpecifiedEventHookResponse = await webhooksClient.CreateSystemEventHookAsync(system: Systems.Data, _event: Events.DmFolderCopied, hookPayload: createSpecifiedEventHook);
+            HttpResponseMessage createSpecifiedEventHookResponse = await webhooksClient.CreateSystemEventHookAsync(system: Systems.Data, _event: Events.DmFolderCopied, hookPayload: createSpecifiedEventHook, region: Region.AUS);
+        
             Console.WriteLine(createSpecifiedEventHookResponse.StatusCode);
             Console.WriteLine(createSpecifiedEventHookResponse.Content);
         }
@@ -264,7 +270,7 @@ namespace Samples
             // Initialise SDKManager & WebhooksClient
             webhooks.Initialise();
             // Call respective methods
-            // await webhooks.CreateSystemEventHookAsync();
+            await webhooks.CreateSystemEventHookAsync();
             // await webhooks.GetHooksAsync();
             // await webhooks.GetAppHooksAsync();
             // await webhooks.GetSystemHooksAsync();
