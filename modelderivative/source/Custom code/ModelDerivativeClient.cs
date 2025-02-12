@@ -144,7 +144,7 @@ namespace Autodesk.ModelDerivative
         ///
         ///- `US` - (Default) Data center for the US region.
         ///- `EMEA` - Data center for European Union, Middle East, and Africa.
-        ///- `APAC` - (Beta) Data center for the Australia region.
+        ///- `AUS` - (Beta) Data center for the Australia region.
         ///
         ///**Note:** 
         ///
@@ -193,7 +193,7 @@ namespace Autodesk.ModelDerivative
         ///
         ///- `US` - (Default) Data center for the US region.
         ///- `EMEA` - Data center for the European Union, Middle East, and Africa. 
-        ///- `APAC` - (Beta) Data center for the Australia region.
+        ///- `AUS` - (Beta) Data center for the Australia region.
         ///
         ///**Note**: Beta features are subject to change. Please avoid using them in production environments. (optional)
         /// </param>
@@ -254,7 +254,7 @@ namespace Autodesk.ModelDerivative
         ///
         ///- `US` - (Default) Data center for the US region.
         ///- `EMEA` - Data center for the European Union, Middle East, and Africa. 
-        ///- `APAC` - (Beta) Data center for the Australia region.
+        ///- `AUS` - (Beta) Data center for the Australia region.
         ///
         ///**Note**: Beta features are subject to change. Please avoid using them in production environments. (optional)
         /// </param>
@@ -297,7 +297,7 @@ namespace Autodesk.ModelDerivative
         ///
         ///- `US` - (Default) Data center for the US region.
         ///- `EMEA` - Data center for the European Union, Middle East, and Africa. 
-        ///- `APAC` - (Beta) Data center for the Australia region.
+        ///- `AUS` - (Beta) Data center for the Australia region.
         ///
         ///**Note**: Beta features are subject to change. Please avoid using them in production environments. (optional)
         /// </param>
@@ -351,7 +351,7 @@ namespace Autodesk.ModelDerivative
         ///
         ///- `US` - (Default) Data center for the US region.
         ///- `EMEA` - Data center for the European Union, Middle East, and Africa. 
-        ///- `APAC` - (Beta) Data center for the Australia region.
+        ///- `AUS` - (Beta) Data center for the Australia region.
         ///
         ///**Note**: Beta features are subject to change. Please avoid using them in production environments. (optional)
         /// </param>
@@ -407,7 +407,7 @@ namespace Autodesk.ModelDerivative
         ///
         ///- `US` - (Default) Data center for the US region.
         ///- `EMEA` - Data center for the European Union, Middle East, and Africa. 
-        ///- `APAC` - (Beta) Data center for the Australia region.
+        ///- `AUS` - (Beta) Data center for the Australia region.
         ///
         ///**Note**: Beta features are subject to change. Please avoid using them in production environments. (optional)
         /// </param>
@@ -464,7 +464,7 @@ namespace Autodesk.ModelDerivative
         ///
         ///- `US` - (Default) Data center for the US region.
         ///- `EMEA` - Data center for the European Union, Middle East, and Africa. 
-        ///- `APAC` - (Beta) Data center for the Australia region.
+        ///- `AUS` - (Beta) Data center for the Australia region.
         ///
         ///**Note**: Beta features are subject to change. Please avoid using them in production environments. (optional)
         /// </param>
@@ -517,7 +517,7 @@ namespace Autodesk.ModelDerivative
         ///
         ///- `US` - (Default) Data center for the US region.
         ///- `EMEA` - Data center for the European Union, Middle East, and Africa. 
-        ///- `APAC` - (Beta) Data center for the Australia region.
+        ///- `AUS` - (Beta) Data center for the Australia region.
         ///
         ///**Note**: Beta features are subject to change. Please avoid using them in production environments. (optional)
         /// </param>
@@ -573,7 +573,7 @@ namespace Autodesk.ModelDerivative
         ///
         ///- `US` - (Default) Data center for the US region.
         ///- `EMEA` - Data center for the European Union, Middle East, and Africa. 
-        ///- `APAC` - (Beta) Data center for the Australia region.
+        ///- `AUS` - (Beta) Data center for the Australia region.
         ///
         ///**Note**: Beta features are subject to change. Please avoid using them in production environments. (optional)
         /// </param>
@@ -692,7 +692,7 @@ namespace Autodesk.ModelDerivative
         ///
         ///- `US` - (Default) Data center for the US region.
         ///- `EMEA` - Data center for the European Union, Middle East, and Africa. 
-        ///- `APAC` - (Beta) Data center for the Australia region.
+        ///- `AUS` - (Beta) Data center for the Australia region.
         ///
         ///**Note**: Beta features are subject to change. Please avoid using them in production environments. (optional)
         /// </param>
@@ -762,7 +762,7 @@ namespace Autodesk.ModelDerivative
         ///
         ///- `US` - (Default) Data center for the US region.
         ///- `EMEA` - Data center for the European Union, Middle East, and Africa. 
-        ///- `APAC` - (Beta) Data center for the Australia region.
+        ///- `AUS` - (Beta) Data center for the Australia region.
         ///
         ///**Note**: Beta features are subject to change. Please avoid using them in production environments. (optional)
         /// </param>
