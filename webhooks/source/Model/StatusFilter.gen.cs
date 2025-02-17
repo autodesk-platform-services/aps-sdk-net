@@ -37,7 +37,7 @@ namespace Autodesk.Webhooks.Model
 ///
 ///- `active` - Successfully delivered most recent event notifications. 
 ///- `inactive` - Failed to deliver most recent event notification and has been deactivated.
-///- `reactivated` - Previously inactive but was reactivated. No events have occurred since reactivation.
+///- `reactivated` - Previously inactive but was reactivated. No events have occurred since reactivation (obsolete).
 ///
 ///If this parameter is not specified, the filter is not applied. See [Event Delivery Guarantees](/en/docs/webhooks/v1/developers_guide/event-delivery-guarantees/) for more information on how the state of a webhook changes.
     /// </summary>
@@ -45,7 +45,7 @@ namespace Autodesk.Webhooks.Model
 ///
 ///- `active` - Successfully delivered most recent event notifications. 
 ///- `inactive` - Failed to deliver most recent event notification and has been deactivated.
-///- `reactivated` - Previously inactive but was reactivated. No events have occurred since reactivation.
+///- `reactivated` - Previously inactive but was reactivated. No events have occurred since reactivation (obsolete).
 ///
 ///If this parameter is not specified, the filter is not applied. See [Event Delivery Guarantees](/en/docs/webhooks/v1/developers_guide/event-delivery-guarantees/) for more information on how the state of a webhook changes.</value>
     
