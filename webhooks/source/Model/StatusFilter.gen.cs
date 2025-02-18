@@ -70,7 +70,7 @@ namespace Autodesk.Webhooks.Model
         /// Enum Reactivated for value: reactivated
         /// </summary>
         [EnumMember(Value = "reactivated")]
-        [Obsolete("Use active instead.")]
+        [Obsolete("Valid options are active | inactive")]
         Reactivated
     }
 
