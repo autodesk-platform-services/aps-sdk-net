@@ -340,7 +340,7 @@ namespace Autodesk.Webhooks
         /// <param name="throwOnError">Specifies whether to throw an exception on error. (optional)</param>
         /// <returns>Task of Hooks</returns>
 
-        public async System.Threading.Tasks.Task<Hooks> GetAppHooksAsync(Region region = default, string pageState = default(string), StatusFilter status = default, Sort sort = default, string accessToken = default, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<Hooks> GetAppHooksAsync(Region region = default, string pageState = default(string), StatusFilter? status = null, Sort? sort = null, string accessToken = default, bool throwOnError = true)
         {
             if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
             {
@@ -482,7 +482,7 @@ namespace Autodesk.Webhooks
         /// <param name="throwOnError">Specifies whether to throw an exception on error. (optional)</param>
         /// <returns>Task of Hooks</returns>
 
-        public async System.Threading.Tasks.Task<Hooks> GetHooksAsync(string pageState = default(string), StatusFilter status = default, Region region = default, string accessToken = default, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<Hooks> GetHooksAsync(string pageState = default(string), StatusFilter? status = null, Region region = default, string accessToken = default, bool throwOnError = true)
         {
             if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
             {
@@ -543,7 +543,7 @@ namespace Autodesk.Webhooks
 
         /// <returns>Task of Hooks</returns>
 
-        public async System.Threading.Tasks.Task<Hooks> GetSystemEventHooksAsync(string system, string _event, Region region = default, string scopeName = default(string), string pageState = default(string), StatusFilter status = default, string accessToken = default, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<Hooks> GetSystemEventHooksAsync(string system, string _event, Region region = default, string scopeName = default(string), string pageState = default(string), StatusFilter? status = null, string accessToken = default, bool throwOnError = true)
         {
             if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
             {
@@ -601,7 +601,7 @@ namespace Autodesk.Webhooks
         /// <param name="accessToken">An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().(optional)</param>
         /// <param name="throwOnError">Specifies whether to throw an exception on error. (optional)</param>
         /// <returns>Task of Hooks</returns>
-        public async System.Threading.Tasks.Task<Hooks> GetSystemEventHooksAsync(Systems system, Events _event, Region region = default, string scopeName = default(string), string pageState = default(string), StatusFilter status = default, string accessToken = default, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<Hooks> GetSystemEventHooksAsync(Systems system, Events _event, Region region = default, string scopeName = default(string), string pageState = default(string), StatusFilter? status = null, string accessToken = default, bool throwOnError = true)
         {
             if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
             {
@@ -656,7 +656,7 @@ namespace Autodesk.Webhooks
         /// <param name="throwOnError">Specifies whether to throw an exception on error. (optional)</param>
         /// <returns>Task of Hooks</returns>
 
-        public async System.Threading.Tasks.Task<Hooks> GetSystemHooksAsync(string system, Region region = default, StatusFilter status = default, string pageState = default(string), string accessToken = default, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<Hooks> GetSystemHooksAsync(string system, Region region = default, StatusFilter? status = null, string pageState = default(string), string accessToken = default, bool throwOnError = true)
         {
             if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
             {
@@ -709,7 +709,7 @@ namespace Autodesk.Webhooks
         /// <param name="accessToken">An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().(optional)</param>
         /// <param name="throwOnError">Specifies whether to throw an exception on error. (optional)</param>
         /// <returns>Task of Hooks</returns>
-        public async System.Threading.Tasks.Task<Hooks> GetSystemHooksAsync(Systems system, Region region = default, StatusFilter status = default, string pageState = default(string), string accessToken = default, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<Hooks> GetSystemHooksAsync(Systems system, Region region = default, StatusFilter? status = null, string pageState = default(string), string accessToken = default, bool throwOnError = true)
         {
             if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
             {
