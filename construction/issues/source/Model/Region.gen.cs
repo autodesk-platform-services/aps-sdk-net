@@ -43,7 +43,8 @@ namespace Autodesk.Construction.Issues.Model
     ///            - `US` - (Default) Data center for the US region.
     ///            - `EMEA` - Data center for the European Union, Middle East, and Africa.
     ///            - `AUS` -  Data center for Australia.
-
+    ///</value>
+    
     [JsonConverter(typeof(StringEnumConverter))]
 
     public enum Region
