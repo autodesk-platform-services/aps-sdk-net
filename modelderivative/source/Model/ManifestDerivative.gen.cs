@@ -32,89 +32,112 @@ using Newtonsoft.Json.Converters;
 
 namespace Autodesk.ModelDerivative.Model
 {
-    /// <summary>
-    /// Represents a derivative generated for the source design.
-    /// </summary>
-    [DataContract]
-    public partial class ManifestDerivative
-    {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ManifestDerivative" /> class.
+        /// Represents a derivative generated for the source design.
         /// </summary>
-        public ManifestDerivative()
+        [DataContract]
+        public partial class ManifestDerivative
         {
+                /// <summary>
+                /// Initializes a new instance of the <see cref="ManifestDerivative" /> class.
+                /// </summary>
+                public ManifestDerivative()
+                {
+                }
+
+                /// <summary>
+                ///The name of the resource.
+                /// </summary>
+                /// <value>
+                ///The name of the resource.
+                /// </value>
+                [DataMember(Name = "name", EmitDefaultValue = false)]
+                public string Name { get; set; }
+
+                /// <summary>
+                ///- `true`: The derivative has a thumbnail.
+                ///- `false`: The derivative does not have a thumbnail.
+                /// </summary>
+                /// <value>
+                ///- `true`: The derivative has a thumbnail.
+                ///- `false`: The derivative does not have a thumbnail.
+                /// </value>
+                [DataMember(Name = "hasThumbnail", EmitDefaultValue = false)]
+                public string HasThumbnail { get; set; }
+
+                /// <summary>
+                ///Indicates the progress of the process generating this derivative, as a percentage. Once complete, the value changes to `complete`.
+                /// </summary>
+                /// <value>
+                ///Indicates the progress of the process generating this derivative, as a percentage. Once complete, the value changes to `complete`.
+                /// </value>
+                [DataMember(Name = "progress", EmitDefaultValue = false)]
+                public string Progress { get; set; }
+
+                /// <summary>
+                ///The file type/format of the derivative. Possible values are: `dwg`, `fbx`, `ifc`, `iges`, `obj` , `step`, `stl`, `svf`, `svf2`,  `thumbnail`.
+                /// </summary>
+                /// <value>
+                ///The file type/format of the derivative. Possible values are: `dwg`, `fbx`, `ifc`, `iges`, `obj` , `step`, `stl`, `svf`, `svf2`,  `thumbnail`.
+                /// </value>
+                [DataMember(Name = "outputType", EmitDefaultValue = false)]
+                public string OutputType { get; set; }
+
+
+                /// <summary>
+                ///A JSON object containing metadata extracted from the source design. This metadata provides valuable information about the model, such as its author, client name, project status, and other relevant details.
+                ///
+                ///**Note:** This metadata is currently returned for the following source design types:
+                ///
+                ///- RVT - Revit models
+                ///- NWD - Navisworks models
+                ///- DWG - AutoCAD models
+                /// </summary>
+                /// <value>
+                ///A JSON object containing metadata extracted from the source design. This metadata provides valuable information about the model, such as its author, client name, project status, and other relevant details.
+                ///
+                ///**Note:** This metadata is currently returned for the following source design types:
+                ///
+                ///- RVT - Revit models
+                ///- NWD - Navisworks models
+                ///- DWG - AutoCAD models
+                /// </value>
+                [DataMember(Name = "properties", EmitDefaultValue = false)]
+                public Object Properties { get; set; }
+
+
+                /// <summary>
+                ///Status of the task generating this derivative. Possible values are: `pending`, `inprogress`, `success`, `failed`, `timeout`.
+                /// </summary>
+                /// <value>
+                ///Status of the task generating this derivative. Possible values are: `pending`, `inprogress`, `success`, `failed`, `timeout`.
+                /// </value>
+                [DataMember(Name = "status", EmitDefaultValue = false)]
+                public string Status { get; set; }
+
+                /// <summary>
+                ///Gets or Sets Messages
+                /// </summary>
+                [DataMember(Name = "messages", EmitDefaultValue = false)]
+                public List<Messages> Messages { get; set; }
+
+                /// <summary>
+                ///An array of objects, where each object represents a resource generated for the derivative. For example, a Model View (Viewable) of the source design.
+                /// </summary>
+                /// <value>
+                ///An array of objects, where each object represents a resource generated for the derivative. For example, a Model View (Viewable) of the source design.
+                /// </value>
+                [DataMember(Name = "children", EmitDefaultValue = false)]
+                public List<ManifestResources> Children { get; set; }
+
+                /// <summary>
+                /// Returns the string presentation of the object
+                /// </summary>
+                /// <returns>String presentation of the object</returns>
+                public override string ToString()
+                {
+                        return JsonConvert.SerializeObject(this, Formatting.Indented);
+                }
         }
-
-        /// <summary>
-        ///The name of the resource.
-        /// </summary>
-        /// <value>
-        ///The name of the resource.
-        /// </value>
-        [DataMember(Name = "name", EmitDefaultValue = false)]
-        public string Name { get; set; }
-
-        /// <summary>
-        ///- `true`: The derivative has a thumbnail.
-        ///- `false`: The derivative does not have a thumbnail.
-        /// </summary>
-        /// <value>
-        ///- `true`: The derivative has a thumbnail.
-        ///- `false`: The derivative does not have a thumbnail.
-        /// </value>
-        [DataMember(Name = "hasThumbnail", EmitDefaultValue = false)]
-        public string HasThumbnail { get; set; }
-
-        /// <summary>
-        ///Indicates the progress of the process generating this derivative, as a percentage. Once complete, the value changes to `complete`.
-        /// </summary>
-        /// <value>
-        ///Indicates the progress of the process generating this derivative, as a percentage. Once complete, the value changes to `complete`.
-        /// </value>
-        [DataMember(Name = "progress", EmitDefaultValue = false)]
-        public string Progress { get; set; }
-
-        /// <summary>
-        ///The file type/format of the derivative. Possible values are: `dwg`, `fbx`, `ifc`, `iges`, `obj` , `step`, `stl`, `svf`, `svf2`,  `thumbnail`.
-        /// </summary>
-        /// <value>
-        ///The file type/format of the derivative. Possible values are: `dwg`, `fbx`, `ifc`, `iges`, `obj` , `step`, `stl`, `svf`, `svf2`,  `thumbnail`.
-        /// </value>
-        [DataMember(Name = "outputType", EmitDefaultValue = false)]
-        public string OutputType { get; set; }
-
-        /// <summary>
-        ///Status of the task generating this derivative. Possible values are: `pending`, `inprogress`, `success`, `failed`, `timeout`.
-        /// </summary>
-        /// <value>
-        ///Status of the task generating this derivative. Possible values are: `pending`, `inprogress`, `success`, `failed`, `timeout`.
-        /// </value>
-        [DataMember(Name = "status", EmitDefaultValue = false)]
-        public string Status { get; set; }
-
-        /// <summary>
-        ///Gets or Sets Messages
-        /// </summary>
-        [DataMember(Name = "messages", EmitDefaultValue = false)]
-        public List<Messages> Messages { get; set; }
-
-        /// <summary>
-        ///An array of objects, where each object represents a resource generated for the derivative. For example, a Model View (Viewable) of the source design.
-        /// </summary>
-        /// <value>
-        ///An array of objects, where each object represents a resource generated for the derivative. For example, a Model View (Viewable) of the source design.
-        /// </value>
-        [DataMember(Name = "children", EmitDefaultValue = false)]
-        public List<ManifestResources> Children { get; set; }
-
-        /// <summary>
-        /// Returns the string presentation of the object
-        /// </summary>
-        /// <returns>String presentation of the object</returns>
-        public override string ToString()
-        {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
-        }
-    }
 
 }
