@@ -36,6 +36,8 @@ namespace Samples
                   {
                         TwoLeggedToken twoLeggedToken = await authenticationClient.GetTwoLeggedTokenAsync(clientId, clientSecret, new List<Scopes>() { Scopes.DataRead, Scopes.BucketRead });
                         string accessToken = twoLeggedToken.AccessToken;
+                        long? expiresAt = twoLeggedToken.ExpiresAt; // Returns the token expiry time in Unix seconds
+                        DateTime expiryLocalTime = DateTimeOffset.FromUnixTimeSeconds(expiresAt!.Value).LocalDateTime; // Convert Unix seconds to local time
                   }
                   catch (AuthenticationApiException ex)
                   {

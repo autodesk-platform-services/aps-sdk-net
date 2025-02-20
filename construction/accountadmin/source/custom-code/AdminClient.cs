@@ -41,7 +41,7 @@ namespace Autodesk.Construction.AccountAdmin
                 ///This header is not currently supported in the Account Admin API. (optional)
                 /// </param>
                 /// <param name="region">
-                ///The region where the bucket resides. Acceptable values: US, EMEA. (optional)
+                ///The region where the bucket resides. Acceptable values: US, EMEA, AUS. (optional)
                 /// </param>
                 /// <param name="userId">
                 ///Note that this header is not relevant for Account Admin GET endpoints. The ID of a user on whose behalf your API request is acting. Required if you’re using a 2-legged authentication context, which must be 2-legged OAuth2 security with user impersonation.  Your app has access to all users specified by the administrator in the SaaS integrations UI. Provide this header value to identify the user to be affected by the request.  You can use either the user’s ACC ID (id), or their Autodesk ID (autodeskId). (optional)
@@ -78,7 +78,7 @@ namespace Autodesk.Construction.AccountAdmin
                 ///This header is not currently supported in the Account Admin API. (optional)
                 /// </param>
                 /// <param name="region">
-                ///The region where the bucket resides. Acceptable values: US, EMEA. (optional)
+                ///The region where the bucket resides. Acceptable values: US, EMEA, AUS. (optional)
                 /// </param>
                 /// <param name="userId">
                 ///Note that this header is not relevant for Account Admin GET endpoints. The ID of a user on whose behalf your API request is acting. Required if you’re using a 2-legged authentication context, which must be 2-legged OAuth2 security with user impersonation.  Your app has access to all users specified by the administrator in the SaaS integrations UI. Provide this header value to identify the user to be affected by the request.  You can use either the user’s ACC ID (id), or their Autodesk ID (autodeskId). (optional)
@@ -118,7 +118,7 @@ namespace Autodesk.Construction.AccountAdmin
                 ///The file to be uploaded as HTTP multipart (chunk) data. Supported MIME types are image/png, image/jpeg, image/jpg, image/bmp, and image/gif.
                 /// </param>
                 /// <param name="region">
-                ///The geographic area where the data is stored. Acceptable values: US, EMEA. By default, it is set to US. (optional)
+                ///The geographic area where the data is stored. Acceptable values: US, EMEA, AUS. By default, it is set to US. (optional)
                 /// </param>
                 /// <returns>Task of ApiResponse&lt;ProjectPatchResponse&gt;></returns>
                 public async System.Threading.Tasks.Task<ProjectPatchResponse> CreateProjectImageAsync(string projectId, string accountId, System.IO.Stream body, Region region= default, string accessToken = default, bool throwOnError = true)
@@ -149,7 +149,7 @@ namespace Autodesk.Construction.AccountAdmin
                 ///This header is not currently supported in the Account Admin API. (optional)
                 /// </param>
                 /// <param name="region">
-                ///The region where the bucket resides. Acceptable values: US, EMEA. (optional)
+                ///The region where the bucket resides. Acceptable values: US, EMEA, AUS. (optional)
                 /// </param>
                 /// <param name="userId">
                 ///Note that this header is not relevant for Account Admin GET endpoints. The ID of a user on whose behalf your API request is acting. Required if you’re using a 2-legged authentication context, which must be 2-legged OAuth2 security with user impersonation.  Your app has access to all users specified by the administrator in the SaaS integrations UI. Provide this header value to identify the user to be affected by the request.  You can use either the user’s ACC ID (id), or their Autodesk ID (autodeskId). (optional)
@@ -224,7 +224,7 @@ namespace Autodesk.Construction.AccountAdmin
                 ///The account ID of the company. This corresponds to hub ID in the Data Management API. To convert a hub ID into an account ID you need to remove the “b.” prefix. For example, a hub ID of b.c8b0c73d-3ae9 translates to an account ID of c8b0c73d-3ae9.
                 /// </param>
                 /// <param name="region">
-                ///The geographic area where the data is stored. Acceptable values: US, EMEA. By default, it is set to US. (optional)
+                ///The geographic area where the data is stored. Acceptable values: US, EMEA, AUS. By default, it is set to US. (optional)
                 /// </param>
                 /// <param name="companyPayload">
                 /// (optional)
@@ -256,7 +256,7 @@ namespace Autodesk.Construction.AccountAdmin
                 ///The account ID of the company. This corresponds to hub ID in the Data Management API. To convert a hub ID into an account ID you need to remove the “b.” prefix. For example, a hub ID of b.c8b0c73d-3ae9 translates to an account ID of c8b0c73d-3ae9.
                 /// </param>
                 /// <param name="region">
-                ///The geographic area where the data is stored. Acceptable values: US, EMEA. By default, it is set to US. (optional)
+                ///The geographic area where the data is stored. Acceptable values: US, EMEA, AUS. By default, it is set to US. (optional)
                 /// </param>
                 /// <param name="limit">
                 ///Response array’s size Default value: 10 Max limit: 100 (optional)
@@ -299,7 +299,7 @@ namespace Autodesk.Construction.AccountAdmin
                 ///The account ID of the company.
                 /// </param>
                 /// <param name="region">
-                ///The geographic area where the data is stored. Acceptable values: US, EMEA. By default, it is set to US. (optional)
+                ///The geographic area where the data is stored. Acceptable values: US, EMEA, AUS. By default, it is set to US. (optional)
                 /// </param>
                 /// <returns>Task of ApiResponse&lt;Company&gt;</returns>
                 public async System.Threading.Tasks.Task<Company> GetCompanyAsync(string companyId, string accountId, Region region= default, string accessToken = default, bool throwOnError = true)
@@ -331,7 +331,7 @@ namespace Autodesk.Construction.AccountAdmin
                 ///The ID of the project. 
                 /// </param>
                 /// <param name="region">
-                ///The geographic area where the data is stored. Acceptable values: US, EMEA. By default, it is set to US. (optional)
+                ///The geographic area where the data is stored. Acceptable values: US, EMEA, AUS. By default, it is set to US. (optional)
                 /// </param>
                 /// <param name="limit">
                 ///Response array’s size Default value: 10 Max limit: 100 (optional)
@@ -372,7 +372,7 @@ namespace Autodesk.Construction.AccountAdmin
                 ///The account ID of the company. This corresponds to hub ID in the Data Management API. To convert a hub ID into an account ID you need to remove the “b.” prefix. For example, a hub ID of b.c8b0c73d-3ae9 translates to an account ID of c8b0c73d-3ae9.
                 /// </param>
                 /// <param name="region">
-                ///The geographic area where the data is stored. Acceptable values: US, EMEA. By default, it is set to US. (optional)
+                ///The geographic area where the data is stored. Acceptable values: US, EMEA, AUS. By default, it is set to US. (optional)
                 /// </param>
                 /// <param name="companyPayload">
                 /// (optional)
@@ -406,7 +406,7 @@ namespace Autodesk.Construction.AccountAdmin
                 ///The account ID of the company.
                 /// </param>
                 /// <param name="region">
-                ///The geographic area where the data is stored. Acceptable values: US, EMEA. By default, it is set to US. (optional)
+                ///The geographic area where the data is stored. Acceptable values: US, EMEA, AUS. By default, it is set to US. (optional)
                 /// </param>
                 /// <param name="companyPatchPayload">
                 /// (optional)
@@ -443,7 +443,7 @@ namespace Autodesk.Construction.AccountAdmin
                 ///The file to be uploaded as HTTP multipart (chunk) data. Supported MIME types are image/png, image/jpeg, image/jpg, image/bmp, and image/gif.
                 /// </param>
                 /// <param name="region">
-                ///The geographic area where the data is stored. Acceptable values: US, EMEA. By default, it is set to US. (optional)
+                ///The geographic area where the data is stored. Acceptable values: US, EMEA, AUS. By default, it is set to US. (optional)
                 /// </param>
                 /// <returns>Task of ApiResponse&lt;Company&gt;</returns>
                 public async System.Threading.Tasks.Task<Company> PatchCompanyImageAsync(string companyId, string accountId, System.IO.Stream body, Region region= default, string accessToken = default, bool throwOnError = true)
@@ -472,7 +472,7 @@ namespace Autodesk.Construction.AccountAdmin
                 ///The account ID of the company.
                 /// </param>
                 /// <param name="region">
-                ///The geographic area where the data is stored. Acceptable values: US, EMEA. By default, it is set to US. (optional)
+                ///The geographic area where the data is stored. Acceptable values: US, EMEA, AUS. By default, it is set to US. (optional)
                 /// </param>
                 /// <param name="name">
                 ///Company name to match Max length: 255 (optional)
@@ -527,7 +527,7 @@ namespace Autodesk.Construction.AccountAdmin
                 ///This header is not currently supported in the Account Admin API. (optional)
                 /// </param>
                 /// <param name="region">
-                ///The region where the bucket resides. Acceptable values: US, EMEA. (optional)
+                ///The region where the bucket resides. Acceptable values: US, EMEA, AUS. (optional)
                 /// </param>
                 /// <param name="userId">
                 ///Note that this header is not relevant for Account Admin GET endpoints. The ID of a user on whose behalf your API request is acting. Required if you’re using a 2-legged authentication context, which must be 2-legged OAuth2 security with user impersonation.  Your app has access to all users specified by the administrator in the SaaS integrations UI. Provide this header value to identify the user to be affected by the request.  You can use either the user’s ACC ID (id), or their Autodesk ID (autodeskId). (optional)
@@ -572,7 +572,7 @@ namespace Autodesk.Construction.AccountAdmin
                 ///This header is not currently supported in the Account Admin API. (optional)
                 /// </param>
                 /// <param name="region">
-                ///The region where the bucket resides. Acceptable values: US, EMEA. (optional)
+                ///The region where the bucket resides. Acceptable values: US, EMEA, AUS. (optional)
                 /// </param>
                 /// <param name="adminUserId">
                 ///Note that this header is not relevant for Account Admin GET endpoints. The ID of a user on whose behalf your API request is acting. Required if you’re using a 2-legged authentication context, which must be 2-legged OAuth2 security with user impersonation.  Your app has access to all users specified by the administrator in the SaaS integrations UI. Provide this header value to identify the user to be affected by the request.  You can use either the user’s ACC ID (id), or their Autodesk ID (autodeskId). (optional)
@@ -615,7 +615,7 @@ namespace Autodesk.Construction.AccountAdmin
                 ///This header is not currently supported in the Account Admin API. (optional)
                 /// </param>
                 /// <param name="region">
-                ///The region where the bucket resides. Acceptable values: US, EMEA. (optional)
+                ///The region where the bucket resides. Acceptable values: US, EMEA, AUS. (optional)
                 /// </param>
                 /// <param name="userId">
                 ///Note that this header is not relevant for Account Admin GET endpoints. The ID of a user on whose behalf your API request is acting. Required if you’re using a 2-legged authentication context, which must be 2-legged OAuth2 security with user impersonation.  Your app has access to all users specified by the administrator in the SaaS integrations UI. Provide this header value to identify the user to be affected by the request.  You can use either the user’s ACC ID (id), or their Autodesk ID (autodeskId). (optional)
@@ -700,7 +700,7 @@ namespace Autodesk.Construction.AccountAdmin
                 ///This header is not currently supported in the Account Admin API. (optional)
                 /// </param>
                 /// <param name="region">
-                ///The region where the bucket resides. Acceptable values: US, EMEA. (optional)
+                ///The region where the bucket resides. Acceptable values: US, EMEA, AUS. (optional)
                 /// </param>
                 /// <param name="userId">
                 ///Note that this header is not relevant for Account Admin GET endpoints. The ID of a user on whose behalf your API request is acting. Required if you’re using a 2-legged authentication context, which must be 2-legged OAuth2 security with user impersonation.  Your app has access to all users specified by the administrator in the SaaS integrations UI. Provide this header value to identify the user to be affected by the request.  You can use either the user’s ACC ID (id), or their Autodesk ID (autodeskId). (optional)
@@ -742,7 +742,7 @@ namespace Autodesk.Construction.AccountAdmin
                 ///This header is not currently supported in the Account Admin API. (optional)
                 /// </param>
                 /// <param name="region">
-                ///The region where the bucket resides. Acceptable values: US, EMEA. (optional)
+                ///The region where the bucket resides. Acceptable values: US, EMEA, AUS. (optional)
                 /// </param>
                 /// <param name="adminUserId">
                 ///Note that this header is not relevant for Account Admin GET endpoints. The ID of a user on whose behalf your API request is acting. Required if you’re using a 2-legged authentication context, which must be 2-legged OAuth2 security with user impersonation.  Your app has access to all users specified by the administrator in the SaaS integrations UI. Provide this header value to identify the user to be affected by the request.  You can use either the user’s ACC ID (id), or their Autodesk ID (autodeskId). (optional)
@@ -781,7 +781,7 @@ namespace Autodesk.Construction.AccountAdmin
                 ///This header is not currently supported in the Account Admin API. (optional)
                 /// </param>
                 /// <param name="region">
-                ///The region where the bucket resides. Acceptable values: US, EMEA. (optional)
+                ///The region where the bucket resides. Acceptable values: US, EMEA, AUS. (optional)
                 /// </param>
                 /// <param name="adminUserId">
                 ///Note that this header is not relevant for Account Admin GET endpoints. The ID of a user on whose behalf your API request is acting. Required if you’re using a 2-legged authentication context, which must be 2-legged OAuth2 security with user impersonation.  Your app has access to all users specified by the administrator in the SaaS integrations UI. Provide this header value to identify the user to be affected by the request.  You can use either the user’s ACC ID (id), or their Autodesk ID (autodeskId). (optional)
@@ -815,7 +815,7 @@ namespace Autodesk.Construction.AccountAdmin
                 ///The account ID of the users. This corresponds to hub ID in the Data Management API. To convert a hub ID into an account ID you need to remove the “b.” prefix. For example, a hub ID of b.c8b0c73d-3ae9 translates to an account ID of c8b0c73d-3ae9.
                 /// </param>
                 /// <param name="region">
-                ///The geographic area where the data is stored. Acceptable values: US, EMEA. By default, it is set to US. (optional)
+                ///The geographic area where the data is stored. Acceptable values: US, EMEA, AUS. By default, it is set to US. (optional)
                 /// </param>
                 /// <param name="userPayload">
                 /// (optional)
@@ -849,7 +849,7 @@ namespace Autodesk.Construction.AccountAdmin
                 ///User ID
                 /// </param>
                 /// <param name="region">
-                ///The geographic area where the data is stored. Acceptable values: US, EMEA. By default, it is set to US. (optional)
+                ///The geographic area where the data is stored. Acceptable values: US, EMEA, AUS. By default, it is set to US. (optional)
                 /// </param>
                 /// <returns>Task of ApiResponse&lt;User&gt;</returns>                
                 public async System.Threading.Tasks.Task<User> GetUserAsync(string accountId, string userId, Region region= default, string accessToken = default, bool throwOnError = true)
@@ -877,7 +877,7 @@ namespace Autodesk.Construction.AccountAdmin
                 ///The account ID of the users. This corresponds to hub ID in the Data Management API. To convert a hub ID into an account ID you need to remove the “b.” prefix. For example, a hub ID of b.c8b0c73d-3ae9 translates to an account ID of c8b0c73d-3ae9.
                 /// </param>
                 /// <param name="region">
-                ///The geographic area where the data is stored. Acceptable values: US, EMEA. By default, it is set to US. (optional)
+                ///The geographic area where the data is stored. Acceptable values: US, EMEA, AUS. By default, it is set to US. (optional)
                 /// </param>
                 /// <param name="limit">
                 ///Response array’s size Default value: 10 Max limit: 100 (optional)
@@ -917,7 +917,7 @@ namespace Autodesk.Construction.AccountAdmin
                 ///The account ID of the users. This corresponds to hub ID in the Data Management API. To convert a hub ID into an account ID you need to remove the “b.” prefix. For example, a hub ID of b.c8b0c73d-3ae9 translates to an account ID of c8b0c73d-3ae9.
                 /// </param>
                 /// <param name="region">
-                ///The geographic area where the data is stored. Acceptable values: US, EMEA. By default, it is set to US. (optional)
+                ///The geographic area where the data is stored. Acceptable values: US, EMEA, AUS. By default, it is set to US. (optional)
                 /// </param>
                 /// <param name="userPayload">
                 /// (optional)
@@ -951,7 +951,7 @@ namespace Autodesk.Construction.AccountAdmin
                 ///User ID
                 /// </param>
                 /// <param name="region">
-                ///The geographic area where the data is stored. Acceptable values: US, EMEA. By default, it is set to US. (optional)
+                ///The geographic area where the data is stored. Acceptable values: US, EMEA, AUS. By default, it is set to US. (optional)
                 /// </param>
                 /// <param name="userPatchPayload">
                 /// (optional)
@@ -982,7 +982,7 @@ namespace Autodesk.Construction.AccountAdmin
                 ///The account ID of the users.
                 /// </param>
                 /// <param name="region">
-                ///The geographic area where the data is stored. Acceptable values: US, EMEA. By default, it is set to US. (optional)
+                ///The geographic area where the data is stored. Acceptable values: US, EMEA, AUS. By default, it is set to US. (optional)
                 /// </param>
                 /// <param name="name">
                 ///User name to match Max length: 255 (optional)
@@ -1038,7 +1038,7 @@ namespace Autodesk.Construction.AccountAdmin
                 ///The account ID of the business unit. This corresponds to hub ID in the Data Management API. To convert a hub ID into an account ID you need to remove the “b.” prefix. For example, a hub ID of b.c8b0c73d-3ae9 translates to an account ID of c8b0c73d-3ae9.
                 /// </param>
                 /// <param name="region">
-                ///The geographic area where the data is stored. Acceptable values: US, EMEA. By default, it is set to US. (optional)
+                ///The geographic area where the data is stored. Acceptable values: US, EMEA, AUS. By default, it is set to US. (optional)
                 /// </param>
                 /// <param name="businessUnitsRequestPyload">
                 /// (optional)
@@ -1069,7 +1069,7 @@ namespace Autodesk.Construction.AccountAdmin
                 ///The account ID of the business unit. This corresponds to hub ID in the Data Management API. To convert a hub ID into an account ID you need to remove the “b.” prefix. For example, a hub ID of b.c8b0c73d-3ae9 translates to an account ID of c8b0c73d-3ae9.
                 /// </param>
                 /// <param name="region">
-                ///The geographic area where the data is stored. Acceptable values: US, EMEA. By default, it is set to US. (optional)
+                ///The geographic area where the data is stored. Acceptable values: US, EMEA, AUS. By default, it is set to US. (optional)
                 /// </param>
                 /// <returns>Task of ApiResponse&lt;BusinessUnitsResponse&gt;</returns>        
                 public async System.Threading.Tasks.Task<BusinessUnitsResponse> GetBusinessUnitsAsync(string accountId, Region region= default, string accessToken = default, bool throwOnError = true)

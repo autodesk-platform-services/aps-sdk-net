@@ -58,7 +58,14 @@ namespace Autodesk.Construction.AccountAdmin.Model
         /// Enum APAC for value: APAC
         /// </summary>
         [EnumMember(Value = "APAC")]
-        APAC
+        [Obsolete("Please use AUS instead.")]
+        APAC,
+
+        /// <summary>
+        /// Enum AUS for value: AUS
+        /// </summary>
+        [EnumMember(Value = "AUS")]
+        AUS
     }
 
 }

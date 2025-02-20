@@ -43,8 +43,10 @@ class DataManagement
             string HubsId = hub.Id;
 
             Console.WriteLine(hubsType);
+            
             Console.WriteLine(HubsId);
             Console.WriteLine(hub.Attributes.Name);
+            Region region = hub.Attributes.Region;
             Console.WriteLine(hub.Attributes.Extension.Type);
         }
     }

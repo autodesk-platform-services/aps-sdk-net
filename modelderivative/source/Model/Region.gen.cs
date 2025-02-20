@@ -37,7 +37,7 @@ namespace Autodesk.ModelDerivative.Model
     ///    
     ///    - `US` - Data center for the US region.
     ///    - `EMEA` - Data center for the European Union, Middle East, and Africa. 
-    ///    - `APAC` - (Beta) Data centre for the Australia region.
+    ///    - `AUS` - (Beta) Data centre for the Australia region.
     ///
     ///**Note**: Beta features are subject to change. Please avoid using them in production environments.
     /// </summary>
@@ -45,7 +45,7 @@ namespace Autodesk.ModelDerivative.Model
     ///    
     ///    - `US` - Data center for the US region.
     ///    - `EMEA` - Data center for the European Union, Middle East, and Africa. 
-    ///    - `APAC` - (Beta) Data centre for the Australia region.
+    ///    - `AUS` - (Beta) Data centre for the Australia region.
     ///
     ///**Note**: Beta features are subject to change. Please avoid using them in production environments.</value>
 
@@ -70,7 +70,15 @@ namespace Autodesk.ModelDerivative.Model
         /// Enum APAC for value: APAC
         /// </summary>
         [EnumMember(Value = "APAC")]
-        APAC
-    }
+        [Obsolete("Please use AUS instead.")]
+        APAC,
 
+        /// <summary>
+        /// Enum AUS for value: AUS
+        /// </summary>
+        [EnumMember(Value = "AUS")]
+        AUS
+    }
 }
+
+

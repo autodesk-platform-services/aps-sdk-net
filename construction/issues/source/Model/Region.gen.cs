@@ -36,15 +36,15 @@ namespace Autodesk.Construction.Issues.Model
     /// Specifies where the bucket containing the object is stored. Possible values are:
     ///            - `US` - (Default) Data center for the US region.
     ///            - `EMEA` - Data center for the European Union, Middle East, and Africa.
-    ///            - `APAC` -  (Beta) Data center for Australia.
+    ///            - `AUS` -  Data center for Australia.
     ///**Note:** Beta features are subject to change. Please do not use in production environments.
     /// </summary>
     ///<value>Specifies where the bucket containing the object is stored. Possible values are:
     ///            - `US` - (Default) Data center for the US region.
     ///            - `EMEA` - Data center for the European Union, Middle East, and Africa.
-    ///            - `APAC` -  (Beta) Data center for Australia.
-    ///**Note:** Beta features are subject to change. Please do not use in production environments.</value>
-
+    ///            - `AUS` -  Data center for Australia.
+    ///</value>
+    
     [JsonConverter(typeof(StringEnumConverter))]
 
     public enum Region
@@ -61,12 +61,19 @@ namespace Autodesk.Construction.Issues.Model
         /// </summary>
         [EnumMember(Value = "EMEA")]
         EMEA,
-
+        
         /// <summary>
         /// Enum APAC for value: APAC
         /// </summary>
         [EnumMember(Value = "APAC")]
-        APAC
+        [Obsolete("Please use AUS instead.")]
+        APAC,
+
+        /// <summary>
+        /// Enum AUS for value: AUS
+        /// </summary>
+        [EnumMember(Value = "AUS")]
+        AUS
     }
 
 }

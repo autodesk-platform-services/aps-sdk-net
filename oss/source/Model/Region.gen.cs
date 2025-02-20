@@ -37,7 +37,7 @@ namespace Autodesk.Oss.Model
 ///
 ///        - `US` - (Default) Data center for the US region.
 ///        - `EMEA` - Data center for the European Union, Middle East, and Africa.
-///        - `APAC` -  (Beta) Data center for Australia.
+///        - `AUS` -  (Beta) Data center for Australia.
 ///
 ///        **Note:** Beta features are subject to change. Please do not use in production environments.
     /// </summary>
@@ -45,7 +45,7 @@ namespace Autodesk.Oss.Model
 ///
 ///        - `US` - (Default) Data center for the US region.
 ///        - `EMEA` - Data center for the European Union, Middle East, and Africa.
-///        - `APAC` -  (Beta) Data center for Australia.
+///        - `AUS` -  (Beta) Data center for Australia.
 ///
 ///        **Note:** Beta features are subject to change. Please do not use in production environments.</value>
     
@@ -69,8 +69,15 @@ namespace Autodesk.Oss.Model
         /// <summary>
         /// Enum APAC for value: APAC
         /// </summary>
+        [Obsolete("Please use AUS instead.")]
         [EnumMember(Value = "APAC")]
-        APAC
+        APAC,
+        
+        /// <summary>
+        /// Enum AUS for value: AUS
+        /// </summary>
+        [EnumMember(Value = "AUS")]
+        AUS
     }
 
 }

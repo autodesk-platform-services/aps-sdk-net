@@ -5,10 +5,13 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Authors>Autodesk Platform Services SDK Team</Authors>
     <PackageDescription>Client SDK for Construction Issues API</PackageDescription>
-    <PackageReleaseNotes>Update x,y,z in 'IssueLinkedDocumentsDetailsPosition' to return double instead of int</PackageReleaseNotes>
+    <PackageReleaseNotes>
+     - Added support for Aus region
+     - Fixed serialization issue in enum AssignedToType
+    </PackageReleaseNotes>
     <Copyright>Autodesk Inc.</Copyright>
     <PackageId>Autodesk.Construction.Issues</PackageId>
-    <PackageVersion>2.0.1</PackageVersion>
+    <PackageVersion>2.1.1</PackageVersion>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/autodesk-platform-services/aps-sdk-net.git</RepositoryUrl>
