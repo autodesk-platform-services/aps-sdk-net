@@ -1,13 +1,59 @@
 # Changelog
 
-## [Unreleased](https://github.com/autodesk-platform-services/aps-sdk-net/tree/HEAD)
+## [v2.1.0](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v2.1.0) (2025-02-20)
 
-[Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v2.0.1...HEAD)
+[Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v2.0.2...v2.1.0)
+
+**Implemented enhancements:**
+
+- \[DAS 324\] - Updates to the Region and ManifestDerivative models [\#143](https://github.com/autodesk-platform-services/aps-sdk-net/pull/143) ([sajith-subramanian](https://github.com/sajith-subramanian))
+- \[BUGFIX 136\] Fixed AssignToType Enum [\#141](https://github.com/autodesk-platform-services/aps-sdk-net/pull/141) ([srivastavarahull](https://github.com/srivastavarahull))
+- \[DAS 330\] - Webhooks default enum values fix [\#140](https://github.com/autodesk-platform-services/aps-sdk-net/pull/140) ([nishchhaldagar](https://github.com/nishchhaldagar))
+- \[DAS 323\] - Added AUS Region support for ACC Admin [\#135](https://github.com/autodesk-platform-services/aps-sdk-net/pull/135) ([nishchhaldagar](https://github.com/nishchhaldagar))
+- \[DAS 327\] - Add AUS regions support for Webhooks [\#134](https://github.com/autodesk-platform-services/aps-sdk-net/pull/134) ([Arrotech](https://github.com/Arrotech))
+- \[DAS 326\] - Add AUS region support for datamanagement [\#133](https://github.com/autodesk-platform-services/aps-sdk-net/pull/133) ([Arrotech](https://github.com/Arrotech))
+- \[DAS 322\] Added AUS Region Support for Issues [\#132](https://github.com/autodesk-platform-services/aps-sdk-net/pull/132) ([srivastavarahull](https://github.com/srivastavarahull))
+
+**Fixed bugs:**
+
+- \[DAS 332\] - deprecate reactivated status filter [\#144](https://github.com/autodesk-platform-services/aps-sdk-net/pull/144) ([Arrotech](https://github.com/Arrotech))
+- \[Das 328\] fix for ascii character [\#139](https://github.com/autodesk-platform-services/aps-sdk-net/pull/139) ([srivastavarahull](https://github.com/srivastavarahull))
+
+**Closed issues:**
+
+- \[Bug\] Webhooks SDK: StatusFilter.Reactivated is available as a Status of webhooks in SDK but not supported [\#142](https://github.com/autodesk-platform-services/aps-sdk-net/issues/142)
+- \[Bug\]  Getting hook methods from Webhooks SDK defaults to returning Active hooks, instead of returning both Active and Inactive hooks [\#138](https://github.com/autodesk-platform-services/aps-sdk-net/issues/138)
+- AssignToType in ACC Issues API serializes to invalid string representations for HTTP Requests [\#136](https://github.com/autodesk-platform-services/aps-sdk-net/issues/136)
+- OssClient.CreateSignedResourceAsync\(\) and Space in the file name [\#129](https://github.com/autodesk-platform-services/aps-sdk-net/issues/129)
+- Upload Bucket Json Object Auto Convert To Something Else [\#128](https://github.com/autodesk-platform-services/aps-sdk-net/issues/128)
+- Typo, extensions should be extension [\#124](https://github.com/autodesk-platform-services/aps-sdk-net/issues/124)
+- Issues IssueLinkedDocumentsDetailsPosition  [\#122](https://github.com/autodesk-platform-services/aps-sdk-net/issues/122)
+
+**Merged pull requests:**
+
+- Keep Development branch updated with main. [\#127](https://github.com/autodesk-platform-services/aps-sdk-net/pull/127) ([sajith-subramanian](https://github.com/sajith-subramanian))
+
+## [v2.0.2](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v2.0.2) (2025-01-13)
+
+[Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v2.0.1...v2.0.2)
+
+**Fixed bugs:**
+
+- \[DAS-320\] Changed the data type of Position from int to double [\#126](https://github.com/autodesk-platform-services/aps-sdk-net/pull/126) ([srivastavarahull](https://github.com/srivastavarahull))
+- \[Das 317\] - Fix Extensions property in TopFolderAttributesWithExtensions class [\#125](https://github.com/autodesk-platform-services/aps-sdk-net/pull/125) ([sajith-subramanian](https://github.com/sajith-subramanian))
 
 **Closed issues:**
 
 - Bug in ItemPayloadIncludedRelationshipsStorageData serialization [\#108](https://github.com/autodesk-platform-services/aps-sdk-net/issues/108)
 - FolderContentsData not converting to JSON [\#107](https://github.com/autodesk-platform-services/aps-sdk-net/issues/107)
+
+**Merged pull requests:**
+
+- Typo, extensions should be extension [\#123](https://github.com/autodesk-platform-services/aps-sdk-net/pull/123) ([jmelhus](https://github.com/jmelhus))
+- Update changelog [\#121](https://github.com/autodesk-platform-services/aps-sdk-net/pull/121) ([sajith-subramanian](https://github.com/sajith-subramanian))
+- Keep Dev branch updated [\#120](https://github.com/autodesk-platform-services/aps-sdk-net/pull/120) ([sajith-subramanian](https://github.com/sajith-subramanian))
+- Keep Main updated with Release v2 branch [\#119](https://github.com/autodesk-platform-services/aps-sdk-net/pull/119) ([sajith-subramanian](https://github.com/sajith-subramanian))
+- Keep Development branch updated [\#93](https://github.com/autodesk-platform-services/aps-sdk-net/pull/93) ([sajith-subramanian](https://github.com/sajith-subramanian))
 
 ## [v2.0.1](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v2.0.1) (2024-12-11)
 
