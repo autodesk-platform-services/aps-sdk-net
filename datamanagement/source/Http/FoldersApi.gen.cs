@@ -46,30 +46,30 @@ namespace Autodesk.DataManagement.Http
         /// </summary>
         /// <remarks>
         ///Creates a new folder in the specified project. Use the `parent` attribute in the request body to specify where in the hierarchy the new folder should be located. Folders can be nested up to 25 levels deep.
-///
-///Use the [Modify a Folder](/en/docs/data/v2/reference/http/projects-project_id-folders-folder_id-PATCH/) operation to delete and restore folders.
-///
-///Before you use the Data Management API to access BIM 360 Docs folders, provision your app through the BIM 360 Account Administrator portal. For details, see the [Manage Access to Docs tutorial](/en/docs/bim360/v1/tutorials/getting-started/manage-access-to-docs/).
-///
-///**Note:** This operation supports Autodesk Construction Cloud (ACC) Projects. For more information, see the [ACC Platform API documentation](https://en.docs.acc.v1/overview/introduction/). 
+        ///
+        ///Use the [Modify a Folder](/en/docs/data/v2/reference/http/projects-project_id-folders-folder_id-PATCH/) operation to delete and restore folders.
+        ///
+        ///Before you use the Data Management API to access BIM 360 Docs folders, provision your app through the BIM 360 Account Administrator portal. For details, see the [Manage Access to Docs tutorial](/en/docs/bim360/v1/tutorials/getting-started/manage-access-to-docs/).
+        ///
+        ///**Note:** This operation supports Autodesk Construction Cloud (ACC) Projects. For more information, see the [ACC Platform API documentation](https://en.docs.acc.v1/overview/introduction/). 
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-         /// <param name="projectId">
-         ///The unique identifier of a project. 
-///
-///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
-///
-///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
-         /// </param>
-         /// <param name="xUserId">
-         ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
-         /// </param>
-         /// <param name="folderPayload">
-         /// (optional)
-         /// </param>
+        /// <param name="projectId">
+        ///The unique identifier of a project. 
+        ///
+        ///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
+        ///
+        ///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
+        /// </param>
+        /// <param name="xUserId">
+        ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
+        /// </param>
+        /// <param name="folderPayload">
+        /// (optional)
+        /// </param>
         /// <returns>Task of ApiResponse&lt;Folder&gt;</returns>
-        
-        System.Threading.Tasks.Task<ApiResponse<Folder>> CreateFolderAsync (string projectId, string xUserId= default(string), FolderPayload folderPayload= default(FolderPayload),  string accessToken = null, bool throwOnError = true);
+
+        System.Threading.Tasks.Task<ApiResponse<Folder>> CreateFolderAsync(string projectId, string xUserId = default(string), FolderPayload folderPayload = default(FolderPayload), string accessToken = null, bool throwOnError = true);
         /// <summary>
         /// Create a Custom Relationship for a Folder
         /// </summary>
@@ -77,309 +77,309 @@ namespace Autodesk.DataManagement.Http
         ///Creates a custom relationship between a folder and another resource within the data domain service (folder, item, or version).
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-         /// <param name="folderId">
-         ///The unique identifier of a folder.
-         /// </param>
-         /// <param name="projectId">
-         ///The unique identifier of a project. 
-///
-///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
-///
-///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
-         /// </param>
-         /// <param name="xUserId">
-         ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
-         /// </param>
-         /// <param name="relationshipRefsPayload">
-         /// (optional)
-         /// </param>
-        
+        /// <param name="folderId">
+        ///The unique identifier of a folder.
+        /// </param>
+        /// <param name="projectId">
+        ///The unique identifier of a project. 
+        ///
+        ///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
+        ///
+        ///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
+        /// </param>
+        /// <param name="xUserId">
+        ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
+        /// </param>
+        /// <param name="relationshipRefsPayload">
+        /// (optional)
+        /// </param>
+
         /// <returns>Task of HttpResponseMessage</returns>
-        System.Threading.Tasks.Task<HttpResponseMessage> CreateFolderRelationshipsRefAsync (string folderId, string projectId, string xUserId= default(string), RelationshipRefsPayload relationshipRefsPayload= default(RelationshipRefsPayload),  string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<HttpResponseMessage> CreateFolderRelationshipsRefAsync(string folderId, string projectId, string xUserId = default(string), RelationshipRefsPayload relationshipRefsPayload = default(RelationshipRefsPayload), string accessToken = null, bool throwOnError = true);
         /// <summary>
         /// Get a Folder
         /// </summary>
         /// <remarks>
         ///Returns the folder specified by the `folder_id` parameter from within the project identified by the `project_id` parameter. All folders and subfolders within a project (including the root folder) have a unique ID.
-///
-///**Note:** This operation supports Autodesk Construction Cloud (ACC) Projects. For more information, see the [ACC Platform API documentation](https://en.docs.acc.v1/overview/introduction/). 
+        ///
+        ///**Note:** This operation supports Autodesk Construction Cloud (ACC) Projects. For more information, see the [ACC Platform API documentation](https://en.docs.acc.v1/overview/introduction/). 
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-         /// <param name="projectId">
-         ///The unique identifier of a project. 
-///
-///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
-///
-///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
-         /// </param>
-         /// <param name="folderId">
-         ///The unique identifier of a folder.
-         /// </param>
-         /// <param name="ifModifiedSince">
-         ///Specify a date in the `YYYY-MM-DDThh:mm:ss.sz` format. If the resource has not been modified since the specified date/time, the response will return a HTTP status of 304 without any response body; the `Last-Modified` response header will contain the date of last modification. (optional)
-         /// </param>
-         /// <param name="xUserId">
-         ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
-         /// </param>
+        /// <param name="projectId">
+        ///The unique identifier of a project. 
+        ///
+        ///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
+        ///
+        ///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
+        /// </param>
+        /// <param name="folderId">
+        ///The unique identifier of a folder.
+        /// </param>
+        /// <param name="ifModifiedSince">
+        ///Specify a date in the `YYYY-MM-DDThh:mm:ss.sz` format. If the resource has not been modified since the specified date/time, the response will return a HTTP status of 304 without any response body; the `Last-Modified` response header will contain the date of last modification. (optional)
+        /// </param>
+        /// <param name="xUserId">
+        ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
+        /// </param>
         /// <returns>Task of ApiResponse&lt;Folder&gt;</returns>
-        
-        System.Threading.Tasks.Task<ApiResponse<Folder>> GetFolderAsync (string projectId, string folderId, DateTime ifModifiedSince= default(DateTime), string xUserId= default(string),  string accessToken = null, bool throwOnError = true);
+
+        System.Threading.Tasks.Task<ApiResponse<Folder>> GetFolderAsync(string projectId, string folderId, DateTime ifModifiedSince = default(DateTime), string xUserId = default(string), string accessToken = null, bool throwOnError = true);
         /// <summary>
         /// List Folder Contents
         /// </summary>
         /// <remarks>
         ///Returns a list of items and folders within the specified folder. Items represent word documents, fusion design files, drawings, spreadsheets, etc.
-///
-///The resources contained in the `included` array of the response are their tip versions.
-///
-///**Note:** This operation supports Autodesk Construction Cloud (ACC) Projects. For more information, see the [ACC Platform API documentation](https://en.docs.acc.v1/overview/introduction/). 
+        ///
+        ///The resources contained in the `included` array of the response are their tip versions.
+        ///
+        ///**Note:** This operation supports Autodesk Construction Cloud (ACC) Projects. For more information, see the [ACC Platform API documentation](https://en.docs.acc.v1/overview/introduction/). 
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-         /// <param name="projectId">
-         ///The unique identifier of a project. 
-///
-///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
-///
-///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
-         /// </param>
-         /// <param name="folderId">
-         ///The unique identifier of a folder.
-         /// </param>
-         /// <param name="xUserId">
-         ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
-         /// </param>
-         /// <param name="filterType">
-         ///Filter by the type of the objects in the folder. Supported values are `folders` and `items`. (optional)
-         /// </param>
-         /// <param name="filterId">
-         ///Filter by the `id` of the `ref` target. (optional)
-         /// </param>
-         /// <param name="filterExtensionType">
-         ///Filter by the extension type.  (optional)
-         /// </param>
-         /// <param name="filterLastModifiedTimeRollup">
-         ///Filter by the `lastModifiedTimeRollup` attribute. Supported values are date-time string in the form `YYYY-MM-DDTHH:MM:SS.000000Z` or `YYYY-MM-DDTHH:MM:SS` based on RFC3339. (optional)
-         /// </param>
-         /// <param name="pageNumber">
-         ///Specifies what page to return. Page numbers are 0-based (the first page is page 0). (optional)
-         /// </param>
-         /// <param name="pageLimit">
-         ///Specifies the maximum number of elements to return in the page. The default value is 200. The min value is 1. The max value is 200. (optional)
-         /// </param>
-         /// <param name="includeHidden">
-         ///`true`: Response will contain items and folders that were deleted from BIM 360 Docs projects. 
-///
-///`false`: (Default): Response will not contain items and folders that were deleted from BIM 360 Docs projects.  
-///
-///To return only items and folders that were deleted from BIM 360 Docs projects, see the documentation on [Filtering](/en/docs/data/v2/overview/filtering/). (optional)
-         /// </param>
+        /// <param name="projectId">
+        ///The unique identifier of a project. 
+        ///
+        ///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
+        ///
+        ///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
+        /// </param>
+        /// <param name="folderId">
+        ///The unique identifier of a folder.
+        /// </param>
+        /// <param name="xUserId">
+        ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
+        /// </param>
+        /// <param name="filterType">
+        ///Filter by the type of the objects in the folder. Supported values are `folders` and `items`. (optional)
+        /// </param>
+        /// <param name="filterId">
+        ///Filter by the `id` of the `ref` target. (optional)
+        /// </param>
+        /// <param name="filterExtensionType">
+        ///Filter by the extension type.  (optional)
+        /// </param>
+        /// <param name="filterLastModifiedTimeRollup">
+        ///Filter by the `lastModifiedTimeRollup` attribute. Supported values are date-time string in the form `YYYY-MM-DDTHH:MM:SS.000000Z` or `YYYY-MM-DDTHH:MM:SS` based on RFC3339. (optional)
+        /// </param>
+        /// <param name="pageNumber">
+        ///Specifies what page to return. Page numbers are 0-based (the first page is page 0). (optional)
+        /// </param>
+        /// <param name="pageLimit">
+        ///Specifies the maximum number of elements to return in the page. The default value is 200. The min value is 1. The max value is 200. (optional)
+        /// </param>
+        /// <param name="includeHidden">
+        ///`true`: Response will contain items and folders that were deleted from BIM 360 Docs projects. 
+        ///
+        ///`false`: (Default): Response will not contain items and folders that were deleted from BIM 360 Docs projects.  
+        ///
+        ///To return only items and folders that were deleted from BIM 360 Docs projects, see the documentation on [Filtering](/en/docs/data/v2/overview/filtering/). (optional)
+        /// </param>
         /// <returns>Task of ApiResponse&lt;FolderContents&gt;</returns>
-        
-        System.Threading.Tasks.Task<ApiResponse<FolderContents>> GetFolderContentsAsync (string projectId, string folderId, string xUserId= default(string), List<FilterType> filterType= default(List<FilterType>), List<string> filterId= default(List<string>), List<string> filterExtensionType= default(List<string>), List<string> filterLastModifiedTimeRollup= default(List<string>), int pageNumber= default(int), int pageLimit= default(int), bool includeHidden= default(bool),  string accessToken = null, bool throwOnError = true);
+
+        System.Threading.Tasks.Task<ApiResponse<FolderContents>> GetFolderContentsAsync(string projectId, string folderId, string xUserId = default(string), List<FilterType> filterType = default(List<FilterType>), List<string> filterId = default(List<string>), List<string> filterExtensionType = default(List<string>), List<string> filterLastModifiedTimeRollup = default(List<string>), int pageNumber = default(int), int pageLimit = default(int), bool includeHidden = default(bool), string accessToken = null, bool throwOnError = true);
         /// <summary>
         /// Get Parent of a Folder
         /// </summary>
         /// <remarks>
         ///Returns the parent folder of the specified folder. In a project, folders are organized in a hierarchy. Each folder except for the root folder has a parent folder.
-///
-///**Note:** This operation supports Autodesk Construction Cloud (ACC) Projects. For more information, see the [ACC Platform API documentation](https://en.docs.acc.v1/overview/introduction/). 
+        ///
+        ///**Note:** This operation supports Autodesk Construction Cloud (ACC) Projects. For more information, see the [ACC Platform API documentation](https://en.docs.acc.v1/overview/introduction/). 
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-         /// <param name="projectId">
-         ///The unique identifier of a project. 
-///
-///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
-///
-///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
-         /// </param>
-         /// <param name="folderId">
-         ///The unique identifier of a folder.
-         /// </param>
-         /// <param name="xUserId">
-         ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
-         /// </param>
+        /// <param name="projectId">
+        ///The unique identifier of a project. 
+        ///
+        ///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
+        ///
+        ///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
+        /// </param>
+        /// <param name="folderId">
+        ///The unique identifier of a folder.
+        /// </param>
+        /// <param name="xUserId">
+        ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
+        /// </param>
         /// <returns>Task of ApiResponse&lt;Folder&gt;</returns>
-        
-        System.Threading.Tasks.Task<ApiResponse<Folder>> GetFolderParentAsync (string projectId, string folderId, string xUserId= default(string),  string accessToken = null, bool throwOnError = true);
+
+        System.Threading.Tasks.Task<ApiResponse<Folder>> GetFolderParentAsync(string projectId, string folderId, string xUserId = default(string), string accessToken = null, bool throwOnError = true);
         /// <summary>
         /// List Related Resources for a Folder
         /// </summary>
         /// <remarks>
         ///Returns the resources (items, folders, and versions) that have a custom relationship with the specified folder. Custom relationships can be established between a folder and other resources within the data domain service (folders, items, and versions).
-///
-///Each relationship is defined by the id of the object at the other end of the relationship, together with type, attributes, and relationships links.
-///Callers will typically use a filter parameter to restrict the response to the custom relationship types (`filter[meta.refType]`) they are interested in.
-///
-///**Note:** This operation supports Autodesk Construction Cloud (ACC) Projects. For more information, see the [ACC Platform API documentation](https://en.docs.acc.v1/overview/introduction/). 
+        ///
+        ///Each relationship is defined by the id of the object at the other end of the relationship, together with type, attributes, and relationships links.
+        ///Callers will typically use a filter parameter to restrict the response to the custom relationship types (`filter[meta.refType]`) they are interested in.
+        ///
+        ///**Note:** This operation supports Autodesk Construction Cloud (ACC) Projects. For more information, see the [ACC Platform API documentation](https://en.docs.acc.v1/overview/introduction/). 
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-         /// <param name="projectId">
-         ///The unique identifier of a project. 
-///
-///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
-///
-///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
-         /// </param>
-         /// <param name="folderId">
-         ///The unique identifier of a folder.
-         /// </param>
-         /// <param name="xUserId">
-         ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
-         /// </param>
-         /// <param name="filterType">
-         ///Filter by the `type` of the `ref` target. Supported values include `folders`, `items`, and `versions`. (optional)
-         /// </param>
-         /// <param name="filterId">
-         ///Filter by the `id` of the `ref` target. (optional)
-         /// </param>
-         /// <param name="filterExtensionType">
-         ///Filter by the extension type.  (optional)
-         /// </param>
+        /// <param name="projectId">
+        ///The unique identifier of a project. 
+        ///
+        ///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
+        ///
+        ///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
+        /// </param>
+        /// <param name="folderId">
+        ///The unique identifier of a folder.
+        /// </param>
+        /// <param name="xUserId">
+        ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
+        /// </param>
+        /// <param name="filterType">
+        ///Filter by the `type` of the `ref` target. Supported values include `folders`, `items`, and `versions`. (optional)
+        /// </param>
+        /// <param name="filterId">
+        ///Filter by the `id` of the `ref` target. (optional)
+        /// </param>
+        /// <param name="filterExtensionType">
+        ///Filter by the extension type.  (optional)
+        /// </param>
         /// <returns>Task of ApiResponse&lt;FolderRefs&gt;</returns>
-        
-        System.Threading.Tasks.Task<ApiResponse<FolderRefs>> GetFolderRefsAsync (string projectId, string folderId, string xUserId= default(string), List<FilterTypeVersion> filterType= default(List<FilterTypeVersion>), List<string> filterId= default(List<string>), List<string> filterExtensionType= default(List<string>),  string accessToken = null, bool throwOnError = true);
+
+        System.Threading.Tasks.Task<ApiResponse<FolderRefs>> GetFolderRefsAsync(string projectId, string folderId, string xUserId = default(string), List<FilterTypeVersion> filterType = default(List<FilterTypeVersion>), List<string> filterId = default(List<string>), List<string> filterExtensionType = default(List<string>), string accessToken = null, bool throwOnError = true);
         /// <summary>
         /// List Relationship Links for a Folder
         /// </summary>
         /// <remarks>
         ///Returns a list of links for the specified folder. 
-///
-///Custom relationships can be established between a folder and other external resources residing outside the data domain service. A link’s `href` attribute defines the target URI to access a resource.
-///
-///**Note:** This operation supports Autodesk Construction Cloud (ACC) Projects. For more information, see the [ACC Platform API documentation](https://en.docs.acc.v1/overview/introduction/). 
+        ///
+        ///Custom relationships can be established between a folder and other external resources residing outside the data domain service. A link’s `href` attribute defines the target URI to access a resource.
+        ///
+        ///**Note:** This operation supports Autodesk Construction Cloud (ACC) Projects. For more information, see the [ACC Platform API documentation](https://en.docs.acc.v1/overview/introduction/). 
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-         /// <param name="projectId">
-         ///The unique identifier of a project. 
-///
-///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
-///
-///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
-         /// </param>
-         /// <param name="folderId">
-         ///The unique identifier of a folder.
-         /// </param>
-         /// <param name="xUserId">
-         ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
-         /// </param>
+        /// <param name="projectId">
+        ///The unique identifier of a project. 
+        ///
+        ///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
+        ///
+        ///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
+        /// </param>
+        /// <param name="folderId">
+        ///The unique identifier of a folder.
+        /// </param>
+        /// <param name="xUserId">
+        ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
+        /// </param>
         /// <returns>Task of ApiResponse&lt;RelationshipLinks&gt;</returns>
-        
-        System.Threading.Tasks.Task<ApiResponse<RelationshipLinks>> GetFolderRelationshipsLinksAsync (string projectId, string folderId, string xUserId= default(string),  string accessToken = null, bool throwOnError = true);
+
+        System.Threading.Tasks.Task<ApiResponse<RelationshipLinks>> GetFolderRelationshipsLinksAsync(string projectId, string folderId, string xUserId = default(string), string accessToken = null, bool throwOnError = true);
         /// <summary>
         /// List Custom Relationships for a Folder
         /// </summary>
         /// <remarks>
         ///Returns the custom relationships associated with the specified folder. Custom relationships can be established between a folder and other resources within the data domain service (folders, items, and versions).
-///
-///Each relationship is defined by the ID of the object at the other end of the relationship, together with type, specific reference meta including extension data.
-///Callers will typically use a filter parameter to restrict the response to the custom relationship types (`filter[meta.refType]`) they are interested in.
-///The response body will have an included array that contains the resources in the relationship, which is essentially what is returned by the [List Related Resources for a Folder](/en/docs/data/v2/reference/http/projects-project_id-folders-folder_id-refs-GET/) operation.  
-///
-///**Note:** This operation supports Autodesk Construction Cloud (ACC) Projects. For more information, see the [ACC Platform API documentation](https://en.docs.acc.v1/overview/introduction/). 
+        ///
+        ///Each relationship is defined by the ID of the object at the other end of the relationship, together with type, specific reference meta including extension data.
+        ///Callers will typically use a filter parameter to restrict the response to the custom relationship types (`filter[meta.refType]`) they are interested in.
+        ///The response body will have an included array that contains the resources in the relationship, which is essentially what is returned by the [List Related Resources for a Folder](/en/docs/data/v2/reference/http/projects-project_id-folders-folder_id-refs-GET/) operation.  
+        ///
+        ///**Note:** This operation supports Autodesk Construction Cloud (ACC) Projects. For more information, see the [ACC Platform API documentation](https://en.docs.acc.v1/overview/introduction/). 
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-         /// <param name="folderId">
-         ///The unique identifier of a folder.
-         /// </param>
-         /// <param name="projectId">
-         ///The unique identifier of a project. 
-///
-///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
-///
-///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
-         /// </param>
-         /// <param name="xUserId">
-         ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
-         /// </param>
-         /// <param name="filterType">
-         ///Filter by the `type` of the `ref` target. Supported values include `folders`, `items`, and `versions`. (optional)
-         /// </param>
-         /// <param name="filterId">
-         ///Filter by the `id` of the `ref` target. (optional)
-         /// </param>
-         /// <param name="filterRefType">
-         ///Filter by `refType`. Possible values: `derived`, `dependencies`, `auxiliary`, `xrefs`, and `includes`. (optional)
-         /// </param>
-         /// <param name="filterDirection">
-         ///Filter by the direction of the reference. Possible values: `from` and `to`. (optional)
-         /// </param>
-         /// <param name="filterExtensionType">
-         ///Filter by the extension type.  (optional)
-         /// </param>
+        /// <param name="folderId">
+        ///The unique identifier of a folder.
+        /// </param>
+        /// <param name="projectId">
+        ///The unique identifier of a project. 
+        ///
+        ///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
+        ///
+        ///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
+        /// </param>
+        /// <param name="xUserId">
+        ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
+        /// </param>
+        /// <param name="filterType">
+        ///Filter by the `type` of the `ref` target. Supported values include `folders`, `items`, and `versions`. (optional)
+        /// </param>
+        /// <param name="filterId">
+        ///Filter by the `id` of the `ref` target. (optional)
+        /// </param>
+        /// <param name="filterRefType">
+        ///Filter by `refType`. Possible values: `derived`, `dependencies`, `auxiliary`, `xrefs`, and `includes`. (optional)
+        /// </param>
+        /// <param name="filterDirection">
+        ///Filter by the direction of the reference. Possible values: `from` and `to`. (optional)
+        /// </param>
+        /// <param name="filterExtensionType">
+        ///Filter by the extension type.  (optional)
+        /// </param>
         /// <returns>Task of ApiResponse&lt;RelationshipRefs&gt;</returns>
-        
-        System.Threading.Tasks.Task<ApiResponse<RelationshipRefs>> GetFolderRelationshipsRefsAsync (string folderId, string projectId, string xUserId= default(string), List<FilterTypeVersion> filterType= default(List<FilterTypeVersion>), List<string> filterId= default(List<string>), FilterRefType? filterRefType= null, FilterDirection? filterDirection= null, List<string> filterExtensionType= default(List<string>),  string accessToken = null, bool throwOnError = true);
+
+        System.Threading.Tasks.Task<ApiResponse<RelationshipRefs>> GetFolderRelationshipsRefsAsync(string folderId, string projectId, string xUserId = default(string), List<FilterTypeVersion> filterType = default(List<FilterTypeVersion>), List<string> filterId = default(List<string>), FilterRefType? filterRefType = null, FilterDirection? filterDirection = null, List<string> filterExtensionType = default(List<string>), string accessToken = null, bool throwOnError = true);
         /// <summary>
         /// List Folder and Subfolder Contents
         /// </summary>
         /// <remarks>
         ///Searches the specified folder and its subfolders and returns a list of the latest versions of the items you can access.
-///
-///
-///Use the `filter` query string parameter to narrow down the list as appropriate. You can filter by the following properties of the version payload: 
-///
-///- `type` property, 
-///- `id` property, 
-///- any of the attributes object properties. 
-///
-///For example, you can filter by `createTime` and `mimeType`. It returns tip versions (latest versions) of properties where the filter conditions are satisfied. To verify the properties of the attributes object for a specific version, use the [Get a Version](/en/docs/data/v2/reference/http/projects-project_id-versions-version_id-GET/) operation.
-///
-///To list the immediate contents of the folder without parsing subfolders, use the [List Folder Contents](/en/docs/data/v2/reference/http/projects-project_id-folders-folder_id-contents-GET/) operation.
-///
-///**Note:** This operation supports Autodesk Construction Cloud (ACC) Projects. For more information, see the [ACC Platform API documentation](https://en.docs.acc.v1/overview/introduction/). 
+        ///
+        ///
+        ///Use the `filter` query string parameter to narrow down the list as appropriate. You can filter by the following properties of the version payload: 
+        ///
+        ///- `type` property, 
+        ///- `id` property, 
+        ///- any of the attributes object properties. 
+        ///
+        ///For example, you can filter by `createTime` and `mimeType`. It returns tip versions (latest versions) of properties where the filter conditions are satisfied. To verify the properties of the attributes object for a specific version, use the [Get a Version](/en/docs/data/v2/reference/http/projects-project_id-versions-version_id-GET/) operation.
+        ///
+        ///To list the immediate contents of the folder without parsing subfolders, use the [List Folder Contents](/en/docs/data/v2/reference/http/projects-project_id-folders-folder_id-contents-GET/) operation.
+        ///
+        ///**Note:** This operation supports Autodesk Construction Cloud (ACC) Projects. For more information, see the [ACC Platform API documentation](https://en.docs.acc.v1/overview/introduction/). 
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-         /// <param name="projectId">
-         ///The unique identifier of a project. 
-///
-///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
-///
-///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
-         /// </param>
-         /// <param name="folderId">
-         ///The unique identifier of a folder.
-         /// </param>
-         /// <param name="filter">
-         ///Filter the data. See the [Filtering](/en/docs/data/v2/overview/filtering/) section for details. (optional)
-         /// </param>
-         /// <param name="pageNumber">
-         ///Specifies what page to return. Page numbers are 0-based (the first page is page 0). (optional)
-         /// </param>
+        /// <param name="projectId">
+        ///The unique identifier of a project. 
+        ///
+        ///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
+        ///
+        ///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
+        /// </param>
+        /// <param name="folderId">
+        ///The unique identifier of a folder.
+        /// </param>
+        /// <param name="filter">
+        ///Filter the data. See the [Filtering](/en/docs/data/v2/overview/filtering/) section for details. (optional)
+        /// </param>
+        /// <param name="pageNumber">
+        ///Specifies what page to return. Page numbers are 0-based (the first page is page 0). (optional)
+        /// </param>
         /// <returns>Task of ApiResponse&lt;Search&gt;</returns>
-        
-        System.Threading.Tasks.Task<ApiResponse<Search>> GetFolderSearchAsync (string projectId, string folderId, List<(string fieldName, ComparisonTypes? operatorType, List<string> values)> filters = null, int pageNumber= default(int),  string accessToken = null, bool throwOnError = true);
+
+        System.Threading.Tasks.Task<ApiResponse<Search>> GetFolderSearchAsync(string projectId, string folderId, List<(string fieldName, ComparisonTypes? operatorType, List<string> values)> filters = null, int pageNumber = default(int), string accessToken = null, bool throwOnError = true);
         /// <summary>
         /// Modify a Folder
         /// </summary>
         /// <remarks>
         ///Renames, moves, hides, or unhides a folder. Marking a BIM 360 Docs folder as hidden effectively deletes it. You can restore it by changing its `hidden` attribute. You can also move BIM 360 Docs folders by changing their parent folder.
-///
-///You cannot permanently delete BIM 360 Docs folders. They are tagged as hidden folders and are removed from the BIM 360 Docs UI and from regular Data Management API responses. You can use the hidden filter (`filter[hidden]=true`) to get a list of deleted folders with the [List Folder Contents](/en/docs/data/v2/reference/http/projects-project_id-folders-folder_id-contents-GET/) operation.
-///
-///Before you use the Data Management API to access BIM 360 Docs folders, provision your app through the BIM 360 Account Administrator portal. For details, see the [Manage Access to Docs tutorial](/en/docs/bim360/v1/tutorials/getting-started/manage-access-to-docs/).
-///
-///**Note:** This operation supports Autodesk Construction Cloud (ACC) Projects. For more information, see the [ACC Platform API documentation](/en.docs.acc.v1/overview/introduction/). 
+        ///
+        ///You cannot permanently delete BIM 360 Docs folders. They are tagged as hidden folders and are removed from the BIM 360 Docs UI and from regular Data Management API responses. You can use the hidden filter (`filter[hidden]=true`) to get a list of deleted folders with the [List Folder Contents](/en/docs/data/v2/reference/http/projects-project_id-folders-folder_id-contents-GET/) operation.
+        ///
+        ///Before you use the Data Management API to access BIM 360 Docs folders, provision your app through the BIM 360 Account Administrator portal. For details, see the [Manage Access to Docs tutorial](/en/docs/bim360/v1/tutorials/getting-started/manage-access-to-docs/).
+        ///
+        ///**Note:** This operation supports Autodesk Construction Cloud (ACC) Projects. For more information, see the [ACC Platform API documentation](/en.docs.acc.v1/overview/introduction/). 
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-         /// <param name="projectId">
-         ///The unique identifier of a project. 
-///
-///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
-///
-///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
-         /// </param>
-         /// <param name="folderId">
-         ///The unique identifier of a folder.
-         /// </param>
-         /// <param name="xUserId">
-         ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
-         /// </param>
-         /// <param name="modifyFolderPayload">
-         /// (optional)
-         /// </param>
+        /// <param name="projectId">
+        ///The unique identifier of a project. 
+        ///
+        ///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
+        ///
+        ///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
+        /// </param>
+        /// <param name="folderId">
+        ///The unique identifier of a folder.
+        /// </param>
+        /// <param name="xUserId">
+        ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
+        /// </param>
+        /// <param name="modifyFolderPayload">
+        /// (optional)
+        /// </param>
         /// <returns>Task of ApiResponse&lt;Folder&gt;</returns>
-        
-        System.Threading.Tasks.Task<ApiResponse<Folder>> PatchFolderAsync (string projectId, string folderId, string xUserId= default(string), ModifyFolderPayload modifyFolderPayload= default(ModifyFolderPayload),  string accessToken = null, bool throwOnError = true);
+
+        System.Threading.Tasks.Task<ApiResponse<Folder>> PatchFolderAsync(string projectId, string folderId, string xUserId = default(string), ModifyFolderPayload modifyFolderPayload = default(ModifyFolderPayload), string accessToken = null, bool throwOnError = true);
     }
 
     /// <summary>
@@ -415,24 +415,55 @@ namespace Autodesk.DataManagement.Http
                     dictionary.Add(name, enumValue);
                 }
             }
-            else if (value is int)
+            else if (value is int intValue)
             {
-                if ((int)value > 0)
+                if (intValue > 0)
                 {
-                    dictionary.Add(name, value);
+                    dictionary.Add(name, intValue);
                 }
             }
-            else if (value is IList)
+            else if (value is ValueTuple<string, ComparisonTypes?, List<string>> filterTuple)
             {
-                if (value is List<string>)
+                var (fieldName, operatorType, values) = filterTuple;
+
+                string operatorTypeValue = null;
+                if (operatorType != null && operatorType.GetType().IsEnum)
                 {
-                    value = String.Join(",", (List<string>)value);
-                    dictionary.Add(name, value);
+                    var type = operatorType.GetType();
+                    var memberInfos = type.GetMember(operatorType.ToString());
+                    var enumValueMemberInfo = memberInfos.FirstOrDefault(m => m.DeclaringType == type);
+                    var valueAttributes = enumValueMemberInfo.GetCustomAttributes(typeof(EnumMemberAttribute), false);
+                    operatorTypeValue = valueAttributes.Length > 0
+                        ? ((EnumMemberAttribute)valueAttributes[0]).Value
+                        : operatorType.ToString();
+                }
+                else
+                {
+                    operatorTypeValue = operatorType?.ToString();
+                }
+
+                string filterKey = $"filter[{fieldName}]{operatorTypeValue}";
+                string filterExpression = string.Join(",", values);
+
+                dictionary.Add(filterKey, filterExpression);
+            }
+            else if (value is IList listValue)
+            {
+                if (listValue is List<string> stringList)
+                {
+                    dictionary.Add(name, string.Join(",", stringList));
+                }
+                else if (listValue is List<ValueTuple<string, ComparisonTypes?, List<string>>> filters)
+                {
+                    foreach (var filter in filters)
+                    {
+                        SetQueryParameter("filter", filter, dictionary);
+                    }
                 }
                 else
                 {
                     List<string> newlist = new List<string>();
-                    foreach (var x in (IList)value)
+                    foreach (var x in listValue)
                     {
                         var type = x.GetType();
                         var memberInfos = type.GetMember(x.ToString());
@@ -440,14 +471,8 @@ namespace Autodesk.DataManagement.Http
                         var valueAttributes = enumValueMemberInfo.GetCustomAttributes(typeof(EnumMemberAttribute), false);
                         newlist.Add(((EnumMemberAttribute)valueAttributes[0]).Value);
                     }
-                    string joinedString = String.Join(",", newlist);
-                    dictionary.Add(name, joinedString);
+                    dictionary.Add(name, string.Join(",", newlist));
                 }
-            }
-            // If the value is a complex filter expression (tuple), build the string accordingly
-            else if (value is string && name.StartsWith("filter"))
-            {
-                dictionary.Add(name, value);
             }
             else
             {
@@ -460,27 +485,27 @@ namespace Autodesk.DataManagement.Http
 
         private void SetHeader(string baseName, object value, HttpRequestMessage req)
         {
-                if(value is DateTime)
+            if (value is DateTime)
+            {
+                if ((DateTime)value != DateTime.MinValue)
                 {
-                    if((DateTime)value != DateTime.MinValue)
+                    req.Headers.TryAddWithoutValidation(baseName, LocalMarshalling.ParameterToString(value)); // header parameter
+                }
+            }
+            else
+            {
+                if (value != null)
+                {
+                    if (!string.Equals(baseName, "Content-Range"))
                     {
                         req.Headers.TryAddWithoutValidation(baseName, LocalMarshalling.ParameterToString(value)); // header parameter
                     }
-                }
-                else
-                {
-                    if (value != null)
+                    else
                     {
-                        if(!string.Equals(baseName, "Content-Range"))
-                        {
-                            req.Headers.TryAddWithoutValidation(baseName, LocalMarshalling.ParameterToString(value)); // header parameter
-                        }
-                        else
-                        {
-                            req.Content.Headers.Add(baseName, LocalMarshalling.ParameterToString(value));
-                        }
+                        req.Content.Headers.Add(baseName, LocalMarshalling.ParameterToString(value));
                     }
                 }
+            }
 
         }
 
@@ -488,37 +513,37 @@ namespace Autodesk.DataManagement.Http
         /// Gets or sets the ApsConfiguration object
         /// </summary>
         /// <value>An instance of the ForgeService</value>
-        public ForgeService Service {get; set;}
+        public ForgeService Service { get; set; }
 
         /// <summary>
         /// Create a Folder
         /// </summary>
         /// <remarks>
         ///Creates a new folder in the specified project. Use the `parent` attribute in the request body to specify where in the hierarchy the new folder should be located. Folders can be nested up to 25 levels deep.
-///
-///Use the [Modify a Folder](/en/docs/data/v2/reference/http/projects-project_id-folders-folder_id-PATCH/) operation to delete and restore folders.
-///
-///Before you use the Data Management API to access BIM 360 Docs folders, provision your app through the BIM 360 Account Administrator portal. For details, see the [Manage Access to Docs tutorial](/en/docs/bim360/v1/tutorials/getting-started/manage-access-to-docs/).
-///
-///**Note:** This operation supports Autodesk Construction Cloud (ACC) Projects. For more information, see the [ACC Platform API documentation](https://en.docs.acc.v1/overview/introduction/). 
+        ///
+        ///Use the [Modify a Folder](/en/docs/data/v2/reference/http/projects-project_id-folders-folder_id-PATCH/) operation to delete and restore folders.
+        ///
+        ///Before you use the Data Management API to access BIM 360 Docs folders, provision your app through the BIM 360 Account Administrator portal. For details, see the [Manage Access to Docs tutorial](/en/docs/bim360/v1/tutorials/getting-started/manage-access-to-docs/).
+        ///
+        ///**Note:** This operation supports Autodesk Construction Cloud (ACC) Projects. For more information, see the [ACC Platform API documentation](https://en.docs.acc.v1/overview/introduction/). 
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-         /// <param name="projectId">
-         ///The unique identifier of a project. 
-///
-///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
-///
-///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
-         /// </param>
-         /// <param name="xUserId">
-         ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
-         /// </param>
-         /// <param name="folderPayload">
-         /// (optional)
-         /// </param>
+        /// <param name="projectId">
+        ///The unique identifier of a project. 
+        ///
+        ///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
+        ///
+        ///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
+        /// </param>
+        /// <param name="xUserId">
+        ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
+        /// </param>
+        /// <param name="folderPayload">
+        /// (optional)
+        /// </param>
         /// <returns>Task of ApiResponse&lt;Folder&gt;></returns>
-        
-        public async System.Threading.Tasks.Task<ApiResponse<Folder>> CreateFolderAsync (string projectId,string xUserId= default(string),FolderPayload folderPayload= default(FolderPayload), string accessToken = null, bool throwOnError = true)
+
+        public async System.Threading.Tasks.Task<ApiResponse<Folder>> CreateFolderAsync(string projectId, string xUserId = default(string), FolderPayload folderPayload = default(FolderPayload), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into CreateFolderAsync ");
             using (var request = new HttpRequestMessage())
@@ -534,7 +559,7 @@ namespace Autodesk.DataManagement.Http
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
                 request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.3");
-                if(!string.IsNullOrEmpty(accessToken))
+                if (!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
                 }
@@ -547,21 +572,21 @@ namespace Autodesk.DataManagement.Http
                 // tell the underlying pipeline what scope we'd like to use
                 // if (scopes == null)
                 // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:create ");
+                // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:create ");
                 // }
                 // else
                 // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
                 // if (scopes == null)
                 // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:create ");
+                // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:create ");
                 // }
                 // else
                 // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
 
                 request.Method = new HttpMethod("POST");
@@ -573,9 +598,11 @@ namespace Autodesk.DataManagement.Http
                 {
                     try
                     {
-                      await response.EnsureSuccessStatusCodeAsync();
-                    } catch (HttpRequestException ex) {
-                      throw new DataManagementApiException(ex.Message, response, ex);
+                        await response.EnsureSuccessStatusCodeAsync();
+                    }
+                    catch (HttpRequestException ex)
+                    {
+                        throw new DataManagementApiException(ex.Message, response, ex);
                     }
                 }
                 else if (!response.IsSuccessStatusCode)
@@ -595,25 +622,25 @@ namespace Autodesk.DataManagement.Http
         ///Creates a custom relationship between a folder and another resource within the data domain service (folder, item, or version).
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-         /// <param name="folderId">
-         ///The unique identifier of a folder.
-         /// </param>
-         /// <param name="projectId">
-         ///The unique identifier of a project. 
-///
-///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
-///
-///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
-         /// </param>
-         /// <param name="xUserId">
-         ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
-         /// </param>
-         /// <param name="relationshipRefsPayload">
-         /// (optional)
-         /// </param>
-        
+        /// <param name="folderId">
+        ///The unique identifier of a folder.
+        /// </param>
+        /// <param name="projectId">
+        ///The unique identifier of a project. 
+        ///
+        ///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
+        ///
+        ///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
+        /// </param>
+        /// <param name="xUserId">
+        ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
+        /// </param>
+        /// <param name="relationshipRefsPayload">
+        /// (optional)
+        /// </param>
+
         /// <returns>Task of HttpResponseMessage</returns>
-        public async System.Threading.Tasks.Task<HttpResponseMessage> CreateFolderRelationshipsRefAsync (string folderId,string projectId,string xUserId= default(string),RelationshipRefsPayload relationshipRefsPayload= default(RelationshipRefsPayload), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<HttpResponseMessage> CreateFolderRelationshipsRefAsync(string folderId, string projectId, string xUserId = default(string), RelationshipRefsPayload relationshipRefsPayload = default(RelationshipRefsPayload), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into CreateFolderRelationshipsRefAsync ");
             using (var request = new HttpRequestMessage())
@@ -630,7 +657,7 @@ namespace Autodesk.DataManagement.Http
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
                 request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.3");
-                if(!string.IsNullOrEmpty(accessToken))
+                if (!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
                 }
@@ -643,21 +670,21 @@ namespace Autodesk.DataManagement.Http
                 // tell the underlying pipeline what scope we'd like to use
                 // if (scopes == null)
                 // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:create ");
+                // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:create ");
                 // }
                 // else
                 // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
                 // if (scopes == null)
                 // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:create ");
+                // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:create ");
                 // }
                 // else
                 // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
 
                 request.Method = new HttpMethod("POST");
@@ -669,9 +696,11 @@ namespace Autodesk.DataManagement.Http
                 {
                     try
                     {
-                      await response.EnsureSuccessStatusCodeAsync();
-                    } catch (HttpRequestException ex) {
-                      throw new DataManagementApiException(ex.Message, response, ex);
+                        await response.EnsureSuccessStatusCodeAsync();
+                    }
+                    catch (HttpRequestException ex)
+                    {
+                        throw new DataManagementApiException(ex.Message, response, ex);
                     }
                 }
                 else if (!response.IsSuccessStatusCode)
@@ -689,29 +718,29 @@ namespace Autodesk.DataManagement.Http
         /// </summary>
         /// <remarks>
         ///Returns the folder specified by the `folder_id` parameter from within the project identified by the `project_id` parameter. All folders and subfolders within a project (including the root folder) have a unique ID.
-///
-///**Note:** This operation supports Autodesk Construction Cloud (ACC) Projects. For more information, see the [ACC Platform API documentation](https://en.docs.acc.v1/overview/introduction/). 
+        ///
+        ///**Note:** This operation supports Autodesk Construction Cloud (ACC) Projects. For more information, see the [ACC Platform API documentation](https://en.docs.acc.v1/overview/introduction/). 
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-         /// <param name="projectId">
-         ///The unique identifier of a project. 
-///
-///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
-///
-///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
-         /// </param>
-         /// <param name="folderId">
-         ///The unique identifier of a folder.
-         /// </param>
-         /// <param name="ifModifiedSince">
-         ///Specify a date in the `YYYY-MM-DDThh:mm:ss.sz` format. If the resource has not been modified since the specified date/time, the response will return a HTTP status of 304 without any response body; the `Last-Modified` response header will contain the date of last modification. (optional)
-         /// </param>
-         /// <param name="xUserId">
-         ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
-         /// </param>
+        /// <param name="projectId">
+        ///The unique identifier of a project. 
+        ///
+        ///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
+        ///
+        ///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
+        /// </param>
+        /// <param name="folderId">
+        ///The unique identifier of a folder.
+        /// </param>
+        /// <param name="ifModifiedSince">
+        ///Specify a date in the `YYYY-MM-DDThh:mm:ss.sz` format. If the resource has not been modified since the specified date/time, the response will return a HTTP status of 304 without any response body; the `Last-Modified` response header will contain the date of last modification. (optional)
+        /// </param>
+        /// <param name="xUserId">
+        ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
+        /// </param>
         /// <returns>Task of ApiResponse&lt;Folder&gt;></returns>
-        
-        public async System.Threading.Tasks.Task<ApiResponse<Folder>> GetFolderAsync (string projectId,string folderId,DateTime ifModifiedSince= default(DateTime),string xUserId= default(string), string accessToken = null, bool throwOnError = true)
+
+        public async System.Threading.Tasks.Task<ApiResponse<Folder>> GetFolderAsync(string projectId, string folderId, DateTime ifModifiedSince = default(DateTime), string xUserId = default(string), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into GetFolderAsync ");
             using (var request = new HttpRequestMessage())
@@ -728,7 +757,7 @@ namespace Autodesk.DataManagement.Http
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
                 request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.3");
-                if(!string.IsNullOrEmpty(accessToken))
+                if (!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
                 }
@@ -741,21 +770,21 @@ namespace Autodesk.DataManagement.Http
                 // tell the underlying pipeline what scope we'd like to use
                 // if (scopes == null)
                 // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read ");
+                // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read ");
                 // }
                 // else
                 // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
                 // if (scopes == null)
                 // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read ");
+                // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read ");
                 // }
                 // else
                 // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
 
                 request.Method = new HttpMethod("GET");
@@ -767,9 +796,11 @@ namespace Autodesk.DataManagement.Http
                 {
                     try
                     {
-                      await response.EnsureSuccessStatusCodeAsync();
-                    } catch (HttpRequestException ex) {
-                      throw new DataManagementApiException(ex.Message, response, ex);
+                        await response.EnsureSuccessStatusCodeAsync();
+                    }
+                    catch (HttpRequestException ex)
+                    {
+                        throw new DataManagementApiException(ex.Message, response, ex);
                     }
                 }
                 else if (!response.IsSuccessStatusCode)
@@ -787,53 +818,53 @@ namespace Autodesk.DataManagement.Http
         /// </summary>
         /// <remarks>
         ///Returns a list of items and folders within the specified folder. Items represent word documents, fusion design files, drawings, spreadsheets, etc.
-///
-///The resources contained in the `included` array of the response are their tip versions.
-///
-///**Note:** This operation supports Autodesk Construction Cloud (ACC) Projects. For more information, see the [ACC Platform API documentation](https://en.docs.acc.v1/overview/introduction/). 
+        ///
+        ///The resources contained in the `included` array of the response are their tip versions.
+        ///
+        ///**Note:** This operation supports Autodesk Construction Cloud (ACC) Projects. For more information, see the [ACC Platform API documentation](https://en.docs.acc.v1/overview/introduction/). 
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-         /// <param name="projectId">
-         ///The unique identifier of a project. 
-///
-///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
-///
-///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
-         /// </param>
-         /// <param name="folderId">
-         ///The unique identifier of a folder.
-         /// </param>
-         /// <param name="xUserId">
-         ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
-         /// </param>
-         /// <param name="filterType">
-         ///Filter by the type of the objects in the folder. Supported values are `folders` and `items`. (optional)
-         /// </param>
-         /// <param name="filterId">
-         ///Filter by the `id` of the `ref` target. (optional)
-         /// </param>
-         /// <param name="filterExtensionType">
-         ///Filter by the extension type.  (optional)
-         /// </param>
-         /// <param name="filterLastModifiedTimeRollup">
-         ///Filter by the `lastModifiedTimeRollup` attribute. Supported values are date-time string in the form `YYYY-MM-DDTHH:MM:SS.000000Z` or `YYYY-MM-DDTHH:MM:SS` based on RFC3339. (optional)
-         /// </param>
-         /// <param name="pageNumber">
-         ///Specifies what page to return. Page numbers are 0-based (the first page is page 0). (optional)
-         /// </param>
-         /// <param name="pageLimit">
-         ///Specifies the maximum number of elements to return in the page. The default value is 200. The min value is 1. The max value is 200. (optional)
-         /// </param>
-         /// <param name="includeHidden">
-         ///`true`: Response will contain items and folders that were deleted from BIM 360 Docs projects. 
-///
-///`false`: (Default): Response will not contain items and folders that were deleted from BIM 360 Docs projects.  
-///
-///To return only items and folders that were deleted from BIM 360 Docs projects, see the documentation on [Filtering](/en/docs/data/v2/overview/filtering/). (optional)
-         /// </param>
+        /// <param name="projectId">
+        ///The unique identifier of a project. 
+        ///
+        ///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
+        ///
+        ///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
+        /// </param>
+        /// <param name="folderId">
+        ///The unique identifier of a folder.
+        /// </param>
+        /// <param name="xUserId">
+        ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
+        /// </param>
+        /// <param name="filterType">
+        ///Filter by the type of the objects in the folder. Supported values are `folders` and `items`. (optional)
+        /// </param>
+        /// <param name="filterId">
+        ///Filter by the `id` of the `ref` target. (optional)
+        /// </param>
+        /// <param name="filterExtensionType">
+        ///Filter by the extension type.  (optional)
+        /// </param>
+        /// <param name="filterLastModifiedTimeRollup">
+        ///Filter by the `lastModifiedTimeRollup` attribute. Supported values are date-time string in the form `YYYY-MM-DDTHH:MM:SS.000000Z` or `YYYY-MM-DDTHH:MM:SS` based on RFC3339. (optional)
+        /// </param>
+        /// <param name="pageNumber">
+        ///Specifies what page to return. Page numbers are 0-based (the first page is page 0). (optional)
+        /// </param>
+        /// <param name="pageLimit">
+        ///Specifies the maximum number of elements to return in the page. The default value is 200. The min value is 1. The max value is 200. (optional)
+        /// </param>
+        /// <param name="includeHidden">
+        ///`true`: Response will contain items and folders that were deleted from BIM 360 Docs projects. 
+        ///
+        ///`false`: (Default): Response will not contain items and folders that were deleted from BIM 360 Docs projects.  
+        ///
+        ///To return only items and folders that were deleted from BIM 360 Docs projects, see the documentation on [Filtering](/en/docs/data/v2/overview/filtering/). (optional)
+        /// </param>
         /// <returns>Task of ApiResponse&lt;FolderContents&gt;></returns>
-        
-        public async System.Threading.Tasks.Task<ApiResponse<FolderContents>> GetFolderContentsAsync (string projectId,string folderId,string xUserId= default(string),List<FilterType> filterType= default(List<FilterType>),List<string> filterId= default(List<string>),List<string> filterExtensionType= default(List<string>),List<string> filterLastModifiedTimeRollup= default(List<string>),int pageNumber= default(int),int pageLimit= default(int),bool includeHidden= default(bool), string accessToken = null, bool throwOnError = true)
+
+        public async System.Threading.Tasks.Task<ApiResponse<FolderContents>> GetFolderContentsAsync(string projectId, string folderId, string xUserId = default(string), List<FilterType> filterType = default(List<FilterType>), List<string> filterId = default(List<string>), List<string> filterExtensionType = default(List<string>), List<string> filterLastModifiedTimeRollup = default(List<string>), int pageNumber = default(int), int pageLimit = default(int), bool includeHidden = default(bool), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into GetFolderContentsAsync ");
             using (var request = new HttpRequestMessage())
@@ -857,7 +888,7 @@ namespace Autodesk.DataManagement.Http
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
                 request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.3");
-                if(!string.IsNullOrEmpty(accessToken))
+                if (!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
                 }
@@ -869,21 +900,21 @@ namespace Autodesk.DataManagement.Http
                 // tell the underlying pipeline what scope we'd like to use
                 // if (scopes == null)
                 // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read ");
+                // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read ");
                 // }
                 // else
                 // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
                 // if (scopes == null)
                 // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read ");
+                // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read ");
                 // }
                 // else
                 // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
 
                 request.Method = new HttpMethod("GET");
@@ -895,9 +926,11 @@ namespace Autodesk.DataManagement.Http
                 {
                     try
                     {
-                      await response.EnsureSuccessStatusCodeAsync();
-                    } catch (HttpRequestException ex) {
-                      throw new DataManagementApiException(ex.Message, response, ex);
+                        await response.EnsureSuccessStatusCodeAsync();
+                    }
+                    catch (HttpRequestException ex)
+                    {
+                        throw new DataManagementApiException(ex.Message, response, ex);
                     }
                 }
                 else if (!response.IsSuccessStatusCode)
@@ -915,26 +948,26 @@ namespace Autodesk.DataManagement.Http
         /// </summary>
         /// <remarks>
         ///Returns the parent folder of the specified folder. In a project, folders are organized in a hierarchy. Each folder except for the root folder has a parent folder.
-///
-///**Note:** This operation supports Autodesk Construction Cloud (ACC) Projects. For more information, see the [ACC Platform API documentation](https://en.docs.acc.v1/overview/introduction/). 
+        ///
+        ///**Note:** This operation supports Autodesk Construction Cloud (ACC) Projects. For more information, see the [ACC Platform API documentation](https://en.docs.acc.v1/overview/introduction/). 
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-         /// <param name="projectId">
-         ///The unique identifier of a project. 
-///
-///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
-///
-///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
-         /// </param>
-         /// <param name="folderId">
-         ///The unique identifier of a folder.
-         /// </param>
-         /// <param name="xUserId">
-         ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
-         /// </param>
+        /// <param name="projectId">
+        ///The unique identifier of a project. 
+        ///
+        ///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
+        ///
+        ///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
+        /// </param>
+        /// <param name="folderId">
+        ///The unique identifier of a folder.
+        /// </param>
+        /// <param name="xUserId">
+        ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
+        /// </param>
         /// <returns>Task of ApiResponse&lt;Folder&gt;></returns>
-        
-        public async System.Threading.Tasks.Task<ApiResponse<Folder>> GetFolderParentAsync (string projectId,string folderId,string xUserId= default(string), string accessToken = null, bool throwOnError = true)
+
+        public async System.Threading.Tasks.Task<ApiResponse<Folder>> GetFolderParentAsync(string projectId, string folderId, string xUserId = default(string), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into GetFolderParentAsync ");
             using (var request = new HttpRequestMessage())
@@ -951,7 +984,7 @@ namespace Autodesk.DataManagement.Http
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
                 request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.3");
-                if(!string.IsNullOrEmpty(accessToken))
+                if (!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
                 }
@@ -963,21 +996,21 @@ namespace Autodesk.DataManagement.Http
                 // tell the underlying pipeline what scope we'd like to use
                 // if (scopes == null)
                 // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read ");
+                // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read ");
                 // }
                 // else
                 // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
                 // if (scopes == null)
                 // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read ");
+                // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read ");
                 // }
                 // else
                 // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
 
                 request.Method = new HttpMethod("GET");
@@ -989,9 +1022,11 @@ namespace Autodesk.DataManagement.Http
                 {
                     try
                     {
-                      await response.EnsureSuccessStatusCodeAsync();
-                    } catch (HttpRequestException ex) {
-                      throw new DataManagementApiException(ex.Message, response, ex);
+                        await response.EnsureSuccessStatusCodeAsync();
+                    }
+                    catch (HttpRequestException ex)
+                    {
+                        throw new DataManagementApiException(ex.Message, response, ex);
                     }
                 }
                 else if (!response.IsSuccessStatusCode)
@@ -1009,38 +1044,38 @@ namespace Autodesk.DataManagement.Http
         /// </summary>
         /// <remarks>
         ///Returns the resources (items, folders, and versions) that have a custom relationship with the specified folder. Custom relationships can be established between a folder and other resources within the data domain service (folders, items, and versions).
-///
-///Each relationship is defined by the id of the object at the other end of the relationship, together with type, attributes, and relationships links.
-///Callers will typically use a filter parameter to restrict the response to the custom relationship types (`filter[meta.refType]`) they are interested in.
-///
-///**Note:** This operation supports Autodesk Construction Cloud (ACC) Projects. For more information, see the [ACC Platform API documentation](https://en.docs.acc.v1/overview/introduction/). 
+        ///
+        ///Each relationship is defined by the id of the object at the other end of the relationship, together with type, attributes, and relationships links.
+        ///Callers will typically use a filter parameter to restrict the response to the custom relationship types (`filter[meta.refType]`) they are interested in.
+        ///
+        ///**Note:** This operation supports Autodesk Construction Cloud (ACC) Projects. For more information, see the [ACC Platform API documentation](https://en.docs.acc.v1/overview/introduction/). 
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-         /// <param name="projectId">
-         ///The unique identifier of a project. 
-///
-///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
-///
-///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
-         /// </param>
-         /// <param name="folderId">
-         ///The unique identifier of a folder.
-         /// </param>
-         /// <param name="xUserId">
-         ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
-         /// </param>
-         /// <param name="filterType">
-         ///Filter by the `type` of the `ref` target. Supported values include `folders`, `items`, and `versions`. (optional)
-         /// </param>
-         /// <param name="filterId">
-         ///Filter by the `id` of the `ref` target. (optional)
-         /// </param>
-         /// <param name="filterExtensionType">
-         ///Filter by the extension type.  (optional)
-         /// </param>
+        /// <param name="projectId">
+        ///The unique identifier of a project. 
+        ///
+        ///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
+        ///
+        ///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
+        /// </param>
+        /// <param name="folderId">
+        ///The unique identifier of a folder.
+        /// </param>
+        /// <param name="xUserId">
+        ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
+        /// </param>
+        /// <param name="filterType">
+        ///Filter by the `type` of the `ref` target. Supported values include `folders`, `items`, and `versions`. (optional)
+        /// </param>
+        /// <param name="filterId">
+        ///Filter by the `id` of the `ref` target. (optional)
+        /// </param>
+        /// <param name="filterExtensionType">
+        ///Filter by the extension type.  (optional)
+        /// </param>
         /// <returns>Task of ApiResponse&lt;FolderRefs&gt;></returns>
-        
-        public async System.Threading.Tasks.Task<ApiResponse<FolderRefs>> GetFolderRefsAsync (string projectId,string folderId,string xUserId= default(string),List<FilterTypeVersion> filterType= default(List<FilterTypeVersion>),List<string> filterId= default(List<string>),List<string> filterExtensionType= default(List<string>), string accessToken = null, bool throwOnError = true)
+
+        public async System.Threading.Tasks.Task<ApiResponse<FolderRefs>> GetFolderRefsAsync(string projectId, string folderId, string xUserId = default(string), List<FilterTypeVersion> filterType = default(List<FilterTypeVersion>), List<string> filterId = default(List<string>), List<string> filterExtensionType = default(List<string>), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into GetFolderRefsAsync ");
             using (var request = new HttpRequestMessage())
@@ -1060,7 +1095,7 @@ namespace Autodesk.DataManagement.Http
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
                 request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.3");
-                if(!string.IsNullOrEmpty(accessToken))
+                if (!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
                 }
@@ -1072,21 +1107,21 @@ namespace Autodesk.DataManagement.Http
                 // tell the underlying pipeline what scope we'd like to use
                 // if (scopes == null)
                 // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read ");
+                // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read ");
                 // }
                 // else
                 // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
                 // if (scopes == null)
                 // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read ");
+                // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read ");
                 // }
                 // else
                 // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
 
                 request.Method = new HttpMethod("GET");
@@ -1098,9 +1133,11 @@ namespace Autodesk.DataManagement.Http
                 {
                     try
                     {
-                      await response.EnsureSuccessStatusCodeAsync();
-                    } catch (HttpRequestException ex) {
-                      throw new DataManagementApiException(ex.Message, response, ex);
+                        await response.EnsureSuccessStatusCodeAsync();
+                    }
+                    catch (HttpRequestException ex)
+                    {
+                        throw new DataManagementApiException(ex.Message, response, ex);
                     }
                 }
                 else if (!response.IsSuccessStatusCode)
@@ -1118,28 +1155,28 @@ namespace Autodesk.DataManagement.Http
         /// </summary>
         /// <remarks>
         ///Returns a list of links for the specified folder. 
-///
-///Custom relationships can be established between a folder and other external resources residing outside the data domain service. A link’s `href` attribute defines the target URI to access a resource.
-///
-///**Note:** This operation supports Autodesk Construction Cloud (ACC) Projects. For more information, see the [ACC Platform API documentation](https://en.docs.acc.v1/overview/introduction/). 
+        ///
+        ///Custom relationships can be established between a folder and other external resources residing outside the data domain service. A link’s `href` attribute defines the target URI to access a resource.
+        ///
+        ///**Note:** This operation supports Autodesk Construction Cloud (ACC) Projects. For more information, see the [ACC Platform API documentation](https://en.docs.acc.v1/overview/introduction/). 
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-         /// <param name="projectId">
-         ///The unique identifier of a project. 
-///
-///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
-///
-///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
-         /// </param>
-         /// <param name="folderId">
-         ///The unique identifier of a folder.
-         /// </param>
-         /// <param name="xUserId">
-         ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
-         /// </param>
+        /// <param name="projectId">
+        ///The unique identifier of a project. 
+        ///
+        ///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
+        ///
+        ///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
+        /// </param>
+        /// <param name="folderId">
+        ///The unique identifier of a folder.
+        /// </param>
+        /// <param name="xUserId">
+        ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
+        /// </param>
         /// <returns>Task of ApiResponse&lt;RelationshipLinks&gt;></returns>
-        
-        public async System.Threading.Tasks.Task<ApiResponse<RelationshipLinks>> GetFolderRelationshipsLinksAsync (string projectId,string folderId,string xUserId= default(string), string accessToken = null, bool throwOnError = true)
+
+        public async System.Threading.Tasks.Task<ApiResponse<RelationshipLinks>> GetFolderRelationshipsLinksAsync(string projectId, string folderId, string xUserId = default(string), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into GetFolderRelationshipsLinksAsync ");
             using (var request = new HttpRequestMessage())
@@ -1156,7 +1193,7 @@ namespace Autodesk.DataManagement.Http
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
                 request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.3");
-                if(!string.IsNullOrEmpty(accessToken))
+                if (!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
                 }
@@ -1168,21 +1205,21 @@ namespace Autodesk.DataManagement.Http
                 // tell the underlying pipeline what scope we'd like to use
                 // if (scopes == null)
                 // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read ");
+                // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read ");
                 // }
                 // else
                 // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
                 // if (scopes == null)
                 // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read ");
+                // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read ");
                 // }
                 // else
                 // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
 
                 request.Method = new HttpMethod("GET");
@@ -1194,9 +1231,11 @@ namespace Autodesk.DataManagement.Http
                 {
                     try
                     {
-                      await response.EnsureSuccessStatusCodeAsync();
-                    } catch (HttpRequestException ex) {
-                      throw new DataManagementApiException(ex.Message, response, ex);
+                        await response.EnsureSuccessStatusCodeAsync();
+                    }
+                    catch (HttpRequestException ex)
+                    {
+                        throw new DataManagementApiException(ex.Message, response, ex);
                     }
                 }
                 else if (!response.IsSuccessStatusCode)
@@ -1214,45 +1253,45 @@ namespace Autodesk.DataManagement.Http
         /// </summary>
         /// <remarks>
         ///Returns the custom relationships associated with the specified folder. Custom relationships can be established between a folder and other resources within the data domain service (folders, items, and versions).
-///
-///Each relationship is defined by the ID of the object at the other end of the relationship, together with type, specific reference meta including extension data.
-///Callers will typically use a filter parameter to restrict the response to the custom relationship types (`filter[meta.refType]`) they are interested in.
-///The response body will have an included array that contains the resources in the relationship, which is essentially what is returned by the [List Related Resources for a Folder](/en/docs/data/v2/reference/http/projects-project_id-folders-folder_id-refs-GET/) operation.  
-///
-///**Note:** This operation supports Autodesk Construction Cloud (ACC) Projects. For more information, see the [ACC Platform API documentation](https://en.docs.acc.v1/overview/introduction/). 
+        ///
+        ///Each relationship is defined by the ID of the object at the other end of the relationship, together with type, specific reference meta including extension data.
+        ///Callers will typically use a filter parameter to restrict the response to the custom relationship types (`filter[meta.refType]`) they are interested in.
+        ///The response body will have an included array that contains the resources in the relationship, which is essentially what is returned by the [List Related Resources for a Folder](/en/docs/data/v2/reference/http/projects-project_id-folders-folder_id-refs-GET/) operation.  
+        ///
+        ///**Note:** This operation supports Autodesk Construction Cloud (ACC) Projects. For more information, see the [ACC Platform API documentation](https://en.docs.acc.v1/overview/introduction/). 
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-         /// <param name="folderId">
-         ///The unique identifier of a folder.
-         /// </param>
-         /// <param name="projectId">
-         ///The unique identifier of a project. 
-///
-///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
-///
-///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
-         /// </param>
-         /// <param name="xUserId">
-         ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
-         /// </param>
-         /// <param name="filterType">
-         ///Filter by the `type` of the `ref` target. Supported values include `folders`, `items`, and `versions`. (optional)
-         /// </param>
-         /// <param name="filterId">
-         ///Filter by the `id` of the `ref` target. (optional)
-         /// </param>
-         /// <param name="filterRefType">
-         ///Filter by `refType`. Possible values: `derived`, `dependencies`, `auxiliary`, `xrefs`, and `includes`. (optional)
-         /// </param>
-         /// <param name="filterDirection">
-         ///Filter by the direction of the reference. Possible values: `from` and `to`. (optional)
-         /// </param>
-         /// <param name="filterExtensionType">
-         ///Filter by the extension type.  (optional)
-         /// </param>
+        /// <param name="folderId">
+        ///The unique identifier of a folder.
+        /// </param>
+        /// <param name="projectId">
+        ///The unique identifier of a project. 
+        ///
+        ///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
+        ///
+        ///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
+        /// </param>
+        /// <param name="xUserId">
+        ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
+        /// </param>
+        /// <param name="filterType">
+        ///Filter by the `type` of the `ref` target. Supported values include `folders`, `items`, and `versions`. (optional)
+        /// </param>
+        /// <param name="filterId">
+        ///Filter by the `id` of the `ref` target. (optional)
+        /// </param>
+        /// <param name="filterRefType">
+        ///Filter by `refType`. Possible values: `derived`, `dependencies`, `auxiliary`, `xrefs`, and `includes`. (optional)
+        /// </param>
+        /// <param name="filterDirection">
+        ///Filter by the direction of the reference. Possible values: `from` and `to`. (optional)
+        /// </param>
+        /// <param name="filterExtensionType">
+        ///Filter by the extension type.  (optional)
+        /// </param>
         /// <returns>Task of ApiResponse&lt;RelationshipRefs&gt;></returns>
-        
-        public async System.Threading.Tasks.Task<ApiResponse<RelationshipRefs>> GetFolderRelationshipsRefsAsync (string folderId,string projectId,string xUserId= default(string),List<FilterTypeVersion> filterType= default(List<FilterTypeVersion>),List<string> filterId= default(List<string>),FilterRefType? filterRefType= null,FilterDirection? filterDirection= null,List<string> filterExtensionType= default(List<string>), string accessToken = null, bool throwOnError = true)
+
+        public async System.Threading.Tasks.Task<ApiResponse<RelationshipRefs>> GetFolderRelationshipsRefsAsync(string folderId, string projectId, string xUserId = default(string), List<FilterTypeVersion> filterType = default(List<FilterTypeVersion>), List<string> filterId = default(List<string>), FilterRefType? filterRefType = null, FilterDirection? filterDirection = null, List<string> filterExtensionType = default(List<string>), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into GetFolderRelationshipsRefsAsync ");
             using (var request = new HttpRequestMessage())
@@ -1274,7 +1313,7 @@ namespace Autodesk.DataManagement.Http
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
                 request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.3");
-                if(!string.IsNullOrEmpty(accessToken))
+                if (!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
                 }
@@ -1286,21 +1325,21 @@ namespace Autodesk.DataManagement.Http
                 // tell the underlying pipeline what scope we'd like to use
                 // if (scopes == null)
                 // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read ");
+                // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read ");
                 // }
                 // else
                 // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
                 // if (scopes == null)
                 // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read ");
+                // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read ");
                 // }
                 // else
                 // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
 
                 request.Method = new HttpMethod("GET");
@@ -1312,9 +1351,11 @@ namespace Autodesk.DataManagement.Http
                 {
                     try
                     {
-                      await response.EnsureSuccessStatusCodeAsync();
-                    } catch (HttpRequestException ex) {
-                      throw new DataManagementApiException(ex.Message, response, ex);
+                        await response.EnsureSuccessStatusCodeAsync();
+                    }
+                    catch (HttpRequestException ex)
+                    {
+                        throw new DataManagementApiException(ex.Message, response, ex);
                     }
                 }
                 else if (!response.IsSuccessStatusCode)
@@ -1332,39 +1373,39 @@ namespace Autodesk.DataManagement.Http
         /// </summary>
         /// <remarks>
         ///Searches the specified folder and its subfolders and returns a list of the latest versions of the items you can access.
-///
-///
-///Use the `filter` query string parameter to narrow down the list as appropriate. You can filter by the following properties of the version payload: 
-///
-///- `type` property, 
-///- `id` property, 
-///- any of the attributes object properties. 
-///
-///For example, you can filter by `createTime` and `mimeType`. It returns tip versions (latest versions) of properties where the filter conditions are satisfied. To verify the properties of the attributes object for a specific version, use the [Get a Version](/en/docs/data/v2/reference/http/projects-project_id-versions-version_id-GET/) operation.
-///
-///To list the immediate contents of the folder without parsing subfolders, use the [List Folder Contents](/en/docs/data/v2/reference/http/projects-project_id-folders-folder_id-contents-GET/) operation.
-///
-///**Note:** This operation supports Autodesk Construction Cloud (ACC) Projects. For more information, see the [ACC Platform API documentation](https://en.docs.acc.v1/overview/introduction/). 
+        ///
+        ///
+        ///Use the `filter` query string parameter to narrow down the list as appropriate. You can filter by the following properties of the version payload: 
+        ///
+        ///- `type` property, 
+        ///- `id` property, 
+        ///- any of the attributes object properties. 
+        ///
+        ///For example, you can filter by `createTime` and `mimeType`. It returns tip versions (latest versions) of properties where the filter conditions are satisfied. To verify the properties of the attributes object for a specific version, use the [Get a Version](/en/docs/data/v2/reference/http/projects-project_id-versions-version_id-GET/) operation.
+        ///
+        ///To list the immediate contents of the folder without parsing subfolders, use the [List Folder Contents](/en/docs/data/v2/reference/http/projects-project_id-folders-folder_id-contents-GET/) operation.
+        ///
+        ///**Note:** This operation supports Autodesk Construction Cloud (ACC) Projects. For more information, see the [ACC Platform API documentation](https://en.docs.acc.v1/overview/introduction/). 
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-         /// <param name="projectId">
-         ///The unique identifier of a project. 
-///
-///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
-///
-///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
-         /// </param>
-         /// <param name="folderId">
-         ///The unique identifier of a folder.
-         /// </param>
-         /// <param name="filter">
-         ///Filter the data. See the [Filtering](/en/docs/data/v2/overview/filtering/) section for details. (optional)
-         /// </param>
-         /// <param name="pageNumber">
-         ///Specifies what page to return. Page numbers are 0-based (the first page is page 0). (optional)
-         /// </param>
+        /// <param name="projectId">
+        ///The unique identifier of a project. 
+        ///
+        ///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
+        ///
+        ///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
+        /// </param>
+        /// <param name="folderId">
+        ///The unique identifier of a folder.
+        /// </param>
+        /// <param name="filter">
+        ///Filter the data. See the [Filtering](/en/docs/data/v2/overview/filtering/) section for details. (optional)
+        /// </param>
+        /// <param name="pageNumber">
+        ///Specifies what page to return. Page numbers are 0-based (the first page is page 0). (optional)
+        /// </param>
         /// <returns>Task of ApiResponse&lt;Search&gt;></returns>
-        
+
         public async System.Threading.Tasks.Task<ApiResponse<Search>> GetFolderSearchAsync(
                     string projectId,
                     string folderId,
@@ -1379,36 +1420,7 @@ namespace Autodesk.DataManagement.Http
             {
                 var queryParam = new Dictionary<string, object>();
 
-                if (filters != null && filters.Count > 0)
-                {
-                    foreach (var filter in filters)
-                    {
-                        var operatorType = filter.operatorType;
-
-                        string operatorTypeValue = null;
-                        if (operatorType != null && operatorType.GetType().IsEnum)
-                        {
-                            var type = operatorType.GetType();
-                            var memberInfos = type.GetMember(operatorType.ToString());
-                            var enumValueMemberInfo = memberInfos.FirstOrDefault(m => m.DeclaringType == type);
-                            var valueAttributes = enumValueMemberInfo.GetCustomAttributes(typeof(EnumMemberAttribute), false);
-                            operatorTypeValue = valueAttributes.Length > 0
-                                ? ((EnumMemberAttribute)valueAttributes[0]).Value
-                                : operatorType.ToString();
-                        }
-                        else
-                        {
-                            operatorTypeValue = operatorType.ToString();
-                        }
-
-                        string filterKey = $"filter[{filter.fieldName}]{operatorTypeValue}";
-                        string filterExpression = string.Join(",", filter.values);  
-
-                        SetQueryParameter(filterKey, filterExpression, queryParam);
-                    }
-                }
-
-                // Apply pagination
+                SetQueryParameter("filters", filters, queryParam);
                 SetQueryParameter("page[number]", pageNumber, queryParam);
 
                 // Build the URI for the request
@@ -1465,33 +1477,33 @@ namespace Autodesk.DataManagement.Http
         /// </summary>
         /// <remarks>
         ///Renames, moves, hides, or unhides a folder. Marking a BIM 360 Docs folder as hidden effectively deletes it. You can restore it by changing its `hidden` attribute. You can also move BIM 360 Docs folders by changing their parent folder.
-///
-///You cannot permanently delete BIM 360 Docs folders. They are tagged as hidden folders and are removed from the BIM 360 Docs UI and from regular Data Management API responses. You can use the hidden filter (`filter[hidden]=true`) to get a list of deleted folders with the [List Folder Contents](/en/docs/data/v2/reference/http/projects-project_id-folders-folder_id-contents-GET/) operation.
-///
-///Before you use the Data Management API to access BIM 360 Docs folders, provision your app through the BIM 360 Account Administrator portal. For details, see the [Manage Access to Docs tutorial](/en/docs/bim360/v1/tutorials/getting-started/manage-access-to-docs/).
-///
-///**Note:** This operation supports Autodesk Construction Cloud (ACC) Projects. For more information, see the [ACC Platform API documentation](/en.docs.acc.v1/overview/introduction/). 
+        ///
+        ///You cannot permanently delete BIM 360 Docs folders. They are tagged as hidden folders and are removed from the BIM 360 Docs UI and from regular Data Management API responses. You can use the hidden filter (`filter[hidden]=true`) to get a list of deleted folders with the [List Folder Contents](/en/docs/data/v2/reference/http/projects-project_id-folders-folder_id-contents-GET/) operation.
+        ///
+        ///Before you use the Data Management API to access BIM 360 Docs folders, provision your app through the BIM 360 Account Administrator portal. For details, see the [Manage Access to Docs tutorial](/en/docs/bim360/v1/tutorials/getting-started/manage-access-to-docs/).
+        ///
+        ///**Note:** This operation supports Autodesk Construction Cloud (ACC) Projects. For more information, see the [ACC Platform API documentation](/en.docs.acc.v1/overview/introduction/). 
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-         /// <param name="projectId">
-         ///The unique identifier of a project. 
-///
-///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
-///
-///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
-         /// </param>
-         /// <param name="folderId">
-         ///The unique identifier of a folder.
-         /// </param>
-         /// <param name="xUserId">
-         ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
-         /// </param>
-         /// <param name="modifyFolderPayload">
-         /// (optional)
-         /// </param>
+        /// <param name="projectId">
+        ///The unique identifier of a project. 
+        ///
+        ///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
+        ///
+        ///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
+        /// </param>
+        /// <param name="folderId">
+        ///The unique identifier of a folder.
+        /// </param>
+        /// <param name="xUserId">
+        ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
+        /// </param>
+        /// <param name="modifyFolderPayload">
+        /// (optional)
+        /// </param>
         /// <returns>Task of ApiResponse&lt;Folder&gt;></returns>
-        
-        public async System.Threading.Tasks.Task<ApiResponse<Folder>> PatchFolderAsync (string projectId,string folderId,string xUserId= default(string),ModifyFolderPayload modifyFolderPayload= default(ModifyFolderPayload), string accessToken = null, bool throwOnError = true)
+
+        public async System.Threading.Tasks.Task<ApiResponse<Folder>> PatchFolderAsync(string projectId, string folderId, string xUserId = default(string), ModifyFolderPayload modifyFolderPayload = default(ModifyFolderPayload), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into PatchFolderAsync ");
             using (var request = new HttpRequestMessage())
@@ -1508,7 +1520,7 @@ namespace Autodesk.DataManagement.Http
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
                 request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.3");
-                if(!string.IsNullOrEmpty(accessToken))
+                if (!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
                 }
@@ -1521,21 +1533,21 @@ namespace Autodesk.DataManagement.Http
                 // tell the underlying pipeline what scope we'd like to use
                 // if (scopes == null)
                 // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:write ");
+                // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:write ");
                 // }
                 // else
                 // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
                 // if (scopes == null)
                 // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:write ");
+                // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:write ");
                 // }
                 // else
                 // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
 
                 request.Method = new HttpMethod("PATCH");
@@ -1547,9 +1559,11 @@ namespace Autodesk.DataManagement.Http
                 {
                     try
                     {
-                      await response.EnsureSuccessStatusCodeAsync();
-                    } catch (HttpRequestException ex) {
-                      throw new DataManagementApiException(ex.Message, response, ex);
+                        await response.EnsureSuccessStatusCodeAsync();
+                    }
+                    catch (HttpRequestException ex)
+                    {
+                        throw new DataManagementApiException(ex.Message, response, ex);
                     }
                 }
                 else if (!response.IsSuccessStatusCode)

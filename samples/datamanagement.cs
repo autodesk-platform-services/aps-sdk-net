@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 class DataManagement
 {
-    string? token = Environment.GetEnvironmentVariable("token") ?? "eyJhbGciOiJSUzI1NiIsImtpZCI6IlhrUFpfSmhoXzlTYzNZS01oRERBZFBWeFowOF9SUzI1NiIsInBpLmF0bSI6ImFzc2MifQ.eyJzY29wZSI6WyJ2aWV3YWJsZXM6cmVhZCIsImRhdGE6cmVhZCIsImRhdGE6d3JpdGUiLCJkYXRhOmNyZWF0ZSIsImRhdGE6c2VhcmNoIiwiYnVja2V0OmNyZWF0ZSIsImJ1Y2tldDpyZWFkIiwiYnVja2V0OnVwZGF0ZSIsImJ1Y2tldDpkZWxldGUiXSwiY2xpZW50X2lkIjoiZVdyRHR1TnhWdUdseW13bDRVd2JlYlJUbHVubXdPOGciLCJpc3MiOiJodHRwczovL2RldmVsb3Blci5hcGkuYXV0b2Rlc2suY29tIiwiYXVkIjoiaHR0cHM6Ly9hdXRvZGVzay5jb20iLCJqdGkiOiI4N05CY0xKalNIcEx3RDl5R3FCNDBsdWtMYmhpSkxtQWVOc2xPRDdNWGhzTUpteFlGS3JQWHFFNzdad0VnSUhvIiwiZXhwIjoxNzM3MTAxNDQyLCJ1c2VyaWQiOiI0UTdDUlhVQzNUQlMifQ.WMOTMzzvasseK95kVlspMfasVx4K3WuC9h6Cgw9ahcF5Jp-U58gMWSSNK-Lwp3865YNsIFZ6lM4sUAmeyo7ObD9PYen_T9i9PlH_cscFkTxMkAeLoSQZ_Y1zAqoAi1QIyi7tqEu49T1Co03ilB9k8BmzB7Cx7rrNzgZBmac9KWhfj2ADaUj0tT-GzP4j_aCfmJFscVx5ohLbX99IiBYlJBO2VroHwDRx_ugKFmj_gtzcTt_wDdl6e-EY-_oizEYL-L0omYfE4OsxG5q_55bm-KBP4_pPUaarcuP0zSSrwMmQAHGB6Gx0yNM3rsHlAgn_Mx0KHhtIneXEVVJp-D6teA";
+    string? token = Environment.GetEnvironmentVariable("token");
     string? folder_id = Environment.GetEnvironmentVariable("folder_id");
     string? project_top_folder_one_id = Environment.GetEnvironmentVariable("project_top_folder_one_id");
     string? project_top_folder_two_id = Environment.GetEnvironmentVariable("project_top_folder_two_id");
@@ -388,13 +388,14 @@ class DataManagement
         var filters = new List<(string fieldName, ComparisonTypes? operatorType, List<string> values)>
         {
             // ("id", null, new List<string> { "urn:adsk.wipprod:fs.file:vf.lwzzqBEUQXaSukbg0uYXPg?version=1" }),
-            ("attributes.displayName", null, new List<string> { "drawingmyt.rvt", "racteded.rvt"}),
+            // ("attributes.displayName", null, new List<string> { "drawingmyt.rvt"}),
+            ("attributes.displayName", ComparisonTypes.EqualTo, new List<string> { "drawingmyt.rvt"}),
             // ("createUserName", null, new List<string> { "Harun Gitundu" }),
         };
 
         Search search = await dataManagementClient.GetFolderSearchAsync(
-            projectId: "b.cdf001dc-4105-4440-a740-0fd0c54b1ef6",
-            folderId: "urn:adsk.wipprod:fs.folder:co.7r3AhbeMQVyuUH0x1mPHjA",
+            projectId: project_id,
+            folderId: folder_id,
             filters: filters,
             pageNumber: 0
         );
@@ -406,14 +407,14 @@ class DataManagement
             TypeVersion currentSearchDataType = currentSearchData.Type;
             string currentSearchDataId = currentSearchData.Id;
 
-            // Console.WriteLine(currentSearchDataType);
+            Console.WriteLine(currentSearchDataType);
             Console.WriteLine(currentSearchDataId);
-            // Console.WriteLine(currentSearchData.Attributes.Name);
-            // Console.WriteLine(currentSearchData.Attributes.CreateUserName);
-            // Console.WriteLine(currentSearchData.Attributes.LastModifiedUserName);
-            // Console.WriteLine(currentSearchData.Attributes.FileType);
+            Console.WriteLine(currentSearchData.Attributes.Name);
+            Console.WriteLine(currentSearchData.Attributes.CreateUserName);
+            Console.WriteLine(currentSearchData.Attributes.LastModifiedUserName);
+            Console.WriteLine(currentSearchData.Attributes.FileType);
             Console.WriteLine(currentSearchData.Attributes.DisplayName);
-            // Console.WriteLine(currentSearchData.Attributes.Extension.Type);
+            Console.WriteLine(currentSearchData.Attributes.Extension.Type);
         }
     }
 
@@ -1362,7 +1363,7 @@ class DataManagement
         // await dataManagement.GetFolderRefsAsync();
         // await dataManagement.GetFolderRelationshipsLinksAsync();
         // await dataManagement.GetFolderRelationshipsRefsAsync();
-        await dataManagement.GetFolderSearchAsync();
+        // await dataManagement.GetFolderSearchAsync();
         // await dataManagement.CreateFolderAsync(); 
         // await dataManagement.CreateFolderRelationshipsRefAsync();
         // await dataManagement.PatchFolderAsync();
