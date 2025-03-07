@@ -6,13 +6,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
    <ItemGroup>
-    <!-- <PackageReference Include="Autodesk.ModelDerivative" Version="1.0.0"/>
-    <PackageReference Include="Autodesk.Webhooks" Version="2.0.0"/> -->
-    <PackageReference Include="Autodesk.DataManagement"/>
-    <!-- <PackageReference Include="Autodesk.Oss" Version="1.0.0"/>   
-    <PackageReference Include="Autodesk.Authentication" Version="1.0.0"/>   
-     <PackageReference Include="Autodesk.Construction.Issues" Version="1.0.0-beta1"/>    -->
-    <PackageReference Include="Autodesk.SDKManager"/>
+    <PackageReference Include="Autodesk.SDKManager" />
+    <PackageReference Include="Autodesk.ModelDerivative" />
+    <PackageReference Include="Autodesk.Webhooks" />
+    <PackageReference Include="Autodesk.DataManagement" />
+    <PackageReference Include="Autodesk.Oss" />   
+    <PackageReference Include="Autodesk.Authentication" />   
+    <PackageReference Include="Autodesk.Construction.Issues" />   
+    <PackageReference Include="Autodesk.Construction.AccountAdmin" />   
     <PackageReference Include="DotNetEnv" />
   </ItemGroup>
 
