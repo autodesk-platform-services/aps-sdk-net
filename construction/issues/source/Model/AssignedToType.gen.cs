@@ -46,19 +46,19 @@ namespace Autodesk.Construction.Issues.Model
         /// Enum User for value: user
         /// </summary>
         [EnumMember(Value = "user")]
-        User,
+        User = 1,
 
         /// <summary>
         /// Enum Company for value:  company
         /// </summary>
         [EnumMember(Value = "company")]
-        Company,
+        Company = 2,
 
         /// <summary>
         /// Enum Role for value:  role
         /// </summary>
         [EnumMember(Value = "role")]
-        Role,
+        Role = 3,
 
         // Documented but the endpoint doesn't support null so commenting it out.
         // /// <summary>
