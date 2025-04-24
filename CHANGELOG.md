@@ -1,5 +1,19 @@
 # Changelog
 
+## [v2.1.2](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v2.1.2) (2025-04-17)
+
+[Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v2.1.1...v2.1.2)
+
+**Fixed bugs:**
+
+- \[DAS 335\] - Fix webView property typo [\#151](https://github.com/autodesk-platform-services/aps-sdk-net/pull/151) ([Arrotech](https://github.com/Arrotech))
+- Fixed AssignedToType enum [\#150](https://github.com/autodesk-platform-services/aps-sdk-net/pull/150) ([srivastavarahull](https://github.com/srivastavarahull))
+
+**Merged pull requests:**
+
+- \[AUTO\]: Update CHANGELOG [\#147](https://github.com/autodesk-platform-services/aps-sdk-net/pull/147) ([sajith-subramanian](https://github.com/sajith-subramanian))
+- Keep Main branch updated [\#146](https://github.com/autodesk-platform-services/aps-sdk-net/pull/146) ([sajith-subramanian](https://github.com/sajith-subramanian))
+
 ## [v2.1.1](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v2.1.1) (2025-04-02)
 
 [Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v2.1.0...v2.1.1)
