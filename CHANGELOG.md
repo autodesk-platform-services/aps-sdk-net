@@ -1,5 +1,13 @@
 # Changelog
 
+## [v2.1.1](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v2.1.1) (2025-04-02)
+
+[Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v2.1.0...v2.1.1)
+
+**Closed issues:**
+
+- Unable to find a constructor to use for type Autodesk.Authentication.Model.UserInfo [\#145](https://github.com/autodesk-platform-services/aps-sdk-net/issues/145)
+
 ## [v2.1.0](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v2.1.0) (2025-02-20)
 
 [Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v2.0.2...v2.1.0)

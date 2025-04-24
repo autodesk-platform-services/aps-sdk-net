@@ -55,7 +55,7 @@ namespace Autodesk.DataManagement.Model
         /// <summary>
         ///Gets or Sets Webview
         /// </summary>
-        [DataMember(Name="webview", EmitDefaultValue=false)]
+        [DataMember(Name="webView", EmitDefaultValue=false)]
         public WebViewLink Webview { get; set; }
 
         /// <summary>
