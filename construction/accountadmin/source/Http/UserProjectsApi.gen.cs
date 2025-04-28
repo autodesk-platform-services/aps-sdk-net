@@ -108,7 +108,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
         /// <returns>
         /// <see cref="System.Threading.Tasks.Task"/>&lt;<see cref="ApiResponse"/>&lt;<see cref="UserProjects"/>&gt;&gt;
         /// </returns>        
-        System.Threading.Tasks.Task<ApiResponse<UserProjects>> GetUserProjectsAsync (string accountId, string acceptLanguage = default, Region? region = null, string userId = default, List<string> filterId = default, List<Fields> fields = default, List<Classification> filterClassification = default, string filterName = default, List<Platform> filterPlatform = default, List<Status> filterStatus = default, List<string> filterType = default, string filterJobNumber = default, string filterUpdatedAt = default, List<AccessLevels> filterAccessLevels = default, FilterTextMatch? filterTextMatch = null, List<SortBy> sort = default, int? limit = default, int? offset = default, string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<ApiResponse<UserProjects>> GetUserProjectsAsync(string accountId, string acceptLanguage = default, Region? region = null, string userId = default, List<string> filterId = default, List<Fields> fields = default, List<Classification> filterClassification = default, string filterName = default, List<Platform> filterPlatform = default, List<Status> filterStatus = default, List<string> filterType = default, string filterJobNumber = default, string filterUpdatedAt = default, List<AccessLevels> filterAccessLevels = default, FilterTextMatch? filterTextMatch = null, List<SortBy> sort = default, int? limit = default, int? offset = default, string accessToken = null, bool throwOnError = true);
     }
 
     /// <summary>
@@ -279,8 +279,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
         /// <returns>
         /// <see cref="System.Threading.Tasks.Task"/>&lt;<see cref="ApiResponse"/>&lt;<see cref="UserProjects"/>&gt;&gt;
         /// </returns>    
-        public async System.Threading.Tasks.Task<ApiResponse<UserProjects>> GetUserProjectsAsync(
-				string accountId, string acceptLanguage = default, Region? region = null, string userId = default, List<string> filterId = default, List<Fields> fields = default, List<Classification> filterClassification = default, string filterName = default, List<Platform> filterPlatform = default, List<Status> filterStatus = default, List<string> filterType = default, string filterJobNumber = default, string filterUpdatedAt = default, List<AccessLevels> filterAccessLevels = default, FilterTextMatch? filterTextMatch = null, List<SortBy> sort = default, int? limit = default, int? offset = default, string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ApiResponse<UserProjects>> GetUserProjectsAsync(string accountId, string acceptLanguage = default, Region? region = null, string userId = default, List<string> filterId = default, List<Fields> fields = default, List<Classification> filterClassification = default, string filterName = default, List<Platform> filterPlatform = default, List<Status> filterStatus = default, List<string> filterType = default, string filterJobNumber = default, string filterUpdatedAt = default, List<AccessLevels> filterAccessLevels = default, FilterTextMatch? filterTextMatch = null, List<SortBy> sort = default, int? limit = default, int? offset = default, string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation($"Entered into {nameof(GetUserProjectsAsync)}");
 			   using HttpRequestMessage request = new();
