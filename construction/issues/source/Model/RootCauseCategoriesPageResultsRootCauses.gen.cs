@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,33 +34,42 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Construction.Issues.Model
 {
         /// <summary>
-        /// IssueRootCauseResults
+        /// RootCauseCategoriesPageResultsRootCauses
         /// </summary>
         [DataContract]
-        public partial class IssueRootCauseResults
+        public partial class RootCauseCategoriesPageResultsRootCauses
         {
                 /// <summary>
-                /// Initializes a new instance of the <see cref="IssueRootCauseResults" /> class.
+                /// Initializes a new instance of the <see cref="RootCauseCategoriesPageResultsRootCauses" /> class.
                 /// </summary>
-                public IssueRootCauseResults()
+                public RootCauseCategoriesPageResultsRootCauses()
                 {
                 }
 
                 /// <summary>
-                ///The ID of the issue root cause category.
+                ///The ID of the issue root cause.
                 /// </summary>
                 /// <value>
-                ///The ID of the issue root cause category.
+                ///The ID of the issue root cause.
                 /// </value>
                 [DataMember(Name = "id", EmitDefaultValue = false)]
                 public string Id { get; set; }
 
                 /// <summary>
-                ///The title of the custom attribute.
+                ///The ID of the parent issue root cause category.
+                /// </summary>
+                /// <value>
+                ///The ID of the parent issue root cause category.
+                /// </value>
+                [DataMember(Name = "rootCauseCategoryId", EmitDefaultValue = false)]
+                public string RootCauseCategoryId { get; set; }
+
+                /// <summary>
+                ///The title of the issue root cause.
                 ///Max length: 100
                 /// </summary>
                 /// <value>
-                ///The title of the custom attribute.
+                ///The title of the issue root cause.
                 ///Max length: 100
                 /// </value>
                 [DataMember(Name = "title", EmitDefaultValue = false)]
@@ -74,7 +84,7 @@ namespace Autodesk.Construction.Issues.Model
                 ///Max length: 500
                 /// </value>
                 [DataMember(Name = "isActive", EmitDefaultValue = false)]
-                public bool? IsActive { get; set; }
+                public bool IsActive { get; set; }
 
                 /// <summary>
                 ///Not relevant
@@ -93,51 +103,6 @@ namespace Autodesk.Construction.Issues.Model
                 /// </value>
                 [DataMember(Name = "permittedAttributes", EmitDefaultValue = false)]
                 public List<string> PermittedAttributes { get; set; }
-
-                /// <summary>
-                ///The metadata object; only relevant for list custom attributes.
-                /// </summary>
-                /// <value>
-                ///The metadata object; only relevant for list custom attributes.
-                /// </value>
-                [DataMember(Name = "rootCauses", EmitDefaultValue = false)]
-                public List<IssueRootCauseResultsRootCauses> RootCauses { get; set; }
-
-                /// <summary>
-                ///The date and time the custom attribute was created, in the following format: YYYY-MM-DDThh:mm:ss.sz.
-                /// </summary>
-                /// <value>
-                ///The date and time the custom attribute was created, in the following format: YYYY-MM-DDThh:mm:ss.sz.
-                /// </value>
-                [DataMember(Name = "createdAt", EmitDefaultValue = false)]
-                public string CreatedAt { get; set; }
-
-                /// <summary>
-                ///The Autodesk ID of the user who created the custom attribute.
-                /// </summary>
-                /// <value>
-                ///The Autodesk ID of the user who created the custom attribute.
-                /// </value>
-                [DataMember(Name = "createdBy", EmitDefaultValue = false)]
-                public string CreatedBy { get; set; }
-
-                /// <summary>
-                ///The last date and time the custom attribute was updated, in the following format: YYYY-MM-DDThh:mm:ss.sz.
-                /// </summary>
-                /// <value>
-                ///The last date and time the custom attribute was updated, in the following format: YYYY-MM-DDThh:mm:ss.sz.
-                /// </value>
-                [DataMember(Name = "updatedAt", EmitDefaultValue = false)]
-                public string UpdatedAt { get; set; }
-
-                /// <summary>
-                ///The Autodesk ID of the user who last updated the custom attribute.
-                /// </summary>
-                /// <value>
-                ///The Autodesk ID of the user who last updated the custom attribute.
-                /// </value>
-                [DataMember(Name = "updatedBy", EmitDefaultValue = false)]
-                public string UpdatedBy { get; set; }
 
                 /// <summary>
                 ///The date and time the custom attribute was deleted, in the following format: YYYY-MM-DDThh:mm:ss.sz.

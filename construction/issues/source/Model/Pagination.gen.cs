@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -36,29 +37,41 @@ namespace Autodesk.Construction.Issues.Model
     /// The pagination object.
     /// </summary>
     [DataContract]
-    public partial class AttrMapping
+    public partial class Pagination
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="AttrMapping" /> class.
+        /// Initializes a new instance of the <see cref="Pagination" /> class.
         /// </summary>
-        public AttrMapping()
+        public Pagination()
         {
         }
 
         /// <summary>
-        ///Gets or Sets Pagination
-        /// </summary>
-        [DataMember(Name = "pagination", EmitDefaultValue = false)]
-        public IssueTypePagination Pagination { get; set; }
-
-        /// <summary>
-        ///A list of issue attribute mappings.
+        ///The number of items per page.
         /// </summary>
         /// <value>
-        ///A list of issue attribute mappings.
+        ///The number of items per page.
         /// </value>
-        [DataMember(Name = "results", EmitDefaultValue = false)]
-        public List<AttrMappingResults> Results { get; set; }
+        [DataMember(Name = "limit", EmitDefaultValue = false)]
+        public int Limit { get; set; }
+
+        /// <summary>
+        ///The page number that the results begin from.
+        /// </summary>
+        /// <value>
+        ///The page number that the results begin from.
+        /// </value>
+        [DataMember(Name = "offset", EmitDefaultValue = false)]
+        public int Offset { get; set; }
+
+        /// <summary>
+        ///The number of items in the response.
+        /// </summary>
+        /// <value>
+        ///The number of items in the response.
+        /// </value>
+        [DataMember(Name = "totalResults", EmitDefaultValue = false)]
+        public int TotalResults { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

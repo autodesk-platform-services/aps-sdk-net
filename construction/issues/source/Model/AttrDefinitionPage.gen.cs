@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ *The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Construction.Issues
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,35 +34,32 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Construction.Issues.Model
 {
     /// <summary>
-    /// AttrDefinitionResultsMetadataListOptions
+    /// The pagination object.
     /// </summary>
     [DataContract]
-    public partial class AttrDefinitionResultsMetadataListOptions
+    public partial class AttrDefinitionPage 
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="AttrDefinitionResultsMetadataListOptions" /> class.
+        /// Initializes a new instance of the <see cref="AttrDefinitionPage" /> class.
         /// </summary>
-        public AttrDefinitionResultsMetadataListOptions()
+        public AttrDefinitionPage()
         {
         }
+        
+        /// <summary>
+        ///Gets or Sets Pagination
+        /// </summary>
+        [DataMember(Name="pagination", EmitDefaultValue=false)]
+        public Pagination Pagination { get; set; }
 
         /// <summary>
-        ///The id of the list option.
+        ///A list of issue attribute mappings.
         /// </summary>
         /// <value>
-        ///The id of the list option.
+        ///A list of issue attribute mappings.
         /// </value>
-        [DataMember(Name = "id", EmitDefaultValue = false)]
-        public string Id { get; set; }
-
-        /// <summary>
-        ///The value of the list item.
-        /// </summary>
-        /// <value>
-        ///The value of the list item.
-        /// </value>
-        [DataMember(Name = "value", EmitDefaultValue = false)]
-        public string Value { get; set; }
+        [DataMember(Name="results", EmitDefaultValue=false)]
+        public List<AttrDefinitionPageResults> Results { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

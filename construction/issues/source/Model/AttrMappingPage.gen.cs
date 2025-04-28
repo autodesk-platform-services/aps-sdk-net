@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -36,41 +37,29 @@ namespace Autodesk.Construction.Issues.Model
     /// The pagination object.
     /// </summary>
     [DataContract]
-    public partial class IssueTypePagination
+    public partial class AttrMappingPage
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="IssueTypePagination" /> class.
+        /// Initializes a new instance of the <see cref="AttrMappingPage" /> class.
         /// </summary>
-        public IssueTypePagination()
+        public AttrMappingPage()
         {
         }
 
         /// <summary>
-        ///The number of items per page.
+        ///Gets or Sets Pagination
         /// </summary>
-        /// <value>
-        ///The number of items per page.
-        /// </value>
-        [DataMember(Name = "limit", EmitDefaultValue = false)]
-        public int? Limit { get; set; }
+        [DataMember(Name = "pagination", EmitDefaultValue = false)]
+        public Pagination Pagination { get; set; }
 
         /// <summary>
-        ///The page number that the results begin from.
+        ///A list of issue attribute mappings.
         /// </summary>
         /// <value>
-        ///The page number that the results begin from.
+        ///A list of issue attribute mappings.
         /// </value>
-        [DataMember(Name = "offset", EmitDefaultValue = false)]
-        public int? Offset { get; set; }
-
-        /// <summary>
-        ///The number of items in the response.
-        /// </summary>
-        /// <value>
-        ///The number of items in the response.
-        /// </value>
-        [DataMember(Name = "totalResults", EmitDefaultValue = false)]
-        public int? TotalResults { get; set; }
+        [DataMember(Name = "results", EmitDefaultValue = false)]
+        public List<AttrMappingPageResults> Results { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

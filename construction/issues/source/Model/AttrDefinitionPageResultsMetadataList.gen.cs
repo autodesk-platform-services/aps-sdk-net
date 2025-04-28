@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,44 +34,26 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Construction.Issues.Model
 {
     /// <summary>
-    /// The pagination object defining the limit, offset, total number of issues, next and previous URL
+    /// The list object.
     /// </summary>
     [DataContract]
-    public partial class IssuesPagePagination
+    public partial class AttrDefinitionPageResultsMetadataList
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="IssuesPagePagination" /> class.
+        /// Initializes a new instance of the <see cref="AttrDefinitionPageResultsMetadataList" /> class.
         /// </summary>
-        public IssuesPagePagination()
+        public AttrDefinitionPageResultsMetadataList()
         {
         }
 
         /// <summary>
-        ///The maximum number of issues to be returned in each page.
+        ///The options object.
         /// </summary>
         /// <value>
-        ///The maximum number of issues to be returned in each page.
+        ///The options object.
         /// </value>
-        [DataMember(Name = "limit", EmitDefaultValue = false)]
-        public int? Limit { get; set; }
-
-        /// <summary>
-        ///The offset defining the start position from where the issues are returned
-        /// </summary>
-        /// <value>
-        ///The offset defining the start position from where the issues are returned
-        /// </value>
-        [DataMember(Name = "offset", EmitDefaultValue = false)]
-        public int? Offset { get; set; }
-
-        /// <summary>
-        ///The total number of issues including the ones of the current page
-        /// </summary>
-        /// <value>
-        ///The total number of issues including the ones of the current page
-        /// </value>
-        [DataMember(Name = "totalResults", EmitDefaultValue = false)]
-        public int? TotalResults { get; set; }
+        [DataMember(Name = "options", EmitDefaultValue = false)]
+        public List<AttrDefinitionPageResultsMetadataListOptions> Options { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

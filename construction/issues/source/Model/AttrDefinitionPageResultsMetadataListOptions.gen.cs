@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,26 +34,35 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Construction.Issues.Model
 {
     /// <summary>
-    /// The list object.
+    /// AttrDefinitionPageResultsMetadataListOptions
     /// </summary>
     [DataContract]
-    public partial class AttrDefinitionResultsMetadataList
+    public partial class AttrDefinitionPageResultsMetadataListOptions
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="AttrDefinitionResultsMetadataList" /> class.
+        /// Initializes a new instance of the <see cref="AttrDefinitionPageResultsMetadataListOptions" /> class.
         /// </summary>
-        public AttrDefinitionResultsMetadataList()
+        public AttrDefinitionPageResultsMetadataListOptions()
         {
         }
 
         /// <summary>
-        ///The options object.
+        ///The id of the list option.
         /// </summary>
         /// <value>
-        ///The options object.
+        ///The id of the list option.
         /// </value>
-        [DataMember(Name = "options", EmitDefaultValue = false)]
-        public List<AttrDefinitionResultsMetadataListOptions> Options { get; set; }
+        [DataMember(Name = "id", EmitDefaultValue = false)]
+        public string Id { get; set; }
+
+        /// <summary>
+        ///The value of the list item.
+        /// </summary>
+        /// <value>
+        ///The value of the list item.
+        /// </value>
+        [DataMember(Name = "value", EmitDefaultValue = false)]
+        public string Value { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

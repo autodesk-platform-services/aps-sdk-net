@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -36,12 +37,12 @@ namespace Autodesk.Construction.Issues.Model
     /// The pagination object.
     /// </summary>
     [DataContract]
-    public partial class AttrDefinition
+    public partial class RootCauseCategoriesPage
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="AttrDefinition" /> class.
+        /// Initializes a new instance of the <see cref="RootCauseCategoriesPage" /> class.
         /// </summary>
-        public AttrDefinition()
+        public RootCauseCategoriesPage()
         {
         }
 
@@ -49,16 +50,16 @@ namespace Autodesk.Construction.Issues.Model
         ///Gets or Sets Pagination
         /// </summary>
         [DataMember(Name = "pagination", EmitDefaultValue = false)]
-        public IssueTypePagination Pagination { get; set; }
+        public Pagination Pagination { get; set; }
 
         /// <summary>
-        ///A list of issue attribute mappings.
+        ///A list of issue root cause categories.
         /// </summary>
         /// <value>
-        ///A list of issue attribute mappings.
+        ///A list of issue root cause categories.
         /// </value>
         [DataMember(Name = "results", EmitDefaultValue = false)]
-        public List<AttrDefinitionResults> Results { get; set; }
+        public List<RootCauseCategoriesPageResults> Results { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

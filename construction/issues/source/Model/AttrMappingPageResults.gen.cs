@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,15 +34,15 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Construction.Issues.Model
 {
     /// <summary>
-    /// AttrMappingResults
+    /// AttrMappingPageResults
     /// </summary>
     [DataContract]
-    public partial class AttrMappingResults
+    public partial class AttrMappingPageResults
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="AttrMappingResults" /> class.
+        /// Initializes a new instance of the <see cref="AttrMappingPageResults" /> class.
         /// </summary>
-        public AttrMappingResults()
+        public AttrMappingPageResults()
         {
         }
 

@@ -73,6 +73,24 @@ namespace Autodesk.Construction.Issues.Model
                 public bool? Deleted { get; set; }
 
                 /// <summary>
+                ///The date and time the issue was deleted, in ISO8601 format. This is only relevant for deleted issues.
+                /// </summary>
+                /// <value>
+                ///The date and time the issue was deleted, in ISO8601 format. This is only relevant for deleted issues.
+                /// </value>
+                [DataMember(Name = "deletedAt", EmitDefaultValue = false)]
+                public string DeletedAt { get; set; }
+
+                /// <summary>
+                ///The Autodesk ID of the user who deleted the issue. This is only relevant for deleted issues.
+                /// </summary>
+                /// <value>
+                ///The Autodesk ID of the user who deleted the issue. This is only relevant for deleted issues.
+                /// </value>
+                [DataMember(Name = "deletedBy", EmitDefaultValue = false)]
+                public string DeletedBy { get; set; }
+
+                /// <summary>
                 ///The chronological user-friendly identifier of the issue.
                 /// </summary>
                 /// <value>
@@ -407,6 +425,14 @@ namespace Autodesk.Construction.Issues.Model
                 /// </summary>
                 [DataMember(Name = "gpsCoordinates", EmitDefaultValue = false)]
                 public IssueGpsCoordinates GpsCoordinates { get; set; }
+                /// <summary>
+                ///Not relevant
+                /// </summary>
+                /// <value>
+                ///Not relevant
+                /// </value>
+                [DataMember(Name = "snapshotHasMarkups", EmitDefaultValue = false)]
+                public bool? SnapshotHasMarkups { get; set; }
 
                 /// <summary>
                 /// Returns the string presentation of the object

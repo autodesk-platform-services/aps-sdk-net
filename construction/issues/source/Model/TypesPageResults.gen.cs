@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,15 +34,15 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Construction.Issues.Model
 {
     /// <summary>
-    /// IssueTypeResults
+    /// TypesPageResults
     /// </summary>
     [DataContract]
-    public partial class IssueTypeResults
+    public partial class TypesPageResults
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="IssueTypeResults" /> class.
+        /// Initializes a new instance of the <see cref="TypesPageResults" /> class.
         /// </summary>
-        public IssueTypeResults()
+        public TypesPageResults()
         {
         }
 
@@ -79,7 +80,7 @@ namespace Autodesk.Construction.Issues.Model
         ///States whether the issue type is active.
         /// </value>
         [DataMember(Name = "isActive", EmitDefaultValue = false)]
-        public bool? IsActive { get; set; }
+        public bool IsActive { get; set; }
 
         /// <summary>
         ///Not relevant
@@ -88,7 +89,7 @@ namespace Autodesk.Construction.Issues.Model
         ///Not relevant
         /// </value>
         [DataMember(Name = "orderIndex", EmitDefaultValue = false)]
-        public int? OrderIndex { get; set; }
+        public int OrderIndex { get; set; }
 
         /// <summary>
         ///Not relevant
@@ -115,7 +116,7 @@ namespace Autodesk.Construction.Issues.Model
         ///A list of subtypes of the specific issue type.
         /// </value>
         [DataMember(Name = "subtypes", EmitDefaultValue = false)]
-        public List<IssueTypeResultsSubtypes> Subtypes { get; set; }
+        public List<TypesPageResultsSubtypes> Subtypes { get; set; }
 
         /// <summary>
         ///Not relevant
