@@ -53,7 +53,7 @@ namespace Autodesk.Construction.Issues.Model
         ///The number of items per page.
         /// </value>
         [DataMember(Name = "limit", EmitDefaultValue = false)]
-        public int Limit { get; set; }
+        public int? Limit { get; set; }
 
         /// <summary>
         ///The page number that the results begin from.
@@ -62,7 +62,7 @@ namespace Autodesk.Construction.Issues.Model
         ///The page number that the results begin from.
         /// </value>
         [DataMember(Name = "offset", EmitDefaultValue = false)]
-        public int Offset { get; set; }
+        public int? Offset { get; set; }
 
         /// <summary>
         ///The number of items in the response.
@@ -71,7 +71,7 @@ namespace Autodesk.Construction.Issues.Model
         ///The number of items in the response.
         /// </value>
         [DataMember(Name = "totalResults", EmitDefaultValue = false)]
-        public int TotalResults { get; set; }
+        public int? TotalResults { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

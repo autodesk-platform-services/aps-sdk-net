@@ -73,7 +73,7 @@ namespace Autodesk.Construction.Issues.Http
         /// </param>
         /// <returns>Task of ApiResponse&lt;AttrDefinitionPage&gt;</returns>
 
-        System.Threading.Tasks.Task<ApiResponse<AttrDefinitionPage>> GetAttributeDefinitionsAsync(string projectId, Region? xAdsRegion = null, int? limit = default(int?), int? offset = default(int), string filterCreatedAt = default(string), string filterUpdatedAt = default(string), string filterDeletedAt = default(string), List<DataType> filterDataType = default(List<DataType>), string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<ApiResponse<AttrDefinitionPage>> GetAttributeDefinitionsAsync(string projectId, Region? xAdsRegion = null, int? limit = default(int?), int? offset = default(int?), string filterCreatedAt = default(string), string filterUpdatedAt = default(string), string filterDeletedAt = default(string), List<DataType> filterDataType = default(List<DataType>), string accessToken = null, bool throwOnError = true);
     }
 
     /// <summary>

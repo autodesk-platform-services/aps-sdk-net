@@ -86,7 +86,7 @@ namespace Autodesk.Construction.Issues.Model
         ///The order that the custom attributes were mapped to the item (type, subtype). This is only relevant to non-inherited mappings.
         /// </value>
         [DataMember(Name = "order", EmitDefaultValue = false)]
-        public int Order { get; set; }
+        public int? Order { get; set; }
 
         /// <summary>
         ///Gets or Sets DataType

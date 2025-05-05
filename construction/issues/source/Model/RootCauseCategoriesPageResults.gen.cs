@@ -75,7 +75,7 @@ namespace Autodesk.Construction.Issues.Model
                 ///Max length: 500
                 /// </value>
                 [DataMember(Name = "isActive", EmitDefaultValue = false)]
-                public bool IsActive { get; set; }
+                public bool? IsActive { get; set; }
 
                 /// <summary>
                 ///Not relevant

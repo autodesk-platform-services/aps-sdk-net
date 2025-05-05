@@ -80,7 +80,7 @@ namespace Autodesk.Construction.Issues.Model
         ///States whether the issue type is active.
         /// </value>
         [DataMember(Name = "isActive", EmitDefaultValue = false)]
-        public bool IsActive { get; set; }
+        public bool? IsActive { get; set; }
 
         /// <summary>
         ///Not relevant
@@ -89,7 +89,7 @@ namespace Autodesk.Construction.Issues.Model
         ///Not relevant
         /// </value>
         [DataMember(Name = "orderIndex", EmitDefaultValue = false)]
-        public int OrderIndex { get; set; }
+        public int? OrderIndex { get; set; }
 
         /// <summary>
         ///Not relevant
