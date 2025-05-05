@@ -1104,7 +1104,7 @@ namespace Autodesk.Construction.AccountAdmin
                 /// <param name="region">
                 ///Specifies the region where your request should be routed. If not set, the request is routed automatically, which may result in a slight increase in latency. Possible values: US, EMEA. For a complete list of supported regions, see the Regions page. (optional)
                 /// </param>
-                /// <param name="userId2">
+                /// <param name="actingUserId">
                 ///The ID of a user on whose behalf your request is acting. Your app has access to all users specified by the administrator in the SaaS integrations UI. Provide this header value to identify the user to be affected by the request.  You can use either the user’s ACC ID (id), or their Autodesk ID (autodeskId).  Note that this header is required for Account Admin POST, PATCH, and DELETE endpoints if you want to use a 2-legged authentication context. This header is optional for Account Admin GET endpoints. (optional)
                 /// </param>
                 /// <param name="filterId">
@@ -1150,7 +1150,7 @@ namespace Autodesk.Construction.AccountAdmin
                 ///The record number to start returning results from, used for pagination. For example, if limit=20 and offset=20, the request retrieves the second page of results. (optional)
                 /// </param>
                 /// <returns>Task of ApiResponse&lt;UserProjectsPage&gt;></returns>
-                public async System.Threading.Tasks.Task<UserProjectsPage> GetUserProjectsAsync(string accountId, string userId, Region region= default, string userId2= default(string), List<string> filterId= default(List<string>), List<UserProjectFields> fields= default(List<UserProjectFields>), List<Classification> filterClassification= default(List<Classification>), string filterName= default(string), List<Platform> filterPlatform= default(List<Platform>), List<Status> filterStatus= default(List<Status>), List<string> filterType= default(List<string>), string filterJobNumber= default(string), string filterUpdatedAt= default(string), List<FilterUserProjectsAccessLevels> filterAccessLevels= default(List<FilterUserProjectsAccessLevels>), FilterTextMatch? filterTextMatch= null, List<UserProjectSortBy> sort= default(List<UserProjectSortBy>), int? limit= default(int?), int? offset= default(int?), string accessToken = null, bool throwOnError = true)
+                public async System.Threading.Tasks.Task<UserProjectsPage> GetUserProjectsAsync(string accountId, string userId, Region region= default, string actingUserId= default(string), List<string> filterId= default(List<string>), List<UserProjectFields> fields= default(List<UserProjectFields>), List<Classification> filterClassification= default(List<Classification>), string filterName= default(string), List<Platform> filterPlatform= default(List<Platform>), List<Status> filterStatus= default(List<Status>), List<string> filterType= default(List<string>), string filterJobNumber= default(string), string filterUpdatedAt= default(string), List<FilterUserProjectsAccessLevels> filterAccessLevels= default(List<FilterUserProjectsAccessLevels>), FilterTextMatch? filterTextMatch= null, List<UserProjectSortBy> sort= default(List<UserProjectSortBy>), int? limit= default(int?), int? offset= default(int?), string accessToken = null, bool throwOnError = true)
                 {
                         if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
                         {
@@ -1160,7 +1160,7 @@ namespace Autodesk.Construction.AccountAdmin
                         {
                                 accessToken = await this.AuthenticationProvider.GetAccessToken();
                         }
-                        var response = await this.UserProjectsApi.GetUserProjectsAsync(accountId, userId, region, userId2 , filterId, fields, filterClassification, filterName, filterPlatform, filterStatus, filterType, filterJobNumber, filterUpdatedAt, filterAccessLevels, filterTextMatch, sort, limit, offset, accessToken, throwOnError);
+                        var response = await this.UserProjectsApi.GetUserProjectsAsync(accountId, userId, region, actingUserId , filterId, fields, filterClassification, filterName, filterPlatform, filterStatus, filterType, filterJobNumber, filterUpdatedAt, filterAccessLevels, filterTextMatch, sort, limit, offset, accessToken, throwOnError);
                         return response.Content;
                 }
         }
