@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,15 +34,15 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Construction.Issues.Model
 {
         /// <summary>
-        /// IssueRootCauseResults
+        /// RootCauseCategoriesPageResults
         /// </summary>
         [DataContract]
-        public partial class IssueRootCauseResults
+        public partial class RootCauseCategoriesPageResults
         {
                 /// <summary>
-                /// Initializes a new instance of the <see cref="IssueRootCauseResults" /> class.
+                /// Initializes a new instance of the <see cref="RootCauseCategoriesPageResults" /> class.
                 /// </summary>
-                public IssueRootCauseResults()
+                public RootCauseCategoriesPageResults()
                 {
                 }
 
@@ -101,7 +102,7 @@ namespace Autodesk.Construction.Issues.Model
                 ///The metadata object; only relevant for list custom attributes.
                 /// </value>
                 [DataMember(Name = "rootCauses", EmitDefaultValue = false)]
-                public List<IssueRootCauseResultsRootCauses> RootCauses { get; set; }
+                public List<RootCauseCategoriesPageResultsRootCauses> RootCauses { get; set; }
 
                 /// <summary>
                 ///The date and time the custom attribute was created, in the following format: YYYY-MM-DDThh:mm:ss.sz.

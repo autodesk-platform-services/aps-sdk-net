@@ -49,7 +49,7 @@ namespace Autodesk.Construction.Issues.Model
         ///Gets or Sets Pagination
         /// </summary>
         [DataMember(Name = "pagination", EmitDefaultValue = false)]
-        public IssuesPagePagination Pagination { get; set; }
+        public Pagination Pagination { get; set; }
 
         /// <summary>
         ///The list of issues in the current page
@@ -58,7 +58,7 @@ namespace Autodesk.Construction.Issues.Model
         ///The list of issues in the current page
         /// </value>
         [DataMember(Name = "results", EmitDefaultValue = false)]
-        public List<Results> Results { get; set; }
+        public List<Issue> Results { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

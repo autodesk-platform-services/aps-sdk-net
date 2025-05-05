@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,32 +34,23 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Construction.Issues.Model
 {
     /// <summary>
-    /// The pagination object.
+    /// The metadata object; only relevant for list custom attributes.
     /// </summary>
     [DataContract]
-    public partial class IssueRootCause
+    public partial class AttrDefinitionPageResultsMetadata
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="IssueRootCause" /> class.
+        /// Initializes a new instance of the <see cref="AttrDefinitionPageResultsMetadata" /> class.
         /// </summary>
-        public IssueRootCause()
+        public AttrDefinitionPageResultsMetadata()
         {
         }
 
         /// <summary>
-        ///Gets or Sets Pagination
+        ///Gets or Sets List
         /// </summary>
-        [DataMember(Name = "pagination", EmitDefaultValue = false)]
-        public IssueTypePagination Pagination { get; set; }
-
-        /// <summary>
-        ///A list of issue root cause categories.
-        /// </summary>
-        /// <value>
-        ///A list of issue root cause categories.
-        /// </value>
-        [DataMember(Name = "results", EmitDefaultValue = false)]
-        public List<IssueRootCauseResults> Results { get; set; }
+        [DataMember(Name = "list", EmitDefaultValue = false)]
+        public AttrDefinitionPageResultsMetadataList List { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

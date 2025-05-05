@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,23 +34,32 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Construction.Issues.Model
 {
     /// <summary>
-    /// FiltercreatedBy
+    /// TypesPage
     /// </summary>
     [DataContract]
-    public partial class FiltercreatedBy
+    public partial class TypesPage
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="FiltercreatedBy" /> class.
+        /// Initializes a new instance of the <see cref="TypesPage" /> class.
         /// </summary>
-        public FiltercreatedBy()
+        public TypesPage()
         {
         }
 
         /// <summary>
-        /// Gets or Sets Id
+        ///Gets or Sets Pagination
         /// </summary>
-        [DataMember(Name = "id", EmitDefaultValue = false)]
-        public string Id { get; set; }
+        [DataMember(Name = "pagination", EmitDefaultValue = false)]
+        public Pagination Pagination { get; set; }
+
+        /// <summary>
+        ///A list of issue type categories.
+        /// </summary>
+        /// <value>
+        ///A list of issue type categories.
+        /// </value>
+        [DataMember(Name = "results", EmitDefaultValue = false)]
+        public List<TypesPageResults> Results { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

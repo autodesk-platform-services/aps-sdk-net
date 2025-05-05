@@ -74,9 +74,9 @@ namespace Autodesk.Construction.Issues.Http
         /// <param name="filterMappedItemId">
         ///Retrieves issue custom attribute mappings associated with the specified items (project, type, or subtype). Separate multiple values with commas. For example: filter[mappedItemId]=18ee5858-cbf1-451a-a525-7c6ff8156775. Note that this does not retrieve inherited custom attribute mappings or custom attribute mappings of descendants. (optional)
         /// </param>
-        /// <returns>Task of ApiResponse&lt;AttrMapping&gt;</returns>
+        /// <returns>Task of ApiResponse&lt;AttrMappingPage&gt;</returns>
 
-        System.Threading.Tasks.Task<ApiResponse<AttrMapping>> GetAttributeMappingsAsync(string projectId, Region? xAdsRegion = null, int? limit = default(int?), int? offset = default(int?), string filterCreatedAt = default(string), string filterUpdatedAt = default(string), string filterDeletedAt = default(string), string filterAttributeDefinitionId = default(string), string filterMappedItemId = default(string), string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<ApiResponse<AttrMappingPage>> GetAttributeMappingsAsync(string projectId, Region? xAdsRegion = null, int? limit = default(int?), int? offset = default(int?), string filterCreatedAt = default(string), string filterUpdatedAt = default(string), string filterDeletedAt = default(string), string filterAttributeDefinitionId = default(string), string filterMappedItemId = default(string), string accessToken = null, bool throwOnError = true);
     }
 
     /// <summary>
@@ -213,9 +213,9 @@ namespace Autodesk.Construction.Issues.Http
         /// <param name="filterMappedItemId">
         ///Retrieves issue custom attribute mappings associated with the specified items (project, type, or subtype). Separate multiple values with commas. For example: filter[mappedItemId]=18ee5858-cbf1-451a-a525-7c6ff8156775. Note that this does not retrieve inherited custom attribute mappings or custom attribute mappings of descendants. (optional)
         /// </param>
-        /// <returns>Task of ApiResponse&lt;AttrMapping&gt;></returns>
+        /// <returns>Task of ApiResponse&lt;AttrMappingPage&gt;></returns>
 
-        public async System.Threading.Tasks.Task<ApiResponse<AttrMapping>> GetAttributeMappingsAsync(string projectId, Region? xAdsRegion = null, int? limit = default(int?), int? offset = default(int?), string filterCreatedAt = default(string), string filterUpdatedAt = default(string), string filterDeletedAt = default(string), string filterAttributeDefinitionId = default(string), string filterMappedItemId = default(string), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ApiResponse<AttrMappingPage>> GetAttributeMappingsAsync(string projectId, Region? xAdsRegion = null, int? limit = default(int?), int? offset = default(int?), string filterCreatedAt = default(string), string filterUpdatedAt = default(string), string filterDeletedAt = default(string), string filterAttributeDefinitionId = default(string), string filterMappedItemId = default(string), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into GetAttributeMappingsAsync ");
             using (var request = new HttpRequestMessage())
@@ -295,10 +295,10 @@ namespace Autodesk.Construction.Issues.Http
                 else if (!response.IsSuccessStatusCode)
                 {
                     logger.LogError($"response unsuccess with status code: {response.StatusCode}");
-                    return new ApiResponse<AttrMapping>(response, default(AttrMapping));
+                    return new ApiResponse<AttrMappingPage>(response, default(AttrMappingPage));
                 }
                 logger.LogInformation($"Exited from GetAttributeMappingsAsync with response statusCode: {response.StatusCode}");
-                return new ApiResponse<AttrMapping>(response, await LocalMarshalling.DeserializeAsync<AttrMapping>(response.Content));
+                return new ApiResponse<AttrMappingPage>(response, await LocalMarshalling.DeserializeAsync<AttrMappingPage>(response.Content));
 
             } // using
         }

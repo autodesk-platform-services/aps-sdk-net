@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,23 +34,29 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Construction.Issues.Model
 {
     /// <summary>
-    /// The metadata object; only relevant for list custom attributes.
+    /// The pagination object.
     /// </summary>
     [DataContract]
-    public partial class AttrDefinitionResultsMetadata
+    public partial class CommentsPage
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="AttrDefinitionResultsMetadata" /> class.
+        /// Initializes a new instance of the <see cref="CommentsPage" /> class.
         /// </summary>
-        public AttrDefinitionResultsMetadata()
+        public CommentsPage()
         {
         }
 
         /// <summary>
-        ///Gets or Sets List
+        ///Gets or Sets Pagination
         /// </summary>
-        [DataMember(Name = "list", EmitDefaultValue = false)]
-        public AttrDefinitionResultsMetadataList List { get; set; }
+        [DataMember(Name = "pagination", EmitDefaultValue = false)]
+        public Pagination Pagination { get; set; }
+
+        /// <summary>
+        ///Gets or Sets Results
+        /// </summary>
+        [DataMember(Name = "results", EmitDefaultValue = false)]
+        public List<Comments> Results { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

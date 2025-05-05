@@ -33,7 +33,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Construction.Issues.Model
 {
     /// <summary>
-    /// The pagination object.
+    /// Comments
     /// </summary>
     [DataContract]
     public partial class Comments
@@ -46,19 +46,96 @@ namespace Autodesk.Construction.Issues.Model
         }
 
         /// <summary>
-        ///Gets or Sets Pagination
-        /// </summary>
-        [DataMember(Name = "pagination", EmitDefaultValue = false)]
-        public IssueTypePagination Pagination { get; set; }
-
-        /// <summary>
-        ///The ID of the custom attribute.
+        ///The comment ID.
         /// </summary>
         /// <value>
-        ///The ID of the custom attribute.
+        ///The comment ID.
         /// </value>
-        [DataMember(Name = "results", EmitDefaultValue = false)]
-        public List<CommentsResults> Results { get; set; }
+        [DataMember(Name = "id", EmitDefaultValue = false)]
+        public string Id { get; set; }
+
+        /// <summary>
+        ///The comment content. A \n indicates a new line, e.g.: Hey\nAharon will be a 2 lines comment.
+        ///Max length: 10000
+        /// </summary>
+        /// <value>
+        ///The comment content. A \n indicates a new line, e.g.: Hey\nAharon will be a 2 lines comment.
+        ///Max length: 10000
+        /// </value>
+        [DataMember(Name = "body", EmitDefaultValue = false)]
+        public string Body { get; set; }
+
+        /// <summary>
+        ///The date and time the custom attribute was created, in the following format: YYYY-MM-DDThh:mm:ss.sz.
+        /// </summary>
+        /// <value>
+        ///The date and time the custom attribute was created, in the following format: YYYY-MM-DDThh:mm:ss.sz.
+        /// </value>
+        [DataMember(Name = "createdAt", EmitDefaultValue = false)]
+        public string CreatedAt { get; set; }
+
+        /// <summary>
+        ///The Autodesk ID of the user who created the comment.
+        /// </summary>
+        /// <value>
+        ///The Autodesk ID of the user who created the comment.
+        /// </value>
+        [DataMember(Name = "createdBy", EmitDefaultValue = false)]
+        public string CreatedBy { get; set; }
+
+        /// <summary>
+        ///Not relevant
+        /// </summary>
+        /// <value>
+        ///Not relevant
+        /// </value>
+        [DataMember(Name = "updatedAt", EmitDefaultValue = false)]
+        public string UpdatedAt { get; set; }
+
+        /// <summary>
+        ///Not relevant
+        /// </summary>
+        /// <value>
+        ///Not relevant
+        /// </value>
+        [DataMember(Name = "deletedAt", EmitDefaultValue = false)]
+        public string DeletedAt { get; set; }
+
+        /// <summary>
+        ///Not relevant
+        /// </summary>
+        /// <value>
+        ///Not relevant
+        /// </value>
+        [DataMember(Name = "clientCreatedAt", EmitDefaultValue = false)]
+        public string ClientCreatedAt { get; set; }
+
+        /// <summary>
+        ///Not relevant
+        /// </summary>
+        /// <value>
+        ///Not relevant
+        /// </value>
+        [DataMember(Name = "clientUpdatedAt", EmitDefaultValue = false)]
+        public string ClientUpdatedAt { get; set; }
+
+        /// <summary>
+        ///Not relevant
+        /// </summary>
+        /// <value>
+        ///Not relevant
+        /// </value>
+        [DataMember(Name = "permittedActions", EmitDefaultValue = false)]
+        public List<string> PermittedActions { get; set; }
+
+        /// <summary>
+        ///Not relevant
+        /// </summary>
+        /// <value>
+        ///Not relevant
+        /// </value>
+        [DataMember(Name = "permittedAttributes", EmitDefaultValue = false)]
+        public List<string> PermittedAttributes { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
