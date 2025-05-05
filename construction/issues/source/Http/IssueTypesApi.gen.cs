@@ -68,9 +68,9 @@ namespace Autodesk.Construction.Issues.Http
         /// <param name="xAdsRegion">
         /// (optional)
         /// </param>
-        /// <returns>Task of ApiResponse&lt;IssueType&gt;</returns>
+        /// <returns>Task of ApiResponse&lt;TypesPage&gt;</returns>
 
-        System.Threading.Tasks.Task<ApiResponse<IssueType>> GetIssuesTypesAsync(string projectId, string include = default(string), int? limit = default(int?), int? offset = default(int?), string filterUpdatedAt = default(string), bool? filterIsActive = default(bool?), Region? xAdsRegion = null, string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<ApiResponse<TypesPage>> GetIssuesTypesAsync(string projectId, string include = default(string), int? limit = default(int?), int? offset = default(int?), string filterUpdatedAt = default(string), bool? filterIsActive = default(bool?), Region? xAdsRegion = null, string accessToken = null, bool throwOnError = true);
     }
 
     /// <summary>
@@ -201,9 +201,9 @@ namespace Autodesk.Construction.Issues.Http
         /// <param name="xAdsRegion">
         /// (optional)
         /// </param>
-        /// <returns>Task of ApiResponse&lt;IssueType&gt;></returns>
+        /// <returns>Task of ApiResponse&lt;TypesPage&gt;></returns>
 
-        public async System.Threading.Tasks.Task<ApiResponse<IssueType>> GetIssuesTypesAsync(string projectId, string include = default(string), int? limit = default(int?), int? offset = default(int?), string filterUpdatedAt = default(string), bool? filterIsActive = default(bool?), Region? xAdsRegion = null, string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ApiResponse<TypesPage>> GetIssuesTypesAsync(string projectId, string include = default(string), int? limit = default(int?), int? offset = default(int?), string filterUpdatedAt = default(string), bool? filterIsActive = default(bool?), Region? xAdsRegion = null, string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into GetIssuesTypesAsync ");
             using (var request = new HttpRequestMessage())
@@ -281,10 +281,10 @@ namespace Autodesk.Construction.Issues.Http
                 else if (!response.IsSuccessStatusCode)
                 {
                     logger.LogError($"response unsuccess with status code: {response.StatusCode}");
-                    return new ApiResponse<IssueType>(response, default(IssueType));
+                    return new ApiResponse<TypesPage>(response, default(TypesPage));
                 }
                 logger.LogInformation($"Exited from GetIssuesTypesAsync with response statusCode: {response.StatusCode}");
-                return new ApiResponse<IssueType>(response, await LocalMarshalling.DeserializeAsync<IssueType>(response.Content));
+                return new ApiResponse<TypesPage>(response, await LocalMarshalling.DeserializeAsync<TypesPage>(response.Content));
 
             } // using
         }

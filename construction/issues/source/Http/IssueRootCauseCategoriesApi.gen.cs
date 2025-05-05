@@ -65,9 +65,9 @@ namespace Autodesk.Construction.Issues.Http
         /// <param name="filterUpdatedAt">
         ///Retrieves root cause categories updated at the specified date and time, in one of the following URL-encoded formats: YYYY-MM-DDThh:mm:ss.sz or YYYY-MM-DD. Separate multiple values with commas. (optional)
         /// </param>
-        /// <returns>Task of ApiResponse&lt;IssueRootCause&gt;</returns>
+        /// <returns>Task of ApiResponse&lt;RootCauseCategoriesPage&gt;</returns>
 
-        System.Threading.Tasks.Task<ApiResponse<IssueRootCause>> GetRootCauseCategoriesAsync(string projectId, Region? xAdsRegion = null, string include = default(string), int? limit = default(int?), int? offset = default(int?), string filterUpdatedAt = default(string), string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<ApiResponse<RootCauseCategoriesPage>> GetRootCauseCategoriesAsync(string projectId, Region? xAdsRegion = null, string include = default(string), int? limit = default(int?), int? offset = default(int?), string filterUpdatedAt = default(string), string accessToken = null, bool throwOnError = true);
     }
 
     /// <summary>
@@ -195,9 +195,9 @@ namespace Autodesk.Construction.Issues.Http
         /// <param name="filterUpdatedAt">
         ///Retrieves root cause categories updated at the specified date and time, in one of the following URL-encoded formats: YYYY-MM-DDThh:mm:ss.sz or YYYY-MM-DD. Separate multiple values with commas. (optional)
         /// </param>
-        /// <returns>Task of ApiResponse&lt;IssueRootCause&gt;></returns>
+        /// <returns>Task of ApiResponse&lt;RootCauseCategoriesPage&gt;></returns>
 
-        public async System.Threading.Tasks.Task<ApiResponse<IssueRootCause>> GetRootCauseCategoriesAsync(string projectId, Region? xAdsRegion = null, string include = default(string), int? limit = default(int?), int? offset = default(int?), string filterUpdatedAt = default(string), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ApiResponse<RootCauseCategoriesPage>> GetRootCauseCategoriesAsync(string projectId, Region? xAdsRegion = null, string include = default(string), int? limit = default(int?), int? offset = default(int?), string filterUpdatedAt = default(string), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into GetRootCauseCategoriesAsync ");
             using (var request = new HttpRequestMessage())
@@ -274,10 +274,10 @@ namespace Autodesk.Construction.Issues.Http
                 else if (!response.IsSuccessStatusCode)
                 {
                     logger.LogError($"response unsuccess with status code: {response.StatusCode}");
-                    return new ApiResponse<IssueRootCause>(response, default(IssueRootCause));
+                    return new ApiResponse<RootCauseCategoriesPage>(response, default(RootCauseCategoriesPage));
                 }
                 logger.LogInformation($"Exited from GetRootCauseCategoriesAsync with response statusCode: {response.StatusCode}");
-                return new ApiResponse<IssueRootCause>(response, await LocalMarshalling.DeserializeAsync<IssueRootCause>(response.Content));
+                return new ApiResponse<RootCauseCategoriesPage>(response, await LocalMarshalling.DeserializeAsync<RootCauseCategoriesPage>(response.Content));
 
             } // using
         }

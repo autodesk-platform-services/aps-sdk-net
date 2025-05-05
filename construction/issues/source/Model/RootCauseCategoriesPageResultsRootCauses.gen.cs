@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,15 +34,15 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Construction.Issues.Model
 {
         /// <summary>
-        /// IssueRootCauseResultsRootCauses
+        /// RootCauseCategoriesPageResultsRootCauses
         /// </summary>
         [DataContract]
-        public partial class IssueRootCauseResultsRootCauses
+        public partial class RootCauseCategoriesPageResultsRootCauses
         {
                 /// <summary>
-                /// Initializes a new instance of the <see cref="IssueRootCauseResultsRootCauses" /> class.
+                /// Initializes a new instance of the <see cref="RootCauseCategoriesPageResultsRootCauses" /> class.
                 /// </summary>
-                public IssueRootCauseResultsRootCauses()
+                public RootCauseCategoriesPageResultsRootCauses()
                 {
                 }
 
@@ -83,7 +84,7 @@ namespace Autodesk.Construction.Issues.Model
                 ///Max length: 500
                 /// </value>
                 [DataMember(Name = "isActive", EmitDefaultValue = false)]
-                public bool? IsActive { get; set; }
+                public bool IsActive { get; set; }
 
                 /// <summary>
                 ///Not relevant

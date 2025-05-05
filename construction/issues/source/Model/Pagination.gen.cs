@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,35 +34,44 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Construction.Issues.Model
 {
     /// <summary>
-    /// AttrDefinitionResultsMetadataListOptions
+    /// The pagination object.
     /// </summary>
     [DataContract]
-    public partial class AttrDefinitionResultsMetadataListOptions
+    public partial class Pagination
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="AttrDefinitionResultsMetadataListOptions" /> class.
+        /// Initializes a new instance of the <see cref="Pagination" /> class.
         /// </summary>
-        public AttrDefinitionResultsMetadataListOptions()
+        public Pagination()
         {
         }
 
         /// <summary>
-        ///The id of the list option.
+        ///The number of items per page.
         /// </summary>
         /// <value>
-        ///The id of the list option.
+        ///The number of items per page.
         /// </value>
-        [DataMember(Name = "id", EmitDefaultValue = false)]
-        public string Id { get; set; }
+        [DataMember(Name = "limit", EmitDefaultValue = false)]
+        public int? Limit { get; set; }
 
         /// <summary>
-        ///The value of the list item.
+        ///The page number that the results begin from.
         /// </summary>
         /// <value>
-        ///The value of the list item.
+        ///The page number that the results begin from.
         /// </value>
-        [DataMember(Name = "value", EmitDefaultValue = false)]
-        public string Value { get; set; }
+        [DataMember(Name = "offset", EmitDefaultValue = false)]
+        public int? Offset { get; set; }
+
+        /// <summary>
+        ///The number of items in the response.
+        /// </summary>
+        /// <value>
+        ///The number of items in the response.
+        /// </value>
+        [DataMember(Name = "totalResults", EmitDefaultValue = false)]
+        public int? TotalResults { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

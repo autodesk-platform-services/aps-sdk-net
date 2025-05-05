@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,32 +34,26 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Construction.Issues.Model
 {
     /// <summary>
-    /// The pagination object.
+    /// The list object.
     /// </summary>
     [DataContract]
-    public partial class AttrMapping
+    public partial class AttrDefinitionPageResultsMetadataList
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="AttrMapping" /> class.
+        /// Initializes a new instance of the <see cref="AttrDefinitionPageResultsMetadataList" /> class.
         /// </summary>
-        public AttrMapping()
+        public AttrDefinitionPageResultsMetadataList()
         {
         }
 
         /// <summary>
-        ///Gets or Sets Pagination
-        /// </summary>
-        [DataMember(Name = "pagination", EmitDefaultValue = false)]
-        public IssueTypePagination Pagination { get; set; }
-
-        /// <summary>
-        ///A list of issue attribute mappings.
+        ///The options object.
         /// </summary>
         /// <value>
-        ///A list of issue attribute mappings.
+        ///The options object.
         /// </value>
-        [DataMember(Name = "results", EmitDefaultValue = false)]
-        public List<AttrMappingResults> Results { get; set; }
+        [DataMember(Name = "options", EmitDefaultValue = false)]
+        public List<AttrDefinitionPageResultsMetadataListOptions> Options { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

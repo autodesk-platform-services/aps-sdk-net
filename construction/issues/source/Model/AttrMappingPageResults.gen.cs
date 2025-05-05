@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,26 +34,35 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Construction.Issues.Model
 {
     /// <summary>
-    /// IssueTypeResults
+    /// AttrMappingPageResults
     /// </summary>
     [DataContract]
-    public partial class IssueTypeResults
+    public partial class AttrMappingPageResults
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="IssueTypeResults" /> class.
+        /// Initializes a new instance of the <see cref="AttrMappingPageResults" /> class.
         /// </summary>
-        public IssueTypeResults()
+        public AttrMappingPageResults()
         {
         }
 
         /// <summary>
-        ///The ID of the issue type.
+        ///The ID of the custom attribute.
         /// </summary>
         /// <value>
-        ///The ID of the issue type.
+        ///The ID of the custom attribute.
         /// </value>
         [DataMember(Name = "id", EmitDefaultValue = false)]
         public string Id { get; set; }
+
+        /// <summary>
+        ///The ID of the custom attribute definition.
+        /// </summary>
+        /// <value>
+        ///The ID of the custom attribute definition.
+        /// </value>
+        [DataMember(Name = "attributeDefinitionId", EmitDefaultValue = false)]
+        public string AttributeDefinitionId { get; set; }
 
         /// <summary>
         ///Not relevant
@@ -64,31 +74,37 @@ namespace Autodesk.Construction.Issues.Model
         public string ContainerId { get; set; }
 
         /// <summary>
-        ///Max length: 250
+        ///The title of the custom attribute.
         /// </summary>
         /// <value>
-        ///Max length: 250
+        ///The title of the custom attribute.
         /// </value>
         [DataMember(Name = "title", EmitDefaultValue = false)]
         public string Title { get; set; }
 
         /// <summary>
-        ///States whether the issue type is active.
+        ///Gets or Sets MappedItemType
         /// </summary>
-        /// <value>
-        ///States whether the issue type is active.
-        /// </value>
-        [DataMember(Name = "isActive", EmitDefaultValue = false)]
-        public bool? IsActive { get; set; }
+        [DataMember(Name = "mappedItemType", EmitDefaultValue = false)]
+        public string MappedItemType { get; set; }
 
         /// <summary>
-        ///Not relevant
+        ///The ID of the item (type, or subtype) the custom attribute is mapped to.
         /// </summary>
         /// <value>
-        ///Not relevant
+        ///The ID of the item (type, or subtype) the custom attribute is mapped to.
         /// </value>
-        [DataMember(Name = "orderIndex", EmitDefaultValue = false)]
-        public int? OrderIndex { get; set; }
+        [DataMember(Name = "mappedItemId", EmitDefaultValue = false)]
+        public string MappedItemId { get; set; }
+
+        /// <summary>
+        ///The order that the custom attributes were mapped to the item (type, subtype). This is only relevant to non-inherited mappings.
+        /// </summary>
+        /// <value>
+        ///The order that the custom attributes were mapped to the item (type, subtype). This is only relevant to non-inherited mappings.
+        /// </value>
+        [DataMember(Name = "order", EmitDefaultValue = false)]
+        public int? Order { get; set; }
 
         /// <summary>
         ///Not relevant
@@ -109,76 +125,67 @@ namespace Autodesk.Construction.Issues.Model
         public List<string> PermittedAttributes { get; set; }
 
         /// <summary>
-        ///A list of subtypes of the specific issue type.
+        ///The date and time the custom attribute was created, in the following format: YYYY-MM-DDThh:mm:ss.sz.
         /// </summary>
         /// <value>
-        ///A list of subtypes of the specific issue type.
-        /// </value>
-        [DataMember(Name = "subtypes", EmitDefaultValue = false)]
-        public List<IssueTypeResultsSubtypes> Subtypes { get; set; }
-
-        /// <summary>
-        ///Not relevant
-        /// </summary>
-        /// <value>
-        ///Not relevant
-        /// </value>
-        [DataMember(Name = "statusSet", EmitDefaultValue = false)]
-        public string StatusSet { get; set; }
-
-        /// <summary>
-        ///The unique identifier of the user who created the issue type.
-        /// </summary>
-        /// <value>
-        ///The unique identifier of the user who created the issue type.
-        /// </value>
-        [DataMember(Name = "createdBy", EmitDefaultValue = false)]
-        public string CreatedBy { get; set; }
-
-        /// <summary>
-        ///The date and time the issue was created, in ISO8601 format.
-        /// </summary>
-        /// <value>
-        ///The date and time the issue was created, in ISO8601 format.
+        ///The date and time the custom attribute was created, in the following format: YYYY-MM-DDThh:mm:ss.sz.
         /// </value>
         [DataMember(Name = "createdAt", EmitDefaultValue = false)]
         public string CreatedAt { get; set; }
 
         /// <summary>
-        ///The unique identifier of the user who updated the issue type.
+        ///The Autodesk ID of the user who created the custom attribute.
         /// </summary>
         /// <value>
-        ///The unique identifier of the user who updated the issue type.
+        ///The Autodesk ID of the user who created the custom attribute.
         /// </value>
-        [DataMember(Name = "updatedBy", EmitDefaultValue = false)]
-        public string UpdatedBy { get; set; }
+        [DataMember(Name = "createdBy", EmitDefaultValue = false)]
+        public string CreatedBy { get; set; }
 
         /// <summary>
-        ///The date and time the issue type was updated, in ISO8601 format.
+        ///The last date and time the custom attribute was updated, in the following format: YYYY-MM-DDThh:mm:ss.sz.
         /// </summary>
         /// <value>
-        ///The date and time the issue type was updated, in ISO8601 format.
+        ///The last date and time the custom attribute was updated, in the following format: YYYY-MM-DDThh:mm:ss.sz.
         /// </value>
         [DataMember(Name = "updatedAt", EmitDefaultValue = false)]
         public string UpdatedAt { get; set; }
 
         /// <summary>
-        ///The unique identifier of the user who deleted the issue type.
+        ///The Autodesk ID of the user who last updated the custom attribute.
         /// </summary>
         /// <value>
-        ///The unique identifier of the user who deleted the issue type.
+        ///The Autodesk ID of the user who last updated the custom attribute.
+        /// </value>
+        [DataMember(Name = "updatedBy", EmitDefaultValue = false)]
+        public string UpdatedBy { get; set; }
+
+        /// <summary>
+        ///The date and time the custom attribute was deleted, in the following format: YYYY-MM-DDThh:mm:ss.sz.
+        /// </summary>
+        /// <value>
+        ///The date and time the custom attribute was deleted, in the following format: YYYY-MM-DDThh:mm:ss.sz.
+        /// </value>
+        [DataMember(Name = "deletedAt", EmitDefaultValue = false)]
+        public string DeletedAt { get; set; }
+
+        /// <summary>
+        ///The Autodesk ID of the user who deleted the custom attribute.
+        /// </summary>
+        /// <value>
+        ///The Autodesk ID of the user who deleted the custom attribute.
         /// </value>
         [DataMember(Name = "deletedBy", EmitDefaultValue = false)]
         public string DeletedBy { get; set; }
 
         /// <summary>
-        ///The date and time the issue type was deleted, in ISO8601 format.
+        ///The description of the custom attribute.
         /// </summary>
         /// <value>
-        ///The date and time the issue type was deleted, in ISO8601 format.
+        ///The description of the custom attribute.
         /// </value>
-        [DataMember(Name = "deletedAt", EmitDefaultValue = false)]
-        public string DeletedAt { get; set; }
+        [DataMember(Name = "description", EmitDefaultValue = false)]
+        public string Description { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

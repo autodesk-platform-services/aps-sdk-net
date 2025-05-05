@@ -71,9 +71,9 @@ namespace Autodesk.Construction.Issues.Http
         /// <param name="filterDataType">
         ///Retrieves issue custom attribute definitions with the specified data type. Possible values: list (this corresponds to dropdown in the UI), text, paragraph, numeric. For example, filter[dataType]=text,numeric. (optional)
         /// </param>
-        /// <returns>Task of ApiResponse&lt;AttrDefinition&gt;</returns>
+        /// <returns>Task of ApiResponse&lt;AttrDefinitionPage&gt;</returns>
 
-        System.Threading.Tasks.Task<ApiResponse<AttrDefinition>> GetAttributeDefinitionsAsync(string projectId, Region? xAdsRegion = null, int? limit = default(int?), int? offset = default(int?), string filterCreatedAt = default(string), string filterUpdatedAt = default(string), string filterDeletedAt = default(string), List<DataType> filterDataType = default(List<DataType>), string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<ApiResponse<AttrDefinitionPage>> GetAttributeDefinitionsAsync(string projectId, Region? xAdsRegion = null, int? limit = default(int?), int? offset = default(int?), string filterCreatedAt = default(string), string filterUpdatedAt = default(string), string filterDeletedAt = default(string), List<DataType> filterDataType = default(List<DataType>), string accessToken = null, bool throwOnError = true);
     }
 
     /// <summary>
@@ -207,9 +207,9 @@ namespace Autodesk.Construction.Issues.Http
         /// <param name="filterDataType">
         ///Retrieves issue custom attribute definitions with the specified data type. Possible values: list (this corresponds to dropdown in the UI), text, paragraph, numeric. For example, filter[dataType]=text,numeric. (optional)
         /// </param>
-        /// <returns>Task of ApiResponse&lt;AttrDefinition&gt;></returns>
+        /// <returns>Task of ApiResponse&lt;AttrDefinitionPage&gt;></returns>
 
-        public async System.Threading.Tasks.Task<ApiResponse<AttrDefinition>> GetAttributeDefinitionsAsync(string projectId, Region? xAdsRegion = null, int? limit = default(int?), int? offset = default(int?), string filterCreatedAt = default(string), string filterUpdatedAt = default(string), string filterDeletedAt = default(string), List<DataType> filterDataType = default(List<DataType>), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ApiResponse<AttrDefinitionPage>> GetAttributeDefinitionsAsync(string projectId, Region? xAdsRegion = null, int? limit = default(int?), int? offset = default(int?), string filterCreatedAt = default(string), string filterUpdatedAt = default(string), string filterDeletedAt = default(string), List<DataType> filterDataType = default(List<DataType>), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into GetAttributeDefinitionsAsync ");
             using (var request = new HttpRequestMessage())
@@ -288,10 +288,10 @@ namespace Autodesk.Construction.Issues.Http
                 else if (!response.IsSuccessStatusCode)
                 {
                     logger.LogError($"response unsuccess with status code: {response.StatusCode}");
-                    return new ApiResponse<AttrDefinition>(response, default(AttrDefinition));
+                    return new ApiResponse<AttrDefinitionPage>(response, default(AttrDefinitionPage));
                 }
                 logger.LogInformation($"Exited from GetAttributeDefinitionsAsync with response statusCode: {response.StatusCode}");
-                return new ApiResponse<AttrDefinition>(response, await LocalMarshalling.DeserializeAsync<AttrDefinition>(response.Content));
+                return new ApiResponse<AttrDefinitionPage>(response, await LocalMarshalling.DeserializeAsync<AttrDefinitionPage>(response.Content));
 
             } // using
         }
