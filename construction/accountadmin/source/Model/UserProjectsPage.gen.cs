@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Construction.Account.Admin
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,41 +34,34 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Construction.AccountAdmin.Model
 {
     /// <summary>
-    /// User Projects
+    /// UserProjectsPage
     /// </summary>
     [DataContract]
-    public partial class UserProjects 
+    public partial class UserProjectsPage 
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="UserProjects" /> class.
+        /// Initializes a new instance of the <see cref="UserProjectsPage" /> class.
         /// </summary>
-        public UserProjects()
-        { }
+        public UserProjectsPage()
+        {
+        }
         
         /// <summary>
-        /// Gets or sets pagination.
+        ///Gets or Sets Pagination
         /// </summary>
-        /// <value>
-        /// Gets or sets pagination.
-        /// </value>
         [DataMember(Name="pagination", EmitDefaultValue=false)]
-        public UserProjectsPagination Pagination { get; set; }
+        public UserProjectsPagePagination Pagination { get; set; }
 
         /// <summary>
-        /// The requested page of the user’s projects.
+        ///Gets or Sets Results
         /// </summary>
-        /// <value>
-        /// The requested page of the user’s projects.
-        /// </value>
         [DataMember(Name="results", EmitDefaultValue=false)]
         public List<UserProject> Results { get; set; }
 
         /// <summary>
-        /// The string presentation of the object.
+        /// Returns the string presentation of the object
         /// </summary>
-        /// <returns>
-        /// The string presentation of the object.
-        /// </returns>
+        /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);

@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Construction.Account.Admin
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,72 +34,52 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Construction.AccountAdmin.Model
 {
     /// <summary>
-    /// User Projects Pagination
+    /// UserProjectsPagePagination
     /// </summary>
     [DataContract]
-    public partial class UserProjectsPagination 
+    public partial class UserProjectsPagePagination 
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="UserProjectsPagination" /> class.
+        /// Initializes a new instance of the <see cref="UserProjectsPagePagination" /> class.
         /// </summary>
-        public UserProjectsPagination()
-        { }
+        public UserProjectsPagePagination()
+        {
+        }
         
         /// <summary>
-        /// The number of items per page.
+        ///Gets or Sets Limit
         /// </summary>
-        /// <value>
-        /// The number of items per page.
-        /// </value>
         [DataMember(Name="limit", EmitDefaultValue=false)]
-        public int? Limit { get; set; }
+        public int Limit { get; set; }
 
         /// <summary>
-        /// The page number that the results begin from.
+        ///Gets or Sets Offset
         /// </summary>
-        /// <value>
-        /// The page number that the results begin from.
-        /// </value>
         [DataMember(Name="offset", EmitDefaultValue=false)]
-        public int? Offset { get; set; }
+        public int Offset { get; set; }
 
         /// <summary>
-        /// The number of items in the response.
+        ///Gets or Sets TotalResults
         /// </summary>
-        /// <value>
-        /// The number of items in the response.
-        /// </value>
         [DataMember(Name="totalResults", EmitDefaultValue=false)]
-        public int? TotalResults { get; set; }
+        public int TotalResults { get; set; }
 
         /// <summary>
-        /// The URL for the next page of records.
-        /// Max length: 2000
+        ///Gets or Sets NextUrl
         /// </summary>
-        /// <value>
-        /// The URL for the next page of records.
-        /// Max length: 2000
-        /// </value>
         [DataMember(Name="nextUrl", EmitDefaultValue=false)]
         public string NextUrl { get; set; }
 
         /// <summary>
-        /// The URL for the previous page of records.
-        /// Max length: 2000
+        ///Gets or Sets PreviousUrl
         /// </summary>
-        /// <value>
-        /// The URL for the previous page of records.
-        /// Max length: 2000
-        /// </value>
         [DataMember(Name="previousUrl", EmitDefaultValue=false)]
         public string PreviousUrl { get; set; }
 
         /// <summary>
-        /// The string presentation of the object.
+        /// Returns the string presentation of the object
         /// </summary>
-        /// <returns>
-        /// The string presentation of the object.
-        /// </returns>
+        /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);

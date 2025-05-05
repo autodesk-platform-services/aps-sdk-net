@@ -1089,82 +1089,78 @@ namespace Autodesk.Construction.AccountAdmin
                 }
       
                 /// <summary>
-                /// Get projects of user in account.
+                /// Get user projects
                 /// </summary>
                 /// <remarks>
-                /// Retrieves a list of the projects in the specified account.
+                ///Returns a list of projects for a specified user within an Autodesk Construction Cloud (ACC) or BIM 360 account. Only projects the user participates in will be returned. The calling user must be an account administrator.
                 /// </remarks>
-                /// <exception cref="HttpRequestException">
-                /// Thrown when fails to make API call.
-                /// </exception>
+                /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
                 /// <param name="accountId">
-                /// The ID of the ACC account that contains the project being created or the projects being retrieved. This corresponds to the hub ID in the Data Management API. To convert a hub ID into an account ID, remove the “b.” prefix. For example, a hub ID of b.c8b0c73d-3ae9 translates to an account ID of c8b0c73d-3ae9.
-                /// </param>
-                /// <param name="acceptLanguage">
-                /// This header is not currently supported in the Account Admin API. (optional)
-                /// </param>
-                /// <param name="region">
-                /// The region where the bucket resides. Acceptable values: US, EMEA, AUS. (optional)
+                ///The ID of the ACC account that contains the project being created or the projects being retrieved. This corresponds to the hub ID in the Data Management API. To convert a hub ID into an account ID, remove the “b." prefix. For example, a hub ID of b.c8b0c73d-3ae9 translates to an account ID of c8b0c73d-3ae9.
                 /// </param>
                 /// <param name="userId">
-                /// Note that this header is not relevant for Account Admin GET endpoints. The ID of a user on whose behalf your API request is acting. Required if you’re using a 2-legged authentication context, which must be 2-legged OAuth2 security with user impersonation.  Your app has access to all users specified by the administrator in the SaaS integrations UI. Provide this header value to identify the user to be affected by the request.  You can use either the user’s ACC ID (id), or their Autodesk ID (autodeskId). (optional)
+                ///The ID of the user. You can use either the ACC ID (id) or the Autodesk ID (autodeskId).
+                /// </param>
+                /// <param name="region">
+                ///Specifies the region where your request should be routed. If not set, the request is routed automatically, which may result in a slight increase in latency. Possible values: US, EMEA. For a complete list of supported regions, see the Regions page. (optional)
+                /// </param>
+                /// <param name="userId2">
+                ///The ID of a user on whose behalf your request is acting. Your app has access to all users specified by the administrator in the SaaS integrations UI. Provide this header value to identify the user to be affected by the request.  You can use either the user’s ACC ID (id), or their Autodesk ID (autodeskId).  Note that this header is required for Account Admin POST, PATCH, and DELETE endpoints if you want to use a 2-legged authentication context. This header is optional for Account Admin GET endpoints. (optional)
                 /// </param>
                 /// <param name="filterId">
-                /// A list of the ACC IDs of users to retrieve. (optional)
+                ///A list of project IDs to filter by. (optional)
                 /// </param>
                 /// <param name="fields">
-                /// A comma-separated list of the project fields to include in the response. Default value: all fields. (optional)
+                ///A comma-separated list of user project fields to include in the response. If not specified, all available fields are included by default. Possible values: accessLevels, accountId, addressLine1, addressLine2, city, constructionType, country, createdAt, classification, deliveryMethod, endDate, imageUrl, jobNumber, latitude, longitude, name, platform, postalCode, projectValue, sheetCount, startDate, stateOrProvince, status, thumbnailImageUrl, timezone, type, updatedAt, contractType and currentPhase. (optional)
                 /// </param>
                 /// <param name="filterClassification">
-                /// A list of the classifications of projects to include in the response. Possible values: production, template, component, sample. (optional)
+                ///Filters projects by classification. Possible values: production – Standard production projects. template – Project templates that can be cloned to create production projects. component – Placeholder projects that contain standardized components (e.g., forms) for use across projects. Only one component project is permitted per account. Known as a library in the ACC unified products UI. sample – The single sample project automatically created upon ACC trial setup. Only one sample project is permitted per account.  Max length: 255 (optional)
                 /// </param>
                 /// <param name="filterName">
-                /// A project name or name pattern to filter projects by. Can be a partial match based on the value of filterTextMatch that you provide; for example: filter[name]=ABCco filterTextMatch=startsWith.  Max length: 255 (optional)
+                ///Filters projects by name. Supports partial matches when used with filterTextMatch. For example filter[name]=ABCco&filterTextMatch=startsWith returns projects whose names start with “ABCco”. Max length: 255 (optional)
                 /// </param>
                 /// <param name="filterPlatform">
-                /// Filter resource by platform. Possible values: acc and bim360. (optional)
+                ///Filters by platform. Possible values: acc (Autodesk Construction Cloud) and bim360 (BIM 360). Max length: 255 (optional)
                 /// </param>
                 /// <param name="filterStatus">
-                /// A list of the statuses of projects to include in the response. Possible values:  active, pending, archived, suspended. (optional)
+                ///Filters projects by status. Possible values: active, pending, archived, suspended. (optional)
                 /// </param>
                 /// <param name="filterType">
-                /// A list of project types to filter projects by. To exclude a project type from the response, prefix it with - (a hyphen); for example, -Bridge excludes bridge projects. (optional)
+                ///Filters by project type. To exclude a type, prefix it with - (e.g., -Bridge excludes bridge projects). Possible values: Airport, Assisted Living / Nursing Home, Bridge, Canal / Waterway, Convention Center, Court House, Data Center, Dams / Flood Control / Reservoirs, Demonstration Project, Dormitory, Education Facility, Government Building, Harbor / River Development, Hospital, Hotel / Motel, Library, Manufacturing / Factory, Medical Laboratory, Medical Office, Military Facility, Mining Facility, Multi-Family Housing, Museum, Oil & Gas,`Plant`, Office, OutPatient Surgery Center, Parking Structure / Garage, Performing Arts, Power Plant, Prison / Correctional Facility, Rail, Recreation Building, Religious Building, Research Facility / Laboratory, Restaurant, Retail, Seaport, Single-Family Housing, Solar Farm, Stadium/Arena, Streets / Roads / Highways, Template Project, Theme Park, Training Project, Transportation Building, Tunnel, Utilities, Warehouse (non-manufacturing), Waste Water / Sewers, Water Supply, Wind Farm. (optional)
                 /// </param>
                 /// <param name="filterJobNumber">
-                /// The user-defined identifier for a project to be returned. This ID was defined when the project was created. This filter accepts a partial match based on the value of filterTextMatch that you provide. (optional)
+                ///Filters by a user-defined project identifier. Supports partial matches when used with filterTextMatch. For example, filter[jobNumber]=HP-0002&filterTextMatch=equals returns projects where the job number is exactly “HP-0002”. Max length: 255 (optional)
                 /// </param>
                 /// <param name="filterUpdatedAt">
-                /// A range of dates during which the desired projects were updated. The range must be specified with dates in ISO 8601 format with time required. Separate multiple values with commas. (optional)
+                ///Filters projects updated within a specific date range in ISO 8601 format. For example: Date range: 2023-03-02T00:00:00.000Z..2023-03-03T23:59:59 .999Z Specific start date: 2023-03-02T00:00:00.000Z.. Specific end date: ..2023-03-02T23:59:59.999Z  For more details, see JSON API Filtering.  Max length: 100 (optional)
                 /// </param>
                 /// <param name="filterAccessLevels">
-                ///A list of user access levels that the returned users must have. (optional)
+                ///Filters projects by user access level. Possible values: projectAdmin, projectMember. Max length: 255 (optional)
                 /// </param>
                 /// <param name="filterTextMatch">
-                /// When filtering on a text-based field, this value indicates how to do the matching. Default value: contains. Possible values: contains, startsWith, endsWith and equals. (optional)
+                ///Defines how text-based filters should match results. Possible values: contains (default) – Returns results where the text appears anywhere in the field. startsWith – Matches only if the field starts with the given value. endsWith – Matches only if the field ends with the given value. equals – Matches only if the field is an exact match. (optional)
                 /// </param>
                 /// <param name="sort">
-                /// A list of fields to sort the returned projects by. Multiple sort fields are applied in sequence order — each sort field produces groupings of projects with the same values of that field; the next sort field applies within the groupings produced by the previous sort field. (optional)
+                ///A list of fields to sort the returned user projects by. Multiple sort fields are applied in sequence order — each sort field produces groupings of projects with the same values of that field; the next sort field applies within the groupings produced by the previous sort field. Each property can be followed by a direction modifier of either asc (ascending) or desc (descending). The default is asc.  Possible values: name (the default), startDate, endDate, type, status, jobNumber, constructionType, deliveryMethod, contractType, currentPhase, createdAt, updatedAt and platform. (optional)
                 /// </param>
                 /// <param name="limit">
-                ///The maximum number of records to return in a single request. Possible range: 1-200. Default value: 20. (optional)
+                ///The maximum number of records per request. Default: 20. Minimum: 1, Maximum: 200. If a value greater than 200 is provided, only 200 records are returned. (optional)
                 /// </param>
                 /// <param name="offset">
-                /// The record number that the returned page should start with. When the total number of records exceeds the value of limit, increase the offset value in subsequent requests to continue getting the remaining results. (optional)
+                ///The record number to start returning results from, used for pagination. For example, if limit=20 and offset=20, the request retrieves the second page of results. (optional)
                 /// </param>
-                /// <returns>
-                /// <see cref="System.Threading.Tasks.Task"/>&lt;<see cref="UserProjects"/>&gt;
-                /// </returns>
-                public async System.Threading.Tasks.Task<UserProjects> GetUserProjectsAsync(string accountId, string acceptLanguage = default, Region? region = null, string userId = default, List<string> filterId = default, List<Fields> fields = default, List<Classification> filterClassification = default, string filterName = default, List<Platform> filterPlatform = default, List<Status> filterStatus = default, List<string> filterType = default, string filterJobNumber = default, string filterUpdatedAt = default, List<AccessLevels> filterAccessLevels = default, FilterTextMatch? filterTextMatch = null, List<SortBy> sort = default, int? limit = default, int? offset = default, string accessToken = null, bool throwOnError = true)
+                /// <returns>Task of ApiResponse&lt;UserProjectsPage&gt;></returns>
+                public async System.Threading.Tasks.Task<UserProjectsPage> GetUserProjectsAsync(string accountId, string userId, Region region= default, string userId2= default(string), List<string> filterId= default(List<string>), List<UserProjectFields> fields= default(List<UserProjectFields>), List<Classification> filterClassification= default(List<Classification>), string filterName= default(string), List<Platform> filterPlatform= default(List<Platform>), List<Status> filterStatus= default(List<Status>), List<string> filterType= default(List<string>), string filterJobNumber= default(string), string filterUpdatedAt= default(string), List<FilterUserProjectsAccessLevels> filterAccessLevels= default(List<FilterUserProjectsAccessLevels>), FilterTextMatch? filterTextMatch= null, List<UserProjectSortBy> sort= default(List<UserProjectSortBy>), int? limit= default(int?), int? offset= default(int?), string accessToken = null, bool throwOnError = true)
                 {
-                        if (string.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+                        if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
                         {
                                 throw new Exception("Please provide a valid access token or an authentication provider");
                         }
-                        else if (string.IsNullOrEmpty(accessToken))
+                        else if (String.IsNullOrEmpty(accessToken))
                         {
                                 accessToken = await this.AuthenticationProvider.GetAccessToken();
                         }
-                        var response = await this.UserProjectsApi.GetUserProjectsAsync(accountId, acceptLanguage, region, userId, filterId, fields, filterClassification, filterName, filterPlatform, filterStatus, filterType,  filterJobNumber, filterUpdatedAt, filterAccessLevels, filterTextMatch, sort, limit, offset, accessToken, throwOnError);
+                        var response = await this.UserProjectsApi.GetUserProjectsAsync(accountId, userId, region, userId2 , filterId, fields, filterClassification, filterName, filterPlatform, filterStatus, filterType, filterJobNumber, filterUpdatedAt, filterAccessLevels, filterTextMatch, sort, limit, offset, accessToken, throwOnError);
                         return response.Content;
                 }
         }
