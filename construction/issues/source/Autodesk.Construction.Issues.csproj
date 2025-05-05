@@ -6,11 +6,19 @@
     <Authors>Autodesk Platform Services SDK Team</Authors>
     <PackageDescription>Client SDK for Construction Issues API</PackageDescription>
     <PackageReleaseNotes>
-     - Fixed issue in enum AssignedToType
+     - Breaking changes. Page suffix added to models capable of pagination:
+      - IssueType renamed to TypesPage.
+      - IssueRootCauseCategories renamed to RootCauseCategoriesPage.
+      - IssueType renamed to TypesPage.
+      - CommentsResults renamed to CommentsPage.
+      - AttrDefinition renamed to AttrDefinitionPage.
+      - AttrMapping renamed to AttrMappingPage.
+     - Pagination class moved out to a common model. 
+     - Added List enum in DataType model.     
     </PackageReleaseNotes>
     <Copyright>Autodesk Inc.</Copyright>
     <PackageId>Autodesk.Construction.Issues</PackageId>
-    <PackageVersion>2.1.2</PackageVersion>
+    <PackageVersion>3.0.0-beta</PackageVersion>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/autodesk-platform-services/aps-sdk-net.git</RepositoryUrl>
