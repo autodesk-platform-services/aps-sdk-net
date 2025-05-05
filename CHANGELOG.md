@@ -1,5 +1,18 @@
 # Changelog
 
+## [v3.0.0](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v3.0.0) (2025-05-05)
+
+[Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v2.1.2...v3.0.0)
+
+**Breaking changes:**
+
+- \[DAS-334\] Fixed Acc issue models [\#156](https://github.com/autodesk-platform-services/aps-sdk-net/pull/156) ([srivastavarahull](https://github.com/srivastavarahull))
+
+**Merged pull requests:**
+
+- \[AUTO\]: Update CHANGELOG [\#153](https://github.com/autodesk-platform-services/aps-sdk-net/pull/153) ([sajith-subramanian](https://github.com/sajith-subramanian))
+- Keep Main branch updated with Development [\#152](https://github.com/autodesk-platform-services/aps-sdk-net/pull/152) ([sajith-subramanian](https://github.com/sajith-subramanian))
+
 ## [v2.1.2](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v2.1.2) (2025-04-17)
 
 [Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v2.1.1...v2.1.2)
