@@ -88,7 +88,7 @@ namespace Autodesk.Oss.Model
         ///The total amount of storage space occupied by the object, in bytes.
         /// </value>
         [DataMember(Name="size", EmitDefaultValue=false)]
-        public int? Size { get; set; }
+        public long? Size { get; set; }
 
         /// <summary>
         ///The format of the data stored within the object, expressed as a MIME type.
