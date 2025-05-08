@@ -34,15 +34,15 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Construction.AccountAdmin.Model
 {
     /// <summary>
-    /// UserProjectsPagePagination
+    /// Pagination
     /// </summary>
     [DataContract]
-    public partial class UserProjectsPagePagination 
+    public partial class Pagination 
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="UserProjectsPagePagination" /> class.
+        /// Initializes a new instance of the <see cref="Pagination" /> class.
         /// </summary>
-        public UserProjectsPagePagination()
+        public Pagination()
         {
         }
         

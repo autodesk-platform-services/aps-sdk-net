@@ -217,6 +217,10 @@ namespace Samples
             int limit = 1;
             int offset = 2;
             UserProjectsPage response = await adminClient.GetUserProjectsAsync(accountId, userId);
+
+            Pagination page = response.Pagination;
+            Console.WriteLine(page.Limit);
+
             foreach (var project in response.Results) {
                 Console.WriteLine(project.Name);
                 Console.WriteLine(project.Id);

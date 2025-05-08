@@ -50,7 +50,7 @@ namespace Autodesk.Construction.AccountAdmin.Model
         ///Gets or Sets Pagination
         /// </summary>
         [DataMember(Name="pagination", EmitDefaultValue=false)]
-        public UserProjectsPagePagination Pagination { get; set; }
+        public Pagination Pagination { get; set; }
 
         /// <summary>
         ///Gets or Sets Results

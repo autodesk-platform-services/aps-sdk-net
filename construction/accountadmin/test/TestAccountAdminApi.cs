@@ -28,7 +28,7 @@ public class TestAccountAdminApi
     [TestMethod]
     public async Task TestGetUserProjectsAsync()
     {
-	     UserProjects userProjects = await _adminClient.GetUserProjectsAsync(accessToken: token, accountId: accountId, userId: userId);
-	     Assert.IsInstanceOfType(userProjects.Results, typeof(List<UserProject>));
+	     UserProjectsPage userProjectsPage = await _adminClient.GetUserProjectsAsync(accessToken: token, accountId: accountId, userId: userId);
+	     Assert.IsInstanceOfType(userProjectsPage.Results, typeof(List<UserProject>));
     }
 }
