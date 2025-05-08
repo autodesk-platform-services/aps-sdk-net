@@ -8,9 +8,10 @@ namespace Samples
 {
     class Admin
     {
-        string token = "<token>";
-        string accountId = "<accountId>";
-        string projectId = "<projectId>";
+        string token = "<your token>";
+        string accountId = "<your account id>";
+        string userId = "<your user id>";
+        string projectId = "<your project id>";
         AdminClient adminClient = null!;
 
         public void Initialise()
@@ -200,6 +201,39 @@ namespace Samples
             Console.WriteLine(response);
         }
 
+        public async Task getUserProjects() {
+            List<string> filterId = new List<string> {"828e49fe-8a96-4eed-bec1-4a617bda6b09"};
+            List<UserProjectFields> fields = new List<UserProjectFields> {UserProjectFields.AddressLine1, UserProjectFields.AddressLine2};
+            List<Classification> filterClassification = new List<Classification> {Classification.Sample};
+            string filterName = "st";
+            List<Platform> filterPlatform = new List<Platform> {Platform.Acc};
+            List<Status> filterStatus = new List<Status> {Status.Active};
+            List<string> filterType= new List<string> {"Demonstration Project"};
+            string filterJobNumber = "1234567890";
+            string filterUpdatedAt = "2024-01-23T19:46:18.160-04:00"; // not working
+            List<FilterUserProjectsAccessLevels> filterAccessLevels = new List<FilterUserProjectsAccessLevels> {FilterUserProjectsAccessLevels.ProjectAdmin};
+            FilterTextMatch filterTextMatch = FilterTextMatch.EndsWith;
+            List<UserProjectSortBy> sort = new List<UserProjectSortBy> {UserProjectSortBy.Namedesc};
+            int limit = 1;
+            int offset = 2;
+            UserProjectsPage response = await adminClient.GetUserProjectsAsync(accountId, userId);
+
+            Pagination page = response.Pagination;
+            Console.WriteLine(page.Limit);
+
+            foreach (var project in response.Results) {
+                Console.WriteLine(project.Name);
+                Console.WriteLine(project.Id);
+                Console.WriteLine(project.Platform);
+                Console.WriteLine(project.Type);
+                Console.WriteLine(project.JobNumber);
+                Console.WriteLine(project.UpdatedAt);
+                Console.WriteLine(project.Status);
+                Console.WriteLine(project.AccessLevels);
+                Console.WriteLine(project.Timezone);
+            }
+        }
+
         // fetch specified user in the project
         public async Task getProjectUser() {
             var userId = "";
@@ -294,6 +328,8 @@ namespace Samples
             // await admin.listUsers();
             // await admin.getProjectUsers();
             // await admin.getBusinessUnits();
+            // await admin.getProjectUsers();
+            await admin.getUserProjects();
         }
     }
 }
