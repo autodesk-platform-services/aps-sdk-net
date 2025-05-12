@@ -6,13 +6,11 @@
     <Authors>Autodesk Platform Services SDK Team</Authors>
     <PackageDescription>Client SDK for Data Management OSS API</PackageDescription>
     <PackageReleaseNotes>
-    - Added support for Aus region
-    - Fixed issues for upload method with special character filenames
-    - Fixed issue on the CreateSignedResourceAsync method
+    - Fixed issue on the object size property for large objects.
     </PackageReleaseNotes>
     <Copyright>Autodesk Inc.</Copyright>
     <PackageId>Autodesk.Oss</PackageId>
-    <PackageVersion>2.1.0</PackageVersion>
+    <PackageVersion>2.1.1</PackageVersion>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/autodesk-platform-services/aps-sdk-net.git</RepositoryUrl> 

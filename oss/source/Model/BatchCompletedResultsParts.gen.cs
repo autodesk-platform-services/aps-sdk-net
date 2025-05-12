@@ -67,7 +67,7 @@ namespace Autodesk.Oss.Model
         ///The size of the corresponding part detected in S3.
         /// </value>
         [DataMember(Name="size", EmitDefaultValue=false)]
-        public int? Size { get; set; }
+        public long? Size { get; set; }
 
         /// <summary>
         ///The eTag of the detected part in S3.
