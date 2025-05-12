@@ -1,5 +1,25 @@
 # Changelog
 
+## [Unreleased](https://github.com/autodesk-platform-services/aps-sdk-net/tree/HEAD)
+
+[Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v3.1.0...HEAD)
+
+**Closed issues:**
+
+- JSON integer parser error [\#155](https://github.com/autodesk-platform-services/aps-sdk-net/issues/155)
+
+## [v3.1.0](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v3.1.0) (2025-05-12)
+
+[Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v3.0.0...v3.1.0)
+
+**Implemented enhancements:**
+
+- \[DAS 338\] - Add user projects api [\#159](https://github.com/autodesk-platform-services/aps-sdk-net/pull/159) ([Arrotech](https://github.com/Arrotech))
+
+**Fixed bugs:**
+
+- \[DAS -339\]Fixed Data-Type of Models [\#160](https://github.com/autodesk-platform-services/aps-sdk-net/pull/160) ([srivastavarahull](https://github.com/srivastavarahull))
+
 ## [v3.0.0](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v3.0.0) (2025-05-05)
 
 [Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v2.1.2...v3.0.0)
