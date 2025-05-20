@@ -155,7 +155,7 @@ namespace Autodesk.Construction.AccountAdmin.Model
         public string Timezone { get; set; }
 
         /// <summary>
-        ///Gets or Sets Constructiontype
+        ///Gets or Sets ConstructionType
         /// </summary>
         [DataMember(Name="constructionType", EmitDefaultValue=false)]
         public string ConstructionType { get; set; }
