@@ -1,5 +1,17 @@
 # Changelog
 
+## [v3.1.1](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v3.1.1) (2025-05-20)
+
+[Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v3.1.0...v3.1.1)
+
+**Fixed bugs:**
+
+- Fixed typo in constructionType property in userProject model [\#163](https://github.com/autodesk-platform-services/aps-sdk-net/pull/163) ([Arrotech](https://github.com/Arrotech))
+
+**Closed issues:**
+
+- JSON integer parser error [\#155](https://github.com/autodesk-platform-services/aps-sdk-net/issues/155)
+
 ## [v3.1.0](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v3.1.0) (2025-05-12)
 
 [Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v3.0.0...v3.1.0)
@@ -11,10 +23,6 @@
 **Fixed bugs:**
 
 - \[DAS -339\]Fixed Data-Type of Models [\#160](https://github.com/autodesk-platform-services/aps-sdk-net/pull/160) ([srivastavarahull](https://github.com/srivastavarahull))
-
-**Closed issues:**
-
-- JSON integer parser error [\#155](https://github.com/autodesk-platform-services/aps-sdk-net/issues/155)
 
 ## [v3.0.0](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v3.0.0) (2025-05-05)
 
