@@ -157,8 +157,8 @@ namespace Autodesk.Construction.AccountAdmin.Model
         /// <summary>
         ///Gets or Sets Constructiontype
         /// </summary>
-        [DataMember(Name="constructiontype", EmitDefaultValue=false)]
-        public string Constructiontype { get; set; }
+        [DataMember(Name="constructionType", EmitDefaultValue=false)]
+        public string ConstructionType { get; set; }
 
         /// <summary>
         ///Gets or Sets DeliveryMethod
