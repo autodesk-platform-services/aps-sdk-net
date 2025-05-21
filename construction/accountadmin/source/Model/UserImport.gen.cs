@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Construction.Account.Admin
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,32 +34,53 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Construction.AccountAdmin.Model
 {
     /// <summary>
-    /// Projects
+    /// UserImport
     /// </summary>
     [DataContract]
-    public partial class Projects 
+    public partial class UserImport 
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Projects" /> class.
+        /// Initializes a new instance of the <see cref="UserImport" /> class.
         /// </summary>
-        public Projects()
+        public UserImport()
         {
         }
         
         /// <summary>
-        ///Gets or Sets Pagination
-        /// </summary>
-        [DataMember(Name="pagination", EmitDefaultValue=false)]
-        public ProjectsPagination Pagination { get; set; }
-
-        /// <summary>
-        ///The requested page of projects.
+        ///Import success user count
         /// </summary>
         /// <value>
-        ///The requested page of projects.
+        ///Import success user count
         /// </value>
-        [DataMember(Name="results", EmitDefaultValue=false)]
-        public List<Project> Results { get; set; }
+        [DataMember(Name="success", EmitDefaultValue=false)]
+        public int Success { get; set; }
+
+        /// <summary>
+        ///Import failure user count
+        /// </summary>
+        /// <value>
+        ///Import failure user count
+        /// </value>
+        [DataMember(Name="failure", EmitDefaultValue=false)]
+        public int Failure { get; set; }
+
+        /// <summary>
+        ///Array of user objects that were successfully imported
+        /// </summary>
+        /// <value>
+        ///Array of user objects that were successfully imported
+        /// </value>
+        [DataMember(Name="success_items", EmitDefaultValue=false)]
+        public List<User> SuccessItems { get; set; }
+
+        /// <summary>
+        ///Array of user objects that failed to import, along with content and error information
+        /// </summary>
+        /// <value>
+        ///Array of user objects that failed to import, along with content and error information
+        /// </value>
+        [DataMember(Name="failure_items", EmitDefaultValue=false)]
+        public List<User> FailureItems { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Construction.Account.Admin
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,28 +34,32 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Construction.AccountAdmin.Model
 {
     /// <summary>
-    /// ProjectUsersImportResponse
+    /// ProjectsPage
     /// </summary>
     [DataContract]
-    public partial class ProjectUsersImportResponse 
+    public partial class ProjectsPage 
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ProjectUsersImportResponse" /> class.
+        /// Initializes a new instance of the <see cref="ProjectsPage" /> class.
         /// </summary>
-        public ProjectUsersImportResponse()
+        public ProjectsPage()
         {
         }
         
         /// <summary>
-        ///We don’t currently support this field, but expect to in a future release.
-///If the response returns jobId with a valid UUID value, the user import operation was successful.
+        ///Gets or Sets Pagination
+        /// </summary>
+        [DataMember(Name="pagination", EmitDefaultValue=false)]
+        public Pagination Pagination { get; set; }
+
+        /// <summary>
+        ///The requested page of projects.
         /// </summary>
         /// <value>
-        ///We don’t currently support this field, but expect to in a future release.
-///If the response returns jobId with a valid UUID value, the user import operation was successful.
+        ///The requested page of projects.
         /// </value>
-        [DataMember(Name="jobId", EmitDefaultValue=false)]
-        public string JobId { get; set; }
+        [DataMember(Name="results", EmitDefaultValue=false)]
+        public List<Project> Results { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

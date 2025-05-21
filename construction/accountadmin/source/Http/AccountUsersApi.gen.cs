@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Construction.Account.Admin
  *
@@ -121,9 +121,9 @@ namespace Autodesk.Construction.AccountAdmin.Http
          /// <param name="userPayload">
          /// (optional)
          /// </param>
-        /// <returns>Task of ApiResponse&lt;UserImportResponse&gt;</returns>
+        /// <returns>Task of ApiResponse&lt;UserImport&gt;</returns>
         
-        System.Threading.Tasks.Task<ApiResponse<UserImportResponse>> ImportUsersAsync (string accountId, Region? region= null, List<UserPayload> userPayload= default(List<UserPayload>),  string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<ApiResponse<UserImport>> ImportUsersAsync (string accountId, Region? region= null, List<UserPayload> userPayload= default(List<UserPayload>),  string accessToken = null, bool throwOnError = true);
         /// <summary>
         /// Update User
         /// </summary>
@@ -588,9 +588,9 @@ namespace Autodesk.Construction.AccountAdmin.Http
          /// <param name="userPayload">
          /// (optional)
          /// </param>
-        /// <returns>Task of ApiResponse&lt;UserImportResponse&gt;></returns>
+        /// <returns>Task of ApiResponse&lt;UserImport&gt;></returns>
         
-        public async System.Threading.Tasks.Task<ApiResponse<UserImportResponse>> ImportUsersAsync (string accountId,Region? region= null,List<UserPayload> userPayload= default(List<UserPayload>), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ApiResponse<UserImport>> ImportUsersAsync (string accountId,Region? region= null,List<UserPayload> userPayload= default(List<UserPayload>), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into ImportUsersAsync ");
             using (var request = new HttpRequestMessage())
@@ -662,10 +662,10 @@ namespace Autodesk.Construction.AccountAdmin.Http
                 else if (!response.IsSuccessStatusCode)
                 {
                     logger.LogError($"response unsuccess with status code: {response.StatusCode}");
-                    return new ApiResponse<UserImportResponse>(response, default(UserImportResponse));
+                    return new ApiResponse<UserImport>(response, default(UserImport));
                 }
                 logger.LogInformation($"Exited from ImportUsersAsync with response statusCode: {response.StatusCode}");
-                return new ApiResponse<UserImportResponse>(response, await LocalMarshalling.DeserializeAsync<UserImportResponse>(response.Content));
+                return new ApiResponse<UserImport>(response, await LocalMarshalling.DeserializeAsync<UserImport>(response.Content));
 
             } // using
         }

@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Construction.Account.Admin
  *
@@ -86,9 +86,9 @@ namespace Autodesk.Construction.AccountAdmin.Http
          /// <param name="region">
          ///The geographic area where the data is stored. Acceptable values: US, EMEA, AUS. By default, it is set to US. (optional)
          /// </param>
-        /// <returns>Task of ApiResponse&lt;ProjectPatchResponse&gt;</returns>
+        /// <returns>Task of ApiResponse&lt;ProjectPatch&gt;</returns>
         
-        System.Threading.Tasks.Task<ApiResponse<ProjectPatchResponse>> CreateProjectImageAsync (string projectId, string accountId, System.IO.Stream body, Region? region= null,  string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<ApiResponse<ProjectPatch>> CreateProjectImageAsync (string projectId, string accountId, System.IO.Stream body, Region? region= null,  string accessToken = null, bool throwOnError = true);
         /// <summary>
         /// Get a project by ID
         /// </summary>
@@ -175,9 +175,9 @@ namespace Autodesk.Construction.AccountAdmin.Http
          /// <param name="offset">
          ///The record number that the returned page should start with. When the total number of records exceeds the value of limit, increase the offset value in subsequent requests to continue getting the remaining results. (optional)
          /// </param>
-        /// <returns>Task of ApiResponse&lt;Projects&gt;</returns>
+        /// <returns>Task of ApiResponse&lt;ProjectsPage&gt;</returns>
         
-        System.Threading.Tasks.Task<ApiResponse<Projects>> GetProjectsAsync (string accountId, string acceptLanguage= default(string), Region? region= null, string userId= default(string), List<Fields> fields= default(List<Fields>), List<Classification> filterClassification= default(List<Classification>), List<Platform> filterPlatform= default(List<Platform>), List<Products> filterProducts= default(List<Products>), string filterName= default(string), List<string> filterType= default(List<string>), List<Status> filterStatus= default(List<Status>), string filterBusinessUnitId= default(string), string filterJobNumber= default(string), string filterUpdatedAt= default(string), FilterTextMatch? filterTextMatch= null, List<SortBy> sort= default(List<SortBy>), int? limit= default(int?), int? offset= default(int?),  string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<ApiResponse<ProjectsPage>> GetProjectsAsync (string accountId, string acceptLanguage= default(string), Region? region= null, string userId= default(string), List<Fields> fields= default(List<Fields>), List<Classification> filterClassification= default(List<Classification>), List<Platform> filterPlatform= default(List<Platform>), List<Products> filterProducts= default(List<Products>), string filterName= default(string), List<string> filterType= default(List<string>), List<Status> filterStatus= default(List<Status>), string filterBusinessUnitId= default(string), string filterJobNumber= default(string), string filterUpdatedAt= default(string), FilterTextMatch? filterTextMatch= null, List<SortBy> sort= default(List<SortBy>), int? limit= default(int?), int? offset= default(int?),  string accessToken = null, bool throwOnError = true);
     }
 
     /// <summary>
@@ -404,9 +404,9 @@ namespace Autodesk.Construction.AccountAdmin.Http
          /// <param name="region">
          ///The geographic area where the data is stored. Acceptable values: US, EMEA, AUS. By default, it is set to US. (optional)
          /// </param>
-        /// <returns>Task of ApiResponse&lt;ProjectPatchResponse&gt;></returns>
+        /// <returns>Task of ApiResponse&lt;ProjectPatch&gt;></returns>
         
-        public async System.Threading.Tasks.Task<ApiResponse<ProjectPatchResponse>> CreateProjectImageAsync (string projectId,string accountId,System.IO.Stream body,Region? region= null, string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ApiResponse<ProjectPatch>> CreateProjectImageAsync (string projectId,string accountId,System.IO.Stream body,Region? region= null, string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into CreateProjectImageAsync ");
             using (var request = new HttpRequestMessage())
@@ -484,10 +484,10 @@ namespace Autodesk.Construction.AccountAdmin.Http
                 else if (!response.IsSuccessStatusCode)
                 {
                     logger.LogError($"response unsuccess with status code: {response.StatusCode}");
-                    return new ApiResponse<ProjectPatchResponse>(response, default(ProjectPatchResponse));
+                    return new ApiResponse<ProjectPatch>(response, default(ProjectPatch));
                 }
                 logger.LogInformation($"Exited from CreateProjectImageAsync with response statusCode: {response.StatusCode}");
-                return new ApiResponse<ProjectPatchResponse>(response, await LocalMarshalling.DeserializeAsync<ProjectPatchResponse>(response.Content));
+                return new ApiResponse<ProjectPatch>(response, await LocalMarshalling.DeserializeAsync<ProjectPatch>(response.Content));
 
             } // using
         }
@@ -657,9 +657,9 @@ namespace Autodesk.Construction.AccountAdmin.Http
          /// <param name="offset">
          ///The record number that the returned page should start with. When the total number of records exceeds the value of limit, increase the offset value in subsequent requests to continue getting the remaining results. (optional)
          /// </param>
-        /// <returns>Task of ApiResponse&lt;Projects&gt;></returns>
+        /// <returns>Task of ApiResponse&lt;ProjectsPage&gt;></returns>
         
-        public async System.Threading.Tasks.Task<ApiResponse<Projects>> GetProjectsAsync (string accountId,string acceptLanguage= default(string),Region? region= null,string userId= default(string),List<Fields> fields= default(List<Fields>),List<Classification> filterClassification= default(List<Classification>),List<Platform> filterPlatform= default(List<Platform>),List<Products> filterProducts= default(List<Products>),string filterName= default(string),List<string> filterType= default(List<string>),List<Status> filterStatus= default(List<Status>),string filterBusinessUnitId= default(string),string filterJobNumber= default(string),string filterUpdatedAt= default(string),FilterTextMatch? filterTextMatch= null,List<SortBy> sort= default(List<SortBy>),int? limit= default(int?),int? offset= default(int?), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ApiResponse<ProjectsPage>> GetProjectsAsync (string accountId,string acceptLanguage= default(string),Region? region= null,string userId= default(string),List<Fields> fields= default(List<Fields>),List<Classification> filterClassification= default(List<Classification>),List<Platform> filterPlatform= default(List<Platform>),List<Products> filterProducts= default(List<Products>),string filterName= default(string),List<string> filterType= default(List<string>),List<Status> filterStatus= default(List<Status>),string filterBusinessUnitId= default(string),string filterJobNumber= default(string),string filterUpdatedAt= default(string),FilterTextMatch? filterTextMatch= null,List<SortBy> sort= default(List<SortBy>),int? limit= default(int?),int? offset= default(int?), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into GetProjectsAsync ");
             using (var request = new HttpRequestMessage())
@@ -746,10 +746,10 @@ namespace Autodesk.Construction.AccountAdmin.Http
                 else if (!response.IsSuccessStatusCode)
                 {
                     logger.LogError($"response unsuccess with status code: {response.StatusCode}");
-                    return new ApiResponse<Projects>(response, default(Projects));
+                    return new ApiResponse<ProjectsPage>(response, default(ProjectsPage));
                 }
                 logger.LogInformation($"Exited from GetProjectsAsync with response statusCode: {response.StatusCode}");
-                return new ApiResponse<Projects>(response, await LocalMarshalling.DeserializeAsync<Projects>(response.Content));
+                return new ApiResponse<ProjectsPage>(response, await LocalMarshalling.DeserializeAsync<ProjectsPage>(response.Content));
 
             } // using
         }

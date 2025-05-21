@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Construction.Account.Admin
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,53 +34,29 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Construction.AccountAdmin.Model
 {
     /// <summary>
-    /// UserImportResponse
+    /// AccountCompaniesPage
     /// </summary>
     [DataContract]
-    public partial class UserImportResponse 
+    public partial class AccountCompaniesPage 
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="UserImportResponse" /> class.
+        /// Initializes a new instance of the <see cref="AccountCompaniesPage" /> class.
         /// </summary>
-        public UserImportResponse()
+        public AccountCompaniesPage()
         {
         }
         
         /// <summary>
-        ///Import success user count
+        ///Gets or Sets Pagination
         /// </summary>
-        /// <value>
-        ///Import success user count
-        /// </value>
-        [DataMember(Name="success", EmitDefaultValue=false)]
-        public int? Success { get; set; }
+        [DataMember(Name="pagination", EmitDefaultValue=false)]
+        public Pagination Pagination { get; set; }
 
         /// <summary>
-        ///Import failure user count
+        ///Gets or Sets Results
         /// </summary>
-        /// <value>
-        ///Import failure user count
-        /// </value>
-        [DataMember(Name="failure", EmitDefaultValue=false)]
-        public int? Failure { get; set; }
-
-        /// <summary>
-        ///Array of user objects that were successfully imported
-        /// </summary>
-        /// <value>
-        ///Array of user objects that were successfully imported
-        /// </value>
-        [DataMember(Name="success_items", EmitDefaultValue=false)]
-        public List<User> SuccessItems { get; set; }
-
-        /// <summary>
-        ///Array of user objects that failed to import, along with content and error information
-        /// </summary>
-        /// <value>
-        ///Array of user objects that failed to import, along with content and error information
-        /// </value>
-        [DataMember(Name="failure_items", EmitDefaultValue=false)]
-        public List<User> FailureItems { get; set; }
+        [DataMember(Name="results", EmitDefaultValue=false)]
+        public List<AccountCompany> Results { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Construction.Account.Admin
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,15 +34,15 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Construction.AccountAdmin.Model
 {
     /// <summary>
-    /// CompanyImportResponse
+    /// CompanyImport
     /// </summary>
     [DataContract]
-    public partial class CompanyImportResponse 
+    public partial class CompanyImport 
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="CompanyImportResponse" /> class.
+        /// Initializes a new instance of the <see cref="CompanyImport" /> class.
         /// </summary>
-        public CompanyImportResponse()
+        public CompanyImport()
         {
         }
         
@@ -52,7 +53,7 @@ namespace Autodesk.Construction.AccountAdmin.Model
         ///Import success company count
         /// </value>
         [DataMember(Name="success", EmitDefaultValue=false)]
-        public int? Success { get; set; }
+        public int Success { get; set; }
 
         /// <summary>
         ///Import failure company count
@@ -61,7 +62,7 @@ namespace Autodesk.Construction.AccountAdmin.Model
         ///Import failure company count
         /// </value>
         [DataMember(Name="failure", EmitDefaultValue=false)]
-        public int? Failure { get; set; }
+        public int Failure { get; set; }
 
         /// <summary>
         ///Array of company objects that were successfully imported
