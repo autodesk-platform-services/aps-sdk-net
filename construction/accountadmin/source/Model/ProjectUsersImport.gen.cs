@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Construction.Account.Admin
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,23 +34,28 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Construction.AccountAdmin.Model
 {
     /// <summary>
-    /// BusinessUnitsResponse
+    /// ProjectUsersImport
     /// </summary>
     [DataContract]
-    public partial class BusinessUnitsResponse 
+    public partial class ProjectUsersImport 
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="BusinessUnitsResponse" /> class.
+        /// Initializes a new instance of the <see cref="ProjectUsersImport" /> class.
         /// </summary>
-        public BusinessUnitsResponse()
+        public ProjectUsersImport()
         {
         }
         
         /// <summary>
-        ///Gets or Sets BusinessUnits
+        ///We don’t currently support this field, but expect to in a future release.
+///If the response returns jobId with a valid UUID value, the user import operation was successful.
         /// </summary>
-        [DataMember(Name="business_units", EmitDefaultValue=false)]
-        public List<BusinessUnit> BusinessUnits { get; set; }
+        /// <value>
+        ///We don’t currently support this field, but expect to in a future release.
+///If the response returns jobId with a valid UUID value, the user import operation was successful.
+        /// </value>
+        [DataMember(Name="jobId", EmitDefaultValue=false)]
+        public string JobId { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
