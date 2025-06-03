@@ -498,7 +498,7 @@ namespace Autodesk.Oss.Http
         ///**Note:** The signed URL returned by [Generate OSS Signed URL](/en/docs/data/v2/reference/http/signedresources-:id-GET/) contains `hash` as a URI parameter.
         /// </param>
         /// <param name="contentRange">
-        ///The byte range to upload, specified in the form `bytes=<START_BYTE>-<END_BYTE>`.
+        ///The byte range to upload, specified in the form `bytes <START_BYTE>-<END_BYTE>/<TOTAL_BYTES>`.
         /// </param>
         /// <param name="sessionId">
         ///An ID to uniquely identify the file upload session.
@@ -585,7 +585,9 @@ namespace Autodesk.Oss.Http
             {
                 if (value != null)
                 {
-                    if (!string.Equals(baseName, "Content-Range"))
+                    if (!string.Equals(baseName, "Content-Range")
+                        && !string.Equals(baseName, "Content-Type")
+								&& !string.Equals(baseName, "Content-Disposition"))
                     {
                         req.Headers.TryAddWithoutValidation(baseName, LocalMarshalling.ParameterToString(value)); // header parameter
                     }
@@ -1954,7 +1956,7 @@ namespace Autodesk.Oss.Http
         ///**Note:** The signed URL returned by [Generate OSS Signed URL](/en/docs/data/v2/reference/http/signedresources-:id-GET/) contains `hash` as a URI parameter.
         /// </param>
         /// <param name="contentRange">
-        ///The byte range to upload, specified in the form `bytes=<START_BYTE>-<END_BYTE>`.
+        ///The byte range to upload, specified in the form `bytes <START_BYTE>-<END_BYTE>/<TOTAL_BYTES>`.
         /// </param>
         /// <param name="sessionId">
         ///An ID to uniquely identify the file upload session.
