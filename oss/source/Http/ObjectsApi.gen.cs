@@ -587,7 +587,7 @@ namespace Autodesk.Oss.Http
                 {
                     if (!string.Equals(baseName, "Content-Range")
                         && !string.Equals(baseName, "Content-Type")
-								&& !string.Equals(baseName, "Content-Disposition"))
+			&& !string.Equals(baseName, "Content-Disposition"))
                     {
                         req.Headers.TryAddWithoutValidation(baseName, LocalMarshalling.ParameterToString(value)); // header parameter
                     }
