@@ -2043,8 +2043,10 @@ namespace Autodesk.Oss.Http
                     logger.LogError($"response unsuccess with status code: {response.StatusCode}");
                     return new ApiResponse<ObjectDetails>(response, default(ObjectDetails));
                 }
-                logger.LogInformation($"Exited from UploadSignedResourcesChunkAsync with response statusCode: {response.StatusCode}");
-                return new ApiResponse<ObjectDetails>(response, await LocalMarshalling.DeserializeAsync<ObjectDetails>(response.Content));
+					 logger.LogInformation($"Exited from UploadSignedResourcesChunkAsync with response statusCode: {response.StatusCode}");
+                return (response.Content?.Headers.ContentType?.MediaType == null)
+                    ? new ApiResponse<ObjectDetails>(response, default(ObjectDetails))
+                    : new ApiResponse<ObjectDetails>(response, await LocalMarshalling.DeserializeAsync<ObjectDetails>(response.Content));
 
             } // using
         }
