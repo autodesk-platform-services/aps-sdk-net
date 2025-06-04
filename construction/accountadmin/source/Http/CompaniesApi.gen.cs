@@ -450,35 +450,6 @@ namespace Autodesk.Construction.AccountAdmin.Http
 
                 SetHeader("Region", region, request);
 
-                // tell the underlying pipeline what scope we'd like to use
-                // if (scopes == null)
-                // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
-                // }
-                // else
-                // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
-                // }
-                // if (scopes == null)
-                // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
-                // }
-                // else
-                // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
-                // }
-                // if (scopes == null)
-                // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
-                // }
-                // else
-                // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
-                // }
-
                 request.Method = new HttpMethod("POST");
 
                 // make the HTTP request
