@@ -123,13 +123,13 @@ namespace Samples
             Company company = await adminClient.CreateCompanyAsync(accountId, companyPayload: companyPayload);
             Console.WriteLine(company);
         }
-        public async Task getAccountCompanies()
+        public async Task getCompaniesWithPagination()
         {
             // Example values for demonstration
             Region region = Region.US;
             string userId = adminUserId;
             string filterName = "004";
-            string filterTrade = "Concrete";
+            string filterTrade = "Cast-in-Place";
             string filterErpId = "c79bf096-5a3e-41a4-aaf8-a771ed329047";
             string filterTaxId = "413-07-5767";
             string filterUpdatedAt = "2025-05-19T00:00:00.000Z..";
@@ -143,7 +143,7 @@ namespace Samples
             int? limit = 1;
             int? offset = 0;
 
-            var response = await adminClient.GetAccountCompaniesAsync(
+            CompaniesPage response = await adminClient.GetCompaniesWithPaginationAsync(
                 accountId: accountId,
                 region: region,
                 userId: userId,
@@ -412,7 +412,7 @@ namespace Samples
             // await admin.searchCompany();
             // await admin.getProjectCompanies();
             // await admin.createCompany();
-            await admin.getAccountCompanies();
+            await admin.getCompaniesWithPagination();
             // await admin.importCompanies();
             // await admin.updateCompany();
             // await admin.updateCompanyImage();

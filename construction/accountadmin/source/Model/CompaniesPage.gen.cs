@@ -34,15 +34,15 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Construction.AccountAdmin.Model
 {
     /// <summary>
-    /// AccountCompaniesPage
+    /// CompaniesPage
     /// </summary>
     [DataContract]
-    public partial class AccountCompaniesPage 
+    public partial class CompaniesPage 
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="AccountCompaniesPage" /> class.
+        /// Initializes a new instance of the <see cref="CompaniesPage" /> class.
         /// </summary>
-        public AccountCompaniesPage()
+        public CompaniesPage()
         {
         }
         

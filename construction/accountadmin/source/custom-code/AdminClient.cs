@@ -299,8 +299,8 @@ namespace Autodesk.Construction.AccountAdmin
                 /// <param name="offset">
                 ///The record number to start returning results from, used for pagination. For example, if limit=20 and offset=20, the request retrieves the second page of results. (optional)
                 /// </param>
-                /// <returns>Task of ApiResponse&lt;AccountCompaniesPage&gt;</returns>
-                public async System.Threading.Tasks.Task<AccountCompaniesPage> GetAccountCompaniesAsync(string accountId, Region? region= null, string userId= default(string), string filterName= default(string), string filterTrade= default(string), string filterErpId= default(string), string filterTaxId= default(string), string filterUpdatedAt= default(string), List<CompanyOrFilters> orFilters= default(List<CompanyOrFilters>), FilterTextMatch? filterTextMatch= null, List<FilterCompanySort> sort= default(List<FilterCompanySort>), List<FilterCompanyFields> fields= default(List<FilterCompanyFields>), int? limit= default(int?), int? offset= default(int?),  string accessToken = null, bool throwOnError = true)
+                /// <returns>Task of ApiResponse&lt;CompaniesPage&gt;</returns>
+                public async System.Threading.Tasks.Task<CompaniesPage> GetCompaniesWithPaginationAsync(string accountId, Region? region= null, string userId= default(string), string filterName= default(string), string filterTrade= default(string), string filterErpId= default(string), string filterTaxId= default(string), string filterUpdatedAt= default(string), List<CompanyOrFilters> orFilters= default(List<CompanyOrFilters>), FilterTextMatch? filterTextMatch= null, List<FilterCompanySort> sort= default(List<FilterCompanySort>), List<FilterCompanyFields> fields= default(List<FilterCompanyFields>), int? limit= default(int?), int? offset= default(int?),  string accessToken = null, bool throwOnError = true)
                 {
                         if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
                         {
@@ -310,7 +310,7 @@ namespace Autodesk.Construction.AccountAdmin
                         {
                                 accessToken = await this.AuthenticationProvider.GetAccessToken();
                         }
-                        var response = await this.CompaniesApi.GetAccountCompaniesAsync(accountId, region, userId, filterName, filterTrade, filterErpId, filterTaxId, filterUpdatedAt, orFilters, filterTextMatch, sort, fields, limit, offset, accessToken, throwOnError);
+                        var response = await this.CompaniesApi.GetCompaniesWithPaginationAsync(accountId, region, userId, filterName, filterTrade, filterErpId, filterTaxId, filterUpdatedAt, orFilters, filterTextMatch, sort, fields, limit, offset, accessToken, throwOnError);
                         return response.Content;
                 }
                 

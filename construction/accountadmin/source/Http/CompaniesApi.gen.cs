@@ -115,9 +115,9 @@ namespace Autodesk.Construction.AccountAdmin.Http
          /// <param name="offset">
          ///The record number to start returning results from, used for pagination. For example, if limit=20 and offset=20, the request retrieves the second page of results. (optional)
          /// </param>
-        /// <returns>Task of ApiResponse&lt;AccountCompaniesPage&gt;</returns>
+        /// <returns>Task of ApiResponse&lt;CompaniesPage&gt;</returns>
         
-        System.Threading.Tasks.Task<ApiResponse<AccountCompaniesPage>> GetAccountCompaniesAsync (string accountId, Region? region= null, string userId= default(string), string filterName= default(string), string filterTrade= default(string), string filterErpId= default(string), string filterTaxId= default(string), string filterUpdatedAt= default(string), List<CompanyOrFilters> orFilters= default(List<CompanyOrFilters>), FilterTextMatch? filterTextMatch= null, List<FilterCompanySort> sort= default(List<FilterCompanySort>), List<FilterCompanyFields> fields= default(List<FilterCompanyFields>), int? limit= default(int?), int? offset= default(int?),  string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<ApiResponse<CompaniesPage>> GetCompaniesWithPaginationAsync (string accountId, Region? region= null, string userId= default(string), string filterName= default(string), string filterTrade= default(string), string filterErpId= default(string), string filterTaxId= default(string), string filterUpdatedAt= default(string), List<CompanyOrFilters> orFilters= default(List<CompanyOrFilters>), FilterTextMatch? filterTextMatch= null, List<FilterCompanySort> sort= default(List<FilterCompanySort>), List<FilterCompanyFields> fields= default(List<FilterCompanyFields>), int? limit= default(int?), int? offset= default(int?),  string accessToken = null, bool throwOnError = true);
         /// <summary>
         /// Get all companies in an account
         /// </summary>
@@ -556,11 +556,11 @@ namespace Autodesk.Construction.AccountAdmin.Http
          /// <param name="offset">
          ///The record number to start returning results from, used for pagination. For example, if limit=20 and offset=20, the request retrieves the second page of results. (optional)
          /// </param>
-        /// <returns>Task of ApiResponse&lt;AccountCompaniesPage&gt;></returns>
+        /// <returns>Task of ApiResponse&lt;CompaniesPage&gt;></returns>
         
-        public async System.Threading.Tasks.Task<ApiResponse<AccountCompaniesPage>> GetAccountCompaniesAsync (string accountId,Region? region= null,string userId= default(string),string filterName= default(string),string filterTrade= default(string),string filterErpId= default(string),string filterTaxId= default(string),string filterUpdatedAt= default(string),List<CompanyOrFilters> orFilters= default(List<CompanyOrFilters>),FilterTextMatch? filterTextMatch= null,List<FilterCompanySort> sort= default(List<FilterCompanySort>),List<FilterCompanyFields> fields= default(List<FilterCompanyFields>),int? limit= default(int?),int? offset= default(int?), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ApiResponse<CompaniesPage>> GetCompaniesWithPaginationAsync (string accountId,Region? region= null,string userId= default(string),string filterName= default(string),string filterTrade= default(string),string filterErpId= default(string),string filterTaxId= default(string),string filterUpdatedAt= default(string),List<CompanyOrFilters> orFilters= default(List<CompanyOrFilters>),FilterTextMatch? filterTextMatch= null,List<FilterCompanySort> sort= default(List<FilterCompanySort>),List<FilterCompanyFields> fields= default(List<FilterCompanyFields>),int? limit= default(int?),int? offset= default(int?), string accessToken = null, bool throwOnError = true)
         {
-            logger.LogInformation("Entered into GetAccountCompaniesAsync ");
+            logger.LogInformation("Entered into GetCompaniesWithPaginationAsync ");
             using (var request = new HttpRequestMessage())
             {
                 var queryParam = new Dictionary<string, object>();
@@ -641,10 +641,10 @@ namespace Autodesk.Construction.AccountAdmin.Http
                 else if (!response.IsSuccessStatusCode)
                 {
                     logger.LogError($"response unsuccess with status code: {response.StatusCode}");
-                    return new ApiResponse<AccountCompaniesPage>(response, default(AccountCompaniesPage));
+                    return new ApiResponse<CompaniesPage>(response, default(CompaniesPage));
                 }
-                logger.LogInformation($"Exited from GetAccountCompaniesAsync with response statusCode: {response.StatusCode}");
-                return new ApiResponse<AccountCompaniesPage>(response, await LocalMarshalling.DeserializeAsync<AccountCompaniesPage>(response.Content));
+                logger.LogInformation($"Exited from GetCompaniesWithPaginationAsync with response statusCode: {response.StatusCode}");
+                return new ApiResponse<CompaniesPage>(response, await LocalMarshalling.DeserializeAsync<CompaniesPage>(response.Content));
 
             } // using
         }

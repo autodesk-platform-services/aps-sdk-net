@@ -111,7 +111,7 @@ namespace Autodesk.Construction.AccountAdmin.Model
         ///Monetary value of the project
         /// </value>
         [DataMember(Name="value", EmitDefaultValue=false)]
-        public decimal Value { get; set; }
+        public decimal? Value { get; set; }
 
         /// <summary>
         ///Currency for project value
