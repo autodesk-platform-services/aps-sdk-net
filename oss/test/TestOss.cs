@@ -178,8 +178,7 @@ public class TestOss
 			});
 
 		string signedUrl = signedObject.SignedUrl;
-		string hash = signedUrl[(signedUrl.LastIndexOf('/') + 1)..signedUrl.IndexOf('?')];
-
+		string hash = new Uri(signedUrl).Segments.Last();
 
 		ObjectDetails? objectDetails = null;
 		int numChunks = (int)Math.Ceiling((double)fileSize / chunkSize);
@@ -215,7 +214,7 @@ public class TestOss
 	[TestMethod]
 	public async Task TestGetSignedResourceAsync()
 	{
-		string hash = signedUrl[(signedUrl.LastIndexOf('/') + 1)..signedUrl.IndexOf('?')];
+		string hash = new Uri(signedUrl).Segments.Last();
 		Stream? signedResource = await _ossClient.GetSignedResourceAsync(
 			accessToken: token,
 			hash: hash);
@@ -225,7 +224,7 @@ public class TestOss
 	[TestMethod]
 	public async Task TestDeleteSignedResourceAsync()
 	{
-		string hash = signedUrl[(signedUrl.LastIndexOf('/') + 1)..signedUrl.IndexOf('?')];
+		string hash = new Uri(signedUrl).Segments.Last();
 		HttpResponseMessage httpResponseMessage = await _ossClient.DeleteSignedResourceAsync(
 			accessToken: token,
 			hash: hash);
