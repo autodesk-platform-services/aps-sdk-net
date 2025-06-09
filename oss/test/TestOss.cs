@@ -159,9 +159,62 @@ public class TestOss
 	}
 
 	[TestMethod]
+	public async Task TestUploadSignedResourcesChunkAsync()
+	{
+		string sessionId = Guid.NewGuid().ToString();
+		var fileInfo = new FileInfo(sourceToUpload!);
+		long fileSize = fileInfo.Length;
+		const int chunkSize = 5 * 1024 * 1024; // 5MB
+
+		CreateObjectSigned? signedObject = await _ossClient.CreateSignedResourceAsync(
+			accessToken: token,
+			access: Access.Write,
+			bucketKey: bucketKey,
+			objectKey: objectKey,
+			createSignedResource: new()
+			{
+				MinutesExpiration = 60,
+				SingleUse = false,
+			});
+
+		string signedUrl = signedObject.SignedUrl;
+		string hash = new Uri(signedUrl).Segments.Last();
+
+		ObjectDetails? objectDetails = null;
+		int numChunks = (int)Math.Ceiling((double)fileSize / chunkSize);
+
+		using var fileStream = File.OpenRead(sourceToUpload!);
+		byte[] buffer = new byte[chunkSize];
+
+		for (int index = 0; index < numChunks; index++)
+		{
+			long startByte = index * (long)chunkSize;
+			long endByte = Math.Min(startByte + chunkSize - 1, fileSize - 1);
+			int contentLength = (int)(endByte - startByte + 1);
+
+			int bytesRead = await fileStream.ReadAsync(buffer.AsMemory(0, contentLength));
+			using var chunkStream = new MemoryStream(buffer, 0, bytesRead);
+
+			string contentRange = $"bytes {startByte}-{endByte}/{fileSize}";
+			string contentType = $"application/octet-stream";
+
+			objectDetails = await _ossClient.UploadSignedResourcesChunkAsync(
+					accessToken: token,
+					hash: hash,
+					contentType: contentType,
+					contentRange: contentRange,
+					sessionId: sessionId,
+					body: chunkStream);
+		}
+
+		Assert.IsNotNull(objectDetails);
+		Assert.IsInstanceOfType<ObjectDetails>(objectDetails);
+	}
+
+	[TestMethod]
 	public async Task TestGetSignedResourceAsync()
 	{
-		string hash = signedUrl[(signedUrl.LastIndexOf('/') + 1)..signedUrl.IndexOf('?')];
+		string hash = new Uri(signedUrl).Segments.Last();
 		Stream? signedResource = await _ossClient.GetSignedResourceAsync(
 			accessToken: token,
 			hash: hash);
@@ -171,7 +224,7 @@ public class TestOss
 	[TestMethod]
 	public async Task TestDeleteSignedResourceAsync()
 	{
-		string hash = signedUrl[(signedUrl.LastIndexOf('/') + 1)..signedUrl.IndexOf('?')];
+		string hash = new Uri(signedUrl).Segments.Last();
 		HttpResponseMessage httpResponseMessage = await _ossClient.DeleteSignedResourceAsync(
 			accessToken: token,
 			hash: hash);
