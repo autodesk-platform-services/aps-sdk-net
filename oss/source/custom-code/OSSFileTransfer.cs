@@ -402,6 +402,12 @@ namespace Autodesk.Oss
         {
             var requestId = !string.IsNullOrEmpty(parentRequestId) ? parentRequestId : Guid.NewGuid().ToString();
             requestId = requestId + ":" + GenerateSdkRequestId(bucketKey, objectKey);
+
+            if (_forgeService.Client.DefaultRequestHeaders.Contains("x-ads-request-id"))
+            {
+                _forgeService.Client.DefaultRequestHeaders.Remove("x-ads-request-id");
+            }
+            
             _forgeService.Client.DefaultRequestHeaders.Add("x-ads-request-id", requestId);
             return requestId;
         }
