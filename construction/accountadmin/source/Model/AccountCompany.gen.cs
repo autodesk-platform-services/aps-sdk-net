@@ -109,8 +109,8 @@ namespace Autodesk.Construction.AccountAdmin.Model
         /// <summary>
         ///Gets or Sets Status
         /// </summary>
-        [DataMember(Name="status", EmitDefaultValue=true)]
-        public CompanyStatus Status { get; set; }
+        [DataMember(Name="status", EmitDefaultValue=false)]
+        public string Status { get; set; }
 
         /// <summary>
         ///Gets or Sets CreatedAt
