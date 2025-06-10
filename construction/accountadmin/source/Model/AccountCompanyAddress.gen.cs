@@ -49,8 +49,8 @@ namespace Autodesk.Construction.AccountAdmin.Model
         /// <summary>
         ///Gets or Sets Type
         /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=true)]
-        public AddressType Type { get; set; }
+        [DataMember(Name="type", EmitDefaultValue=false)]
+        public string Type { get; set; }
 
         /// <summary>
         ///Gets or Sets AddressLine1
