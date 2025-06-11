@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Construction.Account.Admin
  *
@@ -62,9 +62,9 @@ namespace Autodesk.Construction.AccountAdmin.Http
          /// <param name="projectUserPayload">
          /// (optional)
          /// </param>
-        /// <returns>Task of ApiResponse&lt;ProjectUserResponse&gt;</returns>
+        /// <returns>Task of ApiResponse&lt;ProjectUserDetails&gt;</returns>
         
-        System.Threading.Tasks.Task<ApiResponse<ProjectUserResponse>> AssignProjectUserAsync (string projectId, string acceptLanguage= default(string), Region? region= null, string userId= default(string), ProjectUserPayload projectUserPayload= default(ProjectUserPayload),  string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<ApiResponse<ProjectUserDetails>> AssignProjectUserAsync (string projectId, string acceptLanguage= default(string), Region? region= null, string userId= default(string), ProjectUserPayload projectUserPayload= default(ProjectUserPayload),  string accessToken = null, bool throwOnError = true);
         /// <summary>
         /// Get project user
         /// </summary>
@@ -174,9 +174,9 @@ namespace Autodesk.Construction.AccountAdmin.Http
          /// <param name="offset">
          ///The record number that the returned page should start with. When the total number of records exceeds the value of limit, increase the offset value in subsequent requests to continue getting the remaining results. (optional)
          /// </param>
-        /// <returns>Task of ApiResponse&lt;ProjectUsers&gt;</returns>
+        /// <returns>Task of ApiResponse&lt;ProjectUsersPage&gt;</returns>
         
-        System.Threading.Tasks.Task<ApiResponse<ProjectUsers>> GetProjectUsersAsync (string projectId, string acceptLanguage= default(string), Region? region= null, string userId= default(string), List<Products> filterProducts= default(List<Products>), string filterName= default(string), string filterEmail= default(string), List<StatusFilter> filterStatus= default(List<StatusFilter>), List<AccessLevels> filterAccessLevels= default(List<AccessLevels>), string filterCompanyId= default(string), string filterCompanyName= default(string), List<string> filterAutodeskId= default(List<string>), List<string> filterId= default(List<string>), string filterRoleId= default(string), List<string> filterRoleIds= default(List<string>), List<UserSortBy> sort= default(List<UserSortBy>), List<UserFields> fields= default(List<UserFields>), List<OrFilters> orFilters= default(List<OrFilters>), FilterTextMatch? filterTextMatch= null, int? limit= default(int?), int? offset= default(int?),  string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<ApiResponse<ProjectUsersPage>> GetProjectUsersAsync (string projectId, string acceptLanguage= default(string), Region? region= null, string userId= default(string), List<Products> filterProducts= default(List<Products>), string filterName= default(string), string filterEmail= default(string), List<StatusFilter> filterStatus= default(List<StatusFilter>), List<AccessLevels> filterAccessLevels= default(List<AccessLevels>), string filterCompanyId= default(string), string filterCompanyName= default(string), List<string> filterAutodeskId= default(List<string>), List<string> filterId= default(List<string>), string filterRoleId= default(string), List<string> filterRoleIds= default(List<string>), List<UserSortBy> sort= default(List<UserSortBy>), List<UserFields> fields= default(List<UserFields>), List<OrFilters> orFilters= default(List<OrFilters>), FilterTextMatch? filterTextMatch= null, int? limit= default(int?), int? offset= default(int?),  string accessToken = null, bool throwOnError = true);
         /// <summary>
         /// Assigns multiple users to a project
         /// </summary>
@@ -199,9 +199,9 @@ namespace Autodesk.Construction.AccountAdmin.Http
          /// <param name="projectUsersImportPayload">
          /// (optional)
          /// </param>
-        /// <returns>Task of ApiResponse&lt;ProjectUsersImportResponse&gt;</returns>
+        /// <returns>Task of ApiResponse&lt;ProjectUsersImport&gt;</returns>
         
-        System.Threading.Tasks.Task<ApiResponse<ProjectUsersImportResponse>> ImportProjectUsersAsync (string projectId, string acceptLanguage= default(string), Region? region= null, string userId= default(string), ProjectUsersImportPayload projectUsersImportPayload= default(ProjectUsersImportPayload),  string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<ApiResponse<ProjectUsersImport>> ImportProjectUsersAsync (string projectId, string acceptLanguage= default(string), Region? region= null, string userId= default(string), ProjectUsersImportPayload projectUsersImportPayload= default(ProjectUsersImportPayload),  string accessToken = null, bool throwOnError = true);
         /// <summary>
         /// Remove Project User
         /// </summary>
@@ -256,9 +256,9 @@ namespace Autodesk.Construction.AccountAdmin.Http
          /// <param name="projectUsersUpdatePayload">
          /// (optional)
          /// </param>
-        /// <returns>Task of ApiResponse&lt;ProjectUserResponse&gt;</returns>
+        /// <returns>Task of ApiResponse&lt;ProjectUserDetails&gt;</returns>
         
-        System.Threading.Tasks.Task<ApiResponse<ProjectUserResponse>> UpdateProjectUserAsync (string projectId, string userId, string acceptLanguage= default(string), Region? region= null, string userId2= default(string), ProjectUsersUpdatePayload projectUsersUpdatePayload= default(ProjectUsersUpdatePayload),  string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<ApiResponse<ProjectUserDetails>> UpdateProjectUserAsync (string projectId, string userId, string acceptLanguage= default(string), Region? region= null, string userId2= default(string), ProjectUsersUpdatePayload projectUsersUpdatePayload= default(ProjectUsersUpdatePayload),  string accessToken = null, bool throwOnError = true);
     }
 
     /// <summary>
@@ -383,9 +383,9 @@ namespace Autodesk.Construction.AccountAdmin.Http
          /// <param name="projectUserPayload">
          /// (optional)
          /// </param>
-        /// <returns>Task of ApiResponse&lt;ProjectUserResponse&gt;></returns>
+        /// <returns>Task of ApiResponse&lt;ProjectUserDetails&gt;></returns>
         
-        public async System.Threading.Tasks.Task<ApiResponse<ProjectUserResponse>> AssignProjectUserAsync (string projectId,string acceptLanguage= default(string),Region? region= null,string userId= default(string),ProjectUserPayload projectUserPayload= default(ProjectUserPayload), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ApiResponse<ProjectUserDetails>> AssignProjectUserAsync (string projectId,string acceptLanguage= default(string),Region? region= null,string userId= default(string),ProjectUserPayload projectUserPayload= default(ProjectUserPayload), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into AssignProjectUserAsync ");
             using (var request = new HttpRequestMessage())
@@ -459,10 +459,10 @@ namespace Autodesk.Construction.AccountAdmin.Http
                 else if (!response.IsSuccessStatusCode)
                 {
                     logger.LogError($"response unsuccess with status code: {response.StatusCode}");
-                    return new ApiResponse<ProjectUserResponse>(response, default(ProjectUserResponse));
+                    return new ApiResponse<ProjectUserDetails>(response, default(ProjectUserDetails));
                 }
                 logger.LogInformation($"Exited from AssignProjectUserAsync with response statusCode: {response.StatusCode}");
-                return new ApiResponse<ProjectUserResponse>(response, await LocalMarshalling.DeserializeAsync<ProjectUserResponse>(response.Content));
+                return new ApiResponse<ProjectUserDetails>(response, await LocalMarshalling.DeserializeAsync<ProjectUserDetails>(response.Content));
 
             } // using
         }
@@ -656,9 +656,9 @@ namespace Autodesk.Construction.AccountAdmin.Http
          /// <param name="offset">
          ///The record number that the returned page should start with. When the total number of records exceeds the value of limit, increase the offset value in subsequent requests to continue getting the remaining results. (optional)
          /// </param>
-        /// <returns>Task of ApiResponse&lt;ProjectUsers&gt;></returns>
+        /// <returns>Task of ApiResponse&lt;ProjectUsersPage&gt;></returns>
         
-        public async System.Threading.Tasks.Task<ApiResponse<ProjectUsers>> GetProjectUsersAsync (string projectId,string acceptLanguage= default(string),Region? region= null,string userId= default(string),List<Products> filterProducts= default(List<Products>),string filterName= default(string),string filterEmail= default(string),List<StatusFilter> filterStatus= default(List<StatusFilter>),List<AccessLevels> filterAccessLevels= default(List<AccessLevels>),string filterCompanyId= default(string),string filterCompanyName= default(string),List<string> filterAutodeskId= default(List<string>),List<string> filterId= default(List<string>),string filterRoleId= default(string),List<string> filterRoleIds= default(List<string>),List<UserSortBy> sort= default(List<UserSortBy>),List<UserFields> fields= default(List<UserFields>),List<OrFilters> orFilters= default(List<OrFilters>),FilterTextMatch? filterTextMatch= null,int? limit= default(int?),int? offset= default(int?), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ApiResponse<ProjectUsersPage>> GetProjectUsersAsync (string projectId,string acceptLanguage= default(string),Region? region= null,string userId= default(string),List<Products> filterProducts= default(List<Products>),string filterName= default(string),string filterEmail= default(string),List<StatusFilter> filterStatus= default(List<StatusFilter>),List<AccessLevels> filterAccessLevels= default(List<AccessLevels>),string filterCompanyId= default(string),string filterCompanyName= default(string),List<string> filterAutodeskId= default(List<string>),List<string> filterId= default(List<string>),string filterRoleId= default(string),List<string> filterRoleIds= default(List<string>),List<UserSortBy> sort= default(List<UserSortBy>),List<UserFields> fields= default(List<UserFields>),List<OrFilters> orFilters= default(List<OrFilters>),FilterTextMatch? filterTextMatch= null,int? limit= default(int?),int? offset= default(int?), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into GetProjectUsersAsync ");
             using (var request = new HttpRequestMessage())
@@ -748,10 +748,10 @@ namespace Autodesk.Construction.AccountAdmin.Http
                 else if (!response.IsSuccessStatusCode)
                 {
                     logger.LogError($"response unsuccess with status code: {response.StatusCode}");
-                    return new ApiResponse<ProjectUsers>(response, default(ProjectUsers));
+                    return new ApiResponse<ProjectUsersPage>(response, default(ProjectUsersPage));
                 }
                 logger.LogInformation($"Exited from GetProjectUsersAsync with response statusCode: {response.StatusCode}");
-                return new ApiResponse<ProjectUsers>(response, await LocalMarshalling.DeserializeAsync<ProjectUsers>(response.Content));
+                return new ApiResponse<ProjectUsersPage>(response, await LocalMarshalling.DeserializeAsync<ProjectUsersPage>(response.Content));
 
             } // using
         }
@@ -777,9 +777,9 @@ namespace Autodesk.Construction.AccountAdmin.Http
          /// <param name="projectUsersImportPayload">
          /// (optional)
          /// </param>
-        /// <returns>Task of ApiResponse&lt;ProjectUsersImportResponse&gt;></returns>
+        /// <returns>Task of ApiResponse&lt;ProjectUsersImport&gt;></returns>
         
-        public async System.Threading.Tasks.Task<ApiResponse<ProjectUsersImportResponse>> ImportProjectUsersAsync (string projectId,string acceptLanguage= default(string),Region? region= null,string userId= default(string),ProjectUsersImportPayload projectUsersImportPayload= default(ProjectUsersImportPayload), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ApiResponse<ProjectUsersImport>> ImportProjectUsersAsync (string projectId,string acceptLanguage= default(string),Region? region= null,string userId= default(string),ProjectUsersImportPayload projectUsersImportPayload= default(ProjectUsersImportPayload), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into ImportProjectUsersAsync ");
             using (var request = new HttpRequestMessage())
@@ -853,10 +853,10 @@ namespace Autodesk.Construction.AccountAdmin.Http
                 else if (!response.IsSuccessStatusCode)
                 {
                     logger.LogError($"response unsuccess with status code: {response.StatusCode}");
-                    return new ApiResponse<ProjectUsersImportResponse>(response, default(ProjectUsersImportResponse));
+                    return new ApiResponse<ProjectUsersImport>(response, default(ProjectUsersImport));
                 }
                 logger.LogInformation($"Exited from ImportProjectUsersAsync with response statusCode: {response.StatusCode}");
-                return new ApiResponse<ProjectUsersImportResponse>(response, await LocalMarshalling.DeserializeAsync<ProjectUsersImportResponse>(response.Content));
+                return new ApiResponse<ProjectUsersImport>(response, await LocalMarshalling.DeserializeAsync<ProjectUsersImport>(response.Content));
 
             } // using
         }
@@ -994,9 +994,9 @@ namespace Autodesk.Construction.AccountAdmin.Http
          /// <param name="projectUsersUpdatePayload">
          /// (optional)
          /// </param>
-        /// <returns>Task of ApiResponse&lt;ProjectUserResponse&gt;></returns>
+        /// <returns>Task of ApiResponse&lt;ProjectUserDetails&gt;></returns>
         
-        public async System.Threading.Tasks.Task<ApiResponse<ProjectUserResponse>> UpdateProjectUserAsync (string projectId,string userId,string acceptLanguage= default(string),Region? region= null,string userId2= default(string),ProjectUsersUpdatePayload projectUsersUpdatePayload= default(ProjectUsersUpdatePayload), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ApiResponse<ProjectUserDetails>> UpdateProjectUserAsync (string projectId,string userId,string acceptLanguage= default(string),Region? region= null,string userId2= default(string),ProjectUsersUpdatePayload projectUsersUpdatePayload= default(ProjectUsersUpdatePayload), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into UpdateProjectUserAsync ");
             using (var request = new HttpRequestMessage())
@@ -1071,10 +1071,10 @@ namespace Autodesk.Construction.AccountAdmin.Http
                 else if (!response.IsSuccessStatusCode)
                 {
                     logger.LogError($"response unsuccess with status code: {response.StatusCode}");
-                    return new ApiResponse<ProjectUserResponse>(response, default(ProjectUserResponse));
+                    return new ApiResponse<ProjectUserDetails>(response, default(ProjectUserDetails));
                 }
                 logger.LogInformation($"Exited from UpdateProjectUserAsync with response statusCode: {response.StatusCode}");
-                return new ApiResponse<ProjectUserResponse>(response, await LocalMarshalling.DeserializeAsync<ProjectUserResponse>(response.Content));
+                return new ApiResponse<ProjectUserDetails>(response, await LocalMarshalling.DeserializeAsync<ProjectUserDetails>(response.Content));
 
             } // using
         }

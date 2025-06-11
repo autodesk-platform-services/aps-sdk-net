@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Construction.Account.Admin
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,41 +34,44 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Construction.AccountAdmin.Model
 {
     /// <summary>
-    /// ProjectUsers
+    /// Defines companyOrFilters
     /// </summary>
-    [DataContract]
-    public partial class ProjectUsers 
+    ///<value></value>
+    
+    [JsonConverter(typeof(StringEnumConverter))]
+    
+    public enum CompanyOrFilters
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ProjectUsers" /> class.
-        /// </summary>
-        public ProjectUsers()
-        {
-        }
         
         /// <summary>
-        ///Gets or Sets Pagination
+        /// Enum ErpId for value: erpId
         /// </summary>
-        [DataMember(Name="pagination", EmitDefaultValue=false)]
-        public ProjectsPagination Pagination { get; set; }
-
+        [EnumMember(Value = "erpId")]
+        ErpId,
+        
         /// <summary>
-        ///The requested page of project users.
+        /// Enum Name for value: name
         /// </summary>
-        /// <value>
-        ///The requested page of project users.
-        /// </value>
-        [DataMember(Name="results", EmitDefaultValue=false)]
-        public List<ProjectUser> Results { get; set; }
-
+        [EnumMember(Value = "name")]
+        Name,
+        
         /// <summary>
-        /// Returns the string presentation of the object
+        /// Enum TaxId for value: taxId
         /// </summary>
-        /// <returns>String presentation of the object</returns>
-        public override string ToString()
-        {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
-        }
+        [EnumMember(Value = "taxId")]
+        TaxId,
+        
+        /// <summary>
+        /// Enum Trade for value: trade
+        /// </summary>
+        [EnumMember(Value = "trade")]
+        Trade,
+        
+        /// <summary>
+        /// Enum UpdatedAt for value: updatedAt
+        /// </summary>
+        [EnumMember(Value = "updatedAt")]
+        UpdatedAt
     }
 
 }

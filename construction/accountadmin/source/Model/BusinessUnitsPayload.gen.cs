@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Construction.Account.Admin
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,15 +34,15 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Construction.AccountAdmin.Model
 {
     /// <summary>
-    /// BusinessUnitsRequestPyload
+    /// BusinessUnitsPayload
     /// </summary>
     [DataContract]
-    public partial class BusinessUnitsRequestPyload 
+    public partial class BusinessUnitsPayload 
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="BusinessUnitsRequestPyload" /> class.
+        /// Initializes a new instance of the <see cref="BusinessUnitsPayload" /> class.
         /// </summary>
-        public BusinessUnitsRequestPyload()
+        public BusinessUnitsPayload()
         {
         }
         
@@ -49,7 +50,7 @@ namespace Autodesk.Construction.AccountAdmin.Model
         ///Gets or Sets BusinessUnits
         /// </summary>
         [DataMember(Name="business_units", EmitDefaultValue=false)]
-        public List<BusinessUnitsRequest> BusinessUnits { get; set; }
+        public List<BusinessUnitsObject> BusinessUnits { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
