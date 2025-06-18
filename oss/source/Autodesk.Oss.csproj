@@ -6,11 +6,13 @@
     <Authors>Autodesk Platform Services SDK Team</Authors>
     <PackageDescription>Client SDK for Data Management OSS API</PackageDescription>
     <PackageReleaseNotes>
-    - Fixed issue on the object size property for large objects.
+    • Update SetHeader() content header specifications and UploadSignedResourcesChunkAsync() response deserialization. 
+    • Fix for x-ads-request-id in the header in HandleRequestId().
+    • Download() method's returned outputStream’s position is reset to the beginning.
     </PackageReleaseNotes>
     <Copyright>Autodesk Inc.</Copyright>
     <PackageId>Autodesk.Oss</PackageId>
-    <PackageVersion>2.1.1</PackageVersion>
+    <PackageVersion>2.1.2</PackageVersion>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/autodesk-platform-services/aps-sdk-net.git</RepositoryUrl> 
