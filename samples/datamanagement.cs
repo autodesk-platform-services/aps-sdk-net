@@ -385,9 +385,22 @@ class DataManagement
 
     public async Task GetFolderSearchAsync()
     {
-        List<string> filter = new List<string> { "John Doe" };
-        Search search = await dataManagementClient.GetFolderSearchAsync(projectId: project_id, folderId: folder_id, filterFieldName: "createUserName", filterValue: filter, pageNumber: 0);
+        var filters = new List<(string fieldName, ComparisonTypes? operatorType, List<string> values)>
+        {
+            // ("id", null, new List<string> { "urn:adsk.wipprod:fs.file:vf.lwzzqBEUQXaSukbg0uYXPg?version=1" }),
+            // ("attributes.displayName", null, new List<string> { "drawingmyt.rvt"}),
+            ("attributes.displayName", ComparisonTypes.EqualTo, new List<string> { "drawingmyt.rvt"}),
+            // ("createUserName", null, new List<string> { "Harun Gitundu" }),
+        };
 
+        Search search = await dataManagementClient.GetFolderSearchAsync(
+            projectId: project_id,
+            folderId: folder_id,
+            filters: filters,
+            pageNumber: 0
+        );
+    
+        // Process the search data
         List<VersionData> searchData = search.Data;
         foreach (var currentSearchData in searchData)
         {
@@ -396,8 +409,15 @@ class DataManagement
 
             Console.WriteLine(currentSearchDataType);
             Console.WriteLine(currentSearchDataId);
+            Console.WriteLine(currentSearchData.Attributes.Name);
+            Console.WriteLine(currentSearchData.Attributes.CreateUserName);
+            Console.WriteLine(currentSearchData.Attributes.LastModifiedUserName);
+            Console.WriteLine(currentSearchData.Attributes.FileType);
+            Console.WriteLine(currentSearchData.Attributes.DisplayName);
+            Console.WriteLine(currentSearchData.Attributes.Extension.Type);
         }
     }
+
 
     public async Task CreateFolderAsync()
     {
