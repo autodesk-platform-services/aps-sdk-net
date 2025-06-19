@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Construction.Account.Admin
  *
@@ -32,6 +32,7 @@ using Autodesk.Construction.AccountAdmin.Client;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Autodesk.SDKManager;
+using System.Collections;
 using System.IO;
 
 namespace Autodesk.Construction.AccountAdmin.Http
@@ -61,6 +62,62 @@ namespace Autodesk.Construction.AccountAdmin.Http
         /// <returns>Task of ApiResponse&lt;Company&gt;</returns>
         
         System.Threading.Tasks.Task<ApiResponse<Company>> CreateCompanyAsync (string accountId, Region? region= null, CompanyPayload companyPayload= default(CompanyPayload),  string accessToken = null, bool throwOnError = true);
+        /// <summary>
+        /// Get account companies
+        /// </summary>
+        /// <remarks>
+        ///Returns a list of companies in an account.
+///
+///You can also use this endpoint to filter out the list of companies by setting the filter parameters.
+///
+///Note that this endpoint is compatible with both BIM 360 and Autodesk Construction Cloud (ACC) projects.
+        /// </remarks>
+        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+         /// <param name="accountId">
+         ///The ID of the ACC account that contains the project being created or the projects being retrieved. This corresponds to the hub ID in the Data Management API. To convert a hub ID into an account ID, remove the “b." prefix. For example, a hub ID of b.c8b0c73d-3ae9 translates to an account ID of c8b0c73d-3ae9.
+         /// </param>
+         /// <param name="region">
+         ///Specifies the region where your request should be routed. If not set, the request is routed automatically, which may result in a slight increase in latency. Possible values: US, EMEA. For a complete list of supported regions, see the Regions page. (optional)
+         /// </param>
+         /// <param name="userId">
+         ///The ID of a user on whose behalf your request is acting. Your app has access to all users specified by the administrator in the SaaS integrations UI. Provide this header value to identify the user to be affected by the request.  You can use either the user’s ACC ID (id), or their Autodesk ID (autodeskId).  Note that this header is required for Account Admin POST, PATCH, and DELETE endpoints if you want to use a 2-legged authentication context. This header is optional for Account Admin GET endpoints. (optional)
+         /// </param>
+         /// <param name="filterName">
+         ///Filter companies by name. Can be a partial match based on the value of filterTextMatch provided. Max length: 255 (optional)
+         /// </param>
+         /// <param name="filterTrade">
+         ///Filter companies by trade. Can be a partial match based on the value of filterTextMatch provided. Max length: 255 (optional)
+         /// </param>
+         /// <param name="filterErpId">
+         ///Filter companies by ERP Id. Can be a partial match based on the value of filterTextMatch provided. Max length: 255 (optional)
+         /// </param>
+         /// <param name="filterTaxId">
+         ///Filter companies by tax Id. Can be a partial match based on the value of filterTextMatch provided. Max length: 255 (optional)
+         /// </param>
+         /// <param name="filterUpdatedAt">
+         ///Filter companies by updated at date range. The range must be specified with dates in an ISO-8601 format with time required. The start and end dates of the range should be separated by .. One of the dates in the range may be omitted. For example, to get everything on or before June 1, 2019 the range would be ..2019-06-01T23:59:59.999Z. To get everything after June 1, 2019 the range would be 2019-06-01T00:00:00.000Z... Max length: 100 (optional)
+         /// </param>
+         /// <param name="orFilters">
+         ///List of filtered fields to apply an “or” operator. Valid list of fields are erpId, name, taxId, trade, updatedAt. (optional)
+         /// </param>
+         /// <param name="filterTextMatch">
+         ///Defines how text-based filters should match results. Possible values: contains (default) – Returns results where the text appears anywhere in the field. startsWith – Matches only if the field starts with the given value. endsWith – Matches only if the field ends with the given value. equals – Matches only if the field is an exact match. (optional)
+         /// </param>
+         /// <param name="sort">
+         ///The list of fields to sort by. When multiple fields are listed the later property is used to sort the resources where the previous fields have the same value. Each property can be followed by a direction modifier of either asc (ascending) or desc (descending). If no direction is specified then asc is assumed. Valid fields for sorting are name, trade, erpId, taxId, status, createdAt, updatedAt, projectSize and userSize. Default sort is name. (optional)
+         /// </param>
+         /// <param name="fields">
+         ///List of fields to return in the response. Defaults to all fields. Valid list of fields are accountId, name, trade, addresses, websiteUrl, description, erpId, taxId, imageUrl, status, createdAt, updatedAt, projectSize, userSize and originalName. (optional)
+         /// </param>
+         /// <param name="limit">
+         ///The maximum number of records per request. Default: 20. Minimum: 1, Maximum: 200. If a value greater than 200 is provided, only 200 records are returned. (optional)
+         /// </param>
+         /// <param name="offset">
+         ///The record number to start returning results from, used for pagination. For example, if limit=20 and offset=20, the request retrieves the second page of results. (optional)
+         /// </param>
+        /// <returns>Task of ApiResponse&lt;CompaniesPage&gt;</returns>
+        
+        System.Threading.Tasks.Task<ApiResponse<CompaniesPage>> GetCompaniesWithPaginationAsync (string accountId, Region? region= null, string userId= default(string), string filterName= default(string), string filterTrade= default(string), string filterErpId= default(string), string filterTaxId= default(string), string filterUpdatedAt= default(string), List<CompanyOrFilters> orFilters= default(List<CompanyOrFilters>), FilterTextMatch? filterTextMatch= null, List<FilterCompanySort> sort= default(List<FilterCompanySort>), List<FilterCompanyFields> fields= default(List<FilterCompanyFields>), int? limit= default(int?), int? offset= default(int?),  string accessToken = null, bool throwOnError = true);
         /// <summary>
         /// Get all companies in an account
         /// </summary>
@@ -138,9 +195,9 @@ namespace Autodesk.Construction.AccountAdmin.Http
          /// <param name="field">
          ///Comma-separated fields to include in response (optional)
          /// </param>
-        /// <returns>Task of ApiResponse&lt;List&lt;CompanyResponse&gt;&gt;</returns>
+        /// <returns>Task of ApiResponse&lt;List&lt;ProjectCompanies&gt;&gt;</returns>
         
-        System.Threading.Tasks.Task<ApiResponse<List<CompanyResponse>>> GetProjectCompaniesAsync (string accountId, string projectId, Region? region= null, int? limit= default(int?), int? offset= default(int?), string sort= default(string), string field= default(string),  string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<ApiResponse<List<ProjectCompanies>>> GetProjectCompaniesAsync (string accountId, string projectId, Region? region= null, int? limit= default(int?), int? offset= default(int?), string sort= default(string), string field= default(string),  string accessToken = null, bool throwOnError = true);
         /// <summary>
         /// Bulk import partner companies
         /// </summary>
@@ -158,9 +215,9 @@ namespace Autodesk.Construction.AccountAdmin.Http
          /// <param name="companyPayload">
          /// (optional)
          /// </param>
-        /// <returns>Task of ApiResponse&lt;CompanyImportResponse&gt;</returns>
+        /// <returns>Task of ApiResponse&lt;CompanyImport&gt;</returns>
         
-        System.Threading.Tasks.Task<ApiResponse<CompanyImportResponse>> ImportCompaniesAsync (string accountId, Region? region= null, List<CompanyPayload> companyPayload= default(List<CompanyPayload>),  string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<ApiResponse<CompanyImport>> ImportCompaniesAsync (string accountId, Region? region= null, List<CompanyPayload> companyPayload= default(List<CompanyPayload>),  string accessToken = null, bool throwOnError = true);
         /// <summary>
         /// Update the properties of company
         /// </summary>
@@ -286,6 +343,28 @@ namespace Autodesk.Construction.AccountAdmin.Http
                     dictionary.Add(name, value);
                 }
             }
+            else if (value is IList)
+            {
+                if (value is List<string>)
+                {
+                    value = String.Join(",",(List<string>)value);
+                     dictionary.Add(name, value);
+                }
+                else 
+                {
+                    List<string>newlist = new List<string>();
+                    foreach ( var x in (IList)value)
+                    {
+                            var type = x.GetType();
+                            var memberInfos = type.GetMember(x.ToString());
+                            var enumValueMemberInfo = memberInfos.FirstOrDefault(m => m.DeclaringType == type);
+                            var valueAttributes = enumValueMemberInfo.GetCustomAttributes(typeof(EnumMemberAttribute), false);
+                            newlist.Add(((EnumMemberAttribute)valueAttributes[0]).Value);                            
+                    }
+                    string joinedString = String.Join(",", newlist);
+                    dictionary.Add(name, joinedString);
+                }
+            }
             else
             {
                 if(value != null)
@@ -371,6 +450,122 @@ namespace Autodesk.Construction.AccountAdmin.Http
 
                 SetHeader("Region", region, request);
 
+                request.Method = new HttpMethod("POST");
+
+                // make the HTTP request
+                var response = await this.Service.Client.SendAsync(request);
+
+                if (throwOnError)
+                {
+                    try
+                    {
+                      await response.EnsureSuccessStatusCodeAsync();
+                    } catch (HttpRequestException ex) {
+                      throw new ConstructionAccountAdminApiException(ex.Message, response, ex);
+                    }
+                }
+                else if (!response.IsSuccessStatusCode)
+                {
+                    logger.LogError($"response unsuccess with status code: {response.StatusCode}");
+                    return new ApiResponse<Company>(response, default(Company));
+                }
+                logger.LogInformation($"Exited from CreateCompanyAsync with response statusCode: {response.StatusCode}");
+                return new ApiResponse<Company>(response, await LocalMarshalling.DeserializeAsync<Company>(response.Content));
+
+            } // using
+        }
+        /// <summary>
+        /// Get account companies
+        /// </summary>
+        /// <remarks>
+        ///Returns a list of companies in an account.
+///
+///You can also use this endpoint to filter out the list of companies by setting the filter parameters.
+///
+///Note that this endpoint is compatible with both BIM 360 and Autodesk Construction Cloud (ACC) projects.
+        /// </remarks>
+        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+         /// <param name="accountId">
+         ///The ID of the ACC account that contains the project being created or the projects being retrieved. This corresponds to the hub ID in the Data Management API. To convert a hub ID into an account ID, remove the “b." prefix. For example, a hub ID of b.c8b0c73d-3ae9 translates to an account ID of c8b0c73d-3ae9.
+         /// </param>
+         /// <param name="region">
+         ///Specifies the region where your request should be routed. If not set, the request is routed automatically, which may result in a slight increase in latency. Possible values: US, EMEA. For a complete list of supported regions, see the Regions page. (optional)
+         /// </param>
+         /// <param name="userId">
+         ///The ID of a user on whose behalf your request is acting. Your app has access to all users specified by the administrator in the SaaS integrations UI. Provide this header value to identify the user to be affected by the request.  You can use either the user’s ACC ID (id), or their Autodesk ID (autodeskId).  Note that this header is required for Account Admin POST, PATCH, and DELETE endpoints if you want to use a 2-legged authentication context. This header is optional for Account Admin GET endpoints. (optional)
+         /// </param>
+         /// <param name="filterName">
+         ///Filter companies by name. Can be a partial match based on the value of filterTextMatch provided. Max length: 255 (optional)
+         /// </param>
+         /// <param name="filterTrade">
+         ///Filter companies by trade. Can be a partial match based on the value of filterTextMatch provided. Max length: 255 (optional)
+         /// </param>
+         /// <param name="filterErpId">
+         ///Filter companies by ERP Id. Can be a partial match based on the value of filterTextMatch provided. Max length: 255 (optional)
+         /// </param>
+         /// <param name="filterTaxId">
+         ///Filter companies by tax Id. Can be a partial match based on the value of filterTextMatch provided. Max length: 255 (optional)
+         /// </param>
+         /// <param name="filterUpdatedAt">
+         ///Filter companies by updated at date range. The range must be specified with dates in an ISO-8601 format with time required. The start and end dates of the range should be separated by .. One of the dates in the range may be omitted. For example, to get everything on or before June 1, 2019 the range would be ..2019-06-01T23:59:59.999Z. To get everything after June 1, 2019 the range would be 2019-06-01T00:00:00.000Z... Max length: 100 (optional)
+         /// </param>
+         /// <param name="orFilters">
+         ///List of filtered fields to apply an “or” operator. Valid list of fields are erpId, name, taxId, trade, updatedAt. (optional)
+         /// </param>
+         /// <param name="filterTextMatch">
+         ///Defines how text-based filters should match results. Possible values: contains (default) – Returns results where the text appears anywhere in the field. startsWith – Matches only if the field starts with the given value. endsWith – Matches only if the field ends with the given value. equals – Matches only if the field is an exact match. (optional)
+         /// </param>
+         /// <param name="sort">
+         ///The list of fields to sort by. When multiple fields are listed the later property is used to sort the resources where the previous fields have the same value. Each property can be followed by a direction modifier of either asc (ascending) or desc (descending). If no direction is specified then asc is assumed. Valid fields for sorting are name, trade, erpId, taxId, status, createdAt, updatedAt, projectSize and userSize. Default sort is name. (optional)
+         /// </param>
+         /// <param name="fields">
+         ///List of fields to return in the response. Defaults to all fields. Valid list of fields are accountId, name, trade, addresses, websiteUrl, description, erpId, taxId, imageUrl, status, createdAt, updatedAt, projectSize, userSize and originalName. (optional)
+         /// </param>
+         /// <param name="limit">
+         ///The maximum number of records per request. Default: 20. Minimum: 1, Maximum: 200. If a value greater than 200 is provided, only 200 records are returned. (optional)
+         /// </param>
+         /// <param name="offset">
+         ///The record number to start returning results from, used for pagination. For example, if limit=20 and offset=20, the request retrieves the second page of results. (optional)
+         /// </param>
+        /// <returns>Task of ApiResponse&lt;CompaniesPage&gt;></returns>
+        
+        public async System.Threading.Tasks.Task<ApiResponse<CompaniesPage>> GetCompaniesWithPaginationAsync (string accountId,Region? region= null,string userId= default(string),string filterName= default(string),string filterTrade= default(string),string filterErpId= default(string),string filterTaxId= default(string),string filterUpdatedAt= default(string),List<CompanyOrFilters> orFilters= default(List<CompanyOrFilters>),FilterTextMatch? filterTextMatch= null,List<FilterCompanySort> sort= default(List<FilterCompanySort>),List<FilterCompanyFields> fields= default(List<FilterCompanyFields>),int? limit= default(int?),int? offset= default(int?), string accessToken = null, bool throwOnError = true)
+        {
+            logger.LogInformation("Entered into GetCompaniesWithPaginationAsync ");
+            using (var request = new HttpRequestMessage())
+            {
+                var queryParam = new Dictionary<string, object>();
+                SetQueryParameter("filter[name]", filterName, queryParam);
+                SetQueryParameter("filter[trade]", filterTrade, queryParam);
+                SetQueryParameter("filter[erpId]", filterErpId, queryParam);
+                SetQueryParameter("filter[taxId]", filterTaxId, queryParam);
+                SetQueryParameter("filter[updatedAt]", filterUpdatedAt, queryParam);
+                SetQueryParameter("orFilters", orFilters, queryParam);
+                SetQueryParameter("filterTextMatch", filterTextMatch, queryParam);
+                SetQueryParameter("sort", sort, queryParam);
+                SetQueryParameter("fields", fields, queryParam);
+                SetQueryParameter("limit", limit, queryParam);
+                SetQueryParameter("offset", offset, queryParam);
+                request.RequestUri =
+                    Marshalling.BuildRequestUri("/construction/admin/v1/accounts/{accountId}/companies",
+                        routeParameters: new Dictionary<string, object> {
+                            { "accountId", accountId},
+                        },
+                        queryParameters: queryParam
+                    );
+
+                request.Headers.TryAddWithoutValidation("Accept", "application/json");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/CONSTRUCTION.ACCOUNT.ADMIN/C#/1.0.0");
+                if(!string.IsNullOrEmpty(accessToken))
+                {
+                    request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
+                }
+
+
+
+                SetHeader("Region", region, request);
+                SetHeader("User-Id", userId, request);
+
                 // tell the underlying pipeline what scope we'd like to use
                 // if (scopes == null)
                 // {
@@ -400,7 +595,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
                     // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
 
-                request.Method = new HttpMethod("POST");
+                request.Method = new HttpMethod("GET");
 
                 // make the HTTP request
                 var response = await this.Service.Client.SendAsync(request);
@@ -417,10 +612,10 @@ namespace Autodesk.Construction.AccountAdmin.Http
                 else if (!response.IsSuccessStatusCode)
                 {
                     logger.LogError($"response unsuccess with status code: {response.StatusCode}");
-                    return new ApiResponse<Company>(response, default(Company));
+                    return new ApiResponse<CompaniesPage>(response, default(CompaniesPage));
                 }
-                logger.LogInformation($"Exited from CreateCompanyAsync with response statusCode: {response.StatusCode}");
-                return new ApiResponse<Company>(response, await LocalMarshalling.DeserializeAsync<Company>(response.Content));
+                logger.LogInformation($"Exited from GetCompaniesWithPaginationAsync with response statusCode: {response.StatusCode}");
+                return new ApiResponse<CompaniesPage>(response, await LocalMarshalling.DeserializeAsync<CompaniesPage>(response.Content));
 
             } // using
         }
@@ -660,9 +855,9 @@ namespace Autodesk.Construction.AccountAdmin.Http
          /// <param name="field">
          ///Comma-separated fields to include in response (optional)
          /// </param>
-        /// <returns>Task of ApiResponse&lt;List&lt;CompanyResponse&gt;&gt;></returns>
+        /// <returns>Task of ApiResponse&lt;List&lt;ProjectCompanies&gt;&gt;></returns>
         
-        public async System.Threading.Tasks.Task<ApiResponse<List<CompanyResponse>>> GetProjectCompaniesAsync (string accountId,string projectId,Region? region= null,int? limit= default(int?),int? offset= default(int?),string sort= default(string),string field= default(string), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ApiResponse<List<ProjectCompanies>>> GetProjectCompaniesAsync (string accountId,string projectId,Region? region= null,int? limit= default(int?),int? offset= default(int?),string sort= default(string),string field= default(string), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into GetProjectCompaniesAsync ");
             using (var request = new HttpRequestMessage())
@@ -738,10 +933,10 @@ namespace Autodesk.Construction.AccountAdmin.Http
                 else if (!response.IsSuccessStatusCode)
                 {
                     logger.LogError($"response unsuccess with status code: {response.StatusCode}");
-                    return new ApiResponse<List<CompanyResponse>>(response, default(List<CompanyResponse>));
+                    return new ApiResponse<List<ProjectCompanies>>(response, default(List<ProjectCompanies>));
                 }
                 logger.LogInformation($"Exited from GetProjectCompaniesAsync with response statusCode: {response.StatusCode}");
-                return new ApiResponse<List<CompanyResponse>>(response, await LocalMarshalling.DeserializeAsync<List<CompanyResponse>>(response.Content));
+                return new ApiResponse<List<ProjectCompanies>>(response, await LocalMarshalling.DeserializeAsync<List<ProjectCompanies>>(response.Content));
 
             } // using
         }
@@ -762,9 +957,9 @@ namespace Autodesk.Construction.AccountAdmin.Http
          /// <param name="companyPayload">
          /// (optional)
          /// </param>
-        /// <returns>Task of ApiResponse&lt;CompanyImportResponse&gt;></returns>
+        /// <returns>Task of ApiResponse&lt;CompanyImport&gt;></returns>
         
-        public async System.Threading.Tasks.Task<ApiResponse<CompanyImportResponse>> ImportCompaniesAsync (string accountId,Region? region= null,List<CompanyPayload> companyPayload= default(List<CompanyPayload>), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ApiResponse<CompanyImport>> ImportCompaniesAsync (string accountId,Region? region= null,List<CompanyPayload> companyPayload= default(List<CompanyPayload>), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into ImportCompaniesAsync ");
             using (var request = new HttpRequestMessage())
@@ -836,10 +1031,10 @@ namespace Autodesk.Construction.AccountAdmin.Http
                 else if (!response.IsSuccessStatusCode)
                 {
                     logger.LogError($"response unsuccess with status code: {response.StatusCode}");
-                    return new ApiResponse<CompanyImportResponse>(response, default(CompanyImportResponse));
+                    return new ApiResponse<CompanyImport>(response, default(CompanyImport));
                 }
                 logger.LogInformation($"Exited from ImportCompaniesAsync with response statusCode: {response.StatusCode}");
-                return new ApiResponse<CompanyImportResponse>(response, await LocalMarshalling.DeserializeAsync<CompanyImportResponse>(response.Content));
+                return new ApiResponse<CompanyImport>(response, await LocalMarshalling.DeserializeAsync<CompanyImport>(response.Content));
 
             } // using
         }

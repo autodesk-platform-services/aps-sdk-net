@@ -326,66 +326,73 @@ namespace Autodesk.Oss
             double numberOfChunks = CalculateNumberOfChunks((ulong)fileSize);
             double partsDownloaded = 0;
             double start = 0;
-            Stream outputStream ;
-            
-            if(filePath==null) outputStream=new MemoryStream() ;
-            else outputStream = new FileStream(filePath, FileMode.Append, FileAccess.Write);
-                
-                while (partsDownloaded < numberOfChunks)
-                {
-                    ThrowIfCancellationRequested(cancellationToken, requestId);
-                    _logger.LogInformation("{requestId} Downloading part: {partsDownloaded}", requestId, partsDownloaded + 1);
-                    double end = Math.Min((partsDownloaded + 1) * Constants.ChunkSize, fileSize.Value);
+            Stream outputStream;
 
-                    if (start == end)
+            if (filePath == null) outputStream = new MemoryStream();
+            else outputStream = new FileStream(filePath, FileMode.Append, FileAccess.Write);
+
+            while (partsDownloaded < numberOfChunks)
+            {
+                ThrowIfCancellationRequested(cancellationToken, requestId);
+                _logger.LogInformation("{requestId} Downloading part: {partsDownloaded}", requestId, partsDownloaded + 1);
+                double end = Math.Min((partsDownloaded + 1) * Constants.ChunkSize, fileSize.Value);
+
+                if (start == end)
+                {
+                    break;
+                }
+
+                var attemptCount = 0;
+                while (attemptCount < _maxRetryOnUrlExpiry)
+                {
+                    try
                     {
+                        attemptCount++;
+                        _logger.LogDebug("{requestId} Downloading file range : {start} - {end}", requestId, start, end);
+                        await WriteToFileStreamFromUrl(outputStream, response.Content.Url, start, end, requestId);
+                        start = end + 1;
+                        partsDownloaded++;
+                        int percentCompleted = (int)(((double)partsDownloaded / (double)numberOfChunks) * 100);
+                        progress?.Report(percentCompleted);
                         break;
                     }
-
-                    var attemptCount = 0;
-                    while (attemptCount < _maxRetryOnUrlExpiry)
+                    catch (Exception ex) when (ex is HttpRequestException || ex is AggregateException)
                     {
-                        try
+                        if (attemptCount == _maxRetryOnUrlExpiry)
                         {
-                            attemptCount++;
-                            _logger.LogDebug("{requestId} Downloading file range : {start} - {end}", requestId, start, end);
-                            await WriteToFileStreamFromUrl(outputStream, response.Content.Url, start, end, requestId);
-                            start = end + 1;
-                            partsDownloaded++;
-                            int percentCompleted = (int)(((double)partsDownloaded / (double)numberOfChunks) * 100);
-                            progress?.Report(percentCompleted);
-                            break;
-                        }
-                        catch (Exception ex) when (ex is HttpRequestException || ex is AggregateException)
-                        {
-                            if (attemptCount == _maxRetryOnUrlExpiry)
-                            {
-                                _logger.LogDebug(
-                                "{requestId} Reached maximum retries. S3 signed Url can not be renewed.",
-                                requestId);
-                                outputStream.Dispose();
-                                throw new S3ServiceApiException($"{requestId} URL can not be renewed", (int)HttpStatusCode.InternalServerError);
-                            }
-                            if (!ex.Message.Contains(_forbiddenMessage))
-                            {
-                                _logger.LogDebug("{requestId} Error: {errorMessage}", requestId, ex.Message);
-                                outputStream.Dispose();
-                                throw new S3ServiceApiException($"{requestId} Error {ex.Message}", (int)HttpStatusCode.InternalServerError);
-                            }
-
-                            _logger.LogInformation("{requestId} S3 signed Url is expired. Refreshing the Url", requestId);
-                            response = await GetS3SignedDownloadUrlWithRetry(bucketKey, objectKey, accessToken, requestId);
-                        }
-                        catch (Exception ex)
-                        {
-                            _logger.LogError("{requestId} Error: {errorMessage}", requestId, ex.Message);
+                            _logger.LogDebug(
+                            "{requestId} Reached maximum retries. S3 signed Url can not be renewed.",
+                            requestId);
                             outputStream.Dispose();
-                            throw new FileTransferException($"{requestId} Error {ex.Message}");
+                            throw new S3ServiceApiException($"{requestId} URL can not be renewed", (int)HttpStatusCode.InternalServerError);
                         }
+                        if (!ex.Message.Contains(_forbiddenMessage))
+                        {
+                            _logger.LogDebug("{requestId} Error: {errorMessage}", requestId, ex.Message);
+                            outputStream.Dispose();
+                            throw new S3ServiceApiException($"{requestId} Error {ex.Message}", (int)HttpStatusCode.InternalServerError);
+                        }
+
+                        _logger.LogInformation("{requestId} S3 signed Url is expired. Refreshing the Url", requestId);
+                        response = await GetS3SignedDownloadUrlWithRetry(bucketKey, objectKey, accessToken, requestId);
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogError("{requestId} Error: {errorMessage}", requestId, ex.Message);
+                        outputStream.Dispose();
+                        throw new FileTransferException($"{requestId} Error {ex.Message}");
                     }
                 }
-                if(filePath==null) return outputStream;
-                return null;
+            }
+            if (filePath == null)
+            {
+                if (outputStream.CanSeek)
+                {
+                    outputStream.Position = 0; // Reset position for reading
+                }
+                return outputStream;
+            }
+            return null;
         }
 
         private async Task WriteToFileStreamFromUrl(Stream outStream, string contentUrl, double start, double end,
@@ -402,6 +409,12 @@ namespace Autodesk.Oss
         {
             var requestId = !string.IsNullOrEmpty(parentRequestId) ? parentRequestId : Guid.NewGuid().ToString();
             requestId = requestId + ":" + GenerateSdkRequestId(bucketKey, objectKey);
+
+            if (_forgeService.Client.DefaultRequestHeaders.Contains("x-ads-request-id"))
+            {
+                _forgeService.Client.DefaultRequestHeaders.Remove("x-ads-request-id");
+            }
+
             _forgeService.Client.DefaultRequestHeaders.Add("x-ads-request-id", requestId);
             return requestId;
         }

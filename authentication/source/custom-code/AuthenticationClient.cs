@@ -200,7 +200,7 @@ namespace Autodesk.Authentication
             if (!string.IsNullOrEmpty(clientSecret))
             { // for private clients
                 var clientIdSecret = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes($"{clientId}:{clientSecret}"));
-                var response = await this.tokenApi.FetchTokenAsync(authorization: clientIdSecret, code: code, grantType: GrantType.AuthorizationCode, redirectUri: redirectUri, throwOnError: throwOnError);
+                var response = await this.tokenApi.FetchTokenAsync(authorization: clientIdSecret, code: code, grantType: GrantType.AuthorizationCode, redirectUri: redirectUri, codeVerifier: codeVerifier, throwOnError: throwOnError);
                 return await LocalMarshalling.DeserializeAsync<ThreeLeggedToken>(response.Content);
 
             }

@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Construction.Account.Admin
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,15 +34,15 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Construction.AccountAdmin.Model
 {
     /// <summary>
-    /// Projects
+    /// ProjectUsersPage
     /// </summary>
     [DataContract]
-    public partial class Projects 
+    public partial class ProjectUsersPage 
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Projects" /> class.
+        /// Initializes a new instance of the <see cref="ProjectUsersPage" /> class.
         /// </summary>
-        public Projects()
+        public ProjectUsersPage()
         {
         }
         
@@ -49,16 +50,16 @@ namespace Autodesk.Construction.AccountAdmin.Model
         ///Gets or Sets Pagination
         /// </summary>
         [DataMember(Name="pagination", EmitDefaultValue=false)]
-        public ProjectsPagination Pagination { get; set; }
+        public Pagination Pagination { get; set; }
 
         /// <summary>
-        ///The requested page of projects.
+        ///The requested page of project users.
         /// </summary>
         /// <value>
-        ///The requested page of projects.
+        ///The requested page of project users.
         /// </value>
         [DataMember(Name="results", EmitDefaultValue=false)]
-        public List<Project> Results { get; set; }
+        public List<ProjectUser> Results { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

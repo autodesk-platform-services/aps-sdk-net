@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Construction.Account.Admin
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,66 +34,65 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Construction.AccountAdmin.Model
 {
     /// <summary>
-    /// The pagination object.
+    /// AccountCompanyAddress
     /// </summary>
     [DataContract]
-    public partial class ProjectsPagination 
+    public partial class AccountCompanyAddress 
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ProjectsPagination" /> class.
+        /// Initializes a new instance of the <see cref="AccountCompanyAddress" /> class.
         /// </summary>
-        public ProjectsPagination()
+        public AccountCompanyAddress()
         {
         }
         
         /// <summary>
-        ///The number of items per page.
+        ///Gets or Sets Type
         /// </summary>
-        /// <value>
-        ///The number of items per page.
-        /// </value>
-        [DataMember(Name="limit", EmitDefaultValue=false)]
-        public int? Limit { get; set; }
+        [DataMember(Name="type", EmitDefaultValue=false)]
+        public string Type { get; set; }
 
         /// <summary>
-        ///The page number that the results begin from.
+        ///Gets or Sets AddressLine1
         /// </summary>
-        /// <value>
-        ///The page number that the results begin from.
-        /// </value>
-        [DataMember(Name="offset", EmitDefaultValue=false)]
-        public int? Offset { get; set; }
+        [DataMember(Name="addressLine1", EmitDefaultValue=false)]
+        public string AddressLine1 { get; set; }
 
         /// <summary>
-        ///The number of items in the response.
+        ///Gets or Sets AddressLine2
         /// </summary>
-        /// <value>
-        ///The number of items in the response.
-        /// </value>
-        [DataMember(Name="totalResults", EmitDefaultValue=false)]
-        public int? TotalResults { get; set; }
+        [DataMember(Name="addressLine2", EmitDefaultValue=false)]
+        public string AddressLine2 { get; set; }
 
         /// <summary>
-        ///The URL for the next page of records.
-///Max length: 2000
+        ///Gets or Sets City
         /// </summary>
-        /// <value>
-        ///The URL for the next page of records.
-///Max length: 2000
-        /// </value>
-        [DataMember(Name="nextUrl", EmitDefaultValue=false)]
-        public string NextUrl { get; set; }
+        [DataMember(Name="city", EmitDefaultValue=false)]
+        public string City { get; set; }
 
         /// <summary>
-        ///The URL for the previous page of records.
-///Max length: 2000
+        ///Gets or Sets StateOrProvince
         /// </summary>
-        /// <value>
-        ///The URL for the previous page of records.
-///Max length: 2000
-        /// </value>
-        [DataMember(Name="previousUrl", EmitDefaultValue=false)]
-        public string PreviousUrl { get; set; }
+        [DataMember(Name="stateOrProvince", EmitDefaultValue=false)]
+        public string StateOrProvince { get; set; }
+
+        /// <summary>
+        ///Gets or Sets PostalCode
+        /// </summary>
+        [DataMember(Name="postalCode", EmitDefaultValue=false)]
+        public string PostalCode { get; set; }
+
+        /// <summary>
+        ///Gets or Sets Country
+        /// </summary>
+        [DataMember(Name="country", EmitDefaultValue=false)]
+        public string Country { get; set; }
+
+        /// <summary>
+        ///Gets or Sets Phone
+        /// </summary>
+        [DataMember(Name="phone", EmitDefaultValue=false)]
+        public string Phone { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Construction.Account.Admin
  *
@@ -52,12 +52,12 @@ namespace Autodesk.Construction.AccountAdmin.Http
          /// <param name="region">
          ///The geographic area where the data is stored. Acceptable values: US, EMEA, AUS. By default, it is set to US. (optional)
          /// </param>
-         /// <param name="businessUnitsRequestPyload">
+         /// <param name="businessUnitsPayload">
          /// (optional)
          /// </param>
-        /// <returns>Task of ApiResponse&lt;BusinessUnitsResponse&gt;</returns>
+        /// <returns>Task of ApiResponse&lt;BusinessUnits&gt;</returns>
         
-        System.Threading.Tasks.Task<ApiResponse<BusinessUnitsResponse>> CreateBusinessUnitsAsync (string accountId, Region? region= null, BusinessUnitsRequestPyload businessUnitsRequestPyload= default(BusinessUnitsRequestPyload),  string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<ApiResponse<BusinessUnits>> CreateBusinessUnitsAsync (string accountId, Region? region= null, BusinessUnitsPayload businessUnitsPayload= default(BusinessUnitsPayload),  string accessToken = null, bool throwOnError = true);
         /// <summary>
         /// Get Business Units
         /// </summary>
@@ -71,9 +71,9 @@ namespace Autodesk.Construction.AccountAdmin.Http
          /// <param name="region">
          ///The geographic area where the data is stored. Acceptable values: US, EMEA, AUS. By default, it is set to US. (optional)
          /// </param>
-        /// <returns>Task of ApiResponse&lt;BusinessUnitsResponse&gt;</returns>
+        /// <returns>Task of ApiResponse&lt;BusinessUnits&gt;</returns>
         
-        System.Threading.Tasks.Task<ApiResponse<BusinessUnitsResponse>> GetBusinessUnitsAsync (string accountId, Region? region= null,  string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<ApiResponse<BusinessUnits>> GetBusinessUnitsAsync (string accountId, Region? region= null,  string accessToken = null, bool throwOnError = true);
     }
 
     /// <summary>
@@ -167,12 +167,12 @@ namespace Autodesk.Construction.AccountAdmin.Http
          /// <param name="region">
          ///The geographic area where the data is stored. Acceptable values: US, EMEA, AUS. By default, it is set to US. (optional)
          /// </param>
-         /// <param name="businessUnitsRequestPyload">
+         /// <param name="businessUnitsPayload">
          /// (optional)
          /// </param>
-        /// <returns>Task of ApiResponse&lt;BusinessUnitsResponse&gt;></returns>
+        /// <returns>Task of ApiResponse&lt;BusinessUnits&gt;></returns>
         
-        public async System.Threading.Tasks.Task<ApiResponse<BusinessUnitsResponse>> CreateBusinessUnitsAsync (string accountId,Region? region= null,BusinessUnitsRequestPyload businessUnitsRequestPyload= default(BusinessUnitsRequestPyload), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ApiResponse<BusinessUnits>> CreateBusinessUnitsAsync (string accountId,Region? region= null,BusinessUnitsPayload businessUnitsPayload= default(BusinessUnitsPayload), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into CreateBusinessUnitsAsync ");
             using (var request = new HttpRequestMessage())
@@ -193,7 +193,7 @@ namespace Autodesk.Construction.AccountAdmin.Http
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
                 }
 
-                request.Content = Marshalling.Serialize(businessUnitsRequestPyload); // http body (model) parameter
+                request.Content = Marshalling.Serialize(businessUnitsPayload); // http body (model) parameter
 
 
                 SetHeader("Region", region, request);
@@ -244,10 +244,10 @@ namespace Autodesk.Construction.AccountAdmin.Http
                 else if (!response.IsSuccessStatusCode)
                 {
                     logger.LogError($"response unsuccess with status code: {response.StatusCode}");
-                    return new ApiResponse<BusinessUnitsResponse>(response, default(BusinessUnitsResponse));
+                    return new ApiResponse<BusinessUnits>(response, default(BusinessUnits));
                 }
                 logger.LogInformation($"Exited from CreateBusinessUnitsAsync with response statusCode: {response.StatusCode}");
-                return new ApiResponse<BusinessUnitsResponse>(response, await LocalMarshalling.DeserializeAsync<BusinessUnitsResponse>(response.Content));
+                return new ApiResponse<BusinessUnits>(response, await LocalMarshalling.DeserializeAsync<BusinessUnits>(response.Content));
 
             } // using
         }
@@ -264,9 +264,9 @@ namespace Autodesk.Construction.AccountAdmin.Http
          /// <param name="region">
          ///The geographic area where the data is stored. Acceptable values: US, EMEA, AUS. By default, it is set to US. (optional)
          /// </param>
-        /// <returns>Task of ApiResponse&lt;BusinessUnitsResponse&gt;></returns>
+        /// <returns>Task of ApiResponse&lt;BusinessUnits&gt;></returns>
         
-        public async System.Threading.Tasks.Task<ApiResponse<BusinessUnitsResponse>> GetBusinessUnitsAsync (string accountId,Region? region= null, string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ApiResponse<BusinessUnits>> GetBusinessUnitsAsync (string accountId,Region? region= null, string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into GetBusinessUnitsAsync ");
             using (var request = new HttpRequestMessage())
@@ -337,10 +337,10 @@ namespace Autodesk.Construction.AccountAdmin.Http
                 else if (!response.IsSuccessStatusCode)
                 {
                     logger.LogError($"response unsuccess with status code: {response.StatusCode}");
-                    return new ApiResponse<BusinessUnitsResponse>(response, default(BusinessUnitsResponse));
+                    return new ApiResponse<BusinessUnits>(response, default(BusinessUnits));
                 }
                 logger.LogInformation($"Exited from GetBusinessUnitsAsync with response statusCode: {response.StatusCode}");
-                return new ApiResponse<BusinessUnitsResponse>(response, await LocalMarshalling.DeserializeAsync<BusinessUnitsResponse>(response.Content));
+                return new ApiResponse<BusinessUnits>(response, await LocalMarshalling.DeserializeAsync<BusinessUnits>(response.Content));
 
             } // using
         }

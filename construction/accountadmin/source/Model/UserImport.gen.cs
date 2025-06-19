@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Construction.Account.Admin
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -33,15 +34,15 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Construction.AccountAdmin.Model
 {
     /// <summary>
-    /// UserImportResponse
+    /// UserImport
     /// </summary>
     [DataContract]
-    public partial class UserImportResponse 
+    public partial class UserImport 
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="UserImportResponse" /> class.
+        /// Initializes a new instance of the <see cref="UserImport" /> class.
         /// </summary>
-        public UserImportResponse()
+        public UserImport()
         {
         }
         
@@ -52,7 +53,7 @@ namespace Autodesk.Construction.AccountAdmin.Model
         ///Import success user count
         /// </value>
         [DataMember(Name="success", EmitDefaultValue=false)]
-        public int? Success { get; set; }
+        public int Success { get; set; }
 
         /// <summary>
         ///Import failure user count
@@ -61,7 +62,7 @@ namespace Autodesk.Construction.AccountAdmin.Model
         ///Import failure user count
         /// </value>
         [DataMember(Name="failure", EmitDefaultValue=false)]
-        public int? Failure { get; set; }
+        public int Failure { get; set; }
 
         /// <summary>
         ///Array of user objects that were successfully imported
