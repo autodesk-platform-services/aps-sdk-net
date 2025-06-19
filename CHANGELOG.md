@@ -1,5 +1,29 @@
 # Changelog
 
+## [v4.0.0](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v4.0.0) (2025-06-18)
+
+[Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v3.1.1...v4.0.0)
+
+**Breaking changes:**
+
+- \[DAS 336\] - Update Acc Admin models and endpoints [\#166](https://github.com/autodesk-platform-services/aps-sdk-net/pull/166) ([Arrotech](https://github.com/Arrotech))
+
+**Fixed bugs:**
+
+- \[DAS 344\] - Reset outputStream position to 0 for reading [\#170](https://github.com/autodesk-platform-services/aps-sdk-net/pull/170) ([sajith-subramanian](https://github.com/sajith-subramanian))
+- \[DAS 342\]- Add codeVerifier argument for private clients [\#169](https://github.com/autodesk-platform-services/aps-sdk-net/pull/169) ([sajith-subramanian](https://github.com/sajith-subramanian))
+- \[Das 343\] - Fixed bug reports in handle request [\#168](https://github.com/autodesk-platform-services/aps-sdk-net/pull/168) ([srivastavarahull](https://github.com/srivastavarahull))
+- Update 'SetHeader\(\)' content header specifications & 'UploadSignedResourcesChunkAsync\(\)' 'ContentRange' format. [\#167](https://github.com/autodesk-platform-services/aps-sdk-net/pull/167) ([tylerwarner33](https://github.com/tylerwarner33))
+
+**Merged pull requests:**
+
+- \[AUTO\]: Update CHANGELOG [\#165](https://github.com/autodesk-platform-services/aps-sdk-net/pull/165) ([sajith-subramanian](https://github.com/sajith-subramanian))
+- Keep Main branch updated with dev [\#164](https://github.com/autodesk-platform-services/aps-sdk-net/pull/164) ([sajith-subramanian](https://github.com/sajith-subramanian))
+- Update ChangeLog [\#162](https://github.com/autodesk-platform-services/aps-sdk-net/pull/162) ([sajith-subramanian](https://github.com/sajith-subramanian))
+- Keep Main branch updated with dev [\#161](https://github.com/autodesk-platform-services/aps-sdk-net/pull/161) ([sajith-subramanian](https://github.com/sajith-subramanian))
+- \[AUTO\]: Update CHANGELOG [\#158](https://github.com/autodesk-platform-services/aps-sdk-net/pull/158) ([sajith-subramanian](https://github.com/sajith-subramanian))
+- Keep Main branch updated [\#157](https://github.com/autodesk-platform-services/aps-sdk-net/pull/157) ([sajith-subramanian](https://github.com/sajith-subramanian))
+
 ## [v3.1.1](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v3.1.1) (2025-05-20)
 
 [Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v3.1.0...v3.1.1)
