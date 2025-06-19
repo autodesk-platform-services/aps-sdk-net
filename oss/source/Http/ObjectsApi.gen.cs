@@ -932,8 +932,8 @@ namespace Autodesk.Oss.Http
 
                 request.Content = Marshalling.Serialize(body); // http body (model) parameter
 
-
-                SetHeader("Content-Type", contentType, request);
+                //No need to set content-type header here, as it is set by Marshalling.serialize method else it will throw error 'Cannot add value because header 'Content-Type' does not support multiple values.'.
+                // SetHeader("Content-Type", contentType, request);
                 SetHeader("x-ads-meta-Content-Type", xAdsMetaContentType, request);
                 SetHeader("x-ads-meta-Content-Disposition", xAdsMetaContentDisposition, request);
                 SetHeader("x-ads-meta-Content-Encoding", xAdsMetaContentEncoding, request);
