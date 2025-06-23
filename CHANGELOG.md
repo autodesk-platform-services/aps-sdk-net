@@ -1,5 +1,13 @@
 # Changelog
 
+## [v4.0.1](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v4.0.1) (2025-06-23)
+
+[Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v4.0.0...v4.0.1)
+
+**Fixed bugs:**
+
+- \[DAS-343\] - Fixed CompleteSignedS3UploadAsync method [\#173](https://github.com/autodesk-platform-services/aps-sdk-net/pull/173) ([srivastavarahull](https://github.com/srivastavarahull))
+
 ## [v4.0.0](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v4.0.0) (2025-06-18)
 
 [Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v3.1.1...v4.0.0)
