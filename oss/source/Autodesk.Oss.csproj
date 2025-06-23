@@ -9,10 +9,11 @@
     • Update SetHeader() content header specifications and UploadSignedResourcesChunkAsync() response deserialization. 
     • Fix for x-ads-request-id in the header in HandleRequestId().
     • Download() method's returned outputStream’s position is reset to the beginning.
+    • Fixed CompleteSignedS3UploadAsync method.
     </PackageReleaseNotes>
     <Copyright>Autodesk Inc.</Copyright>
     <PackageId>Autodesk.Oss</PackageId>
-    <PackageVersion>2.1.2</PackageVersion>
+    <PackageVersion>2.1.3</PackageVersion>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/autodesk-platform-services/aps-sdk-net.git</RepositoryUrl> 
