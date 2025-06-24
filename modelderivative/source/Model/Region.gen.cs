@@ -44,6 +44,7 @@ namespace Autodesk.ModelDerivative.Model
     ///- `IND` : Data centre for the India region.
     ///- `JPN` : Data centre for the Japan region.
     ///- `GBR`  : Data centre for the United Kingdom region.
+    ///**Note**: Beta features are subject to change. Please avoid using them in production environments.
     /// </summary>
     ///<value>Specifies where the referenced files are stored. Possible values are: 
     ///    
@@ -54,8 +55,8 @@ namespace Autodesk.ModelDerivative.Model
     ///- `DEU` : Data centre for the Germany region.
     ///- `IND` : Data centre for the India region.
     ///- `JPN` : Data centre for the Japan region.
-    ///- `GBR`  : Data centre for the United Kingdom region.</value>
-
+    ///- `GBR`  : Data centre for the United Kingdom region.
+    ///**Note**: Beta features are subject to change. Please avoid using them in production environments.</value>
     [JsonConverter(typeof(StringEnumConverter))]
 
     public enum Region
