@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -35,19 +36,25 @@ namespace Autodesk.ModelDerivative.Model
     /// <summary>
     /// Specifies where the referenced files are stored. Possible values are: 
     ///    
-    ///    - `US` - Data center for the US region.
-    ///    - `EMEA` - Data center for the European Union, Middle East, and Africa. 
-    ///    - `AUS` - (Beta) Data centre for the Australia region.
-    ///
-    ///**Note**: Beta features are subject to change. Please avoid using them in production environments.
+    ///- `US` - Data center for the US region.
+    ///- `EMEA` - Data center for the European Union, Middle East, and Africa. 
+    ///- `AUS` - (Beta) Data center for the Australia region.
+    ///- `CAN` : Data centre for the Canada region.
+    ///- `DEU` : Data centre for the Germany region.
+    ///- `IND` : Data centre for the India region.
+    ///- `JPN` : Data centre for the Japan region.
+    ///- `GBR`  : Data centre for the United Kingdom region.
     /// </summary>
     ///<value>Specifies where the referenced files are stored. Possible values are: 
     ///    
-    ///    - `US` - Data center for the US region.
-    ///    - `EMEA` - Data center for the European Union, Middle East, and Africa. 
-    ///    - `AUS` - (Beta) Data centre for the Australia region.
-    ///
-    ///**Note**: Beta features are subject to change. Please avoid using them in production environments.</value>
+    ///- `US` - Data center for the US region.
+    ///- `EMEA` - Data center for the European Union, Middle East, and Africa. 
+    ///- `AUS` - (Beta) Data center for the Australia region.
+    ///- `CAN` : Data centre for the Canada region.
+    ///- `DEU` : Data centre for the Germany region.
+    ///- `IND` : Data centre for the India region.
+    ///- `JPN` : Data centre for the Japan region.
+    ///- `GBR`  : Data centre for the United Kingdom region.</value>
 
     [JsonConverter(typeof(StringEnumConverter))]
 
@@ -77,8 +84,37 @@ namespace Autodesk.ModelDerivative.Model
         /// Enum AUS for value: AUS
         /// </summary>
         [EnumMember(Value = "AUS")]
-        AUS
+        AUS,
+
+        /// <summary>
+        /// Enum CAN for value: CAN
+        /// </summary>
+        [EnumMember(Value = "CAN")]
+        CAN,
+
+        /// <summary>
+        /// Enum DEU for value: DEU
+        /// </summary>
+        [EnumMember(Value = "DEU")]
+        DEU,
+
+        /// <summary>
+        /// Enum IND for value: IND
+        /// </summary>
+        [EnumMember(Value = "IND")]
+        IND,
+
+        /// <summary>
+        /// Enum JPN for value: JPN
+        /// </summary>
+        [EnumMember(Value = "JPN")]
+        JPN,
+
+        /// <summary>
+        /// Enum GBR for value: GBR
+        /// </summary>
+        [EnumMember(Value = "GBR")]
+        GBR
     }
+
 }
-
-

@@ -36,7 +36,7 @@ namespace Autodesk.ModelDerivative.Model
     /// An object that represents the successful response of a Fetch Manifest operation.
     /// </summary>
     [DataContract]
-    public partial class Manifest 
+    public partial class Manifest
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Manifest" /> class.
@@ -44,14 +44,14 @@ namespace Autodesk.ModelDerivative.Model
         public Manifest()
         {
         }
-        
+
         /// <summary>
         ///The URL-safe Base64 encoded URN of the source design.
         /// </summary>
         /// <value>
         ///The URL-safe Base64 encoded URN of the source design.
         /// </value>
-        [DataMember(Name="urn", EmitDefaultValue=false)]
+        [DataMember(Name = "urn", EmitDefaultValue = false)]
         public string Urn { get; set; }
 
         /// <summary>
@@ -60,18 +60,18 @@ namespace Autodesk.ModelDerivative.Model
         /// <value>
         ///An array of objects, where each object represents a derivative of the source design.
         /// </value>
-        [DataMember(Name="derivatives", EmitDefaultValue=false)]
+        [DataMember(Name = "derivatives", EmitDefaultValue = false)]
         public List<ManifestDerivative> Derivatives { get; set; }
 
         /// <summary>
         ///- `true`: There is a thumbnail for the source design.
-///- `false`: There is no thumbnail for the source design.
+        ///- `false`: There is no thumbnail for the source design.
         /// </summary>
         /// <value>
         ///- `true`: There is a thumbnail for the source design.
-///- `false`: There is no thumbnail for the source design.
+        ///- `false`: There is no thumbnail for the source design.
         /// </value>
-        [DataMember(Name="hasThumbnail", EmitDefaultValue=false)]
+        [DataMember(Name = "hasThumbnail", EmitDefaultValue = false)]
         public string HasThumbnail { get; set; }
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace Autodesk.ModelDerivative.Model
         /// <value>
         ///Indicates the overall progress of all translation jobs, as a percentage. Once all requested derivatives are generated, the value changes to `complete`.
         /// </value>
-        [DataMember(Name="progress", EmitDefaultValue=false)]
+        [DataMember(Name = "progress", EmitDefaultValue = false)]
         public string Progress { get; set; }
 
         /// <summary>
@@ -89,24 +89,34 @@ namespace Autodesk.ModelDerivative.Model
         /// <value>
         ///The type of data that is returned. Always `manifest`.
         /// </value>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [DataMember(Name = "type", EmitDefaultValue = false)]
         public string Type { get; set; }
 
         /// <summary>
         ///Specifies the data center where the manifest, derivatives, and references are stored. Possible values are: 
-///
-///- `US` - Data center for the US region.
-///- `EMEA` - Data center for European Union, Middle East, and Africa. 
-///- `APAC` - Data centre for the Australia region.
+        ///
+        ///- `US` - Data center for the US region.
+        ///- `EMEA` - Data center for European Union, Middle East, and Africa. 
+        ///- `AUS` - (Beta) Data center for the Australia region.
+        ///- `CAN` : Data centre for the Canada region.
+        ///- `DEU` : Data centre for the Germany region.
+        ///- `IND` : Data centre for the India region.
+        ///- `JPN` : Data centre for the Japan region.
+        ///- `GBR`  : Data centre for the United Kingdom region.
         /// </summary>
         /// <value>
         ///Specifies the data center where the manifest, derivatives, and references are stored. Possible values are: 
-///
-///- `US` - Data center for the US region.
-///- `EMEA` - Data center for European Union, Middle East, and Africa. 
-///- `APAC` - Data centre for the Australia region.
+        ///
+        ///- `US` - Data center for the US region.
+        ///- `EMEA` - Data center for European Union, Middle East, and Africa. 
+        ///- `AUS` - (Beta) Data center for the Australia region.
+        ///- `CAN` : Data centre for the Canada region.
+        ///- `DEU` : Data centre for the Germany region.
+        ///- `IND` : Data centre for the India region.
+        ///- `JPN` : Data centre for the Japan region.
+        ///- `GBR`  : Data centre for the United Kingdom region.
         /// </value>
-        [DataMember(Name="region", EmitDefaultValue=false)]
+        [DataMember(Name = "region", EmitDefaultValue = false)]
         public string Region { get; set; }
 
         /// <summary>
@@ -115,7 +125,7 @@ namespace Autodesk.ModelDerivative.Model
         /// <value>
         ///Indicates the version of the schema that the manifest is based on.
         /// </value>
-        [DataMember(Name="version", EmitDefaultValue=false)]
+        [DataMember(Name = "version", EmitDefaultValue = false)]
         public string _Version { get; set; }
 
         /// <summary>
@@ -124,7 +134,7 @@ namespace Autodesk.ModelDerivative.Model
         /// <value>
         ///Overall status of all translation jobs for the source design. Possible values are: `pending`, `success`, `inprogress`, `failed`, `timeout`.
         /// </value>
-        [DataMember(Name="status", EmitDefaultValue=false)]
+        [DataMember(Name = "status", EmitDefaultValue = false)]
         public string Status { get; set; }
 
         /// <summary>
