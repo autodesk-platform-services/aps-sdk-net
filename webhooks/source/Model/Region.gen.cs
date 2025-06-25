@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -38,7 +39,12 @@ namespace Autodesk.Webhooks.Model
 ///- `US` - (Default) Data center dedicated to serve the United States region.
 ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
 ///- `APAC` - (Beta) Data center dedicated to serve the Australia region (obsolete).
-///- `AUS` - Data center for the Australia region.
+///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
+///- `CAN` - Data center dedicated to serve the Canada region.
+///- `DEU` - Data center dedicated to serve the Germany region.
+///- `IND` - Data center dedicated to serve the India region.
+///- `JPN` - Data center dedicated to serve the Japan region.
+///- `GBR` - Data center dedicated to serve the United Kingdom region.
 ///
 ///**Note:** Beta features are subject to change. Please avoid using them in production environments.
     /// </summary>
@@ -46,8 +52,12 @@ namespace Autodesk.Webhooks.Model
 ///
 ///- `US` - (Default) Data center dedicated to serve the United States region.
 ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
-///- `APAC` - (Beta) Data center dedicated to serve the Australia region (obsolete).
-///- `AUS` - Data center for the Australia region.
+///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
+///- `CAN` - Data center dedicated to serve the Canada region.
+///- `DEU` - Data center dedicated to serve the Germany region.
+///- `IND` - Data center dedicated to serve the India region.
+///- `JPN` - Data center dedicated to serve the Japan region.
+///- `GBR` - Data center dedicated to serve the United Kingdom region.
 ///
 ///**Note:** Beta features are subject to change. Please avoid using them in production environments.</value>
     
@@ -79,7 +89,40 @@ namespace Autodesk.Webhooks.Model
         /// Enum AUS for value: AUS
         /// </summary>
         [EnumMember(Value = "AUS")]
-        AUS
+        AUS,
+        
+        /// <summary>
+        /// Enum CAN for value: CAN
+        /// </summary>
+        [EnumMember(Value = "CAN")]
+        CAN,
+        
+        /// <summary>
+        /// Enum DEU for value: DEU
+        /// </summary>
+        [EnumMember(Value = "DEU")]
+        DEU,
+        
+        /// <summary>
+        /// Enum IND for value: IND
+        /// </summary>
+        
+        [EnumMember(Value = "IND")]
+        
+        IND,
+        
+        /// <summary>
+        /// Enum JPN for value: JPN
+        /// </summary>
+        
+        [EnumMember(Value = "JPN")]
+        JPN,
+        
+        /// <summary>
+        /// Enum GBR for value: GBR
+        /// </summary>
+        [EnumMember(Value = "GBR")]
+        GBR
     }
 
 }
