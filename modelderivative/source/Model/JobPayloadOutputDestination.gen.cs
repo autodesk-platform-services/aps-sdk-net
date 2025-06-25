@@ -50,7 +50,12 @@ namespace Autodesk.ModelDerivative.Model
         ///
         ///- `US`: (Default) Store derivatives at a data center for the United States of America.
         ///- `EMEA`: Store derivatives at a data center for the European Union. 
-        ///- `APAC`: (Beta) Store derivatives at a data centre for the Australia region. 
+        ///- `AUS` - (Beta) Data center for the Australia region.
+        ///- `CAN` : Data center for the Canada region.
+        ///- `DEU` : Data center for the Germany region.
+        ///- `IND` : Data center for the India region.
+        ///- `JPN` : Data center for the Japan region.
+        ///- `GBR`  : Data center for the United Kingdom region.
         ///
         ///**Note**: Beta features are subject to change. Please avoid using them in production environments.
         /// </summary>
@@ -59,7 +64,12 @@ namespace Autodesk.ModelDerivative.Model
         ///
         ///- `US`: (Default) Store derivatives at a data center for the United States of America.
         ///- `EMEA`: Store derivatives at a data center for the European Union. 
-        ///- `APAC`: (Beta) Store derivatives at a data centre for the Australia region. 
+        ///- `AUS` - (Beta) Data center for the Australia region.
+        ///- `CAN` : Data center for the Canada region.
+        ///- `DEU` : Data center for the Germany region.
+        ///- `IND` : Data center for the India region.
+        ///- `JPN` : Data center for the Japan region.
+        ///- `GBR`  : Data center for the United Kingdom region.
         ///
         ///**Note**: Beta features are subject to change. Please avoid using them in production environments.
         /// </value>
