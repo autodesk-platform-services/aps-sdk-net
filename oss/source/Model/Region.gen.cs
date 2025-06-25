@@ -35,85 +35,85 @@ namespace Autodesk.Oss.Model
 {
     /// <summary>
     /// Specifies where the bucket containing the object is stored. Possible values are:
-///
-///- `US` : (Default) Data center for the US region.
-///- `EMEA` : Data center for the European Union, Middle East, and Africa.
-///- `AUS` : (Beta) Data center for Australia.
-///- `CAN` : Data centre for the Canada region.
-///- `DEU` : Data centre for the Germany region.
-///- `IND` : Data centre for the India region.
-///- `JPN` : Data centre for the Japan region.
-///- `GBR` : Data centre for the United Kingdom region.
-///
-///**Note:** Beta features are subject to change. Please do not use in production environments.     
+    ///
+    ///- `US` : (Default) Data center for the US region.
+    ///- `EMEA` : Data center for the European Union, Middle East, and Africa.
+    ///- `AUS` : (Beta) Data center for Australia.
+    ///- `CAN` : Data center for the Canada region.
+    ///- `DEU` : Data center for the Germany region.
+    ///- `IND` : Data center for the India region.
+    ///- `JPN` : Data center for the Japan region.
+    ///- `GBR` : Data center for the United Kingdom region.
+    ///
+    ///**Note:** Beta features are subject to change. Please do not use in production environments.     
     /// </summary>
     ///<value>Specifies where the bucket containing the object is stored. Possible values are:
-///
-///- `US` : (Default) Data center for the US region.
-///- `EMEA` : Data center for the European Union, Middle East, and Africa.
-///- `AUS` : (Beta) Data center for Australia.
-///- `CAN` : Data centre for the Canada region.
-///- `DEU` : Data centre for the Germany region.
-///- `IND` : Data centre for the India region.
-///- `JPN` : Data centre for the Japan region.
-///- `GBR` : Data centre for the United Kingdom region.
-///
-///**Note:** Beta features are subject to change. Please do not use in production environments.     </value>
-    
+    ///
+    ///- `US` : (Default) Data center for the US region.
+    ///- `EMEA` : Data center for the European Union, Middle East, and Africa.
+    ///- `AUS` : (Beta) Data center for Australia.
+    ///- `CAN` : Data center for the Canada region.
+    ///- `DEU` : Data center for the Germany region.
+    ///- `IND` : Data center for the India region.
+    ///- `JPN` : Data center for the Japan region.
+    ///- `GBR` : Data center for the United Kingdom region.
+    ///
+    ///**Note:** Beta features are subject to change. Please do not use in production environments.     </value>
+
     [JsonConverter(typeof(StringEnumConverter))]
-    
+
     public enum Region
     {
-        
+
         /// <summary>
         /// Enum US for value: US
         /// </summary>
         [EnumMember(Value = "US")]
         US,
-        
+
         /// <summary>
         /// Enum EMEA for value: EMEA
         /// </summary>
         [EnumMember(Value = "EMEA")]
         EMEA,
-        
+
         /// <summary>
         /// Enum AUS for value: AUS
         /// </summary>
         [EnumMember(Value = "AUS")]
         AUS,
-        
+
         /// <summary>
         /// Enum APAC for value: APAC
         /// </summary>
         [Obsolete("Please use AUS instead.")]
         [EnumMember(Value = "APAC")]
         APAC,
-        
+
         /// <summary>
         /// Enum CAN for value: CAN
         /// </summary>
         [EnumMember(Value = "CAN")]
         CAN,
-        
+
         /// <summary>
         /// Enum DEU for value: DEU
         /// </summary>
         [EnumMember(Value = "DEU")]
         DEU,
-        
+
         /// <summary>
         /// Enum IND for value: IND
         /// </summary>
         [EnumMember(Value = "IND")]
         IND,
-        
+
         /// <summary>
         /// Enum JPN for value: JPN
         /// </summary>
         [EnumMember(Value = "JPN")]
         JPN,
-        
+
         /// <summary>
         /// Enum GBR for value: GBR
         /// </summary>
