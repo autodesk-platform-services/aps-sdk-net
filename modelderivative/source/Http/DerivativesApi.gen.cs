@@ -64,11 +64,11 @@ namespace Autodesk.ModelDerivative.Http
         ///- `US` - (Default) Data center for the US region.
         ///- `EMEA` - Data center for the European Union, Middle East, and Africa. 
         ///- `AUS` - (Beta) Data center for the Australia region.
-        ///- `CAN` : Data centre for the Canada region.
-        ///- `DEU` : Data centre for the Germany region.
-        ///- `IND` : Data centre for the India region.
-        ///- `JPN` : Data centre for the Japan region.
-        ///- `GBR`  : Data centre for the United Kingdom region.
+        ///- `CAN` : Data center for the Canada region.
+        ///- `DEU` : Data center for the Germany region.
+        ///- `IND` : Data center for the India region.
+        ///- `JPN` : Data center for the Japan region.
+        ///- `GBR`  : Data center for the United Kingdom region.
         ///
         ///**Note**: Beta features are subject to change. Please avoid using them in production environments. (optional)
         /// </param>
@@ -96,11 +96,11 @@ namespace Autodesk.ModelDerivative.Http
         ///- `US` - (Default) Data center for the US region.
         ///- `EMEA` - Data center for the European Union, Middle East, and Africa. 
         ///- `AUS` - (Beta) Data center for the Australia region.
-        ///- `CAN` : Data centre for the Canada region.
-        ///- `DEU` : Data centre for the Germany region.
-        ///- `IND` : Data centre for the India region.
-        ///- `JPN` : Data centre for the Japan region.
-        ///- `GBR`  : Data centre for the United Kingdom region.
+        ///- `CAN` : Data center for the Canada region.
+        ///- `DEU` : Data center for the Germany region.
+        ///- `IND` : Data center for the India region.
+        ///- `JPN` : Data center for the Japan region.
+        ///- `GBR`  : Data center for the United Kingdom region.
         ///
         ///**Note**: Beta features are subject to change. Please avoid using them in production environments. (optional)
         /// </param>
@@ -212,11 +212,11 @@ namespace Autodesk.ModelDerivative.Http
         ///- `US` - (Default) Data center for the US region.
         ///- `EMEA` - Data center for the European Union, Middle East, and Africa. 
         ///- `AUS` - (Beta) Data center for the Australia region.
-        ///- `CAN` : Data centre for the Canada region.
-        ///- `DEU` : Data centre for the Germany region.
-        ///- `IND` : Data centre for the India region.
-        ///- `JPN` : Data centre for the Japan region.
-        ///- `GBR`  : Data centre for the United Kingdom region.
+        ///- `CAN` : Data center for the Canada region.
+        ///- `DEU` : Data center for the Germany region.
+        ///- `IND` : Data center for the India region.
+        ///- `JPN` : Data center for the Japan region.
+        ///- `GBR`  : Data center for the United Kingdom region.
         ///
         ///**Note**: Beta features are subject to change. Please avoid using them in production environments. (optional)
         /// </param>
@@ -317,11 +317,11 @@ namespace Autodesk.ModelDerivative.Http
         ///- `US` - (Default) Data center for the US region.
         ///- `EMEA` - Data center for the European Union, Middle East, and Africa. 
         ///- `AUS` - (Beta) Data center for the Australia region.
-        ///- `CAN` : Data centre for the Canada region.
-        ///- `DEU` : Data centre for the Germany region.
-        ///- `IND` : Data centre for the India region.
-        ///- `JPN` : Data centre for the Japan region.
-        ///- `GBR`  : Data centre for the United Kingdom region.
+        ///- `CAN` : Data center for the Canada region.
+        ///- `DEU` : Data center for the Germany region.
+        ///- `IND` : Data center for the India region.
+        ///- `JPN` : Data center for the Japan region.
+        ///- `GBR`  : Data center for the United Kingdom region.
         ///
         ///**Note**: Beta features are subject to change. Please avoid using them in production environments. (optional)
         /// </param>
