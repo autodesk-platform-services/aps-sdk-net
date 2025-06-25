@@ -487,10 +487,17 @@ namespace Autodesk.Oss
         /// </remarks>
         /// <exception cref="OssApiException">Thrown when fails to make API call</exception>
         /// <param name="xAdsRegion">
-        ///Specifies where the bucket must be stored. Possible values are:
-        ///- `US` - (Default) Data center for the US region.
-        ///- `EMEA` - Data center for the European Union, Middle East, and Africa.
-        ///- `AUS` -  (Beta) Data center for Australia.
+        ///Specifies where the bucket containing the object is stored. Possible values are:
+        ///
+        ///- `US` : (Default) Data center for the US region.
+        ///- `EMEA` : Data center for the European Union, Middle East, and Africa.
+        ///- `AUS` : (Beta) Data center for Australia.
+        ///- `CAN` : Data center for the Canada region.
+        ///- `DEU` : Data center for the Germany region.
+        ///- `IND` : Data center for the India region.
+        ///- `JPN` : Data center for the Japan region.
+        ///- `GBR` : Data center for the United Kingdom region.
+        ///
         ///**Note:** Beta features are subject to change. Please do not use in production environments. (optional)
         /// </param>     
         /// <param name="bucketsPayload">
@@ -660,11 +667,16 @@ namespace Autodesk.Oss
         ///**Note:** The signed URL returned by [Generate OSS Signed URL](/en/docs/data/v2/reference/http/signedresources-:id-GET/) contains `hash` as a URI parameter.
         /// </param>
         /// <param name="region">
-        ///Specifies where the bucket containing the object stored. Possible values are:
+        ///Specifies where the bucket containing the object is stored. Possible values are:
         ///
-        ///- `US` - (Default) Data center for the US region.
-        ///- `EMEA` - Data center for the European Union, Middle East, and Africa.
-        ///- `AUS` -  (Beta) Data center for Australia.
+        ///- `US` : (Default) Data center for the US region.
+        ///- `EMEA` : Data center for the European Union, Middle East, and Africa.
+        ///- `AUS` : (Beta) Data center for Australia.
+        ///- `CAN` : Data center for the Canada region.
+        ///- `DEU` : Data center for the Germany region.
+        ///- `IND` : Data center for the India region.
+        ///- `JPN` : Data center for the Japan region.
+        ///- `GBR` : Data center for the United Kingdom region.
         ///
         ///**Note:** Beta features are subject to change. Please do not use in production environments. (optional)
         /// </param>
@@ -734,11 +746,16 @@ namespace Autodesk.Oss
         /// </remarks>
         /// <exception cref="OssApiException">Thrown when fails to make API call</exception>
         /// <param name="region">
-        ///Specifies where the bucket containing the object stored. Possible values are:
+        ///Specifies where the bucket containing the object is stored. Possible values are:
         ///
-        ///- `US` - (Default) Data center for the US region.
-        ///- `EMEA` - Data center for the European Union, Middle East, and Africa.
-        ///- `AUS` -  (Beta) Data center for Australia.
+        ///- `US` : (Default) Data center for the US region.
+        ///- `EMEA` : Data center for the European Union, Middle East, and Africa.
+        ///- `AUS` : (Beta) Data center for Australia.
+        ///- `CAN` : Data center for the Canada region.
+        ///- `DEU` : Data center for the Germany region.
+        ///- `IND` : Data center for the India region.
+        ///- `JPN` : Data center for the Japan region.
+        ///- `GBR` : Data center for the United Kingdom region.
         ///
         ///**Note:** Beta features are subject to change. Please do not use in production environments. (optional)
         /// </param>
@@ -888,11 +905,16 @@ namespace Autodesk.Oss
         ///**Note:** You cannot use `Accept-Encoding:gzip` with a Range header containing an end byte range. OSS will not honor the End byte range if `Accept-Encoding: gzip` header is used. (optional)
         /// </param>
         /// <param name="region">
-        ///Specifies where the bucket containing the object stored. Possible values are:
+        ///Specifies where the bucket containing the object is stored. Possible values are:
         ///
-        ///- `US` - (Default) Data center for the US region.
-        ///- `EMEA` - Data center for the European Union, Middle East, and Africa.
-        ///- `AUS` -  (Beta) Data center for Australia.
+        ///- `US` : (Default) Data center for the US region.
+        ///- `EMEA` : Data center for the European Union, Middle East, and Africa.
+        ///- `AUS` : (Beta) Data center for Australia.
+        ///- `CAN` : Data center for the Canada region.
+        ///- `DEU` : Data center for the Germany region.
+        ///- `IND` : Data center for the India region.
+        ///- `JPN` : Data center for the Japan region.
+        ///- `GBR` : Data center for the United Kingdom region.
         ///
         ///**Note:** Beta features are subject to change. Please do not use in production environments. (optional)
         /// </param>
@@ -1097,11 +1119,16 @@ namespace Autodesk.Oss
         ///The suggested file name to use when this object is downloaded as a file. (optional)
         /// </param>
         /// <param name="xAdsRegion">
-        ///Specifies where the bucket containing the object stored. Possible values are:
+        ///Specifies where the bucket containing the object is stored. Possible values are:
         ///
-        ///- `US` - (Default) Data center for the US region.
-        ///- `EMEA` - Data center for the European Union, Middle East, and Africa.
-        ///- `AUS` -  (Beta) Data center for Australia.
+        ///- `US` : (Default) Data center for the US region.
+        ///- `EMEA` : Data center for the European Union, Middle East, and Africa.
+        ///- `AUS` : (Beta) Data center for Australia.
+        ///- `CAN` : Data center for the Canada region.
+        ///- `DEU` : Data center for the Germany region.
+        ///- `IND` : Data center for the India region.
+        ///- `JPN` : Data center for the Japan region.
+        ///- `GBR` : Data center for the United Kingdom region.
         ///
         ///**Note:** Beta features are subject to change. Please do not use in production environments. (optional)
         /// </param>
@@ -1161,11 +1188,16 @@ namespace Autodesk.Oss
         ///The suggested file name to use when this object is downloaded as a file. (optional)
         /// </param>
         /// <param name="xAdsRegion">
-        ///Specifies where the bucket containing the object stored. Possible values are:
+        ///Specifies where the bucket containing the object is stored. Possible values are:
         ///
-        ///- `US` - (Default) Data center for the US region.
-        ///- `EMEA` - Data center for the European Union, Middle East, and Africa.
-        ///- `AUS` -  (Beta) Data center for Australia.
+        ///- `US` : (Default) Data center for the US region.
+        ///- `EMEA` : Data center for the European Union, Middle East, and Africa.
+        ///- `AUS` : (Beta) Data center for Australia.
+        ///- `CAN` : Data center for the Canada region.
+        ///- `DEU` : Data center for the Germany region.
+        ///- `IND` : Data center for the India region.
+        ///- `JPN` : Data center for the Japan region.
+        ///- `GBR` : Data center for the United Kingdom region.
         ///
         ///**Note:** Beta features are subject to change. Please do not use in production environments. (optional)
         /// </param>
