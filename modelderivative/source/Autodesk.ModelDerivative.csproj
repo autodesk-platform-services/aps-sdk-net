@@ -6,8 +6,7 @@
     <Authors>Autodesk Platform Services SDK Team</Authors>
     <PackageDescription>Client SDK for Model Derivative API</PackageDescription>
     <PackageReleaseNotes>
-    - Added support for Aus region
-    - Added Properties object to ManifestDerivative class
+    • Added region support for UK, Canada, Germany, India and Japan.
     </PackageReleaseNotes>
     <Copyright>Autodesk Inc.</Copyright>
     <PackageId>Autodesk.ModelDerivative</PackageId>
