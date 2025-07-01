@@ -1,5 +1,27 @@
 # Changelog
 
+## [v4.1.1](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v4.1.1) (2025-06-30)
+
+[Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v4.0.1...v4.1.1)
+
+**Implemented enhancements:**
+
+- \[DAS 347\] - DM Add support for uk plus 4 regions [\#179](https://github.com/autodesk-platform-services/aps-sdk-net/pull/179) ([Arrotech](https://github.com/Arrotech))
+- \[DAS 348\] - Oss added support for UK+4 [\#178](https://github.com/autodesk-platform-services/aps-sdk-net/pull/178) ([nishchhaldagar](https://github.com/nishchhaldagar))
+- \[DAS-345\] - Changes done for webhooks to support UK+4 region [\#177](https://github.com/autodesk-platform-services/aps-sdk-net/pull/177) ([srivastavarahull](https://github.com/srivastavarahull))
+- \[Das 346\] - Model Derivative - Adds support for uk+4 regions [\#176](https://github.com/autodesk-platform-services/aps-sdk-net/pull/176) ([sajith-subramanian](https://github.com/sajith-subramanian))
+
+**Closed issues:**
+
+- Model Derivative Job Payload Format For Inventor .IAM Files? [\#181](https://github.com/autodesk-platform-services/aps-sdk-net/issues/181)
+
+**Merged pull requests:**
+
+- \[AUTO\]: Update CHANGELOG [\#175](https://github.com/autodesk-platform-services/aps-sdk-net/pull/175) ([sajith-subramanian](https://github.com/sajith-subramanian))
+- Keep Main updated with Dev [\#174](https://github.com/autodesk-platform-services/aps-sdk-net/pull/174) ([sajith-subramanian](https://github.com/sajith-subramanian))
+- \[AUTO\]: Update CHANGELOG [\#172](https://github.com/autodesk-platform-services/aps-sdk-net/pull/172) ([sajith-subramanian](https://github.com/sajith-subramanian))
+- Keep Main branch updated with Development [\#171](https://github.com/autodesk-platform-services/aps-sdk-net/pull/171) ([sajith-subramanian](https://github.com/sajith-subramanian))
+
 ## [v4.0.1](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v4.0.1) (2025-06-23)
 
 [Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v4.0.0...v4.0.1)
