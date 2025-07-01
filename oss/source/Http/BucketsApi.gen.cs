@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * oss
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using Autodesk.Forge.Core;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
@@ -54,10 +55,17 @@ namespace Autodesk.Oss.Http
         ///
         /// </param>
         /// <param name="xAdsRegion">
-        ///Specifies where the bucket must be stored. Possible values are:
-        ///- `US` - (Default) Data center for the US region.
-        ///- `EMEA` - Data center for the European Union, Middle East, and Africa.
-        ///- `AUS` -  (Beta) Data center for Australia.
+        ///Specifies where the bucket containing the object is stored. Possible values are:
+        ///
+        ///- `US` : (Default) Data center for the US region.
+        ///- `EMEA` : Data center for the European Union, Middle East, and Africa.
+        ///- `AUS` : (Beta) Data center for Australia.
+        ///- `CAN` : Data center for the Canada region.
+        ///- `DEU` : Data center for the Germany region.
+        ///- `IND` : Data center for the India region.
+        ///- `JPN` : Data center for the Japan region.
+        ///- `GBR` : Data center for the United Kingdom region.
+        ///
         ///**Note:** Beta features are subject to change. Please do not use in production environments. (optional)
         /// </param>
         /// <returns>Task of ApiResponse&lt;Bucket&gt;</returns>
@@ -103,11 +111,16 @@ namespace Autodesk.Oss.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="region">
-        ///Specifies where the bucket containing the object stored. Possible values are:
+        ///Specifies where the bucket containing the object is stored. Possible values are:
         ///
-        ///- `US` - (Default) Data center for the US region.
-        ///- `EMEA` - Data center for the European Union, Middle East, and Africa.
-        ///- `AUS` -  (Beta) Data center for Australia.
+        ///- `US` : (Default) Data center for the US region.
+        ///- `EMEA` : Data center for the European Union, Middle East, and Africa.
+        ///- `AUS` : (Beta) Data center for Australia.
+        ///- `CAN` : Data center for the Canada region.
+        ///- `DEU` : Data center for the Germany region.
+        ///- `IND` : Data center for the India region.
+        ///- `JPN` : Data center for the Japan region.
+        ///- `GBR` : Data center for the United Kingdom region.
         ///
         ///**Note:** Beta features are subject to change. Please do not use in production environments. (optional)
         /// </param>
@@ -216,10 +229,17 @@ namespace Autodesk.Oss.Http
         ///
         /// </param>
         /// <param name="xAdsRegion">
-        ///Specifies where the bucket must be stored. Possible values are:
-        ///- `US` - (Default) Data center for the US region.
-        ///- `EMEA` - Data center for the European Union, Middle East, and Africa.
-        ///- `AUS` -  (Beta) Data center for Australia.
+        ///Specifies where the bucket containing the object is stored. Possible values are:
+        ///
+        ///- `US` : (Default) Data center for the US region.
+        ///- `EMEA` : Data center for the European Union, Middle East, and Africa.
+        ///- `AUS` : (Beta) Data center for Australia.
+        ///- `CAN` : Data center for the Canada region.
+        ///- `DEU` : Data center for the Germany region.
+        ///- `IND` : Data center for the India region.
+        ///- `JPN` : Data center for the Japan region.
+        ///- `GBR` : Data center for the United Kingdom region.
+        ///
         ///**Note:** Beta features are subject to change. Please do not use in production environments. (optional)
         /// </param>
         /// <returns>Task of ApiResponse&lt;Bucket&gt;></returns>
@@ -447,11 +467,16 @@ namespace Autodesk.Oss.Http
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="region">
-        ///Specifies where the bucket containing the object stored. Possible values are:
+        ///Specifies where the bucket containing the object is stored. Possible values are:
         ///
-        ///- `US` - (Default) Data center for the US region.
-        ///- `EMEA` - Data center for the European Union, Middle East, and Africa.
-        ///- `AUS` -  (Beta) Data center for Australia.
+        ///- `US` : (Default) Data center for the US region.
+        ///- `EMEA` : Data center for the European Union, Middle East, and Africa.
+        ///- `AUS` : (Beta) Data center for Australia.
+        ///- `CAN` : Data center for the Canada region.
+        ///- `DEU` : Data center for the Germany region.
+        ///- `IND` : Data center for the India region.
+        ///- `JPN` : Data center for the Japan region.
+        ///- `GBR` : Data center for the United Kingdom region.
         ///
         ///**Note:** Beta features are subject to change. Please do not use in production environments. (optional)
         /// </param>
@@ -528,6 +553,5 @@ namespace Autodesk.Oss.Http
 
             } // using
         }
-
     }
 }

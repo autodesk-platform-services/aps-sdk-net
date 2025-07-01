@@ -35,19 +35,29 @@ namespace Autodesk.DataManagement.Model
 {
     /// <summary>
     /// Specifies where the hub is stored. Possible values are:
-///
-///- `US` - Data center for the US region.
-///- `EMEA` - Data center for the European Union, Middle East, and Africa regions.
-///- `APAC` - Data center for the Australia region (obsolete).
-///- `AUS` - Data center for the Australia region.
+    ///
+    ///- `US` - Data center for the US region.
+    ///- `EMEA` - Data center for the European Union, Middle East, and Africa regions.
+    ///- `APAC` - Data center for the Australia region (obsolete).
+    ///- `AUS` - Data center for the Australia region.
+    ///- `CAN` - Data center for the Canada region.
+    ///- `DEU` - Data center for the Germany region.
+    ///- `IND` - Data center for the India region.
+    ///- `JPN` - Data center for the Japan region.
+    ///- `GBR` - Data center for the United Kingdom region.
     /// </summary>
     ///<value>Specifies where the hub is stored. Possible values are:
-///
-///- `US` - Data center for the US region.
-///- `EMEA` - Data center for the European Union, Middle East, and Africa regions.
-///- `APAC` - Data center for the Australia region (obsolete).
-///- `AUS` - Data center for the Australia region.</value>
-    
+    ///
+    ///- `US` - Data center for the US region.
+    ///- `EMEA` - Data center for the European Union, Middle East, and Africa regions.
+    ///- `APAC` - Data center for the Australia region (obsolete).
+    ///- `AUS` - Data center for the Australia region.
+    ///- `CAN` - Data center for the Canada region.
+    ///- `DEU` - Data center for the Germany region.
+    ///- `IND` - Data center for the India region.
+    ///- `JPN` - Data center for the Japan region.
+    ///- `GBR` - Data center for the United Kingdom region.</value>
+
     [JsonConverter(typeof(StringEnumConverter))]
     
     public enum Region
@@ -76,7 +86,37 @@ namespace Autodesk.DataManagement.Model
         /// Enum AUS for value: AUS
         /// </summary>
         [EnumMember(Value = "AUS")]
-        AUS
+        AUS,
+        
+        /// <summary>
+        /// Enum CAN for value: CAN
+        /// </summary>
+        [EnumMember(Value = "CAN")]
+        CAN,
+        
+        /// <summary>
+        /// Enum DEU for value: DEU
+        /// </summary>
+        [EnumMember(Value = "DEU")]
+        DEU,
+        
+        /// <summary>
+        /// Enum IND for value: IND
+        /// </summary>
+        [EnumMember(Value = "IND")]
+        IND,
+        
+        /// <summary>
+        /// Enum JPN for value: JPN
+        /// </summary>
+        [EnumMember(Value = "JPN")]
+        JPN,
+        
+        /// <summary>
+        /// Enum GBR for value: GBR
+        /// </summary>
+        [EnumMember(Value = "GBR")]
+        GBR
     }
 
 }
