@@ -1,5 +1,19 @@
 # Changelog
 
+## [v4.2.1](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v4.2.1) (2025-07-03)
+
+[Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v4.1.1...v4.2.1)
+
+**Implemented enhancements:**
+
+- \[DAS 349\] - Add support for UK plus four regions [\#185](https://github.com/autodesk-platform-services/aps-sdk-net/pull/185) ([Arrotech](https://github.com/Arrotech))
+- \[DAS-350\] - Added support for UK+4 for issues [\#184](https://github.com/autodesk-platform-services/aps-sdk-net/pull/184) ([srivastavarahull](https://github.com/srivastavarahull))
+
+**Merged pull requests:**
+
+- \[AUTO\]: Update CHANGELOG [\#183](https://github.com/autodesk-platform-services/aps-sdk-net/pull/183) ([sajith-subramanian](https://github.com/sajith-subramanian))
+- Keep Main branch updated with release 4.1.1 [\#182](https://github.com/autodesk-platform-services/aps-sdk-net/pull/182) ([sajith-subramanian](https://github.com/sajith-subramanian))
+
 ## [v4.1.1](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v4.1.1) (2025-06-30)
 
 [Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v4.0.1...v4.1.1)
