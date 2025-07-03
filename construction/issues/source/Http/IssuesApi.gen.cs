@@ -536,6 +536,9 @@ namespace Autodesk.Construction.Issues.Http
         /// <param name="filterStartDate">
         ///Filter issues by start date, in one of the following URL-encoded format: YYYY-MM-DD. Separate multiple values with commas. (optional)
         /// </param>
+        /// <param name="filterDeleted">
+        ///Filter deleted issues. For example, filter[deleted]=true. If set to true it only returns deleted issues. If set to false it only returns undeleted issues. Note that we do not currently support returning both deleted and undeleted issues. Default value: false. (optional)
+        /// </param>
         /// <param name="filterCreatedAt">
         ///Filter issues created at the specified date and time, in one of the following URL-encoded formats: YYYY-MM-DDThh:mm:ss.sz or YYYY-MM-DD. Separate multiple values with commas (optional)
         /// </param>
