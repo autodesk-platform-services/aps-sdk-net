@@ -38,6 +38,10 @@ namespace Autodesk.Construction.Issues.Model
         [DataContract]
         public partial class IssuePayload
         {
+                private string _assignedTo;
+                private AssignedToType? _assignedToType;
+                private bool _assignedToWasSet = false;
+                private bool _assignedToTypeWasSet = false;
                 /// <summary>
                 /// Initializes a new instance of the <see cref="IssuePayload" /> class.
                 /// </summary>
@@ -98,13 +102,52 @@ namespace Autodesk.Construction.Issues.Model
                 ///The Autodesk ID of the member, role, or company you want to assign to the issue. Note that if you select an assignee ID, you also need to select a type (assignedToType).
                 /// </value>
                 [DataMember(Name = "assignedTo", EmitDefaultValue = false)]
-                public string AssignedTo { get; set; }
-
+                [JsonProperty(NullValueHandling = NullValueHandling.Include)]
+                public string AssignedTo
+                {
+                        // The AssignedTo property with custom serialization handling.
+                        // We need to track if this property was explicitly set to handle null values correctly during serialization.
+                        // This allows us to distinguish between an unset value and an explicitly set null value.
+                        get => _assignedTo;
+                        set
+                        {
+                                _assignedTo = value;
+                                _assignedToWasSet = true; // Track that this property was explicitly set
+                        }
+                }
                 /// <summary>
                 ///Gets or Sets AssignedToType
                 /// </summary>
                 [DataMember(Name = "assignedToType", EmitDefaultValue = false)]
-                public AssignedToType AssignedToType { get; set; }
+                [JsonProperty(NullValueHandling = NullValueHandling.Include)] 
+                public AssignedToType? AssignedToType
+                {
+                        // The AssignedToType property with custom serialization handling.
+                        // Similar to AssignedTo, we track if this was explicitly set to handle null values correctly.
+                        // This is important because AssignedTo and AssignedToType work together - if one is set, the other should also be set.
+                        get => _assignedToType;
+                        set
+                        {
+                                _assignedToType = value;
+                                _assignedToTypeWasSet = true; // Track that this property was explicitly set
+                        }
+                }
+                
+                // Controls serialization of AssignedTo property.
+                // Only serialize if the property was explicitly set, allowing proper null handling.
+                // This prevents the property from being included in JSON if it was never set.
+                public bool ShouldSerializeAssignedTo()
+                {
+                        return _assignedToWasSet;
+                }
+
+                // Controls serialization of AssignedToType property.
+                // Only serialize if the property was explicitly set, allowing proper null handling.
+                // This prevents the property from being included in JSON if it was never set.
+                public bool ShouldSerializeAssignedToType()
+                {
+                        return _assignedToTypeWasSet;
+                }
 
                 /// <summary>
                 ///The due date of the issue, in ISO8601 format.
