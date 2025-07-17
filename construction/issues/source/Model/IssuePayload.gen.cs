@@ -29,6 +29,7 @@ using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using System.ComponentModel;
 
 namespace Autodesk.Construction.Issues.Model
 {
@@ -136,6 +137,7 @@ namespace Autodesk.Construction.Issues.Model
                 // Controls serialization of AssignedTo property.
                 // Only serialize if the property was explicitly set, allowing proper null handling.
                 // This prevents the property from being included in JSON if it was never set.
+                [EditorBrowsable(EditorBrowsableState.Never)] 
                 public bool ShouldSerializeAssignedTo()
                 {
                         return _assignedToWasSet;
@@ -144,6 +146,7 @@ namespace Autodesk.Construction.Issues.Model
                 // Controls serialization of AssignedToType property.
                 // Only serialize if the property was explicitly set, allowing proper null handling.
                 // This prevents the property from being included in JSON if it was never set.
+                [EditorBrowsable(EditorBrowsableState.Never)]
                 public bool ShouldSerializeAssignedToType()
                 {
                         return _assignedToTypeWasSet;
