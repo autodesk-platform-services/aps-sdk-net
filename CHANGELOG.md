@@ -1,13 +1,5 @@
 # Changelog
 
-## [Unreleased](https://github.com/autodesk-platform-services/aps-sdk-net/tree/HEAD)
-
-[Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v4.2.2...HEAD)
-
-**Closed issues:**
-
-- Unable to 'clear' values for fields that are clearable/nullable for Construction.Issues when calling PatchIssueDetailsAsync [\#180](https://github.com/autodesk-platform-services/aps-sdk-net/issues/180)
-
 ## [v4.2.2](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v4.2.2) (2025-07-24)
 
 [Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v4.2.1...v4.2.2)
@@ -15,10 +7,10 @@
 **Fixed bugs:**
 
 - \[DAS-352\] - Fixed all the data members of IssuePayload to support null values [\#191](https://github.com/autodesk-platform-services/aps-sdk-net/pull/191) ([srivastavarahull](https://github.com/srivastavarahull))
-- \[DAS - 352\] - Fixed IssuePayload model to handle null values [\#188](https://github.com/autodesk-platform-services/aps-sdk-net/pull/188) ([srivastavarahull](https://github.com/srivastavarahull))
 
 **Closed issues:**
 
+- Unable to 'clear' values for fields that are clearable/nullable for Construction.Issues when calling PatchIssueDetailsAsync [\#180](https://github.com/autodesk-platform-services/aps-sdk-net/issues/180)
 - Access manifest/metadata for an item [\#149](https://github.com/autodesk-platform-services/aps-sdk-net/issues/149)
 - RFIs support [\#39](https://github.com/autodesk-platform-services/aps-sdk-net/issues/39)
 - BIM360 support [\#38](https://github.com/autodesk-platform-services/aps-sdk-net/issues/38)
