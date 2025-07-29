@@ -486,34 +486,34 @@ namespace Autodesk.Webhooks.Model
         [EnumMember(Value = "sco.deleted-1.0")]
         ScoDeleted10,
 
-		  /// <summary>
-		  /// Enum IssueCreated10 for value: issue.created-1.0
-		  /// </summary>
-		  [EnumMember(Value = "issue.created-1.0")]
+        /// <summary>
+        /// Enum IssueCreated10 for value: issue.created-1.0
+        /// </summary>
+        [EnumMember(Value = "issue.created-1.0")]
         IssueCreated10,
 
-		  /// <summary>
-		  /// Enum IssueUpdated10 for value: issue.updated-1.0
-		  /// </summary>
-		  [EnumMember(Value = "issue.updated-1.0")]
+        /// <summary>
+        /// Enum IssueUpdated10 for value: issue.updated-1.0
+        /// </summary>
+        [EnumMember(Value = "issue.updated-1.0")]
         IssueUpdated10,
 
-		  /// <summary>
-		  /// Enum IssueDeleted10 for value: issue.deleted-1.0
-		  /// </summary>
-		  [EnumMember(Value = "issue.deleted-1.0")]
+        /// <summary>
+        /// Enum IssueDeleted10 for value: issue.deleted-1.0
+        /// </summary>
+        [EnumMember(Value = "issue.deleted-1.0")]
         IssueDeleted10,
 
-		  /// <summary>
-		  /// Enum IssueRestored10 for value: issue.restored-1.0
-		  /// </summary>
-		  [EnumMember(Value = "issue.restored-1.0")]
+        /// <summary>
+        /// Enum IssueRestored10 for value: issue.restored-1.0
+        /// </summary>
+        [EnumMember(Value = "issue.restored-1.0")]
         IssueRestored10,
 
-		  /// <summary>
-		  /// Enum IssueUnlinked10 for value: issue.unlinked-1.0
-		  /// </summary>
-		  [EnumMember(Value = "issue.unlinked-1.0")]
+        /// <summary>
+        /// Enum IssueUnlinked10 for value: issue.unlinked-1.0
+        /// </summary>
+        [EnumMember(Value = "issue.unlinked-1.0")]
         IssueUnlinked10
     }
 }
