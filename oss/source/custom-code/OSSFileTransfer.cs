@@ -114,7 +114,12 @@ namespace Autodesk.Oss
             string accessToken,
             CancellationToken cancellationToken,
             string requestIdPrefix = "",
-            IProgress<int> progress = null)
+            IProgress<int> progress = null,
+            string xAdsMetaContentType = default(string),
+            string xAdsMetaContentDisposition = default(string),
+            string xAdsMetaContentEncoding = default(string),
+            string xAdsMetaCacheControl = default(string),
+            string xAdsUserDefinedMetadata = default(string))
         {
             var requestId = HandleRequestId(requestIdPrefix, bucketKey, objectKey);
             var retryCount = _configuration.GetRetryCount();
@@ -226,7 +231,12 @@ namespace Autodesk.Oss
                 {
                     UploadKey = uploadKey
                 },
-                accessToken: accessToken);
+                accessToken: accessToken,
+                xAdsMetaContentType: xAdsMetaContentType,
+                xAdsMetaContentDisposition: xAdsMetaContentDisposition,
+                xAdsMetaContentEncoding: xAdsMetaContentEncoding,
+                xAdsMetaCacheControl: xAdsMetaCacheControl,
+					 xAdsUserDefinedMetadata: xAdsUserDefinedMetadata);
 
             progress?.Report(100);
             return completeResponse;
