@@ -236,7 +236,7 @@ namespace Autodesk.Oss
                 xAdsMetaContentDisposition: xAdsMetaContentDisposition,
                 xAdsMetaContentEncoding: xAdsMetaContentEncoding,
                 xAdsMetaCacheControl: xAdsMetaCacheControl,
-					 xAdsUserDefinedMetadata: xAdsUserDefinedMetadata);
+                xAdsUserDefinedMetadata: xAdsUserDefinedMetadata);
 
             progress?.Report(100);
             return completeResponse;
