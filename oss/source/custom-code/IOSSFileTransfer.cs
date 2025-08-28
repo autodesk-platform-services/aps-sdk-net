@@ -37,11 +37,11 @@ namespace Autodesk.Oss
             CancellationToken cancellationToken,
             string requestIdPrefix = "",
             IProgress<int> progress = null,
-				string xAdsMetaContentType = default(string),
-				string xAdsMetaContentDisposition = default(string),
-				string xAdsMetaContentEncoding = default(string),
-				string xAdsMetaCacheControl = default(string),
-				string xAdsUserDefinedMetadata = default(string));
+            string xAdsMetaContentType = default(string),
+            string xAdsMetaContentDisposition = default(string),
+            string xAdsMetaContentEncoding = default(string),
+            string xAdsMetaCacheControl = default(string),
+            string xAdsUserDefinedMetadata = default(string));
     
         Task<Stream> Download(
             string bucketKey,
