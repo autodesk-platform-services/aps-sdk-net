@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Webhooks
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -485,35 +486,72 @@ namespace Autodesk.Webhooks.Model
         /// </summary>
         [EnumMember(Value = "sco.deleted-1.0")]
         ScoDeleted10,
-
+        
+        /// <summary>
+        /// Enum BidCreated for value: bid.created
+        /// </summary>
+        [EnumMember(Value = "bid.created")]
+        BidCreated,
+        
+        /// <summary>
+        /// Enum OpportunityCommentCreated for value: opportunity.comment.created
+        /// </summary>
+        [EnumMember(Value = "opportunity.comment.created")]
+        OpportunityCommentCreated,
+        
+        /// <summary>
+        /// Enum OpportunityCommentDeleted for value: opportunity.comment.deleted
+        /// </summary>
+        [EnumMember(Value = "opportunity.comment.deleted")]
+        OpportunityCommentDeleted,
+        
+        /// <summary>
+        /// Enum OpportunityCommentUpdated for value: opportunity.comment.updated
+        /// </summary>
+        [EnumMember(Value = "opportunity.comment.updated")]
+        OpportunityCommentUpdated,
+        
+        /// <summary>
+        /// Enum OpportunityCreated for value: opportunity.created
+        /// </summary>
+        [EnumMember(Value = "opportunity.created")]
+        OpportunityCreated,
+        
+        /// <summary>
+        /// Enum OpportunityStatusUpdated for value: opportunity.status.updated
+        /// </summary>
+        [EnumMember(Value = "opportunity.status.updated")]
+        OpportunityStatusUpdated,
+        
         /// <summary>
         /// Enum IssueCreated10 for value: issue.created-1.0
         /// </summary>
         [EnumMember(Value = "issue.created-1.0")]
         IssueCreated10,
-
+        
         /// <summary>
         /// Enum IssueUpdated10 for value: issue.updated-1.0
         /// </summary>
         [EnumMember(Value = "issue.updated-1.0")]
         IssueUpdated10,
-
+        
         /// <summary>
         /// Enum IssueDeleted10 for value: issue.deleted-1.0
         /// </summary>
         [EnumMember(Value = "issue.deleted-1.0")]
         IssueDeleted10,
-
+        
         /// <summary>
         /// Enum IssueRestored10 for value: issue.restored-1.0
         /// </summary>
         [EnumMember(Value = "issue.restored-1.0")]
         IssueRestored10,
-
+        
         /// <summary>
         /// Enum IssueUnlinked10 for value: issue.unlinked-1.0
         /// </summary>
         [EnumMember(Value = "issue.unlinked-1.0")]
         IssueUnlinked10
     }
+
 }
