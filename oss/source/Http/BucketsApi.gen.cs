@@ -268,7 +268,7 @@ namespace Autodesk.Oss.Http
                 request.Content = Marshalling.Serialize(policyKey); // http body (model) parameter
 
 
-                SetHeader("x-ads-region", xAdsRegion, request);
+                SetHeader("region", xAdsRegion, request);
 
                 // tell the underlying pipeline what scope we'd like to use
                 // if (scopes == null)
