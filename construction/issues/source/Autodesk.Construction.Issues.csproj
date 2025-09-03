@@ -6,11 +6,12 @@
     <Authors>Autodesk Platform Services SDK Team</Authors>
     <PackageDescription>Client SDK for Construction Issues API</PackageDescription>
     <PackageReleaseNotes>
+    Breaking change
     • Fixed issue with the custom attributes filtering in GetIssuesAsync method.
     </PackageReleaseNotes>
     <Copyright>Autodesk Inc.</Copyright>
     <PackageId>Autodesk.Construction.Issues</PackageId>
-    <PackageVersion>3.1.2-beta</PackageVersion>
+    <PackageVersion>4.0.0-beta</PackageVersion>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/autodesk-platform-services/aps-sdk-net.git</RepositoryUrl>
