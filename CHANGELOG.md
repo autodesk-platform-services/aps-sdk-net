@@ -1,5 +1,17 @@
 # Changelog
 
+## [v5.0.0](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v5.0.0) (2025-09-03)
+
+[Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v4.3.0...v5.0.0)
+
+**Breaking changes:**
+
+- \[DAS 356\] - Fixed custom attribute filtering for Get Issues Endpoint [\#199](https://github.com/autodesk-platform-services/aps-sdk-net/pull/199) ([srivastavarahull](https://github.com/srivastavarahull))
+
+**Closed issues:**
+
+- Error when passing custom attributes filter to GetIssuesAsync [\#196](https://github.com/autodesk-platform-services/aps-sdk-net/issues/196)
+
 ## [v4.3.0](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v4.3.0) (2025-09-03)
 
 [Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v4.2.2...v4.3.0)
@@ -7,10 +19,6 @@
 **Implemented enhancements:**
 
 - \[DAS 355\] - Updated webhooks sdk acc issues enum [\#198](https://github.com/autodesk-platform-services/aps-sdk-net/pull/198) ([srivastavarahull](https://github.com/srivastavarahull))
-
-**Fixed bugs:**
-
-- \[DAS 356\] - Fixed custom attribute filtering for Get Issues Endpoint [\#199](https://github.com/autodesk-platform-services/aps-sdk-net/pull/199) ([srivastavarahull](https://github.com/srivastavarahull))
 
 **Closed issues:**
 
