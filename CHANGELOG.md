@@ -1,5 +1,36 @@
 # Changelog
 
+## [v4.3.0](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v4.3.0) (2025-09-03)
+
+[Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v4.2.2...v4.3.0)
+
+**Implemented enhancements:**
+
+- \[DAS 355\] - Updated webhooks sdk acc issues enum [\#198](https://github.com/autodesk-platform-services/aps-sdk-net/pull/198) ([srivastavarahull](https://github.com/srivastavarahull))
+
+**Fixed bugs:**
+
+- \[DAS 356\] - Fixed custom attribute filtering for Get Issues Endpoint [\#199](https://github.com/autodesk-platform-services/aps-sdk-net/pull/199) ([srivastavarahull](https://github.com/srivastavarahull))
+
+**Closed issues:**
+
+- Timeout problem [\#194](https://github.com/autodesk-platform-services/aps-sdk-net/issues/194)
+- Unable to 'clear' values for fields that are clearable/nullable for Construction.Issues when calling PatchIssueDetailsAsync [\#180](https://github.com/autodesk-platform-services/aps-sdk-net/issues/180)
+- Why .Net Standard was drop?  [\#118](https://github.com/autodesk-platform-services/aps-sdk-net/issues/118)
+- Could not load type 'Microsoft.Extensions.DependencyInjection.ServiceCollection ... [\#83](https://github.com/autodesk-platform-services/aps-sdk-net/issues/83)
+- Add documentation for the state of the library with depency injection. [\#29](https://github.com/autodesk-platform-services/aps-sdk-net/issues/29)
+
+**Merged pull requests:**
+
+- Keep Dev updated with main [\#204](https://github.com/autodesk-platform-services/aps-sdk-net/pull/204) ([sajith-subramanian](https://github.com/sajith-subramanian))
+- Fix custom attributes filtering in GetIssuesAsync [\#197](https://github.com/autodesk-platform-services/aps-sdk-net/pull/197) ([joel-szakall](https://github.com/joel-szakall))
+- Add ACC Issues webhook enums. [\#195](https://github.com/autodesk-platform-services/aps-sdk-net/pull/195) ([tylerwarner33](https://github.com/tylerwarner33))
+- Update ChangeLog [\#193](https://github.com/autodesk-platform-services/aps-sdk-net/pull/193) ([sajith-subramanian](https://github.com/sajith-subramanian))
+- Keep Main branch updated with dev [\#192](https://github.com/autodesk-platform-services/aps-sdk-net/pull/192) ([sajith-subramanian](https://github.com/sajith-subramanian))
+- \[DAS 351\] - Oss region fix in create bucket [\#189](https://github.com/autodesk-platform-services/aps-sdk-net/pull/189) ([nishchhaldagar](https://github.com/nishchhaldagar))
+- \[AUTO\]: Update CHANGELOG [\#187](https://github.com/autodesk-platform-services/aps-sdk-net/pull/187) ([sajith-subramanian](https://github.com/sajith-subramanian))
+- Keep Main branch updated with Dev [\#186](https://github.com/autodesk-platform-services/aps-sdk-net/pull/186) ([sajith-subramanian](https://github.com/sajith-subramanian))
+
 ## [v4.2.2](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v4.2.2) (2025-07-24)
 
 [Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v4.2.1...v4.2.2)
@@ -7,10 +38,10 @@
 **Fixed bugs:**
 
 - \[DAS-352\] - Fixed all the data members of IssuePayload to support null values [\#191](https://github.com/autodesk-platform-services/aps-sdk-net/pull/191) ([srivastavarahull](https://github.com/srivastavarahull))
+- \[DAS - 352\] - Fixed IssuePayload model to handle null values [\#188](https://github.com/autodesk-platform-services/aps-sdk-net/pull/188) ([srivastavarahull](https://github.com/srivastavarahull))
 
 **Closed issues:**
 
-- Unable to 'clear' values for fields that are clearable/nullable for Construction.Issues when calling PatchIssueDetailsAsync [\#180](https://github.com/autodesk-platform-services/aps-sdk-net/issues/180)
 - Access manifest/metadata for an item [\#149](https://github.com/autodesk-platform-services/aps-sdk-net/issues/149)
 - RFIs support [\#39](https://github.com/autodesk-platform-services/aps-sdk-net/issues/39)
 - BIM360 support [\#38](https://github.com/autodesk-platform-services/aps-sdk-net/issues/38)
