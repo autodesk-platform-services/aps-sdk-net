@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The Forge Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Webhooks
  *
@@ -19,6 +19,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 using System;
 using System.Linq;
 using System.IO;
@@ -70,7 +71,19 @@ namespace Autodesk.Webhooks.Model
         /// Enum AutodeskConstructionCost for value: autodesk.construction.cost
         /// </summary>
         [EnumMember(Value = "autodesk.construction.cost")]
-        AutodeskConstructionCost
+        AutodeskConstructionCost,
+        
+        /// <summary>
+        /// Enum AutodeskConstructionBc for value: autodesk.construction.bc
+        /// </summary>
+        [EnumMember(Value = "autodesk.construction.bc")]
+        AutodeskConstructionBc,
+        
+        /// <summary>
+        /// Enum AutodeskConstructionIssues for value: autodesk.construction.issues
+        /// </summary>
+        [EnumMember(Value = "autodesk.construction.issues")]
+        AutodeskConstructionIssues
     }
 
 }
