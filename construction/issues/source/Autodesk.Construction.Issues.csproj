@@ -6,11 +6,11 @@
     <Authors>Autodesk Platform Services SDK Team</Authors>
     <PackageDescription>Client SDK for Construction Issues API</PackageDescription>
     <PackageReleaseNotes>
-    • Fixed issue regarding unable to clear values for fields with PatchIssueDetailsAsync method.
+    • Fixed issue with the custom attributes filtering in GetIssuesAsync method.
     </PackageReleaseNotes>
     <Copyright>Autodesk Inc.</Copyright>
     <PackageId>Autodesk.Construction.Issues</PackageId>
-    <PackageVersion>3.1.1-beta</PackageVersion>
+    <PackageVersion>3.1.2-beta</PackageVersion>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/autodesk-platform-services/aps-sdk-net.git</RepositoryUrl>
