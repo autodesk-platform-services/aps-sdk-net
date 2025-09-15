@@ -175,6 +175,15 @@ namespace Autodesk.DataManagement.Model
         public ItemExtensionWithSchemaLink Extension { get; set; }
 
         /// <summary>
+        /// The relative path of the item starting from project’s root folder.
+        /// </summary>
+        /// <value>
+        /// The relative path of the item starting from project’s root folder.
+        /// </value>
+        [DataMember(Name= "pathInProject", EmitDefaultValue=false)]
+        public string PathInProject { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
