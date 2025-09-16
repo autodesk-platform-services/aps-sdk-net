@@ -180,7 +180,7 @@ namespace Autodesk.DataManagement.Model
         /// <value>
         /// The relative path of the item starting from project’s root folder.
         /// </value>
-        [DataMember(Name= "pathInProject", EmitDefaultValue=false)]
+        [DataMember(Name="pathInProject", EmitDefaultValue=false)]
         public string PathInProject { get; set; }
 
         /// <summary>
