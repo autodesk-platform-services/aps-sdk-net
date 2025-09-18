@@ -16,7 +16,7 @@ trim_trailing_whitespace = true
 [*{_AssemblyInfo.cs,.notsupported.cs,AsmOffsets.cs}]
 generated_code = true
 dotnet_style_operator_placement_when_wrapping = beginning_of_line
-tab_width = 3
+tab_width = 4
 end_of_line = crlf
 dotnet_style_coalesce_expression = true:suggestion
 dotnet_style_null_propagation = true:suggestion
