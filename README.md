@@ -32,6 +32,7 @@ The Developer Portal has everything APS:
 - [Data Management](https://www.nuget.org/packages/Autodesk.DataManagement)
 - [Model Derivative](https://www.nuget.org/packages/Autodesk.ModelDerivative)
 - [OSS](https://www.nuget.org/packages/Autodesk.Oss)
+- [Secure Service Account](https://www.nuget.org/packages/Autodesk.SecureServiceAccount)
 - [SDK Manager](https://www.nuget.org/packages/Autodesk.SDKManager)
 - [Webhooks](https://www.nuget.org/packages/Autodesk.Webhooks)
 
