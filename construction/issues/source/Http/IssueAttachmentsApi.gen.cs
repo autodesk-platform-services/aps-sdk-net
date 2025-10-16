@@ -414,8 +414,8 @@ namespace Autodesk.Construction.Issues.Http
                         },
                         queryParameters: queryParam
                     );
-            Console.WriteLine(projectId);
-            Console.WriteLine(issueId);
+            logger.LogDebug($"projectId: {projectId}");
+            logger.LogDebug($"issueId: {issueId}");
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
                 request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/CONSTRUCTION.ISSUES/C#/1.0.0");
                 if (!string.IsNullOrEmpty(accessToken))
