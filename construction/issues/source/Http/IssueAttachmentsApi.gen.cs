@@ -92,10 +92,10 @@ namespace Autodesk.Construction.Issues.Http
         ///For details about downloading an attachment, see the Download Issue Attachment tutorial.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-        /// <param name="issueId">
+        /// <param name="projectId">
         ///The ID of the project. Use the Data Management API to retrieve the project ID. For more information, see the Retrieve a Project ID tutorial. You need to convert the project ID into a project ID for the ACC API by removing the “b." prefix. For example, a project ID of b.a4be0c34a-4ab7 translates to a project ID of a4be0c34a-4ab7.
         /// </param>
-        /// <param name="projectId">
+        /// <param name="issueId">
         ///The unique identifier of the issue. To find the ID, call GET issues.
         /// </param>
         /// <returns>Task of ApiResponse&lt;Attachments&gt;</returns>
