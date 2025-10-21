@@ -1183,7 +1183,7 @@ namespace Autodesk.Construction.AccountAdmin
                 ///Filters roles by their status. Accepts one or more of the following values: active – The role is currently in use. inactive – The role has been removed or is no longer in use. (optional)
                 /// </param>
                 /// <param name="filterName">
-                ///filter[name] (optional)
+                ///Filters roles by name. By default, this performs a partial match (case-insensitive).  You can control how the match behaves by using the filterTextMatch parameter. For example, to match only names that start with (startsWith), end with (endsWith), or exactly equal (equals) the provided value. (optional)
                 /// </param>
                 /// <param name="filterTextMatch">
                 ///Specifies how text-based filters should match values in supported fields. This parameter can be used in any endpoint that supports text-based filtering (e.g., filter[name], filter[jobNumber], filter[companyName], etc.). Possible values: contains (default) – Matches if the field contains the specified text anywhere startsWith – Matches if the field starts with the specified text endsWith – Matches if the field ends with the specified text equals – Matches only if the field exactly matches the specified text Matching is case-insensitive. Wildcards and regular expressions are not supported. (optional)
