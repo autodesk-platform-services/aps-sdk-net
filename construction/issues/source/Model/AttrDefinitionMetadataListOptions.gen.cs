@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Construction.Issues
  *
@@ -34,23 +34,35 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Construction.Issues.Model
 {
     /// <summary>
-    /// The metadata object; only relevant for list custom attributes.
+    /// AttrDefinitionMetadataListOptions
     /// </summary>
     [DataContract]
-    public partial class AttrDefinitionPageResultsMetadata
+    public partial class AttrDefinitionMetadataListOptions
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="AttrDefinitionPageResultsMetadata" /> class.
+        /// Initializes a new instance of the <see cref="AttrDefinitionMetadataListOptions" /> class.
         /// </summary>
-        public AttrDefinitionPageResultsMetadata()
+        public AttrDefinitionMetadataListOptions()
         {
         }
+        
+        /// <summary>
+        ///The id of the list option.
+        /// </summary>
+        /// <value>
+        ///The id of the list option.
+        /// </value>
+        [DataMember(Name="id", EmitDefaultValue=false)]
+        public string Id { get; set; }
 
         /// <summary>
-        ///Gets or Sets List
+        ///The value of the list item.
         /// </summary>
-        [DataMember(Name = "list", EmitDefaultValue = false)]
-        public AttrDefinitionPageResultsMetadataList List { get; set; }
+        /// <value>
+        ///The value of the list item.
+        /// </value>
+        [DataMember(Name="value", EmitDefaultValue=false)]
+        public string Value { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

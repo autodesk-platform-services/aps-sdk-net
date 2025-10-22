@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Construction.Issues
  *
@@ -34,15 +34,15 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Construction.Issues.Model
 {
     /// <summary>
-    /// TypesPageResultsSubtypes
+    /// IssueTypeSubtypes
     /// </summary>
     [DataContract]
-    public partial class TypesPageResultsSubtypes
+    public partial class IssueTypeSubtypes
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="TypesPageResultsSubtypes" /> class.
+        /// Initializes a new instance of the <see cref="IssueTypeSubtypes" /> class.
         /// </summary>
-        public TypesPageResultsSubtypes()
+        public IssueTypeSubtypes()
         {
         }
 
@@ -89,7 +89,7 @@ namespace Autodesk.Construction.Issues.Model
         ///States whether the issue type is active.
         /// </value>
         [DataMember(Name = "isActive", EmitDefaultValue = false)]
-        public bool? IsActive { get; set; }
+        public bool IsActive { get; set; }
 
         /// <summary>
         ///Not relevant
@@ -98,7 +98,7 @@ namespace Autodesk.Construction.Issues.Model
         ///Not relevant
         /// </value>
         [DataMember(Name = "orderIndex", EmitDefaultValue = false)]
-        public int? OrderIndex { get; set; }
+        public int OrderIndex { get; set; }
 
         /// <summary>
         ///Not relevant
@@ -107,7 +107,7 @@ namespace Autodesk.Construction.Issues.Model
         ///Not relevant
         /// </value>
         [DataMember(Name = "isReadOnly", EmitDefaultValue = false)]
-        public bool? IsReadOnly { get; set; }
+        public bool IsReadOnly { get; set; }
 
         /// <summary>
         ///Not relevant

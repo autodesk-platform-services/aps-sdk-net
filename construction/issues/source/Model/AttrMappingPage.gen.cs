@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Construction.Issues
  *
@@ -58,8 +58,8 @@ namespace Autodesk.Construction.Issues.Model
         /// <value>
         ///A list of issue attribute mappings.
         /// </value>
-        [DataMember(Name = "results", EmitDefaultValue = false)]
-        public List<AttrMappingPageResults> Results { get; set; }
+        [DataMember(Name="results", EmitDefaultValue=false)]
+        public List<AttrMapping> Results { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

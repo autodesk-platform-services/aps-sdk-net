@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Construction.Issues
  *
@@ -34,58 +34,40 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Construction.Issues.Model
 {
     /// <summary>
-    /// AttrMappingPageResults
+    /// AttrDefinition
     /// </summary>
     [DataContract]
-    public partial class AttrMappingPageResults
+    public partial class AttrDefinition 
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="AttrMappingPageResults" /> class.
+        /// Initializes a new instance of the <see cref="AttrDefinition" /> class.
         /// </summary>
-        public AttrMappingPageResults()
+        public AttrDefinition()
         {
         }
-
+        
         /// <summary>
         ///The ID of the custom attribute.
         /// </summary>
         /// <value>
         ///The ID of the custom attribute.
         /// </value>
-        [DataMember(Name = "id", EmitDefaultValue = false)]
+        [DataMember(Name="id", EmitDefaultValue=false)]
         public string Id { get; set; }
 
         /// <summary>
-        ///The ID of the custom attribute definition.
-        /// </summary>
-        /// <value>
-        ///The ID of the custom attribute definition.
-        /// </value>
-        [DataMember(Name = "attributeDefinitionId", EmitDefaultValue = false)]
-        public string AttributeDefinitionId { get; set; }
-
-        /// <summary>
         ///Not relevant
         /// </summary>
         /// <value>
         ///Not relevant
         /// </value>
-        [DataMember(Name = "containerId", EmitDefaultValue = false)]
+        [DataMember(Name="containerId", EmitDefaultValue=false)]
         public string ContainerId { get; set; }
-
-        /// <summary>
-        ///The title of the custom attribute.
-        /// </summary>
-        /// <value>
-        ///The title of the custom attribute.
-        /// </value>
-        [DataMember(Name = "title", EmitDefaultValue = false)]
-        public string Title { get; set; }
 
         /// <summary>
         ///Gets or Sets MappedItemType
         /// </summary>
-        [DataMember(Name = "mappedItemType", EmitDefaultValue = false)]
+        [DataMember(Name="mappedItemType", EmitDefaultValue=false)]
         public string MappedItemType { get; set; }
 
         /// <summary>
@@ -94,7 +76,7 @@ namespace Autodesk.Construction.Issues.Model
         /// <value>
         ///The ID of the item (type, or subtype) the custom attribute is mapped to.
         /// </value>
-        [DataMember(Name = "mappedItemId", EmitDefaultValue = false)]
+        [DataMember(Name="mappedItemId", EmitDefaultValue=false)]
         public string MappedItemId { get; set; }
 
         /// <summary>
@@ -103,8 +85,20 @@ namespace Autodesk.Construction.Issues.Model
         /// <value>
         ///The order that the custom attributes were mapped to the item (type, subtype). This is only relevant to non-inherited mappings.
         /// </value>
-        [DataMember(Name = "order", EmitDefaultValue = false)]
-        public int? Order { get; set; }
+        [DataMember(Name="order", EmitDefaultValue=false)]
+        public int Order { get; set; }
+
+        /// <summary>
+        ///Gets or Sets DataType
+        /// </summary>
+        [DataMember(Name="dataType", EmitDefaultValue=true)]
+        public DataType DataType { get; set; }
+
+        /// <summary>
+        ///Gets or Sets Metadata
+        /// </summary>
+        [DataMember(Name="metadata", EmitDefaultValue=false)]
+        public AttrDefinitionMetadata Metadata { get; set; }
 
         /// <summary>
         ///Not relevant
@@ -112,7 +106,7 @@ namespace Autodesk.Construction.Issues.Model
         /// <value>
         ///Not relevant
         /// </value>
-        [DataMember(Name = "permittedActions", EmitDefaultValue = false)]
+        [DataMember(Name="permittedActions", EmitDefaultValue=false)]
         public List<string> PermittedActions { get; set; }
 
         /// <summary>
@@ -121,7 +115,7 @@ namespace Autodesk.Construction.Issues.Model
         /// <value>
         ///Not relevant
         /// </value>
-        [DataMember(Name = "permittedAttributes", EmitDefaultValue = false)]
+        [DataMember(Name="permittedAttributes", EmitDefaultValue=false)]
         public List<string> PermittedAttributes { get; set; }
 
         /// <summary>
@@ -130,7 +124,7 @@ namespace Autodesk.Construction.Issues.Model
         /// <value>
         ///The date and time the custom attribute was created, in the following format: YYYY-MM-DDThh:mm:ss.sz.
         /// </value>
-        [DataMember(Name = "createdAt", EmitDefaultValue = false)]
+        [DataMember(Name="createdAt", EmitDefaultValue=false)]
         public string CreatedAt { get; set; }
 
         /// <summary>
@@ -139,7 +133,7 @@ namespace Autodesk.Construction.Issues.Model
         /// <value>
         ///The Autodesk ID of the user who created the custom attribute.
         /// </value>
-        [DataMember(Name = "createdBy", EmitDefaultValue = false)]
+        [DataMember(Name="createdBy", EmitDefaultValue=false)]
         public string CreatedBy { get; set; }
 
         /// <summary>
@@ -148,7 +142,7 @@ namespace Autodesk.Construction.Issues.Model
         /// <value>
         ///The last date and time the custom attribute was updated, in the following format: YYYY-MM-DDThh:mm:ss.sz.
         /// </value>
-        [DataMember(Name = "updatedAt", EmitDefaultValue = false)]
+        [DataMember(Name="updatedAt", EmitDefaultValue=false)]
         public string UpdatedAt { get; set; }
 
         /// <summary>
@@ -157,7 +151,7 @@ namespace Autodesk.Construction.Issues.Model
         /// <value>
         ///The Autodesk ID of the user who last updated the custom attribute.
         /// </value>
-        [DataMember(Name = "updatedBy", EmitDefaultValue = false)]
+        [DataMember(Name="updatedBy", EmitDefaultValue=false)]
         public string UpdatedBy { get; set; }
 
         /// <summary>
@@ -166,7 +160,7 @@ namespace Autodesk.Construction.Issues.Model
         /// <value>
         ///The date and time the custom attribute was deleted, in the following format: YYYY-MM-DDThh:mm:ss.sz.
         /// </value>
-        [DataMember(Name = "deletedAt", EmitDefaultValue = false)]
+        [DataMember(Name="deletedAt", EmitDefaultValue=false)]
         public string DeletedAt { get; set; }
 
         /// <summary>
@@ -175,8 +169,17 @@ namespace Autodesk.Construction.Issues.Model
         /// <value>
         ///The Autodesk ID of the user who deleted the custom attribute.
         /// </value>
-        [DataMember(Name = "deletedBy", EmitDefaultValue = false)]
+        [DataMember(Name="deletedBy", EmitDefaultValue=false)]
         public string DeletedBy { get; set; }
+
+        /// <summary>
+        ///The title of the custom attribute.
+        /// </summary>
+        /// <value>
+        ///The title of the custom attribute.
+        /// </value>
+        [DataMember(Name="title", EmitDefaultValue=false)]
+        public string Title { get; set; }
 
         /// <summary>
         ///The description of the custom attribute.
@@ -184,7 +187,7 @@ namespace Autodesk.Construction.Issues.Model
         /// <value>
         ///The description of the custom attribute.
         /// </value>
-        [DataMember(Name = "description", EmitDefaultValue = false)]
+        [DataMember(Name="description", EmitDefaultValue=false)]
         public string Description { get; set; }
 
         /// <summary>

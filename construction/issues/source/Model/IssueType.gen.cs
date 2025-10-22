@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Construction.Issues
  *
@@ -34,15 +34,15 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Construction.Issues.Model
 {
     /// <summary>
-    /// TypesPageResults
+    /// IssueType
     /// </summary>
     [DataContract]
-    public partial class TypesPageResults
+    public partial class IssueType
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="TypesPageResults" /> class.
+        /// Initializes a new instance of the <see cref="IssueType" /> class.
         /// </summary>
-        public TypesPageResults()
+        public IssueType()
         {
         }
 
@@ -80,7 +80,7 @@ namespace Autodesk.Construction.Issues.Model
         ///States whether the issue type is active.
         /// </value>
         [DataMember(Name = "isActive", EmitDefaultValue = false)]
-        public bool? IsActive { get; set; }
+        public bool IsActive { get; set; }
 
         /// <summary>
         ///Not relevant
@@ -89,7 +89,7 @@ namespace Autodesk.Construction.Issues.Model
         ///Not relevant
         /// </value>
         [DataMember(Name = "orderIndex", EmitDefaultValue = false)]
-        public int? OrderIndex { get; set; }
+        public int OrderIndex { get; set; }
 
         /// <summary>
         ///Not relevant
@@ -116,7 +116,7 @@ namespace Autodesk.Construction.Issues.Model
         ///A list of subtypes of the specific issue type.
         /// </value>
         [DataMember(Name = "subtypes", EmitDefaultValue = false)]
-        public List<TypesPageResultsSubtypes> Subtypes { get; set; }
+        public List<IssueTypeSubtypes> Subtypes { get; set; }
 
         /// <summary>
         ///Not relevant

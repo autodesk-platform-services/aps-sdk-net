@@ -59,7 +59,7 @@ namespace Autodesk.Construction.Issues.Model
         ///A list of issue type categories.
         /// </value>
         [DataMember(Name = "results", EmitDefaultValue = false)]
-        public List<TypesPageResults> Results { get; set; }
+        public List<IssueType> Results { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Construction.Issues
  *
@@ -34,15 +34,15 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Construction.Issues.Model
 {
         /// <summary>
-        /// RootCauseCategoriesPageResults
+        /// RootCauseCategory
         /// </summary>
         [DataContract]
-        public partial class RootCauseCategoriesPageResults
+        public partial class RootCauseCategory
         {
                 /// <summary>
-                /// Initializes a new instance of the <see cref="RootCauseCategoriesPageResults" /> class.
+                /// Initializes a new instance of the <see cref="RootCauseCategory" /> class.
                 /// </summary>
-                public RootCauseCategoriesPageResults()
+                public RootCauseCategory()
                 {
                 }
 
@@ -75,7 +75,7 @@ namespace Autodesk.Construction.Issues.Model
                 ///Max length: 500
                 /// </value>
                 [DataMember(Name = "isActive", EmitDefaultValue = false)]
-                public bool? IsActive { get; set; }
+                public bool IsActive { get; set; }
 
                 /// <summary>
                 ///Not relevant
@@ -102,7 +102,7 @@ namespace Autodesk.Construction.Issues.Model
                 ///The metadata object; only relevant for list custom attributes.
                 /// </value>
                 [DataMember(Name = "rootCauses", EmitDefaultValue = false)]
-                public List<RootCauseCategoriesPageResultsRootCauses> RootCauses { get; set; }
+                public List<RootCauseCategoryRootCauses> RootCauses { get; set; }
 
                 /// <summary>
                 ///The date and time the custom attribute was created, in the following format: YYYY-MM-DDThh:mm:ss.sz.
