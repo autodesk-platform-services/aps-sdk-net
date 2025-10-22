@@ -31,4 +31,18 @@ public class TestAccountAdminApi
 	     UserProjectsPage userProjectsPage = await _adminClient.GetUserProjectsAsync(accessToken: token, accountId: accountId, userId: userId);
 	     Assert.IsInstanceOfType(userProjectsPage.Results, typeof(List<UserProject>));
     }
+    
+    [TestMethod]
+    public async Task TestGetUserProductsAsync()
+    {
+	     ProductsPage productsPage = await _adminClient.GetUserProductsAsync(accessToken: token, accountId: accountId, userId: userId);
+	     Assert.IsInstanceOfType(productsPage.Results, typeof(List<Product>));
+    }
+    
+    [TestMethod]
+    public async Task TestGetUserRolesAsync()
+    {
+	     RolesPage rolesPage = await _adminClient.GetUserRolesAsync(accessToken: token, accountId: accountId, userId: userId);
+	     Assert.IsInstanceOfType(rolesPage.Results, typeof(List<Role>));
+    }
 }
