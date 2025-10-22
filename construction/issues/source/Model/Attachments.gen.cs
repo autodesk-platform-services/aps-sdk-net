@@ -34,7 +34,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Construction.Issues.Model
 {
     /// <summary>
-    /// Attachments
+    /// An optional array of attachments associated with this object.
     /// </summary>
     [DataContract]
     public partial class Attachments

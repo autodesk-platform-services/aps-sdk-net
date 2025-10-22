@@ -34,7 +34,7 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Construction.Issues.Model
 {
     /// <summary>
-    /// AttachmentsPayload
+    /// Represents the payload for adding attachments to an issue.
     /// </summary>
     [DataContract]
     public partial class AttachmentsPayload
@@ -56,7 +56,7 @@ namespace Autodesk.Construction.Issues.Model
         public string DomainEntityId { get; set; }
 
         /// <summary>
-        ///Gets or Sets Attachments
+        ///The list of attachments to be added to the issue.
         /// </summary>
         [DataMember(Name = "attachments", EmitDefaultValue = false)]
         public List<AttachmentObject> Attachments { get; set; }
