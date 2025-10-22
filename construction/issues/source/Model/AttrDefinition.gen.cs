@@ -65,28 +65,23 @@ namespace Autodesk.Construction.Issues.Model
         public string ContainerId { get; set; }
 
         /// <summary>
-        ///Gets or Sets MappedItemType
-        /// </summary>
-        [DataMember(Name="mappedItemType", EmitDefaultValue=false)]
-        public string MappedItemType { get; set; }
-
-        /// <summary>
-        ///The ID of the item (type, or subtype) the custom attribute is mapped to.
+        ///The title of the custom attribute.
         /// </summary>
         /// <value>
-        ///The ID of the item (type, or subtype) the custom attribute is mapped to.
+        ///The title of the custom attribute.
         /// </value>
-        [DataMember(Name="mappedItemId", EmitDefaultValue=false)]
-        public string MappedItemId { get; set; }
+        [DataMember(Name="title", EmitDefaultValue=false)]
+        public string Title { get; set; }
 
         /// <summary>
-        ///The order that the custom attributes were mapped to the item (type, subtype). This is only relevant to non-inherited mappings.
+        ///The description of the custom attribute.
         /// </summary>
         /// <value>
-        ///The order that the custom attributes were mapped to the item (type, subtype). This is only relevant to non-inherited mappings.
+        ///The description of the custom attribute.
         /// </value>
-        [DataMember(Name="order", EmitDefaultValue=false)]
-        public int Order { get; set; }
+        [DataMember(Name="description", EmitDefaultValue=false)]
+        public string Description { get; set; }
+
 
         /// <summary>
         ///Gets or Sets DataType
@@ -171,24 +166,6 @@ namespace Autodesk.Construction.Issues.Model
         /// </value>
         [DataMember(Name="deletedBy", EmitDefaultValue=false)]
         public string DeletedBy { get; set; }
-
-        /// <summary>
-        ///The title of the custom attribute.
-        /// </summary>
-        /// <value>
-        ///The title of the custom attribute.
-        /// </value>
-        [DataMember(Name="title", EmitDefaultValue=false)]
-        public string Title { get; set; }
-
-        /// <summary>
-        ///The description of the custom attribute.
-        /// </summary>
-        /// <value>
-        ///The description of the custom attribute.
-        /// </value>
-        [DataMember(Name="description", EmitDefaultValue=false)]
-        public string Description { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
