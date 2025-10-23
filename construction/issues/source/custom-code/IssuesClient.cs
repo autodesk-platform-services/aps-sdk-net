@@ -143,9 +143,9 @@ namespace Autodesk.Construction.Issues
                 /// </param >
                 /// <param name="contentType">Must be application/json</param>
                 /// <param name="body"> (optional)</param>
-                /// <returns>Task of ApiResponse<CreatedComment></returns>
+                /// <returns>Task of <Comment></returns>
 
-                public async System.Threading.Tasks.Task<Comments> CreateCommentsAsync(string projectId, string issueId, CommentsPayload commentsPayload, Region xAdsRegion = default, string accessToken = default, bool throwOnError = true)
+                public async System.Threading.Tasks.Task<Comment> CreateCommentsAsync(string projectId, string issueId, CommentsPayload commentsPayload, Region xAdsRegion = default, string accessToken = default, bool throwOnError = true)
                 {
                         if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
                         {

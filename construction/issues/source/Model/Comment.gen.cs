@@ -33,15 +33,15 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Construction.Issues.Model
 {
     /// <summary>
-    /// Comments
+    /// Comment
     /// </summary>
     [DataContract]
-    public partial class Comments
+    public partial class Comment
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Comments" /> class.
+        /// Initializes a new instance of the <see cref="Comment" /> class.
         /// </summary>
-        public Comments()
+        public Comment()
         {
         }
 

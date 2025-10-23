@@ -58,9 +58,9 @@ namespace Autodesk.Construction.Issues.Http
         /// <param name="commentsPayload">
         /// (optional)
         /// </param>
-        /// <returns>Task of ApiResponse&lt;Comments&gt;</returns>
+        /// <returns>Task of ApiResponse&lt;Comment&gt;</returns>
 
-        System.Threading.Tasks.Task<ApiResponse<Comments>> CreateCommentsAsync(string projectId, string issueId, Region? xAdsRegion = null, CommentsPayload commentsPayload = default(CommentsPayload), string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<ApiResponse<Comment>> CreateCommentsAsync(string projectId, string issueId, Region? xAdsRegion = null, CommentsPayload commentsPayload = default(CommentsPayload), string accessToken = null, bool throwOnError = true);
         /// <summary>
         /// Your GET endpoint
         /// </summary>
@@ -190,7 +190,7 @@ namespace Autodesk.Construction.Issues.Http
         /// </param>
         /// <returns>Task of ApiResponse&lt;Comments&gt;></returns>
 
-        public async System.Threading.Tasks.Task<ApiResponse<Comments>> CreateCommentsAsync(string projectId, string issueId, Region? xAdsRegion = null, CommentsPayload commentsPayload = default(CommentsPayload), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ApiResponse<Comment>> CreateCommentsAsync(string projectId, string issueId, Region? xAdsRegion = null, CommentsPayload commentsPayload = default(CommentsPayload), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into CreateCommentsAsync ");
             using (var request = new HttpRequestMessage())
@@ -265,10 +265,10 @@ namespace Autodesk.Construction.Issues.Http
                 else if (!response.IsSuccessStatusCode)
                 {
                     logger.LogError($"response unsuccess with status code: {response.StatusCode}");
-                    return new ApiResponse<Comments>(response, default(Comments));
+                    return new ApiResponse<Comment>(response, default(Comment));
                 }
                 logger.LogInformation($"Exited from CreateCommentsAsync with response statusCode: {response.StatusCode}");
-                return new ApiResponse<Comments>(response, await LocalMarshalling.DeserializeAsync<Comments>(response.Content));
+                return new ApiResponse<Comment>(response, await LocalMarshalling.DeserializeAsync<Comment>(response.Content));
 
             } // using
         }
