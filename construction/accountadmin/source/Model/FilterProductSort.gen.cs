@@ -54,16 +54,16 @@ namespace Autodesk.Construction.AccountAdmin.Model
     {
         
         /// <summary>
-        /// Enum Asc for value: name asc
+        /// Enum Nameasc for value: name asc
         /// </summary>
         [EnumMember(Value = "name asc")]
-        Asc,
+        Nameasc,
         
         /// <summary>
-        /// Enum Desc for value: name desc
+        /// Enum Namedesc for value: name desc
         /// </summary>
         [EnumMember(Value = "name desc")]
-        Desc
+        Namedesc
     }
 
 }

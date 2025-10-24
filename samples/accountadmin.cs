@@ -316,7 +316,7 @@ namespace Samples
             List<string> filterProjectId = new List<string> { "1574261a-4095-400c-8a88-d4aeab1a1fa4" };
             List<FilterProductKey> filterKey = new List<FilterProductKey> { FilterProductKey.Docs, FilterProductKey.Build };
             List<FilterProductField> fields = new List<FilterProductField> { FilterProductField.Name, FilterProductField.Icon };
-            List<FilterProductSort> sort = new List<FilterProductSort> { FilterProductSort.Desc};
+            List<FilterProductSort> sort = new List<FilterProductSort> { FilterProductSort.Namedesc};
             int limit = 10;
             int offset = 5;
 
@@ -507,7 +507,7 @@ namespace Samples
             // await admin.createUser();
             // await admin.importUsers();
             // await admin.updateUser();
-            // await admin.getUserProducts();
+            await admin.getUserProducts();
             // await admin.getUserRoles();
             // await admin.getProjectUsers();
             // await admin.getUserProjects();
