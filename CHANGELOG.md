@@ -1,12 +1,20 @@
 # Changelog
 
+## [v5.1.0](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v5.1.0) (2025-10-27)
+
+[Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v5.0.0...v5.1.0)
+
+**Implemented enhancements:**
+
+- \[DAS 360\] - Add New Acc Admin Endpoints [\#212](https://github.com/autodesk-platform-services/aps-sdk-net/pull/212) ([Arrotech](https://github.com/Arrotech))
+
+**Closed issues:**
+
+- Add nuget package for ACC takeoff [\#200](https://github.com/autodesk-platform-services/aps-sdk-net/issues/200)
+
 ## [v5.0.0](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v5.0.0) (2025-09-03)
 
 [Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v4.3.0...v5.0.0)
-
-**Breaking changes:**
-
-- \[DAS 356\] - Fixed custom attribute filtering for Get Issues Endpoint [\#199](https://github.com/autodesk-platform-services/aps-sdk-net/pull/199) ([srivastavarahull](https://github.com/srivastavarahull))
 
 **Closed issues:**
 
@@ -15,6 +23,10 @@
 ## [v4.3.0](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v4.3.0) (2025-09-03)
 
 [Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v4.2.2...v4.3.0)
+
+**Breaking changes:**
+
+- \[DAS 356\] - Fixed custom attribute filtering for Get Issues Endpoint [\#199](https://github.com/autodesk-platform-services/aps-sdk-net/pull/199) ([srivastavarahull](https://github.com/srivastavarahull))
 
 **Implemented enhancements:**
 
