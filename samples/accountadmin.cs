@@ -173,6 +173,7 @@ namespace Samples
                 Console.WriteLine($"TaxId: {company.TaxId}");
                 Console.WriteLine($"ErpId: {company.ErpId}");
                 Console.WriteLine($"UpdatedAt: {company.UpdatedAt}");
+                Console.WriteLine($"Status: {company.Status}");
             }
         }
         // Import Companies
@@ -309,6 +310,91 @@ namespace Samples
             }
         }
 
+        // Get user products
+        public async Task getUserProducts()
+        {
+            List<string> filterProjectId = new List<string> { "1574261a-4095-400c-8a88-d4aeab1a1fa4" };
+            List<FilterProductKey> filterKey = new List<FilterProductKey> { FilterProductKey.Docs, FilterProductKey.Build };
+            List<FilterProductField> fields = new List<FilterProductField> { FilterProductField.Name, FilterProductField.Icon };
+            List<FilterProductSort> sort = new List<FilterProductSort> { FilterProductSort.Namedesc};
+            int limit = 10;
+            int offset = 5;
+
+            ProductsPage response = await adminClient.GetUserProductsAsync(
+                accountId: accountId,
+                userId: userId,
+                region: Region.US,
+                filterProjectId: filterProjectId,
+                filterKey: filterKey,
+                fields: fields,
+                sort: sort,
+                limit: limit,
+                offset: offset
+            );
+
+            Console.WriteLine($"Total Products: {response.Pagination.TotalResults}");
+            Console.WriteLine($"Limit: {response.Pagination.Limit}");
+            Console.WriteLine($"Offset: {response.Pagination.Offset}");
+
+            foreach (var product in response.Results)
+            {
+                Console.WriteLine($"\nProduct Name: {product.Name}");
+                Console.WriteLine($"Product Key: {product.Key}");
+                if (product.ProjectIds != null)
+                {
+                    Console.WriteLine($"Associated Projects: {string.Join(", ", product.ProjectIds)}");
+                }
+            }
+        }
+
+        // Get user roles
+        public async Task getUserRoles()
+        {
+            List<string> filterProjectId = new List<string> { "6cbd9e21-e4b5-425c-a448-c29fea20ca5e" };
+            List<FilterRoleStatus> filterStatus = new List<FilterRoleStatus> { FilterRoleStatus.Active };
+            string filterName = "Document Manager";
+            FilterTextMatch filterTextMatch = FilterTextMatch.Equals;
+            List<FilterRoleField> fields = new List<FilterRoleField> { 
+                FilterRoleField.Name, 
+                FilterRoleField.Status, 
+                FilterRoleField.ProjectIds 
+            };
+            List<FilterRoleSort> sort = new List<FilterRoleSort> { FilterRoleSort.Namedesc };
+            int limit = 2;
+            int offset = 2;
+
+            RolesPage response = await adminClient.GetUserRolesAsync(
+                accountId: accountId,
+                userId: userId,
+                region: Region.US,
+                filterProjectId: filterProjectId,
+                filterStatus: filterStatus,
+                filterName: filterName,
+                filterTextMatch: filterTextMatch,
+                fields: fields,
+                sort: sort,
+                limit: limit,
+                offset: offset
+            );
+
+            Console.WriteLine($"Total Roles: {response.Pagination.TotalResults}");
+            Console.WriteLine($"Limit: {response.Pagination.Limit}");
+            Console.WriteLine($"Offset: {response.Pagination.Offset}");
+
+            foreach (var role in response.Results)
+            {
+                Console.WriteLine($"\nRole Name: {role.Name}");
+                Console.WriteLine($"Role Status: {role.Status}");
+                Console.WriteLine($"Role Key: {role.Key}");
+                if (role.ProjectIds != null)
+                {
+                    Console.WriteLine($"Associated Projects: {string.Join(", ", role.ProjectIds)}");
+                }
+                Console.WriteLine($"Created At: {role.CreatedAt}");
+                Console.WriteLine($"Updated At: {role.UpdatedAt}");
+            }
+        }
+
         // fetch specified user in the project
         public async Task getProjectUser()
         {
@@ -412,7 +498,7 @@ namespace Samples
             // await admin.searchCompany();
             // await admin.getProjectCompanies();
             // await admin.createCompany();
-            await admin.getCompaniesWithPagination();
+            // await admin.getCompaniesWithPagination();
             // await admin.importCompanies();
             // await admin.updateCompany();
             // await admin.updateCompanyImage();
@@ -421,6 +507,8 @@ namespace Samples
             // await admin.createUser();
             // await admin.importUsers();
             // await admin.updateUser();
+            await admin.getUserProducts();
+            // await admin.getUserRoles();
             // await admin.getProjectUsers();
             // await admin.getUserProjects();
             // await admin.getProjectUser();

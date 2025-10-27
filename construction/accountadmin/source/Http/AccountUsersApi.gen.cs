@@ -31,6 +31,7 @@ using Autodesk.Construction.AccountAdmin.Client;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Autodesk.SDKManager;
+using System.Collections;
 
 namespace Autodesk.Construction.AccountAdmin.Http
 {
@@ -77,6 +78,100 @@ namespace Autodesk.Construction.AccountAdmin.Http
         /// <returns>Task of ApiResponse&lt;User&gt;</returns>
         
         System.Threading.Tasks.Task<ApiResponse<User>> GetUserAsync (string accountId, string userId, Region? region= null,  string accessToken = null, bool throwOnError = true);
+        /// <summary>
+        /// Get user products
+        /// </summary>
+        /// <remarks>
+        ///Returns a list of ACC products the user is associated with in their assigned projects.
+///
+///Only account administrators can call this endpoint.
+///
+///Note that this endpoint is compatible with both BIM 360 and Autodesk Construction Cloud (ACC) projects.
+        /// </remarks>
+        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+         /// <param name="accountId">
+         ///The ID of the ACC account that contains the project being created or the projects being retrieved. This corresponds to the hub ID in the Data Management API. To convert a hub ID into an account ID, remove the “b." prefix. For example, a hub ID of b.c8b0c73d-3ae9 translates to an account ID of c8b0c73d-3ae9.
+         /// </param>
+         /// <param name="userId">
+         ///The ID of the user. To find the ID call GET users. You can use either the ACC ID (id) or the Autodesk ID (autodeskId).
+         /// </param>
+         /// <param name="region">
+         ///Specifies the region where your request should be routed. If not set, the request is routed automatically, which may result in a slight increase in latency. Possible values: US, EMEA. For a complete list of supported regions, see the Regions page. (optional)
+         /// </param>
+         /// <param name="userId2">
+         ///The ID of a user on whose behalf your request is acting. Your app has access to all users specified by the administrator in the SaaS integrations UI. Provide this header value to identify the user to be affected by the request.  You can use either the user’s ACC ID (id), or their Autodesk ID (autodeskId).  Note that this header is required for Account Admin POST, PATCH, and DELETE endpoints if you want to use a 2-legged authentication context. This header is optional for Account Admin GET endpoints. (optional)
+         /// </param>
+         /// <param name="filterProjectId">
+         ///A list of project IDs. Only results where the user is associated with one or more of the specified projects are returned. (optional)
+         /// </param>
+         /// <param name="filterKey">
+         ///Filters the list of products by product key — a machine-readable identifier for an ACC product (such as docs, build, or cost). You can specify one or more keys to return only those products the user is associated with.  Example: filter[key]=docs,build  Possible values: accountAdministration, autoSpecs, build, buildingConnected, capitalPlanning, cloudWorksharing, cost, designCollaboration, docs, financials, insight, modelCoordination, projectAdministration, takeoff, and workshopxr. (optional)
+         /// </param>
+         /// <param name="fields">
+         ///List of fields to return in the response. Defaults to all fields. Possible values: projectIds, name and icon. (optional)
+         /// </param>
+         /// <param name="sort">
+         ///The list of fields to sort by. Each property can be followed by a direction modifier of either asc (ascending) or desc (descending). The default is asc.  Possible values: name.  Default is the order in database. (optional)
+         /// </param>
+         /// <param name="limit">
+         ///The maximum number of records to return in the response. Default: 20  Minimum: 1  Maximum: 200 (If a larger value is provided, only 200 records are returned) (optional)
+         /// </param>
+         /// <param name="offset">
+         ///The index of the first record to return. Used for pagination in combination with the limit parameter.  Example: limit=20 and offset=40 returns records 41–60. (optional)
+         /// </param>
+        /// <returns>Task of ApiResponse&lt;ProductsPage&gt;</returns>
+        
+        System.Threading.Tasks.Task<ApiResponse<ProductsPage>> GetUserProductsAsync (string accountId, string userId, Region? region= null, string userId2= default(string), List<string> filterProjectId= default(List<string>), List<FilterProductKey> filterKey= default(List<FilterProductKey>), List<FilterProductField> fields= default(List<FilterProductField>), List<FilterProductSort> sort= default(List<FilterProductSort>), int? limit= default(int?), int? offset= default(int?),  string accessToken = null, bool throwOnError = true);
+        /// <summary>
+        /// Get user roles
+        /// </summary>
+        /// <remarks>
+        ///Returns the roles assigned to a specific user across the projects they belong to.
+///
+///Only users with account admin permissions can call this endpoint. To verify a user’s permissions, call GET users.
+///
+///Note that this endpoint is compatible with both BIM 360 and Autodesk Construction Cloud (ACC) projects.
+        /// </remarks>
+        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+         /// <param name="accountId">
+         ///The ID of the ACC account that contains the project being created or the projects being retrieved. This corresponds to the hub ID in the Data Management API. To convert a hub ID into an account ID, remove the “b." prefix. For example, a hub ID of b.c8b0c73d-3ae9 translates to an account ID of c8b0c73d-3ae9.
+         /// </param>
+         /// <param name="userId">
+         ///The ID of the user. To find the ID call GET users. You can use either the ACC ID (id) or the Autodesk ID (autodeskId).
+         /// </param>
+         /// <param name="region">
+         ///Specifies the region where your request should be routed. If not set, the request is routed automatically, which may result in a slight increase in latency. Possible values: US, EMEA. For a complete list of supported regions, see the Regions page. (optional)
+         /// </param>
+         /// <param name="userId2">
+         ///The ID of a user on whose behalf your request is acting. Your app has access to all users specified by the administrator in the SaaS integrations UI. Provide this header value to identify the user to be affected by the request.  You can use either the user’s ACC ID (id), or their Autodesk ID (autodeskId).  Note that this header is required for Account Admin POST, PATCH, and DELETE endpoints if you want to use a 2-legged authentication context. This header is optional for Account Admin GET endpoints. (optional)
+         /// </param>
+         /// <param name="filterProjectId">
+         ///A list of project IDs. Only results where the user is associated with one or more of the specified projects are returned. (optional)
+         /// </param>
+         /// <param name="filterStatus">
+         ///Filters roles by their status. Accepts one or more of the following values: active – The role is currently in use.  inactive – The role has been removed or is no longer in use. (optional)
+         /// </param>
+         /// <param name="filterName">
+         ///Filters roles by name. By default, this performs a partial match (case-insensitive).  You can control how the match behaves by using the filterTextMatch parameter. For example, to match only names that start with (startsWith), end with (endsWith), or exactly equal (equals) the provided value. (optional)
+         /// </param>
+         /// <param name="filterTextMatch">
+         ///Specifies how text-based filters should match values in supported fields. This parameter can be used in any endpoint that supports text-based filtering (e.g., filter[name], filter[jobNumber], filter[companyName], etc.).  Possible values:  contains (default) – Matches if the field contains the specified text anywhere  startsWith – Matches if the field starts with the specified text  endsWith – Matches if the field ends with the specified text  equals – Matches only if the field exactly matches the specified text  Matching is case-insensitive.  Wildcards and regular expressions are not supported. (optional)
+         /// </param>
+         /// <param name="fields">
+         ///A comma-separated list of response fields to include. Defaults to all fields if not specified. Use this parameter to reduce the response size by retrieving only the fields you need.  Possible values:  projectIds – Projects where the user holds this role  name – Role name  status – Role status (active or inactive)  key – Internal key used to translate the role name  createdAt – Timestamp when the role was created  updatedAt – Timestamp when the role was last updated (optional)
+         /// </param>
+         /// <param name="sort">
+         ///Sorts the results by one or more fields. Each field can be followed by a direction modifier:  asc – Ascending order (default)  desc – Descending order  Possible values: name, createdAt, updatedAt.  Default sort: name asc  Example: sort=name,updatedAt desc (optional)
+         /// </param>
+         /// <param name="limit">
+         ///The maximum number of records to return in the response. Default: 20  Minimum: 1  Maximum: 200 (If a larger value is provided, only 200 records are returned) (optional)
+         /// </param>
+         /// <param name="offset">
+         ///The index of the first record to return. Used for pagination in combination with the limit parameter.  Example: limit=20 and offset=40 returns records 41–60. (optional)
+         /// </param>
+        /// <returns>Task of ApiResponse&lt;RolesPage&gt;</returns>
+        
+        System.Threading.Tasks.Task<ApiResponse<RolesPage>> GetUserRolesAsync (string accountId, string userId, Region? region= null, string userId2= default(string), List<string> filterProjectId= default(List<string>), List<FilterRoleStatus> filterStatus= default(List<FilterRoleStatus>), string filterName= default(string), FilterTextMatch? filterTextMatch= null, List<FilterRoleField> fields= default(List<FilterRoleField>), List<FilterRoleSort> sort= default(List<FilterRoleSort>), int? limit= default(int?), int? offset= default(int?),  string accessToken = null, bool throwOnError = true);
         /// <summary>
         /// Get account users
         /// </summary>
@@ -227,6 +322,28 @@ namespace Autodesk.Construction.AccountAdmin.Http
                 if((int)value > 0)
                 {
                     dictionary.Add(name, value);
+                }
+            }
+            else if (value is IList)
+            {
+                if (value is List<string>)
+                {
+                    value = String.Join(",",(List<string>)value);
+                     dictionary.Add(name, value);
+                }
+                else 
+                {
+                    List<string>newlist = new List<string>();
+                    foreach ( var x in (IList)value)
+                    {
+                            var type = x.GetType();
+                            var memberInfos = type.GetMember(x.ToString());
+                            var enumValueMemberInfo = memberInfos.FirstOrDefault(m => m.DeclaringType == type);
+                            var valueAttributes = enumValueMemberInfo.GetCustomAttributes(typeof(EnumMemberAttribute), false);
+                            newlist.Add(((EnumMemberAttribute)valueAttributes[0]).Value);                            
+                    }
+                    string joinedString = String.Join(",", newlist);
+                    dictionary.Add(name, joinedString);
                 }
             }
             else
@@ -460,6 +577,272 @@ namespace Autodesk.Construction.AccountAdmin.Http
                 }
                 logger.LogInformation($"Exited from GetUserAsync with response statusCode: {response.StatusCode}");
                 return new ApiResponse<User>(response, await LocalMarshalling.DeserializeAsync<User>(response.Content));
+
+            } // using
+        }
+        /// <summary>
+        /// Get user products
+        /// </summary>
+        /// <remarks>
+        ///Returns a list of ACC products the user is associated with in their assigned projects.
+///
+///Only account administrators can call this endpoint.
+///
+///Note that this endpoint is compatible with both BIM 360 and Autodesk Construction Cloud (ACC) projects.
+        /// </remarks>
+        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+         /// <param name="accountId">
+         ///The ID of the ACC account that contains the project being created or the projects being retrieved. This corresponds to the hub ID in the Data Management API. To convert a hub ID into an account ID, remove the “b." prefix. For example, a hub ID of b.c8b0c73d-3ae9 translates to an account ID of c8b0c73d-3ae9.
+         /// </param>
+         /// <param name="userId">
+         ///The ID of the user. To find the ID call GET users. You can use either the ACC ID (id) or the Autodesk ID (autodeskId).
+         /// </param>
+         /// <param name="region">
+         ///Specifies the region where your request should be routed. If not set, the request is routed automatically, which may result in a slight increase in latency. Possible values: US, EMEA. For a complete list of supported regions, see the Regions page. (optional)
+         /// </param>
+         /// <param name="userId2">
+         ///The ID of a user on whose behalf your request is acting. Your app has access to all users specified by the administrator in the SaaS integrations UI. Provide this header value to identify the user to be affected by the request.  You can use either the user’s ACC ID (id), or their Autodesk ID (autodeskId).  Note that this header is required for Account Admin POST, PATCH, and DELETE endpoints if you want to use a 2-legged authentication context. This header is optional for Account Admin GET endpoints. (optional)
+         /// </param>
+         /// <param name="filterProjectId">
+         ///A list of project IDs. Only results where the user is associated with one or more of the specified projects are returned. (optional)
+         /// </param>
+         /// <param name="filterKey">
+         ///Filters the list of products by product key — a machine-readable identifier for an ACC product (such as docs, build, or cost). You can specify one or more keys to return only those products the user is associated with.  Example: filter[key]=docs,build  Possible values: accountAdministration, autoSpecs, build, buildingConnected, capitalPlanning, cloudWorksharing, cost, designCollaboration, docs, financials, insight, modelCoordination, projectAdministration, takeoff, and workshopxr. (optional)
+         /// </param>
+         /// <param name="fields">
+         ///List of fields to return in the response. Defaults to all fields. Possible values: projectIds, name and icon. (optional)
+         /// </param>
+         /// <param name="sort">
+         ///The list of fields to sort by. Each property can be followed by a direction modifier of either asc (ascending) or desc (descending). The default is asc.  Possible values: name.  Default is the order in database. (optional)
+         /// </param>
+         /// <param name="limit">
+         ///The maximum number of records to return in the response. Default: 20  Minimum: 1  Maximum: 200 (If a larger value is provided, only 200 records are returned) (optional)
+         /// </param>
+         /// <param name="offset">
+         ///The index of the first record to return. Used for pagination in combination with the limit parameter.  Example: limit=20 and offset=40 returns records 41–60. (optional)
+         /// </param>
+        /// <returns>Task of ApiResponse&lt;ProductsPage&gt;></returns>
+        
+        public async System.Threading.Tasks.Task<ApiResponse<ProductsPage>> GetUserProductsAsync (string accountId,string userId,Region? region= null,string userId2= default(string),List<string> filterProjectId= default(List<string>),List<FilterProductKey> filterKey= default(List<FilterProductKey>),List<FilterProductField> fields= default(List<FilterProductField>),List<FilterProductSort> sort= default(List<FilterProductSort>),int? limit= default(int?),int? offset= default(int?), string accessToken = null, bool throwOnError = true)
+        {
+            logger.LogInformation("Entered into GetUserProductsAsync ");
+            using (var request = new HttpRequestMessage())
+            {
+                var queryParam = new Dictionary<string, object>();
+                SetQueryParameter("filter[projectId]", filterProjectId, queryParam);
+                SetQueryParameter("filter[key]", filterKey, queryParam);
+                SetQueryParameter("fields", fields, queryParam);
+                SetQueryParameter("sort", sort, queryParam);
+                SetQueryParameter("limit", limit, queryParam);
+                SetQueryParameter("offset", offset, queryParam);
+                request.RequestUri =
+                    Marshalling.BuildRequestUri("/construction/admin/v1/accounts/{accountId}/users/{userId}/products",
+                        routeParameters: new Dictionary<string, object> {
+                            { "accountId", accountId},
+                            { "userId", userId},
+                        },
+                        queryParameters: queryParam
+                    );
+
+                request.Headers.TryAddWithoutValidation("Accept", "application/json");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/CONSTRUCTION.ACCOUNT.ADMIN/C#/1.0.0");
+                if(!string.IsNullOrEmpty(accessToken))
+                {
+                    request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
+                }
+
+
+
+                SetHeader("Region", region, request);
+                SetHeader("User-Id", userId2, request);
+
+                // tell the underlying pipeline what scope we'd like to use
+                // if (scopes == null)
+                // {
+                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
+                // }
+                // else
+                // {
+                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // }
+                // if (scopes == null)
+                // {
+                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
+                // }
+                // else
+                // {
+                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // }
+                // if (scopes == null)
+                // {
+                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
+                // }
+                // else
+                // {
+                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // }
+
+                request.Method = new HttpMethod("GET");
+
+                // make the HTTP request
+                var response = await this.Service.Client.SendAsync(request);
+
+                if (throwOnError)
+                {
+                    try
+                    {
+                      await response.EnsureSuccessStatusCodeAsync();
+                    } catch (HttpRequestException ex) {
+                      throw new ConstructionAccountAdminApiException(ex.Message, response, ex);
+                    }
+                }
+                else if (!response.IsSuccessStatusCode)
+                {
+                    logger.LogError($"response unsuccess with status code: {response.StatusCode}");
+                    return new ApiResponse<ProductsPage>(response, default(ProductsPage));
+                }
+                logger.LogInformation($"Exited from GetUserProductsAsync with response statusCode: {response.StatusCode}");
+                return new ApiResponse<ProductsPage>(response, await LocalMarshalling.DeserializeAsync<ProductsPage>(response.Content));
+
+            } // using
+        }
+        /// <summary>
+        /// Get user roles
+        /// </summary>
+        /// <remarks>
+        ///Returns the roles assigned to a specific user across the projects they belong to.
+///
+///Only users with account admin permissions can call this endpoint. To verify a user’s permissions, call GET users.
+///
+///Note that this endpoint is compatible with both BIM 360 and Autodesk Construction Cloud (ACC) projects.
+        /// </remarks>
+        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+         /// <param name="accountId">
+         ///The ID of the ACC account that contains the project being created or the projects being retrieved. This corresponds to the hub ID in the Data Management API. To convert a hub ID into an account ID, remove the “b." prefix. For example, a hub ID of b.c8b0c73d-3ae9 translates to an account ID of c8b0c73d-3ae9.
+         /// </param>
+         /// <param name="userId">
+         ///The ID of the user. To find the ID call GET users. You can use either the ACC ID (id) or the Autodesk ID (autodeskId).
+         /// </param>
+         /// <param name="region">
+         ///Specifies the region where your request should be routed. If not set, the request is routed automatically, which may result in a slight increase in latency. Possible values: US, EMEA. For a complete list of supported regions, see the Regions page. (optional)
+         /// </param>
+         /// <param name="userId2">
+         ///The ID of a user on whose behalf your request is acting. Your app has access to all users specified by the administrator in the SaaS integrations UI. Provide this header value to identify the user to be affected by the request.  You can use either the user’s ACC ID (id), or their Autodesk ID (autodeskId).  Note that this header is required for Account Admin POST, PATCH, and DELETE endpoints if you want to use a 2-legged authentication context. This header is optional for Account Admin GET endpoints. (optional)
+         /// </param>
+         /// <param name="filterProjectId">
+         ///A list of project IDs. Only results where the user is associated with one or more of the specified projects are returned. (optional)
+         /// </param>
+         /// <param name="filterStatus">
+         ///Filters roles by their status. Accepts one or more of the following values: active – The role is currently in use.  inactive – The role has been removed or is no longer in use. (optional)
+         /// </param>
+         /// <param name="filterName">
+         ///Filters roles by name. By default, this performs a partial match (case-insensitive).  You can control how the match behaves by using the filterTextMatch parameter. For example, to match only names that start with (startsWith), end with (endsWith), or exactly equal (equals) the provided value. (optional)
+         /// </param>
+         /// <param name="filterTextMatch">
+         ///Specifies how text-based filters should match values in supported fields. This parameter can be used in any endpoint that supports text-based filtering (e.g., filter[name], filter[jobNumber], filter[companyName], etc.).  Possible values:  contains (default) – Matches if the field contains the specified text anywhere  startsWith – Matches if the field starts with the specified text  endsWith – Matches if the field ends with the specified text  equals – Matches only if the field exactly matches the specified text  Matching is case-insensitive.  Wildcards and regular expressions are not supported. (optional)
+         /// </param>
+         /// <param name="fields">
+         ///A comma-separated list of response fields to include. Defaults to all fields if not specified. Use this parameter to reduce the response size by retrieving only the fields you need.  Possible values:  projectIds – Projects where the user holds this role  name – Role name  status – Role status (active or inactive)  key – Internal key used to translate the role name  createdAt – Timestamp when the role was created  updatedAt – Timestamp when the role was last updated (optional)
+         /// </param>
+         /// <param name="sort">
+         ///Sorts the results by one or more fields. Each field can be followed by a direction modifier:  asc – Ascending order (default)  desc – Descending order  Possible values: name, createdAt, updatedAt.  Default sort: name asc  Example: sort=name,updatedAt desc (optional)
+         /// </param>
+         /// <param name="limit">
+         ///The maximum number of records to return in the response. Default: 20  Minimum: 1  Maximum: 200 (If a larger value is provided, only 200 records are returned) (optional)
+         /// </param>
+         /// <param name="offset">
+         ///The index of the first record to return. Used for pagination in combination with the limit parameter.  Example: limit=20 and offset=40 returns records 41–60. (optional)
+         /// </param>
+        /// <returns>Task of ApiResponse&lt;RolesPage&gt;></returns>
+        
+        public async System.Threading.Tasks.Task<ApiResponse<RolesPage>> GetUserRolesAsync (string accountId,string userId,Region? region= null,string userId2= default(string),List<string> filterProjectId= default(List<string>),List<FilterRoleStatus> filterStatus= default(List<FilterRoleStatus>),string filterName= default(string),FilterTextMatch? filterTextMatch= null,List<FilterRoleField> fields= default(List<FilterRoleField>),List<FilterRoleSort> sort= default(List<FilterRoleSort>),int? limit= default(int?),int? offset= default(int?), string accessToken = null, bool throwOnError = true)
+        {
+            logger.LogInformation("Entered into GetUserRolesAsync ");
+            using (var request = new HttpRequestMessage())
+            {
+                var queryParam = new Dictionary<string, object>();
+                SetQueryParameter("filter[projectId]", filterProjectId, queryParam);
+                SetQueryParameter("filter[status]", filterStatus, queryParam);
+                SetQueryParameter("filter[name]", filterName, queryParam);
+                SetQueryParameter("filterTextMatch", filterTextMatch, queryParam);
+                SetQueryParameter("fields", fields, queryParam);
+                SetQueryParameter("sort", sort, queryParam);
+                SetQueryParameter("limit", limit, queryParam);
+                SetQueryParameter("offset", offset, queryParam);
+                request.RequestUri =
+                    Marshalling.BuildRequestUri("/construction/admin/v1/accounts/{accountId}/users/{userId}/roles",
+                        routeParameters: new Dictionary<string, object> {
+                            { "accountId", accountId},
+                            { "userId", userId},
+                        },
+                        queryParameters: queryParam
+                    );
+
+                request.Headers.TryAddWithoutValidation("Accept", "application/json");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/CONSTRUCTION.ACCOUNT.ADMIN/C#/1.0.0");
+                if(!string.IsNullOrEmpty(accessToken))
+                {
+                    request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
+                }
+
+
+
+                SetHeader("Region", region, request);
+                SetHeader("User-Id", userId2, request);
+
+                // tell the underlying pipeline what scope we'd like to use
+                // if (scopes == null)
+                // {
+                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
+                // }
+                // else
+                // {
+                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // }
+                // if (scopes == null)
+                // {
+                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
+                // }
+                // else
+                // {
+                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // }
+                // if (scopes == null)
+                // {
+                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "");
+                // }
+                // else
+                // {
+                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // }
+
+                request.Method = new HttpMethod("GET");
+
+                // make the HTTP request
+                var response = await this.Service.Client.SendAsync(request);
+
+                if (throwOnError)
+                {
+                    try
+                    {
+                      await response.EnsureSuccessStatusCodeAsync();
+                    } catch (HttpRequestException ex) {
+                      throw new ConstructionAccountAdminApiException(ex.Message, response, ex);
+                    }
+                }
+                else if (!response.IsSuccessStatusCode)
+                {
+                    logger.LogError($"response unsuccess with status code: {response.StatusCode}");
+                    return new ApiResponse<RolesPage>(response, default(RolesPage));
+                }
+                logger.LogInformation($"Exited from GetUserRolesAsync with response statusCode: {response.StatusCode}");
+                return new ApiResponse<RolesPage>(response, await LocalMarshalling.DeserializeAsync<RolesPage>(response.Content));
 
             } // using
         }
