@@ -34,15 +34,15 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Construction.Issues.Model
 {
     /// <summary>
-    /// TypesPage
+    /// IssueTypesPage
     /// </summary>
     [DataContract]
-    public partial class TypesPage
+    public partial class IssueTypesPage
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="TypesPage" /> class.
+        /// Initializes a new instance of the <see cref="IssueTypesPage" /> class.
         /// </summary>
-        public TypesPage()
+        public IssueTypesPage()
         {
         }
 
