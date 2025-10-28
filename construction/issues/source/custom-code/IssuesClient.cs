@@ -245,9 +245,9 @@ namespace Autodesk.Construction.Issues
                 /// </param >
                 /// <param name="contentType">Must be application/json</param>
                 /// <param name="body"> (optional)</param>
-                /// <returns>Task of ApiResponse<CreatedComment></returns>
+                /// <returns>Task of <Comment></returns>
 
-                public async System.Threading.Tasks.Task<Comments> CreateCommentsAsync(string projectId, string issueId, CommentsPayload commentsPayload, Region xAdsRegion = default, string accessToken = default, bool throwOnError = true)
+                public async System.Threading.Tasks.Task<Comment> CreateCommentsAsync(string projectId, string issueId, CommentsPayload commentsPayload, Region xAdsRegion = default, string accessToken = default, bool throwOnError = true)
                 {
                         if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
                         {
@@ -575,9 +575,9 @@ namespace Autodesk.Construction.Issues
                 /// <param name="offset">Add offset&#x3D;20 to get partial results (together with the limit to support pagination). (optional)</param>
                 /// <param name="filterUpdatedAt">Retrieves types that were last updated at the specified date and time, in in one of the following URL-encoded formats: YYYY-MM-DDThh:mm:ss.sz or YYYY-MM-DD. Separate multiple values with commas. (optional)</param>
                 /// <param name="filterIsActive">Filter types by status e.g. filter[isActive]&#x3D;true will only return active types. Default value: undefined (meaning both active &amp; inactive issue type categories will return). (optional)</param>
-                /// <returns>Task of ApiResponse<IssueType></returns>
+                /// <returns>Task of ApiResponse<IssueTypesPage></returns>
 
-                public async System.Threading.Tasks.Task<TypesPage> GetIssuesTypesAsync(string projectId, string include = default(string), int? limit = default(int?), int? offset = default(int?), string filterUpdatedAt = default(string), bool? filterIsActive = default(bool?), Region xAdsRegion = default, string accessToken = default, bool throwOnError = true)
+                public async System.Threading.Tasks.Task<IssueTypesPage> GetIssuesTypesAsync(string projectId, string include = default(string), int? limit = default(int?), int? offset = default(int?), string filterUpdatedAt = default(string), bool? filterIsActive = default(bool?), Region xAdsRegion = default, string accessToken = default, bool throwOnError = true)
                 {
                         if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
                         {

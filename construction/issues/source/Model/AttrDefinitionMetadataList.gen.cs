@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Construction.Issues
  *
@@ -34,35 +34,26 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Construction.Issues.Model
 {
     /// <summary>
-    /// AttrDefinitionPageResultsMetadataListOptions
+    /// The list object.
     /// </summary>
     [DataContract]
-    public partial class AttrDefinitionPageResultsMetadataListOptions
+    public partial class AttrDefinitionMetadataList 
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="AttrDefinitionPageResultsMetadataListOptions" /> class.
+        /// Initializes a new instance of the <see cref="AttrDefinitionMetadataList" /> class.
         /// </summary>
-        public AttrDefinitionPageResultsMetadataListOptions()
+        public AttrDefinitionMetadataList()
         {
         }
-
+        
         /// <summary>
-        ///The id of the list option.
+        ///The options object.
         /// </summary>
         /// <value>
-        ///The id of the list option.
+        ///The options object.
         /// </value>
-        [DataMember(Name = "id", EmitDefaultValue = false)]
-        public string Id { get; set; }
-
-        /// <summary>
-        ///The value of the list item.
-        /// </summary>
-        /// <value>
-        ///The value of the list item.
-        /// </value>
-        [DataMember(Name = "value", EmitDefaultValue = false)]
-        public string Value { get; set; }
+        [DataMember(Name="options", EmitDefaultValue=false)]
+        public List<AttrDefinitionMetadataListOptions> Options { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

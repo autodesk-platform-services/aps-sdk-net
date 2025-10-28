@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Construction.Issues
  *
@@ -34,26 +34,23 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Construction.Issues.Model
 {
     /// <summary>
-    /// The list object.
+    /// The metadata object; only relevant for list custom attributes.
     /// </summary>
     [DataContract]
-    public partial class AttrDefinitionPageResultsMetadataList
+    public partial class AttrDefinitionMetadata 
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="AttrDefinitionPageResultsMetadataList" /> class.
+        /// Initializes a new instance of the <see cref="AttrDefinitionMetadata" /> class.
         /// </summary>
-        public AttrDefinitionPageResultsMetadataList()
+        public AttrDefinitionMetadata()
         {
         }
-
+        
         /// <summary>
-        ///The options object.
+        ///Gets or Sets List
         /// </summary>
-        /// <value>
-        ///The options object.
-        /// </value>
-        [DataMember(Name = "options", EmitDefaultValue = false)]
-        public List<AttrDefinitionPageResultsMetadataListOptions> Options { get; set; }
+        [DataMember(Name="list", EmitDefaultValue=false)]
+        public AttrDefinitionMetadataList List { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
