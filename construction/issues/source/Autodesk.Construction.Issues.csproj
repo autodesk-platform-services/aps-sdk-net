@@ -6,12 +6,14 @@
     <Authors>Autodesk Platform Services SDK Team</Authors>
     <PackageDescription>Client SDK for Construction Issues API</PackageDescription>
     <PackageReleaseNotes>
-    Breaking change
-    • Fixed issue with the custom attributes filtering in GetIssuesAsync method.
+    • Added support for endpoints for Issues Attachments:
+      ‣ `projects/{projectId}/attachments`
+      ‣ `projects/{projectId}/attachments/{issueId}/items/{attachmentId}`
+      ‣ `attachments/:issueId/items`
     </PackageReleaseNotes>
     <Copyright>Autodesk Inc.</Copyright>
     <PackageId>Autodesk.Construction.Issues</PackageId>
-    <PackageVersion>4.0.0-beta</PackageVersion>
+    <PackageVersion>4.0.0-beta1</PackageVersion>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/autodesk-platform-services/aps-sdk-net.git</RepositoryUrl>
