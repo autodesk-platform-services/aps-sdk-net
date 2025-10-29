@@ -118,8 +118,7 @@ namespace Autodesk.Oss
             string xAdsMetaContentType = default(string),
             string xAdsMetaContentDisposition = default(string),
             string xAdsMetaContentEncoding = default(string),
-            string xAdsMetaCacheControl = default(string),
-            string xAdsUserDefinedMetadata = default(string))
+            string xAdsMetaCacheControl = default(string))
         {
             var requestId = HandleRequestId(requestIdPrefix, bucketKey, objectKey);
             var retryCount = _configuration.GetRetryCount();
@@ -235,8 +234,7 @@ namespace Autodesk.Oss
                 xAdsMetaContentType: xAdsMetaContentType,
                 xAdsMetaContentDisposition: xAdsMetaContentDisposition,
                 xAdsMetaContentEncoding: xAdsMetaContentEncoding,
-                xAdsMetaCacheControl: xAdsMetaCacheControl,
-                xAdsUserDefinedMetadata: xAdsUserDefinedMetadata);
+                xAdsMetaCacheControl: xAdsMetaCacheControl);
 
             progress?.Report(100);
             return completeResponse;

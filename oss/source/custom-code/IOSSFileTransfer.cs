@@ -40,8 +40,7 @@ namespace Autodesk.Oss
             string xAdsMetaContentType = default(string),
             string xAdsMetaContentDisposition = default(string),
             string xAdsMetaContentEncoding = default(string),
-            string xAdsMetaCacheControl = default(string),
-            string xAdsUserDefinedMetadata = default(string));
+            string xAdsMetaCacheControl = default(string));
     
         Task<Stream> Download(
             string bucketKey,
