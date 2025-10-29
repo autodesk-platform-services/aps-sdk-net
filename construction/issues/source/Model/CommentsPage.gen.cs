@@ -56,7 +56,7 @@ namespace Autodesk.Construction.Issues.Model
         ///Gets or Sets Results
         /// </summary>
         [DataMember(Name = "results", EmitDefaultValue = false)]
-        public List<Comments> Results { get; set; }
+        public List<Comment> Results { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

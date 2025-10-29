@@ -4,13 +4,14 @@ using Autodesk.SDKManager;
 using System.Collections.Generic;
 using System;
 using Autodesk.Forge.Core;
+using System.Net.Http;
 
 namespace Autodesk.Construction.Issues
 {
         public class IssuesClient : BaseClient
         {
 
-
+                public IIssueAttachmentsApi IssueAttachmentsApi { get; }
                 public IIssueAttributeDefinitionsApi IssueAttributeDefinitionsApi { get; }
                 public IIssueAttributeMappingsApi IssueAttributeMappingsApi { get; }
                 public IIssueCommentsApi IssueCommentsApi { get; }
@@ -25,6 +26,7 @@ namespace Autodesk.Construction.Issues
                         {
                                 sdkManager = SdkManagerBuilder.Create().Build();
                         }
+                        this.IssueAttachmentsApi = new IssueAttachmentsApi(sdkManager);
                         this.IssueAttributeDefinitionsApi = new IssueAttributeDefinitionsApi(sdkManager);
                         this.IssueAttributeMappingsApi = new IssueAttributeMappingsApi(sdkManager);
                         this.IssueCommentsApi = new IssueCommentsApi(sdkManager);
@@ -33,6 +35,106 @@ namespace Autodesk.Construction.Issues
                         this.IssuesProfileApi = new IssuesProfileApi(sdkManager);
                         this.IssueTypesApi = new IssueTypesApi(sdkManager);
                 }
+                /// <summary>
+                /// Your POST endpoint
+                /// </summary>
+                /// <remarks>
+                ///Adds attachments to an existing issue.
+                ///
+                ///Links one or more files in Autodesk Docs (uploaded via the Data Management OSS API) to the specified issue.
+                ///
+                ///Note that an issue can have up to 100 attachments. Files can include images, PDFs, or other supported formats.
+                ///
+                ///For more information about uploading attachments, see the Upload Issue Attachment tutorial.
+                /// </remarks>
+                /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+                /// <param name="projectId">
+                ///The ID of the project.
+                /// </param>
+                /// <param name="attachmentsPayload">
+                /// (optional)
+                /// </param>
+                /// <returns>Task of ApiResponse&lt;Attachments&gt;</returns>
+
+                public async System.Threading.Tasks.Task<Attachments> AddAttachmentsAsync(string projectId, AttachmentsPayload attachmentsPayload = default(AttachmentsPayload), string accessToken = null, bool throwOnError = true)
+                {
+                        if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+                        {
+                                throw new Exception("Please provide a valid access token or an authentication provider");
+                        }
+                        else if (String.IsNullOrEmpty(accessToken))
+                        {
+                                accessToken = await this.AuthenticationProvider.GetAccessToken();
+                        }
+                        var response = await this.IssueAttachmentsApi.AddAttachmentsAsync(projectId, attachmentsPayload, accessToken, throwOnError);
+                        return response.Content;
+
+
+                }
+                /// <summary>
+                /// Your DELETE endpoint
+                /// </summary>
+                /// <remarks>
+                ///Deletes a specific attachment from an issue in a project.
+                /// </remarks>
+                /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+                /// <param name="projectId">
+                ///The ID of the project. Use the Data Management API to retrieve the project ID. For more information, see the Retrieve a Project ID tutorial. You need to convert the project ID into a project ID for the ACC API by removing the “b." prefix. For example, a project ID of b.a4be0c34a-4ab7 translates to a project ID of a4be0c34a-4ab7.
+                /// </param>
+                /// <param name="issueId">
+                ///The unique identifier of the issue. To find the ID, call GET issues.
+                /// </param>
+                /// <param name="attachmentId">
+                ///The unique identifier of the attachment. To find the ID, call GET attachments.
+                /// </param>
+
+                /// <returns>Task of HttpResponseMessage</returns>
+                public async System.Threading.Tasks.Task<HttpResponseMessage> DeleteAttachmentAsync(string projectId, string issueId, string attachmentId, string accessToken = null, bool throwOnError = true)
+                {
+                        if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+                        {
+                                throw new Exception("Please provide a valid access token or an authentication provider");
+                        }
+                        else if (String.IsNullOrEmpty(accessToken))
+                        {
+                                accessToken = await this.AuthenticationProvider.GetAccessToken();
+                        }
+                        var response = await this.IssueAttachmentsApi.DeleteAttachmentAsync(projectId, issueId, attachmentId, accessToken, throwOnError);
+                        return response;
+                }
+                /// <summary>
+                /// Your GET endpoint
+                /// </summary>
+                /// <remarks>
+                ///Retrieves all attachments for a specific issue in a project.
+                ///
+                ///For details about retrieving metadata for a specific attachment, see the Retrieve Issue Attachment tutorial.
+                ///
+                ///For details about downloading an attachment, see the Download Issue Attachment tutorial.
+                /// </remarks>
+                /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+                /// <param name="issueId">
+                ///The unique identifier of the issue. To find the ID, call GET issues.
+                /// </param>
+                /// <param name="projectId">
+                ///The ID of the project. Use the Data Management API to retrieve the project ID. For more information, see the Retrieve a Project ID tutorial. You need to convert the project ID into a project ID for the ACC API by removing the “b." prefix. For example, a project ID of b.a4be0c34a-4ab7 translates to a project ID of a4be0c34a-4ab7.
+                /// </param>
+                /// <returns>Task of ApiResponse&lt;Attachments&gt;</returns>
+
+                public async System.Threading.Tasks.Task<Attachments> GetAttachmentsAsync(string projectId, string issueId, string accessToken = null, bool throwOnError = true)
+                {
+                        if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+                        {
+                                throw new Exception("Please provide a valid access token or an authentication provider");
+                        }
+                        else if (String.IsNullOrEmpty(accessToken))
+                        {
+                                accessToken = await this.AuthenticationProvider.GetAccessToken();
+                        }
+                        var response = await this.IssueAttachmentsApi.GetAttachmentsAsync(projectId, issueId, accessToken, throwOnError);
+                        return response.Content;
+                }
+
 
 
                 /// <summary>
@@ -143,9 +245,9 @@ namespace Autodesk.Construction.Issues
                 /// </param >
                 /// <param name="contentType">Must be application/json</param>
                 /// <param name="body"> (optional)</param>
-                /// <returns>Task of ApiResponse<CreatedComment></returns>
+                /// <returns>Task of <Comment></returns>
 
-                public async System.Threading.Tasks.Task<Comments> CreateCommentsAsync(string projectId, string issueId, CommentsPayload commentsPayload, Region xAdsRegion = default, string accessToken = default, bool throwOnError = true)
+                public async System.Threading.Tasks.Task<Comment> CreateCommentsAsync(string projectId, string issueId, CommentsPayload commentsPayload, Region xAdsRegion = default, string accessToken = default, bool throwOnError = true)
                 {
                         if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
                         {
@@ -473,9 +575,9 @@ namespace Autodesk.Construction.Issues
                 /// <param name="offset">Add offset&#x3D;20 to get partial results (together with the limit to support pagination). (optional)</param>
                 /// <param name="filterUpdatedAt">Retrieves types that were last updated at the specified date and time, in in one of the following URL-encoded formats: YYYY-MM-DDThh:mm:ss.sz or YYYY-MM-DD. Separate multiple values with commas. (optional)</param>
                 /// <param name="filterIsActive">Filter types by status e.g. filter[isActive]&#x3D;true will only return active types. Default value: undefined (meaning both active &amp; inactive issue type categories will return). (optional)</param>
-                /// <returns>Task of ApiResponse<IssueType></returns>
+                /// <returns>Task of ApiResponse<IssueTypesPage></returns>
 
-                public async System.Threading.Tasks.Task<TypesPage> GetIssuesTypesAsync(string projectId, string include = default(string), int? limit = default(int?), int? offset = default(int?), string filterUpdatedAt = default(string), bool? filterIsActive = default(bool?), Region xAdsRegion = default, string accessToken = default, bool throwOnError = true)
+                public async System.Threading.Tasks.Task<IssueTypesPage> GetIssuesTypesAsync(string projectId, string include = default(string), int? limit = default(int?), int? offset = default(int?), string filterUpdatedAt = default(string), bool? filterIsActive = default(bool?), Region xAdsRegion = default, string accessToken = default, bool throwOnError = true)
                 {
                         if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
                         {

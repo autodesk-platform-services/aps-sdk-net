@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Construction.Issues
  *
@@ -34,15 +34,15 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Construction.Issues.Model
 {
         /// <summary>
-        /// RootCauseCategoriesPageResultsRootCauses
+        /// RootCauseCategoryRootCauses
         /// </summary>
         [DataContract]
-        public partial class RootCauseCategoriesPageResultsRootCauses
+        public partial class RootCauseCategoryRootCauses
         {
                 /// <summary>
-                /// Initializes a new instance of the <see cref="RootCauseCategoriesPageResultsRootCauses" /> class.
+                /// Initializes a new instance of the <see cref="RootCauseCategoryRootCauses" /> class.
                 /// </summary>
-                public RootCauseCategoriesPageResultsRootCauses()
+                public RootCauseCategoryRootCauses()
                 {
                 }
 
