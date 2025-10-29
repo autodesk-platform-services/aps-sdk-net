@@ -1,5 +1,14 @@
 # Changelog
 
+## [v5.2.0](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v5.2.0) (2025-10-29)
+
+[Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v5.1.0...v5.2.0)
+
+**Implemented enhancements:**
+
+- \[DAS 363\] - Fixed Model Naming for Issues Sdk [\#214](https://github.com/autodesk-platform-services/aps-sdk-net/pull/214) ([srivastavarahull](https://github.com/srivastavarahull))
+- \[DAS 362\] - Added new endpoints to Acc Issues SDK [\#213](https://github.com/autodesk-platform-services/aps-sdk-net/pull/213) ([srivastavarahull](https://github.com/srivastavarahull))
+
 ## [v5.1.0](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v5.1.0) (2025-10-27)
 
 [Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v5.0.0...v5.1.0)
