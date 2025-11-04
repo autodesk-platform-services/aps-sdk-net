@@ -1,25 +1,27 @@
-public class BaseClient
+namespace Autodesk.SDKManager
 {
-    private IAuthenticationProvider _authenticationProvider;
-
-    public IAuthenticationProvider AuthenticationProvider
+   public class BaseClient
     {
-        get
-        {
-            return _authenticationProvider;
-        }
-        set
-        {
-            _authenticationProvider = value;
-        }
-    }
+        private IAuthenticationProvider _authenticationProvider;
 
-    public BaseClient(IAuthenticationProvider authenticationProvider)
-    {
-        if (authenticationProvider != null)
+        public IAuthenticationProvider AuthenticationProvider
         {
-            _authenticationProvider = authenticationProvider;
+            get
+            {
+                return _authenticationProvider;
+            }
+            set
+            {
+                _authenticationProvider = value;
+            }
         }
 
+        public BaseClient(IAuthenticationProvider authenticationProvider)
+        {
+            if (authenticationProvider != null)
+            {
+                _authenticationProvider = authenticationProvider;
+            }
+        }
     }
 }

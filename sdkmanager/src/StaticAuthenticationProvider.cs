@@ -1,20 +1,20 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-public class StaticAuthenticationProvider : IAuthenticationProvider
+namespace Autodesk.SDKManager
 {
-    private string _accessToken;
-
-    public StaticAuthenticationProvider(string accessToken)
+    public class StaticAuthenticationProvider : IAuthenticationProvider
     {
-        _accessToken = accessToken;
+        private string _accessToken;
+
+        public StaticAuthenticationProvider(string accessToken)
+        {
+            _accessToken = accessToken;
+        }
+
+        public async Task<string> GetAccessToken(IEnumerable<string> scopes = default)
+        {
+            return _accessToken;
+        }
     }
-
-
-    public async Task<string> GetAccessToken(IEnumerable<string> scopes = default)
-    {
-        return _accessToken;
-    }
-
-
 }
