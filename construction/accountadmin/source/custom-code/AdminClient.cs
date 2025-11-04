@@ -52,7 +52,7 @@ namespace Autodesk.Construction.AccountAdmin
                 /// (optional)
                 /// </param>
                 /// <returns>Task of ApiResponse&lt;Project&gt;</returns>
-                public async System.Threading.Tasks.Task<Project> CreateProjectAsync(string accountId, ProjectPayload projectPayload, string acceptLanguage= default(string), Region region= default, string userId= default(string), string accessToken = default, bool throwOnError = true)
+                public async System.Threading.Tasks.Task<Project> CreateProjectAsync(string accountId, ProjectPayload projectPayload, string acceptLanguage= default(string), Region? region= null, string userId= default(string), string accessToken = default, bool throwOnError = true)
                 {
                         if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
                         {
@@ -89,7 +89,7 @@ namespace Autodesk.Construction.AccountAdmin
                 ///A comma-separated list of the project fields to include in the response. Default value: all fields. (optional)
                 /// </param>
                 /// <returns>Task of ApiResponse&lt;Project&gt;</returns>
-                public async System.Threading.Tasks.Task<Project> GetProjectAsync(string projectId, string acceptLanguage= default(string), Region region= default, string userId= default(string), List<Fields> fields= default(List<Fields>), string accessToken = default, bool throwOnError = true)
+                public async System.Threading.Tasks.Task<Project> GetProjectAsync(string projectId, string acceptLanguage= default(string), Region? region= null, string userId= default(string), List<Fields> fields= default(List<Fields>), string accessToken = default, bool throwOnError = true)
                 {
                         if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
                         {
@@ -123,7 +123,7 @@ namespace Autodesk.Construction.AccountAdmin
                 ///The geographic area where the data is stored. Acceptable values: US, EMEA, AUS, CAN, DEU, IND, JPN, GBR. By default, it is set to US. (optional)
                 /// </param>
                 /// <returns>Task of ApiResponse&lt;ProjectPatch&gt;></returns>
-                public async System.Threading.Tasks.Task<ProjectPatch> CreateProjectImageAsync(string projectId, string accountId, System.IO.Stream body, Region region= default, string accessToken = default, bool throwOnError = true)
+                public async System.Threading.Tasks.Task<ProjectPatch> CreateProjectImageAsync(string projectId, string accountId, System.IO.Stream body, Region? region= null, string accessToken = default, bool throwOnError = true)
                 {
                         if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
                         {
@@ -200,7 +200,7 @@ namespace Autodesk.Construction.AccountAdmin
                 /// </param>
                 /// <returns>Task of ApiResponse&lt;ProjectsPage&gt;</returns>
         
-                public async System.Threading.Tasks.Task<ProjectsPage> GetProjectsAsync(string accountId, string acceptLanguage= default(string), Region region= default, string userId= default(string), List<Fields> fields= default(List<Fields>), List<Classification> filterClassification= default(List<Classification>), List<Platform> filterPlatform= default(List<Platform>), List<Products> filterProducts= default(List<Products>), string filterName= default(string), List<string> filterType= default(List<string>), List<Status> filterStatus= default(List<Status>), string filterBusinessUnitId= default(string), string filterJobNumber= default(string), string filterUpdatedAt= default(string), FilterTextMatch? filterTextMatch= null, List<SortBy> sort= default(List<SortBy>), int? limit= default(int?), int? offset= default(int?), string accessToken = default, bool throwOnError = true)
+                public async System.Threading.Tasks.Task<ProjectsPage> GetProjectsAsync(string accountId, string acceptLanguage= default(string), Region? region= null, string userId= default(string), List<Fields> fields= default(List<Fields>), List<Classification> filterClassification= default(List<Classification>), List<Platform> filterPlatform= default(List<Platform>), List<Products> filterProducts= default(List<Products>), string filterName= default(string), List<string> filterType= default(List<string>), List<Status> filterStatus= default(List<Status>), string filterBusinessUnitId= default(string), string filterJobNumber= default(string), string filterUpdatedAt= default(string), FilterTextMatch? filterTextMatch= null, List<SortBy> sort= default(List<SortBy>), int? limit= default(int?), int? offset= default(int?), string accessToken = default, bool throwOnError = true)
                 {
                         if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
                         {
@@ -232,7 +232,7 @@ namespace Autodesk.Construction.AccountAdmin
                 /// (optional)
                 /// </param>
                 /// <returns>Task of ApiResponse&lt;Company&gt;</returns>
-                public async System.Threading.Tasks.Task<Company> CreateCompanyAsync(string accountId, CompanyPayload companyPayload, Region region= default, string accessToken = default, bool throwOnError = true)
+                public async System.Threading.Tasks.Task<Company> CreateCompanyAsync(string accountId, CompanyPayload companyPayload, Region? region= null, string accessToken = default, bool throwOnError = true)
                 {
                         if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
                         {
@@ -341,7 +341,7 @@ namespace Autodesk.Construction.AccountAdmin
                 ///Comma-separated fields to include in response  id will always be returned Invalid fields will be ignored (optional)
                 /// </param>
                 /// <returns>Task of ApiResponse&lt;List&lt;Company&gt;&gt;</returns>
-                public async System.Threading.Tasks.Task<List<Company>> GetCompaniesAsync(string accountId, Region region= default, int? limit= default(int?), int? offset= default(int?), string sort= default(string), string field= default(string), string accessToken = default, bool throwOnError = true)
+                public async System.Threading.Tasks.Task<List<Company>> GetCompaniesAsync(string accountId, Region? region= null, int? limit= default(int?), int? offset= default(int?), string sort= default(string), string field= default(string), string accessToken = default, bool throwOnError = true)
                 {
                         if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
                         {
@@ -372,7 +372,7 @@ namespace Autodesk.Construction.AccountAdmin
                 ///The geographic area where the data is stored. Acceptable values: US, EMEA, AUS, CAN, DEU, IND, JPN, GBR. By default, it is set to US. (optional)
                 /// </param>
                 /// <returns>Task of ApiResponse&lt;Company&gt;</returns>
-                public async System.Threading.Tasks.Task<Company> GetCompanyAsync(string companyId, string accountId, Region region= default, string accessToken = default, bool throwOnError = true)
+                public async System.Threading.Tasks.Task<Company> GetCompanyAsync(string companyId, string accountId, Region? region= null, string accessToken = default, bool throwOnError = true)
                 {
                         if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
                         {
@@ -416,7 +416,7 @@ namespace Autodesk.Construction.AccountAdmin
                 ///Comma-separated fields to include in response (optional)
                 /// </param>
                 /// <returns>Task of ApiResponse&lt;List&lt;ProjectCompanies&gt;&gt;</returns>
-                public async System.Threading.Tasks.Task<List<ProjectCompanies>> GetProjectCompaniesAsync(string accountId, string projectId, Region region= default, int? limit= default(int?), int? offset= default(int?), string sort= default(string), string field= default(string), string accessToken = default, bool throwOnError = true)
+                public async System.Threading.Tasks.Task<List<ProjectCompanies>> GetProjectCompaniesAsync(string accountId, string projectId, Region? region= null, int? limit= default(int?), int? offset= default(int?), string sort= default(string), string field= default(string), string accessToken = default, bool throwOnError = true)
                 {
                         if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
                         {
@@ -448,7 +448,7 @@ namespace Autodesk.Construction.AccountAdmin
                 /// (optional)
                 /// </param>
                 /// <returns>Task of ApiResponse&lt;CompanyImport&gt;</returns>
-                public async System.Threading.Tasks.Task<CompanyImport> ImportCompaniesAsync(string accountId, Region region= default, List<CompanyPayload> companyPayload= default(List<CompanyPayload>), string accessToken = default, bool throwOnError = true)
+                public async System.Threading.Tasks.Task<CompanyImport> ImportCompaniesAsync(string accountId, Region? region= null, List<CompanyPayload> companyPayload= default(List<CompanyPayload>), string accessToken = default, bool throwOnError = true)
                 {
                         if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
                         {
@@ -482,7 +482,7 @@ namespace Autodesk.Construction.AccountAdmin
                 /// (optional)
                 /// </param>
                 /// <returns>Task of ApiResponse&lt;Company&gt;</returns>
-                public async System.Threading.Tasks.Task<Company> PatchCompanyDetailsAsync(string companyId, string accountId, CompanyPatchPayload companyPatchPayload, Region region= default, string accessToken = default, bool throwOnError = true)
+                public async System.Threading.Tasks.Task<Company> PatchCompanyDetailsAsync(string companyId, string accountId, CompanyPatchPayload companyPatchPayload, Region? region= null, string accessToken = default, bool throwOnError = true)
                 {
                         if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
                         {
@@ -516,7 +516,7 @@ namespace Autodesk.Construction.AccountAdmin
                 ///The geographic area where the data is stored. Acceptable values: US, EMEA, AUS, CAN, DEU, IND, JPN, GBR. By default, it is set to US. (optional)
                 /// </param>
                 /// <returns>Task of ApiResponse&lt;Company&gt;</returns>
-                public async System.Threading.Tasks.Task<Company> PatchCompanyImageAsync(string companyId, string accountId, System.IO.Stream body, Region region= default, string accessToken = default, bool throwOnError = true)
+                public async System.Threading.Tasks.Task<Company> PatchCompanyImageAsync(string companyId, string accountId, System.IO.Stream body, Region? region= null, string accessToken = default, bool throwOnError = true)
                 {
                         if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
                         {
@@ -569,7 +569,7 @@ namespace Autodesk.Construction.AccountAdmin
                 ///Comma-separated fields to include in response (optional)
                 /// </param>
                 /// <returns>Task of ApiResponse&lt;List&lt;Company&gt;&gt;</returns>
-                public async System.Threading.Tasks.Task<List<Company>> SearchCompaniesAsync(string accountId, Region region= default, string name= default(string), string trade= default(string), string _operator= default(string), bool? partial= default(bool?), int? limit= default(int?), int? offset= default(int?), string sort= default(string), string field= default(string), string accessToken = default, bool throwOnError = true)
+                public async System.Threading.Tasks.Task<List<Company>> SearchCompaniesAsync(string accountId, Region? region= null, string name= default(string), string trade= default(string), string _operator= default(string), bool? partial= default(bool?), int? limit= default(int?), int? offset= default(int?), string sort= default(string), string field= default(string), string accessToken = default, bool throwOnError = true)
                 {
                         if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
                         {
@@ -606,7 +606,7 @@ namespace Autodesk.Construction.AccountAdmin
                 /// (optional)
                 /// </param>
                 /// <returns>Task of ApiResponse&lt;ProjectUserDetails&gt;</returns>
-                public async System.Threading.Tasks.Task<ProjectUserDetails> AssignProjectUserAsync(string projectId, ProjectUserPayload projectUserPayload, string acceptLanguage= default(string), Region region= default, string userId= default(string), string accessToken = default, bool throwOnError = true)
+                public async System.Threading.Tasks.Task<ProjectUserDetails> AssignProjectUserAsync(string projectId, ProjectUserPayload projectUserPayload, string acceptLanguage= default(string), Region? region= null, string userId= default(string), string accessToken = default, bool throwOnError = true)
                 {
                         if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
                         {
@@ -651,7 +651,7 @@ namespace Autodesk.Construction.AccountAdmin
                 ///A comma-separated list of the project fields to include in the response. Default value: all fields. (optional)
                 /// </param>
                 /// <returns>Task of ApiResponse&lt;ProjectUser&gt;</returns>
-                public async System.Threading.Tasks.Task<ProjectUser> GetProjectUserAsync(string projectId, string userId, string acceptLanguage= default(string), Region region= default, string adminUserId= default(string), List<UserFields> fields= default(List<UserFields>), string accessToken = default, bool throwOnError = true)
+                public async System.Threading.Tasks.Task<ProjectUser> GetProjectUserAsync(string projectId, string userId, string acceptLanguage= default(string), Region? region= null, string adminUserId= default(string), List<UserFields> fields= default(List<UserFields>), string accessToken = default, bool throwOnError = true)
                 {
                         if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
                         {
@@ -742,7 +742,7 @@ namespace Autodesk.Construction.AccountAdmin
                 ///The record number that the returned page should start with. When the total number of records exceeds the value of limit, increase the offset value in subsequent requests to continue getting the remaining results. (optional)
                 /// </param>
                 /// <returns>Task of ApiResponse&lt;ProjectUsersPage&gt;</returns>
-                public async System.Threading.Tasks.Task<ProjectUsersPage> GetProjectUsersAsync(string projectId, string acceptLanguage= default(string), Region region= default, string userId= default(string), List<Products> filterProducts= default(List<Products>), string filterName= default(string), string filterEmail= default(string), List<StatusFilter> filterStatus= default(List<StatusFilter>), List<AccessLevels> filterAccessLevels= default(List<AccessLevels>), string filterCompanyId= default(string), string filterCompanyName= default(string), List<string> filterAutodeskId= default(List<string>), List<string> filterId= default(List<string>), string filterRoleId= default(string), List<string> filterRoleIds= default(List<string>), List<UserSortBy> sort= default(List<UserSortBy>), List<UserFields> fields= default(List<UserFields>), List<OrFilters> orFilters= default(List<OrFilters>), FilterTextMatch? filterTextMatch= null, int? limit= default(int?), int? offset= default(int?), string accessToken = default, bool throwOnError = true)
+                public async System.Threading.Tasks.Task<ProjectUsersPage> GetProjectUsersAsync(string projectId, string acceptLanguage= default(string), Region? region= null, string userId= default(string), List<Products> filterProducts= default(List<Products>), string filterName= default(string), string filterEmail= default(string), List<StatusFilter> filterStatus= default(List<StatusFilter>), List<AccessLevels> filterAccessLevels= default(List<AccessLevels>), string filterCompanyId= default(string), string filterCompanyName= default(string), List<string> filterAutodeskId= default(List<string>), List<string> filterId= default(List<string>), string filterRoleId= default(string), List<string> filterRoleIds= default(List<string>), List<UserSortBy> sort= default(List<UserSortBy>), List<UserFields> fields= default(List<UserFields>), List<OrFilters> orFilters= default(List<OrFilters>), FilterTextMatch? filterTextMatch= null, int? limit= default(int?), int? offset= default(int?), string accessToken = default, bool throwOnError = true)
                 {
                         if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
                         {
@@ -779,7 +779,7 @@ namespace Autodesk.Construction.AccountAdmin
                 /// (optional)
                 /// </param>
                 /// <returns>Task of ApiResponse&lt;ProjectUsersImport&gt;</returns>
-                public async System.Threading.Tasks.Task<ProjectUsersImport> ImportProjectUsersAsync(string projectId, ProjectUsersImportPayload projectUsersImportPayload, string acceptLanguage= default(string), Region region= default, string userId= default(string), string accessToken = default, bool throwOnError = true)
+                public async System.Threading.Tasks.Task<ProjectUsersImport> ImportProjectUsersAsync(string projectId, ProjectUsersImportPayload projectUsersImportPayload, string acceptLanguage= default(string), Region? region= null, string userId= default(string), string accessToken = default, bool throwOnError = true)
                 {
                         if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
                         {
@@ -818,7 +818,7 @@ namespace Autodesk.Construction.AccountAdmin
                 ///Note that this header is not relevant for Account Admin GET endpoints. The ID of a user on whose behalf your API request is acting. Required if you’re using a 2-legged authentication context, which must be 2-legged OAuth2 security with user impersonation.  Your app has access to all users specified by the administrator in the SaaS integrations UI. Provide this header value to identify the user to be affected by the request.  You can use either the user’s ACC ID (id), or their Autodesk ID (autodeskId). (optional)
                 /// </param>           
                 /// <returns>Task of HttpResponseMessage</returns>
-                public async System.Threading.Tasks.Task<HttpResponseMessage> RemoveProjectUserAsync(string projectId, string userId, string acceptLanguage= default(string), Region region= default, string adminUserId= default(string), string accessToken = default, bool throwOnError = true)
+                public async System.Threading.Tasks.Task<HttpResponseMessage> RemoveProjectUserAsync(string projectId, string userId, string acceptLanguage= default(string), Region? region= null, string adminUserId= default(string), string accessToken = default, bool throwOnError = true)
                 {
                         if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
                         {
@@ -860,7 +860,7 @@ namespace Autodesk.Construction.AccountAdmin
                 /// (optional)
                 /// </param>
                 /// <returns>Task of ApiResponse&lt;ProjectUserDetails&gt;</returns>
-                public async System.Threading.Tasks.Task<ProjectUserDetails> UpdateProjectUserAsync(string projectId, string userId, ProjectUsersUpdatePayload projectUsersUpdatePayload, string acceptLanguage= default(string), Region region= default, string adminUserId= default(string), string accessToken = default, bool throwOnError = true)
+                public async System.Threading.Tasks.Task<ProjectUserDetails> UpdateProjectUserAsync(string projectId, string userId, ProjectUsersUpdatePayload projectUsersUpdatePayload, string acceptLanguage= default(string), Region? region= null, string adminUserId= default(string), string accessToken = default, bool throwOnError = true)
                 {
                         if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
                         {
@@ -891,7 +891,7 @@ namespace Autodesk.Construction.AccountAdmin
                 /// (optional)
                 /// </param>
                 /// <returns>Task of ApiResponse&lt;User&gt;</returns>
-                public async System.Threading.Tasks.Task<User> CreateUserAsync(string accountId, UserPayload userPayload, Region region= default, string accessToken = default, bool throwOnError = true)
+                public async System.Threading.Tasks.Task<User> CreateUserAsync(string accountId, UserPayload userPayload, Region? region= null, string accessToken = default, bool throwOnError = true)
                 {
                         if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
                         {
@@ -922,7 +922,7 @@ namespace Autodesk.Construction.AccountAdmin
                 ///The geographic area where the data is stored. Acceptable values: US, EMEA, AUS, CAN, DEU, IND, JPN, GBR. By default, it is set to US. (optional)
                 /// </param>
                 /// <returns>Task of ApiResponse&lt;User&gt;</returns>                
-                public async System.Threading.Tasks.Task<User> GetUserAsync(string accountId, string userId, Region region= default, string accessToken = default, bool throwOnError = true)
+                public async System.Threading.Tasks.Task<User> GetUserAsync(string accountId, string userId, Region? region= null, string accessToken = default, bool throwOnError = true)
                 {
                         if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
                         {
@@ -962,7 +962,7 @@ namespace Autodesk.Construction.AccountAdmin
                 ///Comma-separated fields to include in response (optional)
                 /// </param>
                 /// <returns>Task of ApiResponse&lt;List&lt;User&gt;&gt;</returns>
-                public async System.Threading.Tasks.Task<List<User>> GetUsersAsync(string accountId, Region region= default, int? limit= default(int?), int? offset= default(int?), string sort= default(string), string field= default(string), string accessToken = default, bool throwOnError = true)
+                public async System.Threading.Tasks.Task<List<User>> GetUsersAsync(string accountId, Region? region= null, int? limit= default(int?), int? offset= default(int?), string sort= default(string), string field= default(string), string accessToken = default, bool throwOnError = true)
                 {
                         if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
                         {
@@ -993,7 +993,7 @@ namespace Autodesk.Construction.AccountAdmin
                 /// (optional)
                 /// </param>
                 /// <returns>Task of ApiResponse&lt;UserImport&gt;</returns>
-                public async System.Threading.Tasks.Task<UserImport> ImportUsersAsync(string accountId, Region region= default, List<UserPayload> userPayload= default(List<UserPayload>), string accessToken = default, bool throwOnError = true)
+                public async System.Threading.Tasks.Task<UserImport> ImportUsersAsync(string accountId, Region? region= null, List<UserPayload> userPayload= default(List<UserPayload>), string accessToken = default, bool throwOnError = true)
                 {
                         if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
                         {
@@ -1027,7 +1027,7 @@ namespace Autodesk.Construction.AccountAdmin
                 /// (optional)
                 /// </param>
                 /// <returns>Task of ApiResponse&lt;User&gt;</returns>
-                public async System.Threading.Tasks.Task<User> PatchUserDetailsAsync(string accountId, string userId, UserPatchPayload userPatchPayload, Region region= default, string accessToken = default, bool throwOnError = true)
+                public async System.Threading.Tasks.Task<User> PatchUserDetailsAsync(string accountId, string userId, UserPatchPayload userPatchPayload, Region? region= null, string accessToken = default, bool throwOnError = true)
                 {
                         if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
                         {
@@ -1083,7 +1083,7 @@ namespace Autodesk.Construction.AccountAdmin
                 /// </param>
                 /// <returns>Task of ApiResponse&lt;List&lt;User&gt;&gt;</returns>
                 
-                public async System.Threading.Tasks.Task<List<User>> SearchUsersAsync(string accountId, Region region= default, string name= default(string), string email= default(string), string companyName= default(string), string _operator= default(string), bool? partial= default(bool?), int? limit= default(int?), int? offset= default(int?), string sort= default(string), string field= default(string), string accessToken = default, bool throwOnError = true)
+                public async System.Threading.Tasks.Task<List<User>> SearchUsersAsync(string accountId, Region? region= null, string name= default(string), string email= default(string), string companyName= default(string), string _operator= default(string), bool? partial= default(bool?), int? limit= default(int?), int? offset= default(int?), string sort= default(string), string field= default(string), string accessToken = default, bool throwOnError = true)
                 {
                         if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
                         {
@@ -1232,7 +1232,7 @@ namespace Autodesk.Construction.AccountAdmin
                 /// (optional)
                 /// </param>
                 /// <returns>Task of ApiResponse&lt;BusinessUnits&gt;</returns>                
-                public async System.Threading.Tasks.Task<BusinessUnits> CreateBusinessUnitsAsync(string accountId, Region region= default, BusinessUnitsPayload businessUnitsPayload= default(BusinessUnitsPayload), string accessToken = default, bool throwOnError = true)
+                public async System.Threading.Tasks.Task<BusinessUnits> CreateBusinessUnitsAsync(string accountId, Region? region= null, BusinessUnitsPayload businessUnitsPayload= default(BusinessUnitsPayload), string accessToken = default, bool throwOnError = true)
                 {
                         if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
                         {
@@ -1260,7 +1260,7 @@ namespace Autodesk.Construction.AccountAdmin
                 ///The geographic area where the data is stored. Acceptable values: US, EMEA, AUS, CAN, DEU, IND, JPN, GBR. By default, it is set to US. (optional)
                 /// </param>
                 /// <returns>Task of ApiResponse&lt;BusinessUnits&gt;</returns>        
-                public async System.Threading.Tasks.Task<BusinessUnits> GetBusinessUnitsAsync(string accountId, Region region= default, string accessToken = default, bool throwOnError = true)
+                public async System.Threading.Tasks.Task<BusinessUnits> GetBusinessUnitsAsync(string accountId, Region? region= null, string accessToken = default, bool throwOnError = true)
                 {
                         if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
                         {
@@ -1336,7 +1336,7 @@ namespace Autodesk.Construction.AccountAdmin
                 ///The record number to start returning results from, used for pagination. For example, if limit=20 and offset=20, the request retrieves the second page of results. (optional)
                 /// </param>
                 /// <returns>Task of ApiResponse&lt;UserProjectsPage&gt;></returns>
-                public async System.Threading.Tasks.Task<UserProjectsPage> GetUserProjectsAsync(string accountId, string userId, Region region= default, string adminUserId= default(string), List<string> filterId= default(List<string>), List<UserProjectFields> fields= default(List<UserProjectFields>), List<Classification> filterClassification= default(List<Classification>), string filterName= default(string), List<Platform> filterPlatform= default(List<Platform>), List<Status> filterStatus= default(List<Status>), List<string> filterType= default(List<string>), string filterJobNumber= default(string), string filterUpdatedAt= default(string), List<FilterUserProjectsAccessLevels> filterAccessLevels= default(List<FilterUserProjectsAccessLevels>), FilterTextMatch? filterTextMatch= null, List<UserProjectSortBy> sort= default(List<UserProjectSortBy>), int? limit= default(int?), int? offset= default(int?), string accessToken = null, bool throwOnError = true)
+                public async System.Threading.Tasks.Task<UserProjectsPage> GetUserProjectsAsync(string accountId, string userId, Region? region= null, string adminUserId= default(string), List<string> filterId= default(List<string>), List<UserProjectFields> fields= default(List<UserProjectFields>), List<Classification> filterClassification= default(List<Classification>), string filterName= default(string), List<Platform> filterPlatform= default(List<Platform>), List<Status> filterStatus= default(List<Status>), List<string> filterType= default(List<string>), string filterJobNumber= default(string), string filterUpdatedAt= default(string), List<FilterUserProjectsAccessLevels> filterAccessLevels= default(List<FilterUserProjectsAccessLevels>), FilterTextMatch? filterTextMatch= null, List<UserProjectSortBy> sort= default(List<UserProjectSortBy>), int? limit= default(int?), int? offset= default(int?), string accessToken = null, bool throwOnError = true)
                 {
                         if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
                         {
