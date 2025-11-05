@@ -6,12 +6,11 @@
     <Authors>Autodesk Platform Services SDK Team</Authors>
     <PackageDescription>Client SDK for Construction Account Admin API</PackageDescription>
     <PackageReleaseNotes>
-    • Added support for `accounts/{accountId}/users/{userId}/products` endpoint.
-    • Added support for `accounts/{accountId}/users/{userId}/roles` endpoint.
+    • Added support for auto routing endpoints when region is not specified.
     </PackageReleaseNotes>
     <Copyright>Autodesk Inc.</Copyright>
     <PackageId>Autodesk.Construction.AccountAdmin</PackageId>
-    <PackageVersion>3.1.0-beta1</PackageVersion>
+    <PackageVersion>3.1.0-beta2</PackageVersion>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/autodesk-platform-services/aps-sdk-net.git</RepositoryUrl>
