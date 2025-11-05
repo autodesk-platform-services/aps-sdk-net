@@ -1,5 +1,14 @@
 # Changelog
 
+## [v5.2.1](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v5.2.1) (2025-11-05)
+
+[Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v5.2.0...v5.2.1)
+
+**Fixed bugs:**
+
+- \[DAS 367\] - Add Support for Regions Auto-Routing [\#222](https://github.com/autodesk-platform-services/aps-sdk-net/pull/222) ([Arrotech](https://github.com/Arrotech))
+- \[DAS 368\] - Added Support For Auto Routing For Regions [\#221](https://github.com/autodesk-platform-services/aps-sdk-net/pull/221) ([srivastavarahull](https://github.com/srivastavarahull))
+
 ## [v5.2.0](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v5.2.0) (2025-10-29)
 
 [Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v5.1.0...v5.2.0)
