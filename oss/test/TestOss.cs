@@ -10,9 +10,9 @@ public class TestOss
 {
 	private static OssClient _ossClient = null!;
 
-	string? token = Environment.GetEnvironmentVariable("TWO_LEGGED_ACCESS_TOKEN");
-	string? bucketKey = Environment.GetEnvironmentVariable("BUCKET_KEY");
-	string? objectKey = Environment.GetEnvironmentVariable("OBJECT_KEY");
+	string? token = "eyJhbGciOiJSUzI1NiIsImtpZCI6IlZiakZvUzhQU3lYODQyMV95dndvRUdRdFJEa19SUzI1NiIsInBpLmF0bSI6ImFzc2MifQ.eyJzY29wZSI6WyJidWNrZXQ6Y3JlYXRlIiwiYnVja2V0OnJlYWQiLCJkYXRhOmNyZWF0ZSIsImRhdGE6cmVhZCIsImRhdGE6d3JpdGUiLCJ2aWV3YWJsZXM6cmVhZCJdLCJjbGllbnRfaWQiOiJvd0dnM2FCOERBMUllUFdWQ0VJcGN0WnZWZUhKR2o2NUl4YVJCSExZbVdreVBzbGgiLCJpc3MiOiJodHRwczovL2RldmVsb3Blci5hcGkuYXV0b2Rlc2suY29tIiwiYXVkIjoiaHR0cHM6Ly9hdXRvZGVzay5jb20iLCJqdGkiOiI3eWlFbnhhQmptV2ZiWEhWRm9ad0RPdjhBeU5sZ1c2bHJOc0dsUkhWcHdoanZQRUdRRjFKOExyUHdwMWJBcFBzIiwiZXhwIjoxNzYyNDM0NzQ2fQ.bDjwkWG4Xl3TfHikrP7R4NgpOVYUuzfnRKDf5B31yzoUvDTK-aho7X0tZ_t4_wpEo-5Xjx9FGShduRjY3AFMGrom6c6lgoZZR-ZQWqMzpLqK7xazi7R9GOfNnLAp6A4cQ_qcIv0CEQnPqzWoVspLtxUpFRPVgHrcaFWgIWJFl4t2UZHb8MofJb6erEM8eEc4tRcfystTvA11H_SGYOAlgkfsKZmmW65iSntXbaWpOYDe8Tupf_iOk39MigW7dUgxTRuSuNFdayadav1NgX0A2YlEUuFWeTGLOEzIhQxrRjPjiA3wO1kPnVIflucVyaaoyEafGUSoGubHH5f4YN940g";
+	string? bucketKey = "test-owgg3ab8da1iepwvceipctzvvehjgj65ixarbhlymwkypslh";
+	string? objectKey = "Test Part 25.ipt";
 	string? newObjName = Environment.GetEnvironmentVariable("NEW_OBJ_NAME");
 	string? sourceToUpload = Environment.GetEnvironmentVariable("SOURCE_TO_UPLOAD");
 	string? filePath = Environment.GetEnvironmentVariable("FILE_PATH");
@@ -117,7 +117,7 @@ public class TestOss
 			accessToken: token,
 			bucketKey: bucketKey,
 			objectKey: objectKey);
-		Assert.IsTrue(objectFullDetails.ObjectId.Equals($"urn:adsk.objects:os.object:{bucketKey}/{objectKey}"));
+		Assert.IsTrue(objectFullDetails.ObjectId.Equals($"urn:adsk.objects:os.object:{bucketKey}/{Uri.EscapeDataString(objectKey!)}"));
 	}
 
 	[TestMethod]
