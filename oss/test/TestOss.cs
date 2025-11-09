@@ -85,7 +85,7 @@ public class TestOss
 			objectKey: objectKey,
 			sourceToUpload: sourceToUpload,
 			cancellationToken: CancellationToken.None);
-		Assert.IsTrue(objectDetails.ObjectId.Equals($"urn:adsk.objects:os.object:{bucketKey}/{objectKey}"));
+		Assert.IsTrue(objectDetails.ObjectKey.Equals(objectKey));
 	}
 
 	[TestMethod]
@@ -96,7 +96,7 @@ public class TestOss
 			bucketKey: bucketKey,
 			objectKey: objectKey,
 			newObjName: newObjName);
-		Assert.IsTrue(objectDetails.ObjectId.Equals($"urn:adsk.objects:os.object:{bucketKey}/{newObjName}"));
+		Assert.IsTrue(objectDetails.ObjectKey.Equals(newObjName));
 	}
 
 	[TestMethod]
@@ -117,7 +117,7 @@ public class TestOss
 			accessToken: token,
 			bucketKey: bucketKey,
 			objectKey: objectKey);
-		Assert.IsTrue(objectFullDetails.ObjectId.Equals($"urn:adsk.objects:os.object:{bucketKey}/{Uri.EscapeDataString(objectKey!)}"));
+		Assert.IsTrue(objectFullDetails.ObjectKey.Equals(objectKey));
 	}
 
 	[TestMethod]
