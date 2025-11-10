@@ -22,7 +22,6 @@ public class TestOss
 	string? xAdsMetaContentDisposition = Environment.GetEnvironmentVariable("XADS_META_CONTENT_DISPOSITION");
 	string? xAdsMetaContentEncoding = Environment.GetEnvironmentVariable("XADS_META_CONTENT_ENCODING");
 	string? xAdsMetaCacheControl = Environment.GetEnvironmentVariable("XADS_META_CACHE_CONTROL");
-	string? xAdsUserDefinedMetadata = Environment.GetEnvironmentVariable("XADS_USER_DEFINED_METADATA");
 
 [ClassInitialize]
 	public static void ClassInitialize(TestContext testContext)
