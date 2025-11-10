@@ -93,8 +93,7 @@ public class TestOss
 			xAdsMetaContentType: xAdsMetaContentType,
 			xAdsMetaContentDisposition: xAdsMetaContentDisposition,
 			xAdsMetaContentEncoding: xAdsMetaContentEncoding,
-			xAdsMetaCacheControl: xAdsMetaCacheControl,
-			xAdsUserDefinedMetadata: xAdsUserDefinedMetadata);
+			xAdsMetaCacheControl: xAdsMetaCacheControl);
 		Assert.IsTrue(objectDetails.ObjectId.Equals($"urn:adsk.objects:os.object:{bucketKey}/{objectKey}"));
 	}
 
@@ -111,8 +110,7 @@ public class TestOss
 			xAdsMetaContentType: xAdsMetaContentType,
 			xAdsMetaContentDisposition: xAdsMetaContentDisposition,
 			xAdsMetaContentEncoding: xAdsMetaContentEncoding,
-			xAdsMetaCacheControl: xAdsMetaCacheControl,
-			xAdsUserDefinedMetadata: xAdsUserDefinedMetadata);
+			xAdsMetaCacheControl: xAdsMetaCacheControl);
 		Assert.IsTrue(objectDetails.ObjectId.Equals($"urn:adsk.objects:os.object:{bucketKey}/{objectKey}"));
 	}
 
