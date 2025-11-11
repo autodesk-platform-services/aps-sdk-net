@@ -1410,7 +1410,7 @@ namespace Autodesk.DataManagement.Http
                     string projectId,
                     string folderId,
                     List<(string fieldName, ComparisonTypes? operatorType, List<string> values)> filters = null,
-                    int pageNumber = 1,
+                    int pageNumber = 0,
                     string accessToken = null,
                     bool throwOnError = true)
         {
