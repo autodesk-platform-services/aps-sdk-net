@@ -383,7 +383,7 @@ namespace Autodesk.Construction.AccountAdmin.Model
         /// <value>
         ///The ID of the project that was used as a template to create this project.
         /// </value>
-        [DataMember(Name= "templateId", EmitDefaultValue=false)]
+        [DataMember(Name="templateId", EmitDefaultValue=false)]
         public string? TemplateId { get; set; }
 
         /// <summary>
