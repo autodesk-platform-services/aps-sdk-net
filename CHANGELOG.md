@@ -1,18 +1,14 @@
 # Changelog
 
-## [Unreleased](https://github.com/autodesk-platform-services/aps-sdk-net/tree/HEAD)
+## [v5.3.1](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v5.3.1) (2025-12-03)
 
-[Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v5.3.1...HEAD)
+[Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v5.2.1...v5.3.1)
 
 **Closed issues:**
 
 - \[OssClient\] How to GetAllObjectsAsync using Next [\#226](https://github.com/autodesk-platform-services/aps-sdk-net/issues/226)
 - Why `IAuthenticationProvider` and `StaticAuthenticationProvider` has not namespace? [\#220](https://github.com/autodesk-platform-services/aps-sdk-net/issues/220)
 - DataManagement method GetItemAsync ignores parameter "includePathInProject" [\#201](https://github.com/autodesk-platform-services/aps-sdk-net/issues/201)
-
-## [v5.3.1](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v5.3.1) (2025-12-03)
-
-[Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v5.2.1...v5.3.1)
 
 **Implemented enhancements:**
 
