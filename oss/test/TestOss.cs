@@ -18,8 +18,13 @@ public class TestOss
 	string? filePath = Environment.GetEnvironmentVariable("FILE_PATH");
 	// Signed Url Format: "https://developer.api.autodesk.com/oss/v2/signedresources/<hash>?region=US"
 	string? signedUrl = Environment.GetEnvironmentVariable("SIGNED_URL");
+	string? xAdsMetaContentType = Environment.GetEnvironmentVariable("XADS_META_CONTENT_TYPE");
+	string? xAdsMetaContentDisposition = Environment.GetEnvironmentVariable("XADS_META_CONTENT_DISPOSITION");
+	string? xAdsMetaContentEncoding = Environment.GetEnvironmentVariable("XADS_META_CONTENT_ENCODING");
+	string? xAdsMetaCacheControl = Environment.GetEnvironmentVariable("XADS_META_CACHE_CONTROL");
+	string? xAdsUserDefinedMetadata = Environment.GetEnvironmentVariable("XADS_USER_DEFINED_METADATA");
 
-	[ClassInitialize]
+[ClassInitialize]
 	public static void ClassInitialize(TestContext testContext)
 	{
 		var sdkManager = SdkManagerBuilder
