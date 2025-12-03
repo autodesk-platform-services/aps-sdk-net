@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
-		<RootNamespace>Autodesk.Construction.Issues.Test</RootNamespace>
+		<RootNamespace>Autodesk.Construction.AccountAdmin.Test</RootNamespace>
 		<IsPackable>false</IsPackable>
 	</PropertyGroup>
 

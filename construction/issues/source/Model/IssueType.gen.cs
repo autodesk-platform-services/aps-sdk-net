@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Construction.Issues
  *
@@ -34,35 +34,35 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Construction.Issues.Model
 {
     /// <summary>
-    /// TypesPageResultsSubtypes
+    /// IssueType
     /// </summary>
     [DataContract]
-    public partial class TypesPageResultsSubtypes
+    public partial class IssueType
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="TypesPageResultsSubtypes" /> class.
+        /// Initializes a new instance of the <see cref="IssueType" /> class.
         /// </summary>
-        public TypesPageResultsSubtypes()
+        public IssueType()
         {
         }
 
         /// <summary>
-        ///The ID of the issue subtype.
+        ///The ID of the issue type.
         /// </summary>
         /// <value>
-        ///The ID of the issue subtype.
+        ///The ID of the issue type.
         /// </value>
         [DataMember(Name = "id", EmitDefaultValue = false)]
         public string Id { get; set; }
 
         /// <summary>
-        ///The ID of the parent issue type.
+        ///Not relevant
         /// </summary>
         /// <value>
-        ///The ID of the parent issue type.
+        ///Not relevant
         /// </value>
-        [DataMember(Name = "issueTypeId", EmitDefaultValue = false)]
-        public string IssueTypeId { get; set; }
+        [DataMember(Name = "containerId", EmitDefaultValue = false)]
+        public string ContainerId { get; set; }
 
         /// <summary>
         ///Max length: 250
@@ -72,15 +72,6 @@ namespace Autodesk.Construction.Issues.Model
         /// </value>
         [DataMember(Name = "title", EmitDefaultValue = false)]
         public string Title { get; set; }
-
-        /// <summary>
-        ///3 chars pin label.
-        /// </summary>
-        /// <value>
-        ///3 chars pin label.
-        /// </value>
-        [DataMember(Name = "code", EmitDefaultValue = false)]
-        public string Code { get; set; }
 
         /// <summary>
         ///States whether the issue type is active.
@@ -106,15 +97,6 @@ namespace Autodesk.Construction.Issues.Model
         /// <value>
         ///Not relevant
         /// </value>
-        [DataMember(Name = "isReadOnly", EmitDefaultValue = false)]
-        public bool? IsReadOnly { get; set; }
-
-        /// <summary>
-        ///Not relevant
-        /// </summary>
-        /// <value>
-        ///Not relevant
-        /// </value>
         [DataMember(Name = "permittedActions", EmitDefaultValue = false)]
         public List<string> PermittedActions { get; set; }
 
@@ -126,6 +108,24 @@ namespace Autodesk.Construction.Issues.Model
         /// </value>
         [DataMember(Name = "permittedAttributes", EmitDefaultValue = false)]
         public List<string> PermittedAttributes { get; set; }
+
+        /// <summary>
+        ///A list of subtypes of the specific issue type.
+        /// </summary>
+        /// <value>
+        ///A list of subtypes of the specific issue type.
+        /// </value>
+        [DataMember(Name = "subtypes", EmitDefaultValue = false)]
+        public List<IssueTypeSubtypes> Subtypes { get; set; }
+
+        /// <summary>
+        ///Not relevant
+        /// </summary>
+        /// <value>
+        ///Not relevant
+        /// </value>
+        [DataMember(Name = "statusSet", EmitDefaultValue = false)]
+        public string StatusSet { get; set; }
 
         /// <summary>
         ///The unique identifier of the user who created the issue type.

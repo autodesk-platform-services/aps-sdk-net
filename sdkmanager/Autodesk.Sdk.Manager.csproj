@@ -4,10 +4,12 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Autodesk Platform Services SDK Team</Authors>
     <PackageDescription>Common SDK Manager to support the various APS SDK's.</PackageDescription>
-    <PackageReleaseNotes>Update Forge Core dependency to 4.1.1</PackageReleaseNotes>
+    <PackageReleaseNotes>
+    • Added missing namespace declarations.
+    </PackageReleaseNotes>
     <Copyright>Autodesk Inc.</Copyright>
     <PackageId>Autodesk.SDKManager</PackageId>
-    <PackageVersion>1.1.2</PackageVersion>
+    <PackageVersion>1.1.3</PackageVersion>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/autodesk-platform-services/aps-sdk-net.git</RepositoryUrl>

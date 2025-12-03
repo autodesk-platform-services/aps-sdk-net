@@ -6,11 +6,11 @@
     <Authors>Autodesk Platform Services SDK Team</Authors>
     <PackageDescription>Client SDK for Data Management OSS API</PackageDescription>
     <PackageReleaseNotes>
-    • Added region support for UK, Canada, Germany, India and Japan. 
+    • Added XadsMeta properties to Upload function. 
     </PackageReleaseNotes>
     <Copyright>Autodesk Inc.</Copyright>
     <PackageId>Autodesk.Oss</PackageId>
-    <PackageVersion>2.2.3</PackageVersion>
+    <PackageVersion>2.3.3</PackageVersion>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/autodesk-platform-services/aps-sdk-net.git</RepositoryUrl> 

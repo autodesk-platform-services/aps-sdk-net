@@ -1,12 +1,77 @@
 # Changelog
 
+## [v5.3.1](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v5.3.1) (2025-12-03)
+
+[Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v5.2.1...v5.3.1)
+
+**Closed issues:**
+
+- \[OssClient\] How to GetAllObjectsAsync using Next [\#226](https://github.com/autodesk-platform-services/aps-sdk-net/issues/226)
+- Why `IAuthenticationProvider` and `StaticAuthenticationProvider` has not namespace? [\#220](https://github.com/autodesk-platform-services/aps-sdk-net/issues/220)
+- DataManagement method GetItemAsync ignores parameter "includePathInProject" [\#201](https://github.com/autodesk-platform-services/aps-sdk-net/issues/201)
+
+**Implemented enhancements:**
+
+- \[DAS 358\] - Added XadsMeta properties to Upload function [\#209](https://github.com/autodesk-platform-services/aps-sdk-net/pull/209) ([srivastavarahull](https://github.com/srivastavarahull))
+
+**Fixed bugs:**
+
+- \[DAS 369\] - Added Missing Namespace in Sdkmanager [\#230](https://github.com/autodesk-platform-services/aps-sdk-net/pull/230) ([srivastavarahull](https://github.com/srivastavarahull))
+- \[DAS 359\] - Add pathInProject param [\#211](https://github.com/autodesk-platform-services/aps-sdk-net/pull/211) ([Arrotech](https://github.com/Arrotech))
+
+**Merged pull requests:**
+
+- Merging Tyler's changes to Contributing , Readme and Oss Test cases [\#232](https://github.com/autodesk-platform-services/aps-sdk-net/pull/232) ([sajith-subramanian](https://github.com/sajith-subramanian))
+- Fix typos in CONTRIBUTING.md [\#229](https://github.com/autodesk-platform-services/aps-sdk-net/pull/229) ([tylerwarner33](https://github.com/tylerwarner33))
+- Enhance badging for NuGet packages on README. [\#228](https://github.com/autodesk-platform-services/aps-sdk-net/pull/228) ([tylerwarner33](https://github.com/tylerwarner33))
+- Fix 'TestOss' to check 'ObjectKey' instead of 'ObjectId' [\#227](https://github.com/autodesk-platform-services/aps-sdk-net/pull/227) ([tylerwarner33](https://github.com/tylerwarner33))
+- \[AUTO\]: Update CHANGELOG [\#225](https://github.com/autodesk-platform-services/aps-sdk-net/pull/225) ([sajith-subramanian](https://github.com/sajith-subramanian))
+- Keep Main branch updated with development [\#224](https://github.com/autodesk-platform-services/aps-sdk-net/pull/224) ([sajith-subramanian](https://github.com/sajith-subramanian))
+- Add Missing Namespace Declarations To SDK Manager. [\#223](https://github.com/autodesk-platform-services/aps-sdk-net/pull/223) ([tylerwarner33](https://github.com/tylerwarner33))
+- Correct Test 'RootNamespace' to 'Autodesk.Construction.AccountAdmin.Test' [\#219](https://github.com/autodesk-platform-services/aps-sdk-net/pull/219) ([tylerwarner33](https://github.com/tylerwarner33))
+- \[AUTO\]: Update CHANGELOG [\#218](https://github.com/autodesk-platform-services/aps-sdk-net/pull/218) ([sajith-subramanian](https://github.com/sajith-subramanian))
+- Keep Main branch updated with development changes [\#217](https://github.com/autodesk-platform-services/aps-sdk-net/pull/217) ([sajith-subramanian](https://github.com/sajith-subramanian))
+- \[AUTO\]: Update CHANGELOG [\#216](https://github.com/autodesk-platform-services/aps-sdk-net/pull/216) ([sajith-subramanian](https://github.com/sajith-subramanian))
+- Keep Main branch updated with changes for ACC Admin [\#215](https://github.com/autodesk-platform-services/aps-sdk-net/pull/215) ([sajith-subramanian](https://github.com/sajith-subramanian))
+- Update Changelog [\#207](https://github.com/autodesk-platform-services/aps-sdk-net/pull/207) ([sajith-subramanian](https://github.com/sajith-subramanian))
+- Update main with ACC Issues 4.0.0-beta changes [\#206](https://github.com/autodesk-platform-services/aps-sdk-net/pull/206) ([sajith-subramanian](https://github.com/sajith-subramanian))
+- Update Main branch with changes for ACC Issues and WebHooks [\#205](https://github.com/autodesk-platform-services/aps-sdk-net/pull/205) ([sajith-subramanian](https://github.com/sajith-subramanian))
+- Add .editorconfig file & include solution-level files within the solution. [\#203](https://github.com/autodesk-platform-services/aps-sdk-net/pull/203) ([tylerwarner33](https://github.com/tylerwarner33))
+- Add xAdsMeta properties To OSS Object Upload Methods [\#202](https://github.com/autodesk-platform-services/aps-sdk-net/pull/202) ([tylerwarner33](https://github.com/tylerwarner33))
+
+## [v5.2.1](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v5.2.1) (2025-11-05)
+
+[Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v5.2.0...v5.2.1)
+
+**Fixed bugs:**
+
+- \[DAS 367\] - Add Support for Regions Auto-Routing [\#222](https://github.com/autodesk-platform-services/aps-sdk-net/pull/222) ([Arrotech](https://github.com/Arrotech))
+- \[DAS 368\] - Added Support For Auto Routing For Regions [\#221](https://github.com/autodesk-platform-services/aps-sdk-net/pull/221) ([srivastavarahull](https://github.com/srivastavarahull))
+
+## [v5.2.0](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v5.2.0) (2025-10-29)
+
+[Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v5.1.0...v5.2.0)
+
+**Implemented enhancements:**
+
+- \[DAS 363\] - Fixed Model Naming for Issues Sdk [\#214](https://github.com/autodesk-platform-services/aps-sdk-net/pull/214) ([srivastavarahull](https://github.com/srivastavarahull))
+- \[DAS 362\] - Added new endpoints to Acc Issues SDK [\#213](https://github.com/autodesk-platform-services/aps-sdk-net/pull/213) ([srivastavarahull](https://github.com/srivastavarahull))
+
+## [v5.1.0](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v5.1.0) (2025-10-27)
+
+[Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v5.0.0...v5.1.0)
+
+**Implemented enhancements:**
+
+- \[DAS 360\] - Add New Acc Admin Endpoints [\#212](https://github.com/autodesk-platform-services/aps-sdk-net/pull/212) ([Arrotech](https://github.com/Arrotech))
+
+**Closed issues:**
+
+- Add nuget package for ACC takeoff [\#200](https://github.com/autodesk-platform-services/aps-sdk-net/issues/200)
+
 ## [v5.0.0](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v5.0.0) (2025-09-03)
 
 [Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v4.3.0...v5.0.0)
-
-**Breaking changes:**
-
-- \[DAS 356\] - Fixed custom attribute filtering for Get Issues Endpoint [\#199](https://github.com/autodesk-platform-services/aps-sdk-net/pull/199) ([srivastavarahull](https://github.com/srivastavarahull))
 
 **Closed issues:**
 
@@ -15,6 +80,10 @@
 ## [v4.3.0](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v4.3.0) (2025-09-03)
 
 [Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v4.2.2...v4.3.0)
+
+**Breaking changes:**
+
+- \[DAS 356\] - Fixed custom attribute filtering for Get Issues Endpoint [\#199](https://github.com/autodesk-platform-services/aps-sdk-net/pull/199) ([srivastavarahull](https://github.com/srivastavarahull))
 
 **Implemented enhancements:**
 

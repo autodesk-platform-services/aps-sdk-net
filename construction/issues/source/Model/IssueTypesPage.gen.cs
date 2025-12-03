@@ -34,23 +34,32 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Construction.Issues.Model
 {
     /// <summary>
-    /// The metadata object; only relevant for list custom attributes.
+    /// IssueTypesPage
     /// </summary>
     [DataContract]
-    public partial class AttrDefinitionPageResultsMetadata
+    public partial class IssueTypesPage
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="AttrDefinitionPageResultsMetadata" /> class.
+        /// Initializes a new instance of the <see cref="IssueTypesPage" /> class.
         /// </summary>
-        public AttrDefinitionPageResultsMetadata()
+        public IssueTypesPage()
         {
         }
 
         /// <summary>
-        ///Gets or Sets List
+        ///Gets or Sets Pagination
         /// </summary>
-        [DataMember(Name = "list", EmitDefaultValue = false)]
-        public AttrDefinitionPageResultsMetadataList List { get; set; }
+        [DataMember(Name = "pagination", EmitDefaultValue = false)]
+        public Pagination Pagination { get; set; }
+
+        /// <summary>
+        ///A list of issue type categories.
+        /// </summary>
+        /// <value>
+        ///A list of issue type categories.
+        /// </value>
+        [DataMember(Name = "results", EmitDefaultValue = false)]
+        public List<IssueType> Results { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

@@ -5,10 +5,10 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Authors>Autodesk Platform Services SDK Team</Authors>
     <PackageDescription>Client SDK for Data Management API</PackageDescription>
-    <PackageReleaseNotes>Added region support for UK, Canada, Germany, India and Japan.</PackageReleaseNotes>
+    <PackageReleaseNotes>Added PathInProject property to ItemAttributes model to store the relative path.</PackageReleaseNotes>
     <Copyright>Autodesk Inc.</Copyright>
     <PackageId>Autodesk.DataManagement</PackageId>
-    <PackageVersion>2.1.2</PackageVersion>
+    <PackageVersion>2.1.3</PackageVersion>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/autodesk-platform-services/aps-sdk-net.git</RepositoryUrl>

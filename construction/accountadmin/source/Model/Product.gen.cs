@@ -3,9 +3,9 @@
  *
  * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
- * Construction.Issues
+ * Construction.Account.Admin
  *
- * An issue is an item that is created in ACC for tracking, managing and communicating tasks, problems and other points of concern through to resolution. You can manage different types of issues, such as design, safety, and commissioning. We currently support issues that are associated with a project.
+ * The Account Admin API automates creating and managing projects, assigning and managing project users, and managing member and partner company directories. You can also synchronize data with external systems. 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,35 +31,44 @@ using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace Autodesk.Construction.Issues.Model
+namespace Autodesk.Construction.AccountAdmin.Model
 {
     /// <summary>
-    /// The pagination object.
+    /// A list of ACC products the user is associated with.
     /// </summary>
     [DataContract]
-    public partial class AttrMappingPage
+    public partial class Product 
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="AttrMappingPage" /> class.
+        /// Initializes a new instance of the <see cref="Product" /> class.
         /// </summary>
-        public AttrMappingPage()
+        public Product()
         {
         }
+        
+        /// <summary>
+        ///Gets or Sets Key
+        /// </summary>
+        [DataMember(Name="key", EmitDefaultValue=false)]
+        public string Key { get; set; }
 
         /// <summary>
-        ///Gets or Sets Pagination
+        ///Gets or Sets Icon
         /// </summary>
-        [DataMember(Name = "pagination", EmitDefaultValue = false)]
-        public Pagination Pagination { get; set; }
+        [DataMember(Name="icon", EmitDefaultValue=false)]
+        public string Icon { get; set; }
 
         /// <summary>
-        ///A list of issue attribute mappings.
+        ///Gets or Sets Name
         /// </summary>
-        /// <value>
-        ///A list of issue attribute mappings.
-        /// </value>
-        [DataMember(Name="results", EmitDefaultValue=false)]
-        public List<AttrMapping> Results { get; set; }
+        [DataMember(Name="name", EmitDefaultValue=false)]
+        public string Name { get; set; }
+
+        /// <summary>
+        ///Gets or Sets ProjectIds
+        /// </summary>
+        [DataMember(Name="projectIds", EmitDefaultValue=false)]
+        public List<string> ProjectIds { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

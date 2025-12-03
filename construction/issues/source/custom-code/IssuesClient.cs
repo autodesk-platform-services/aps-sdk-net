@@ -4,13 +4,14 @@ using Autodesk.SDKManager;
 using System.Collections.Generic;
 using System;
 using Autodesk.Forge.Core;
+using System.Net.Http;
 
 namespace Autodesk.Construction.Issues
 {
         public class IssuesClient : BaseClient
         {
 
-
+                public IIssueAttachmentsApi IssueAttachmentsApi { get; }
                 public IIssueAttributeDefinitionsApi IssueAttributeDefinitionsApi { get; }
                 public IIssueAttributeMappingsApi IssueAttributeMappingsApi { get; }
                 public IIssueCommentsApi IssueCommentsApi { get; }
@@ -25,6 +26,7 @@ namespace Autodesk.Construction.Issues
                         {
                                 sdkManager = SdkManagerBuilder.Create().Build();
                         }
+                        this.IssueAttachmentsApi = new IssueAttachmentsApi(sdkManager);
                         this.IssueAttributeDefinitionsApi = new IssueAttributeDefinitionsApi(sdkManager);
                         this.IssueAttributeMappingsApi = new IssueAttributeMappingsApi(sdkManager);
                         this.IssueCommentsApi = new IssueCommentsApi(sdkManager);
@@ -33,6 +35,106 @@ namespace Autodesk.Construction.Issues
                         this.IssuesProfileApi = new IssuesProfileApi(sdkManager);
                         this.IssueTypesApi = new IssueTypesApi(sdkManager);
                 }
+                /// <summary>
+                /// Your POST endpoint
+                /// </summary>
+                /// <remarks>
+                ///Adds attachments to an existing issue.
+                ///
+                ///Links one or more files in Autodesk Docs (uploaded via the Data Management OSS API) to the specified issue.
+                ///
+                ///Note that an issue can have up to 100 attachments. Files can include images, PDFs, or other supported formats.
+                ///
+                ///For more information about uploading attachments, see the Upload Issue Attachment tutorial.
+                /// </remarks>
+                /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+                /// <param name="projectId">
+                ///The ID of the project.
+                /// </param>
+                /// <param name="attachmentsPayload">
+                /// (optional)
+                /// </param>
+                /// <returns>Task of ApiResponse&lt;Attachments&gt;</returns>
+
+                public async System.Threading.Tasks.Task<Attachments> AddAttachmentsAsync(string projectId, AttachmentsPayload attachmentsPayload = default(AttachmentsPayload), string accessToken = null, bool throwOnError = true)
+                {
+                        if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+                        {
+                                throw new Exception("Please provide a valid access token or an authentication provider");
+                        }
+                        else if (String.IsNullOrEmpty(accessToken))
+                        {
+                                accessToken = await this.AuthenticationProvider.GetAccessToken();
+                        }
+                        var response = await this.IssueAttachmentsApi.AddAttachmentsAsync(projectId, attachmentsPayload, accessToken, throwOnError);
+                        return response.Content;
+
+
+                }
+                /// <summary>
+                /// Your DELETE endpoint
+                /// </summary>
+                /// <remarks>
+                ///Deletes a specific attachment from an issue in a project.
+                /// </remarks>
+                /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+                /// <param name="projectId">
+                ///The ID of the project. Use the Data Management API to retrieve the project ID. For more information, see the Retrieve a Project ID tutorial. You need to convert the project ID into a project ID for the ACC API by removing the “b." prefix. For example, a project ID of b.a4be0c34a-4ab7 translates to a project ID of a4be0c34a-4ab7.
+                /// </param>
+                /// <param name="issueId">
+                ///The unique identifier of the issue. To find the ID, call GET issues.
+                /// </param>
+                /// <param name="attachmentId">
+                ///The unique identifier of the attachment. To find the ID, call GET attachments.
+                /// </param>
+
+                /// <returns>Task of HttpResponseMessage</returns>
+                public async System.Threading.Tasks.Task<HttpResponseMessage> DeleteAttachmentAsync(string projectId, string issueId, string attachmentId, string accessToken = null, bool throwOnError = true)
+                {
+                        if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+                        {
+                                throw new Exception("Please provide a valid access token or an authentication provider");
+                        }
+                        else if (String.IsNullOrEmpty(accessToken))
+                        {
+                                accessToken = await this.AuthenticationProvider.GetAccessToken();
+                        }
+                        var response = await this.IssueAttachmentsApi.DeleteAttachmentAsync(projectId, issueId, attachmentId, accessToken, throwOnError);
+                        return response;
+                }
+                /// <summary>
+                /// Your GET endpoint
+                /// </summary>
+                /// <remarks>
+                ///Retrieves all attachments for a specific issue in a project.
+                ///
+                ///For details about retrieving metadata for a specific attachment, see the Retrieve Issue Attachment tutorial.
+                ///
+                ///For details about downloading an attachment, see the Download Issue Attachment tutorial.
+                /// </remarks>
+                /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+                /// <param name="issueId">
+                ///The unique identifier of the issue. To find the ID, call GET issues.
+                /// </param>
+                /// <param name="projectId">
+                ///The ID of the project. Use the Data Management API to retrieve the project ID. For more information, see the Retrieve a Project ID tutorial. You need to convert the project ID into a project ID for the ACC API by removing the “b." prefix. For example, a project ID of b.a4be0c34a-4ab7 translates to a project ID of a4be0c34a-4ab7.
+                /// </param>
+                /// <returns>Task of ApiResponse&lt;Attachments&gt;</returns>
+
+                public async System.Threading.Tasks.Task<Attachments> GetAttachmentsAsync(string projectId, string issueId, string accessToken = null, bool throwOnError = true)
+                {
+                        if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
+                        {
+                                throw new Exception("Please provide a valid access token or an authentication provider");
+                        }
+                        else if (String.IsNullOrEmpty(accessToken))
+                        {
+                                accessToken = await this.AuthenticationProvider.GetAccessToken();
+                        }
+                        var response = await this.IssueAttachmentsApi.GetAttachmentsAsync(projectId, issueId, accessToken, throwOnError);
+                        return response.Content;
+                }
+
 
 
                 /// <summary>
@@ -63,7 +165,7 @@ namespace Autodesk.Construction.Issues
                 /// <param name="filterDataType">Retrieves issue custom attribute definitions with the specified data type. Possible values: list (this corresponds to dropdown in the UI), text, paragraph, numeric. For example, filter[dataType]&#x3D;text,numeric. (optional)</param>
                 /// <returns>Task of ApiResponse<AttrDefinition></returns>
 
-                public async System.Threading.Tasks.Task<AttrDefinitionPage> GetAttributeDefinitionsAsync(string projectId, Region xAdsRegion = default, int? limit = default(int?), int? offset = default(int?), string filterCreatedAt = default(string), string filterUpdatedAt = default(string), string filterDeletedAt = default(string), List<DataType> filterDataType = default(List<DataType>), string accessToken = default, bool throwOnError = true)
+                public async System.Threading.Tasks.Task<AttrDefinitionPage> GetAttributeDefinitionsAsync(string projectId, Region? xAdsRegion = null, int? limit = default(int?), int? offset = default(int?), string filterCreatedAt = default(string), string filterUpdatedAt = default(string), string filterDeletedAt = default(string), List<DataType> filterDataType = default(List<DataType>), string accessToken = default, bool throwOnError = true)
                 {
                         if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
                         {
@@ -107,7 +209,7 @@ namespace Autodesk.Construction.Issues
                 /// <param name="filterMappedItemId">Retrieves issue custom attribute mappings associated with the specified items (project, type, or subtype). Separate multiple values with commas. For example: filter[mappedItemId]&#x3D;18ee5858-cbf1-451a-a525-7c6ff8156775. Note that this does not retrieve inherited custom attribute mappings or custom attribute mappings of descendants. (optional)</param>
                 /// <returns>Task of ApiResponse<AttrMapping></returns>
 
-                public async System.Threading.Tasks.Task<AttrMappingPage> GetAttributeMappingsAsync(string projectId, Region xAdsRegion = default, int? limit = default(int?), int? offset = default(int?), string filterCreatedAt = default(string), string filterUpdatedAt = default(string), string filterDeletedAt = default(string), string filterAttributeDefinitionId = default(string), string filterMappedItemId = default(string), string accessToken = default, bool throwOnError = true)
+                public async System.Threading.Tasks.Task<AttrMappingPage> GetAttributeMappingsAsync(string projectId, Region? xAdsRegion = null, int? limit = default(int?), int? offset = default(int?), string filterCreatedAt = default(string), string filterUpdatedAt = default(string), string filterDeletedAt = default(string), string filterAttributeDefinitionId = default(string), string filterMappedItemId = default(string), string accessToken = default, bool throwOnError = true)
                 {
                         if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
                         {
@@ -143,9 +245,9 @@ namespace Autodesk.Construction.Issues
                 /// </param >
                 /// <param name="contentType">Must be application/json</param>
                 /// <param name="body"> (optional)</param>
-                /// <returns>Task of ApiResponse<CreatedComment></returns>
+                /// <returns>Task of <Comment></returns>
 
-                public async System.Threading.Tasks.Task<Comments> CreateCommentsAsync(string projectId, string issueId, CommentsPayload commentsPayload, Region xAdsRegion = default, string accessToken = default, bool throwOnError = true)
+                public async System.Threading.Tasks.Task<Comment> CreateCommentsAsync(string projectId, string issueId, CommentsPayload commentsPayload, Region? xAdsRegion = null, string accessToken = default, bool throwOnError = true)
                 {
                         if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
                         {
@@ -184,7 +286,7 @@ namespace Autodesk.Construction.Issues
                 /// <param name="sortBy">Sort issue comments by specified fields. Separate multiple values with commas. To sort in descending order add a - (minus sign) before the sort criteria (optional)</param>
                 /// <returns>Task of ApiResponse<Comments></returns>
 
-                public async System.Threading.Tasks.Task<CommentsPage> GetCommentsAsync(string projectId, string issueId, Region xAdsRegion = default, string limit = default(string), string offset = default(string), List<SortBy> sortBy = default(List<SortBy>), string accessToken = default, bool throwOnError = true)
+                public async System.Threading.Tasks.Task<CommentsPage> GetCommentsAsync(string projectId, string issueId, Region? xAdsRegion = null, string limit = default(string), string offset = default(string), List<SortBy> sortBy = default(List<SortBy>), string accessToken = default, bool throwOnError = true)
                 {
                         if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
                         {
@@ -224,7 +326,7 @@ namespace Autodesk.Construction.Issues
                 /// <param name="filterUpdatedAt">Retrieves root cause categories updated at the specified date and time, in one of the following URL-encoded formats: YYYY-MM-DDThh:mm:ss.sz or YYYY-MM-DD. Separate multiple values with commas. (optional)</param>
                 /// <returns>Task of ApiResponse<IssueRootCause></returns>
 
-                public async System.Threading.Tasks.Task<RootCauseCategoriesPage> GetRootCauseCategoriesAsync(string projectId, Region xAdsRegion = default, string include = default(string), int? limit = default(int?), int? offset = default(int?), string filterUpdatedAt = default(string), string accessToken = default, bool throwOnError = true)
+                public async System.Threading.Tasks.Task<RootCauseCategoriesPage> GetRootCauseCategoriesAsync(string projectId, Region? xAdsRegion = null, string include = default(string), int? limit = default(int?), int? offset = default(int?), string filterUpdatedAt = default(string), string accessToken = default, bool throwOnError = true)
                 {
                         if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
                         {
@@ -262,7 +364,7 @@ namespace Autodesk.Construction.Issues
                 /// <param name="issueUpdateRequest"> (optional)</param>
                 /// <returns>Task of ApiResponse<IssueUpdateResponse></returns>
 
-                public async System.Threading.Tasks.Task<Issue> CreateIssueAsync(string projectId, IssuePayload issuePayload, Region xAdsRegion = default, string accessToken = default, bool throwOnError = true)
+                public async System.Threading.Tasks.Task<Issue> CreateIssueAsync(string projectId, IssuePayload issuePayload, Region? xAdsRegion = null, string accessToken = default, bool throwOnError = true)
                 {
                         if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
                         {
@@ -298,7 +400,7 @@ namespace Autodesk.Construction.Issues
                 /// </param >
                 /// <returns>Task of ApiResponse<Issue></returns>
 
-                public async System.Threading.Tasks.Task<Issue> GetIssueDetailsAsync(string projectId, string issueId, Region xAdsRegion = default, string accessToken = default, bool throwOnError = true)
+                public async System.Threading.Tasks.Task<Issue> GetIssueDetailsAsync(string projectId, string issueId, Region? xAdsRegion = null, string accessToken = default, bool throwOnError = true)
                 {
                         if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
                         {
@@ -359,7 +461,7 @@ namespace Autodesk.Construction.Issues
                 /// <param name="fields">Return only specific fields in issue object. Separate multiple values with commas. (optional)</param>
                 /// <returns>Task of ApiResponse<Issues></returns>
 
-                public async System.Threading.Tasks.Task<IssuesPage> GetIssuesAsync(string projectId, Region xAdsRegion = default, List<string> filterId = default(List<string>), List<string> filterIssueTypeId = default(List<string>), List<string> filterIssueSubtypeId = default(List<string>), string filterStatus = default(string), List<string> filterLinkedDocumentUrn = default(List<string>), string filterDueDate = default(string), string filterStartDate = default(string), bool? filterDeleted = default(bool?), string filterCreatedAt = default(string), List<string> filterCreatedBy = default(List<string>), string filterUpdatedAt = default(string), List<string> filterUpdatedBy = default(List<string>), List<string> filterAssignedTo = default(List<string>), List<string> filterRootCauseId = default(List<string>), List<string> filterLocationId = default(List<string>), List<string> filterSubLocationId = default(List<string>), List<string> filterClosedBy = default(List<string>), string filterClosedAt = default(string), string filterSearch = default(string), int? filterDisplayId = default(int?), string filterAssignedToType = default(string), Dictionary<string, List<string>> filterCustomAttributes = default(Dictionary<string, List<string>>), bool? filterValid = default(bool?), int? limit = default(int?), int? offset = default(int?), List<SortBy> sortBy = default(List<SortBy>), List<Fields> fields = default(List<Fields>), string accessToken = default, bool throwOnError = true)
+                public async System.Threading.Tasks.Task<IssuesPage> GetIssuesAsync(string projectId, Region? xAdsRegion = null, List<string> filterId = default(List<string>), List<string> filterIssueTypeId = default(List<string>), List<string> filterIssueSubtypeId = default(List<string>), string filterStatus = default(string), List<string> filterLinkedDocumentUrn = default(List<string>), string filterDueDate = default(string), string filterStartDate = default(string), bool? filterDeleted = default(bool?), string filterCreatedAt = default(string), List<string> filterCreatedBy = default(List<string>), string filterUpdatedAt = default(string), List<string> filterUpdatedBy = default(List<string>), List<string> filterAssignedTo = default(List<string>), List<string> filterRootCauseId = default(List<string>), List<string> filterLocationId = default(List<string>), List<string> filterSubLocationId = default(List<string>), List<string> filterClosedBy = default(List<string>), string filterClosedAt = default(string), string filterSearch = default(string), int? filterDisplayId = default(int?), string filterAssignedToType = default(string), Dictionary<string, List<string>> filterCustomAttributes = default(Dictionary<string, List<string>>), bool? filterValid = default(bool?), int? limit = default(int?), int? offset = default(int?), List<SortBy> sortBy = default(List<SortBy>), List<Fields> fields = default(List<Fields>), string accessToken = default, bool throwOnError = true)
                 {
                         if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
                         {
@@ -398,7 +500,7 @@ namespace Autodesk.Construction.Issues
                 /// <param name="issuePayload"> (optional)</param>
                 /// <returns>Task of ApiResponse<Issue></returns>
 
-                public async System.Threading.Tasks.Task<Issue> PatchIssueDetailsAsync(string projectId, string issueId, IssuePayload issuePayload, Region xAdsRegion = default, string accessToken = default, bool throwOnError = true)
+                public async System.Threading.Tasks.Task<Issue> PatchIssueDetailsAsync(string projectId, string issueId, IssuePayload issuePayload, Region? xAdsRegion = null, string accessToken = default, bool throwOnError = true)
                 {
                         if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
                         {
@@ -434,7 +536,7 @@ namespace Autodesk.Construction.Issues
                 /// </param >
                 /// <returns>Task of ApiResponse<User></returns>
 
-                public async System.Threading.Tasks.Task<User> GetUserProfileAsync(string projectId, Region xAdsRegion = default, string accessToken = default, bool throwOnError = true)
+                public async System.Threading.Tasks.Task<User> GetUserProfileAsync(string projectId, Region? xAdsRegion = null, string accessToken = default, bool throwOnError = true)
                 {
                         if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
                         {
@@ -473,9 +575,9 @@ namespace Autodesk.Construction.Issues
                 /// <param name="offset">Add offset&#x3D;20 to get partial results (together with the limit to support pagination). (optional)</param>
                 /// <param name="filterUpdatedAt">Retrieves types that were last updated at the specified date and time, in in one of the following URL-encoded formats: YYYY-MM-DDThh:mm:ss.sz or YYYY-MM-DD. Separate multiple values with commas. (optional)</param>
                 /// <param name="filterIsActive">Filter types by status e.g. filter[isActive]&#x3D;true will only return active types. Default value: undefined (meaning both active &amp; inactive issue type categories will return). (optional)</param>
-                /// <returns>Task of ApiResponse<IssueType></returns>
+                /// <returns>Task of ApiResponse<IssueTypesPage></returns>
 
-                public async System.Threading.Tasks.Task<TypesPage> GetIssuesTypesAsync(string projectId, string include = default(string), int? limit = default(int?), int? offset = default(int?), string filterUpdatedAt = default(string), bool? filterIsActive = default(bool?), Region xAdsRegion = default, string accessToken = default, bool throwOnError = true)
+                public async System.Threading.Tasks.Task<IssueTypesPage> GetIssuesTypesAsync(string projectId, string include = default(string), int? limit = default(int?), int? offset = default(int?), string filterUpdatedAt = default(string), bool? filterIsActive = default(bool?), Region? xAdsRegion = null, string accessToken = default, bool throwOnError = true)
                 {
                         if (String.IsNullOrEmpty(accessToken) && this.AuthenticationProvider == null)
                         {
