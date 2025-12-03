@@ -18,8 +18,13 @@ public class TestOss
 	string? filePath = Environment.GetEnvironmentVariable("FILE_PATH");
 	// Signed Url Format: "https://developer.api.autodesk.com/oss/v2/signedresources/<hash>?region=US"
 	string? signedUrl = Environment.GetEnvironmentVariable("SIGNED_URL");
+	string? xAdsMetaContentType = Environment.GetEnvironmentVariable("XADS_META_CONTENT_TYPE");
+	string? xAdsMetaContentDisposition = Environment.GetEnvironmentVariable("XADS_META_CONTENT_DISPOSITION");
+	string? xAdsMetaContentEncoding = Environment.GetEnvironmentVariable("XADS_META_CONTENT_ENCODING");
+	string? xAdsMetaCacheControl = Environment.GetEnvironmentVariable("XADS_META_CACHE_CONTROL");
+	string? xAdsUserDefinedMetadata = Environment.GetEnvironmentVariable("XADS_USER_DEFINED_METADATA");
 
-	[ClassInitialize]
+[ClassInitialize]
 	public static void ClassInitialize(TestContext testContext)
 	{
 		var sdkManager = SdkManagerBuilder
@@ -85,7 +90,7 @@ public class TestOss
 			objectKey: objectKey,
 			sourceToUpload: sourceToUpload,
 			cancellationToken: CancellationToken.None);
-		Assert.IsTrue(objectDetails.ObjectId.Equals($"urn:adsk.objects:os.object:{bucketKey}/{objectKey}"));
+		Assert.IsTrue(objectDetails.ObjectKey.Equals(objectKey));
 	}
 
 	[TestMethod]
@@ -96,7 +101,7 @@ public class TestOss
 			bucketKey: bucketKey,
 			objectKey: objectKey,
 			newObjName: newObjName);
-		Assert.IsTrue(objectDetails.ObjectId.Equals($"urn:adsk.objects:os.object:{bucketKey}/{newObjName}"));
+		Assert.IsTrue(objectDetails.ObjectKey.Equals(newObjName));
 	}
 
 	[TestMethod]
@@ -117,7 +122,7 @@ public class TestOss
 			accessToken: token,
 			bucketKey: bucketKey,
 			objectKey: objectKey);
-		Assert.IsTrue(objectFullDetails.ObjectId.Equals($"urn:adsk.objects:os.object:{bucketKey}/{objectKey}"));
+		Assert.IsTrue(objectFullDetails.ObjectKey.Equals(objectKey));
 	}
 
 	[TestMethod]

@@ -1,7 +1,10 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-public interface IAuthenticationProvider
+namespace Autodesk.SDKManager
 {
-       Task<string> GetAccessToken(IEnumerable<string> scopes = default);
+    public interface IAuthenticationProvider
+    {
+        Task<string> GetAccessToken(IEnumerable<string> scopes = default);
+    }
 }
