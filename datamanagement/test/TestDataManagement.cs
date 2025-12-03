@@ -4,21 +4,11 @@ using Autodesk.SDKManager;
 
 namespace Autodesk.DataManagement.Test;
 
-
 [TestClass]
 public class TestDataManagement
 {
     private static DataManagementClient _DataManagement = null!;
-
-    // string token = Environment.GetEnvironmentVariable("THREE_LEGGED_ACCESS_TOKEN");
-    // string hubId = Environment.GetEnvironmentVariable("HUB_ID");
-    // string projectId = Environment.GetEnvironmentVariable("PROJECT_ID");
-    // string downloadId = Environment.GetEnvironmentVariable("DOWNLOAD_ID");
-    // string jobId = Environment.GetEnvironmentVariable("JOB_ID");
-    // string folderId = Environment.GetEnvironmentVariable("FOLDER_ID");
-    // string itemId = Environment.GetEnvironmentVariable("ITEM_ID");
-    // string versionId = Environment.GetEnvironmentVariable("VERSION_ID");
-
+       
     string? token = Environment.GetEnvironmentVariable("ACCESS_TOKEN");
     string? hubId = Environment.GetEnvironmentVariable("HUB_ID");
     string? projectId = Environment.GetEnvironmentVariable("PROJECT_ID");
@@ -27,7 +17,6 @@ public class TestDataManagement
     string? folderId = Environment.GetEnvironmentVariable("FOLDER_ID");
     string? itemId = Environment.GetEnvironmentVariable("ITEM_ID");
     string? versionId = Environment.GetEnvironmentVariable("VERSION_ID");
-
 
     [ClassInitialize]
     public static void ClassInitialize(TestContext testContext)
@@ -322,181 +311,181 @@ public class TestDataManagement
     //     Assert.IsTrue(folderId == folderData.Id);
     // }
 
-    // [TestMethod]
-    // public async Task TestGetItemAsync()
-    // {
-    //     Item item = await _DataManagement.GetItemAsync(projectId: projectId, itemId: itemId, accessToken: token);
-    //     ItemData itemData = item.Data;
-    //     Assert.IsTrue(itemData.Type == Type.Items);
-    // }
-
-    // [TestMethod]
-    // public async Task TestGetItemParentFolderAsync()
-    // {
-    //     Folder folder = await _DataManagement.GetItemParentFolderAsync(projectId: projectId, itemId: itemId, accessToken: token);
-    //     FolderData folderData = folder.Data;
-    //     Assert.IsTrue(folderData.Type == Type.Folders);
-    // }
-
-    // [TestMethod]
-    // public async Task TestGetItemRefsAsync()
-    // {
-    //     Refs refs = await _DataManagement.GetItemRefsAsync(projectId: projectId, itemId: itemId, accessToken: token);
-    //     Assert.IsInstanceOfType(refs.Data, typeof(List<RefsData>));
-    // }
-
-    // [TestMethod]
-    // public async Task TestGetItemRelationshipsLinksAsync()
-    // {
-    //     RelationshipLinks relationshipLinks = await _DataManagement.GetItemRelationshipsLinksAsync(projectId: projectId, itemId: itemId, accessToken: token);
-    //     Assert.IsInstanceOfType(relationshipLinks.Data, typeof(List<RelationshipLinksData>));
-    // }
-
-    // [TestMethod]
-    // public async Task TestGetItemRelationshipsRefsAsync()
-    // {
-    //     RelationshipRefs relationshipRefs = await _DataManagement.GetItemRelationshipsRefsAsync(projectId: projectId, itemId: itemId, accessToken: token);
-    //     Assert.IsInstanceOfType(relationshipRefs.Data, typeof(List<RelationshipRefsData>));
-    // }
-
-    // [TestMethod]
-    // public async Task TestGetItemTipAsync()
-    // {
-    //     ItemTip itemTip = await _DataManagement.GetItemTipAsync(projectId: projectId, itemId: itemId, accessToken: token);
-    //     VersionData itemTipData = itemTip.Data;
-    //     Assert.IsTrue(itemTipData.Type == Type.Versions);
-    // }
-
-    // [TestMethod]
-    // public async Task TestGetItemVersionsAsync()
-    // {
-    //     Versions versions = await _DataManagement.GetItemVersionsAsync(projectId: projectId, itemId: itemId, accessToken: token);
-    //     Assert.IsInstanceOfType(versions.Data, typeof(List<VersionData>));
-    // }
-
-    // [TestMethod]
-    // public async Task TestCreateItemAsync()
-    // {
-
-    //     ItemPayload itemPayload = new ItemPayload()
-    //     {
-    //         Jsonapi = new ModifyFolderPayloadJsonapi()
-    //         {
-    //             _Version = VersionNumber._10
-    //         },
-    //         Data = new ItemPayloadData()
-    //         {
-    //             Type = Type.Items,
-    //             Attributes = new ItemPayloadDataAttributes()
-    //             {
-    //                 DisplayName = "drawing.dwg",
-    //                 Extension = new ItemPayloadDataAttributesExtension()
-    //                 {
-    //                     Type = Type.ItemsautodeskCoreFile,
-    //                     _Version = VersionNumber._10
-    //                 }
-    //             },
-    //             Relationships = new ItemPayloadDataRelationships()
-    //             {
-    //                 Tip = new FolderPayloadDataRelationshipsParent()
-    //                 {
-    //                     Data = new FolderPayloadDataRelationshipsParentData()
-    //                     {
-    //                         Type = Type.Versions,
-    //                         Id = "1"
-    //                     }
-    //                 },
-    //                 Parent = new FolderPayloadDataRelationshipsParent()
-    //                 {
-    //                     Data = new FolderPayloadDataRelationshipsParentData()
-    //                     {
-    //                         Type = Type.Versions,
-    //                         Id = "1"
-    //                     }
-    //                 }
-    //             }
-    //         },
-    //         Included = new List<ItemPayloadIncluded>()
-    //         {
-    //             new ItemPayloadIncluded()
-    //             {
-    //                 Type = Type.Versions,
-    //                 Id = "1",
-    //                 Attributes = new ItemPayloadIncludedAttributes()
-    //                 {
-    //                     Name = "drawing.dwg",
-    //                     Extension = new ItemPayloadDataAttributesExtension()
-    //                     {
-    //                         Type = Type.VersionsautodeskCoreFile,
-    //                         _Version = VersionNumber._10
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     };
-
-
-    //     Item item = await _DataManagement.CreateItemAsync(projectId: projectId, itemPayload: itemPayload, accessToken: token);
-    //     ItemData itemData = item.Data;
-    //     Assert.IsTrue(itemData.Type == "items");
-    // }
-
-    // [TestMethod]
-    // public async Task TestCreateItemRelationshipsRefAsync()
-    // {
-    //     RelationshipRefsPayload relationshipRefsPayload = new RelationshipRefsPayload()
-    //     {
-    //         Jsonapi = new ModifyFolderPayloadJsonapi()
-    //         {
-    //             _Version = VersionNumber._10
-    //         },
-    //         Data = new RelationshipRefsPayloadData()
-    //         {
-    //             Type = Type.Versions,
-    //             Id = "urn:adsk.wipprod:fs.file:vf.ooWjwAQJR0uEoPRyfEnvew?version=1",
-    //             Meta = new RelationshipRefsPayloadDataMeta()
-    //             {
-    //                 Extension = new RelationshipRefsPayloadDataMetaExtension()
-    //                 {
-    //                     Type = Type.AuxiliaryautodeskCoreAttachment,
-    //                     _Version = VersionNumber._10
-    //                 }
-    //             }
-    //         }
-    //     };
-
-    //     HttpResponseMessage responseMessage = await _DataManagement.CreateItemRelationshipsRefAsync(projectId: projectId, itemId: itemId, relationshipRefsPayload: relationshipRefsPayload, accessToken: token);
-    //     var statusCode = responseMessage.StatusCode;
-    //     string statusCodeString = statusCode.ToString();
-    //     Assert.IsTrue(statusCodeString == "NoContent");
-    // }
-
-    // [TestMethod]
-    // public async Task TestPatchItemAsync()
-    // {
-    //     ModifyItemPayload modifyItemPayload = new ModifyItemPayload()
-    //     {
-    //         Jsonapi = new ModifyFolderPayloadJsonapi()
-    //         {
-    //             _Version = VersionNumber._10
-    //         },
-    //         Data = new ModifyItemPayloadData()
-    //         {
-    //             Type = Type.Items,
-    //             Id = "urn:adsk.wipprod:dm.lineage:AeYgDtcTSuqYoyMweWFhhQ",
-    //             Attributes = new ModifyItemPayloadDataAttributes()
-    //             {
-    //                 DisplayName = "drawing.dwg"
-    //             }
-    //         }
-    //     };
-
-    //     Item item = await _DataManagement.PatchItemAsync(projectId: projectId, itemId: itemId, modifyItemPayload: modifyItemPayload, accessToken: token);
-    //     ItemData itemData = item.Data;
-    //     Assert.IsTrue(itemData.Type == "items");
-    // }
-
     [TestMethod]
+    public async Task TestGetItemAsync()
+    {
+       Item item = await _DataManagement.GetItemAsync(projectId: projectId, itemId: itemId, accessToken: token, includePathInProject: true);
+       
+       Assert.IsTrue(item?.Data?.Type == TypeItem.Items);
+    }
+
+   // [TestMethod]
+   // public async Task TestGetItemParentFolderAsync()
+   // {
+   //     Folder folder = await _DataManagement.GetItemParentFolderAsync(projectId: projectId, itemId: itemId, accessToken: token);
+   //     FolderData folderData = folder.Data;
+   //     Assert.IsTrue(folderData.Type == Type.Folders);
+   // }
+
+   // [TestMethod]
+   // public async Task TestGetItemRefsAsync()
+   // {
+   //     Refs refs = await _DataManagement.GetItemRefsAsync(projectId: projectId, itemId: itemId, accessToken: token);
+   //     Assert.IsInstanceOfType(refs.Data, typeof(List<RefsData>));
+   // }
+
+   // [TestMethod]
+   // public async Task TestGetItemRelationshipsLinksAsync()
+   // {
+   //     RelationshipLinks relationshipLinks = await _DataManagement.GetItemRelationshipsLinksAsync(projectId: projectId, itemId: itemId, accessToken: token);
+   //     Assert.IsInstanceOfType(relationshipLinks.Data, typeof(List<RelationshipLinksData>));
+   // }
+
+   // [TestMethod]
+   // public async Task TestGetItemRelationshipsRefsAsync()
+   // {
+   //     RelationshipRefs relationshipRefs = await _DataManagement.GetItemRelationshipsRefsAsync(projectId: projectId, itemId: itemId, accessToken: token);
+   //     Assert.IsInstanceOfType(relationshipRefs.Data, typeof(List<RelationshipRefsData>));
+   // }
+
+   // [TestMethod]
+   // public async Task TestGetItemTipAsync()
+   // {
+   //     ItemTip itemTip = await _DataManagement.GetItemTipAsync(projectId: projectId, itemId: itemId, accessToken: token);
+   //     VersionData itemTipData = itemTip.Data;
+   //     Assert.IsTrue(itemTipData.Type == Type.Versions);
+   // }
+
+   // [TestMethod]
+   // public async Task TestGetItemVersionsAsync()
+   // {
+   //     Versions versions = await _DataManagement.GetItemVersionsAsync(projectId: projectId, itemId: itemId, accessToken: token);
+   //     Assert.IsInstanceOfType(versions.Data, typeof(List<VersionData>));
+   // }
+
+   // [TestMethod]
+   // public async Task TestCreateItemAsync()
+   // {
+
+   //     ItemPayload itemPayload = new ItemPayload()
+   //     {
+   //         Jsonapi = new ModifyFolderPayloadJsonapi()
+   //         {
+   //             _Version = VersionNumber._10
+   //         },
+   //         Data = new ItemPayloadData()
+   //         {
+   //             Type = Type.Items,
+   //             Attributes = new ItemPayloadDataAttributes()
+   //             {
+   //                 DisplayName = "drawing.dwg",
+   //                 Extension = new ItemPayloadDataAttributesExtension()
+   //                 {
+   //                     Type = Type.ItemsautodeskCoreFile,
+   //                     _Version = VersionNumber._10
+   //                 }
+   //             },
+   //             Relationships = new ItemPayloadDataRelationships()
+   //             {
+   //                 Tip = new FolderPayloadDataRelationshipsParent()
+   //                 {
+   //                     Data = new FolderPayloadDataRelationshipsParentData()
+   //                     {
+   //                         Type = Type.Versions,
+   //                         Id = "1"
+   //                     }
+   //                 },
+   //                 Parent = new FolderPayloadDataRelationshipsParent()
+   //                 {
+   //                     Data = new FolderPayloadDataRelationshipsParentData()
+   //                     {
+   //                         Type = Type.Versions,
+   //                         Id = "1"
+   //                     }
+   //                 }
+   //             }
+   //         },
+   //         Included = new List<ItemPayloadIncluded>()
+   //         {
+   //             new ItemPayloadIncluded()
+   //             {
+   //                 Type = Type.Versions,
+   //                 Id = "1",
+   //                 Attributes = new ItemPayloadIncludedAttributes()
+   //                 {
+   //                     Name = "drawing.dwg",
+   //                     Extension = new ItemPayloadDataAttributesExtension()
+   //                     {
+   //                         Type = Type.VersionsautodeskCoreFile,
+   //                         _Version = VersionNumber._10
+   //                     }
+   //                 }
+   //             }
+   //         }
+   //     };
+
+
+   //     Item item = await _DataManagement.CreateItemAsync(projectId: projectId, itemPayload: itemPayload, accessToken: token);
+   //     ItemData itemData = item.Data;
+   //     Assert.IsTrue(itemData.Type == "items");
+   // }
+
+   // [TestMethod]
+   // public async Task TestCreateItemRelationshipsRefAsync()
+   // {
+   //     RelationshipRefsPayload relationshipRefsPayload = new RelationshipRefsPayload()
+   //     {
+   //         Jsonapi = new ModifyFolderPayloadJsonapi()
+   //         {
+   //             _Version = VersionNumber._10
+   //         },
+   //         Data = new RelationshipRefsPayloadData()
+   //         {
+   //             Type = Type.Versions,
+   //             Id = "urn:adsk.wipprod:fs.file:vf.ooWjwAQJR0uEoPRyfEnvew?version=1",
+   //             Meta = new RelationshipRefsPayloadDataMeta()
+   //             {
+   //                 Extension = new RelationshipRefsPayloadDataMetaExtension()
+   //                 {
+   //                     Type = Type.AuxiliaryautodeskCoreAttachment,
+   //                     _Version = VersionNumber._10
+   //                 }
+   //             }
+   //         }
+   //     };
+
+   //     HttpResponseMessage responseMessage = await _DataManagement.CreateItemRelationshipsRefAsync(projectId: projectId, itemId: itemId, relationshipRefsPayload: relationshipRefsPayload, accessToken: token);
+   //     var statusCode = responseMessage.StatusCode;
+   //     string statusCodeString = statusCode.ToString();
+   //     Assert.IsTrue(statusCodeString == "NoContent");
+   // }
+
+   // [TestMethod]
+   // public async Task TestPatchItemAsync()
+   // {
+   //     ModifyItemPayload modifyItemPayload = new ModifyItemPayload()
+   //     {
+   //         Jsonapi = new ModifyFolderPayloadJsonapi()
+   //         {
+   //             _Version = VersionNumber._10
+   //         },
+   //         Data = new ModifyItemPayloadData()
+   //         {
+   //             Type = Type.Items,
+   //             Id = "urn:adsk.wipprod:dm.lineage:AeYgDtcTSuqYoyMweWFhhQ",
+   //             Attributes = new ModifyItemPayloadDataAttributes()
+   //             {
+   //                 DisplayName = "drawing.dwg"
+   //             }
+   //         }
+   //     };
+
+   //     Item item = await _DataManagement.PatchItemAsync(projectId: projectId, itemId: itemId, modifyItemPayload: modifyItemPayload, accessToken: token);
+   //     ItemData itemData = item.Data;
+   //     Assert.IsTrue(itemData.Type == "items");
+   // }
+
+   [TestMethod]
     public async Task TestGetVersionAsync()
     {
         ModelVersion versionDetails = await _DataManagement.GetVersionAsync(projectId: projectId, versionId: versionId, accessToken: token);
