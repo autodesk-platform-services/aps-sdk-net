@@ -144,19 +144,19 @@ namespace Autodesk.Oss
         /// (optional)
         /// </param>
         /// <param name="xAdsMetaContentType">
-        ///The Content-Type value for the uploaded object to record within OSS. (optional)
+        /// The Content-Type value for the uploaded object to record within OSS. (optional)
         /// </param>
         /// <param name="xAdsMetaContentDisposition">
-        ///The Content-Disposition value for the uploaded object to record within OSS. (optional)
+        /// The Content-Disposition value for the uploaded object to record within OSS. (optional)
         /// </param>
         /// <param name="xAdsMetaContentEncoding">
-        ///The Content-Encoding value for the uploaded object to record within OSS. (optional)
+        /// The Content-Encoding value for the uploaded object to record within OSS. (optional)
         /// </param>
         /// <param name="xAdsMetaCacheControl">
-        ///The Cache-Control value for the uploaded object to record within OSS. (optional)
+        /// The Cache-Control value for the uploaded object to record within OSS. (optional)
         /// </param>
         /// <param name="xAdsUserDefinedMetadata">
-        ///Custom metadata to be stored with the object, which can be retrieved later on download or when retrieving object details. Must be a JSON object that is less than 100 bytes. (optional)
+        /// Custom metadata to be stored with the object, which can be retrieved later on download or when retrieving object details. Must be a JSON object that is less than 100 bytes. (optional)
         /// </param>
         /// <returns>Task of &lt;Upload&gt;</returns>
         public async System.Threading.Tasks.Task<ObjectDetails> UploadObjectAsync(string bucketKey, string objectKey, string sourceToUpload, CancellationToken cancellationToken = default, string requestIdPrefix = "", IProgress<int> progress = null, string accessToken = default, string xAdsMetaContentType = default(string), string xAdsMetaContentDisposition = default(string), string xAdsMetaContentEncoding = default(string), string xAdsMetaCacheControl = default(string), string xAdsUserDefinedMetadata = default(string))
