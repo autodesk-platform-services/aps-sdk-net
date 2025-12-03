@@ -1,7 +1,7 @@
 /* 
  * APS SDK
  *
- * The APS Platform contains an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
+ * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Construction.Issues
  *
@@ -34,26 +34,32 @@ using Newtonsoft.Json.Converters;
 namespace Autodesk.Construction.Issues.Model
 {
     /// <summary>
-    /// The list object.
+    /// Represents the payload for adding attachments to an issue.
     /// </summary>
     [DataContract]
-    public partial class AttrDefinitionPageResultsMetadataList
+    public partial class AttachmentsPayload
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="AttrDefinitionPageResultsMetadataList" /> class.
+        /// Initializes a new instance of the <see cref="AttachmentsPayload" /> class.
         /// </summary>
-        public AttrDefinitionPageResultsMetadataList()
+        public AttachmentsPayload()
         {
         }
 
         /// <summary>
-        ///The options object.
+        ///The unique identifier of the issue to which the attachments will be added.
         /// </summary>
         /// <value>
-        ///The options object.
+        ///The unique identifier of the issue to which the attachments will be added.
         /// </value>
-        [DataMember(Name = "options", EmitDefaultValue = false)]
-        public List<AttrDefinitionPageResultsMetadataListOptions> Options { get; set; }
+        [DataMember(Name = "domainEntityId", EmitDefaultValue = false)]
+        public string DomainEntityId { get; set; }
+
+        /// <summary>
+        ///The list of attachments to be added to the issue.
+        /// </summary>
+        [DataMember(Name = "attachments", EmitDefaultValue = false)]
+        public List<AttachmentObject> Attachments { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

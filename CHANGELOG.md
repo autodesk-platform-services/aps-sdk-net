@@ -1,12 +1,38 @@
 # Changelog
 
+## [v5.2.1](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v5.2.1) (2025-11-05)
+
+[Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v5.2.0...v5.2.1)
+
+**Fixed bugs:**
+
+- \[DAS 367\] - Add Support for Regions Auto-Routing [\#222](https://github.com/autodesk-platform-services/aps-sdk-net/pull/222) ([Arrotech](https://github.com/Arrotech))
+- \[DAS 368\] - Added Support For Auto Routing For Regions [\#221](https://github.com/autodesk-platform-services/aps-sdk-net/pull/221) ([srivastavarahull](https://github.com/srivastavarahull))
+
+## [v5.2.0](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v5.2.0) (2025-10-29)
+
+[Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v5.1.0...v5.2.0)
+
+**Implemented enhancements:**
+
+- \[DAS 363\] - Fixed Model Naming for Issues Sdk [\#214](https://github.com/autodesk-platform-services/aps-sdk-net/pull/214) ([srivastavarahull](https://github.com/srivastavarahull))
+- \[DAS 362\] - Added new endpoints to Acc Issues SDK [\#213](https://github.com/autodesk-platform-services/aps-sdk-net/pull/213) ([srivastavarahull](https://github.com/srivastavarahull))
+
+## [v5.1.0](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v5.1.0) (2025-10-27)
+
+[Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v5.0.0...v5.1.0)
+
+**Implemented enhancements:**
+
+- \[DAS 360\] - Add New Acc Admin Endpoints [\#212](https://github.com/autodesk-platform-services/aps-sdk-net/pull/212) ([Arrotech](https://github.com/Arrotech))
+
+**Closed issues:**
+
+- Add nuget package for ACC takeoff [\#200](https://github.com/autodesk-platform-services/aps-sdk-net/issues/200)
+
 ## [v5.0.0](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v5.0.0) (2025-09-03)
 
 [Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v4.3.0...v5.0.0)
-
-**Breaking changes:**
-
-- \[DAS 356\] - Fixed custom attribute filtering for Get Issues Endpoint [\#199](https://github.com/autodesk-platform-services/aps-sdk-net/pull/199) ([srivastavarahull](https://github.com/srivastavarahull))
 
 **Closed issues:**
 
@@ -15,6 +41,10 @@
 ## [v4.3.0](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v4.3.0) (2025-09-03)
 
 [Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v4.2.2...v4.3.0)
+
+**Breaking changes:**
+
+- \[DAS 356\] - Fixed custom attribute filtering for Get Issues Endpoint [\#199](https://github.com/autodesk-platform-services/aps-sdk-net/pull/199) ([srivastavarahull](https://github.com/srivastavarahull))
 
 **Implemented enhancements:**
 
