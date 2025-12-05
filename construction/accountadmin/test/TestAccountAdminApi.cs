@@ -11,6 +11,7 @@ public class TestAccountAdminApi
     
     string? token = Environment.GetEnvironmentVariable("token");
     string? accountId = Environment.GetEnvironmentVariable("account_id");
+    string? projectId = Environment.GetEnvironmentVariable("project_id");
     string? userId = Environment.GetEnvironmentVariable("user_id");
        
     [ClassInitialize]
@@ -23,6 +24,20 @@ public class TestAccountAdminApi
 	     .Build();
         
 	     _adminClient = new AdminClient(sdkManager);
+    }
+    
+    [TestMethod]
+    public async Task TestGetProjectAsync()
+    {
+	     Project project = await _adminClient.GetProjectAsync(accessToken: token, projectId: projectId);
+        Assert.IsTrue(projectId == project.Id);
+    }
+    
+    [TestMethod]
+    public async Task TestGetProjectsAsync()
+    {
+	     ProjectsPage projectsPage = await _adminClient.GetProjectsAsync(accessToken: token, accountId: accountId);
+	     Assert.IsInstanceOfType(projectsPage.Results, typeof(List<Project>));
     }
     
     [TestMethod]
