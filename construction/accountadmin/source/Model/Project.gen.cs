@@ -56,11 +56,11 @@ namespace Autodesk.Construction.AccountAdmin.Model
 
         /// <summary>
         ///The name of the project.
-///Max length: 255
+        ///Max length: 255
         /// </summary>
         /// <value>
         ///The name of the project.
-///Max length: 255
+        ///Max length: 255
         /// </value>
         [DataMember(Name="name", EmitDefaultValue=false)]
         public string Name { get; set; }
@@ -121,33 +121,33 @@ namespace Autodesk.Construction.AccountAdmin.Model
 
         /// <summary>
         ///A job identifier that’s defined for the project by the user. This ID was defined when the project was created.
-///Max length: 100
+        ///Max length: 100
         /// </summary>
         /// <value>
         ///A job identifier that’s defined for the project by the user. This ID was defined when the project was created.
-///Max length: 100
+        ///Max length: 100
         /// </value>
         [DataMember(Name="jobNumber", EmitDefaultValue=false)]
         public string JobNumber { get; set; }
 
         /// <summary>
         ///Address line 1 for the project.
-///Max length: 255
+        ///Max length: 255
         /// </summary>
         /// <value>
         ///Address line 1 for the project.
-///Max length: 255
+        ///Max length: 255
         /// </value>
         [DataMember(Name="addressLine1", EmitDefaultValue=false)]
         public string AddressLine1 { get; set; }
 
         /// <summary>
         ///Address line 2 for the project.
-///Max length: 255
+        ///Max length: 255
         /// </summary>
         /// <value>
         ///Address line 2 for the project.
-///Max length: 255
+        ///Max length: 255
         /// </value>
         [DataMember(Name="addressLine2", EmitDefaultValue=false)]
         public string AddressLine2 { get; set; }
@@ -376,6 +376,15 @@ namespace Autodesk.Construction.AccountAdmin.Model
         /// </value>
         [DataMember(Name="memberCount", EmitDefaultValue=false)]
         public int? MemberCount { get; set; }
+
+        /// <summary>
+        ///The ID of the project that was used as a template to create this project.
+        /// </summary>
+        /// <value>
+        ///The ID of the project that was used as a template to create this project.
+        /// </value>
+        [DataMember(Name="templateId", EmitDefaultValue=false)]
+        public string? TemplateId { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
