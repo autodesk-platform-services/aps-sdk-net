@@ -30,53 +30,53 @@ namespace Autodesk.Authentication.SecureServiceAccount.Model;
 [DataContract]
 public partial class Key
 {
-   /// <summary>
-   /// Initializes a new instance of the <see cref="Key" /> class.
-   /// </summary>
-   public Key()
-   { }
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Key" /> class.
+    /// </summary>
+    public Key()
+    { }
 
-   /// <summary>
-   /// The ID of the private key.
-   /// </summary>
-   /// <value>
-   /// The ID of the private key.
-   /// </value>
-   [DataMember(Name = "kid", EmitDefaultValue = false)]
-   public string Kid { get; set; }
+    /// <summary>
+    /// The ID of the private key.
+    /// </summary>
+    /// <value>
+    /// The ID of the private key.
+    /// </value>
+    [DataMember(Name = "kid", EmitDefaultValue = false)]
+    public string Kid { get; set; }
 
-   /// <summary>
-   /// The status of the key. Possible values:
-   /// 
-   /// - `ENABLED` -
-   /// - `DISABLED` -
-   /// 
-   /// </summary>
-   /// <value>
-   /// The status of the key. Possible values:
-   /// 
-   /// - `ENABLED` -
-   /// - `DISABLED` -
-   /// 
-   /// </value>
-   [DataMember(Name = "status", EmitDefaultValue = true)]
-   public KeyStatus Status { get; set; }
+    /// <summary>
+    /// The status of the key. Possible values:
+    /// 
+    /// - `ENABLED` -
+    /// - `DISABLED` -
+    /// 
+    /// </summary>
+    /// <value>
+    /// The status of the key. Possible values:
+    /// 
+    /// - `ENABLED` -
+    /// - `DISABLED` -
+    /// 
+    /// </value>
+    [DataMember(Name = "status", EmitDefaultValue = true)]
+    public KeyStatus Status { get; set; }
 
-   /// <summary>
-   /// The creation time of the key, in UTC format.
-   /// </summary>
-   /// <value>
-   /// The creation time of the key, in UTC format.
-   /// </value>
-   [DataMember(Name = "createdAt", EmitDefaultValue = false)]
-   public string CreatedAt { get; set; }
+    /// <summary>
+    /// The creation time of the key, in UTC format.
+    /// </summary>
+    /// <value>
+    /// The creation time of the key, in UTC format.
+    /// </value>
+    [DataMember(Name = "createdAt", EmitDefaultValue = false)]
+    public string CreatedAt { get; set; }
 
-   /// <summary>
-   /// This is the most recent time an access token was generated for this service account key, in UTC format.
-   /// </summary>
-   /// <value>
-   /// This is the most recent time an access token was generated for this service account key, in UTC format.
-   /// </value>
-   [DataMember(Name = "accessedAt", EmitDefaultValue = false)]
-   public string AccessedAt { get; set; }
+    /// <summary>
+    /// This is the most recent time an access token was generated for this service account key, in UTC format.
+    /// </summary>
+    /// <value>
+    /// This is the most recent time an access token was generated for this service account key, in UTC format.
+    /// </value>
+    [DataMember(Name = "accessedAt", EmitDefaultValue = false)]
+    public string AccessedAt { get; set; }
 }

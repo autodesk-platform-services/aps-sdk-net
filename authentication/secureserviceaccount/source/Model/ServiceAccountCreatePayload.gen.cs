@@ -20,8 +20,8 @@
  * limitations under the License.
  */
 
-using Newtonsoft.Json;
 using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace Autodesk.Authentication.SecureServiceAccount.Model;
 
@@ -31,81 +31,81 @@ namespace Autodesk.Authentication.SecureServiceAccount.Model;
 [DataContract]
 public partial class ServiceAccountCreatePayload
 {
-   /// <summary>
-   /// Initializes a new instance of the <see cref="ServiceAccountCreatePayload" /> class.
-   /// </summary>
-   public ServiceAccountCreatePayload()
-	{ }
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ServiceAccountCreatePayload" /> class.
+    /// </summary>
+    public ServiceAccountCreatePayload()
+    { }
 
-   /// <summary>
-   /// The name of the service account.
-   /// Must be 5-100 characters long, contain only alphanumeric characters and dashes, and include at least one alphanumeric character.
-   /// </summary>
-   /// <value>
-   /// The name of the service account.
-   /// Must be 5-100 characters long, contain only alphanumeric characters and dashes, and include at least one alphanumeric character.
-   /// </value>
-   [DataMember(Name = "name", EmitDefaultValue = false)]
-   public string Name { get; set; }
+    /// <summary>
+    /// The name of the service account.
+    /// Must be 5-100 characters long, contain only alphanumeric characters and dashes, and include at least one alphanumeric character.
+    /// </summary>
+    /// <value>
+    /// The name of the service account.
+    /// Must be 5-100 characters long, contain only alphanumeric characters and dashes, and include at least one alphanumeric character.
+    /// </value>
+    [DataMember(Name = "name", EmitDefaultValue = false)]
+    public string Name { get; set; }
 
-   /// <summary>
-   /// The last name of the service account. For display purposes only.
-   /// Must meet the following conditions:
-   /// Length between 5 and 100 characters
-   /// Contain only alphanumeric characters and dashes
-   /// Include at least one alphanumeric character
-   /// Avoid inappropriate words
-   /// Exclude invalid characters such as the special characters % and /.
-   /// Avoid the character pattern of &amp;# even though the characters are allowed individually.
-   /// For more information, see the [Naming Guidelines](/en/docs/ssa/v1/developers_guide/naming-guidelines/) section in the Developer's Guide.
-   /// </summary>
-   /// <value>
-   /// The last name of the service account. For display purposes only.
-   /// Must meet the following conditions:
-   /// Length between 5 and 100 characters
-   /// Contain only alphanumeric characters and dashes
-   /// Include at least one alphanumeric character
-   /// Avoid inappropriate words
-   /// Exclude invalid characters such as the special characters % and /.
-   /// Avoid the character pattern of &amp;# even though the characters are allowed individually.
-   /// For more information, see the [Naming Guidelines](/en/docs/ssa/v1/developers_guide/naming-guidelines/) section in the Developer's Guide.
-   /// </value>
-   [DataMember(Name = "firstName", EmitDefaultValue = false)]
-   public string FirstName { get; set; }
+    /// <summary>
+    /// The first name of the service account. For display purposes only.
+    /// Must meet the following conditions:
+    /// Length between 5 and 100 characters
+    /// Contain only alphanumeric characters and dashes
+    /// Include at least one alphanumeric character
+    /// Avoid inappropriate words
+    /// Exclude invalid characters such as the special characters % and /.
+    /// Avoid the character pattern of &amp;# even though the characters are allowed individually.
+    /// For more information, see the [Naming Guidelines](/en/docs/ssa/v1/developers_guide/naming-guidelines/) section in the Developer's Guide.
+    /// </summary>
+    /// <value>
+    /// The first name of the service account. For display purposes only.
+    /// Must meet the following conditions:
+    /// Length between 5 and 100 characters
+    /// Contain only alphanumeric characters and dashes
+    /// Include at least one alphanumeric character
+    /// Avoid inappropriate words
+    /// Exclude invalid characters such as the special characters % and /.
+    /// Avoid the character pattern of &amp;# even though the characters are allowed individually.
+    /// For more information, see the [Naming Guidelines](/en/docs/ssa/v1/developers_guide/naming-guidelines/) section in the Developer's Guide.
+    /// </value>
+    [DataMember(Name = "firstName", EmitDefaultValue = false)]
+    public string FirstName { get; set; }
 
-   /// <summary>
-   /// The last name of the service account. For display purposes only.
-   /// Must meet the following conditions:
-   /// Length between 5 and 100 characters
-   /// Contain only alphanumeric characters and dashes
-   /// Include at least one alphanumeric character
-   /// Avoid inappropriate words
-   /// Exclude invalid characters such as the special characters % and /.
-   /// Avoid the character pattern of &amp;# even though the characters are allowed individually.
-   /// For more information, see the [Naming Guidelines](/en/docs/ssa/v1/developers_guide/naming-guidelines/) section in the Developer's Guide.
-   /// </summary>
-   /// <value>
-   /// The last name of the service account. For display purposes only.
-   /// Must meet the following conditions:
-   /// Length between 5 and 100 characters
-   /// Contain only alphanumeric characters and dashes
-   /// Include at least one alphanumeric character
-   /// Avoid inappropriate words
-   /// Exclude invalid characters such as the special characters % and /.
-   /// Avoid the character pattern of &amp;# even though the characters are allowed individually.
-   /// For more information, see the [Naming Guidelines](/en/docs/ssa/v1/developers_guide/naming-guidelines/) section in the Developer's Guide.
-   /// </value>
-   [DataMember(Name = "lastName", EmitDefaultValue = false)]
-   public string LastName { get; set; }
+    /// <summary>
+    /// The last name of the service account. For display purposes only.
+    /// Must meet the following conditions:
+    /// Length between 5 and 100 characters
+    /// Contain only alphanumeric characters and dashes
+    /// Include at least one alphanumeric character
+    /// Avoid inappropriate words
+    /// Exclude invalid characters such as the special characters % and /.
+    /// Avoid the character pattern of &amp;# even though the characters are allowed individually.
+    /// For more information, see the [Naming Guidelines](/en/docs/ssa/v1/developers_guide/naming-guidelines/) section in the Developer's Guide.
+    /// </summary>
+    /// <value>
+    /// The last name of the service account. For display purposes only.
+    /// Must meet the following conditions:
+    /// Length between 5 and 100 characters
+    /// Contain only alphanumeric characters and dashes
+    /// Include at least one alphanumeric character
+    /// Avoid inappropriate words
+    /// Exclude invalid characters such as the special characters % and /.
+    /// Avoid the character pattern of &amp;# even though the characters are allowed individually.
+    /// For more information, see the [Naming Guidelines](/en/docs/ssa/v1/developers_guide/naming-guidelines/) section in the Developer's Guide.
+    /// </value>
+    [DataMember(Name = "lastName", EmitDefaultValue = false)]
+    public string LastName { get; set; }
 
-   /// <summary>
-   /// Returns the string presentation of the object.
-   /// </summary>
-   /// <returns>
-   /// String presentation of the object.
-   /// </returns>
-   public override string ToString()
-	{
-		return JsonConvert.SerializeObject(this, Formatting.Indented);
-	}
+    /// <summary>
+    /// Returns the string presentation of the object.
+    /// </summary>
+    /// <returns>
+    /// String presentation of the object.
+    /// </returns>
+    public override string ToString()
+    {
+        return JsonConvert.SerializeObject(this, Formatting.Indented);
+    }
 }

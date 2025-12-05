@@ -30,27 +30,27 @@ namespace Autodesk.Authentication.SecureServiceAccount.Model;
 [DataContract]
 public partial class KeyCreated
 {
-   /// <summary>
-   /// Initializes a new instance of the <see cref="KeyCreated" /> class.
-   /// </summary>
-   public KeyCreated()
-   { }
+    /// <summary>
+    /// Initializes a new instance of the <see cref="KeyCreated" /> class.
+    /// </summary>
+    public KeyCreated()
+    { }
 
-   /// <summary>
-   /// The ID of the private key.
-   /// </summary>
-   /// <value>
-   /// The ID of the private key.
-   /// </value>
-   [DataMember(Name = "kid", EmitDefaultValue = false)]
-   public string Kid { get; set; }
+    /// <summary>
+    /// The ID of the private key.
+    /// </summary>
+    /// <value>
+    /// The ID of the private key.
+    /// </value>
+    [DataMember(Name = "kid", EmitDefaultValue = false)]
+    public string Kid { get; set; }
 
-   /// <summary>
-   /// The private key value, in PEM format.
-   /// </summary>
-   /// <value>
-   /// The private key value, in PEM format.
-   /// </value>
-   [DataMember(Name = "privateKey", EmitDefaultValue = false)]
-   public string PrivateKey { get; set; }
+    /// <summary>
+    /// The private key value, in PEM format.
+    /// </summary>
+    /// <value>
+    /// The private key value, in PEM format.
+    /// </value>
+    [DataMember(Name = "privateKey", EmitDefaultValue = false)]
+    public string PrivateKey { get; set; }
 }

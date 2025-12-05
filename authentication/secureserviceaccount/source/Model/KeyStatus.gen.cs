@@ -43,15 +43,15 @@ namespace Autodesk.Authentication.SecureServiceAccount.Model;
 [JsonConverter(typeof(StringEnumConverter))]
 public enum KeyStatus
 {
-   /// <summary>
-   /// Enum <see cref="Enabled"/> for value: ENABLED.
-   /// </summary>
-   [EnumMember(Value = "ENABLED")]
-   Enabled,
+    /// <summary>
+    /// Enum <see cref="Enabled"/> for value: ENABLED.
+    /// </summary>
+    [EnumMember(Value = "ENABLED")]
+    Enabled,
 
-   /// <summary>
-   /// Enum <see cref="Disabled"/> for value: DISABLED.
-   /// </summary>
-   [EnumMember(Value = "DISABLED")]
-   Disabled,
+    /// <summary>
+    /// Enum <see cref="Disabled"/> for value: DISABLED.
+    /// </summary>
+    [EnumMember(Value = "DISABLED")]
+    Disabled,
 }

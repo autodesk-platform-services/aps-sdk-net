@@ -41,10 +41,9 @@ namespace Autodesk.Authentication.SecureServiceAccount.Model;
 [JsonConverter(typeof(StringEnumConverter))]
 public enum GrantType
 {
-   /// <summary>
-   /// Enum <see cref="JwtBearer"/> for value: urn:ietf:params:oauth:grant-type:jwt-bearer
-   /// </summary>
-   [EnumMember(Value = "urn:ietf:params:oauth:grant-type:jwt-bearer")]
-   JwtBearer,
+    /// <summary>
+    /// Enum <see cref="JwtBearer"/> for value: urn:ietf:params:oauth:grant-type:jwt-bearer
+    /// </summary>
+    [EnumMember(Value = "urn:ietf:params:oauth:grant-type:jwt-bearer")]
+    JwtBearer,
 }
-

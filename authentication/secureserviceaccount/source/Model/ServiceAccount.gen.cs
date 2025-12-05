@@ -20,8 +20,8 @@
  * limitations under the License.
  */
 
-using Newtonsoft.Json;
 using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace Autodesk.Authentication.SecureServiceAccount.Model;
 
@@ -31,91 +31,91 @@ namespace Autodesk.Authentication.SecureServiceAccount.Model;
 [DataContract]
 public partial class ServiceAccount
 {
-	/// <summary>
-	/// Initializes a new instance of the <see cref="ServiceAccount" /> class.
-	/// </summary>
-	public ServiceAccount()
-	{ }
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ServiceAccount" /> class.
+    /// </summary>
+    public ServiceAccount()
+    { }
 
-	/// <summary>
-	/// The Autodesk ID of the service account.
-	/// </summary>
-	/// <value>
-	/// The Autodesk ID of the service account.
-	/// </value>
-	[DataMember(Name = "serviceAccountId", EmitDefaultValue = false)]
-	public string ServiceAccountId { get; set; }
+    /// <summary>
+    /// The Autodesk ID of the service account.
+    /// </summary>
+    /// <value>
+    /// The Autodesk ID of the service account.
+    /// </value>
+    [DataMember(Name = "serviceAccountId", EmitDefaultValue = false)]
+    public string ServiceAccountId { get; set; }
 
-	/// <summary>
-	/// The email address of the service account.
-	/// </summary>
-	/// <value>
-	/// The email address of the service account.
-	/// </value>
-	[DataMember(Name = "email", EmitDefaultValue = false)]
-	public string Email { get; set; }
+    /// <summary>
+    /// The email address of the service account.
+    /// </summary>
+    /// <value>
+    /// The email address of the service account.
+    /// </value>
+    [DataMember(Name = "email", EmitDefaultValue = false)]
+    public string Email { get; set; }
 
-	/// <summary>
-	/// The client ID used to create the service account.
-	/// </summary>
-	/// <value>
-	/// The client ID used to create the service account.
-	/// </value>
-	[DataMember(Name = "createdBy", EmitDefaultValue = false)]
-	public string CreatedBy { get; set; }
+    /// <summary>
+    /// The client ID used to create the service account.
+    /// </summary>
+    /// <value>
+    /// The client ID used to create the service account.
+    /// </value>
+    [DataMember(Name = "createdBy", EmitDefaultValue = false)]
+    public string CreatedBy { get; set; }
 
-	/// <summary>
-	/// The status of the service account. Possible values:
-	/// 
-	/// - `ENABLED` -
-	/// - `DISABLED` -
-	/// 
-	/// </summary>
-	/// <value>
-	/// The status of the service account. Possible values:
-	/// 
-	/// - `ENABLED` -
-	/// - `DISABLED` -
-	/// 
-	/// </value>
-	[DataMember(Name = "status", EmitDefaultValue = true)]
-	public ServiceAccountStatus Status { get; set; }
+    /// <summary>
+    /// The status of the service account. Possible values:
+    /// 
+    /// - `ENABLED` -
+    /// - `DISABLED` -
+    /// 
+    /// </summary>
+    /// <value>
+    /// The status of the service account. Possible values:
+    /// 
+    /// - `ENABLED` -
+    /// - `DISABLED` -
+    /// 
+    /// </value>
+    [DataMember(Name = "status", EmitDefaultValue = true)]
+    public ServiceAccountStatus Status { get; set; }
 
-	/// <summary>
-	/// The creation time of the service account, in UTC format.
-	/// </summary>
-	/// <value>
-	/// The creation time of the service account, in UTC format.
-	/// </value>
-	[DataMember(Name = "createdAt", EmitDefaultValue = false)]
-	public string CreatedAt { get; set; }
+    /// <summary>
+    /// The creation time of the service account, in UTC format.
+    /// </summary>
+    /// <value>
+    /// The creation time of the service account, in UTC format.
+    /// </value>
+    [DataMember(Name = "createdAt", EmitDefaultValue = false)]
+    public string CreatedAt { get; set; }
 
-	/// <summary>
-	/// This is the most recent time an access token was generated for this service account, in UTC format.
-	/// </summary>
-	/// <value>
-	/// This is the most recent time an access token was generated for this service account, in UTC format.
-	/// </value>
-	[DataMember(Name = "accessedAt", EmitDefaultValue = false)]
-	public string AccessedAt { get; set; }
+    /// <summary>
+    /// This is the most recent time an access token was generated for this service account, in UTC format.
+    /// </summary>
+    /// <value>
+    /// This is the most recent time an access token was generated for this service account, in UTC format.
+    /// </value>
+    [DataMember(Name = "accessedAt", EmitDefaultValue = false)]
+    public string AccessedAt { get; set; }
 
-	/// <summary>
-	/// The expiration time of the service account, in UTC format.
-	/// </summary>
-	/// <value>
-	/// The expiration time of the service account, in UTC format.
-	/// </value>
-	[DataMember(Name = "expiresAt", EmitDefaultValue = false)]
-	public string ExpiresAt { get; set; }
+    /// <summary>
+    /// The expiration time of the service account, in UTC format.
+    /// </summary>
+    /// <value>
+    /// The expiration time of the service account, in UTC format.
+    /// </value>
+    [DataMember(Name = "expiresAt", EmitDefaultValue = false)]
+    public string ExpiresAt { get; set; }
 
-	/// <summary>
-	/// Returns the string presentation of the object.
-	/// </summary>
-	/// <returns>
-	/// String presentation of the object.
-	/// </returns>
-	public override string ToString()
-	{
-		return JsonConvert.SerializeObject(this, Formatting.Indented);
-	}
+    /// <summary>
+    /// Returns the string presentation of the object.
+    /// </summary>
+    /// <returns>
+    /// String presentation of the object.
+    /// </returns>
+    public override string ToString()
+    {
+        return JsonConvert.SerializeObject(this, Formatting.Indented);
+    }
 }

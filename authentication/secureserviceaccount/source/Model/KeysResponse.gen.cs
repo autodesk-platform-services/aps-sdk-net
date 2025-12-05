@@ -20,9 +20,9 @@
  * limitations under the License.
  */
 
-using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace Autodesk.Authentication.SecureServiceAccount.Model;
 
@@ -32,29 +32,29 @@ namespace Autodesk.Authentication.SecureServiceAccount.Model;
 [DataContract]
 public partial class KeysResponse
 {
-   /// <summary>
-   /// Initializes a new instance of the <see cref="KeysResponse" /> class.
-   /// </summary>
-   public KeysResponse()
-	{ }
+    /// <summary>
+    /// Initializes a new instance of the <see cref="KeysResponse" /> class.
+    /// </summary>
+    public KeysResponse()
+    { }
 
-   /// <summary>
-   /// A collection of keys associated with the service account.
-   /// </summary>
-   /// <value>
-   /// A collection of keys associated with the service account.
-   /// </value>
-   [DataMember(Name = "keys", EmitDefaultValue = false)]
-   public List<Key> Keys { get; set; }
+    /// <summary>
+    /// A collection of keys associated with the service account.
+    /// </summary>
+    /// <value>
+    /// A collection of keys associated with the service account.
+    /// </value>
+    [DataMember(Name = "keys", EmitDefaultValue = false)]
+    public List<Key> Keys { get; set; }
 
-	/// <summary>
-	/// Returns the string presentation of the object.
-	/// </summary>
-	/// <returns>
-	/// String presentation of the object.
-	/// </returns>
-	public override string ToString()
-	{
-		return JsonConvert.SerializeObject(this, Formatting.Indented);
-	}
+    /// <summary>
+    /// Returns the string presentation of the object.
+    /// </summary>
+    /// <returns>
+    /// String presentation of the object.
+    /// </returns>
+    public override string ToString()
+    {
+        return JsonConvert.SerializeObject(this, Formatting.Indented);
+    }
 }

@@ -29,18 +29,18 @@ namespace Autodesk.Authentication.SecureServiceAccount;
 
 public static class ServiceCollectionExtensions
 {
-   /// <summary>
-   /// Adds <see cref="SecureServiceAccountClient"/> and configures it with the given configuration.
-   /// </summary>
-   /// <param name="services"></param>
-   /// <param name="configuration"></param>
-   /// <returns></returns>
-   public static IHttpClientBuilder AddAuthentication(this IServiceCollection services, IConfiguration configuration)
-   {
-      services.AddTransient<IAccountManagementApi, AccountManagementApi>();
-      services.AddTransient<IExchangeTokenApi, ExchangeTokenApi>();
-      services.AddTransient<IKeyManagementApi, KeyManagementApi>();
+    /// <summary>
+    /// Adds <see cref="SecureServiceAccountClient"/> and configures it with the given configuration.
+    /// </summary>
+    /// <param name="services"></param>
+    /// <param name="configuration"></param>
+    /// <returns></returns>
+    public static IHttpClientBuilder AddAuthentication(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddTransient<IAccountManagementApi, AccountManagementApi>();
+        services.AddTransient<IExchangeTokenApi, ExchangeTokenApi>();
+        services.AddTransient<IKeyManagementApi, KeyManagementApi>();
 
-      return services.AddForgeService(configuration);
-   }
+        return services.AddForgeService(configuration);
+    }
 }

@@ -20,8 +20,8 @@
  * limitations under the License.
  */
 
-using Newtonsoft.Json;
 using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace Autodesk.Authentication.SecureServiceAccount.Model;
 
@@ -31,40 +31,40 @@ namespace Autodesk.Authentication.SecureServiceAccount.Model;
 [DataContract]
 public partial class ServiceAccountCreated
 {
-   /// <summary>
-   /// Initializes a new instance of the <see cref="ServiceAccountCreated" /> class.
-   /// </summary>
-   public ServiceAccountCreated()
-	{ }
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ServiceAccountCreated" /> class.
+    /// </summary>
+    public ServiceAccountCreated()
+    { }
 
-	/// <summary>
-	/// The Autodesk ID of the service account.
-	/// </summary>
-	/// <value>
-	/// The Autodesk ID of the service account.
-	/// </value>
-	[DataMember(Name = "serviceAccountId", EmitDefaultValue = false)]
-	public string ServiceAccountId { get; set; }
+    /// <summary>
+    /// The Autodesk ID of the service account.
+    /// </summary>
+    /// <value>
+    /// The Autodesk ID of the service account.
+    /// </value>
+    [DataMember(Name = "serviceAccountId", EmitDefaultValue = false)]
+    public string ServiceAccountId { get; set; }
 
-   /// <summary>
-   /// The email address of the service account.
-   /// It is of the form {serviceAccountName}@{clientId}.adskserviceaccount.autodesk.com.
-   /// </summary>
-   /// <value>
-   /// The email address of the service account.
-   /// It is of the form {serviceAccountName}@{clientId}.adskserviceaccount.autodesk.com.
-   /// </value>
-   [DataMember(Name = "email", EmitDefaultValue = false)]
-	public string Email { get; set; }
+    /// <summary>
+    /// The email address of the service account.
+    /// It is of the form {serviceAccountName}@{clientId}.adskserviceaccount.autodesk.com.
+    /// </summary>
+    /// <value>
+    /// The email address of the service account.
+    /// It is of the form {serviceAccountName}@{clientId}.adskserviceaccount.autodesk.com.
+    /// </value>
+    [DataMember(Name = "email", EmitDefaultValue = false)]
+    public string Email { get; set; }
 
-	/// <summary>
-	/// Returns the string presentation of the object.
-	/// </summary>
-	/// <returns>
-	/// String presentation of the object.
-	/// </returns>
-	public override string ToString()
-	{
-		return JsonConvert.SerializeObject(this, Formatting.Indented);
-	}
+    /// <summary>
+    /// Returns the string presentation of the object.
+    /// </summary>
+    /// <returns>
+    /// String presentation of the object.
+    /// </returns>
+    public override string ToString()
+    {
+        return JsonConvert.SerializeObject(this, Formatting.Indented);
+    }
 }

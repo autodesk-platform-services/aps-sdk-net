@@ -30,14 +30,14 @@ namespace Autodesk.Authentication.SecureServiceAccount;
 /// </summary>
 public abstract class ServiceApiException : HttpRequestException
 {
-	public HttpResponseMessage HttpResponseMessage { get; set; }
+    public HttpResponseMessage HttpResponseMessage { get; set; }
 
-	public ServiceApiException(string message) : base(message) { }
+    public ServiceApiException(string message) : base(message) { }
 
-	public ServiceApiException(string message, HttpResponseMessage httpResponseMessage, Exception exception) : base(message, exception)
-	{
-		HttpResponseMessage = httpResponseMessage;
-	}
+    public ServiceApiException(string message, HttpResponseMessage httpResponseMessage, Exception exception) : base(message, exception)
+    {
+        HttpResponseMessage = httpResponseMessage;
+    }
 }
 
 /// <summary>
@@ -45,7 +45,7 @@ public abstract class ServiceApiException : HttpRequestException
 /// </summary>
 public class SecureServiceAccountApiException : ServiceApiException
 {
-	public SecureServiceAccountApiException(string message) : base(message) { }
+    public SecureServiceAccountApiException(string message) : base(message) { }
 
-	public SecureServiceAccountApiException(string message, HttpResponseMessage httpResponseMessage, Exception exception) : base(message, httpResponseMessage, exception) { }
+    public SecureServiceAccountApiException(string message, HttpResponseMessage httpResponseMessage, Exception exception) : base(message, httpResponseMessage, exception) { }
 }

@@ -20,8 +20,8 @@
  * limitations under the License.
  */
 
-using Newtonsoft.Json;
 using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace Autodesk.Authentication.SecureServiceAccount.Model;
 
@@ -31,37 +31,37 @@ namespace Autodesk.Authentication.SecureServiceAccount.Model;
 [DataContract]
 public partial class ServiceAccountUpdatePayload
 {
-   /// <summary>
-   /// Initializes a new instance of the <see cref="ServiceAccountUpdatePayload" /> class.
-   /// </summary>
-   public ServiceAccountUpdatePayload()
-	{ }
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ServiceAccountUpdatePayload" /> class.
+    /// </summary>
+    public ServiceAccountUpdatePayload()
+    { }
 
-   /// <summary>
-	/// Gets or sets the status of the service account. Possible values:
-	/// 
-	/// - `ENABLED` -
-	/// - `DISABLED` -
-	/// 
-   /// </summary>
-   /// <value>
-	/// Gets or sets the status of the service account. Possible values:
-	/// 
-	/// - `ENABLED` -
-	/// - `DISABLED` -
-	/// 
-   /// </value>
-   [DataMember(Name = "status", EmitDefaultValue = true)]
-	public ServiceAccountStatus Status { get; set; }
+    /// <summary>
+    /// Gets or sets the status of the service account. Possible values:
+    /// 
+    /// - `ENABLED` -
+    /// - `DISABLED` -
+    /// 
+    /// </summary>
+    /// <value>
+    /// Gets or sets the status of the service account. Possible values:
+    /// 
+    /// - `ENABLED` -
+    /// - `DISABLED` -
+    /// 
+    /// </value>
+    [DataMember(Name = "status", EmitDefaultValue = true)]
+    public ServiceAccountStatus Status { get; set; }
 
-	/// <summary>
-	/// Returns the string presentation of the object.
-	/// </summary>
-	/// <returns>
-	/// String presentation of the object.
-	/// </returns>
-	public override string ToString()
-	{
-		return JsonConvert.SerializeObject(this, Formatting.Indented);
-	}
+    /// <summary>
+    /// Returns the string presentation of the object.
+    /// </summary>
+    /// <returns>
+    /// String presentation of the object.
+    /// </returns>
+    public override string ToString()
+    {
+        return JsonConvert.SerializeObject(this, Formatting.Indented);
+    }
 }

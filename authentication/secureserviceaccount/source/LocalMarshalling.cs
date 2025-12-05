@@ -21,9 +21,9 @@
  */
 
 using System;
-using Newtonsoft.Json;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Autodesk.Authentication.SecureServiceAccount.Client;
 
@@ -32,78 +32,68 @@ namespace Autodesk.Authentication.SecureServiceAccount.Client;
 /// </summary>
 public partial class LocalMarshalling
 {
-	private JsonSerializerSettings _serializerSettings = new()
-	{
-		ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor
-	};
+    /// <summary>
+    /// If parameter is DateTime, output in a formatted string (default ISO 8601)
+    /// Otherwise just return the string.
+    /// </summary>
+    /// <param name="obj">The parameter (header, path, query, form).</param>
+    /// <returns>Formatted string.</returns>
+    public static string ParameterToString(object obj)
+    {
+        // https://docs.microsoft.com/en-us/dotnet/standard/base-types/standard-date-and-time-format-strings#Roundtrip
+        return obj is DateTime
+            ? ((DateTime)obj).ToString("o")
+            : Convert.ToString(obj);
+    }
 
-	/// <summary>
-	/// If parameter is DateTime, output in a formatted string (default ISO 8601)
-	/// Otherwise just return the string.
-	/// </summary>
-	/// <param name="obj">The parameter (header, path, query, form).</param>
-	/// <returns>Formatted string.</returns>
-	public static string ParameterToString(object obj)
-	{
-		if (obj is DateTime)
-		{
-			// https://docs.microsoft.com/en-us/dotnet/standard/base-types/standard-date-and-time-format-strings#Roundtrip
-			return ((DateTime)obj).ToString("o");
-		}
-		else
-		{
-			return Convert.ToString(obj);
-		}
-	}
+    public static async Task<T> DeserializeAsync<T>(HttpContent content)
+    {
+        ArgumentNullException.ThrowIfNull(content);
 
-	public static async Task<T> DeserializeAsync<T>(HttpContent content)
-	{
-		ArgumentNullException.ThrowIfNull(content);
+        // Don't deserialize Stream - this is fix for download scenarios.
+        if (typeof(T) == typeof(System.IO.Stream))
+        {
+            return await (dynamic)content.ReadAsStreamAsync();
+        }
 
-		// Don't deserialize Stream - this is fix for download scenarios.
-		if (typeof(T) == typeof(System.IO.Stream))
-		{
-			return await (dynamic)content.ReadAsStreamAsync();
-		}
+        string mediaType = content.Headers.ContentType?.MediaType;
+        if (mediaType != "application/json" && mediaType != "text/plain")
+        {
+            throw new ArgumentException($"Content-Type must be application/json. '{mediaType}' was specified.");
+        }
 
-		string mediaType = content.Headers.ContentType?.MediaType;
-		if (mediaType != "application/json" && mediaType != "text/plain")
-		{
-			throw new ArgumentException($"Content-Type must be application/json. '{mediaType}' was specified.");
-		}
+        var str = await content.ReadAsStringAsync();
+        return JsonConvert.DeserializeObject<T>(str);
+    }
 
-		var str = await content.ReadAsStringAsync();
-		return JsonConvert.DeserializeObject<T>(str);
-	}
+    /// <summary>
+    /// Deserialize the JSON string into a proper object.
+    /// </summary>
+    /// <param name="content">The HTTP response.</param>
+    /// <param name="type">Object type.</param>
+    /// <returns>Object representation of the JSON string.</returns>
+    public static object Deserialize(HttpContent content, Type type)
+    {
+        return JsonConvert.DeserializeObject(content.ReadAsStringAsync().Result, type);
+    }
 
-	/// <summary>
-	/// Deserialize the JSON string into a proper object.
-	/// </summary>
-	/// <param name="content">The HTTP response.</param>
-	/// <param name="type">Object type.</param>
-	/// <returns>Object representation of the JSON string.</returns>
-	public static object Deserialize(HttpContent content, Type type)
-	{
-		return JsonConvert.DeserializeObject(content.ReadAsStringAsync().Result, type);
-	}
+    /// <summary>
+    /// Serialize an input (model) into JSON string
+    /// </summary>
+    /// <param name="obj">Object.</param>
+    /// <returns>HttpContent</returns>
+    public static HttpContent Serialize(object obj, string contentType)
+    {
+        return new StringContent(JsonConvert.SerializeObject(obj));
+    }
 
-	/// <summary>
-	/// Serialize an input (model) into JSON string
-	/// </summary>
-	/// <param name="obj">Object.</param>
-	/// <returns>HttpContent</returns>
-	public static HttpContent Serialize(object obj, string contentType)
-	{
-		return new StringContent(JsonConvert.SerializeObject(obj));
-	}
+    public static string SetPathVariable(string path, string name, object value)
+    {
+        return path.Replace($"", value.ToString());
+    }
 
-	public static string SetPathVariable(string path, string name, object value)
-	{
-		return path.Replace($"", value.ToString());
-	}
-
-	public static string AddQuery(string localVarPath, string v, string page)
-	{
-		throw new NotImplementedException();
-	}
+    public static string AddQuery(string localVarPath, string v, string page)
+    {
+        throw new NotImplementedException();
+    }
 }
