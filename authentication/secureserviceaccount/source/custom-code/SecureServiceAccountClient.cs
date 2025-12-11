@@ -28,6 +28,7 @@ using System.Net.Http;
 using System.Runtime.Serialization;
 using System.Security.Claims;
 using System.Security.Cryptography;
+using System.Text.Json;
 using Autodesk.Authentication.SecureServiceAccount.Http;
 using Autodesk.Authentication.SecureServiceAccount.Model;
 using Autodesk.Forge.Core;
@@ -543,18 +544,19 @@ public class SecureServiceAccountClient : BaseClient
             KeyId = keyId,
         };
 
-        List<Claim> claims =
-        [
-           new(JwtRegisteredClaimNames.Sub, serviceAccountId),
-         new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString("N")),
-      ];
-
-        foreach (var scope in scopes)
+        var scopeValues = scopes.Select(scope =>
         {
             var memberInfo = typeof(Scopes).GetMember(scope.ToString()).FirstOrDefault();
             var attribute = Attribute.GetCustomAttributes(memberInfo, typeof(EnumMemberAttribute)).FirstOrDefault();
-            claims.Add(new("scope", ((EnumMemberAttribute)attribute)?.Value));
-        }
+            return ((EnumMemberAttribute)attribute)?.Value;
+        }).ToList();
+
+        List<Claim> claims =
+        [
+            new(JwtRegisteredClaimNames.Sub, serviceAccountId),
+            new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString("N")),
+            new("scope", JsonSerializer.Serialize(scopeValues), JsonClaimValueTypes.JsonArray)
+        ];
 
         var currentTime = DateTime.UtcNow;
         var expirationTime = currentTime.AddSeconds(lifetimeSeconds);
