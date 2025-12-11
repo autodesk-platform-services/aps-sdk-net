@@ -386,4 +386,5 @@ namespace Autodesk.Construction.AccountAdmin.Model
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
     }
+
 }
