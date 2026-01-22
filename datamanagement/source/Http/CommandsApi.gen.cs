@@ -4,8 +4,9 @@
  * The Autodesk Platform Services (formerly Forge Platform) contain an expanding collection of web service components that can be used with Autodesk cloud-based products or your own technologies. Take advantage of Autodesk’s expertise in design and engineering.
  *
  * Data Management
+ * The Data Management API provides a unified and consistent way to access data across BIM 360 Team, Fusion Team (formerly known as A360 Team), BIM 360 Docs, Forma, A360 Personal, and the Object Storage Service.  With this API, you can accomplish a number of workflows, including accessing a Fusion model in Fusion Team and getting an ordered structure of items, IDs, and properties for generating a bill of materials in a 3rd-party process. Or, you might want to superimpose a Fusion model and a building model to use in the Viewer.
  *
- * The Data Management API provides a unified and consistent way to access data across BIM 360 Team, Fusion Team (formerly known as A360 Team), BIM 360 Docs, A360 Personal, and the Object Storage Service.  With this API, you can accomplish a number of workflows, including accessing a Fusion model in Fusion Team and getting an ordered structure of items, IDs, and properties for generating a bill of materials in a 3rd-party process. Or, you might want to superimpose a Fusion model and a building model to use in the Viewer.
+ * Contact: aps.help@autodesk.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,30 +47,30 @@ namespace Autodesk.DataManagement.Http
         /// </summary>
         /// <remarks>
         ///Executes the command that you specify in the request body. Commands enable you to perform general operations on multiple resources.
-///
-///For example, you can check whether a user has permission to delete a collection of versions, items, and folders.
-///
-///The command as well as the input data for the command are specified using the `data` object of the request body. 
-///
-///For more information about commands see the [Commands](/en/docs/data/v2/overview/commands/) section in the Developer's Guide.
+        ///
+        ///For example, you can check whether a user has permission to delete a collection of versions, items, and folders.
+        ///
+        ///The command as well as the input data for the command are specified using the `data` object of the request body. 
+        ///
+        ///For more information about commands see the [Commands](/en/docs/data/v2/overview/commands/) section in the Developer's Guide.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-         /// <param name="projectId">
-         ///The unique identifier of a project. 
-///
-///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
-///
-///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
-         /// </param>
-         /// <param name="xUserId">
-         ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
-         /// </param>
-         /// <param name="commandPayload">
-         /// (optional)
-         /// </param>
+        /// <param name="projectId">
+        ///The unique identifier of a project. 
+        ///
+        ///For BIM 360 Docs, a Data Management Hub ID corresponds to an Account ID. For Forma, a Data Management Hub ID corresponds to a Forma Hub ID. To convert either to a Data Management Hub ID, prefix the ID with `b.` For example, a BIM 360 Account ID or Forma Hub ID of `c8b0c73d-3ae9` translates to a Data Management Hub ID of `b.c8b0c73d-3ae9`.
+        ///
+        ///Similarly, to convert BIM 360 or Forma Project IDs to Data Management Project IDs, prefix them with `b.` For example, a Project ID of `c8b0c73d-3ae9` becomes `b.c8b0c73d-3ae9`.
+        /// </param>
+        /// <param name="commandPayload">
+        ///
+        /// </param>
+        /// <param name="xUserId">
+        ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
+        /// </param>
         /// <returns>Task of ApiResponse&lt;Command&gt;</returns>
-        
-        System.Threading.Tasks.Task<ApiResponse<Command>> ExecuteCommandAsync (string projectId, string xUserId= default(string), CommandPayload commandPayload= default(CommandPayload),  string accessToken = null, bool throwOnError = true);
+
+        System.Threading.Tasks.Task<ApiResponse<Command>> ExecuteCommandAsync(string projectId, string xUserId = default(string), CommandPayload commandPayload = default(CommandPayload), string accessToken = null, bool throwOnError = true);
     }
 
     /// <summary>
@@ -142,27 +143,27 @@ namespace Autodesk.DataManagement.Http
         }
         private void SetHeader(string baseName, object value, HttpRequestMessage req)
         {
-                if(value is DateTime)
+            if (value is DateTime)
+            {
+                if ((DateTime)value != DateTime.MinValue)
                 {
-                    if((DateTime)value != DateTime.MinValue)
+                    req.Headers.TryAddWithoutValidation(baseName, LocalMarshalling.ParameterToString(value)); // header parameter
+                }
+            }
+            else
+            {
+                if (value != null)
+                {
+                    if (!string.Equals(baseName, "Content-Range"))
                     {
                         req.Headers.TryAddWithoutValidation(baseName, LocalMarshalling.ParameterToString(value)); // header parameter
                     }
-                }
-                else
-                {
-                    if (value != null)
+                    else
                     {
-                        if(!string.Equals(baseName, "Content-Range"))
-                        {
-                            req.Headers.TryAddWithoutValidation(baseName, LocalMarshalling.ParameterToString(value)); // header parameter
-                        }
-                        else
-                        {
-                            req.Content.Headers.Add(baseName, LocalMarshalling.ParameterToString(value));
-                        }
+                        req.Content.Headers.Add(baseName, LocalMarshalling.ParameterToString(value));
                     }
                 }
+            }
 
         }
 
@@ -170,37 +171,37 @@ namespace Autodesk.DataManagement.Http
         /// Gets or sets the ApsConfiguration object
         /// </summary>
         /// <value>An instance of the ForgeService</value>
-        public ForgeService Service {get; set;}
+        public ForgeService Service { get; set; }
 
         /// <summary>
         /// Execute a Command
         /// </summary>
         /// <remarks>
         ///Executes the command that you specify in the request body. Commands enable you to perform general operations on multiple resources.
-///
-///For example, you can check whether a user has permission to delete a collection of versions, items, and folders.
-///
-///The command as well as the input data for the command are specified using the `data` object of the request body. 
-///
-///For more information about commands see the [Commands](/en/docs/data/v2/overview/commands/) section in the Developer's Guide.
+        ///
+        ///For example, you can check whether a user has permission to delete a collection of versions, items, and folders.
+        ///
+        ///The command as well as the input data for the command are specified using the `data` object of the request body. 
+        ///
+        ///For more information about commands see the [Commands](/en/docs/data/v2/overview/commands/) section in the Developer's Guide.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-         /// <param name="projectId">
-         ///The unique identifier of a project. 
-///
-///For BIM 360 Docs and ACC Docs, a hub ID corresponds to an Account ID. To convert a BIM 360 or ACC Account ID to a hub ID, prefix the Account ID with `b.`. For example, an Account ID of ``c8b0c73d-3ae9`` translates to a hub ID of `b.c8b0c73d-3ae9`.
-///
-///Similarly, to convert an ACC or BIM 360 project ID to a Data Management project ID prefix the ACC or BIM 360 project ID with `b.`. For example, a project ID of `c8b0c73d-3ae9` translates to a project ID of `b.c8b0c73d-3ae9`.
-         /// </param>
-         /// <param name="xUserId">
-         ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
-         /// </param>
-         /// <param name="commandPayload">
-         /// (optional)
-         /// </param>
+        /// <param name="projectId">
+        ///The unique identifier of a project. 
+        ///
+        ///For BIM 360 Docs, a Data Management Hub ID corresponds to an Account ID. For Forma, a Data Management Hub ID corresponds to a Forma Hub ID. To convert either to a Data Management Hub ID, prefix the ID with `b.` For example, a BIM 360 Account ID or Forma Hub ID of `c8b0c73d-3ae9` translates to a Data Management Hub ID of `b.c8b0c73d-3ae9`.
+        ///
+        ///Similarly, to convert BIM 360 or Forma Project IDs to Data Management Project IDs, prefix them with `b.` For example, a Project ID of `c8b0c73d-3ae9` becomes `b.c8b0c73d-3ae9`.
+        /// </param>
+        /// <param name="commandPayload">
+        ///
+        /// </param>
+        /// <param name="xUserId">
+        ///In a two-legged authentication context, an app has access to all users specified by the administrator in the SaaS integrations UI. By providing this header, the API call will be limited to act only on behalf of the specified user. (optional)
+        /// </param>
         /// <returns>Task of ApiResponse&lt;Command&gt;></returns>
-        
-        public async System.Threading.Tasks.Task<ApiResponse<Command>> ExecuteCommandAsync (string projectId,string xUserId= default(string),CommandPayload commandPayload= default(CommandPayload), string accessToken = null, bool throwOnError = true)
+
+        public async System.Threading.Tasks.Task<ApiResponse<Command>> ExecuteCommandAsync(string projectId, string xUserId = default(string), CommandPayload commandPayload = default(CommandPayload), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into ExecuteCommandAsync ");
             using (var request = new HttpRequestMessage())
@@ -216,7 +217,7 @@ namespace Autodesk.DataManagement.Http
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
                 request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/DATA MANAGEMENT/C#/2.0.3");
-                if(!string.IsNullOrEmpty(accessToken))
+                if (!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
                 }
@@ -229,21 +230,21 @@ namespace Autodesk.DataManagement.Http
                 // tell the underlying pipeline what scope we'd like to use
                 // if (scopes == null)
                 // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read data:create data:write ");
+                // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read data:create data:write ");
                 // }
                 // else
                 // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
                 // if (scopes == null)
                 // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read data:create data:write ");
+                // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read data:create data:write ");
                 // }
                 // else
                 // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
 
                 request.Method = new HttpMethod("POST");
@@ -255,9 +256,11 @@ namespace Autodesk.DataManagement.Http
                 {
                     try
                     {
-                      await response.EnsureSuccessStatusCodeAsync();
-                    } catch (HttpRequestException ex) {
-                      throw new DataManagementApiException(ex.Message, response, ex);
+                        await response.EnsureSuccessStatusCodeAsync();
+                    }
+                    catch (HttpRequestException ex)
+                    {
+                        throw new DataManagementApiException(ex.Message, response, ex);
                     }
                 }
                 else if (!response.IsSuccessStatusCode)
