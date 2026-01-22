@@ -38,24 +38,24 @@ namespace Autodesk.ModelDerivative.Model
     ///    
     ///- `US` - Data center for the US region.
     ///- `EMEA` - Data center for the European Union, Middle East, and Africa. 
-    ///- `AUS` - (Beta) Data center for the Australia region.
-    ///- `CAN` : Data center for the Canada region.
-    ///- `DEU` : Data center for the Germany region.
-    ///- `IND` : Data center for the India region.
-    ///- `JPN` : Data center for the Japan region.
-    ///- `GBR`  : Data center for the United Kingdom region.
+    ///- `AUS` - Data center for the Australia region.
+    ///- `CAN` - Data center for the Canada region.
+    ///- `DEU` - Data center for the Germany region.
+    ///- `IND` - Data center for the India region.
+    ///- `JPN` - Data center for the Japan region.
+    ///- `GBR` - Data center for the United Kingdom region.
     ///**Note**: Beta features are subject to change. Please avoid using them in production environments.
     /// </summary>
     ///<value>Specifies where the referenced files are stored. Possible values are: 
     ///    
     ///- `US` - Data center for the US region.
     ///- `EMEA` - Data center for the European Union, Middle East, and Africa. 
-    ///- `AUS` - (Beta) Data center for the Australia region.
-    ///- `CAN` : Data center for the Canada region.
-    ///- `DEU` : Data center for the Germany region.
-    ///- `IND` : Data center for the India region.
-    ///- `JPN` : Data center for the Japan region.
-    ///- `GBR`  : Data center for the United Kingdom region.
+    ///- `AUS` - Data center for the Australia region.
+    ///- `CAN` - Data center for the Canada region.
+    ///- `DEU` - Data center for the Germany region.
+    ///- `IND` - Data center for the India region.
+    ///- `JPN` - Data center for the Japan region.
+    ///- `GBR` - Data center for the United Kingdom region.
     ///**Note**: Beta features are subject to change. Please avoid using them in production environments.</value>
     [JsonConverter(typeof(StringEnumConverter))]
 
