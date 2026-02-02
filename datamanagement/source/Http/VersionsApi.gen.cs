@@ -341,7 +341,7 @@ namespace Autodesk.DataManagement.Http
         /// <remarks>
         ///Updates the properties of the specified version of an  item. Currently, you can only change the name of the version.
         ///
-        ///**Note:** This operation is not supported for BIM 360 and ACC. If you want to rename a version, create a new version with a new name.
+        ///**Note:** This operation is not supported for BIM 360 and Forma. If you want to rename a version, create a new version with a new name.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="projectId">
@@ -1411,7 +1411,7 @@ namespace Autodesk.DataManagement.Http
         /// <remarks>
         ///Updates the properties of the specified version of an  item. Currently, you can only change the name of the version.
         ///
-        ///**Note:** This operation is not supported for BIM 360 and ACC. If you want to rename a version, create a new version with a new name.
+        ///**Note:** This operation is not supported for BIM 360 and Forma. If you want to rename a version, create a new version with a new name.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
         /// <param name="projectId">
