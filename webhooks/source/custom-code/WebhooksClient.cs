@@ -55,16 +55,13 @@ namespace Autodesk.Webhooks
         ///
         ///- `US` - (Default) Data center dedicated to serve the United States region.
         ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
-        ///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
+        ///- `AUS` - Data center dedicated to serve the Australia region.
         ///- `CAN` - Data center dedicated to serve the Canada region.
         ///- `DEU` - Data center dedicated to serve the Germany region.
         ///- `IND` - Data center dedicated to serve the India region.
         ///- `JPN` - Data center dedicated to serve the Japan region.
         ///- `GBR` - Data center dedicated to serve the United Kingdom region.
         ///
-        ///**Note:** 
-        ///
-        /// Beta features are subject to change. Please avoid using them in production environments.
         /// </param>
         /// <param name="hookPayload">The payload for the webhook.</param>
         /// <param name="accessToken">An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().(optional)</param>
@@ -102,16 +99,13 @@ namespace Autodesk.Webhooks
         ///
         ///- `US` - (Default) Data center dedicated to serve the United States region.
         ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
-        ///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
+        ///- `AUS` - Data center dedicated to serve the Australia region.
         ///- `CAN` - Data center dedicated to serve the Canada region.
         ///- `DEU` - Data center dedicated to serve the Germany region.
         ///- `IND` - Data center dedicated to serve the India region.
         ///- `JPN` - Data center dedicated to serve the Japan region.
         ///- `GBR` - Data center dedicated to serve the United Kingdom region.
         ///
-        ///**Note:** 
-        ///
-        /// Beta features are subject to change. Please avoid using them in production environments.
         /// </param>
         /// <param name="hookPayload">The payload for the webhook.</param>
         /// <param name="accessToken">An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().(optional)</param>
@@ -150,16 +144,13 @@ namespace Autodesk.Webhooks
         ///
         ///- `US` - (Default) Data center dedicated to serve the United States region.
         ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
-        ///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
+        ///- `AUS` - Data center dedicated to serve the Australia region.
         ///- `CAN` - Data center dedicated to serve the Canada region.
         ///- `DEU` - Data center dedicated to serve the Germany region.
         ///- `IND` - Data center dedicated to serve the India region.
         ///- `JPN` - Data center dedicated to serve the Japan region.
         ///- `GBR` - Data center dedicated to serve the United Kingdom region.
         ///
-        ///**Note:** 
-        ///
-        /// Beta features are subject to change. Please avoid using them in production environments.
         /// </param>
         /// <param name="hookPayload">The payload for the webhook.</param>
         /// <param name="accessToken">An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().(optional)</param>
@@ -195,16 +186,13 @@ namespace Autodesk.Webhooks
         ///
         ///- `US` - (Default) Data center dedicated to serve the United States region.
         ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
-        ///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
+        ///- `AUS` - Data center dedicated to serve the Australia region.
         ///- `CAN` - Data center dedicated to serve the Canada region.
         ///- `DEU` - Data center dedicated to serve the Germany region.
         ///- `IND` - Data center dedicated to serve the India region.
         ///- `JPN` - Data center dedicated to serve the Japan region.
         ///- `GBR` - Data center dedicated to serve the United Kingdom region.
         ///
-        ///**Note:** 
-        ///
-        /// Beta features are subject to change. Please avoid using them in production environments.
         /// </param>
         /// <param name="hookPayload">The payload for the webhook.</param>
         /// <param name="accessToken">An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().(optional)</param>
@@ -247,16 +235,13 @@ namespace Autodesk.Webhooks
         ///
         ///- `US` - (Default) Data center dedicated to serve the United States region.
         ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
-        ///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
+        ///- `AUS` - Data center dedicated to serve the Australia region.
         ///- `CAN` - Data center dedicated to serve the Canada region.
         ///- `DEU` - Data center dedicated to serve the Germany region.
         ///- `IND` - Data center dedicated to serve the India region.
         ///- `JPN` - Data center dedicated to serve the Japan region.
         ///- `GBR` - Data center dedicated to serve the United Kingdom region.
         ///
-        ///**Note:** 
-        ///
-        /// Beta features are subject to change. Please avoid using them in production environments.
         /// </param>
         /// <param name="accessToken">An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().(optional)</param>
         /// <param name="throwOnError">Specifies whether to throw an exception on error. (optional)</param>
@@ -296,16 +281,13 @@ namespace Autodesk.Webhooks
         ///
         ///- `US` - (Default) Data center dedicated to serve the United States region.
         ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
-        ///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
+        ///- `AUS` - Data center dedicated to serve the Australia region.
         ///- `CAN` - Data center dedicated to serve the Canada region.
         ///- `DEU` - Data center dedicated to serve the Germany region.
         ///- `IND` - Data center dedicated to serve the India region.
         ///- `JPN` - Data center dedicated to serve the Japan region.
         ///- `GBR` - Data center dedicated to serve the United Kingdom region.
         ///
-        ///**Note:** 
-        ///
-        /// Beta features are subject to change. Please avoid using them in production environments.
         /// </param>
         /// <param name="accessToken">An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().(optional)</param>
         /// <param name="throwOnError">Specifies whether to throw an exception on error. (optional)</param>
@@ -353,16 +335,13 @@ namespace Autodesk.Webhooks
         ///
         ///- `US` - (Default) Data center dedicated to serve the United States region.
         ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
-        ///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
+        ///- `AUS` - Data center dedicated to serve the Australia region.
         ///- `CAN` - Data center dedicated to serve the Canada region.
         ///- `DEU` - Data center dedicated to serve the Germany region.
         ///- `IND` - Data center dedicated to serve the India region.
         ///- `JPN` - Data center dedicated to serve the Japan region.
         ///- `GBR` - Data center dedicated to serve the United Kingdom region.
         ///
-        ///**Note:** 
-        ///
-        /// Beta features are subject to change. Please avoid using them in production environments.
         /// </param>
         /// <param name="sort">
         ///Specifies the sorting order of the list of webhooks by their `lastUpdatedDate` attribute. 
@@ -410,16 +389,13 @@ namespace Autodesk.Webhooks
         ///
         ///- `US` - (Default) Data center dedicated to serve the United States region.
         ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
-        ///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
+        ///- `AUS` - Data center dedicated to serve the Australia region.
         ///- `CAN` - Data center dedicated to serve the Canada region.
         ///- `DEU` - Data center dedicated to serve the Germany region.
         ///- `IND` - Data center dedicated to serve the India region.
         ///- `JPN` - Data center dedicated to serve the Japan region.
         ///- `GBR` - Data center dedicated to serve the United Kingdom region.
         ///
-        ///**Note:** 
-        ///
-        /// Beta features are subject to change. Please avoid using them in production environments.
         /// </param>
         /// <param name="accessToken">An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().(optional)</param>
         /// <param name="throwOnError">Specifies whether to throw an exception on error. (optional)</param>
@@ -460,16 +436,13 @@ namespace Autodesk.Webhooks
         ///
         ///- `US` - (Default) Data center dedicated to serve the United States region.
         ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
-        ///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
+        ///- `AUS` - Data center dedicated to serve the Australia region.
         ///- `CAN` - Data center dedicated to serve the Canada region.
         ///- `DEU` - Data center dedicated to serve the Germany region.
         ///- `IND` - Data center dedicated to serve the India region.
         ///- `JPN` - Data center dedicated to serve the Japan region.
         ///- `GBR` - Data center dedicated to serve the United Kingdom region.
         ///
-        ///**Note:** 
-        ///
-        /// Beta features are subject to change. Please avoid using them in production environments.
         /// </param>
         /// <param name="accessToken">An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().(optional)</param>
         /// <param name="throwOnError">Specifies whether to throw an exception on error. (optional)</param>
@@ -515,16 +488,13 @@ namespace Autodesk.Webhooks
         ///
         ///- `US` - (Default) Data center dedicated to serve the United States region.
         ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
-        ///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
+        ///- `AUS` - Data center dedicated to serve the Australia region.
         ///- `CAN` - Data center dedicated to serve the Canada region.
         ///- `DEU` - Data center dedicated to serve the Germany region.
         ///- `IND` - Data center dedicated to serve the India region.
         ///- `JPN` - Data center dedicated to serve the Japan region.
         ///- `GBR` - Data center dedicated to serve the United Kingdom region.
         ///
-        ///**Note:** 
-        ///
-        /// Beta features are subject to change. Please avoid using them in production environments.
         /// </param>
         /// <param name="accessToken">An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().(optional)</param>
         /// <param name="throwOnError">Specifies whether to throw an exception on error. (optional)</param>
@@ -565,16 +535,13 @@ namespace Autodesk.Webhooks
         ///
         ///- `US` - (Default) Data center dedicated to serve the United States region.
         ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
-        ///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
+        ///- `AUS` - Data center dedicated to serve the Australia region.
         ///- `CAN` - Data center dedicated to serve the Canada region.
         ///- `DEU` - Data center dedicated to serve the Germany region.
         ///- `IND` - Data center dedicated to serve the India region.
         ///- `JPN` - Data center dedicated to serve the Japan region.
         ///- `GBR` - Data center dedicated to serve the United Kingdom region.
         ///
-        ///**Note:** 
-        ///
-        /// Beta features are subject to change. Please avoid using them in production environments.
         /// </param>
         /// <param name="scopeName">
         ///Filters retrieved webhooks by the scope name used to create hook. For example : `folder`.  If this parameter is not specified, the filter is not applied. (optional)
@@ -629,16 +596,13 @@ namespace Autodesk.Webhooks
         ///
         ///- `US` - (Default) Data center dedicated to serve the United States region.
         ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
-        ///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
+        ///- `AUS` - Data center dedicated to serve the Australia region.
         ///- `CAN` - Data center dedicated to serve the Canada region.
         ///- `DEU` - Data center dedicated to serve the Germany region.
         ///- `IND` - Data center dedicated to serve the India region.
         ///- `JPN` - Data center dedicated to serve the Japan region.
         ///- `GBR` - Data center dedicated to serve the United Kingdom region.
         ///
-        ///**Note:** 
-        ///
-        /// Beta features are subject to change. Please avoid using them in production environments.
         /// </param>
         /// <param name="scopeName">
         ///Filters retrieved webhooks by the scope name used to create hook. For example : `folder`.  If this parameter is not specified, the filter is not applied. (optional)
@@ -701,16 +665,13 @@ namespace Autodesk.Webhooks
         ///
         ///- `US` - (Default) Data center dedicated to serve the United States region.
         ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
-        ///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
+        ///- `AUS` - Data center dedicated to serve the Australia region.
         ///- `CAN` - Data center dedicated to serve the Canada region.
         ///- `DEU` - Data center dedicated to serve the Germany region.
         ///- `IND` - Data center dedicated to serve the India region.
         ///- `JPN` - Data center dedicated to serve the Japan region.
         ///- `GBR` - Data center dedicated to serve the United Kingdom region.
         ///
-        ///**Note:** 
-        ///
-        /// Beta features are subject to change. Please avoid using them in production environments.
         /// </param>
         /// <param name="accessToken">An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().(optional)</param>
         /// <param name="throwOnError">Specifies whether to throw an exception on error. (optional)</param>
@@ -759,16 +720,13 @@ namespace Autodesk.Webhooks
         ///
         ///- `US` - (Default) Data center dedicated to serve the United States region.
         ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
-        ///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
+        ///- `AUS` - Data center dedicated to serve the Australia region.
         ///- `CAN` - Data center dedicated to serve the Canada region.
         ///- `DEU` - Data center dedicated to serve the Germany region.
         ///- `IND` - Data center dedicated to serve the India region.
         ///- `JPN` - Data center dedicated to serve the Japan region.
         ///- `GBR` - Data center dedicated to serve the United Kingdom region.
         ///
-        ///**Note:** 
-        ///
-        /// Beta features are subject to change. Please avoid using them in production environments.
         /// </param>
         /// <param name="accessToken">An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().(optional)</param>
         /// <param name="throwOnError">Specifies whether to throw an exception on error. (optional)</param>
@@ -823,16 +781,13 @@ namespace Autodesk.Webhooks
         ///
         ///- `US` - (Default) Data center dedicated to serve the United States region.
         ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
-        ///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
+        ///- `AUS` - Data center dedicated to serve the Australia region.
         ///- `CAN` - Data center dedicated to serve the Canada region.
         ///- `DEU` - Data center dedicated to serve the Germany region.
         ///- `IND` - Data center dedicated to serve the India region.
         ///- `JPN` - Data center dedicated to serve the Japan region.
         ///- `GBR` - Data center dedicated to serve the United Kingdom region.
         ///
-        ///**Note:** 
-        ///
-        /// Beta features are subject to change. Please avoid using them in production environments.
         /// </param>   
         /// <param name="accessToken">An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().(optional)</param>
         /// <param name="throwOnError">Specifies whether to throw an exception on error. (optional)</param>
@@ -885,16 +840,13 @@ namespace Autodesk.Webhooks
         ///
         ///- `US` - (Default) Data center dedicated to serve the United States region.
         ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
-        ///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
+        ///- `AUS` - Data center dedicated to serve the Australia region.
         ///- `CAN` - Data center dedicated to serve the Canada region.
         ///- `DEU` - Data center dedicated to serve the Germany region.
         ///- `IND` - Data center dedicated to serve the India region.
         ///- `JPN` - Data center dedicated to serve the Japan region.
         ///- `GBR` - Data center dedicated to serve the United Kingdom region.
         ///
-        ///**Note:** 
-        ///
-        /// Beta features are subject to change. Please avoid using them in production environments.
         /// </param>   
         /// <param name="accessToken">An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().(optional)</param>
         /// <param name="throwOnError">Specifies whether to throw an exception on error. (optional)</param>
@@ -943,16 +895,13 @@ namespace Autodesk.Webhooks
         ///
         ///- `US` - (Default) Data center dedicated to serve the United States region.
         ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
-        ///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
+        ///- `AUS` - Data center dedicated to serve the Australia region.
         ///- `CAN` - Data center dedicated to serve the Canada region.
         ///- `DEU` - Data center dedicated to serve the Germany region.
         ///- `IND` - Data center dedicated to serve the India region.
         ///- `JPN` - Data center dedicated to serve the Japan region.
         ///- `GBR` - Data center dedicated to serve the United Kingdom region.
         ///
-        ///**Note:** 
-        ///
-        /// Beta features are subject to change. Please avoid using them in production environments.
         /// </param>
         /// <param name="accessToken">An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().(optional)</param>
         /// <param name="throwOnError">Specifies whether to throw an exception on error. (optional)</param>
@@ -994,16 +943,13 @@ namespace Autodesk.Webhooks
         ///
         ///- `US` - (Default) Data center dedicated to serve the United States region.
         ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
-        ///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
+        ///- `AUS` - Data center dedicated to serve the Australia region.
         ///- `CAN` - Data center dedicated to serve the Canada region.
         ///- `DEU` - Data center dedicated to serve the Germany region.
         ///- `IND` - Data center dedicated to serve the India region.
         ///- `JPN` - Data center dedicated to serve the Japan region.
         ///- `GBR` - Data center dedicated to serve the United Kingdom region.
         ///
-        ///**Note:** 
-        ///
-        /// Beta features are subject to change. Please avoid using them in production environments.
         /// </param>
         /// <param name="accessToken">An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().(optional)</param>
         /// <param name="throwOnError">Specifies whether to throw an exception on error. (optional)</param>       
@@ -1048,16 +994,13 @@ namespace Autodesk.Webhooks
         ///
         ///- `US` - (Default) Data center dedicated to serve the United States region.
         ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
-        ///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
+        ///- `AUS` - Data center dedicated to serve the Australia region.
         ///- `CAN` - Data center dedicated to serve the Canada region.
         ///- `DEU` - Data center dedicated to serve the Germany region.
         ///- `IND` - Data center dedicated to serve the India region.
         ///- `JPN` - Data center dedicated to serve the Japan region.
         ///- `GBR` - Data center dedicated to serve the United Kingdom region.
         ///
-        ///**Note:** 
-        ///
-        /// Beta features are subject to change. Please avoid using them in production environments.
         /// </param>
         /// <param name="accessToken">An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().(optional)</param>
         /// <param name="throwOnError">Specifies whether to throw an exception on error. (optional)</param>       
