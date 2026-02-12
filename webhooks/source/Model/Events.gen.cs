@@ -36,13 +36,9 @@ namespace Autodesk.Webhooks.Model
     /// <summary>
     /// Defines Events
     /// </summary>
-    ///<value></value>
-    
-    [JsonConverter(typeof(StringEnumConverter))]
-    
+    [JsonConverter(typeof(StringEnumConverter))]    
     public enum Events
-    {
-        
+    {        
         /// <summary>
         /// Enum ExtractionFinished for value: extraction.finished
         /// </summary>
@@ -551,7 +547,30 @@ namespace Autodesk.Webhooks.Model
         /// Enum IssueUnlinked10 for value: issue.unlinked-1.0
         /// </summary>
         [EnumMember(Value = "issue.unlinked-1.0")]
-        IssueUnlinked10
-    }
+        IssueUnlinked10,
 
+        /// <summary>
+        /// Enum DtApplyTemplate for value: dt.applyTemplate
+        /// </summary>
+        [EnumMember(Value = "dt.applyTemplate")]
+        DtApplyTemplate,
+
+        /// <summary>
+        /// Enum DtRemoveTemplate for value: dt.removeTemplate
+        /// </summary>
+        [EnumMember(Value = "dt.removeTemplate")]
+        DtRemoveTemplate,
+
+        /// <summary>
+        /// Enum DtMutation for value: dt.mutation
+        /// </summary>
+        [EnumMember(Value = "dt.mutation")]
+        DtMutation,
+
+        /// <summary>
+        /// Enum DtAlert for value: dt.alert
+        /// </summary>
+        [EnumMember(Value = "dt.alert")]
+        DtAlert
+    }
 }
