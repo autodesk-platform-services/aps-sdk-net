@@ -20,13 +20,13 @@
  * limitations under the License.
  */
 using System;
-using System.Linq;
-using System.IO;
-using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
+using System.Linq;
 using System.Runtime.Serialization;
+using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -36,7 +36,7 @@ namespace Autodesk.Webhooks.Model
     /// A paginated list of webhooks. 
     /// </summary>
     [DataContract]
-    public partial class Hooks 
+    public partial class Hooks
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Hooks" /> class.
@@ -44,11 +44,11 @@ namespace Autodesk.Webhooks.Model
         public Hooks()
         {
         }
-        
+
         /// <summary>
         ///Gets or Sets Links
         /// </summary>
-        [DataMember(Name="links", EmitDefaultValue=false)]
+        [DataMember(Name = "links", EmitDefaultValue = false)]
         public HooksLinks Links { get; set; }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace Autodesk.Webhooks.Model
         /// <value>
         ///An array of objects, where each object represents a webhook.
         /// </value>
-        [DataMember(Name="data", EmitDefaultValue=false)]
+        [DataMember(Name = "data", EmitDefaultValue = false)]
         public List<HookDetails> Data { get; set; }
 
         /// <summary>

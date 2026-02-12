@@ -20,9 +20,9 @@
  * limitations under the License.
  */
 using Autodesk.Forge.Core;
+using Autodesk.Webhooks.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Autodesk.Webhooks.Http;
 
 namespace Autodesk.Webhooks
 {
@@ -40,8 +40,8 @@ namespace Autodesk.Webhooks
         public static IHttpClientBuilder AddWebhooks(this IServiceCollection services, IConfiguration configuration)
         {
             // services.Configure<Configuration>(configuration.GetSection("Forge").GetSection("Webhooks"));
-            services.AddTransient<IHooksApi,HooksApi>();
-            services.AddTransient<ITokensApi,TokensApi>();
+            services.AddTransient<IHooksApi, HooksApi>();
+            services.AddTransient<ITokensApi, TokensApi>();
             // services.AddTransient<WebhooksClient>();
             return services.AddForgeService(configuration);
         }

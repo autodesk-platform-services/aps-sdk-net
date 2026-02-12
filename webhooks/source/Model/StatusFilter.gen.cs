@@ -20,13 +20,13 @@
  * limitations under the License.
  */
 using System;
-using System.Linq;
-using System.IO;
-using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
+using System.Linq;
 using System.Runtime.Serialization;
+using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -34,38 +34,38 @@ namespace Autodesk.Webhooks.Model
 {
     /// <summary>
     /// Filters retrieved webhooks by their current state. Possible values are 
-///
-///- `active` - Successfully delivered most recent event notifications. 
-///- `inactive` - Failed to deliver most recent event notification and has been deactivated.
-///- `reactivated` - Previously inactive but was reactivated. No events have occurred since reactivation (obsolete).
-///
-///If this parameter is not specified, the filter is not applied. See [Event Delivery Guarantees](/en/docs/webhooks/v1/developers_guide/event-delivery-guarantees/) for more information on how the state of a webhook changes.
+    ///
+    ///- `active` - Successfully delivered most recent event notifications. 
+    ///- `inactive` - Failed to deliver most recent event notification and has been deactivated.
+    ///- `reactivated` - Previously inactive but was reactivated. No events have occurred since reactivation (obsolete).
+    ///
+    ///If this parameter is not specified, the filter is not applied. See [Event Delivery Guarantees](/en/docs/webhooks/v1/developers_guide/event-delivery-guarantees/) for more information on how the state of a webhook changes.
     /// </summary>
     ///<value>Filters retrieved webhooks by their current state. Possible values are 
-///
-///- `active` - Successfully delivered most recent event notifications. 
-///- `inactive` - Failed to deliver most recent event notification and has been deactivated.
-///- `reactivated` - Previously inactive but was reactivated. No events have occurred since reactivation (obsolete).
-///
-///If this parameter is not specified, the filter is not applied. See [Event Delivery Guarantees](/en/docs/webhooks/v1/developers_guide/event-delivery-guarantees/) for more information on how the state of a webhook changes.</value>
-    
+    ///
+    ///- `active` - Successfully delivered most recent event notifications. 
+    ///- `inactive` - Failed to deliver most recent event notification and has been deactivated.
+    ///- `reactivated` - Previously inactive but was reactivated. No events have occurred since reactivation (obsolete).
+    ///
+    ///If this parameter is not specified, the filter is not applied. See [Event Delivery Guarantees](/en/docs/webhooks/v1/developers_guide/event-delivery-guarantees/) for more information on how the state of a webhook changes.</value>
+
     [JsonConverter(typeof(StringEnumConverter))]
-    
+
     public enum StatusFilter
     {
-        
+
         /// <summary>
         /// Enum Active for value: active
         /// </summary>
         [EnumMember(Value = "active")]
         Active,
-        
+
         /// <summary>
         /// Enum Inactive for value: inactive
         /// </summary>
         [EnumMember(Value = "inactive")]
         Inactive,
-        
+
         /// <summary>
         /// Enum Reactivated for value: reactivated
         /// </summary>

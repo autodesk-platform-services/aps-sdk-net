@@ -19,18 +19,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-using Autodesk.Forge.Core;
-using Microsoft.Extensions.Options;
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Runtime.Serialization;
-using Autodesk.Webhooks.Model;
+using Autodesk.Forge.Core;
+using Autodesk.SDKManager;
 using Autodesk.Webhooks.Client;
+using Autodesk.Webhooks.Model;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
-using Autodesk.SDKManager;
+using Microsoft.Extensions.Options;
 
 namespace Autodesk.Webhooks.Http
 {
@@ -44,172 +44,172 @@ namespace Autodesk.Webhooks.Http
         /// </summary>
         /// <remarks>
         ///Sets a secret token to verify the authenticity of webhook payloads. 
-///
-///When a webhook event occurs, the service calculates a hash signature using the token and includes it in the event notification. The receiving application listening at the callback URL can verify the payload's integrity by comparing the calculated signature to the one received.
-///
-///The webhooks affected by this operation are determined by the type of access token you use.
-///
-///- Two-legged Access Token: Sets the secret token for all webhooks owned by calling the app.
-///- Three-legged Access Token: Sets the secret token for all webhooks owned by the calling user
-///
-///**Note:** Use the [Update Webhook operation](/en/docs/webhooks/v1/reference/http/webhooks/systems-system-events-event-hooks-hook_id-PATCH/) to set a token for a specific webhook.
-///
-///
-///See the [Secret Token](/en/docs/webhooks/v1/developers_guide/basics/#secret-token) section in API Basics for more information.
+        ///
+        ///When a webhook event occurs, the service calculates a hash signature using the token and includes it in the event notification. The receiving application listening at the callback URL can verify the payload's integrity by comparing the calculated signature to the one received.
+        ///
+        ///The webhooks affected by this operation are determined by the type of access token you use.
+        ///
+        ///- Two-legged Access Token: Sets the secret token for all webhooks owned by calling the app.
+        ///- Three-legged Access Token: Sets the secret token for all webhooks owned by the calling user
+        ///
+        ///**Note:** Use the [Update Webhook operation](/en/docs/webhooks/v1/reference/http/webhooks/systems-system-events-event-hooks-hook_id-PATCH/) to set a token for a specific webhook.
+        ///
+        ///
+        ///See the [Secret Token](/en/docs/webhooks/v1/developers_guide/basics/#secret-token) section in API Basics for more information.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-         /// <param name="xAdsRegion">
-         ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make requests to your callback URL. Possible values:
-///
-///- `US` - (Default) Data center dedicated to serve the United States region.
-///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
-///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
-///- `CAN` - Data center dedicated to serve the Canada region.
-///- `DEU` - Data center dedicated to serve the Germany region.
-///- `IND` - Data center dedicated to serve the India region.
-///- `JPN` - Data center dedicated to serve the Japan region.
-///- `GBR` - Data center dedicated to serve the United Kingdom region.
-///
-///**Note:** 
-///
-///1. Beta features are subject to change. Please avoid using them in production environments.
-///2. You can also use the `region` query string parameter to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
-         /// </param>
-         /// <param name="region">
-         ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make request to your callback URL. Possible values:
-///
-///- `US` - (Default) Data center dedicated to serve the United States region.
-///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
-///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
-///- `CAN` - Data center dedicated to serve the Canada region.
-///- `DEU` - Data center dedicated to serve the Germany region.
-///- `IND` - Data center dedicated to serve the India region.
-///- `JPN` - Data center dedicated to serve the Japan region.
-///- `GBR` - Data center dedicated to serve the United Kingdom region.
-///
-///**Note:** 
-///
-///1. Beta features are subject to change. Please avoid using them in production environments.
-///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
-         /// </param>
-         /// <param name="tokenPayload">
-         /// (optional)
-         /// </param>
+        /// <param name="xAdsRegion">
+        ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make requests to your callback URL. Possible values:
+        ///
+        ///- `US` - (Default) Data center dedicated to serve the United States region.
+        ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+        ///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
+        ///- `CAN` - Data center dedicated to serve the Canada region.
+        ///- `DEU` - Data center dedicated to serve the Germany region.
+        ///- `IND` - Data center dedicated to serve the India region.
+        ///- `JPN` - Data center dedicated to serve the Japan region.
+        ///- `GBR` - Data center dedicated to serve the United Kingdom region.
+        ///
+        ///**Note:** 
+        ///
+        ///1. Beta features are subject to change. Please avoid using them in production environments.
+        ///2. You can also use the `region` query string parameter to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
+        /// </param>
+        /// <param name="region">
+        ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make request to your callback URL. Possible values:
+        ///
+        ///- `US` - (Default) Data center dedicated to serve the United States region.
+        ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+        ///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
+        ///- `CAN` - Data center dedicated to serve the Canada region.
+        ///- `DEU` - Data center dedicated to serve the Germany region.
+        ///- `IND` - Data center dedicated to serve the India region.
+        ///- `JPN` - Data center dedicated to serve the Japan region.
+        ///- `GBR` - Data center dedicated to serve the United Kingdom region.
+        ///
+        ///**Note:** 
+        ///
+        ///1. Beta features are subject to change. Please avoid using them in production environments.
+        ///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
+        /// </param>
+        /// <param name="tokenPayload">
+        /// (optional)
+        /// </param>
         /// <returns>Task of ApiResponse&lt;Token&gt;</returns>
-        
-        System.Threading.Tasks.Task<ApiResponse<Token>> CreateTokenAsync (XAdsRegion? xAdsRegion= null, Region? region= null, TokenPayload tokenPayload= default(TokenPayload),  string accessToken = null, bool throwOnError = true);
+
+        System.Threading.Tasks.Task<ApiResponse<Token>> CreateTokenAsync(XAdsRegion? xAdsRegion = null, Region? region = null, TokenPayload tokenPayload = default(TokenPayload), string accessToken = null, bool throwOnError = true);
         /// <summary>
         /// Delete Secret Token
         /// </summary>
         /// <remarks>
         ///Removes an existing secret token from the webhooks impacted by this operation. 
-///
-///The webhooks affected by this operation are determined by the type of access token you use.
-///
-///- Two-legged Access Token: Sets the secret token for all webhooks owned by calling the app.
-///- Three-legged Access Token: Sets the secrety token for all webhooks owned by the calling user
-///
-///Note that there can be a delay of up to 10 minutes while the change takes effect. We recommend that your callback accept both secret token values for a period of time to allow all requests to go through.
-///
-///See the [Secret Token](/en/docs/webhooks/v1/developers_guide/basics/#secret-token) section in API Basics for more information.
+        ///
+        ///The webhooks affected by this operation are determined by the type of access token you use.
+        ///
+        ///- Two-legged Access Token: Sets the secret token for all webhooks owned by calling the app.
+        ///- Three-legged Access Token: Sets the secrety token for all webhooks owned by the calling user
+        ///
+        ///Note that there can be a delay of up to 10 minutes while the change takes effect. We recommend that your callback accept both secret token values for a period of time to allow all requests to go through.
+        ///
+        ///See the [Secret Token](/en/docs/webhooks/v1/developers_guide/basics/#secret-token) section in API Basics for more information.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-         /// <param name="xAdsRegion">
-         ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make requests to your callback URL. Possible values:
-///
-///- `US` - (Default) Data center dedicated to serve the United States region.
-///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
-///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
-///- `CAN` - Data center dedicated to serve the Canada region.
-///- `DEU` - Data center dedicated to serve the Germany region.
-///- `IND` - Data center dedicated to serve the India region.
-///- `JPN` - Data center dedicated to serve the Japan region.
-///- `GBR` - Data center dedicated to serve the United Kingdom region.
-///
-///**Note:** 
-///
-///1. Beta features are subject to change. Please avoid using them in production environments.
-///2. You can also use the `region` query string parameter to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
-         /// </param>
-         /// <param name="region">
-         ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make request to your callback URL. Possible values:
-///
-///- `US` - (Default) Data center dedicated to serve the United States region.
-///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
-///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
-///- `CAN` - Data center dedicated to serve the Canada region.
-///- `DEU` - Data center dedicated to serve the Germany region.
-///- `IND` - Data center dedicated to serve the India region.
-///- `JPN` - Data center dedicated to serve the Japan region.
-///- `GBR` - Data center dedicated to serve the United Kingdom region.
-///
-///**Note:** 
-///
-///1. Beta features are subject to change. Please avoid using them in production environments.
-///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
-         /// </param>
-        
+        /// <param name="xAdsRegion">
+        ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make requests to your callback URL. Possible values:
+        ///
+        ///- `US` - (Default) Data center dedicated to serve the United States region.
+        ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+        ///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
+        ///- `CAN` - Data center dedicated to serve the Canada region.
+        ///- `DEU` - Data center dedicated to serve the Germany region.
+        ///- `IND` - Data center dedicated to serve the India region.
+        ///- `JPN` - Data center dedicated to serve the Japan region.
+        ///- `GBR` - Data center dedicated to serve the United Kingdom region.
+        ///
+        ///**Note:** 
+        ///
+        ///1. Beta features are subject to change. Please avoid using them in production environments.
+        ///2. You can also use the `region` query string parameter to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
+        /// </param>
+        /// <param name="region">
+        ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make request to your callback URL. Possible values:
+        ///
+        ///- `US` - (Default) Data center dedicated to serve the United States region.
+        ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+        ///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
+        ///- `CAN` - Data center dedicated to serve the Canada region.
+        ///- `DEU` - Data center dedicated to serve the Germany region.
+        ///- `IND` - Data center dedicated to serve the India region.
+        ///- `JPN` - Data center dedicated to serve the Japan region.
+        ///- `GBR` - Data center dedicated to serve the United Kingdom region.
+        ///
+        ///**Note:** 
+        ///
+        ///1. Beta features are subject to change. Please avoid using them in production environments.
+        ///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
+        /// </param>
+
         /// <returns>Task of HttpResponseMessage</returns>
-        System.Threading.Tasks.Task<HttpResponseMessage> DeleteTokenAsync (XAdsRegion? xAdsRegion= null, Region? region= null,  string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<HttpResponseMessage> DeleteTokenAsync(XAdsRegion? xAdsRegion = null, Region? region = null, string accessToken = null, bool throwOnError = true);
         /// <summary>
         /// Update Secret Token
         /// </summary>
         /// <remarks>
         ///Replaces an existing secret token with a new one. 
-///
-///Note that there can be a delay of up to 10 minutes while the change takes effect. We recommend that your callback accept both secret token values for a period of time to allow all requests to go through.
-///
-///The webhooks affected by this operation are determined by the type of access token you use.
-///
-///- Two-legged Access Token: Sets the secret token for all webhooks owned by calling the app.
-///- Three-legged Access Token: Sets the secrety token for all webhooks owned by the calling user
-///
-///**Note:** Use the [Update Webhook operation](/en/docs/webhooks/v1/reference/http/webhooks/systems-system-events-event-hooks-hook_id-PATCH/) to set a token for a specific webhook.
-///
-///
-///See the [Secret Token](/en/docs/webhooks/v1/developers_guide/basics/#secret-token) section in API Basics for more information.
+        ///
+        ///Note that there can be a delay of up to 10 minutes while the change takes effect. We recommend that your callback accept both secret token values for a period of time to allow all requests to go through.
+        ///
+        ///The webhooks affected by this operation are determined by the type of access token you use.
+        ///
+        ///- Two-legged Access Token: Sets the secret token for all webhooks owned by calling the app.
+        ///- Three-legged Access Token: Sets the secrety token for all webhooks owned by the calling user
+        ///
+        ///**Note:** Use the [Update Webhook operation](/en/docs/webhooks/v1/reference/http/webhooks/systems-system-events-event-hooks-hook_id-PATCH/) to set a token for a specific webhook.
+        ///
+        ///
+        ///See the [Secret Token](/en/docs/webhooks/v1/developers_guide/basics/#secret-token) section in API Basics for more information.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-         /// <param name="xAdsRegion">
-         ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make requests to your callback URL. Possible values:
-///
-///- `US` - (Default) Data center dedicated to serve the United States region.
-///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
-///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
-///- `CAN` - Data center dedicated to serve the Canada region.
-///- `DEU` - Data center dedicated to serve the Germany region.
-///- `IND` - Data center dedicated to serve the India region.
-///- `JPN` - Data center dedicated to serve the Japan region.
-///- `GBR` - Data center dedicated to serve the United Kingdom region.
-///
-///**Note:** 
-///
-///1. Beta features are subject to change. Please avoid using them in production environments.
-///2. You can also use the `region` query string parameter to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
-         /// </param>
-         /// <param name="region">
-         ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make request to your callback URL. Possible values:
-///
-///- `US` - (Default) Data center dedicated to serve the United States region.
-///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
-///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
-///- `CAN` - Data center dedicated to serve the Canada region.
-///- `DEU` - Data center dedicated to serve the Germany region.
-///- `IND` - Data center dedicated to serve the India region.
-///- `JPN` - Data center dedicated to serve the Japan region.
-///- `GBR` - Data center dedicated to serve the United Kingdom region.
-///
-///**Note:** 
-///
-///1. Beta features are subject to change. Please avoid using them in production environments.
-///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
-         /// </param>
-         /// <param name="tokenPayload">
-         /// (optional)
-         /// </param>
-        
+        /// <param name="xAdsRegion">
+        ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make requests to your callback URL. Possible values:
+        ///
+        ///- `US` - (Default) Data center dedicated to serve the United States region.
+        ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+        ///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
+        ///- `CAN` - Data center dedicated to serve the Canada region.
+        ///- `DEU` - Data center dedicated to serve the Germany region.
+        ///- `IND` - Data center dedicated to serve the India region.
+        ///- `JPN` - Data center dedicated to serve the Japan region.
+        ///- `GBR` - Data center dedicated to serve the United Kingdom region.
+        ///
+        ///**Note:** 
+        ///
+        ///1. Beta features are subject to change. Please avoid using them in production environments.
+        ///2. You can also use the `region` query string parameter to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
+        /// </param>
+        /// <param name="region">
+        ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make request to your callback URL. Possible values:
+        ///
+        ///- `US` - (Default) Data center dedicated to serve the United States region.
+        ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+        ///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
+        ///- `CAN` - Data center dedicated to serve the Canada region.
+        ///- `DEU` - Data center dedicated to serve the Germany region.
+        ///- `IND` - Data center dedicated to serve the India region.
+        ///- `JPN` - Data center dedicated to serve the Japan region.
+        ///- `GBR` - Data center dedicated to serve the United Kingdom region.
+        ///
+        ///**Note:** 
+        ///
+        ///1. Beta features are subject to change. Please avoid using them in production environments.
+        ///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
+        /// </param>
+        /// <param name="tokenPayload">
+        /// (optional)
+        /// </param>
+
         /// <returns>Task of HttpResponseMessage</returns>
-        System.Threading.Tasks.Task<HttpResponseMessage> PutTokenAsync (XAdsRegion? xAdsRegion= null, Region? region= null, TokenPayload tokenPayload= default(TokenPayload),  string accessToken = null, bool throwOnError = true);
+        System.Threading.Tasks.Task<HttpResponseMessage> PutTokenAsync(XAdsRegion? xAdsRegion = null, Region? region = null, TokenPayload tokenPayload = default(TokenPayload), string accessToken = null, bool throwOnError = true);
     }
 
     /// <summary>
@@ -232,27 +232,27 @@ namespace Autodesk.Webhooks.Http
         }
         private void SetQueryParameter(string name, object value, Dictionary<string, object> dictionary)
         {
-            if(value is Enum)
+            if (value is Enum)
             {
                 var type = value.GetType();
                 var memberInfos = type.GetMember(value.ToString());
                 var enumValueMemberInfo = memberInfos.FirstOrDefault(m => m.DeclaringType == type);
                 var valueAttributes = enumValueMemberInfo.GetCustomAttributes(typeof(EnumMemberAttribute), false);
-                if(valueAttributes.Length > 0)
+                if (valueAttributes.Length > 0)
                 {
                     dictionary.Add(name, ((EnumMemberAttribute)valueAttributes[0]).Value);
                 }
             }
-            else if(value is int)
+            else if (value is int)
             {
-                if((int)value > 0)
+                if ((int)value > 0)
                 {
                     dictionary.Add(name, value);
                 }
             }
             else
             {
-                if(value != null)
+                if (value != null)
                 {
                     dictionary.Add(name, value);
                 }
@@ -260,27 +260,27 @@ namespace Autodesk.Webhooks.Http
         }
         private void SetHeader(string baseName, object value, HttpRequestMessage req)
         {
-                if(value is DateTime)
+            if (value is DateTime)
+            {
+                if ((DateTime)value != DateTime.MinValue)
                 {
-                    if((DateTime)value != DateTime.MinValue)
+                    req.Headers.TryAddWithoutValidation(baseName, LocalMarshalling.ParameterToString(value)); // header parameter
+                }
+            }
+            else
+            {
+                if (value != null)
+                {
+                    if (!string.Equals(baseName, "Content-Range"))
                     {
                         req.Headers.TryAddWithoutValidation(baseName, LocalMarshalling.ParameterToString(value)); // header parameter
                     }
-                }
-                else
-                {
-                    if (value != null)
+                    else
                     {
-                        if(!string.Equals(baseName, "Content-Range"))
-                        {
-                            req.Headers.TryAddWithoutValidation(baseName, LocalMarshalling.ParameterToString(value)); // header parameter
-                        }
-                        else
-                        {
-                            req.Content.Headers.Add(baseName, LocalMarshalling.ParameterToString(value));
-                        }
+                        req.Content.Headers.Add(baseName, LocalMarshalling.ParameterToString(value));
                     }
                 }
+            }
 
         }
 
@@ -288,67 +288,67 @@ namespace Autodesk.Webhooks.Http
         /// Gets or sets the ApsConfiguration object
         /// </summary>
         /// <value>An instance of the ForgeService</value>
-        public ForgeService Service {get; set;}
+        public ForgeService Service { get; set; }
 
         /// <summary>
         /// Create Secret Token
         /// </summary>
         /// <remarks>
         ///Sets a secret token to verify the authenticity of webhook payloads. 
-///
-///When a webhook event occurs, the service calculates a hash signature using the token and includes it in the event notification. The receiving application listening at the callback URL can verify the payload's integrity by comparing the calculated signature to the one received.
-///
-///The webhooks affected by this operation are determined by the type of access token you use.
-///
-///- Two-legged Access Token: Sets the secret token for all webhooks owned by calling the app.
-///- Three-legged Access Token: Sets the secret token for all webhooks owned by the calling user
-///
-///**Note:** Use the [Update Webhook operation](/en/docs/webhooks/v1/reference/http/webhooks/systems-system-events-event-hooks-hook_id-PATCH/) to set a token for a specific webhook.
-///
-///
-///See the [Secret Token](/en/docs/webhooks/v1/developers_guide/basics/#secret-token) section in API Basics for more information.
+        ///
+        ///When a webhook event occurs, the service calculates a hash signature using the token and includes it in the event notification. The receiving application listening at the callback URL can verify the payload's integrity by comparing the calculated signature to the one received.
+        ///
+        ///The webhooks affected by this operation are determined by the type of access token you use.
+        ///
+        ///- Two-legged Access Token: Sets the secret token for all webhooks owned by calling the app.
+        ///- Three-legged Access Token: Sets the secret token for all webhooks owned by the calling user
+        ///
+        ///**Note:** Use the [Update Webhook operation](/en/docs/webhooks/v1/reference/http/webhooks/systems-system-events-event-hooks-hook_id-PATCH/) to set a token for a specific webhook.
+        ///
+        ///
+        ///See the [Secret Token](/en/docs/webhooks/v1/developers_guide/basics/#secret-token) section in API Basics for more information.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-         /// <param name="xAdsRegion">
-         ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make requests to your callback URL. Possible values:
-///
-///- `US` - (Default) Data center dedicated to serve the United States region.
-///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
-///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
-///- `CAN` - Data center dedicated to serve the Canada region.
-///- `DEU` - Data center dedicated to serve the Germany region.
-///- `IND` - Data center dedicated to serve the India region.
-///- `JPN` - Data center dedicated to serve the Japan region.
-///- `GBR` - Data center dedicated to serve the United Kingdom region.
-///
-///**Note:** 
-///
-///1. Beta features are subject to change. Please avoid using them in production environments.
-///2. You can also use the `region` query string parameter to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
-         /// </param>
-         /// <param name="region">
-         ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make request to your callback URL. Possible values:
-///
-///- `US` - (Default) Data center dedicated to serve the United States region.
-///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
-///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
-///- `CAN` - Data center dedicated to serve the Canada region.
-///- `DEU` - Data center dedicated to serve the Germany region.
-///- `IND` - Data center dedicated to serve the India region.
-///- `JPN` - Data center dedicated to serve the Japan region.
-///- `GBR` - Data center dedicated to serve the United Kingdom region.
-///
-///**Note:** 
-///
-///1. Beta features are subject to change. Please avoid using them in production environments.
-///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
-         /// </param>
-         /// <param name="tokenPayload">
-         /// (optional)
-         /// </param>
+        /// <param name="xAdsRegion">
+        ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make requests to your callback URL. Possible values:
+        ///
+        ///- `US` - (Default) Data center dedicated to serve the United States region.
+        ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+        ///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
+        ///- `CAN` - Data center dedicated to serve the Canada region.
+        ///- `DEU` - Data center dedicated to serve the Germany region.
+        ///- `IND` - Data center dedicated to serve the India region.
+        ///- `JPN` - Data center dedicated to serve the Japan region.
+        ///- `GBR` - Data center dedicated to serve the United Kingdom region.
+        ///
+        ///**Note:** 
+        ///
+        ///1. Beta features are subject to change. Please avoid using them in production environments.
+        ///2. You can also use the `region` query string parameter to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
+        /// </param>
+        /// <param name="region">
+        ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make request to your callback URL. Possible values:
+        ///
+        ///- `US` - (Default) Data center dedicated to serve the United States region.
+        ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+        ///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
+        ///- `CAN` - Data center dedicated to serve the Canada region.
+        ///- `DEU` - Data center dedicated to serve the Germany region.
+        ///- `IND` - Data center dedicated to serve the India region.
+        ///- `JPN` - Data center dedicated to serve the Japan region.
+        ///- `GBR` - Data center dedicated to serve the United Kingdom region.
+        ///
+        ///**Note:** 
+        ///
+        ///1. Beta features are subject to change. Please avoid using them in production environments.
+        ///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
+        /// </param>
+        /// <param name="tokenPayload">
+        /// (optional)
+        /// </param>
         /// <returns>Task of ApiResponse&lt;Token&gt;></returns>
-        
-        public async System.Threading.Tasks.Task<ApiResponse<Token>> CreateTokenAsync (XAdsRegion? xAdsRegion= null,Region? region= null,TokenPayload tokenPayload= default(TokenPayload), string accessToken = null, bool throwOnError = true)
+
+        public async System.Threading.Tasks.Task<ApiResponse<Token>> CreateTokenAsync(XAdsRegion? xAdsRegion = null, Region? region = null, TokenPayload tokenPayload = default(TokenPayload), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into CreateTokenAsync ");
             using (var request = new HttpRequestMessage())
@@ -357,14 +357,15 @@ namespace Autodesk.Webhooks.Http
                 SetQueryParameter("region", region, queryParam);
                 request.RequestUri =
                     Marshalling.BuildRequestUri("/webhooks/v1/tokens",
-                        routeParameters: new Dictionary<string, object> {
+                        routeParameters: new Dictionary<string, object>
+                        {
                         },
                         queryParameters: queryParam
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
                 request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/WEBHOOKS/C#/2.0.0");
-                if(!string.IsNullOrEmpty(accessToken))
+                if (!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
                 }
@@ -377,21 +378,21 @@ namespace Autodesk.Webhooks.Http
                 // tell the underlying pipeline what scope we'd like to use
                 // if (scopes == null)
                 // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read data:write ");
+                // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read data:write ");
                 // }
                 // else
                 // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
                 // if (scopes == null)
                 // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read data:write ");
+                // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read data:write ");
                 // }
                 // else
                 // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
 
                 request.Method = new HttpMethod("POST");
@@ -403,9 +404,11 @@ namespace Autodesk.Webhooks.Http
                 {
                     try
                     {
-                      await response.EnsureSuccessStatusCodeAsync();
-                    } catch (HttpRequestException ex) {
-                      throw new WebhooksApiException(ex.Message, response, ex);
+                        await response.EnsureSuccessStatusCodeAsync();
+                    }
+                    catch (HttpRequestException ex)
+                    {
+                        throw new WebhooksApiException(ex.Message, response, ex);
                     }
                 }
                 else if (!response.IsSuccessStatusCode)
@@ -423,54 +426,54 @@ namespace Autodesk.Webhooks.Http
         /// </summary>
         /// <remarks>
         ///Removes an existing secret token from the webhooks impacted by this operation. 
-///
-///The webhooks affected by this operation are determined by the type of access token you use.
-///
-///- Two-legged Access Token: Sets the secret token for all webhooks owned by calling the app.
-///- Three-legged Access Token: Sets the secrety token for all webhooks owned by the calling user
-///
-///Note that there can be a delay of up to 10 minutes while the change takes effect. We recommend that your callback accept both secret token values for a period of time to allow all requests to go through.
-///
-///See the [Secret Token](/en/docs/webhooks/v1/developers_guide/basics/#secret-token) section in API Basics for more information.
+        ///
+        ///The webhooks affected by this operation are determined by the type of access token you use.
+        ///
+        ///- Two-legged Access Token: Sets the secret token for all webhooks owned by calling the app.
+        ///- Three-legged Access Token: Sets the secrety token for all webhooks owned by the calling user
+        ///
+        ///Note that there can be a delay of up to 10 minutes while the change takes effect. We recommend that your callback accept both secret token values for a period of time to allow all requests to go through.
+        ///
+        ///See the [Secret Token](/en/docs/webhooks/v1/developers_guide/basics/#secret-token) section in API Basics for more information.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-         /// <param name="xAdsRegion">
-         ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make requests to your callback URL. Possible values:
-///
-///- `US` - (Default) Data center dedicated to serve the United States region.
-///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
-///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
-///- `CAN` - Data center dedicated to serve the Canada region.
-///- `DEU` - Data center dedicated to serve the Germany region.
-///- `IND` - Data center dedicated to serve the India region.
-///- `JPN` - Data center dedicated to serve the Japan region.
-///- `GBR` - Data center dedicated to serve the United Kingdom region.
-///
-///**Note:** 
-///
-///1. Beta features are subject to change. Please avoid using them in production environments.
-///2. You can also use the `region` query string parameter to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
-         /// </param>
-         /// <param name="region">
-         ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make request to your callback URL. Possible values:
-///
-///- `US` - (Default) Data center dedicated to serve the United States region.
-///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
-///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
-///- `CAN` - Data center dedicated to serve the Canada region.
-///- `DEU` - Data center dedicated to serve the Germany region.
-///- `IND` - Data center dedicated to serve the India region.
-///- `JPN` - Data center dedicated to serve the Japan region.
-///- `GBR` - Data center dedicated to serve the United Kingdom region.
-///
-///**Note:** 
-///
-///1. Beta features are subject to change. Please avoid using them in production environments.
-///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
-         /// </param>
-        
+        /// <param name="xAdsRegion">
+        ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make requests to your callback URL. Possible values:
+        ///
+        ///- `US` - (Default) Data center dedicated to serve the United States region.
+        ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+        ///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
+        ///- `CAN` - Data center dedicated to serve the Canada region.
+        ///- `DEU` - Data center dedicated to serve the Germany region.
+        ///- `IND` - Data center dedicated to serve the India region.
+        ///- `JPN` - Data center dedicated to serve the Japan region.
+        ///- `GBR` - Data center dedicated to serve the United Kingdom region.
+        ///
+        ///**Note:** 
+        ///
+        ///1. Beta features are subject to change. Please avoid using them in production environments.
+        ///2. You can also use the `region` query string parameter to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
+        /// </param>
+        /// <param name="region">
+        ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make request to your callback URL. Possible values:
+        ///
+        ///- `US` - (Default) Data center dedicated to serve the United States region.
+        ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+        ///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
+        ///- `CAN` - Data center dedicated to serve the Canada region.
+        ///- `DEU` - Data center dedicated to serve the Germany region.
+        ///- `IND` - Data center dedicated to serve the India region.
+        ///- `JPN` - Data center dedicated to serve the Japan region.
+        ///- `GBR` - Data center dedicated to serve the United Kingdom region.
+        ///
+        ///**Note:** 
+        ///
+        ///1. Beta features are subject to change. Please avoid using them in production environments.
+        ///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
+        /// </param>
+
         /// <returns>Task of HttpResponseMessage</returns>
-        public async System.Threading.Tasks.Task<HttpResponseMessage> DeleteTokenAsync (XAdsRegion? xAdsRegion= null,Region? region= null, string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<HttpResponseMessage> DeleteTokenAsync(XAdsRegion? xAdsRegion = null, Region? region = null, string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into DeleteTokenAsync ");
             using (var request = new HttpRequestMessage())
@@ -479,14 +482,15 @@ namespace Autodesk.Webhooks.Http
                 SetQueryParameter("region", region, queryParam);
                 request.RequestUri =
                     Marshalling.BuildRequestUri("/webhooks/v1/tokens/@me",
-                        routeParameters: new Dictionary<string, object> {
+                        routeParameters: new Dictionary<string, object>
+                        {
                         },
                         queryParameters: queryParam
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
                 request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/WEBHOOKS/C#/2.0.0");
-                if(!string.IsNullOrEmpty(accessToken))
+                if (!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
                 }
@@ -498,21 +502,21 @@ namespace Autodesk.Webhooks.Http
                 // tell the underlying pipeline what scope we'd like to use
                 // if (scopes == null)
                 // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read data:write ");
+                // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read data:write ");
                 // }
                 // else
                 // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
                 // if (scopes == null)
                 // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read data:write ");
+                // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read data:write ");
                 // }
                 // else
                 // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
 
                 request.Method = new HttpMethod("DELETE");
@@ -524,9 +528,11 @@ namespace Autodesk.Webhooks.Http
                 {
                     try
                     {
-                      await response.EnsureSuccessStatusCodeAsync();
-                    } catch (HttpRequestException ex) {
-                      throw new WebhooksApiException(ex.Message, response, ex);
+                        await response.EnsureSuccessStatusCodeAsync();
+                    }
+                    catch (HttpRequestException ex)
+                    {
+                        throw new WebhooksApiException(ex.Message, response, ex);
                     }
                 }
                 else if (!response.IsSuccessStatusCode)
@@ -544,60 +550,60 @@ namespace Autodesk.Webhooks.Http
         /// </summary>
         /// <remarks>
         ///Replaces an existing secret token with a new one. 
-///
-///Note that there can be a delay of up to 10 minutes while the change takes effect. We recommend that your callback accept both secret token values for a period of time to allow all requests to go through.
-///
-///The webhooks affected by this operation are determined by the type of access token you use.
-///
-///- Two-legged Access Token: Sets the secret token for all webhooks owned by calling the app.
-///- Three-legged Access Token: Sets the secrety token for all webhooks owned by the calling user
-///
-///**Note:** Use the [Update Webhook operation](/en/docs/webhooks/v1/reference/http/webhooks/systems-system-events-event-hooks-hook_id-PATCH/) to set a token for a specific webhook.
-///
-///
-///See the [Secret Token](/en/docs/webhooks/v1/developers_guide/basics/#secret-token) section in API Basics for more information.
+        ///
+        ///Note that there can be a delay of up to 10 minutes while the change takes effect. We recommend that your callback accept both secret token values for a period of time to allow all requests to go through.
+        ///
+        ///The webhooks affected by this operation are determined by the type of access token you use.
+        ///
+        ///- Two-legged Access Token: Sets the secret token for all webhooks owned by calling the app.
+        ///- Three-legged Access Token: Sets the secrety token for all webhooks owned by the calling user
+        ///
+        ///**Note:** Use the [Update Webhook operation](/en/docs/webhooks/v1/reference/http/webhooks/systems-system-events-event-hooks-hook_id-PATCH/) to set a token for a specific webhook.
+        ///
+        ///
+        ///See the [Secret Token](/en/docs/webhooks/v1/developers_guide/basics/#secret-token) section in API Basics for more information.
         /// </remarks>
         /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
-         /// <param name="xAdsRegion">
-         ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make requests to your callback URL. Possible values:
-///
-///- `US` - (Default) Data center dedicated to serve the United States region.
-///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
-///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
-///- `CAN` - Data center dedicated to serve the Canada region.
-///- `DEU` - Data center dedicated to serve the Germany region.
-///- `IND` - Data center dedicated to serve the India region.
-///- `JPN` - Data center dedicated to serve the Japan region.
-///- `GBR` - Data center dedicated to serve the United Kingdom region.
-///
-///**Note:** 
-///
-///1. Beta features are subject to change. Please avoid using them in production environments.
-///2. You can also use the `region` query string parameter to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
-         /// </param>
-         /// <param name="region">
-         ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make request to your callback URL. Possible values:
-///
-///- `US` - (Default) Data center dedicated to serve the United States region.
-///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
-///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
-///- `CAN` - Data center dedicated to serve the Canada region.
-///- `DEU` - Data center dedicated to serve the Germany region.
-///- `IND` - Data center dedicated to serve the India region.
-///- `JPN` - Data center dedicated to serve the Japan region.
-///- `GBR` - Data center dedicated to serve the United Kingdom region.
-///
-///**Note:** 
-///
-///1. Beta features are subject to change. Please avoid using them in production environments.
-///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
-         /// </param>
-         /// <param name="tokenPayload">
-         /// (optional)
-         /// </param>
-        
+        /// <param name="xAdsRegion">
+        ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make requests to your callback URL. Possible values:
+        ///
+        ///- `US` - (Default) Data center dedicated to serve the United States region.
+        ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+        ///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
+        ///- `CAN` - Data center dedicated to serve the Canada region.
+        ///- `DEU` - Data center dedicated to serve the Germany region.
+        ///- `IND` - Data center dedicated to serve the India region.
+        ///- `JPN` - Data center dedicated to serve the Japan region.
+        ///- `GBR` - Data center dedicated to serve the United Kingdom region.
+        ///
+        ///**Note:** 
+        ///
+        ///1. Beta features are subject to change. Please avoid using them in production environments.
+        ///2. You can also use the `region` query string parameter to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
+        /// </param>
+        /// <param name="region">
+        ///Specifies the geographical location (region) of the server the request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make request to your callback URL. Possible values:
+        ///
+        ///- `US` - (Default) Data center dedicated to serve the United States region.
+        ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+        ///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
+        ///- `CAN` - Data center dedicated to serve the Canada region.
+        ///- `DEU` - Data center dedicated to serve the Germany region.
+        ///- `IND` - Data center dedicated to serve the India region.
+        ///- `JPN` - Data center dedicated to serve the Japan region.
+        ///- `GBR` - Data center dedicated to serve the United Kingdom region.
+        ///
+        ///**Note:** 
+        ///
+        ///1. Beta features are subject to change. Please avoid using them in production environments.
+        ///2. You can also use the `x-ads-region` header to specify the region. If you specify the `region` query string parameter as well as the `x-ads-region` header, the `x-ads-region` header takes precedence. (optional)
+        /// </param>
+        /// <param name="tokenPayload">
+        /// (optional)
+        /// </param>
+
         /// <returns>Task of HttpResponseMessage</returns>
-        public async System.Threading.Tasks.Task<HttpResponseMessage> PutTokenAsync (XAdsRegion? xAdsRegion= null,Region? region= null,TokenPayload tokenPayload= default(TokenPayload), string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<HttpResponseMessage> PutTokenAsync(XAdsRegion? xAdsRegion = null, Region? region = null, TokenPayload tokenPayload = default(TokenPayload), string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into PutTokenAsync ");
             using (var request = new HttpRequestMessage())
@@ -606,14 +612,15 @@ namespace Autodesk.Webhooks.Http
                 SetQueryParameter("region", region, queryParam);
                 request.RequestUri =
                     Marshalling.BuildRequestUri("/webhooks/v1/tokens/@me",
-                        routeParameters: new Dictionary<string, object> {
+                        routeParameters: new Dictionary<string, object>
+                        {
                         },
                         queryParameters: queryParam
                     );
 
                 request.Headers.TryAddWithoutValidation("Accept", "application/json");
                 request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/WEBHOOKS/C#/2.0.0");
-                if(!string.IsNullOrEmpty(accessToken))
+                if (!string.IsNullOrEmpty(accessToken))
                 {
                     request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
                 }
@@ -626,21 +633,21 @@ namespace Autodesk.Webhooks.Http
                 // tell the underlying pipeline what scope we'd like to use
                 // if (scopes == null)
                 // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read data:write ");
+                // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read data:write ");
                 // }
                 // else
                 // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
                 // if (scopes == null)
                 // {
-                    // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read data:write ");
+                // TBD:Naren FORCE-4027 - If accessToken is null, acquire auth token using auth SDK, with defined scope.
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), "data:read data:write ");
                 // }
                 // else
                 // {
-                    // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
+                // request.Properties.Add(ForgeApsConfiguration.ScopeKey.ToString(), scopes);
                 // }
 
                 request.Method = new HttpMethod("PUT");
@@ -652,9 +659,11 @@ namespace Autodesk.Webhooks.Http
                 {
                     try
                     {
-                      await response.EnsureSuccessStatusCodeAsync();
-                    } catch (HttpRequestException ex) {
-                      throw new WebhooksApiException(ex.Message, response, ex);
+                        await response.EnsureSuccessStatusCodeAsync();
+                    }
+                    catch (HttpRequestException ex)
+                    {
+                        throw new WebhooksApiException(ex.Message, response, ex);
                     }
                 }
                 else if (!response.IsSuccessStatusCode)

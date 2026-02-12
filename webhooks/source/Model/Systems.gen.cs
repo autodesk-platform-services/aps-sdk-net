@@ -21,13 +21,13 @@
  */
 
 using System;
-using System.Linq;
-using System.IO;
-using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
+using System.Linq;
 using System.Runtime.Serialization;
+using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -36,45 +36,45 @@ namespace Autodesk.Webhooks.Model
     /// <summary>
     /// Defines Systems
     /// </summary>
-    [JsonConverter(typeof(StringEnumConverter))]    
+    [JsonConverter(typeof(StringEnumConverter))]
     public enum Systems
-    {        
+    {
         /// <summary>
         /// Enum Data for value: data
         /// </summary>
         [EnumMember(Value = "data")]
         Data,
-        
+
         /// <summary>
         /// Enum Derivative for value: derivative
         /// </summary>
         [EnumMember(Value = "derivative")]
         Derivative,
-        
+
         /// <summary>
         /// Enum AdskC4r for value: adsk.c4r
         /// </summary>
         [EnumMember(Value = "adsk.c4r")]
         AdskC4r,
-        
+
         /// <summary>
         /// Enum AdskFlcProduction for value: adsk.flc.production
         /// </summary>
         [EnumMember(Value = "adsk.flc.production")]
         AdskFlcProduction,
-        
+
         /// <summary>
         /// Enum AutodeskConstructionCost for value: autodesk.construction.cost
         /// </summary>
         [EnumMember(Value = "autodesk.construction.cost")]
         AutodeskConstructionCost,
-        
+
         /// <summary>
         /// Enum AutodeskConstructionBc for value: autodesk.construction.bc
         /// </summary>
         [EnumMember(Value = "autodesk.construction.bc")]
         AutodeskConstructionBc,
-        
+
         /// <summary>
         /// Enum AutodeskConstructionIssues for value: autodesk.construction.issues
         /// </summary>

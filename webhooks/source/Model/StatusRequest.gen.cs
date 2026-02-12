@@ -20,13 +20,13 @@
  * limitations under the License.
  */
 using System;
-using System.Linq;
-using System.IO;
-using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
+using System.Linq;
 using System.Runtime.Serialization;
+using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -34,26 +34,26 @@ namespace Autodesk.Webhooks.Model
 {
     /// <summary>
     /// Sets the current state of the webhook. Possible values:
-///
-///- `active` - Activates webhook.
-///- `inactive` - Deactivates webhook.
+    ///
+    ///- `active` - Activates webhook.
+    ///- `inactive` - Deactivates webhook.
     /// </summary>
     ///<value>Sets the current state of the webhook. Possible values:
-///
-///- `active` - Activates webhook.
-///- `inactive` - Deactivates webhook.</value>
-    
+    ///
+    ///- `active` - Activates webhook.
+    ///- `inactive` - Deactivates webhook.</value>
+
     [JsonConverter(typeof(StringEnumConverter))]
-    
+
     public enum StatusRequest
     {
-        
+
         /// <summary>
         /// Enum Active for value: active
         /// </summary>
         [EnumMember(Value = "active")]
         Active,
-        
+
         /// <summary>
         /// Enum Inactive for value: inactive
         /// </summary>

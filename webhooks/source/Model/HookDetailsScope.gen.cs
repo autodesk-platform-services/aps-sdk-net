@@ -20,13 +20,13 @@
  * limitations under the License.
  */
 using System;
-using System.Linq;
-using System.IO;
-using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
+using System.Linq;
 using System.Runtime.Serialization;
+using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -36,7 +36,7 @@ namespace Autodesk.Webhooks.Model
     /// Represents the extent to which the event is monitored. For example, if the scope is folder, the webhooks service generates a notification for the specified event occurring in any sub folder or item within that folder.
     /// </summary>
     [DataContract]
-    public partial class HookDetailsScope 
+    public partial class HookDetailsScope
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="HookDetailsScope" /> class.
@@ -44,31 +44,31 @@ namespace Autodesk.Webhooks.Model
         public HookDetailsScope()
         {
         }
-        
+
         /// <summary>
         ///The URN of the folder the scope is set to. Present only for Data Management events. 
-///
-///See [Creating a Webhook and Listening to Data Management Events](/en/docs/webhooks/v1/tutorials/create-a-hook-data-management/) for more information.
+        ///
+        ///See [Creating a Webhook and Listening to Data Management Events](/en/docs/webhooks/v1/tutorials/create-a-hook-data-management/) for more information.
         /// </summary>
         /// <value>
         ///The URN of the folder the scope is set to. Present only for Data Management events. 
-///
-///See [Creating a Webhook and Listening to Data Management Events](/en/docs/webhooks/v1/tutorials/create-a-hook-data-management/) for more information.
+        ///
+        ///See [Creating a Webhook and Listening to Data Management Events](/en/docs/webhooks/v1/tutorials/create-a-hook-data-management/) for more information.
         /// </value>
-        [DataMember(Name="folder", EmitDefaultValue=false)]
+        [DataMember(Name = "folder", EmitDefaultValue = false)]
         public string Folder { get; set; }
 
         /// <summary>
         ///The ID of a Model Derivative workflow the scope is set to. Present only for Model Derivative events.
-///
-///See [Creating a Webhook and Listening to Model Derivative Events](/en/docs/webhooks/v1/tutorials/create-a-hook-model-derivative/) for more information.
+        ///
+        ///See [Creating a Webhook and Listening to Model Derivative Events](/en/docs/webhooks/v1/tutorials/create-a-hook-model-derivative/) for more information.
         /// </summary>
         /// <value>
         ///The ID of a Model Derivative workflow the scope is set to. Present only for Model Derivative events.
-///
-///See [Creating a Webhook and Listening to Model Derivative Events](/en/docs/webhooks/v1/tutorials/create-a-hook-model-derivative/) for more information.
+        ///
+        ///See [Creating a Webhook and Listening to Model Derivative Events](/en/docs/webhooks/v1/tutorials/create-a-hook-model-derivative/) for more information.
         /// </value>
-        [DataMember(Name="workflow", EmitDefaultValue=false)]
+        [DataMember(Name = "workflow", EmitDefaultValue = false)]
         public string Workflow { get; set; }
 
         /// <summary>

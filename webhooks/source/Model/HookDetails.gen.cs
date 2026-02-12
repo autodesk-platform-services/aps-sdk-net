@@ -20,13 +20,13 @@
  * limitations under the License.
  */
 using System;
-using System.Linq;
-using System.IO;
-using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
+using System.Linq;
 using System.Runtime.Serialization;
+using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -36,7 +36,7 @@ namespace Autodesk.Webhooks.Model
     /// Contains the details of a webhook.
     /// </summary>
     [DataContract]
-    public partial class HookDetails 
+    public partial class HookDetails
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="HookDetails" /> class.
@@ -44,51 +44,51 @@ namespace Autodesk.Webhooks.Model
         public HookDetails()
         {
         }
-        
+
         /// <summary>
         ///The ID that uniquely identifies the webhook.
         /// </summary>
         /// <value>
         ///The ID that uniquely identifies the webhook.
         /// </value>
-        [DataMember(Name="hookId", EmitDefaultValue=false)]
+        [DataMember(Name = "hookId", EmitDefaultValue = false)]
         public string HookId { get; set; }
 
         /// <summary>
         ///The ID of the tenant from which the event 
-///originates.
+        ///originates.
         /// </summary>
         /// <value>
         ///The ID of the tenant from which the event 
-///originates.
+        ///originates.
         /// </value>
-        [DataMember(Name="tenant", EmitDefaultValue=false)]
+        [DataMember(Name = "tenant", EmitDefaultValue = false)]
         public string Tenant { get; set; }
 
         /// <summary>
         ///The URL to send notifications to when the 
-///event is triggered. 
+        ///event is triggered. 
         /// </summary>
         /// <value>
         ///The URL to send notifications to when the 
-///event is triggered. 
+        ///event is triggered. 
         /// </value>
-        [DataMember(Name="callbackUrl", EmitDefaultValue=false)]
+        [DataMember(Name = "callbackUrl", EmitDefaultValue = false)]
         public string CallbackUrl { get; set; }
 
         /// <summary>
         ///The ID of the entity that created the webhook. It can be one of the following:
-///
-///- Client ID of an app: If created using a Client Credentials flow (two-legged OAuth). 
-///- User ID of a user: If created using an Authorization Code flow (three-legged OAuth).
+        ///
+        ///- Client ID of an app: If created using a Client Credentials flow (two-legged OAuth). 
+        ///- User ID of a user: If created using an Authorization Code flow (three-legged OAuth).
         /// </summary>
         /// <value>
         ///The ID of the entity that created the webhook. It can be one of the following:
-///
-///- Client ID of an app: If created using a Client Credentials flow (two-legged OAuth). 
-///- User ID of a user: If created using an Authorization Code flow (three-legged OAuth).
+        ///
+        ///- Client ID of an app: If created using a Client Credentials flow (two-legged OAuth). 
+        ///- User ID of a user: If created using an Authorization Code flow (three-legged OAuth).
         /// </value>
-        [DataMember(Name="createdBy", EmitDefaultValue=false)]
+        [DataMember(Name = "createdBy", EmitDefaultValue = false)]
         public string CreatedBy { get; set; }
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace Autodesk.Webhooks.Model
         /// <value>
         ///The ID of the event the webhook monitors.  See [Supported Events](/en/docs/webhooks/v1/reference/events/) for a full list of events and wildcard patterns.
         /// </value>
-        [DataMember(Name="event", EmitDefaultValue=false)]
+        [DataMember(Name = "event", EmitDefaultValue = false)]
         public string Event { get; set; }
 
         /// <summary>
@@ -106,7 +106,7 @@ namespace Autodesk.Webhooks.Model
         /// <value>
         ///The date and time when the webhook was created, formatted as an ISO 8601 date/time string.
         /// </value>
-        [DataMember(Name="createdDate", EmitDefaultValue=false)]
+        [DataMember(Name = "createdDate", EmitDefaultValue = false)]
         public string CreatedDate { get; set; }
 
         /// <summary>
@@ -115,7 +115,7 @@ namespace Autodesk.Webhooks.Model
         /// <value>
         ///The date and time when the webhook was last modified, formatted as an ISO 8601 date/time string.
         /// </value>
-        [DataMember(Name="lastUpdatedDate", EmitDefaultValue=false)]
+        [DataMember(Name = "lastUpdatedDate", EmitDefaultValue = false)]
         public string LastUpdatedDate { get; set; }
 
         /// <summary>
@@ -124,58 +124,58 @@ namespace Autodesk.Webhooks.Model
         /// <value>
         ///The ID of the system the webhook applies to. For example `data` for Data Management. See [Supported Events](/en/docs/webhooks/v1/reference/events/) for a full list of systems.
         /// </value>
-        [DataMember(Name="system", EmitDefaultValue=false)]
+        [DataMember(Name = "system", EmitDefaultValue = false)]
         public string System { get; set; }
 
         /// <summary>
         ///Indicates what type of an entity created the webhooks. Possible values:
-///
-///- `O2User` - Created by a user through an Authorization Code flow (three-legged OAuth).
-///- `Application` - Created by an application using a Client Credentials flow (two-legged OAuth).
+        ///
+        ///- `O2User` - Created by a user through an Authorization Code flow (three-legged OAuth).
+        ///- `Application` - Created by an application using a Client Credentials flow (two-legged OAuth).
         /// </summary>
         /// <value>
         ///Indicates what type of an entity created the webhooks. Possible values:
-///
-///- `O2User` - Created by a user through an Authorization Code flow (three-legged OAuth).
-///- `Application` - Created by an application using a Client Credentials flow (two-legged OAuth).
+        ///
+        ///- `O2User` - Created by a user through an Authorization Code flow (three-legged OAuth).
+        ///- `Application` - Created by an application using a Client Credentials flow (two-legged OAuth).
         /// </value>
-        [DataMember(Name="creatorType", EmitDefaultValue=false)]
+        [DataMember(Name = "creatorType", EmitDefaultValue = false)]
         public string CreatorType { get; set; }
 
         /// <summary>
         ///Gets or Sets Status
         /// </summary>
-        [DataMember(Name="status", EmitDefaultValue=true)]
+        [DataMember(Name = "status", EmitDefaultValue = true)]
         public Status Status { get; set; }
 
         /// <summary>
         ///`true` - Automatically reactivate the webhook if it becomes `inactive`.
-///
-///`false` - (Default) Do not reactivate the webhook if it becomes `inactive`.
-///
-///See [Event Delivery Guarantees](/en/docs/webhooks/v1/developers_guide/event-delivery-guarantees/) for more information on how the webhooks service handles reactivation.
+        ///
+        ///`false` - (Default) Do not reactivate the webhook if it becomes `inactive`.
+        ///
+        ///See [Event Delivery Guarantees](/en/docs/webhooks/v1/developers_guide/event-delivery-guarantees/) for more information on how the webhooks service handles reactivation.
         /// </summary>
         /// <value>
         ///`true` - Automatically reactivate the webhook if it becomes `inactive`.
-///
-///`false` - (Default) Do not reactivate the webhook if it becomes `inactive`.
-///
-///See [Event Delivery Guarantees](/en/docs/webhooks/v1/developers_guide/event-delivery-guarantees/) for more information on how the webhooks service handles reactivation.
+        ///
+        ///`false` - (Default) Do not reactivate the webhook if it becomes `inactive`.
+        ///
+        ///See [Event Delivery Guarantees](/en/docs/webhooks/v1/developers_guide/event-delivery-guarantees/) for more information on how the webhooks service handles reactivation.
         /// </value>
-        [DataMember(Name="autoReactivateHook", EmitDefaultValue=false)]
+        [DataMember(Name = "autoReactivateHook", EmitDefaultValue = false)]
         public bool? AutoReactivateHook { get; set; }
 
         /// <summary>
         ///The date and time when the webhook will expire, formatted as an ISO 8601 date/time string. A missing or null value indicates that the webhook will never expire.
-///
-///`hookExpiry` is returned only if it was specified when the webhook was created.
+        ///
+        ///`hookExpiry` is returned only if it was specified when the webhook was created.
         /// </summary>
         /// <value>
         ///The date and time when the webhook will expire, formatted as an ISO 8601 date/time string. A missing or null value indicates that the webhook will never expire.
-///
-///`hookExpiry` is returned only if it was specified when the webhook was created.
+        ///
+        ///`hookExpiry` is returned only if it was specified when the webhook was created.
         /// </value>
-        [DataMember(Name="hookExpiry", EmitDefaultValue=false)]
+        [DataMember(Name = "hookExpiry", EmitDefaultValue = false)]
         public string HookExpiry { get; set; }
 
         /// <summary>
@@ -184,13 +184,13 @@ namespace Autodesk.Webhooks.Model
         /// <value>
         ///Custom metadata which will be less than 1KB in size.
         /// </value>
-        [DataMember(Name="hookAttribute", EmitDefaultValue=false)]
+        [DataMember(Name = "hookAttribute", EmitDefaultValue = false)]
         public Object HookAttribute { get; set; }
 
         /// <summary>
         ///Gets or Sets Scope
         /// </summary>
-        [DataMember(Name="scope", EmitDefaultValue=false)]
+        [DataMember(Name = "scope", EmitDefaultValue = false)]
         public HookDetailsScope Scope { get; set; }
 
         /// <summary>
@@ -199,20 +199,20 @@ namespace Autodesk.Webhooks.Model
         /// <value>
         ///The URN of the webhook.
         /// </value>
-        [DataMember(Name="urn", EmitDefaultValue=false)]
+        [DataMember(Name = "urn", EmitDefaultValue = false)]
         public string Urn { get; set; }
 
         /// <summary>
         ///`true` - The callback request payload will only contain information about the event. It will not contain any information about the webhook.
-///
-///`false` - The callback request payload will contain information about the event as well as the webhook.
+        ///
+        ///`false` - The callback request payload will contain information about the event as well as the webhook.
         /// </summary>
         /// <value>
         ///`true` - The callback request payload will only contain information about the event. It will not contain any information about the webhook.
-///
-///`false` - The callback request payload will contain information about the event as well as the webhook.
+        ///
+        ///`false` - The callback request payload will contain information about the event as well as the webhook.
         /// </value>
-        [DataMember(Name="callbackWithEventPayloadOnly", EmitDefaultValue=false)]
+        [DataMember(Name = "callbackWithEventPayloadOnly", EmitDefaultValue = false)]
         public string CallbackWithEventPayloadOnly { get; set; }
 
         /// <summary>
@@ -221,7 +221,7 @@ namespace Autodesk.Webhooks.Model
         /// <value>
         ///A link to itself.
         /// </value>
-        [DataMember(Name="__self__", EmitDefaultValue=false)]
+        [DataMember(Name = "__self__", EmitDefaultValue = false)]
         public string Self { get; set; }
 
         /// <summary>

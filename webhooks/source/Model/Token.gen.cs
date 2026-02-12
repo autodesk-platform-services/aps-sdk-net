@@ -20,13 +20,13 @@
  * limitations under the License.
  */
 using System;
-using System.Linq;
-using System.IO;
-using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
+using System.Linq;
 using System.Runtime.Serialization;
+using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -36,7 +36,7 @@ namespace Autodesk.Webhooks.Model
     /// Add a new Webhook secret token.
     /// </summary>
     [DataContract]
-    public partial class Token 
+    public partial class Token
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Token" /> class.
@@ -44,14 +44,14 @@ namespace Autodesk.Webhooks.Model
         public Token()
         {
         }
-        
+
         /// <summary>
         ///A repetition of the HTTP status code returned in the response headers, which indicates the outcome of the request.
         /// </summary>
         /// <value>
         ///A repetition of the HTTP status code returned in the response headers, which indicates the outcome of the request.
         /// </value>
-        [DataMember(Name="status", EmitDefaultValue=false)]
+        [DataMember(Name = "status", EmitDefaultValue = false)]
         public decimal? Status { get; set; }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Autodesk.Webhooks.Model
         /// <value>
         ///An array of strings, where each string is a human-readable description of the request's outcome.
         /// </value>
-        [DataMember(Name="detail", EmitDefaultValue=false)]
+        [DataMember(Name = "detail", EmitDefaultValue = false)]
         public List<string> Detail { get; set; }
 
         /// <summary>

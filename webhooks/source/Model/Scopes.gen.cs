@@ -20,13 +20,13 @@
  * limitations under the License.
  */
 using System;
-using System.Linq;
-using System.IO;
-using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
+using System.Linq;
 using System.Runtime.Serialization;
+using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -36,24 +36,24 @@ namespace Autodesk.Webhooks.Model
     /// Defines Scopes
     /// </summary>
     ///<value></value>
-    
+
     [JsonConverter(typeof(StringEnumConverter))]
-    
+
     public enum Scopes
     {
-        
+
         /// <summary>
         /// Enum Workflow for value: workflow
         /// </summary>
         [EnumMember(Value = "workflow")]
         Workflow,
-        
+
         /// <summary>
         /// Enum Folder for value: folder
         /// </summary>
         [EnumMember(Value = "folder")]
         Folder,
-        
+
         /// <summary>
         /// Enum Project for value: project
         /// </summary>

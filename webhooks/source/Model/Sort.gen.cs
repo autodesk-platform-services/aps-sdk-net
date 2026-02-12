@@ -20,13 +20,13 @@
  * limitations under the License.
  */
 using System;
-using System.Linq;
-using System.IO;
-using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
+using System.Linq;
 using System.Runtime.Serialization;
+using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -34,26 +34,26 @@ namespace Autodesk.Webhooks.Model
 {
     /// <summary>
     /// Specifies the sorting order of the list of webhooks by their `lastUpdatedDate` attribute. 
-///
-///- `asc` - Ascending order.
-///- `desc` - (Default) Descending order.
+    ///
+    ///- `asc` - Ascending order.
+    ///- `desc` - (Default) Descending order.
     /// </summary>
     ///<value>Specifies the sorting order of the list of webhooks by their `lastUpdatedDate` attribute. 
-///
-///- `asc` - Ascending order.
-///- `desc` - (Default) Descending order.</value>
-    
+    ///
+    ///- `asc` - Ascending order.
+    ///- `desc` - (Default) Descending order.</value>
+
     [JsonConverter(typeof(StringEnumConverter))]
-    
+
     public enum Sort
     {
-        
+
         /// <summary>
         /// Enum Asc for value: asc
         /// </summary>
         [EnumMember(Value = "asc")]
         Asc,
-        
+
         /// <summary>
         /// Enum Desc for value: desc
         /// </summary>

@@ -20,13 +20,13 @@
  * limitations under the License.
  */
 using System;
-using System.Linq;
-using System.IO;
-using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
+using System.Linq;
 using System.Runtime.Serialization;
+using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -34,38 +34,38 @@ namespace Autodesk.Webhooks.Model
 {
     /// <summary>
     /// Indicates the current state of the webhook. Possible values are 
-///
-///- `active` - Successfully delivered most recent event notifications. 
-///- `inactive` - Failed to deliver most recent event notification and has been deactivated.
-///- `reactivated` - Previously inactive webhook that has been reactivated. No events have occurred since reactivation.
-///
-///See [Event Delivery Guarantees](/en/docs/webhooks/v1/developers_guide/event-delivery-guarantees/) for more information on how the system deactivates webhooks and subsequently reactivates them.    
+    ///
+    ///- `active` - Successfully delivered most recent event notifications. 
+    ///- `inactive` - Failed to deliver most recent event notification and has been deactivated.
+    ///- `reactivated` - Previously inactive webhook that has been reactivated. No events have occurred since reactivation.
+    ///
+    ///See [Event Delivery Guarantees](/en/docs/webhooks/v1/developers_guide/event-delivery-guarantees/) for more information on how the system deactivates webhooks and subsequently reactivates them.    
     /// </summary>
     ///<value>Indicates the current state of the webhook. Possible values are 
-///
-///- `active` - Successfully delivered most recent event notifications. 
-///- `inactive` - Failed to deliver most recent event notification and has been deactivated.
-///- `reactivated` - Previously inactive webhook that has been reactivated. No events have occurred since reactivation.
-///
-///See [Event Delivery Guarantees](/en/docs/webhooks/v1/developers_guide/event-delivery-guarantees/) for more information on how the system deactivates webhooks and subsequently reactivates them.    </value>
-    
+    ///
+    ///- `active` - Successfully delivered most recent event notifications. 
+    ///- `inactive` - Failed to deliver most recent event notification and has been deactivated.
+    ///- `reactivated` - Previously inactive webhook that has been reactivated. No events have occurred since reactivation.
+    ///
+    ///See [Event Delivery Guarantees](/en/docs/webhooks/v1/developers_guide/event-delivery-guarantees/) for more information on how the system deactivates webhooks and subsequently reactivates them.    </value>
+
     [JsonConverter(typeof(StringEnumConverter))]
-    
+
     public enum Status
     {
-        
+
         /// <summary>
         /// Enum Active for value: active
         /// </summary>
         [EnumMember(Value = "active")]
         Active,
-        
+
         /// <summary>
         /// Enum Inactive for value: inactive
         /// </summary>
         [EnumMember(Value = "inactive")]
         Inactive,
-        
+
         /// <summary>
         /// Enum Reactivated for value: reactivated
         /// </summary>

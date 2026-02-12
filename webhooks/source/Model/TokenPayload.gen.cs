@@ -20,13 +20,13 @@
  * limitations under the License.
  */
 using System;
-using System.Linq;
-using System.IO;
-using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
+using System.Linq;
 using System.Runtime.Serialization;
+using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -36,7 +36,7 @@ namespace Autodesk.Webhooks.Model
     /// The request body for an Update Secret Token operation.
     /// </summary>
     [DataContract]
-    public partial class TokenPayload 
+    public partial class TokenPayload
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TokenPayload" /> class.
@@ -44,14 +44,14 @@ namespace Autodesk.Webhooks.Model
         public TokenPayload()
         {
         }
-        
+
         /// <summary>
         ///The new secret to set.
         /// </summary>
         /// <value>
         ///The new secret to set.
         /// </value>
-        [DataMember(Name="token", EmitDefaultValue=false)]
+        [DataMember(Name = "token", EmitDefaultValue = false)]
         public string Token { get; set; }
 
         /// <summary>

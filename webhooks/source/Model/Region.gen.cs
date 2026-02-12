@@ -21,13 +21,13 @@
  */
 
 using System;
-using System.Linq;
-using System.IO;
-using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
+using System.Linq;
 using System.Runtime.Serialization;
+using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -35,49 +35,49 @@ namespace Autodesk.Webhooks.Model
 {
     /// <summary>
     /// Specifies the geographical location (region) of the server a request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make requests to your callback URL. Possible values:
-///
-///- `US` - (Default) Data center dedicated to serve the United States region.
-///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
-///- `APAC` - (Beta) Data center dedicated to serve the Australia region (obsolete).
-///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
-///- `CAN` - Data center dedicated to serve the Canada region.
-///- `DEU` - Data center dedicated to serve the Germany region.
-///- `IND` - Data center dedicated to serve the India region.
-///- `JPN` - Data center dedicated to serve the Japan region.
-///- `GBR` - Data center dedicated to serve the United Kingdom region.
-///
-///**Note:** Beta features are subject to change. Please avoid using them in production environments.
+    ///
+    ///- `US` - (Default) Data center dedicated to serve the United States region.
+    ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+    ///- `APAC` - (Beta) Data center dedicated to serve the Australia region (obsolete).
+    ///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
+    ///- `CAN` - Data center dedicated to serve the Canada region.
+    ///- `DEU` - Data center dedicated to serve the Germany region.
+    ///- `IND` - Data center dedicated to serve the India region.
+    ///- `JPN` - Data center dedicated to serve the Japan region.
+    ///- `GBR` - Data center dedicated to serve the United Kingdom region.
+    ///
+    ///**Note:** Beta features are subject to change. Please avoid using them in production environments.
     /// </summary>
     ///<value>Specifies the geographical location (region) of the server a request must be executed on. This also corresponds to the region where the Webhook data is stored. It is also the location of the server that will make requests to your callback URL. Possible values:
-///
-///- `US` - (Default) Data center dedicated to serve the United States region.
-///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
-///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
-///- `CAN` - Data center dedicated to serve the Canada region.
-///- `DEU` - Data center dedicated to serve the Germany region.
-///- `IND` - Data center dedicated to serve the India region.
-///- `JPN` - Data center dedicated to serve the Japan region.
-///- `GBR` - Data center dedicated to serve the United Kingdom region.
-///
-///**Note:** Beta features are subject to change. Please avoid using them in production environments.</value>
-    
+    ///
+    ///- `US` - (Default) Data center dedicated to serve the United States region.
+    ///- `EMEA` - Data center dedicated to serve the European Union, Middle East, and Africa regions.
+    ///- `AUS` - (Beta) Data center dedicated to serve the Australia region.
+    ///- `CAN` - Data center dedicated to serve the Canada region.
+    ///- `DEU` - Data center dedicated to serve the Germany region.
+    ///- `IND` - Data center dedicated to serve the India region.
+    ///- `JPN` - Data center dedicated to serve the Japan region.
+    ///- `GBR` - Data center dedicated to serve the United Kingdom region.
+    ///
+    ///**Note:** Beta features are subject to change. Please avoid using them in production environments.</value>
+
     [JsonConverter(typeof(StringEnumConverter))]
-    
+
     public enum Region
     {
-        
+
         /// <summary>
         /// Enum US for value: US
         /// </summary>
         [EnumMember(Value = "US")]
         US,
-        
+
         /// <summary>
         /// Enum EMEA for value: EMEA
         /// </summary>
         [EnumMember(Value = "EMEA")]
         EMEA,
-        
+
         /// <summary>
         /// Enum APAC for value: APAC
         /// </summary>
@@ -90,34 +90,34 @@ namespace Autodesk.Webhooks.Model
         /// </summary>
         [EnumMember(Value = "AUS")]
         AUS,
-        
+
         /// <summary>
         /// Enum CAN for value: CAN
         /// </summary>
         [EnumMember(Value = "CAN")]
         CAN,
-        
+
         /// <summary>
         /// Enum DEU for value: DEU
         /// </summary>
         [EnumMember(Value = "DEU")]
         DEU,
-        
+
         /// <summary>
         /// Enum IND for value: IND
         /// </summary>
-        
+
         [EnumMember(Value = "IND")]
-        
+
         IND,
-        
+
         /// <summary>
         /// Enum JPN for value: JPN
         /// </summary>
-        
+
         [EnumMember(Value = "JPN")]
         JPN,
-        
+
         /// <summary>
         /// Enum GBR for value: GBR
         /// </summary>
