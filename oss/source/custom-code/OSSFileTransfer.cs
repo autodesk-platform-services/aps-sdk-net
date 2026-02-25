@@ -409,10 +409,10 @@ namespace Autodesk.Oss
             string requestId)
         {
             _forgeService.Client.DefaultRequestHeaders.Add("Range", "bytes=" + start + "-" + end);
-            var streamAsync = _forgeService.Client.GetByteArrayAsync(contentUrl);
+            var bytes = await _forgeService.Client.GetByteArrayAsync(contentUrl);
             _forgeService.Client.DefaultRequestHeaders.Remove("Range");
-            var available = streamAsync.Result.Length;
-            await outStream.WriteAsync(streamAsync.Result, 0, available);
+            var available = bytes.Length;
+            await outStream.WriteAsync(bytes, 0, available);
         }
 
         private string HandleRequestId(string parentRequestId, string bucketKey, string objectKey)
