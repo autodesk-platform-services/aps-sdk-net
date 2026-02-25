@@ -83,7 +83,13 @@ namespace Autodesk.Webhooks.Model
         /// Enum AutodeskConstructionIssues for value: autodesk.construction.issues
         /// </summary>
         [EnumMember(Value = "autodesk.construction.issues")]
-        AutodeskConstructionIssues
+        AutodeskConstructionIssues,
+        
+        /// <summary>
+        /// Enum AdskTandem for value: adsk.tandem
+        /// </summary>
+        [EnumMember(Value = "adsk.tandem")]
+        AdskTandem
     }
 
 }
