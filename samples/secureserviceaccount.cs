@@ -1,13 +1,6 @@
-using System.Threading.Tasks;
-using System.Reflection;
-using System.Runtime.Serialization;
 using Autodesk.SDKManager;
 using Autodesk.SecureServiceAccount;
 using Autodesk.SecureServiceAccount.Model;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Linq;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Samples
 {
@@ -206,6 +199,7 @@ namespace Samples
                 ExchangeJwtToken newToken = await secureServiceAccountClient.ExchangeJwtAssertionAsync(assertion, clientId, clientSecret);
                 DateTime expiryLocalTime = DateTimeOffset.FromUnixTimeSeconds(newToken.ExpiresAt!.Value).LocalDateTime;
                 Console.WriteLine($"New token retrieved: {newToken}");
+                Console.WriteLine($"Token expires at: {expiryLocalTime}");
             }
             catch (Exception ex)
             {
@@ -222,22 +216,22 @@ namespace Samples
             secureServiceAccount.Initialise();
 
             // Account Management methods
-            // await secureServiceAccount.CreateServiceAccountAsync();
-            // await secureServiceAccount.DeleteServiceAccountAsync();
-            // await secureServiceAccount.GetAllServiceAccountsAsync();
-            // await secureServiceAccount.GetServiceAccountAsync();
-            // await secureServiceAccount.EnableServiceAccountAsync();
-            // await secureServiceAccount.DisableServiceAccountAsync();
+            await secureServiceAccount.CreateServiceAccountAsync();
+            await secureServiceAccount.DeleteServiceAccountAsync();
+            await secureServiceAccount.GetAllServiceAccountsAsync();
+            await secureServiceAccount.GetServiceAccountAsync();
+            await secureServiceAccount.EnableServiceAccountAsync();
+            await secureServiceAccount.DisableServiceAccountAsync();
 
             // Key Management methods
-            // await secureServiceAccount.CreateServiceAccountKeyAsync();
-            // await secureServiceAccount.GetAllServiceAccountKeysAsync();
-            // await secureServiceAccount.EnableServiceAccountKeyAsync();
-            // await secureServiceAccount.DisableServiceAccountKeyAsync();
-            // await secureServiceAccount.DeleteServiceAccountKeyAsync();
+            await secureServiceAccount.CreateServiceAccountKeyAsync();
+            await secureServiceAccount.GetAllServiceAccountKeysAsync();
+            await secureServiceAccount.EnableServiceAccountKeyAsync();
+            await secureServiceAccount.DisableServiceAccountKeyAsync();
+            await secureServiceAccount.DeleteServiceAccountKeyAsync();
 
             // Exchange JWT for token
-            // await secureServiceAccount.ExchangeJwtforTokenAsync();
+            await secureServiceAccount.ExchangeJwtforTokenAsync();
 
         }
     }
