@@ -33,7 +33,7 @@ namespace Samples
         // Get IssueType
         public async Task getIssueType()
         {
-            IssueTypesPage Type = await issuesClient.GetIssuesTypesAsync(projectId: project_id);
+            IssueTypesPage types = await issuesClient.GetIssuesTypesAsync(projectId: project_id);
         }
 
         //Get Issues

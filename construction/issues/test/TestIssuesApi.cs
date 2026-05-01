@@ -40,8 +40,8 @@ public class TestIssuesApi
     [TestMethod]
     public async Task getIssueType()
     {
-        IssueTypesPage Type = await issuesClient.GetIssuesTypesAsync(projectid, xAdsRegion: Region.US, accessToken: token);
-        Assert.AreNotSame(Type.Pagination, null);
+        IssueTypesPage types = await issuesClient.GetIssuesTypesAsync(projectid, xAdsRegion: Region.US, accessToken: token);
+        Assert.AreNotSame(types.Pagination, null);
     }
 
     [TestMethod]
