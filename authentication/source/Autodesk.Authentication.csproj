@@ -12,13 +12,15 @@
     <PackageId>Autodesk.Authentication</PackageId>
     <PackageVersion>2.0.1</PackageVersion>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
-    <PackageReadmeFile>README.md</PackageReadmeFile>   
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>autodesk-icon.png</PackageIcon>
    <RepositoryUrl>https://github.com/autodesk-platform-services/aps-sdk-net.git</RepositoryUrl>
   </PropertyGroup>
     <ItemGroup>
       <PackageReference Include="Autodesk.SDKManager" />
       <None Include="../../LICENSE.txt" Pack="true" PackagePath=""/>
       <None Include="../../README.md" Pack="true" PackagePath=""/>
+      <None Include="../../images/autodesk-icon.png" Pack="true" PackagePath=""/>
     </ItemGroup>
 
 </Project>
