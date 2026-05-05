@@ -195,7 +195,7 @@ namespace Samples
         {
             try
             {
-                string assertion = Utils.GenerateJwtAssertion(keyId, privateKey, clientId, serviceAccountId, [Scopes.ApplicationServiceAccountKeyRead, Scopes.ApplicationServiceAccountKeyWrite, Scopes.AccountRead, Scopes.ApplicationServiceAccountKeyRead]);
+                string assertion = Utils.GenerateJwtAssertion(keyId, privateKey, clientId, serviceAccountId, [Scopes.ApplicationServiceAccountKeyRead, Scopes.ApplicationServiceAccountKeyWrite, Scopes.AccountRead]);
                 ExchangeJwtToken newToken = await secureServiceAccountClient.ExchangeJwtAssertionAsync(assertion, clientId, clientSecret);
                 DateTime expiryLocalTime = DateTimeOffset.FromUnixTimeSeconds(newToken.ExpiresAt!.Value).LocalDateTime;
                 Console.WriteLine($"New token retrieved: {newToken}");
