@@ -26,11 +26,11 @@ namespace Autodesk.SecureServiceAccount
         /// <param name="keyId">The key identifier (kid) included in the JWT header.</param>
         /// <param name="privateKey">PEM-formatted RSA private key used to sign the token.</param>
         /// <param name="clientId">The OAuth client ID, used as the <c>iss</c> claim.</param>
-        /// <param name="ssaId">The service account identifier, used as the <c>sub</c> claim.</param>
+        /// <param name="serviceAccountId">The service account identifier, used as the <c>sub</c> claim.</param>
         /// <param name="scopes">Requested scopes to include in the <c>scope</c> claim.</param>
         /// <param name="assertionLifetimeSeconds">The lifetime of the assertion in seconds. Must be 0 - 5 minutes in the future. Default is 300 seconds (5 minutes).</param>
         /// <returns>A compact serialized JWT assertion string.</returns>
-        public static string GenerateJwtAssertion(string keyId, string privateKey, string clientId, string ssaId, List<Scopes> scopes, int assertionLifetimeSeconds = 300)
+        public static string GenerateJwtAssertion(string keyId, string privateKey, string clientId, string serviceAccountId, List<Scopes> scopes, int assertionLifetimeSeconds = 300)
         {
             // Create RSA from the PEM-formatted private key
             using RSA rsa = RSA.Create();
@@ -47,7 +47,7 @@ namespace Autodesk.SecureServiceAccount
             var claims = new List<Claim>
             {
                 new Claim("iss", clientId),
-                new Claim("sub", ssaId),
+                new Claim("sub", serviceAccountId),
                 new Claim("aud", "https://developer.api.autodesk.com/authentication/v2/token"),
             };
 
@@ -77,7 +77,8 @@ namespace Autodesk.SecureServiceAccount
         /// <param name="assertionLifetimeSeconds">The lifetime of the assertion in seconds. Must be 0 - 5 minutes in the future. Default is 300 seconds (5 minutes).</param>
         /// <returns>A compact serialized JWT assertion string.</returns>
         /// <exception cref="ArgumentException">Thrown when <paramref name="privateKeyStream"/> is null or not readable.</exception>
-        public static string GenerateJwtAssertion(string clientId, string serviceAccountId, Stream privateKeyStream, string keyId, List<Scopes> scopes, int assertionLifetimeSeconds = 300)
+
+        public static string GenerateJwtAssertion(string keyId, Stream privateKeyStream, string clientId, string serviceAccountId, List<Scopes> scopes, int assertionLifetimeSeconds = 300)
         {
             if (privateKeyStream is null || !privateKeyStream.CanRead)
                 throw new ArgumentException($"{nameof(privateKeyStream)} must be a readable stream.", nameof(privateKeyStream));
@@ -88,7 +89,7 @@ namespace Autodesk.SecureServiceAccount
             using StreamReader streamReader = new(privateKeyStream, leaveOpen: true);
             string privateKeyPem = streamReader.ReadToEnd();
 
-            return GenerateJwtAssertion(clientId, serviceAccountId, privateKeyPem, keyId, scopes, assertionLifetimeSeconds);
+            return GenerateJwtAssertion(keyId, privateKeyPem, clientId, serviceAccountId, scopes, assertionLifetimeSeconds);
         }
 
     }
