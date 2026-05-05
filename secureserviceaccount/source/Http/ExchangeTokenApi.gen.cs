@@ -21,15 +21,15 @@
  * limitations under the License.
  */
 
-using Autodesk.Forge.Core;
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System;
 using System.Linq;
 using System.Net.Http;
 using System.Runtime.Serialization;
-using Autodesk.SecureServiceAccount.Model;
+using Autodesk.Forge.Core;
 using Autodesk.SecureServiceAccount.Client;
+using Autodesk.SecureServiceAccount.Model;
 using Microsoft.Extensions.Logging;
 
 namespace Autodesk.SecureServiceAccount.Http
@@ -228,7 +228,7 @@ namespace Autodesk.SecureServiceAccount.Http
                 if (!string.IsNullOrEmpty(clientId)) { formParams.Add("client_id", clientId); }
                 if (!string.IsNullOrEmpty(clientSecret)) { formParams.Add("client_secret", clientSecret); }
                 if (!string.IsNullOrEmpty(assertion)) { formParams.Add("assertion", assertion); }
-                SetQueryParameter("scope", scope, queryParam);
+                SetQueryParameter("scope", scope, formParams);
                 request.Content = new FormUrlEncodedContent(formParams.ToDictionary(k => k.Key, v => v.Value.ToString()));
 
 

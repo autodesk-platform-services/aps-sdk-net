@@ -21,15 +21,15 @@
  * limitations under the License.
  */
 
-using Autodesk.Forge.Core;
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System;
 using System.Linq;
 using System.Net.Http;
 using System.Runtime.Serialization;
-using Autodesk.SecureServiceAccount.Model;
+using Autodesk.Forge.Core;
 using Autodesk.SecureServiceAccount.Client;
+using Autodesk.SecureServiceAccount.Model;
 using Microsoft.Extensions.Logging;
 
 

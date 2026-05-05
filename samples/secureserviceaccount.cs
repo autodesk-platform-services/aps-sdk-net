@@ -20,7 +20,7 @@ namespace Samples
             // SDKManager sdkManager = SdkManagerBuilder.Create().Build();
 
             StaticAuthenticationProvider staticAuthenticationProvider = new StaticAuthenticationProvider(token);
-            // Instantiate ModelDerivativeClient using the auth provider
+            // Instantiate SecureServiceAccountClient using the auth provider
             secureServiceAccountClient = new SecureServiceAccountClient(authenticationProvider: staticAuthenticationProvider);
         }
 

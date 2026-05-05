@@ -22,9 +22,9 @@
  */
 
 using Autodesk.Forge.Core;
+using Autodesk.SecureServiceAccount.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Autodesk.SecureServiceAccount.Http;
 
 namespace Autodesk.SecureServiceAccount
 {
