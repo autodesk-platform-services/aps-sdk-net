@@ -42,6 +42,9 @@ The Developer Portal has everything APS:
 
 [![Nuget Package Site](https://img.shields.io/badge/Nuget-Autodesk.Webhooks-blue.svg)](https://www.nuget.org/packages/Autodesk.Webhooks#readme-body-tab) [![Latest version](https://img.shields.io/nuget/v/Autodesk.Webhooks.svg?label=Release&color=brightgreen)](https://www.nuget.org/packages/Autodesk.Webhooks#readme-body-tab) [![Latest Prerelease Version](https://img.shields.io/nuget/vpre/Autodesk.Webhooks.svg?label=Latest)](https://www.nuget.org/packages/Autodesk.Webhooks#versions-body-tab)
 
+[![Nuget Package Site](https://img.shields.io/badge/Nuget-Autodesk.SecureServiceAccount-blue.svg)](https://www.nuget.org/packages/Autodesk.SecureServiceAccount#readme-body-tab) [![Latest version](https://img.shields.io/nuget/v/Autodesk.SecureServiceAccount.svg?label=Release&color=brightgreen)](https://www.nuget.org/packages/Autodesk.SecureServiceAccount#readme-body-tab) [![Latest Prerelease Version](https://img.shields.io/nuget/vpre/Autodesk.SecureServiceAccount.svg?label=Latest)](https://www.nuget.org/packages/Autodesk.SecureServiceAccount#versions-body-tab)
+
+
 ### Looking for Design Automation v3?
 
 The Design Automation .NET is maintained in a separate [repo](https://github.com/Autodesk-Forge/forge-api-dotnet-design.automation).

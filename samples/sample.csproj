@@ -13,7 +13,8 @@
     <PackageReference Include="Autodesk.Oss" />   
     <PackageReference Include="Autodesk.Authentication" />   
     <PackageReference Include="Autodesk.Construction.Issues" />   
-    <PackageReference Include="Autodesk.Construction.AccountAdmin" />   
+    <PackageReference Include="Autodesk.Construction.AccountAdmin" />  
+    <PackageReference Include="Autodesk.SecureServiceAccount" /> 
     <PackageReference Include="DotNetEnv" />
   </ItemGroup>
 
