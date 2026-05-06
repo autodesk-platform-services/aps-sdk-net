@@ -6,7 +6,7 @@
 
 **Newly added services:**
 
-[DAS 376] - SSA SDK initial commit [#250](https://github.com/autodesk-platform-services/aps-sdk-net/pull/250) ([sajith-subramanian](https://github.com/sajith-subramanian))
+- \[DAS 376\] - SSA SDK initial commit [\#250](https://github.com/autodesk-platform-services/aps-sdk-net/pull/250) ([sajith-subramanian](https://github.com/sajith-subramanian))
 
 **Implemented enhancements:**
 
