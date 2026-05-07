@@ -1,14 +1,36 @@
 # Changelog
 
-## [v5.3.1](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v5.3.1) (2025-12-03)
+## [v5.4.0](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v5.4.0) (2026-05-06)
 
-[Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v5.2.1...v5.3.1)
+[Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v5.3.1...v5.4.0)
+
+**Newly added services:**
+
+- \[DAS 376\] - SSA SDK initial commit [\#250](https://github.com/autodesk-platform-services/aps-sdk-net/pull/250) ([sajith-subramanian](https://github.com/sajith-subramanian))
+
+**Implemented enhancements:**
+
+- \[DAS 383\] - Add Tandem events enums in Webhooks [\#243](https://github.com/autodesk-platform-services/aps-sdk-net/pull/243) ([nishchhaldagar](https://github.com/nishchhaldagar))
+- \[DAS 373\] - Added templateId to project model for Construction Account Admin [\#236](https://github.com/autodesk-platform-services/aps-sdk-net/pull/236) ([srivastavarahull](https://github.com/srivastavarahull))
 
 **Closed issues:**
 
+- Missing HookId in CreateSystemEventHookAsync Response [\#245](https://github.com/autodesk-platform-services/aps-sdk-net/issues/245)
+- CS7069 Error With SDKManager v1.1.3 [\#237](https://github.com/autodesk-platform-services/aps-sdk-net/issues/237)
+- Moving Autodesk.Forge.Core code to Autodesk.Sdk.Manager [\#235](https://github.com/autodesk-platform-services/aps-sdk-net/issues/235)
 - \[OssClient\] How to GetAllObjectsAsync using Next [\#226](https://github.com/autodesk-platform-services/aps-sdk-net/issues/226)
 - Why `IAuthenticationProvider` and `StaticAuthenticationProvider` has not namespace? [\#220](https://github.com/autodesk-platform-services/aps-sdk-net/issues/220)
 - DataManagement method GetItemAsync ignores parameter "includePathInProject" [\#201](https://github.com/autodesk-platform-services/aps-sdk-net/issues/201)
+
+**Merged pull requests:**
+
+- Update Changelog [\#234](https://github.com/autodesk-platform-services/aps-sdk-net/pull/234) ([sajith-subramanian](https://github.com/sajith-subramanian))
+- Keep Main branch updated with development [\#233](https://github.com/autodesk-platform-services/aps-sdk-net/pull/233) ([sajith-subramanian](https://github.com/sajith-subramanian))
+- Add `Project.TemplateId` property to ACC Project. [\#231](https://github.com/autodesk-platform-services/aps-sdk-net/pull/231) ([tylerwarner33](https://github.com/tylerwarner33))
+
+## [v5.3.1](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v5.3.1) (2025-12-03)
+
+[Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v5.2.1...v5.3.1)
 
 **Implemented enhancements:**
 
