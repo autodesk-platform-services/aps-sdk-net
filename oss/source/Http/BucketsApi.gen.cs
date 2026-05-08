@@ -20,18 +20,15 @@
  * limitations under the License.
  */
 
-using Autodesk.Forge.Core;
-using Microsoft.Extensions.Options;
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Runtime.Serialization;
-using Autodesk.Oss.Model;
+using Autodesk.Forge.Core;
 using Autodesk.Oss.Client;
+using Autodesk.Oss.Model;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Abstractions;
-using Autodesk.SDKManager;
 
 namespace Autodesk.Oss.Http
 {
@@ -134,6 +131,39 @@ namespace Autodesk.Oss.Http
         /// <returns>Task of ApiResponse&lt;Buckets&gt;</returns>
 
         System.Threading.Tasks.Task<ApiResponse<Buckets>> GetBucketsAsync(Region? region = null, int? limit = default(int?), string startAt = default(string), string accessToken = null, bool throwOnError = true);
+
+        /// <summary>
+        /// Protect Bucket
+        /// </summary>
+        /// <remarks>
+        /// Modifies the protection status of the specified bucket.
+        /// When you protect a bucket, it cannot be deleted until you explicitly unprotect it.
+        /// When you unprotect a bucket, it becomes eligible for deletion again.
+        /// 
+        /// You must be the owner of the bucket or have appropriate permissions to modify bucket protection settings.
+        /// 
+        /// This operation is idempotent.
+        /// Protecting an already protected bucket or unprotecting an already unprotected bucket will not result in an error.
+        /// 
+        /// The protection status change takes effect immediately upon successful completion of the operation.
+        /// </remarks>
+        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+        /// <param name="bucketKey">
+        /// The bucket key of the bucket to protect.
+        /// </param>
+        /// <param name="payload">
+        /// The request payload for the Protect Bucket operation.
+        /// </param>
+        /// <param name="accessToken">
+        /// An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().
+        /// (optional)
+        /// </param>
+        /// <param name="throwOnError">
+        /// Specifies whether to throw an error if the API call fails.
+        /// (optional)
+        /// </param>
+        /// <returns>Task of <see cref="HttpResponseMessage"/></returns>
+        System.Threading.Tasks.Task<HttpResponseMessage> ProtectBucketAsync(string bucketKey, ProtectBucketPayload payload, string accessToken = null, bool throwOnError = true);
     }
 
     /// <summary>
@@ -244,7 +274,7 @@ namespace Autodesk.Oss.Http
         /// </param>
         /// <returns>Task of ApiResponse&lt;Bucket&gt;></returns>
 
-        public async System.Threading.Tasks.Task<ApiResponse<Bucket>> CreateBucketAsync(CreateBucketsPayload policyKey, Region xAdsRegion , string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<ApiResponse<Bucket>> CreateBucketAsync(CreateBucketsPayload policyKey, Region xAdsRegion, string accessToken = null, bool throwOnError = true)
         {
             logger.LogInformation("Entered into CreateBucketAsync ");
             using (var request = new HttpRequestMessage())
@@ -552,6 +582,84 @@ namespace Autodesk.Oss.Http
                 return new ApiResponse<Buckets>(response, await LocalMarshalling.DeserializeAsync<Buckets>(response.Content));
 
             } // using
+        }
+
+        /// <summary>
+        /// Protect Bucket
+        /// </summary>
+        /// <remarks>
+        /// Modifies the protection status of the specified bucket.
+        /// When you protect a bucket, it cannot be deleted until you explicitly unprotect it.
+        /// When you unprotect a bucket, it becomes eligible for deletion again.
+        /// 
+        /// You must be the owner of the bucket or have appropriate permissions to modify bucket protection settings.
+        /// 
+        /// This operation is idempotent.
+        /// Protecting an already protected bucket or unprotecting an already unprotected bucket will not result in an error.
+        /// 
+        /// The protection status change takes effect immediately upon successful completion of the operation.
+        /// </remarks>
+        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+        /// <param name="bucketKey">
+        /// The bucket key of the bucket to protect.
+        /// </param>
+        /// <param name="payload">
+        /// The request payload for the Protect Bucket operation.
+        /// </param>
+        /// <param name="accessToken">
+        /// An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().
+        /// (optional)
+        /// </param>
+        /// <param name="throwOnError">
+        /// Specifies whether to throw an error if the API call fails.
+        /// (optional)
+        /// </param>
+        /// <returns>Task of <see cref="HttpResponseMessage"/></returns>
+        public async System.Threading.Tasks.Task<HttpResponseMessage> ProtectBucketAsync(string bucketKey, ProtectBucketPayload payload, string accessToken = null, bool throwOnError = true)
+        {
+            logger.LogInformation($"Entered into {nameof(ProtectBucketAsync)}().");
+            using (var request = new HttpRequestMessage())
+            {
+                var queryParam = new Dictionary<string, object>();
+                request.RequestUri =
+                    Marshalling.BuildRequestUri("/oss/v2/buckets/{bucketKey}/protect",
+                        routeParameters: new Dictionary<string, object> {
+                            { "bucketKey", bucketKey},
+                        },
+                        queryParameters: queryParam
+                    );
+
+                request.Headers.TryAddWithoutValidation("Accept", "application/json");
+                request.Headers.TryAddWithoutValidation("User-Agent", "APS SDK/OSS/C#/1.0.0");
+                if (!string.IsNullOrEmpty(accessToken))
+                {
+                    request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {accessToken}");
+                }
+
+                request.Content = Marshalling.Serialize(payload);
+                request.Method = new HttpMethod("POST");
+
+                HttpResponseMessage response = await Service.Client.SendAsync(request);
+
+                if (throwOnError)
+                {
+                    try
+                    {
+                        await response.EnsureSuccessStatusCodeAsync();
+                    }
+                    catch (HttpRequestException ex)
+                    {
+                        throw new OssApiException(ex.Message, response, ex);
+                    }
+                }
+                else if (!response.IsSuccessStatusCode)
+                {
+                    logger.LogError($"Response unsuccessful with status code: {response.StatusCode}.");
+                    return response;
+                }
+                logger.LogInformation($"Exited from {nameof(ProtectBucketAsync)}() with response statusCode: {response.StatusCode}.");
+                return response;
+            }
         }
     }
 }

@@ -818,6 +818,52 @@ namespace Autodesk.Oss
             var response = await this.bucketsApi.GetBucketsAsync(region, limit, startAt, accessToken, throwOnError);
             return response.Content;
         }
+
+        /// <summary>
+        /// Protect Bucket
+        /// </summary>
+        /// <remarks>
+        /// Modifies the protection status of the specified bucket.
+        /// When you protect a bucket, it cannot be deleted until you explicitly unprotect it.
+        /// When you unprotect a bucket, it becomes eligible for deletion again.
+        /// 
+        /// You must be the owner of the bucket or have appropriate permissions to modify bucket protection settings.
+        /// 
+        /// This operation is idempotent.
+        /// Protecting an already protected bucket or unprotecting an already unprotected bucket will not result in an error.
+        /// 
+        /// The protection status change takes effect immediately upon successful completion of the operation.
+        /// </remarks>
+        /// <exception cref="HttpRequestException">Thrown when fails to make API call</exception>
+        /// <param name="bucketKey">
+        /// The bucket key of the bucket to protect.
+        /// </param>
+        /// <param name="payload">
+        /// The request payload for the Protect Bucket operation.
+        /// </param>
+        /// <param name="accessToken">
+        /// An access token obtained by a call to GetThreeLeggedTokenAsync() or GetTwoLeggedTokenAsync().
+        /// (optional)
+        /// </param>
+        /// <param name="throwOnError">
+        /// Specifies whether to throw an error if the API call fails.
+        /// (optional)
+        /// </param>
+        /// <returns>Task of <see cref="HttpResponseMessage"/></returns>
+        public async System.Threading.Tasks.Task<HttpResponseMessage> ProtectBucketAsync(string bucketKey, ProtectBucketPayload payload, string accessToken = default, bool throwOnError = true)
+        {
+            if (string.IsNullOrEmpty(accessToken) && AuthenticationProvider == null)
+            {
+                throw new Exception("Please provide a valid access token or an authentication provider.");
+            }
+            else if (string.IsNullOrEmpty(accessToken))
+            {
+                accessToken = await AuthenticationProvider.GetAccessToken();
+            }
+            var response = await bucketsApi.ProtectBucketAsync(bucketKey, payload, accessToken, throwOnError);
+            return response;
+        }
+
         /// <summary>
         /// Get Object Details
         /// </summary>
