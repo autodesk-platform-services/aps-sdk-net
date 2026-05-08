@@ -24,17 +24,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Net.Sockets;
 using System.Runtime.Serialization;
-using System.Threading.Channels;
 using Autodesk.Forge.Core;
 using Autodesk.Oss.Client;
 using Autodesk.Oss.Model;
-using Autodesk.SDKManager;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Abstractions;
-using Microsoft.Extensions.Options;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Autodesk.Oss.Http
 {
@@ -660,7 +654,7 @@ namespace Autodesk.Oss.Http
                 }
                 else if (!response.IsSuccessStatusCode)
                 {
-                    logger.LogError($"Response unsuccess with status code: {response.StatusCode}.");
+                    logger.LogError($"Response unsuccessful with status code: {response.StatusCode}.");
                     return response;
                 }
                 logger.LogInformation($"Exited from {nameof(ProtectBucketAsync)}() with response statusCode: {response.StatusCode}.");

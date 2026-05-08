@@ -850,7 +850,7 @@ namespace Autodesk.Oss
         /// (optional)
         /// </param>
         /// <returns>Task of <see cref="HttpResponseMessage"/></returns>
-        public async System.Threading.Tasks.Task<HttpResponseMessage> ProtectBucketAsync(string bucketKey, ProtectBucketPayload payload, string accessToken = null, bool throwOnError = true)
+        public async System.Threading.Tasks.Task<HttpResponseMessage> ProtectBucketAsync(string bucketKey, ProtectBucketPayload payload, string accessToken = default, bool throwOnError = true)
         {
             if (string.IsNullOrEmpty(accessToken) && AuthenticationProvider == null)
             {

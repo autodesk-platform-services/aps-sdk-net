@@ -85,7 +85,7 @@ public class TestOss
 			 bucketKey: bucketKey,
              payload: new()
              {
-                 Protection = false,
+                 Protection = true,
              });
 		Assert.IsTrue(httpResponseMessage.StatusCode == HttpStatusCode.OK);
 	}
