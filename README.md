@@ -53,4 +53,4 @@ The Design Automation .NET is maintained in a separate [repo](https://github.com
 
 ## Contributions
 
-Contributions are welcome! Please make sure to read the [contribution guidelines](CONTRIBUTING.md).
+Contributions are welcome! Please make sure to read the [contribution guidelines](https://github.com/autodesk-platform-services/aps-sdk-net/blob/main/CONTRIBUTING.md).
