@@ -4,6 +4,15 @@
 
 [Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v5.4.0...v5.4.1)
 
+**Implemented enhancements:**
+
+- Add NuGet package icon to APS SDK packages. [\#248](https://github.com/autodesk-platform-services/aps-sdk-net/pull/248) ([tylerwarner33](https://github.com/tylerwarner33))
+
+**Fixed bugs:**
+
+- Fixed intermittent NullReferenceException during concurrent uploads. [\#256](https://github.com/autodesk-platform-services/aps-sdk-net/pull/256) ([sajith-subramanian](https://github.com/sajith-subramanian))
+- Refactor WriteToFileStreamFromUrl to use await [\#244](https://github.com/autodesk-platform-services/aps-sdk-net/pull/244) ([delundgren](https://github.com/delundgren))
+
 **Closed issues:**
 
 - Filtering in GetIssuesAsync does not behave as expected [\#255](https://github.com/autodesk-platform-services/aps-sdk-net/issues/255)
@@ -12,7 +21,6 @@
 
 **Merged pull requests:**
 
-- Add NuGet package icon to APS SDK packages. [\#248](https://github.com/autodesk-platform-services/aps-sdk-net/pull/248) ([tylerwarner33](https://github.com/tylerwarner33))
 - Revert back to SDKManager 1.1.2 [\#238](https://github.com/autodesk-platform-services/aps-sdk-net/pull/238) ([sajith-subramanian](https://github.com/sajith-subramanian))
 
 ## [v5.4.0](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v5.4.0) (2026-05-06)
