@@ -177,7 +177,7 @@ namespace Autodesk.Oss
                         {
                             ThrowIfCancellationRequested(cancellationToken, requestId);
 
-                            var responseBuffer = await UploadToURL(currentUrl, fileBytes);
+                            var responseBuffer = await UploadToURL(currentUrl, fileBytes, requestId);
                             int statusCode = (int)responseBuffer.StatusCode;
 
                             if (statusCode == (int)HttpStatusCode.Forbidden && retryUrlExpiryCount == _maxRetryOnUrlExpiry)
@@ -312,11 +312,14 @@ namespace Autodesk.Oss
             return numberOfChunks;
         }
 
-        private async Task<dynamic> UploadToURL(string url, byte[] buffer)
+        private async Task<HttpResponseMessage> UploadToURL(string url, byte[] buffer, string requestId)
         {
-            var client = new HttpClient();
-            var httpContent = new ByteArrayContent(buffer);
-            return await _forgeService.Client.PutAsync(url, httpContent);
+            using var request = new HttpRequestMessage(HttpMethod.Put, url)
+            {
+                Content = new ByteArrayContent(buffer)
+            };
+            request.Headers.Add("x-ads-request-id", requestId);
+            return await _forgeService.Client.SendAsync(request);
         }
 
         public async Task<Stream> Download(string bucketKey, string objectKey,
@@ -408,24 +411,19 @@ namespace Autodesk.Oss
         private async Task WriteToFileStreamFromUrl(Stream outStream, string contentUrl, double start, double end,
             string requestId)
         {
-            _forgeService.Client.DefaultRequestHeaders.Add("Range", "bytes=" + start + "-" + end);
-            var streamAsync = _forgeService.Client.GetByteArrayAsync(contentUrl);
-            _forgeService.Client.DefaultRequestHeaders.Remove("Range");
-            var available = streamAsync.Result.Length;
-            await outStream.WriteAsync(streamAsync.Result, 0, available);
+            using var request = new HttpRequestMessage(HttpMethod.Get, contentUrl);
+            request.Headers.Add("Range", "bytes=" + start + "-" + end);
+
+            var response = await _forgeService.Client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+            var bytes = await response.Content.ReadAsByteArrayAsync();
+            await outStream.WriteAsync(bytes, 0, bytes.Length);
         }
 
         private string HandleRequestId(string parentRequestId, string bucketKey, string objectKey)
         {
             var requestId = !string.IsNullOrEmpty(parentRequestId) ? parentRequestId : Guid.NewGuid().ToString();
             requestId = requestId + ":" + GenerateSdkRequestId(bucketKey, objectKey);
-
-            if (_forgeService.Client.DefaultRequestHeaders.Contains("x-ads-request-id"))
-            {
-                _forgeService.Client.DefaultRequestHeaders.Remove("x-ads-request-id");
-            }
-
-            _forgeService.Client.DefaultRequestHeaders.Add("x-ads-request-id", requestId);
             return requestId;
         }
 

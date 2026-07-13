@@ -6,19 +6,21 @@
     <Authors>Autodesk Platform Services SDK Team</Authors>
     <PackageDescription>Client SDK for Data Management OSS API</PackageDescription>
     <PackageReleaseNotes>
-    • Added XadsMeta properties to Upload function. 
+    • Fixed intermittent NullReferenceException during concurrent uploads.
     </PackageReleaseNotes>
     <Copyright>Autodesk Inc.</Copyright>
     <PackageId>Autodesk.Oss</PackageId>
-    <PackageVersion>2.3.3</PackageVersion>
+    <PackageVersion>2.3.4</PackageVersion>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>autodesk-icon.png</PackageIcon>
     <RepositoryUrl>https://github.com/autodesk-platform-services/aps-sdk-net.git</RepositoryUrl> 
     </PropertyGroup>
     <ItemGroup>
       <PackageReference Include="Autodesk.SDKManager" />
       <None Include="../../LICENSE.txt" Pack="true" PackagePath=""/>
       <None Include="../../README.md" Pack="true" PackagePath=""/>
+      <None Include="../../images/autodesk-icon.png" Pack="true" PackagePath=""/>
     </ItemGroup>
 
 </Project>
