@@ -1,17 +1,35 @@
 # Changelog
 
+## [v5.4.1](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v5.4.1) (2026-07-13)
+
+[Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v5.4.0...v5.4.1)
+
+**Implemented enhancements:**
+
+- Add NuGet package icon to APS SDK packages. [\#248](https://github.com/autodesk-platform-services/aps-sdk-net/pull/248) ([tylerwarner33](https://github.com/tylerwarner33))
+
+**Fixed bugs:**
+
+- Fixed intermittent NullReferenceException during concurrent uploads. [\#256](https://github.com/autodesk-platform-services/aps-sdk-net/pull/256) ([sajith-subramanian](https://github.com/sajith-subramanian))
+- Refactor WriteToFileStreamFromUrl to use await [\#244](https://github.com/autodesk-platform-services/aps-sdk-net/pull/244) ([delundgren](https://github.com/delundgren))
+
+**Closed issues:**
+
+- Filtering in GetIssuesAsync does not behave as expected [\#255](https://github.com/autodesk-platform-services/aps-sdk-net/issues/255)
+- GetAppHooksAsync Does Not Support 3-Legged Token [\#247](https://github.com/autodesk-platform-services/aps-sdk-net/issues/247)
+- Inconsistent Token Support Between HookPayload and ModifyHookPayload [\#246](https://github.com/autodesk-platform-services/aps-sdk-net/issues/246)
+
+**Merged pull requests:**
+
+- Revert back to SDKManager 1.1.2 [\#238](https://github.com/autodesk-platform-services/aps-sdk-net/pull/238) ([sajith-subramanian](https://github.com/sajith-subramanian))
+
 ## [v5.4.0](https://github.com/autodesk-platform-services/aps-sdk-net/tree/v5.4.0) (2026-05-06)
 
 [Full Changelog](https://github.com/autodesk-platform-services/aps-sdk-net/compare/v5.3.1...v5.4.0)
 
-**Newly added services:**
-
-- \[DAS 376\] - SSA SDK initial commit [\#250](https://github.com/autodesk-platform-services/aps-sdk-net/pull/250) ([sajith-subramanian](https://github.com/sajith-subramanian))
-
 **Implemented enhancements:**
 
-- \[DAS 383\] - Add Tandem events enums in Webhooks [\#243](https://github.com/autodesk-platform-services/aps-sdk-net/pull/243) ([nishchhaldagar](https://github.com/nishchhaldagar))
-- \[DAS 373\] - Added templateId to project model for Construction Account Admin [\#236](https://github.com/autodesk-platform-services/aps-sdk-net/pull/236) ([srivastavarahull](https://github.com/srivastavarahull))
+- \[DAS 373\] - Added templateId to project model [\#236](https://github.com/autodesk-platform-services/aps-sdk-net/pull/236) ([srivastavarahull](https://github.com/srivastavarahull))
 
 **Closed issues:**
 
@@ -24,6 +42,8 @@
 
 **Merged pull requests:**
 
+- \[DAS 376\] - SSA SDK initial commit [\#250](https://github.com/autodesk-platform-services/aps-sdk-net/pull/250) ([sajith-subramanian](https://github.com/sajith-subramanian))
+- \[DAS 383\] - Add Tandem events enums in Webhooks [\#243](https://github.com/autodesk-platform-services/aps-sdk-net/pull/243) ([nishchhaldagar](https://github.com/nishchhaldagar))
 - Update Changelog [\#234](https://github.com/autodesk-platform-services/aps-sdk-net/pull/234) ([sajith-subramanian](https://github.com/sajith-subramanian))
 - Keep Main branch updated with development [\#233](https://github.com/autodesk-platform-services/aps-sdk-net/pull/233) ([sajith-subramanian](https://github.com/sajith-subramanian))
 - Add `Project.TemplateId` property to ACC Project. [\#231](https://github.com/autodesk-platform-services/aps-sdk-net/pull/231) ([tylerwarner33](https://github.com/tylerwarner33))
