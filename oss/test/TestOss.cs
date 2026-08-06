@@ -77,6 +77,19 @@ public class TestOss
 		Assert.IsTrue(httpResponseMessage.StatusCode == HttpStatusCode.OK);
 	}
 
+	[TestMethod]
+	public async Task TestProtectBucketAsync()
+	{
+		HttpResponseMessage httpResponseMessage = await _ossClient.ProtectBucketAsync(
+			 accessToken: token,
+			 bucketKey: bucketKey,
+             payload: new()
+             {
+                 Protection = true,
+             });
+		Assert.IsTrue(httpResponseMessage.StatusCode == HttpStatusCode.OK);
+	}
+
 	#endregion
 
 	#region Objects
