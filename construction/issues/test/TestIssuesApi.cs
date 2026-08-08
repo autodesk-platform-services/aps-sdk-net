@@ -40,8 +40,8 @@ public class TestIssuesApi
     [TestMethod]
     public async Task getIssueType()
     {
-        TypesPage Type = await issuesClient.GetIssuesTypesAsync(projectid, xAdsRegion: Region.US, accessToken: token);
-        Assert.AreNotSame(Type.Pagination, null);
+        IssueTypesPage types = await issuesClient.GetIssuesTypesAsync(projectid, xAdsRegion: Region.US, accessToken: token);
+        Assert.AreNotSame(types.Pagination, null);
     }
 
     [TestMethod]
@@ -79,7 +79,7 @@ public class TestIssuesApi
     {
         CommentsPayload newcomment = new CommentsPayload();
         newcomment.Body = "<Body>";
-        Comments createComment = await issuesClient.CreateCommentsAsync(projectid, issueId, xAdsRegion: Region.US, commentsPayload: newcomment, accessToken: token);
+        Comment createComment = await issuesClient.CreateCommentsAsync(projectid, issueId, xAdsRegion: Region.US, commentsPayload: newcomment, accessToken: token);
         Assert.AreNotSame(createComment.Id, null);
 
 

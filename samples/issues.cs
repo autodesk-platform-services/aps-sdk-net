@@ -33,7 +33,7 @@ namespace Samples
         // Get IssueType
         public async Task getIssueType()
         {
-            IssueType Type = await issuesClient.GetIssuesTypesAsync(projectId: project_id);
+            IssueTypesPage types = await issuesClient.GetIssuesTypesAsync(projectId: project_id);
         }
 
         //Get Issues
@@ -67,19 +67,19 @@ namespace Samples
         {
             CommentsPayload newcomment = new CommentsPayload();
             newcomment.Body = "Created a Comment for testing SDK";
-            CreatedComment createComment = await issuesClient.CreateCommentsAsync(projectId: project_id, issueId: issue_id, commentsPayload: newcomment);
+            Comment createComment = await issuesClient.CreateCommentsAsync(projectId: project_id, issueId: issue_id, commentsPayload: newcomment);
         }
 
         //Get Comments
         public async Task getComments()
         {
-            Comments getComments = await issuesClient.GetCommentsAsync(projectId: project_id, issueId: issue_id);
+            CommentsPage getComments = await issuesClient.GetCommentsAsync(projectId: project_id, issueId: issue_id);
             Console.WriteLine(getComments);
         }
 
         public async Task getAttrdefinition()
         {
-            AttrDefinition attrDefinition = await issuesClient.GetAttributeDefinitionsAsync(projectId: project_id);
+            AttrDefinitionPage attrDefinition = await issuesClient.GetAttributeDefinitionsAsync(projectId: project_id);
             Console.WriteLine(attrDefinition);
         }
 
