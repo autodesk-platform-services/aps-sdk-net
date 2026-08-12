@@ -38,7 +38,8 @@ namespace Autodesk.SecureServiceAccount
 
             var securityKey = new RsaSecurityKey(rsa)
             {
-                KeyId = keyId
+                KeyId = keyId,
+                CryptoProviderFactory = new CryptoProviderFactory { CacheSignatureProviders = false }
             };
 
             var signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.RsaSha256);
