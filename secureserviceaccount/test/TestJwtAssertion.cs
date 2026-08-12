@@ -22,13 +22,13 @@
  * limitations under the License.
  */
 
+using Autodesk.SecureServiceAccount;
 using Autodesk.SecureServiceAccount.Model;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Cryptography;
 using System.Text;
-
 namespace Autodesk.SecureServiceAccount.Test;
 
 /// <summary>
@@ -41,12 +41,12 @@ namespace Autodesk.SecureServiceAccount.Test;
 [TestClass]
 public class TestJwtAssertion
 {
-    private static readonly string? keyId = Environment.GetEnvironmentVariable("KEY_ID");
-    private static readonly string? clientId = Environment.GetEnvironmentVariable("CLIENT_ID");
-    private static readonly string? serviceAccountId = Environment.GetEnvironmentVariable("SERVICE_ACCOUNT_ID");
-    private static List<Scopes> scopes => [Scopes.DataRead, Scopes.UserProfileRead];
-    private static readonly string? expectedAudience = "https://developer.api.autodesk.com/authentication/v2/token";
-    private static readonly string[] expectedScopes = ["data:read", "user-profile:read"];
+private const string keyId = "test-key-id";
+private const string clientId = "test-client-id";
+private const string serviceAccountId = "test-service-account-id";
+private static List<Scopes> scopes => [Scopes.DataRead, Scopes.UserProfileRead];
+private const string expectedAudience = "https://developer.api.autodesk.com/authentication/v2/token";
+private static readonly string[] expectedScopes = ["data:read", "user-profile:read"];
 
     /// <summary>
     /// 	Creates a PEM-formatted RSA private key for a single test.
