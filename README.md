@@ -1,12 +1,12 @@
 # APS SDK for .NET
 
-[![Nuget Package Site](https://img.shields.io/badge/Nuget-AutodeskPlatformServices.SDK-blue.svg)](https://www.nuget.org/profiles/AutodeskPlatformServices.SDK) [![Supported Frameworks](https://img.shields.io/badge/8.0-blue.svg?label=.NET)](https://www.nuget.org/packages/Autodesk.SDKManager#supportedframeworks-body-tab) [![License Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-green.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
+[![Nuget Package Site](https://img.shields.io/badge/Nuget-AutodeskPlatformServices.SDK-blue.svg)](https://www.nuget.org/profiles/AutodeskPlatformServices.SDK) [![Supported Frameworks](https://img.shields.io/badge/8.0%20%7C%2010.0-blue.svg?label=.NET)](https://www.nuget.org/packages/Autodesk.SDKManager#supportedframeworks-body-tab) [![License Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-green.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 
 The **Autodesk Platform Services (APS) SDK for .NET** helps .NET developer create applications that leverage the various APS services: Model Derivative, Data Management, OSS, Webhooks. More services soon.
 
 ## Requirements
 
-- [.NET 8](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) or later
+- [.NET 8](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) or later. Native builds are provided for .NET 8 and [.NET 10](https://dotnet.microsoft.com/en-us/download/dotnet/10.0).
 - A registered app on the [APS Developer Portal](http://aps.autodesk.com). 
 
 ## Getting Help
